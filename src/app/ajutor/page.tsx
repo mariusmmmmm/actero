@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { useAppStore } from '@/store/appStore'
@@ -47,7 +47,7 @@ type FormState = {
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
 
-export default function AjutorPage() {
+function AjutorPageContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session') ?? ''
   const { guideId } = useAppStore()
@@ -250,5 +250,18 @@ export default function AjutorPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function AjutorPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+      </main>
+    }>
+      <AjutorPageContent />
+    </Suspense>
   )
 }
