@@ -1,0 +1,52 @@
+# ActeRO
+
+> Navigator digital pentru acte românești din Germania.
+> Ghiduri personalizate pas cu pas pentru pașaport, buletin, procuri și titlu de călătorie.
+> Informații verificate direct de pe site-urile oficiale ale consulatelor.
+
+## Ghiduri principale
+
+- [Pașaport expirat în Germania](https://actero.ro/pasaport-expirat-germania): 
+  Ghid complet reînnoire pașaport CRDS din Germania. Taxa 53€, program consulate, 
+  documente necesare, trucuri programare econsulat.ro.
+
+- [Buletin expirat în Germania](https://actero.ro/buletin-expirat-germania): 
+  Reînnoire carte de identitate din Germania. Schimbare procedură 2025 — 
+  prezență fizică obligatorie pentru biometrie.
+
+- [Programare consulat România](https://actero.ro/programare-consulat-romania): 
+  Cum obții programare pe econsulat.ro. Trucul cu luni 08:00, 
+  pași exacți, greșeli frecvente.
+
+- [Procură notarială Germania](https://actero.ro/procura-notariala-germania): 
+  Procură la consulat vs notar german. Vânzare proprietate, moștenire, 
+  buletin prin mandatar.
+
+- [Titlu de călătorie urgent Germania](https://actero.ro/titlu-calatorie-urgenta-germania): 
+  Document de urgență FĂRĂ programare, eliberat în aceeași zi la 
+  toate consulatele din Germania.
+
+## Consulate România în Germania
+
+| Consulat | Landuri | Adresă | Plată pașaport |
+|----------|---------|--------|----------------|
+| München  | Bayern  | Richard-Strauss-Strasse 149, 81679 München | Numerar (cash) |
+| Bonn     | NRW, RP, HE, SL, NI, HB, HH, SH | Legionsweg 14, 53117 Bonn | EC-Karte |
+| Stuttgart| Baden-Württemberg | Hauptstätter Str. 70, 70178 Stuttgart | POS / transfer bancar |
+| Berlin   | Berlin, BB, SN, ST, TH, MV | Dorotheenstrasse 62-66, 10117 Berlin | — |
+
+## Taxe și termene (actualizat 2026)
+
+- Pașaport CRDS: 53€ · durată 6-10 săptămâni · 1 deplasare la consulat
+- Titlu de călătorie: GRATUIT · eliberat în aceeași zi · fără programare
+- Procură notarială: GRATUITĂ (+3€ publicitate notarială pentru imobil)
+- Fotografii pașaport: se fac la consulat, nu trebuie aduse de acasă
+
+## Despre ActeRO
+
+ActeRO este un navigator digital care ghidează românii din Germania prin procesul 
+de reînnoire a actelor românești. Informațiile sunt verificate direct de pe 
+site-urile oficiale ale consulatelor (muenchen.mae.ro, bonn.mae.ro, 
+stuttgart.mae.ro, berlin.mae.ro) și actualizate continuu.
+
+Contact: contac@actero.ro

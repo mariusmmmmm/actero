@@ -1,0 +1,76 @@
+// ActeRO — app/api/session/route.ts
+// Creează o sesiune nouă după completarea wizard-ului
+
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { deriveGuideId } from '@/lib/utils/deriveGuideId'
+import type { CreateSessionPayload, CreateSessionResponse } from '@/types'
+
+export async function POST(req: NextRequest) {
+  try {
+    const body: CreateSessionPayload = await req.json()
+    const { problemType, country, situation, utmSource, utmMedium, utmCampaign } = body
+
+    // Validare minimă
+    if (!problemType || !country || !situation) {
+      return NextResponse.json(
+        { error: 'problemType, country și situation sunt obligatorii' },
+        { status: 400 }
+      )
+    }
+
+    // Derivă ghidul sau route-ul din răspunsurile wizard-ului
+    const wizardResult = deriveGuideId(problemType, country, situation)
+
+    // Dacă e waitlist — nu creăm sesiune, returnăm direct
+    if (wizardResult.type === 'waitlist') {
+      return NextResponse.json({ wizardResult }, { status: 200 })
+    }
+
+    // Determină guideId — pentru route folosim ghidul A
+    const guideId =
+      wizardResult.type === 'guide'
+        ? wizardResult.guideId
+        : wizardResult.guideAId
+
+    // Inserează sesiunea în Supabase
+    const supabase = createClient()
+    const { data, error } = await supabase
+      .from('user_sessions')
+      .insert({
+        document_type: problemType,
+        country,
+        situation,
+        guide_id: guideId,
+        is_paid: false,
+        utm_source: utmSource ?? null,
+        utm_medium: utmMedium ?? null,
+        utm_campaign: utmCampaign ?? null,
+      })
+      .select('id')
+      .single()
+
+    if (error || !data) {
+      console.error('Supabase insert error:', error)
+      return NextResponse.json(
+        { error: 'Nu s-a putut crea sesiunea' },
+        { status: 500 }
+      )
+    }
+
+    const response: CreateSessionResponse = {
+      sessionId: data.id,
+      guideId,
+      wizardResult,
+    }
+
+    return NextResponse.json(response, { status: 201 })
+  } catch (err) {
+    console.error('Session route error:', err)
+    return NextResponse.json(
+      { error: 'Eroare internă de server' },
+      { status: 500 }
+    )
+  }
+}

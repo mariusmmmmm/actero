@@ -1,0 +1,450 @@
+# ============================================================
+# robots.txt — ActeRO (actero.ro)
+# Actualizat: Aprilie 2026
+# Strategie: ALLOW ALL AI crawlers pentru vizibilitate maximă
+# în ChatGPT, Claude, Perplexity, Gemini și toți agenții AI.
+# ============================================================
+
+# ——————————————————————————————————————————
+# SECȚIUNEA 1 — REGULA GENERALĂ
+# Toți crawlerii nelistați explicit pot accesa totul,
+# cu excepția rutelor private.
+# ——————————————————————————————————————————
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /ghid/access
+Sitemap: https://actero.ro/sitemap.xml
+
+
+# ============================================================
+# SECȚIUNEA 2 — OPENAI (ChatGPT, GPT-5)
+# ============================================================
+
+# GPTBot — crawler training OpenAI (GPT-4o, GPT-5)
+# Scopul: colectare date pentru antrenarea modelelor
+# Respectă robots.txt: DA (confirmat oficial)
+# Impact blocare: MARE — conținutul nu intră în training
+# Recomandare pentru ActeRO: ALLOW (vrem să fim în GPT)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# OAI-SearchBot — crawler real-time al ChatGPT Search
+# Scopul: indexare pentru răspunsuri live cu surse citate
+# NU este folosit pentru training — afișează citări live
+# Respectă robots.txt: DA
+# Impact blocare: CRITIC — nu mai apari în ChatGPT Search
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ChatGPT-User — browsing declanșat de utilizatorul ChatGPT
+# Scopul: fetch pagini specifice la cererea utilizatorului
+# NU folosit pentru training
+# Respectă robots.txt: PARȚIAL — poate ignora în user context
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 3 — ANTHROPIC (Claude)
+# ============================================================
+
+# ClaudeBot — crawler principal Anthropic
+# Scopul: training modele Claude + citări în chat
+# Respectă robots.txt: DA (confirmat în system card Anthropic)
+# Nota: a crescut volumul de crawl cu ~100% din Q3 2025
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Claude-SearchBot — crawler pentru funcția de search Claude
+# Scopul: îmbunătățire calitate răspunsuri cu surse live
+# Respectă robots.txt: DA
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Claude-User — fetch declanșat de utilizatorul Claude
+# Scopul: răspunde la întrebări cu context live din pagini
+# Respectă robots.txt: DA
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# anthropic-ai — user agent vechi Anthropic (deprecated din 2024)
+# Anthropic a confirmat în iulie 2024 că ClaudeBot îl înlocuiește
+# Păstrat pentru compatibilitate backward (trafic legacy sau spoofed)
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# claude-web — user agent vechi Anthropic (deprecated)
+User-agent: claude-web
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 4 — PERPLEXITY
+# ============================================================
+
+# PerplexityBot — crawler principal Perplexity.ai
+# Scopul: indexare pentru answer engine Perplexity (citări directe)
+# Perplexity NU antrenează modele proprii — folosește OpenAI/Meta
+# Respectă robots.txt: DA (publică și IP ranges)
+# Impact: citări directe cu link în Perplexity — CRITIC pentru GEO
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Perplexity-User — fetch declanșat de utilizatorul Perplexity
+# Scopul: fetch pagini în timp real la cererea utilizatorului
+# Respectă robots.txt: DA
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 5 — GOOGLE AI (Gemini, NotebookLM, Deep Research)
+# ============================================================
+
+# Google-Extended — crawler Google pentru antrenare AI
+# Scopul: date training Gemini, Vertex AI, Google AI Overviews
+# Respectă robots.txt: DA
+# CRITIC: blocarea afectează și AI Overviews din Google Search
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Gemini-Deep-Research — agentul Google Deep Research
+# Scopul: multi-hop reasoning, rapoarte complexe (Gemini App + Search)
+# Respectă robots.txt: DA (verificat feb 2026)
+# Disponibil în Google Search, NotebookLM, Google Finance
+User-agent: Gemini-Deep-Research
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Google-NotebookLM — crawler pentru NotebookLM
+# Scopul: fetch surse adăugate de utilizatori în NotebookLM
+# Este user-triggered (fetcher, nu crawler autonom)
+# ATENȚIE: ignoră robots.txt în context user-triggered
+User-agent: Google-NotebookLM
+Allow: /
+Disallow: /admin/
+
+# GoogleAgent-Mariner — agentul Google Project Mariner
+# Scopul: browsing autonom pe web în numele utilizatorului
+# Adăugat oficial 20 martie 2026 în documentația Google
+# ATENȚIE: user-triggered fetcher — IGNORĂ robots.txt prin design
+# Menționat pentru transparență (nu poate fi blocat prin robots.txt)
+User-agent: GoogleAgent-Mariner
+Allow: /
+
+# Google-CloudVertexBot — crawler pentru Vertex AI
+User-agent: Google-CloudVertexBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Google-Firebase — crawler Firebase AI features
+User-agent: Google-Firebase
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# GoogleOther — crawler generic Google pentru produse AI diverse
+User-agent: GoogleOther
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 6 — MICROSOFT (Bing, Copilot)
+# ============================================================
+
+# Bingbot — crawler principal Microsoft
+# Scopul: indexare Bing + Microsoft Copilot (AI Overviews Bing)
+# Respectă robots.txt: DA
+# Microsoft a confirmat (martie 2025) că schema markup
+# ajută LLM-urile Microsoft să înțeleagă conținutul
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# msnbot — crawler legacy Microsoft (Bing)
+User-agent: msnbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 7 — APPLE (Siri, Apple Intelligence)
+# ============================================================
+
+# Applebot — crawler standard Apple (Siri, Spotlight)
+# Respectă robots.txt: DA
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Applebot-Extended — crawler specific Apple Intelligence
+# Scopul: training Apple Intelligence (iOS 18+)
+# OPT-IN prin default — trebuie explicit Allow pentru vizibilitate
+# Respectă robots.txt: DA
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 8 — META (Facebook AI, Instagram, Meta AI)
+# ============================================================
+
+# FacebookBot — crawler Meta pentru training AI + speech recognition
+# Scopul: colectare date pentru modele AI Meta (Llama, Meta AI)
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# meta-externalagent — crawler Meta pentru training + indexare
+# Scopul: "crawls web for AI model training and improving products"
+# Respectă robots.txt: DA (conform documentație Meta)
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Meta-ExternalFetcher — fetch user-triggered de Meta AI
+# Scopul: fetching pagini specifice la cererea utilizatorilor Meta AI
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 9 — xAI (Grok)
+# ============================================================
+
+# GrokBot — crawler training xAI pentru Grok
+# Respectă robots.txt: NECLAR — Grok confirmat că folosește
+# iPhone user-agent strings pentru a evita detectarea
+# User agents documentați dar rar văzuți în practică
+User-agent: GrokBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: xAI-Grok
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Grok-DeepSearch
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 10 — DEEPSEEK
+# ============================================================
+
+# DeepSeekBot — crawler DeepSeek (dacă se identifică)
+# NOTĂ CRITICĂ: DeepSeek în general NU se identifică prin
+# user-agent — crawlează anonim ca trafic browser obișnuit.
+# robots.txt are efect limitat pentru DeepSeek.
+User-agent: DeepSeekBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 11 — AMAZON (Alexa, Amazon AI)
+# ============================================================
+
+# Amazonbot — crawler Amazon pentru Alexa și Amazon AI
+# Respectă robots.txt: DA
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 12 — COMMON CRAWL (CCBot)
+# ============================================================
+
+# CCBot — crawler Common Crawl (non-profit, open dataset)
+# Scopul: arhivă publică folosită ca bază training pentru
+# MULȚI furnizori AI (OpenAI, Anthropic, Mistral, etc.)
+# Respectă robots.txt: DA (Anthropic confirmă că respectă CCBot)
+# Impact: blocarea afectează vizibilitatea în modele mai mici
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 13 — ALȚI CRAWLERI AI (modele mai mici, Europa)
+# ============================================================
+
+# DuckAssistBot — crawler DuckDuckGo AI Answers
+# Scopul: răspunsuri AI generate în DuckDuckGo
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# YouBot — crawler You.com AI Search
+User-agent: YouBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# cohere-ai — crawler Cohere (enterprise LLM)
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# cohere-training-data-crawler — crawler training Cohere
+User-agent: cohere-training-data-crawler
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# AI2Bot — crawler Allen Institute for AI (Dolma dataset)
+User-agent: AI2Bot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Diffbot — crawler AI extraction (folosit de mulți furnizori)
+User-agent: Diffbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# iAskBot / iaskspider — crawler iAsk.ai (motoare AI search)
+User-agent: iAskBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: iaskspider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 14 — CRAWLERI SOCIAL MEDIA (pentru sharing + citări)
+# ============================================================
+
+# LinkedInBot — preview link-uri LinkedIn
+# Util pentru sharing conținut ActeRO în comunități profesionale
+User-agent: LinkedInBot
+Allow: /
+Disallow: /admin/
+
+# Twitterbot — preview link-uri X/Twitter
+User-agent: Twitterbot
+Allow: /
+Disallow: /admin/
+
+# Slackbot — preview link-uri Slack (WA/diaspora communities)
+User-agent: Slackbot
+Allow: /
+Disallow: /admin/
+
+# WhatsApp — preview link-uri WhatsApp (canal principal diaspora!)
+User-agent: WhatsApp
+Allow: /
+Disallow: /admin/
+
+# Telegram — preview link-uri Telegram
+User-agent: TelegramBot
+Allow: /
+Disallow: /admin/
+
+
+# ============================================================
+# SECȚIUNEA 15 — CRAWLERI DE CĂUTARE CLASICI (baza SEO = baza GEO)
+# 60-70% din citările Perplexity corelează cu rankingul Google.
+# SEO bun = GEO bun.
+# ============================================================
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /admin/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Yahoo! Slurp
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Yandex
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SECȚIUNEA 16 — BYTEDANCE (TikTok) — DECIZIE SPECIALĂ
+# ============================================================
+
+# Bytespider — crawler ByteDance pentru TikTok AI + Ernie Bot
+# ATENȚIE: Rapoarte că Bytespider a ignorat Disallow pe unele site-uri
+# (observat accesând căi blocate pe 3 din 8 site-uri de test)
+# Decizie: Allow pentru vizibilitate TikTok + China AI
+# (ActeRO targetează diaspora RO din Germania — TikTok relevant!)
+# Dacă apar probleme de bandwidth, poate fi restricționat.
+User-agent: Bytespider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+
+# ============================================================
+# SITEMAP
+# ============================================================
+
+Sitemap: https://actero.ro/sitemap.xml
