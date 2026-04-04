@@ -3,6 +3,7 @@
 
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { TEST_MODE } from '@/lib/config'
@@ -626,7 +627,7 @@ function PaywallBanner({
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function GhidFreePage() {
+function GhidFreePageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const sessionId = searchParams.get('session') ?? ''
@@ -716,5 +717,18 @@ export default function GhidFreePage() {
         <div className="h-16" />
       </div>
     </main>
+  )
+}
+
+export default function GhidFreePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 py-6 flex-1" />
+      </main>
+    }>
+      <GhidFreePageContent />
+    </Suspense>
   )
 }

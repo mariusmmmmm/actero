@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { TEST_MODE } from '@/lib/config'
@@ -95,7 +95,7 @@ function IncludesList({ items }: { items: string[] }) {
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function PaywallPage() {
+function PaywallPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const sessionId = searchParams.get('session') ?? ''
@@ -233,5 +233,18 @@ export default function PaywallPage() {
 
       </div>
     </main>
+  )
+}
+
+export default function PaywallPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 flex-1 flex flex-col" />
+      </main>
+    }>
+      <PaywallPageContent />
+    </Suspense>
   )
 }

@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { bundeslandOptions, consulates } from '@/lib/content/consulates/de'
@@ -681,7 +681,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function DiagnosticPage() {
+function DiagnosticPageContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session') ?? ''
   const { guideId, wizardResult } = useAppStore()
@@ -721,5 +721,18 @@ export default function DiagnosticPage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function DiagnosticPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+      </main>
+    }>
+      <DiagnosticPageContent />
+    </Suspense>
   )
 }

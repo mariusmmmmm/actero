@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { findBundeslandByCity } from '@/lib/content/cities-to-bundesland'
@@ -528,7 +528,7 @@ function getProgressPercent(
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function WizardPage() {
+function WizardPageContent() {
   const { currentWizardStep, currentSubStep, totalSubSteps } = useAppStore()
 
   return (
@@ -556,5 +556,18 @@ export default function WizardPage() {
         {currentWizardStep === 3 && <Step3 />}
       </div>
     </main>
+  )
+}
+
+export default function WizardPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+      </main>
+    }>
+      <WizardPageContent />
+    </Suspense>
   )
 }

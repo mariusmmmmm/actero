@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { TEST_MODE } from '@/lib/config'
 import SiteHeader from '@/components/layout/SiteHeader'
@@ -478,7 +478,7 @@ function ConsulateCard({ consulateId }: { consulateId: ConsulateId }) {
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-export default function GhidPaidPage() {
+function GhidPaidPageContent() {
   const { sessionId } = useParams<{ sessionId: string }>()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -666,5 +666,18 @@ export default function GhidPaidPage() {
 
       </div>
     </main>
+  )
+}
+
+export default function GhidPaidPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full flex flex-col flex-1" />
+      </main>
+    }>
+      <GhidPaidPageContent />
+    </Suspense>
   )
 }

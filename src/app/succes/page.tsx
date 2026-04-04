@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { useAppStore } from '@/store/appStore'
@@ -37,7 +37,7 @@ const crossSell: Record<string, { icon: string; text: string; href: string }[]> 
 const shareText =
   'Am rezolvat actele din Germania cu ActeRO. Dacă și tu ești blocat, încearcă — primii pași sunt gratuiți. actero.ro'
 
-export default function SuccesPage() {
+function SuccesPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const sessionId = searchParams.get('session') ?? ''
@@ -209,5 +209,18 @@ export default function SuccesPage() {
 
       </div>
     </main>
+  )
+}
+
+export default function SuccesPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex flex-col">
+        <SiteHeader />
+        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+      </main>
+    }>
+      <SuccesPageContent />
+    </Suspense>
   )
 }
