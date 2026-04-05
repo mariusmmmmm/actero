@@ -6,7 +6,6 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
-import { findBundeslandByCity } from '@/lib/content/cities-to-bundesland'
 import { bundeslandOptions } from '@/lib/content/consulates/de'
 import { useAppStore } from '@/store/appStore'
 import type { BundeslandCode, CreateSessionResponse, ProblemType, SituationFlags, WizardResult } from '@/types'
@@ -89,28 +88,10 @@ function Step1() {
 
 function Step2() {
   const { bundesland, setBundesland, consulate, nextWizardStep, prevWizardStep } = useAppStore()
-  const [showCitySearch, setShowCitySearch] = useState(false)
-  const [cityInput, setCityInput] = useState('')
-  const [cityNotFound, setCityNotFound] = useState(false)
 
   const consulateName = consulate
     ? { muenchen: 'München', bonn: 'Bonn', stuttgart: 'Stuttgart', berlin: 'Berlin' }[consulate]
     : null
-
-  function handleCitySearch(value: string) {
-    setCityInput(value)
-    setCityNotFound(false)
-    if (value.length >= 3) {
-      const result = findBundeslandByCity(value)
-      if (result) {
-        setBundesland(result)
-        setShowCitySearch(false)
-        setCityInput('')
-      } else if (value.length >= 5) {
-        setCityNotFound(true)
-      }
-    }
-  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -134,35 +115,6 @@ function Step2() {
           </button>
         ))}
       </div>
-      {!showCitySearch ? (
-        <button
-          type="button"
-          onClick={() => setShowCitySearch(true)}
-          className="mt-3 text-xs text-gray-400 underline underline-offset-2 hover:text-gray-600"
-        >
-          Nu știu în ce land sunt →
-        </button>
-      ) : (
-        <div className="mt-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
-          <p className="text-xs text-gray-500 mb-2">
-            Scrie orașul în care locuiești:
-          </p>
-          <input
-            type="text"
-            value={cityInput}
-            onChange={(e) => handleCitySearch(e.target.value)}
-            placeholder="ex: München, Köln, Stuttgart..."
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-gray-900"
-            autoFocus
-          />
-          {cityNotFound && (
-            <p className="text-xs text-gray-400 mt-2">
-              Orașul nu a fost găsit. Selectează manual din lista de sus
-              sau caută „{cityInput} Bundesland" pe Google.
-            </p>
-          )}
-        </div>
-      )}
       {consulateName && (
         <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-4 py-3 text-sm text-gray-600">
           <span>📍</span>
@@ -503,6 +455,19 @@ function Step3() {
               : 'Continuă →'}
           </button>
         </div>
+        {isLast && (
+          <p className="text-center text-xs text-gray-400 mt-3 leading-relaxed">
+            Prin continuare, confirmi că ai citit{' '}
+            <a href="/termeni-si-conditii" className="underline underline-offset-2">
+              Termenii și Condițiile
+            </a>{' '}
+            și{' '}
+            <a href="/politica-de-confidentialitate" className="underline underline-offset-2">
+              Politica de confidențialitate
+            </a>
+            .
+          </p>
+        )}
         {submitError && (
           <p className="text-center text-sm text-red-500 mt-3">
             {submitError}

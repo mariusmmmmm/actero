@@ -101,6 +101,7 @@ function PaywallPageContent() {
   const sessionId = searchParams.get('session') ?? ''
   const { guideId, problemType, unlockPaid } = useAppStore()
   const [benefitsOpen, setBenefitsOpen] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
 
   const includesList = getIncludes(problemType)
 
@@ -160,6 +161,29 @@ function PaywallPageContent() {
 
         {/* Opțiuni preț */}
         <div className="flex flex-col gap-3 mb-6">
+          <label className="flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-600">
+            <input
+              type="checkbox"
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-400"
+            />
+            <span className="leading-relaxed">
+              Am citit și accept{' '}
+              <a href="/termeni-si-conditii" className="underline underline-offset-2">
+                Termenii și Condițiile
+              </a>{' '}
+              și{' '}
+              <a
+                href="/politica-de-confidentialitate"
+                className="underline underline-offset-2"
+              >
+                Politica de confidențialitate
+              </a>
+              . Sunt de acord să primesc acces imediat la conținutul digital după
+              confirmarea plății.
+            </span>
+          </label>
 
           {/* Opțiunea recomandată */}
           <div className="border-2 border-green-500 bg-green-50 rounded-2xl p-4">
@@ -177,7 +201,8 @@ function PaywallPageContent() {
             </div>
             <button
               onClick={handleGhid}
-              className="w-full py-3 bg-gray-900 text-white font-bold rounded-xl text-sm"
+              disabled={!termsAccepted}
+              className="w-full py-3 bg-gray-900 text-white font-bold rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Plătesc 9,99€ și primesc ghidul →
             </button>
@@ -194,7 +219,8 @@ function PaywallPageContent() {
             </div>
             <button
               onClick={handleFamilie}
-              className="w-full py-3 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl text-sm"
+              disabled={!termsAccepted}
+              className="w-full py-3 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Aleg pachetul familie →
             </button>

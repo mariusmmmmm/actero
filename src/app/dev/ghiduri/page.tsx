@@ -30,6 +30,21 @@ const seoPages = [
   { title: 'Titlu calatorie urgenta Germania', path: '/titlu-calatorie-urgenta-germania' },
 ]
 
+const routes = [
+  {
+    id: 'route-a',
+    when: 'Primul pasaport, domiciliu in Germania, nascut in Germania/strainatate',
+    guideA: 'transcriere-nastere-de',
+    guideB: 'pasaport-crds-nou-de',
+  },
+  {
+    id: 'route-b',
+    when: 'Primul buletin, fara domiciliu anterior in Romania, nascut in Germania/strainatate',
+    guideA: 'transcriere-nastere-de',
+    guideB: 'buletin-de-primul-de-b',
+  },
+]
+
 export default function DevGhiduriPage() {
   return (
     <main className="min-h-screen bg-white">
@@ -69,6 +84,50 @@ export default function DevGhiduriPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-900">Route-uri compuse</h2>
+          <p className="mt-2 text-sm text-gray-500">
+            Cazuri din wizard care nu duc direct intr-un singur ghid, ci intr-o succesiune de doua ghiduri.
+          </p>
+
+          <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+            <table className="w-full text-left">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Route</th>
+                  <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Cand se aplica</th>
+                  <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Ghid A</th>
+                  <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Ghid B</th>
+                </tr>
+              </thead>
+              <tbody>
+                {routes.map((route) => (
+                  <tr key={route.id} className="border-t border-gray-100 align-top">
+                    <td className="px-4 py-3 text-sm font-semibold text-gray-900">{route.id}</td>
+                    <td className="px-4 py-3 text-sm text-gray-600">{route.when}</td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      <a
+                        href={`/ghid?session=test-session&guide=${route.guideA}`}
+                        className="underline underline-offset-2"
+                      >
+                        {route.guideA}
+                      </a>
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      <a
+                        href={`/ghid?session=test-session&guide=${route.guideB}`}
+                        className="underline underline-offset-2"
+                      >
+                        {route.guideB}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="mt-12">
