@@ -5,11 +5,11 @@
 
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { getBaseUrl } from '@/lib/base-url'
 import { createClient } from '@/lib/supabase/server'
 import { sendAccessEmail, sendFamilieEmail } from '@/lib/resend'
 
 const GUMROAD_SELLER_ID = process.env.GUMROAD_SELLER_ID ?? ''
-const GUMROAD_LINK_FAMILIE = process.env.GUMROAD_LINK_FAMILIE ?? ''
 
 // Detectează dacă plata e pentru pachetul familie
 // Gumroad trimite permalink-ul produsului în câmpul `permalink`
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Session update failed' }, { status: 500 })
     }
 
-    const accessUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/ghid/access?token=${session.access_token}`
+    const accessUrl = `${getBaseUrl()}/ghid/access?token=${session.access_token}`
     await sendAccessEmail({ to: email, accessUrl, guideId: session.guide_id })
 
     return NextResponse.json({ ok: true, action: 'paid_ghid' })
@@ -128,7 +128,7 @@ async function handleFamiliePayment({
   sessionId: string | null
   tokenExpiry: Date
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://actero.ro'
+  const baseUrl = getBaseUrl()
 
   // Sesiunea 1 — cea din wizard (dacă există), sau nouă goală
   let session1Id: string

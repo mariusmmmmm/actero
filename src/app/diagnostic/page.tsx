@@ -20,7 +20,7 @@ type DiagnosticData = {
   subtitle: string
   warnings: string[]
   estimatedWeeks: string
-  estimatedAppointments: number
+  estimatedAppointments: number | string
   previewSteps: { id: number; label: string; locked: boolean }[]
   guideTitle: string
   isRoute: boolean
@@ -154,6 +154,50 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       { id: 4, label: 'Pregătire pentru deplasare', locked: true },
       { id: 5, label: 'Ziua la SPCLEP', locked: true },
       { id: 6, label: 'Ridică buletinul', locked: true },
+    ],
+  },
+  'buletin-de-cu-domiciliu-pierdut': {
+    title: 'Buletin pierdut sau furat — cu domiciliu în România',
+    subtitle: 'Ai domiciliul activ în România și buletinul nu mai e la tine — trebuie să te prezinți personal la SPCLEP.',
+    warnings: [
+      'Prezența ta fizică la SPCLEP este obligatorie la depunere. Cererea nu se poate face prin procură.',
+      'Ai obligația legală să soliciți buletin nou în termen de 15 zile de la constatarea lipsei.',
+      'Dacă buletinul a fost furat: raportezi la poliția locală germană în 24 ore (obligație legală). Raportul poliției NU este document SPCLEP — funcționarul înregistrează furtul din declarația ta.',
+      'CEI se ridică personal (setup PIN obligatoriu la ghișeu). CIS poate fi ridicat prin procură specială notarială.',
+    ],
+    estimatedWeeks: '2–5 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Buletin pierdut/furat · Domiciliu România · Germania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește documentele', locked: false },
+      { id: 3, label: 'Planifică deplasarea în România', locked: true },
+      { id: 4, label: 'Pregătire pentru deplasare', locked: true },
+      { id: 5, label: 'Ziua la SPCLEP', locked: true },
+      { id: 6, label: 'Ridică buletinul', locked: true },
+    ],
+  },
+  'buletin-de-primul-de': {
+    title: 'Primul tău buletin românesc',
+    subtitle: 'Nu ai fost niciodată înregistrat la o primărie din România. Stabilirea domiciliului și prima carte de identitate se fac împreună, la același ghișeu SPCLEP — dar ai nevoie de o adresă și de actele de identitate pregătite înainte să pleci.',
+    warnings: [
+      'Prezența fizică în România este obligatorie — nu există procură sau alternativă la distanță.',
+      'Ai nevoie de o adresă de domiciliu în România. Fără aceasta, cererea nu poate fi depusă.',
+      'Această procedură folosește un formular distinct față de reînnoirea standard de CI — spune la ghișeu că vii pentru schimbarea domiciliului din străinătate în România.',
+    ],
+    estimatedWeeks: '1–6 săptămâni de la deplasare (CEI: ~5 zile calendaristice / CIS: ~30–45 zile)',
+    estimatedAppointments: '1 deplasare în România · 1 vizită la SPCLEP pentru depunere · 1 vizită pentru ridicare',
+    guideTitle: 'Ghid: Primul buletin românesc · Schimbare domiciliu din străinătate în România',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește dovada de adresă', locked: false },
+      { id: 3, label: 'Alege tipul de carte de identitate', locked: true },
+      { id: 4, label: 'Planifică deplasarea și programarea', locked: true },
+      { id: 5, label: 'Pregătire pentru ziua deplasării', locked: true },
+      { id: 6, label: 'Ziua la SPCLEP', locked: true },
+      { id: 7, label: 'Ridică buletinul', locked: true },
     ],
   },
   'titlu-calatorie-urgenta-de': {
@@ -335,6 +379,13 @@ function getEmotionalCopy(guideId: GuideId | null, problemType: ProblemType | nu
     }
   }
 
+  if (guideId === 'buletin-de-primul-de') {
+    return {
+      title: 'Primul tău buletin românesc se rezolvă — ghid exact pentru situația ta.',
+      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
+    }
+  }
+
   switch (problemType) {
     case 'pasaport':
       return {
@@ -364,7 +415,11 @@ function getEmotionalCopy(guideId: GuideId | null, problemType: ProblemType | nu
   }
 }
 
-function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimatedAppointments: number) {
+function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimatedAppointments: number | string) {
+  if (typeof estimatedAppointments === 'string') {
+    return `⏱ ${estimatedAppointments} · ${estimatedWeeks}`
+  }
+
   switch (guideId) {
     case 'pasaport-crds-de':
       return '⏱ 1 singură deplasare la consulat · 6–8 săptămâni'
@@ -712,17 +767,6 @@ function DiagnosticPageContent() {
     diagnosticData = diagnosticMap[guideId] ?? null
   }
 
-  if (!diagnosticData) {
-    return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <div className="text-3xl mb-3">⚠️</div>
-          <p className="text-sm">Sesiune invalidă. <a href="/wizard" className="underline">Reîncepe</a></p>
-        </div>
-      </main>
-    )
-  }
-
   useEffect(() => {
     persistAttribution(searchParams)
   }, [searchParams])
@@ -743,6 +787,17 @@ function DiagnosticPageContent() {
       }, searchParams)
     )
   }, [showResult, diagnosticData, sessionId, guideId, wizardResult, problemType, situation, searchParams])
+
+  if (!diagnosticData) {
+    return (
+      <main className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center text-gray-500">
+          <div className="text-3xl mb-3">⚠️</div>
+          <p className="text-sm">Sesiune invalidă. <a href="/wizard" className="underline">Reîncepe</a></p>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

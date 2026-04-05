@@ -61,7 +61,7 @@ export type SituationFlags = {
   pasaportStatus?: 'expirat-distrus' | 'pierdut-furat'
 
   // Path Buletin
-  buletinStatus?: 'expirat' | 'pierdut-furat-distrus'
+  buletinStatus?: 'expirat' | 'pierdut-furat-distrus' | 'niciodata'
   hasDomiciliuAnteriorRO?: boolean  // a mai fost înregistrat vreodată în RO
 
   // Path Titlu de călătorie

@@ -40,11 +40,20 @@ export const metadata: Metadata = {
     title: 'ActeRO — Acte românești din Germania, pas cu pas',
     description:
       'Ghid personalizat pentru pașaport, buletin și procuri din Germania. Fără drumuri degeaba la consulat.',
+    images: [
+      {
+        url: '/logo.png',
+        width: 512,
+        height: 512,
+        alt: 'ActeRO',
+      },
+    ],
   },
   twitter: {
     card: 'summary',
     title: 'ActeRO — Acte românești din Germania',
     description: 'Ghid personalizat. Fără drumuri degeaba la consulat.',
+    images: ['/logo.png'],
   },
   icons: {
     icon: [

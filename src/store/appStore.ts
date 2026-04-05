@@ -71,6 +71,7 @@ type AppStore = {
   toggleChecklistItem: (itemId: string) => void
   updateChecklistItem: (itemId: string, fields: Partial<ChecklistItemState>) => void
   setExpandedItem: (id: string | null) => void
+  setChecklistItem: (id: string, checked: boolean) => void
 
   // ── TRACKER ──────────────────────────────────────────────────────────────────
   trackerState: Record<number, TrackerStepState>
@@ -79,6 +80,7 @@ type AppStore = {
   setTrackerStepDate: (stepId: number, date: string) => void
   setTrackerStepStatus: (stepId: number, status: TrackerStepState['status']) => void
   setExpandedTrackerStep: (id: number | null) => void
+  setTrackerStep: (idx: number, state: 'done' | 'active' | 'todo') => void
 
   // ── COMPUTED ─────────────────────────────────────────────────────────────────
   getChecklistProgress: () => { checked: number; total: number; pct: number }
@@ -225,6 +227,14 @@ export const useAppStore = create<AppStore>()(
 
       setExpandedItem: (id) => set({ expandedItemId: id }),
 
+      setChecklistItem: (id, checked) =>
+        set((s) => ({
+          checklistState: {
+            ...s.checklistState,
+            [id]: { ...s.checklistState[id], checked },
+          },
+        })),
+
       // ── TRACKER ──────────────────────────────────────────────────────────────
       ...initialTracker,
 
@@ -249,6 +259,31 @@ export const useAppStore = create<AppStore>()(
       },
 
       setExpandedTrackerStep: (id) => set({ expandedTrackerStepId: id }),
+
+      setTrackerStep: (idx, stepState) =>
+        set((s) => {
+          const next = {
+            ...s.trackerState,
+            [idx]: { ...s.trackerState[idx], status: stepState },
+          }
+          const steps = Object.keys(next).map(Number)
+          const maxDone = steps
+            .filter((i) => next[i]?.status === 'done')
+            .reduce((a, b) => Math.max(a, b), -1)
+          const nextIdx = maxDone + 1
+
+          if (next[nextIdx] === undefined || next[nextIdx]?.status === 'todo') {
+            next[nextIdx] = {
+              ...next[nextIdx],
+              status: 'active',
+            }
+          }
+
+          return {
+            trackerState: next,
+            currentStepIndex: nextIdx,
+          }
+        }),
 
       // ── COMPUTED ─────────────────────────────────────────────────────────────
       getChecklistProgress: () => {

@@ -1,0 +1,58 @@
+import type { ConsulateId } from '@/types'
+
+export interface CrossSellGuide {
+  guideId: string
+  title: string
+  subtitle: string
+  icon: string
+}
+
+export function getGuideTitle(guideId: string | null): string | null {
+  if (!guideId) return null
+  return GUIDE_TITLES[guideId] ?? null
+}
+
+export function getCrossSellGuides(
+  guideId: string | null,
+  _consulate: ConsulateId | null
+): CrossSellGuide[] {
+  if (!guideId) return []
+  return CROSS_SELL[guideId] ?? []
+}
+
+const GUIDE_TITLES: Record<string, string> = {
+  'pasaport-crds-de': 'pașaportul CRDS din Germania',
+  'pasaport-crds-nou-de': 'primul pașaport CRDS din Germania',
+  'pasaport-de-cu-domiciliu': 'pașaportul din Germania',
+  'pasaport-de-cu-domiciliu-pierdut': 'pașaportul pierdut din Germania',
+  'buletin-de-fara-domiciliu': 'buletinul din Germania',
+  'buletin-de-cu-domiciliu': 'buletinul din Germania',
+  'buletin-de-fara-domiciliu-pierdut': 'buletinul pierdut din Germania',
+  'buletin-de-cu-domiciliu-pierdut': 'buletinul pierdut din Germania',
+  'buletin-de-primul-de': 'primul buletin românesc',
+  'titlu-calatorie-urgenta-de': 'titlul de călătorie de urgență',
+  'titlu-calatorie-de': 'titlul de călătorie',
+  'procura-vanzare-de': 'procura notarială din Germania',
+  'procura-mostenire-de': 'procura pentru moștenire din Germania',
+  'procura-generala-de': 'procura notarială din Germania',
+  'transcriere-nastere-de': 'transcrierea certificatului de naștere',
+}
+
+const CROSS_SELL: Record<string, CrossSellGuide[]> = {
+  'pasaport-crds-de': [
+    { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai buletin expirat sau lipsă', icon: '🪪' },
+    { guideId: 'procura-vanzare-de', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+  'buletin-de-cu-domiciliu-pierdut': [
+    { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul CRDS', subtitle: 'Dacă ai și pașaport expirat', icon: '📕' },
+    { guideId: 'titlu-calatorie-de', title: 'Titlu de călătorie', subtitle: 'Dacă ai nevoie să pleci urgent', icon: '⚡' },
+  ],
+  'buletin-de-fara-domiciliu': [
+    { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul CRDS', subtitle: 'Dacă ai și pașaport expirat', icon: '📕' },
+    { guideId: 'procura-vanzare-de', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+  'pasaport-de-cu-domiciliu': [
+    { guideId: 'buletin-de-cu-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă are nevoie de reînnoire', icon: '🪪' },
+    { guideId: 'procura-vanzare-de', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+}

@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "typecheck": "tsc --noEmit",
-    "preflight": "npm run typecheck && next build",
-    "build": "next build",
+    "preflight": "npm run typecheck && next build --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },

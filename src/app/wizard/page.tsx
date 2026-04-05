@@ -23,7 +23,7 @@ const STEP1_OPTIONS = [
   {
     icon: '🪪',
     label: 'N-am buletin valabil',
-    sublabel: 'Carte de identitate expirată sau pierdută',
+    sublabel: 'Expirat, pierdut sau primul buletin',
     value: 'buletin' as ProblemType,
   },
   {
@@ -192,10 +192,11 @@ function getQuestions(problemType: ProblemType): Question[] {
       return [
         {
           key: 'buletinStatus',
-          question: 'Ce s-a întâmplat cu buletinul tău?',
+          question: 'Care este situația ta cu buletinul?',
           options: [
             { value: 'expirat', label: 'A expirat', sublabel: 'Îl am încă la mine' },
             { value: 'pierdut-furat-distrus', label: 'L-am pierdut, furat sau distrus', sublabel: 'Nu îl mai am' },
+            { value: 'niciodata', label: 'Nu am avut niciodată', sublabel: 'Ar fi primul meu buletin românesc' },
           ],
         },
         {
@@ -212,6 +213,14 @@ function getQuestions(problemType: ProblemType): Question[] {
           options: [
             { value: true, label: 'Da', sublabel: 'Am avut domiciliu în România la un moment dat' },
             { value: false, label: 'Nu', sublabel: 'Nu am avut niciodată' },
+          ],
+        },
+        {
+          key: 'locuNastere',
+          question: 'Unde te-ai născut?',
+          options: [
+            { value: 'ro', label: '🇷🇴 În România', sublabel: 'Am CNP românesc' },
+            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Nu am CNP românesc' },
           ],
         },
       ]
@@ -274,6 +283,12 @@ function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags
     return all.filter((_, i) => {
       if (i === 0 || i === 1) return true
       if (i === 2) return situation.hasDomiciliuRO === false
+      if (i === 3) {
+        return (
+          situation.hasDomiciliuRO === false &&
+          situation.hasDomiciliuAnteriorRO === false
+        )
+      }
       return false
     })
   }
