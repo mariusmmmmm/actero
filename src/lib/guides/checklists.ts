@@ -193,6 +193,46 @@ function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: Situa
   ]
 }
 
+function checklistTitluCalatorie(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  let fotoDetail = 'Verifică regulile consulatului tău pentru fotografie'
+
+  if (consulate === 'bonn') {
+    fotoDetail = 'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii'
+  } else if (consulate === 'muenchen') {
+    fotoDetail = '2 fotografii biometrice color 3,5 × 4,5 cm · tipărite, nu pe telefon'
+  } else if (consulate === 'stuttgart') {
+    fotoDetail = 'Adulți: foto la ghișeu; minori sub 14 ani: 1 fotografie color 3,5 × 4,5 cm pe hârtie'
+  } else if (consulate === 'berlin') {
+    fotoDetail = 'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii'
+  }
+
+  return [
+    {
+      id: 'identitate',
+      title: 'Documente de identificare',
+      items: [
+        { id: 'tc12_doc_romanesc', name: 'Un document românesc de identificare', detail: 'Original + 1 copie · pașaport expirat, CI/buletin expirat sau permis de conducere românesc' },
+        { id: 'tc12_foto', name: 'Fotografie / reguli foto', detail: fotoDetail },
+      ],
+    },
+    {
+      id: 'fara_act',
+      title: 'Dacă nu mai ai niciun act de identitate',
+      items: [
+        { id: 'tc12_nastere', name: 'Certificat de naștere românesc sau act cu CNP', detail: 'Original + 1 copie · folosit pentru identificare în lipsa unui act cu fotografie' },
+      ],
+    },
+    {
+      id: 'furt',
+      title: 'Dacă documentul a fost furat',
+      items: [
+        { id: 'tc12_politie', name: 'Adeverință de la poliția locală', detail: 'Verlustanzeige / Diebstahlsanzeige' },
+        { id: 'tc12_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; la Bonn nu este cerută' },
+      ],
+    },
+  ]
+}
+
 // ── Generic fallback ──────────────────────────────────────────────────────────
 
 function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -220,4 +260,5 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'buletin-de-primul-de': checklistBuletinPrimulDe,
   'buletin-de-primul-de-b': checklistBuletinPrimulDeB,
   'titlu-calatorie-urgenta-de': checklistTitluCalatorieUrgenta,
+  'titlu-calatorie-de': checklistTitluCalatorie,
 }

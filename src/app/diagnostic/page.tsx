@@ -243,18 +243,22 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     ],
   },
   'titlu-calatorie-de': {
-    title: 'Titlu de călătorie · 1–2 săptămâni',
-    subtitle: 'Programare standard',
-    warnings: [],
+    title: 'Titlu de călătorie — Germania',
+    subtitle: 'Nu mai ai acte valide și trebuie să te întorci în România. Titlul de călătorie se obține direct la consulat, fără programare, de regulă în aceeași zi.',
+    warnings: [
+      'Titlul ÎȘI PIERDE VALABILITATEA la intrarea în România — nu poți reveni în Germania cu el. Trebuie să îți faci urgent un pașaport sau buletin nou în România.',
+      'Dacă documentul a fost FURAT (nu expirat/pierdut), ai nevoie și de adeverință poliție. La München, Stuttgart și Berlin trebuie și traducere autorizată în română — pregătește-o înainte.',
+    ],
     estimatedWeeks: '1–2 săptămâni',
-    estimatedAppointments: 1,
-    guideTitle: 'Ghid titlu de călătorie',
+    estimatedAppointments: '1 deplasare la consulat (fără programare) · eliberare de regulă în aceeași zi',
+    guideTitle: 'Titlu de călătorie · Germania · 1–2 săptămâni',
     isRoute: false,
     previewSteps: [
       { id: 1, label: 'Documentele necesare', locked: false },
-      { id: 2, label: 'Cont și cerere pe econsulat.ro', locked: true },
-      { id: 3, label: 'Ziua consulatului', locked: true },
-      { id: 4, label: 'Pasul următor', locked: true },
+      { id: 2, label: 'Pregătește fotografiile', locked: false },
+      { id: 3, label: 'Mergi la consulat', locked: true },
+      { id: 4, label: 'Ridică titlul de călătorie', locked: true },
+      { id: 5, label: 'Ce faci în România', locked: true },
     ],
   },
   'procura-vanzare-de': {
@@ -431,6 +435,23 @@ function getEmotionalCopy(
     }
   }
 
+  if (
+    guideId === 'buletin-de-fara-domiciliu-pierdut' ||
+    guideId === 'buletin-de-cu-domiciliu-pierdut'
+  ) {
+    return {
+      title: 'Buletinul lipsă se rezolvă — iată exact pașii pentru situația ta.',
+      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
+    }
+  }
+
+  if (guideId === 'titlu-calatorie-de') {
+    return {
+      title: 'Te întorci în România cu titlul de călătorie — iată pașii corecți.',
+      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
+    }
+  }
+
   switch (problemType) {
     case 'pasaport':
       return {
@@ -444,7 +465,7 @@ function getEmotionalCopy(
       }
     case 'titlu-calatorie':
       return {
-        title: 'Trebuie să ajungi urgent în România — există o soluție pentru asta.',
+        title: 'Titlul de călătorie te aduce acasă — îți arătăm exact pașii.',
         subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
       }
     case 'procura':
@@ -485,6 +506,8 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
       return '⏱ 1 singură deplasare la consulat · 1–2 săptămâni'
     case 'titlu-calatorie-urgenta-de':
       return '⏱ 1 deplasare la consulat · fără programare · aceeași zi'
+    case 'titlu-calatorie-de':
+      return '⏱ 1 deplasare la consulat · fără programare · aceeași zi în majoritatea cazurilor'
     default:
       return `⏱ ${estimatedAppointments === 1 ? '1 singură deplasare' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
   }

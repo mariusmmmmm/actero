@@ -32,7 +32,7 @@ const GUIDE_TITLES: Record<string, string> = {
   'buletin-de-primul-de': 'primul buletin românesc',
   'buletin-de-primul-de-b': 'primul buletin românesc din Germania',
   'titlu-calatorie-urgenta-de': 'titlul de călătorie de urgență din Germania',
-  'titlu-calatorie-de': 'titlul de călătorie',
+  'titlu-calatorie-de': 'titlul de călătorie din Germania',
   'procura-vanzare-de': 'procura notarială din Germania',
   'procura-mostenire-de': 'procura pentru moștenire din Germania',
   'procura-generala-de': 'procura notarială din Germania',
@@ -59,5 +59,9 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'titlu-calatorie-urgenta-de': [
     { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul', subtitle: 'Documentul permanent după urgență', icon: '📕' },
     { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă trebuie să revii și în România', icon: '🪪' },
+  ],
+  'titlu-calatorie-de': [
+    { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul', subtitle: 'Documentul permanent după revenirea în România', icon: '📕' },
+    { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai nevoie de carte de identitate nouă', icon: '🪪' },
   ],
 }

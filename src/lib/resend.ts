@@ -21,7 +21,7 @@ const GUIDE_TITLES: Record<string, string> = {
   'buletin-de-cu-domiciliu-pierdut': 'Buletin pierdut · Domiciliu activ RO',
   'buletin-de-primul-de': 'Primul buletin românesc · Schimbare domiciliu din străinătate',
   'titlu-calatorie-urgenta-de': 'Titlu de călătorie · Urgență',
-  'titlu-calatorie-de': 'Titlu de călătorie · Germania',
+  'titlu-calatorie-de': 'Titlu de călătorie · Germania · 1–2 săptămâni',
   'buletin-de-primul-de-b': 'Primul buletin românesc · Germania',
   'procura-vanzare-de': 'Procură · Vânzare proprietate · Germania',
   'procura-mostenire-de': 'Procură · Moștenire · Germania',

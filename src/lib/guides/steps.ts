@@ -54,6 +54,14 @@ const STEPS_TITLU_URGENTA: TrackerStep[] = [
   { id: 'romania', title: 'Ce faci după ce ajungi în România', shortLabel: 'România', todoNote: 'Titlul expiră la intrarea în țară · rezolvă imediat documentul permanent' },
 ]
 
+const STEPS_TITLU_STANDARD: TrackerStep[] = [
+  { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Pregătește actul românesc în original și o copie' },
+  { id: 'fotografii', title: 'Pregătește fotografiile', shortLabel: 'Fotografii', todoNote: 'Regulile diferă în funcție de consulat' },
+  { id: 'consulat', title: 'Mergi la consulat', shortLabel: 'Consulat', todoNote: 'Fără programare · doar în intervalul dedicat' },
+  { id: 'ridicare', title: 'Ridică titlul de călătorie', shortLabel: 'Ridicare', todoNote: 'De regulă în aceeași zi' },
+  { id: 'romania', title: 'Ce faci în România', shortLabel: 'România', todoNote: 'Rezolvă documentul permanent înainte să pleci iar' },
+]
+
 const STEPS_GENERIC: TrackerStep[] = [
   { id: 'documente', title: 'Strânge documentele', shortLabel: 'Documente' },
   { id: 'cerere', title: 'Depune cererea', shortLabel: 'Cerere' },
@@ -73,4 +81,5 @@ const STEPS: Record<string, TrackerStep[]> = {
   'buletin-de-primul-de': STEPS_BULETIN_PRIMUL,
   'buletin-de-primul-de-b': STEPS_BULETIN_PRIMUL_B,
   'titlu-calatorie-urgenta-de': STEPS_TITLU_URGENTA,
+  'titlu-calatorie-de': STEPS_TITLU_STANDARD,
 }
