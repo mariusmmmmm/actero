@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import type { ReactNode } from 'react'
 import { persistAttribution, trackEvent, withAttribution } from '@/lib/analytics'
 
@@ -13,7 +12,7 @@ type TrackedLinkProps = {
   eventParams?: Record<string, string | number | boolean | null | undefined>
 }
 
-function buildHrefWithAttribution(href: string, searchParams: ReturnType<typeof useSearchParams>) {
+function buildHrefWithAttribution(href: string, searchParams?: URLSearchParams) {
   if (!href.startsWith('/')) return href
 
   const [pathname, hash = ''] = href.split('#')
@@ -22,7 +21,7 @@ function buildHrefWithAttribution(href: string, searchParams: ReturnType<typeof 
 
   ;['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((key) => {
     if (!nextParams.has(key)) {
-      const value = searchParams.get(key)
+      const value = searchParams?.get(key)
       if (value) nextParams.set(key, value)
     }
   })
@@ -39,7 +38,10 @@ export default function TrackedLink({
   eventName,
   eventParams = {},
 }: TrackedLinkProps) {
-  const searchParams = useSearchParams()
+  const searchParams =
+    typeof window !== 'undefined'
+      ? new URLSearchParams(window.location.search)
+      : undefined
   const resolvedHref = buildHrefWithAttribution(href, searchParams)
 
   return (

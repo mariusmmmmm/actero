@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { persistAttribution, trackOnce, withAttribution } from '@/lib/analytics'
 
 export default function SeoAnalytics({
@@ -11,9 +10,12 @@ export default function SeoAnalytics({
   lpSlug: string
   lpTopic: string
 }) {
-  const searchParams = useSearchParams()
-
   useEffect(() => {
+    const searchParams =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search)
+        : undefined
+
     persistAttribution(searchParams)
     trackOnce(
       `seo_lp_view:${lpSlug}`,
@@ -26,7 +28,7 @@ export default function SeoAnalytics({
         searchParams
       )
     )
-  }, [lpSlug, lpTopic, searchParams])
+  }, [lpSlug, lpTopic])
 
   return null
 }
