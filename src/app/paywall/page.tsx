@@ -310,6 +310,16 @@ function PaywallPageContent() {
 
         </div>
 
+        <div className="mb-6 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4">
+          <div className="mb-1 text-sm font-semibold text-blue-900">
+            După plată primești imediat emailul cu linkul tău de acces
+          </div>
+          <p className="text-sm leading-relaxed text-blue-800">
+            Checkout-ul se finalizează pe Gumroad, iar apoi primești pe email linkul personal către ghidul tău complet.
+            Dacă rămâi pe pagina de confirmare Gumroad, verifică inbox-ul și spam-ul pentru emailul de la ActeRO.
+          </p>
+        </div>
+
         {/* Ce primești */}
         <div className="mb-4">
           <div className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">
