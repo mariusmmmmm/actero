@@ -1,6 +1,6 @@
 import type { GuideId } from '@/types'
 
-export type FreeBlockType = 'info' | 'warning' | 'tip' | 'action'
+export type FreeBlockType = 'info' | 'warning' | 'tip' | 'action' | 'note'
 
 export type FreeStep = {
   id: number
@@ -300,32 +300,44 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
     ],
   },
   'titlu-calatorie-urgenta-de': {
-    title: 'Ghid titlu de călătorie · Urgență sub 3 zile',
-    meta: { free: '1 pas gratuit', total: '4 pași total' },
-    totalSteps: 4,
+    title: 'Titlu de călătorie urgență · Germania',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
     steps: [
       {
         id: 1,
-        title: 'Documentele necesare',
+        title: 'Identifică documentele necesare',
         blocks: [
-          { text: 'Orice act de identitate disponibil (pașaport expirat / buletin expirat / ambele) — original.', type: 'info' },
-          { text: 'Dovada urgenței: bilet de avion/tren, invitație medicală, deces în familie sau altă situație obiectivă documentată.', type: 'warning' },
-          { text: 'Dovada domiciliului în Germania (Anmeldung) — original.', type: 'info' },
-          { text: '2 fotografii color recente, 3,5 × 4,5 cm, fond alb.', type: 'info' },
-          { text: 'Certificat de naștere românesc — original.', type: 'info' },
+          { text: 'Ai nevoie de CEL PUȚIN UN document românesc de identificare, în original. Acceptat oricare dintre acestea: CI sau buletin expirat / pașaport românesc expirat / permis de conducere românesc / certificat de naștere românesc cu CNP (dacă nu mai ai niciun alt document cu fotografie).', type: 'info' },
+          { text: 'Ghidul este același indiferent dacă ai pașaport expirat, buletin expirat sau ambele. Ce act ai acum schimbă doar documentul pe care îl aduci — nu procedura.', type: 'info' },
+          { text: 'Dacă documentul a fost PIERDUT: nu ai nevoie de nicio hârtie în avans. Declarația privind împrejurările pierderii se completează direct la ghișeul consulatului.', type: 'warning' },
+          { text: 'Dacă documentul a fost FURAT: du-te PRIMUL la poliția locală (Polizei) și depune Diebstahlsanzeige. Primești o adeverință scrisă. Această adeverință trebuie însoțită de traducere autorizată în română: obligatorie la München, Stuttgart și Berlin. La Bonn pagina nu specifică traducerea, dar la celelalte 3 consulate este obligatorie — adu traducere și la Bonn.', type: 'warning' },
+          { text: 'Nu ai nevoie de econsulat.ro și nu există programare online pentru titlul de călătorie. Te prezinți direct la consulat în intervalul dedicat.', type: 'tip' },
+          { text: 'Nu ai nevoie de: Anmeldung, Aufenthaltstitel, apostilă, traduceri pentru documente germane, nicio sumă de bani — serviciul este GRATUIT.', type: 'info' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Pregătește-te pentru consulat',
+        blocks: [
+          { text: 'FOTOGRAFII: depinde strict de consulatul tău. La München trebuie să aduci 2 fotografii biometrice color proprii — de la centre foto sau automate (NU salvate pe telefon). La Bonn, Stuttgart și Berlin fotografia se preia electronic la ghișeu — nu aduci nimic.', type: 'warning' },
+          { text: 'Dacă nu ești sigur de consulatul tău sau dacă nu vrei să riști un drum degeaba: adu 2 fotografii biometrice (3,5 × 4,5 cm, fond alb, față descoperită). Automatele din Rossmann sau DM (selectezi „biometric”) sunt acceptate.', type: 'tip' },
+          { text: 'Recomandare oficială de la toate consulatele: îmbracă-te în culori închise pentru o fotografie mai clară.', type: 'info' },
+          { text: 'Titlul de călătorie nu conține date biometrice (amprente digitale). Este un document mai simplu decât pașaportul — de aceea se eliberează în aceeași zi.', type: 'note' },
         ],
       },
     ],
     lockedSteps: [
-      { id: 2, title: 'Obține programarea de urgență' },
-      { id: 3, title: 'Ziua consulatului' },
-      { id: 4, title: 'Pasul următor după urgență' },
+      { id: 3, title: 'Mergi la consulat azi' },
+      { id: 4, title: 'La ghișeu' },
+      { id: 5, title: 'Ce faci după ce ajungi în România' },
     ],
     paywallTeaser: [
-      'Numerele de telefon pentru urgențe la toate 4 consulatele',
-      'Cum obții programarea de urgență rapid',
-      'Ce se întâmplă la ghișeu și cât durează eliberarea',
-      'Ce document permanent să faci după ce rezolvi urgența',
+      'Programul exact de preluare la consulatul tău și adresa cu hartă',
+      'Ce spui la ghișeu și la ce să te aștepți pas cu pas',
+      'Ce faci dacă nu ai absolut niciun document românesc la tine',
+      'Cum treci frontiera cu titlul de călătorie și ce se întâmplă cu documentul',
+      'Pașii obligatorii în România după ce ajungi — pașaport în 1-2 zile, cum și de unde',
     ],
   },
   'titlu-calatorie-de': {
@@ -536,18 +548,48 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
     ],
   },
   'buletin-de-primul-de-b': {
-    title: 'Ghid primul buletin · Născut Germania',
-    meta: { free: '1 pas gratuit', total: '6 pași total' },
+    title: 'Primul buletin românesc · Germania',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
     totalSteps: 6,
     steps: [
       {
         id: 1,
-        title: 'Documentele necesare',
-        blocks: [{ text: 'Necesită finalizarea transcrierii certificatului de naștere.', type: 'warning' }],
+        title: 'Verifică documentele necesare',
+        blocks: [
+          { text: 'Certificat de naștere românesc transcris — original (obținut prin Ghidul #16). Documentul dovedește identitatea și cetățenia română și trebuie să conțină CNP-ul.', type: 'info' },
+          { text: 'Certificatul de naștere plastifiat, rupt, pătat sau corectat cu scotch este nul de drept — nu se acceptă la ghișeu. Dacă al tău e deteriorat, solicită duplicat înainte de a pleca în România.', type: 'warning' },
+          { text: 'Dovada rezidenței în Germania — unul din: pașaport CRDS valabil sau Anmeldung / Meldebescheinigung emis de autoritățile germane — original. Fără apostilă, fără traducere.', type: 'info' },
+          { text: 'Certificat de căsătorie românesc — original — doar dacă ești căsătorit/ă și ți-ai schimbat numele prin căsătorie. Dacă nu ți-ai schimbat numele, nu e necesar.', type: 'info' },
+          { text: 'Prima CEI este GRATUITĂ pentru cetățenii 14+ ani, până la 30 iunie 2026 (finanțare PNRR). Nu ai nicio taxă de plătit la depunere — nu e nevoie de chitanță sau plată în avans.', type: 'tip' },
+          { text: 'Dacă ești minor (14–18 ani): trebuie să fii însoțit obligatoriu de unul dintre părinți la ghișeu. Fără prezența unui părinte, cererea nu se poate depune.', type: 'warning' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Pregătește documentele',
+        blocks: [
+          { text: 'Verifică că certificatul de naștere transcris este intact: nedeteriorat, neplastifiat, fără corecturi. Dacă e în stare proastă, trebuie duplicat înainte de deplasare.', type: 'action' },
+          { text: 'Documentele se prezintă exclusiv în original la ghișeu. Funcționarul face copii pe loc — nu trebuie să aduci copii proprii.', type: 'info' },
+          { text: 'Creează un cont pe hub.mai.gov.ro înainte de a pleca din Germania — validarea contului se face prin email și e necesară înainte de a putea face programarea la SPCLEP.', type: 'action' },
+          { text: 'Programarea online pe hub.mai.gov.ro este obligatorie — nu te prezenta la SPCLEP fără programare activă în sistem. Ghișeele nu primesc walk-in pentru CEI.', type: 'warning' },
+          { text: 'Din 1 august 2025, poți merge la ORICE SPCLEP din România, indiferent de adresa de domiciliu. Dacă orașul preferat nu are locuri, verifică localitățile din jur — sloturile se actualizează constant din anulări.', type: 'tip' },
+        ],
       },
     ],
-    lockedSteps: [{ id: 2, title: 'Planifică deplasarea' }, { id: 3, title: 'SPCLEP' }],
-    paywallTeaser: ['Ghid complet pas cu pas'],
+    lockedSteps: [
+      { id: 3, title: 'Creează cont și programează-te pe hub.mai.gov.ro' },
+      { id: 4, title: 'Planifică deplasarea în România' },
+      { id: 5, title: 'Ziua la SPCLEP — depunerea cererii' },
+      { id: 6, title: 'Ridică CEI-ul și activează PIN-urile' },
+    ],
+    paywallTeaser: [
+      'Cum te programezi exact pe hub.mai.gov.ro — pas cu pas, ce selectezi, ce câmp completezi',
+      'La ce SPCLEP mergi și cum găsești cel mai rapid slot disponibil din țară',
+      'Ce se întâmplă la ghișeu: fotografie biometrică, amprente, semnătură — tot procesul explicat',
+      'Ce faci dacă funcționarul cere ceva care nu e în lista ta',
+      'Cum ridici CEI-ul și cum activezi singur PIN-urile cu aplicația MAI',
+      'Ce faci după: adresa de domiciliu pe CEI și accesul la servicii digitale românești',
+    ],
   },
   'transcriere-nastere-de': {
     title: 'Ghid transcriere certificat de naștere',

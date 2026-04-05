@@ -282,6 +282,69 @@ const buletinPrimulSteps: PaidStep[] = [
   },
 ]
 
+const buletinPrimulGermaniaSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Creează cont și programează-te pe hub.mai.gov.ro',
+    shortLabel: 'Programare',
+    blocks: [
+      { text: "Intră pe hub.mai.gov.ro → 'Autentificare' → 'Creare cont'. Completezi email + parolă și validezi contul prin link-ul primit pe email. Fără validare, butonul de programare nu devine activ.", type: 'action' },
+      { text: "Mergi la 'Cartea electronică de identitate' → 'Programare' → selectezi județul și localitate. Alege orice localitate din țară — nu ești legat de adresa de domiciliu. Completezi datele și confirmi în 30 de minute prin link-ul de email.", type: 'action' },
+      { text: 'Dacă nu confirmi programarea în 30 de minute, aceasta se anulează automat. Nu poți face o nouă programare cât timp una este activă — așteaptă anularea automată sau anulează manual din cont.', type: 'warning' },
+      { text: 'Tinerii care solicită primul act de identitate (au împlinit sau vor împlini 14 ani în 30 de zile) beneficiază de un orizont extins de programare de 45 de zile — mai mult timp disponibil față de cetățenii care reînnoiesc.', type: 'tip' },
+      { text: 'Dacă ai doi părinți în Germania: minorul 14-18 ani nu poate depune cererea la consulatul german — calea este exclusiv SPCLEP în România, cu prezența fizică a minorului și a unui părinte.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Programare CEI — hub.mai.gov.ro',
+      href: 'https://hub.mai.gov.ro/cei/programari/harta',
+    },
+  },
+  {
+    id: 4,
+    title: 'Planifică deplasarea în România',
+    shortLabel: 'Pregătire',
+    blocks: [
+      { text: 'Nu ai nevoie de pașaport românesc ca să intri în România — poți călători pe Personalausweis german sau pașaport german. Documentul german este valabil pentru intrarea în România.', type: 'info' },
+      { text: 'Verifică adresa exactă și programul de lucru al SPCLEP-ului ales înainte de a pleca. Unele SPCLEP-uri au program scurtat vinerea — verifică pe site-ul primăriei locale sau pe carteadeidentitate.gov.ro/ghisee.', type: 'action' },
+      { text: 'Pune în geantă documentele în original: certificat naștere transcris, Anmeldung sau pașaport CRDS, certificat căsătorie dacă e cazul. Nu aduci copii — funcționarul le face pe loc.', type: 'action' },
+      { text: 'Dacă ești minor (14–18 ani): unul dintre părinți trebuie să vină fizic cu tine. Programarea se face pe numele minorului, dar prezența părintelui este obligatorie la ghișeu.', type: 'warning' },
+      { text: 'Ajungi cu 10–15 minute înainte de ora programării. Dacă întârzii peste 15 minute, programarea poate fi marcată absență — trebuie reprogramat.', type: 'tip' },
+      { text: 'Dacă vrei să stabilești domiciliu în România la această ocazie (la o rudă, de exemplu): pregătește actul de proprietate al imobilului + consimțământul scris al proprietarului. Comunică intenția la ghișeu ÎNAINTE de semnarea cererii.', type: 'note' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Depune cererea la SPCLEP',
+    shortLabel: 'SPCLEP',
+    blocks: [
+      { text: 'La ghișeu prezinți confirmarea programării + documentele în original. Funcționarul verifică actele, generează cererea în sistem și ți-o dă spre semnare.', type: 'action' },
+      { text: 'Funcționarul preia pe loc: fotografia biometrică (se face la ghișeu — nu aduci fotografii proprii), impresiunile celor două degete (amprente) și semnătura electronică. Toate sunt obligatorii.', type: 'info' },
+      { text: 'Prima CEI este GRATUITĂ — nu plătești nimic la ghișeu (până la 30 iunie 2026). Dacă funcționarul solicită chitanță de plată, amintește că prima emitere este fără taxă pentru cetățenii 14+ ani.', type: 'info' },
+      { text: 'Dacă funcționarul cere un document care nu apare în lista ta: notează calm ce solicită și întreabă diplomatic de ce sau de când s-a modificat procedura. Nu pleca fără o explicație clară.', type: 'warning' },
+      { text: 'Indică verbal la ghișeu, înainte de semnarea cererii, dacă vrei să ridici CEI-ul de la un alt SPCLEP decât cel unde depui — funcționarul operează opțiunea în sistem. Dacă nu specifici nimic, ridicarea va fi la același SPCLEP.', type: 'action' },
+      { text: 'Dacă alegi un SPCLEP de ridicare diferit față de cel de depunere, termenul de confecționare se prelungește cu 10 zile lucrătoare în plus față de termenul standard de 5 zile. Ia în calcul asta la planificarea celei de-a doua deplasări.', type: 'warning' },
+      { text: 'Primești un bon/recipisă la final — fotografiază-l imediat cu telefonul. Conține numărul cererii cu care verifici statusul CEI pe hub.mai.gov.ro.', type: 'note' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ridică CEI-ul și activează PIN-urile',
+    shortLabel: 'Ridicare',
+    blocks: [
+      { text: "Verifică statusul CEI pe hub.mai.gov.ro → 'Verificare status cerere'. Dacă ai furnizat emailul la programare, primești notificare când CEI este confecționat.", type: 'action' },
+      { text: 'Termen oficial: medie 5 zile calendaristice, maxim 30 zile calendaristice. Termenul de ridicare este de maximum 90 de zile de la depunere — după aceea pot fi necesare operații suplimentare.', type: 'info' },
+      { text: 'CEI se ridică exclusiv personal — nu există ridicare prin procură. La ridicare stabilești tu PIN-urile, nu funcționarul. Planifică o a doua deplasare în România în fereastra de 90 de zile. Excepție: dacă ești minor 14–18 ani, CEI poate fi ridicată și de părintele care te-a însoțit la depunerea cererii.', type: 'warning' },
+      { text: 'Prezinți la ridicare: recipisa de depunere + un act de identitate valid. Funcționarul îți înmânează CEI-ul și verifici datele pe loc — nume, data nașterii, CNP. Semnalează orice eroare imediat.', type: 'action' },
+      { text: 'PIN-urile le stabilești tu singur, cu aplicația IDPlugManager (PC) sau RO CEI Reader (Android/iOS), descărcate de pe hub.mai.gov.ro/aplicatie-cei. PIN implicit de autentificare: 1234 → îl schimbi tu. PIN implicit de semnătură: 123456 → îl schimbi tu. Nu e nevoie să rămâi la ghișeu pentru asta.', type: 'info' },
+      { text: 'CEI este validă ca document de călătorie în toate țările UE, Elveția, Islanda, Norvegia, Liechtenstein. Dacă te reîntorci în România și îți stabilești domiciliu, poți actualiza adresa electronic — fără să emiți un act nou.', type: 'tip' },
+    ],
+    actionItem: {
+      label: 'Verificare status CEI',
+      href: 'https://hub.mai.gov.ro/cei/programari/verifica-cei',
+    },
+  },
+]
+
 // Pași paid procură
 const procuraSteps: PaidStep[] = [
   {
@@ -375,41 +438,50 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
     steps: buletinPrimulSteps,
   },
   'buletin-de-primul-de-b': {
-    title: 'Primul buletin · Născut Germania',
-    steps: buletinSteps,
+    title: 'Primul buletin românesc · Germania',
+    steps: buletinPrimulGermaniaSteps,
   },
   'titlu-calatorie-urgenta-de': {
-    title: 'Titlu de călătorie · Urgență',
+    title: 'Titlu de călătorie urgență · Germania — Ghid complet',
     steps: [
       {
-        id: 2,
-        title: 'Obține programarea de urgență',
-        shortLabel: 'Programare',
+        id: 3,
+        title: 'Mergi la consulat azi',
+        shortLabel: 'Consulat',
         hasConsulateCard: true,
         blocks: [
-          { text: 'Sună la consulat pentru programare de urgență. Titlul de călătorie poate fi eliberat în aceeași zi sau a doua zi.', type: 'action' },
-          { text: 'Alternativ: econsulat.ro → „Cerere nouă" → „Titlu de călătorie".', type: 'info' },
-          { text: 'Pregătește dovada urgenței: bilet de avion/tren, invitație medicală, deces în familie.', type: 'warning' },
+          { text: 'Titlul de călătorie se preia fără programare, în intervalul dedicat al consulatului tău. Nu trebuie să creezi cerere pe econsulat.ro. Intervalul diferă per consulat — verifică cardul de mai jos.', type: 'info' },
+          { text: 'Prezintă-te DOAR în intervalul de preluare titluri — nu în programul general de depunere pașapoarte. Dacă vii în afara intervalului, riști să nu fii primit.', type: 'warning' },
+          { text: 'Dacă documentul a fost furat și nu ai depus încă Diebstahlsanzeige la poliție — fă asta ÎNAINTE de a pleca la consulat. Adeverința poliției este obligatorie la toate consulatele. Traducerea autorizată în română este obligatorie: München, Stuttgart, Berlin. La Bonn pagina nu specifică traducerea, dar la toate celelalte 3 consulate este obligatorie — adu traducere și la Bonn.', type: 'warning' },
+          { text: 'Vino cât mai devreme în interval. Dacă nu ai niciun document românesc cu fotografie, verificarea în baze de date durează mai mult.', type: 'tip' },
         ],
-      },
-      {
-        id: 3,
-        title: 'Ziua consulatului',
-        shortLabel: 'Consulat',
-        blocks: [
-          { text: 'Prezinți documentele la ghișeu. Funcționarul verifică urgența și eliberează titlul de călătorie.', type: 'info' },
-          { text: 'Titlul e valabil pentru o singură călătorie sau o perioadă scurtă determinată.', type: 'warning' },
-          { text: 'Plătești taxa consulară la ghișeu.', type: 'action' },
-        ],
+        actionItem: null,
       },
       {
         id: 4,
-        title: 'Pasul următor după urgență',
-        shortLabel: 'Următor',
+        title: 'La ghișeu',
+        shortLabel: 'Ghișeu',
         blocks: [
-          { text: 'Titlul de călătorie rezolvă urgența. Acum trebuie să rezolvi documentul permanent.', type: 'info' },
-          { text: 'Dacă ai pașaportul expirat → Ghid reînnoire pașaport CRDS.', type: 'tip' },
-          { text: 'Dacă ai buletinul expirat → Ghid buletin (necesită deplasare în România).', type: 'tip' },
+          { text: 'Prezinți documentul(ele) de identificare în original. Funcționarul verifică identitatea și procesează cererea.', type: 'action' },
+          { text: 'La Bonn, Stuttgart și Berlin: funcționarul preia fotografia electronic la ghișeu — nu aduci fotografii. La München: funcționarul verifică fotografiile biometrice pe care le-ai adus.', type: 'info' },
+          { text: 'Taxa: GRATUIT. Nu se percep taxe consulare pentru titlul de călătorie.', type: 'info' },
+          { text: 'Eliberare în aceeași zi la toate consulatele: München explicit / Berlin (preluare + eliberare 08:00–10:00) / Stuttgart implicit / Bonn implicit — titlurile nu apar în slotul de ridicare 14:00–15:00 (rezervat pașapoarte + stare civilă procesate din RO).', type: 'info' },
+          { text: 'Dacă nu ai absolut niciun document românesc (nici CI expirat, nici pașaport, nici permis RO): funcționarul verifică identitatea în bazele de date MAI. Dacă nu poate stabili identitatea și cetățenia → trebuie să te identifici în România. Adu orice act românesc, fie și expirat de ani.', type: 'warning' },
+          { text: 'Dacă funcționarul cere ceva suplimentar față de lista ta: notează calm ce se cere și întreabă diplomatic de ce sau când s-a modificat procedura.', type: 'tip' },
+          { text: 'Fă imediat o poză cu telefonul titlului de călătorie primit — e mai greu să îl pierzi în format digital.', type: 'note' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Ce faci după ce ajungi în România',
+        shortLabel: 'România',
+        blocks: [
+          { text: 'Titlul de călătorie expiră în momentul în care intri în România — trecerea frontierei îi încetează valabilitatea de drept. NU îl predai la frontieră — continuă să îl ai la tine.', type: 'warning' },
+          { text: 'Titlul se predă când depui cererea pentru noul pașaport în România, la ghișeul serviciului de pașapoarte.', type: 'info' },
+          { text: 'Imediat după ajungerea în România: depune cerere pentru pașaport sau carte de identitate. Fără act valabil, nu poți reveni în Germania.', type: 'action' },
+          { text: 'Opțiuni pașaport în România: pașaport simplu electronic — 265 lei, max 5 zile lucrătoare (în prezent 1–2 zile în medie), fără taxă suplimentară de urgență, livrare gratuită la domiciliu. Pașaport simplu temporar — 265 lei, max 3 zile lucrătoare, valabil 12 luni. Programare online la epasapoarte.ro. Poți merge la ORICE serviciu de pașapoarte din țară.', type: 'info' },
+          { text: 'Opțiuni carte de identitate în România: mergi la SPCLEP din sectorul/orașul de domiciliu. Prezența fizică obligatorie (din sept. 2025).', type: 'info' },
+          { text: 'Dacă știi deja ce document îți trebuie după revenire, ghidurile ActeRO pentru pașaport și carte de identitate te pot ajuta să pregătești dosarul din Germania, înainte de a pleca.', type: 'tip' },
         ],
       },
     ],

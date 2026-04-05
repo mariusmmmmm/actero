@@ -30,7 +30,8 @@ const GUIDE_TITLES: Record<string, string> = {
   'buletin-de-fara-domiciliu-pierdut': 'buletinul pierdut din Germania',
   'buletin-de-cu-domiciliu-pierdut': 'buletinul pierdut din Germania',
   'buletin-de-primul-de': 'primul buletin românesc',
-  'titlu-calatorie-urgenta-de': 'titlul de călătorie de urgență',
+  'buletin-de-primul-de-b': 'primul buletin românesc din Germania',
+  'titlu-calatorie-urgenta-de': 'titlul de călătorie de urgență din Germania',
   'titlu-calatorie-de': 'titlul de călătorie',
   'procura-vanzare-de': 'procura notarială din Germania',
   'procura-mostenire-de': 'procura pentru moștenire din Germania',
@@ -54,5 +55,9 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'pasaport-de-cu-domiciliu': [
     { guideId: 'buletin-de-cu-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă are nevoie de reînnoire', icon: '🪪' },
     { guideId: 'procura-vanzare-de', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+  'titlu-calatorie-urgenta-de': [
+    { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul', subtitle: 'Documentul permanent după urgență', icon: '📕' },
+    { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă trebuie să revii și în România', icon: '🪪' },
   ],
 }

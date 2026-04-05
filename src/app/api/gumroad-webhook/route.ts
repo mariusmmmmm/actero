@@ -6,6 +6,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
+import { extractGumroadSessionToken, verifyGumroadSessionToken } from '@/lib/gumroad-session-token'
 import { createClient } from '@/lib/supabase/server'
 import { sendAccessEmail, sendFamilieEmail } from '@/lib/resend'
 
@@ -26,12 +27,35 @@ function isFamilieProduct(formData: FormData): boolean {
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData()
+    const payloadEntries = Array.from(formData.entries()).map(([key, value]) => [
+      key,
+      typeof value === 'string' ? value : '[binary]',
+    ])
 
     const sellerId = formData.get('seller_id') as string
     const email = formData.get('email') as string
     const saleId = formData.get('sale_id') as string
     const refunded = formData.get('refunded') === 'true'
-    const sessionId = formData.get('actero_session_id') as string | null
+    const sessionToken = extractGumroadSessionToken(formData)
+    let sessionPayload: { sid: string } | null = null
+
+    console.info('Gumroad webhook payload keys:', payloadEntries.map(([key]) => key))
+    console.info('Gumroad webhook custom field preview:', payloadEntries.filter(([key]) =>
+      key.toLowerCase().includes('custom') || key.toLowerCase().includes('session')
+    ))
+
+    if (sessionToken) {
+      try {
+        sessionPayload = verifyGumroadSessionToken(sessionToken)
+        console.info('Gumroad webhook session token verified for session:', sessionPayload.sid)
+      } catch (error) {
+        console.warn('Webhook: session token invalid', error)
+      }
+    } else {
+      console.warn('Webhook: no session token found in payload', payloadEntries)
+    }
+
+    const sessionId = sessionPayload?.sid ?? null
 
     // Verifică seller
     if (sellerId !== GUMROAD_SELLER_ID) {
@@ -79,7 +103,7 @@ export async function POST(req: NextRequest) {
 
     // ── Ghid individual ───────────────────────────────────────────────────────
     if (!sessionId) {
-      console.warn('Webhook: actero_session_id lipsă pentru', email)
+      console.warn('Webhook: session token lipsă sau invalid pentru', email)
       return NextResponse.json({ ok: true, action: 'no_session' })
     }
 

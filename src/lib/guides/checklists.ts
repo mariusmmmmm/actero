@@ -140,6 +140,59 @@ function checklistBuletinPrimulDe(_c: ConsulateId | null, _s: SituationFlags): C
   ]
 }
 
+function checklistBuletinPrimulDeB(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'b10_nastere', name: 'Certificat de naștere românesc transcris', detail: 'Original · trebuie să conțină CNP-ul · dacă e deteriorat, solicită duplicat înainte de deplasare' },
+        { id: 'b10_rezidenta', name: 'Dovada rezidenței în Germania', detail: 'Pașaport CRDS valabil sau Anmeldung / Meldebescheinigung · original · fără apostilă și fără traducere' },
+        { id: 'b10_programare', name: 'Programare activă pe hub.mai.gov.ro', detail: 'Obligatorie pentru depunerea CEI · confirmată prin email' },
+      ],
+    },
+    {
+      id: 'daca_casatorit',
+      title: 'Dacă ți-ai schimbat numele prin căsătorie',
+      items: [
+        { id: 'b10_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · doar dacă ți-ai schimbat numele prin căsătorie' },
+      ],
+    },
+    {
+      id: 'minor',
+      title: 'Dacă ai între 14 și 18 ani',
+      items: [
+        { id: 'b10_parinte', name: 'Prezența unuia dintre părinți la ghișeu', detail: 'Obligatorie la depunere pentru minorii 14–18 ani' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  const fotoDetail = consulate === 'muenchen'
+    ? '2 fotografii biometrice color 3,5 × 4,5 cm · tipărite, nu pe telefon'
+    : 'La Bonn, Stuttgart și Berlin fotografia se preia la ghișeu; dacă nu ești sigur, adu 2 fotografii biometrice de rezervă'
+
+  return [
+    {
+      id: 'identitate',
+      title: 'Documente de identificare',
+      items: [
+        { id: 'tc11_doc_romanesc', name: 'Un document românesc de identificare', detail: 'Original · CI/buletin expirat, pașaport românesc expirat, permis românesc sau certificat de naștere românesc cu CNP' },
+        { id: 'tc11_foto', name: 'Fotografii biometrice', detail: fotoDetail },
+      ],
+    },
+    {
+      id: 'furt',
+      title: 'Dacă documentul a fost furat',
+      items: [
+        { id: 'tc11_politie', name: 'Diebstahlsanzeige de la poliția locală', detail: 'Obligatorie înainte de consulat' },
+        { id: 'tc11_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; recomandată și la Bonn' },
+      ],
+    },
+  ]
+}
+
 // ── Generic fallback ──────────────────────────────────────────────────────────
 
 function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -165,4 +218,6 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'buletin-de-fara-domiciliu-pierdut': checklistGeneric,
   'buletin-de-cu-domiciliu-pierdut': checklistBuletinPierdutDomRo,
   'buletin-de-primul-de': checklistBuletinPrimulDe,
+  'buletin-de-primul-de-b': checklistBuletinPrimulDeB,
+  'titlu-calatorie-urgenta-de': checklistTitluCalatorieUrgenta,
 }

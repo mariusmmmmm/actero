@@ -103,6 +103,8 @@ function PaywallPageContent() {
   const { guideId, problemType, unlockPaid } = useAppStore()
   const [benefitsOpen, setBenefitsOpen] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
+  const [checkoutLoading, setCheckoutLoading] = useState<'single' | 'family' | null>(null)
+  const [checkoutError, setCheckoutError] = useState<string | null>(null)
 
   const includesList = getIncludes(problemType)
 
@@ -118,18 +120,33 @@ function PaywallPageContent() {
     )
   }, [guideId, problemType, searchParams, sessionId])
 
-  // Construiește URL Gumroad cu sessionId ca parametru custom
-  const buildGumroadUrl = (baseUrl: string) => {
+  const buildGumroadUrl = async (baseUrl: string, offerType: 'single' | 'family') => {
+    const res = await fetch('/api/gumroad/session-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        guideId,
+        offerType,
+      }),
+    })
+
+    if (!res.ok) {
+      throw new Error('Nu am putut inițializa checkout-ul')
+    }
+
+    const data = await res.json() as { token: string; fieldName: string }
     const url = new URL(baseUrl)
-    if (sessionId) url.searchParams.set('actero_session_id', sessionId)
+    url.searchParams.set(data.fieldName, data.token)
     return url.toString()
   }
 
-  const handleGhid = () => {
+  const handleGhid = async () => {
     if (typeof window !== 'undefined') {
       window.sessionStorage.setItem('actero:last_offer_type', 'single')
       window.sessionStorage.setItem('actero:last_offer_value', '9.99')
     }
+    setCheckoutError(null)
     trackEvent('paywall_purchase_click', withAttribution({
       guide_id: guideId ?? undefined,
       problem_type: problemType ?? undefined,
@@ -142,14 +159,22 @@ function PaywallPageContent() {
       router.push(`/ghid/${sessionId}`)
       return
     }
-    window.location.href = buildGumroadUrl(GUMROAD_LINK_GHID)
+    try {
+      setCheckoutLoading('single')
+      window.location.href = await buildGumroadUrl(GUMROAD_LINK_GHID, 'single')
+    } catch (error) {
+      console.error('Gumroad checkout init error:', error)
+      setCheckoutError('Checkout-ul nu a putut fi inițializat. Încearcă din nou.')
+      setCheckoutLoading(null)
+    }
   }
 
-  const handleFamilie = () => {
+  const handleFamilie = async () => {
     if (typeof window !== 'undefined') {
       window.sessionStorage.setItem('actero:last_offer_type', 'family')
       window.sessionStorage.setItem('actero:last_offer_value', '24.99')
     }
+    setCheckoutError(null)
     trackEvent('paywall_family_click', withAttribution({
       guide_id: guideId ?? undefined,
       problem_type: problemType ?? undefined,
@@ -162,7 +187,14 @@ function PaywallPageContent() {
       router.push(`/ghid/${sessionId}`)
       return
     }
-    window.location.href = buildGumroadUrl(GUMROAD_LINK_FAMILIE)
+    try {
+      setCheckoutLoading('family')
+      window.location.href = await buildGumroadUrl(GUMROAD_LINK_FAMILIE, 'family')
+    } catch (error) {
+      console.error('Gumroad family checkout init error:', error)
+      setCheckoutError('Checkout-ul nu a putut fi inițializat. Încearcă din nou.')
+      setCheckoutLoading(null)
+    }
   }
 
   const handleBack = () => {
@@ -248,7 +280,7 @@ function PaywallPageContent() {
               disabled={!termsAccepted}
               className="w-full py-3 bg-gray-900 text-white font-bold rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Plătesc 9,99€ și primesc ghidul →
+              {checkoutLoading === 'single' ? 'Se deschide checkout-ul...' : 'Plătesc 9,99€ și primesc ghidul →'}
             </button>
           </div>
 
@@ -266,9 +298,15 @@ function PaywallPageContent() {
               disabled={!termsAccepted}
               className="w-full py-3 bg-white border-2 border-gray-200 text-gray-700 font-semibold rounded-xl text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Aleg pachetul familie →
+              {checkoutLoading === 'family' ? 'Se deschide checkout-ul...' : 'Aleg pachetul familie →'}
             </button>
           </div>
+
+          {checkoutError && (
+            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {checkoutError}
+            </div>
+          )}
 
         </div>
 

@@ -200,19 +200,46 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       { id: 7, label: 'Ridică buletinul', locked: true },
     ],
   },
-  'titlu-calatorie-urgenta-de': {
-    title: 'Titlu de călătorie · Urgență sub 3 zile',
-    subtitle: 'Fără programare prealabilă',
-    warnings: ['Trebuie să dovedești urgența cu documente (bilet, invitație medicală etc.)'],
-    estimatedWeeks: '1–3 zile',
-    estimatedAppointments: 1,
-    guideTitle: 'Ghid titlu de călătorie urgență',
+  'buletin-de-primul-de-b': {
+    title: 'Primul tău buletin românesc',
+    subtitle: 'Ai certificatul de naștere transcris — acum poți obține Cartea Electronică de Identitate (CEI) la orice SPCLEP din România, indiferent de adresa de domiciliu.',
+    warnings: [
+      'Prezența fizică obligatorie în România — biometricele (fotografie, amprente, semnătură) se preiau exclusiv la ghișeu. Nu există procură pentru depunere.',
+      'Ridicarea CEI este de asemenea personală — la ridicare stabilești tu PIN-urile cu aplicația MAI. Nu se poate ridica prin procură.',
+      'Prima CEI este GRATUITĂ (14+ ani) până la 30 iunie 2026 prin PNRR. Plata de 70 lei intervine doar de la a doua emitere sau dacă solicitantul are sub 14 ani.',
+      "CEI cu mențiunea 'fără domiciliu în România': dacă nu stabilești o adresă în RO, aceasta apare pe actul electronic. Poți stabili domiciliu la o rudă — comunică la ghișeu înainte de semnarea cererii.",
+    ],
+    estimatedWeeks: '1–2 săptămâni (din momentul sosirii în România)',
+    estimatedAppointments: '1 deplasare în România · 1 vizită SPCLEP pentru depunere (cu programare prealabilă) · 1 vizită SPCLEP pentru ridicare',
+    guideTitle: 'Primul buletin românesc · Germania',
     isRoute: false,
     previewSteps: [
       { id: 1, label: 'Documentele necesare', locked: false },
-      { id: 2, label: 'Obține programarea de urgență', locked: true },
-      { id: 3, label: 'Ziua consulatului', locked: true },
-      { id: 4, label: 'Pasul următor după urgență', locked: true },
+      { id: 2, label: 'Pregătește documentele', locked: false },
+      { id: 3, label: 'Creează cont și programează-te pe hub.mai.gov.ro', locked: true },
+      { id: 4, label: 'Planifică deplasarea în România', locked: true },
+      { id: 5, label: 'Ziua la SPCLEP — depunerea cererii', locked: true },
+      { id: 6, label: 'Ridică CEI-ul și activează PIN-urile', locked: true },
+    ],
+  },
+  'titlu-calatorie-urgenta-de': {
+    title: 'Titlu de călătorie — urgență',
+    subtitle: 'Nu mai ai act valabil și trebuie să ajungi în România în câteva zile. Titlul de călătorie se obține fără programare, gratuit, în aceeași zi la consulatul tău.',
+    warnings: [
+      'Titlul de călătorie este valabil EXCLUSIV pentru revenirea în România — expiră în momentul în care treci frontiera.',
+      'Dacă documentul a fost FURAT: trebuie să declari furtul la poliția locală (Diebstahlsanzeige) ÎNAINTE de a merge la consulat. Fără adeverința poliției, titlul nu se eliberează.',
+      'Odată în România, titlul de călătorie nu mai are nicio valabilitate. Trebuie să obții pașaport sau carte de identitate înainte de orice viitoare deplasare în afara țării.',
+    ],
+    estimatedWeeks: '1 zi lucrătoare',
+    estimatedAppointments: '1 deplasare la consulat · fără programare · eliberare în aceeași zi',
+    guideTitle: 'Titlu de călătorie urgență · Germania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Identifică documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește-te pentru consulat', locked: false },
+      { id: 3, label: 'Mergi la consulat azi', locked: true },
+      { id: 4, label: 'La ghișeu', locked: true },
+      { id: 5, label: 'Ce faci după ce ajungi în România', locked: true },
     ],
   },
   'titlu-calatorie-de': {
@@ -287,29 +314,29 @@ const diagnosticMap: Record<string, DiagnosticData> = {
 const routeMap: Record<string, DiagnosticData> = {
   'route-a': {
     title: 'Primul pașaport · Născut în Germania',
-    subtitle: 'Situația ta necesită 2 acte separate',
-    warnings: ['Trebuie mai întâi să transcrii certificatul de naștere în România, apoi poți solicita pașaportul.'],
+    subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi pașaportul',
+    warnings: ['Nu poți solicita încă pașaportul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul de pașaport.'],
     estimatedWeeks: '4–8 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: '~3–6 luni' },
-      { guideId: 'pasaport-crds-nou-de', title: 'Ghid B: Primul pașaport CRDS', weeks: '~6–8 săptămâni' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
+      { guideId: 'pasaport-crds-nou-de', title: 'Ghid B: Primul pașaport CRDS (după transcriere)', weeks: 'pasul 2 · ~6–8 săptămâni' },
     ],
     previewSteps: [],
   },
   'route-b': {
     title: 'Primul buletin · Născut în Germania',
-    subtitle: 'Situația ta necesită 2 acte separate',
-    warnings: ['Trebuie mai întâi să transcrii certificatul de naștere în România, apoi poți solicita buletinul.'],
+    subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi primul buletin',
+    warnings: ['Nu poți solicita încă buletinul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul pentru primul buletin.'],
     estimatedWeeks: '4–8 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: '~3–6 luni' },
-      { guideId: 'buletin-de-primul-de-b', title: 'Ghid B: Primul buletin', weeks: 'după transcriere' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
+      { guideId: 'buletin-de-primul-de-b', title: 'Ghid B: Primul buletin (după transcriere)', weeks: 'pasul 2 · după obținerea certificatului românesc și a CNP-ului' },
     ],
     previewSteps: [],
   },
@@ -371,7 +398,25 @@ function Loader({ onDone }: { onDone: () => void }) {
 
 // ─── DIAGNOSTIC ───────────────────────────────────────────────────────────────
 
-function getEmotionalCopy(guideId: GuideId | null, problemType: ProblemType | null): { title: string; subtitle: string } {
+function getEmotionalCopy(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  routeId?: string
+): { title: string; subtitle: string } {
+  if (routeId === 'route-a') {
+    return {
+      title: 'Primul pașaport românesc vine în 2 pași — îți arătăm ordinea corectă.',
+      subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi pașaportul. Ai mai jos ambele ghiduri, în ordinea corectă.',
+    }
+  }
+
+  if (routeId === 'route-b') {
+    return {
+      title: 'Primul tău buletin românesc vine în 2 pași — îți arătăm ordinea corectă.',
+      subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi ghidul pentru primul buletin. Ai mai jos ambele ghiduri, în ordinea corectă.',
+    }
+  }
+
   if (guideId === 'pasaport-crds-nou-de') {
     return {
       title: 'Primul tău pașaport din Germania — iată exact ce trebuie să faci.',
@@ -379,7 +424,7 @@ function getEmotionalCopy(guideId: GuideId | null, problemType: ProblemType | nu
     }
   }
 
-  if (guideId === 'buletin-de-primul-de') {
+  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
     return {
       title: 'Primul tău buletin românesc se rezolvă — ghid exact pentru situația ta.',
       subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
@@ -399,7 +444,7 @@ function getEmotionalCopy(guideId: GuideId | null, problemType: ProblemType | nu
       }
     case 'titlu-calatorie':
       return {
-        title: 'Trebuie să pleci urgent — există o soluție pentru 3 zile.',
+        title: 'Trebuie să ajungi urgent în România — există o soluție pentru asta.',
         subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
       }
     case 'procura':
@@ -439,7 +484,7 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
     case 'procura-generala-de':
       return '⏱ 1 singură deplasare la consulat · 1–2 săptămâni'
     case 'titlu-calatorie-urgenta-de':
-      return '⏱ 1 deplasare urgentă · 1–3 zile'
+      return '⏱ 1 deplasare la consulat · fără programare · aceeași zi'
     default:
       return `⏱ ${estimatedAppointments === 1 ? '1 singură deplasare' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
   }
@@ -608,7 +653,11 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
   const router = useRouter()
   const { wizardResult, problemType, guideId, situation } = useAppStore()
   const [visible, setVisible] = useState(0)
-  const emotionalCopy = getEmotionalCopy(guideId, problemType)
+  const emotionalCopy = getEmotionalCopy(
+    guideId,
+    problemType,
+    wizardResult?.type === 'route' ? wizardResult.routeId : undefined
+  )
 
   // Reveal progresiv — câte o secțiune la 150ms
   useEffect(() => {
