@@ -1,7 +1,7 @@
 export default function SiteFooter() {
   return (
     <div className="px-5 pb-8 border-t border-gray-100 pt-6">
-      <div className="flex flex-col gap-4 text-xs text-gray-400">
+      <div className="mx-auto max-w-2xl flex flex-col gap-4 text-xs text-gray-400">
         <span>© 2026 ActeRO</span>
         <div className="flex flex-wrap gap-x-4 gap-y-2">
           <a href="/ajutor" className="hover:text-gray-600">Ajutor</a>

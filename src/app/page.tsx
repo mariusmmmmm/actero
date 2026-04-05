@@ -11,37 +11,39 @@ import SiteHeader from '@/components/layout/SiteHeader'
 
 function Hero() {
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-gray-800 px-5 pt-10 pb-8">
-      <h1 className="text-3xl font-extrabold text-white leading-tight mb-3">
-        Acte românești din Germania.{' '}
-        <span className="text-green-400">Rezolvate corect.</span>
-      </h1>
-      <p className="text-sm text-gray-400 leading-relaxed mb-6">
-        Ghid personalizat pentru situația ta exactă —
-        fără drumuri degeaba la consulat.
-      </p>
+    <section className="bg-gradient-to-br from-gray-900 to-gray-800 px-5 pt-10 pb-8">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-3xl font-extrabold text-white leading-tight mb-3">
+          Acte românești din Germania.{' '}
+          <span className="text-green-400">Rezolvate corect.</span>
+        </h1>
+        <p className="text-sm text-gray-400 leading-relaxed mb-6">
+          Ghid personalizat pentru situația ta exactă —
+          fără drumuri degeaba la consulat.
+        </p>
 
-      {/* Social proof deasupra CTA */}
-      <div className="flex items-center gap-3 mb-5">
-        <SocialProofAvatars />
-        <p className="text-xs text-gray-400">
-          <strong className="text-gray-200">1400+</strong> români din Germania au rezolvat cu ActeRO
+        {/* Social proof deasupra CTA */}
+        <div className="flex items-center gap-3 mb-5">
+          <SocialProofAvatars />
+          <p className="text-xs text-gray-400">
+            <strong className="text-gray-200">1400+</strong> români din Germania au rezolvat cu ActeRO
+          </p>
+        </div>
+
+        <Link
+          href="/wizard"
+          className="block w-full py-4 bg-green-500 text-white font-bold text-center rounded-xl text-base"
+        >
+          Începe — primii pași gratuit →
+        </Link>
+        <p className="text-xs text-gray-400 text-center mt-2">
+          Ghid complet de la 9,99€ · plată o singură dată
+        </p>
+        <p className="text-xs text-gray-500 text-center mt-2">
+          Fără cont · Fără card · 30 secunde
         </p>
       </div>
-
-      <Link
-        href="/wizard"
-        className="block w-full py-4 bg-green-500 text-white font-bold text-center rounded-xl text-base"
-      >
-        Începe — primii pași gratuit →
-      </Link>
-      <p className="text-xs text-gray-400 text-center mt-2">
-        Ghid complet de la 9,99€ · plată o singură dată
-      </p>
-      <p className="text-xs text-gray-500 text-center mt-2">
-        Fără cont · Fără card · 30 secunde
-      </p>
-    </div>
+    </section>
   )
 }
 
@@ -200,8 +202,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
       <SiteHeader />
-      <div className="max-w-md mx-auto">
-        <Hero />
+      <Hero />
+      <div className="max-w-2xl mx-auto">
         <Features />
         <Services />
         <HowItWorks />

@@ -7,7 +7,7 @@ export default function TokenExpiratPage() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center">
 
         <div className="text-center">
           <div className="text-5xl mb-5">🔗</div>

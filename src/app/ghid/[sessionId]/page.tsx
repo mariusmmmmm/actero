@@ -543,7 +543,7 @@ function GhidPaidPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full flex flex-col flex-1">
+      <div className="max-w-2xl mx-auto w-full flex flex-col flex-1">
 
         {/* Header */}
         <div className="px-5 pt-6 pb-3">
@@ -646,7 +646,7 @@ function GhidPaidPageContent() {
 
         {/* Navigare fixă jos */}
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-5 py-4">
-          <div className="max-w-md mx-auto flex gap-3">
+          <div className="max-w-2xl mx-auto w-full flex gap-3">
             <button
               onClick={isFirst ? () => router.push(`/ghid?session=${sessionId}`) : goToPrevStep}
               className="flex-1 py-3 bg-gray-100 text-gray-600 font-medium rounded-xl text-sm"
@@ -674,7 +674,7 @@ export default function GhidPaidPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full flex flex-col flex-1" />
+        <div className="max-w-2xl mx-auto w-full flex flex-col flex-1" />
       </main>
     }>
       <GhidPaidPageContent />

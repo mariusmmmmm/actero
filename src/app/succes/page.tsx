@@ -99,7 +99,7 @@ function SuccesPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
 
         {/* Status polling */}
         {status === 'polling' && (
@@ -217,7 +217,7 @@ export default function SuccesPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1" />
       </main>
     }>
       <SuccesPageContent />

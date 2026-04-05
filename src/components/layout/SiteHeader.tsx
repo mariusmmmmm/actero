@@ -4,8 +4,7 @@ import Link from 'next/link'
 export default function SiteHeader() {
   return (
     <div className="border-b border-gray-100 bg-white">
-      <div className="mx-auto grid max-w-md grid-cols-[1fr_auto_1fr] items-center px-4 py-3 sm:max-w-3xl sm:px-6 sm:py-[14px]">
-        <div />
+      <div className="mx-auto flex max-w-2xl justify-center px-4 py-3 sm:px-6 sm:py-[14px]">
         <div className="flex items-center gap-3 justify-self-center sm:gap-5">
 
           {/* Logo */}
@@ -44,14 +43,6 @@ export default function SiteHeader() {
               Fără drumuri degeaba
             </span>
           </div>
-        </div>
-        <div className="justify-self-end">
-          <Link
-            href="/despre"
-            className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-          >
-            Despre
-          </Link>
         </div>
       </div>
     </div>

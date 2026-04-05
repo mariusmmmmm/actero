@@ -534,7 +534,7 @@ function WizardPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="h-1 bg-gray-100 rounded-full mb-4">
           <div
             className="h-1 bg-gray-900 rounded-full transition-all duration-300"
@@ -564,7 +564,7 @@ export default function WizardPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1" />
       </main>
     }>
       <WizardPageContent />

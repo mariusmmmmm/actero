@@ -12,7 +12,7 @@ export default function SeoHero({ title, description, ctaHref, ctaLabel }: SeoHe
   return (
     <main className="min-h-screen bg-white">
       <SiteHeader />
-      <div className="max-w-md mx-auto">
+      <div className="max-w-2xl mx-auto">
         <section className="bg-gradient-to-br from-gray-900 to-gray-800 px-5 pt-10 pb-10">
           <h1 className="text-3xl font-extrabold leading-tight text-white mb-3">{title}</h1>
           <p className="text-sm leading-relaxed text-gray-400 mb-6">{description}</p>

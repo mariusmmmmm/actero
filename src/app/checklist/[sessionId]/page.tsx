@@ -10,7 +10,7 @@ export default function ChecklistPlaceholderPage() {
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
 
-      <div className="max-w-md mx-auto w-full flex-1 px-5 py-8">
+      <div className="max-w-2xl mx-auto w-full flex-1 px-5 py-8">
         <div className="mb-6 flex justify-end">
           <a
             href={`/ghid/${params.sessionId}`}

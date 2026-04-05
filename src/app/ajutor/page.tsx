@@ -104,7 +104,7 @@ function AjutorPageContent() {
   if (status === 'success') {
     return (
       <main className="min-h-screen bg-white flex flex-col">
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1 flex flex-col items-center justify-center text-center">
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1 flex flex-col items-center justify-center text-center">
           <div className="text-5xl mb-4">✉️</div>
           <h2 className="text-xl font-bold text-gray-900 mb-3">Am primit întrebarea ta!</h2>
           <p className="text-sm text-gray-600 leading-relaxed mb-6">
@@ -133,7 +133,7 @@ function AjutorPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-6 flex justify-end">
           {sessionId && (
             <a href={`/ghid/${sessionId}`} className="text-sm text-gray-400 hover:text-gray-600">
@@ -258,7 +258,7 @@ export default function AjutorPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1" />
       </main>
     }>
       <AjutorPageContent />

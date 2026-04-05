@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SiteHeader from '@/components/layout/SiteHeader'
+import SiteFooter from '@/components/layout/SiteFooter'
 
 export const metadata: Metadata = {
   title: 'Despre noi',
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 export default function DesprePage() {
   return (
     <main>
+      <SiteHeader />
 
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="bg-[#1a1a1a] px-6 py-24 text-center">
@@ -184,6 +187,8 @@ export default function DesprePage() {
           <div className="h-1 w-8 rounded-full bg-red-600" />
         </div>
       </section>
+
+      <SiteFooter />
 
     </main>
   )

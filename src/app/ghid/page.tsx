@@ -3,7 +3,7 @@
 
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { TEST_MODE } from '@/lib/config'
@@ -558,6 +558,11 @@ const blockIcons = {
 }
 
 function StepCard({ step, isActive }: { step: FreeStep; isActive: boolean }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const shouldCollapse = step.id === 1 || step.id === 2
+  const visibleBlocks = shouldCollapse ? step.blocks.slice(0, 2) : step.blocks
+  const hiddenBlocks = shouldCollapse ? step.blocks.slice(2) : []
+
   return (
     <div className={`rounded-2xl border-2 p-4 mb-4 ${isActive ? 'border-green-400 bg-green-50/30' : 'border-gray-200 bg-white'}`}>
       <div className="flex items-center gap-3 mb-3">
@@ -567,12 +572,37 @@ function StepCard({ step, isActive }: { step: FreeStep; isActive: boolean }) {
         <div className="font-semibold text-gray-900 text-sm">{step.title}</div>
       </div>
       <div className="flex flex-col gap-2 ml-11">
-        {step.blocks.map((block, i) => (
+        {visibleBlocks.map((block, i) => (
           <div key={i} className={`rounded-xl px-3 py-2 text-sm flex gap-2 ${blockStyles[block.type]}`}>
             <span className="flex-shrink-0">{blockIcons[block.type]}</span>
             <span>{block.text}</span>
           </div>
         ))}
+        {hiddenBlocks.length > 0 && (
+          <>
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="self-start mt-1 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-600 hover:border-gray-300 hover:text-gray-800 transition-colors"
+            >
+              {isExpanded
+                ? '▲ Ascunde informațiile suplimentare'
+                : step.id === 1
+                ? `▼ Vezi toate documentele necesare (${hiddenBlocks.length} în plus)`
+                : `▼ Vezi toți pașii de pregătire (${hiddenBlocks.length} în plus)`}
+            </button>
+            {isExpanded && (
+              <div className="flex flex-col gap-2">
+                {hiddenBlocks.map((block, i) => (
+                  <div key={`${step.id}-${i + 2}`} className={`rounded-xl px-3 py-2 text-sm flex gap-2 ${blockStyles[block.type]}`}>
+                    <span className="flex-shrink-0">{blockIcons[block.type]}</span>
+                    <span>{block.text}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   )
@@ -599,28 +629,64 @@ function PaywallBanner({
   price: string
   onUnlock: () => void
 }) {
+  const [benefitsOpen, setBenefitsOpen] = useState(false)
+  const visibleTeaser = teaser.slice(0, 3)
+  const hiddenTeaser = teaser.slice(3)
+
   return (
     <div className="bg-gray-900 rounded-2xl p-5 my-4">
-      <div className="font-bold text-white text-sm mb-3">
-        Urmează încă {teaser.length > 3 ? teaser.length : ''} pași esențiali
+      <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-white/70 mb-3">
+        Acces complet
       </div>
-      <div className="flex flex-col gap-2 mb-4">
-        {teaser.map((item, i) => (
+      <div className="font-bold text-white text-xl mb-2">
+        Deblochezi restul ghidului complet
+      </div>
+      <div className="text-white font-bold text-xl mb-1">
+        {price} <span className="text-gray-400 text-sm font-normal">· plată o singură dată</span>
+      </div>
+      <p className="text-xs text-gray-400 mb-4">
+        Acces instant după plată
+      </p>
+      <button
+        onClick={onUnlock}
+        className="w-full py-3 bg-green-500 text-white font-bold rounded-xl text-sm"
+      >
+        Deblochează ghidul complet →
+      </button>
+      <div className="text-xs text-gray-500 text-center mt-2 mb-4">
+        Checklist + tracker + parteneri verificați
+      </div>
+      <div className="flex flex-col gap-2">
+        {visibleTeaser.map((item, i) => (
           <div key={i} className="flex gap-2 text-sm text-gray-300">
             <span className="text-green-400 flex-shrink-0">✓</span>
             <span>{item}</span>
           </div>
         ))}
       </div>
-      <div className="text-white font-bold text-xl mb-1">
-        {price} <span className="text-gray-400 text-sm font-normal">· plată o singură dată</span>
-      </div>
-      <button
-        onClick={onUnlock}
-        className="w-full mt-3 py-3 bg-green-500 text-white font-bold rounded-xl text-sm"
-      >
-        Deblochează ghidul complet →
-      </button>
+      {hiddenTeaser.length > 0 && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={() => setBenefitsOpen(!benefitsOpen)}
+            className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-gray-300 hover:border-white/20 hover:text-white transition-colors"
+          >
+            {benefitsOpen
+              ? '▲ Mai puține beneficii'
+              : `▼ Vezi toate beneficiile (${hiddenTeaser.length} în plus)`}
+          </button>
+          {benefitsOpen && (
+            <div className="mt-3 flex flex-col gap-2">
+              {hiddenTeaser.map((item, i) => (
+                <div key={`${item}-${i}`} className="flex gap-2 text-sm text-gray-300">
+                  <span className="text-green-400 flex-shrink-0">✓</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -653,7 +719,7 @@ function GhidFreePageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-6 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-6 flex-1">
         <div className="mb-4 flex justify-end">
           <a href={`/diagnostic?session=${sessionId}`} className="text-sm text-gray-400">← Înapoi</a>
         </div>
@@ -692,7 +758,7 @@ function GhidFreePageContent() {
 
         {/* Tab bar fix jos */}
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 flex">
-          <div className="max-w-md mx-auto w-full flex">
+          <div className="max-w-2xl mx-auto w-full flex">
             {[
               { label: 'Ghid', icon: '📋', active: true },
               { label: 'Checklist', icon: '✓', locked: true },
@@ -725,7 +791,7 @@ export default function GhidFreePage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-6 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-6 flex-1" />
       </main>
     }>
       <GhidFreePageContent />

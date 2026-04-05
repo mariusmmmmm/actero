@@ -83,7 +83,7 @@ function InCurandPageContent() {
     return (
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center text-center">
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center text-center">
           <div className="text-4xl mb-4">{countryFlag}</div>
           <h2 className="text-xl font-bold text-gray-900 mb-3">
             {countryDate ? `Te anunțăm în ${countryDate}!` : 'Te-am adăugat pe listă!'}
@@ -107,7 +107,7 @@ function InCurandPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-10 flex justify-end">
           <a href="/wizard" className="text-sm text-gray-400 hover:text-gray-600">← Înapoi</a>
         </div>
@@ -205,7 +205,7 @@ export default function InCurandPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1" />
       </main>
     }>
       <InCurandPageContent />

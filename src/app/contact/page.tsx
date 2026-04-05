@@ -54,7 +54,7 @@ export default function ContactPage() {
     return (
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center text-center">
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1 flex flex-col justify-center text-center">
           <div className="text-5xl mb-4">✉️</div>
           <h1 className="text-xl font-bold text-gray-900 mb-3">Mesaj trimis</h1>
           <p className="text-sm text-gray-600 leading-relaxed mb-6">
@@ -74,7 +74,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-8 flex justify-end">
           <a href="/" className="text-sm text-gray-400 hover:text-gray-600">
             ← Înapoi

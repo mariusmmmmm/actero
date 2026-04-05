@@ -709,7 +709,7 @@ function DiagnosticPageContent() {
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <SiteHeader />
-      <div className="max-w-md mx-auto w-full px-5 py-8 flex-1">
+      <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-6 flex justify-end">
           <a href="/wizard" className="text-sm text-gray-400 hover:text-gray-600">← Înapoi</a>
         </div>
@@ -729,7 +729,7 @@ export default function DiagnosticPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white flex flex-col">
         <SiteHeader />
-        <div className="max-w-md mx-auto w-full px-5 py-8 flex-1" />
+        <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1" />
       </main>
     }>
       <DiagnosticPageContent />
