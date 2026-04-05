@@ -74,6 +74,8 @@ const breadcrumbSchema = {
 export default function BuletinExpiratGermaniaPage() {
   return (
     <LlmOptimizedPage
+      lpSlug="buletin-expirat-germania"
+      lpTopic="buletin"
       h1="Buletin expirat în Germania?"
       intro="Dacă locuiești în Germania, schimbările din 2025 fac diferența între un drum pregătit corect și un drum făcut degeaba."
       tldr="Din 2025, CEI/CIS necesită prezență fizică pentru biometrie. Se poate depune cererea prin mandatar (procură de la consulat), dar ridicarea actului necesită prezență personală la SPCLEP România."

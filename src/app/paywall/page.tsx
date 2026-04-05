@@ -3,9 +3,10 @@
 
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
 import { useAppStore } from '@/store/appStore'
 
@@ -105,6 +106,18 @@ function PaywallPageContent() {
 
   const includesList = getIncludes(problemType)
 
+  useEffect(() => {
+    persistAttribution(searchParams)
+    trackOnce(
+      `paywall_view:${sessionId || guideId || problemType || 'unknown'}`,
+      'paywall_view',
+      withAttribution({
+        guide_id: guideId ?? undefined,
+        problem_type: problemType ?? undefined,
+      }, searchParams)
+    )
+  }, [guideId, problemType, searchParams, sessionId])
+
   // Construiește URL Gumroad cu sessionId ca parametru custom
   const buildGumroadUrl = (baseUrl: string) => {
     const url = new URL(baseUrl)
@@ -113,6 +126,17 @@ function PaywallPageContent() {
   }
 
   const handleGhid = () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('actero:last_offer_type', 'single')
+      window.sessionStorage.setItem('actero:last_offer_value', '9.99')
+    }
+    trackEvent('paywall_purchase_click', withAttribution({
+      guide_id: guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      offer_type: 'single',
+      value: 9.99,
+      currency: 'EUR',
+    }, searchParams))
     if (TEST_MODE) {
       unlockPaid()
       router.push(`/ghid/${sessionId}`)
@@ -122,6 +146,17 @@ function PaywallPageContent() {
   }
 
   const handleFamilie = () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('actero:last_offer_type', 'family')
+      window.sessionStorage.setItem('actero:last_offer_value', '24.99')
+    }
+    trackEvent('paywall_family_click', withAttribution({
+      guide_id: guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      offer_type: 'family',
+      value: 24.99,
+      currency: 'EUR',
+    }, searchParams))
     if (TEST_MODE) {
       unlockPaid()
       router.push(`/ghid/${sessionId}`)
@@ -165,7 +200,16 @@ function PaywallPageContent() {
             <input
               type="checkbox"
               checked={termsAccepted}
-              onChange={(e) => setTermsAccepted(e.target.checked)}
+              onChange={(e) => {
+                const accepted = e.target.checked
+                setTermsAccepted(accepted)
+                if (accepted) {
+                  trackEvent('paywall_terms_accept', withAttribution({
+                    guide_id: guideId ?? undefined,
+                    problem_type: problemType ?? undefined,
+                  }, searchParams))
+                }
+              }}
               className="mt-0.5 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-400"
             />
             <span className="leading-relaxed">

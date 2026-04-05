@@ -3,9 +3,10 @@
 
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
 import { useAppStore } from '@/store/appStore'
 import type { GuideId } from '@/types'
@@ -557,7 +558,15 @@ const blockIcons = {
   action: '→',
 }
 
-function StepCard({ step, isActive }: { step: FreeStep; isActive: boolean }) {
+function StepCard({
+  step,
+  isActive,
+  guideId,
+}: {
+  step: FreeStep
+  isActive: boolean
+  guideId: GuideId
+}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const shouldCollapse = step.id === 1 || step.id === 2
   const visibleBlocks = shouldCollapse ? step.blocks.slice(0, 2) : step.blocks
@@ -582,7 +591,16 @@ function StepCard({ step, isActive }: { step: FreeStep; isActive: boolean }) {
           <>
             <button
               type="button"
-              onClick={() => setIsExpanded(!isExpanded)}
+              onClick={() => {
+                const nextExpanded = !isExpanded
+                setIsExpanded(nextExpanded)
+                if (nextExpanded) {
+                  trackEvent(
+                    step.id === 1 ? 'free_guide_expand_step_1' : 'free_guide_expand_step_2',
+                    withAttribution({ guide_id: guideId })
+                  )
+                }
+              }}
               className="self-start mt-1 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-600 hover:border-gray-300 hover:text-gray-800 transition-colors"
             >
               {isExpanded
@@ -624,17 +642,49 @@ function PaywallBanner({
   teaser,
   price,
   onUnlock,
+  guideId,
+  problemType,
+  sessionId,
 }: {
   teaser: string[]
   price: string
   onUnlock: () => void
+  guideId: GuideId
+  problemType?: string | null
+  sessionId: string
 }) {
   const [benefitsOpen, setBenefitsOpen] = useState(false)
+  const bannerRef = useRef<HTMLDivElement | null>(null)
   const visibleTeaser = teaser.slice(0, 3)
   const hiddenTeaser = teaser.slice(3)
 
+  useEffect(() => {
+    const node = bannerRef.current
+    if (!node || typeof window === 'undefined') return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          trackOnce(
+            `free_guide_paywall_view:${sessionId}:${guideId}`,
+            'free_guide_paywall_view',
+            withAttribution({
+              guide_id: guideId,
+              problem_type: problemType ?? undefined,
+            })
+          )
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [guideId, problemType, sessionId])
+
   return (
-    <div className="bg-gray-900 rounded-2xl p-5 my-4">
+    <div ref={bannerRef} className="bg-gray-900 rounded-2xl p-5 my-4">
       <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-white/70 mb-3">
         Acces complet
       </div>
@@ -648,7 +698,15 @@ function PaywallBanner({
         Acces instant după plată
       </p>
       <button
-        onClick={onUnlock}
+        onClick={() => {
+          trackEvent('free_guide_paywall_click', withAttribution({
+            guide_id: guideId,
+            problem_type: problemType ?? undefined,
+            value: 9.99,
+            currency: 'EUR',
+          }))
+          onUnlock()
+        }}
         className="w-full py-3 bg-green-500 text-white font-bold rounded-xl text-sm"
       >
         Deblochează ghidul complet →
@@ -698,10 +756,26 @@ function GhidFreePageContent() {
   const router = useRouter()
   const sessionId = searchParams.get('session') ?? ''
   const testGuideId = searchParams.get('guide') as GuideId | null
-  const { guideId } = useAppStore()
+  const { guideId, problemType } = useAppStore()
   const activeGuideId = TEST_MODE && testGuideId ? testGuideId : guideId
 
   const content = activeGuideId ? ghidFreeMap[activeGuideId] : null
+
+  useEffect(() => {
+    persistAttribution(searchParams)
+  }, [searchParams])
+
+  useEffect(() => {
+    if (!activeGuideId) return
+    trackOnce(
+      `free_guide_view:${sessionId || activeGuideId}`,
+      'free_guide_view',
+      withAttribution({
+        guide_id: activeGuideId,
+        problem_type: problemType ?? undefined,
+      }, searchParams)
+    )
+  }, [activeGuideId, problemType, searchParams, sessionId])
 
   if (!content) {
     return (
@@ -713,6 +787,8 @@ function GhidFreePageContent() {
       </main>
     )
   }
+
+  const safeGuideId = activeGuideId as GuideId
 
   const handleUnlock = () => router.push(`/paywall?session=${sessionId}`)
 
@@ -739,7 +815,7 @@ function GhidFreePageContent() {
 
         {/* Pași free */}
         {content.steps.map((step, i) => (
-          <StepCard key={step.id} step={step} isActive={i === 0} />
+          <StepCard key={step.id} step={step} isActive={i === 0} guideId={safeGuideId} />
         ))}
 
         {/* Paywall banner */}
@@ -747,6 +823,9 @@ function GhidFreePageContent() {
           teaser={content.paywallTeaser}
           price="9,99€"
           onUnlock={handleUnlock}
+          guideId={safeGuideId}
+          problemType={problemType}
+          sessionId={sessionId}
         />
 
         {/* Pași locked */}

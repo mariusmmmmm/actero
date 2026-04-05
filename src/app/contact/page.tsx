@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { trackEvent, withAttribution } from '@/lib/analytics'
 
 type FormState = {
   name: string
@@ -44,7 +45,12 @@ export default function ContactPage() {
         }),
       })
 
-      setStatus(res.ok ? 'success' : 'error')
+      if (res.ok) {
+        trackEvent('contact_submit_success', withAttribution({ source_page: 'contact' }))
+        setStatus('success')
+      } else {
+        setStatus('error')
+      }
     } catch {
       setStatus('error')
     }

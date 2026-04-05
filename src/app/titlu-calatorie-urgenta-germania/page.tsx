@@ -73,6 +73,8 @@ const breadcrumbSchema = {
 export default function TitluCalatorieUrgentaGermaniaPage() {
   return (
     <LlmOptimizedPage
+      lpSlug="titlu-calatorie-urgenta-germania"
+      lpTopic="titlu-calatorie"
       h1="Titlu de călătorie urgentă din Germania?"
       intro="Dacă trebuie să ajungi rapid în România și nu mai poți folosi documentele actuale, titlul de călătorie este soluția de urgență."
       tldr="Titlul de călătorie românesc se obține FĂRĂ programare la orice consulat din Germania, în aceeași zi, GRATUIT. Valabil maximum 30 de zile, exclusiv pentru întoarcerea în România. Prezență fizică obligatorie."

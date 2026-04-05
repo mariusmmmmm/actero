@@ -79,6 +79,8 @@ const breadcrumbSchema = {
 export default function ProgramareConsulatRomaniaPage() {
   return (
     <LlmOptimizedPage
+      lpSlug="programare-consulat-romania"
+      lpTopic="programare-consulat"
       h1="Cum obții programare la consulatul României?"
       intro="Dacă ai cererea pregătită corect, momentul și ordinea pașilor fac toată diferența pe econsulat.ro."
       tldr="Programările la consulatele din Germania se obțin pe econsulat.ro. Sunt disponibile de obicei luni la 08:00. Cererea trebuie mai întâi să fie Validată (1-3 zile). Programările sunt GRATUITE — nu plătiți intermediari."

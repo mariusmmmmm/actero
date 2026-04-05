@@ -6,6 +6,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { bundeslandOptions } from '@/lib/content/consulates/de'
 import { useAppStore } from '@/store/appStore'
 import type { BundeslandCode, CreateSessionResponse, ProblemType, SituationFlags, WizardResult } from '@/types'
@@ -74,7 +75,11 @@ function Step1() {
       </div>
       <button
         type="button"
-        onClick={nextWizardStep}
+        onClick={() => {
+          if (!problemType) return
+          trackEvent('wizard_step_1_complete', withAttribution({ problem_type: problemType }))
+          nextWizardStep()
+        }}
         disabled={!problemType}
         className="mt-2 w-full py-4 bg-gray-900 text-white font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
       >
@@ -87,7 +92,7 @@ function Step1() {
 // ─── STEP 2 — ȚARA + BUNDESLAND ──────────────────────────────────────────────
 
 function Step2() {
-  const { bundesland, setBundesland, consulate, nextWizardStep, prevWizardStep } = useAppStore()
+  const { bundesland, setBundesland, consulate, nextWizardStep, prevWizardStep, problemType } = useAppStore()
 
   const consulateName = consulate
     ? { muenchen: 'München', bonn: 'Bonn', stuttgart: 'Stuttgart', berlin: 'Berlin' }[consulate]
@@ -127,7 +132,15 @@ function Step2() {
         </button>
         <button
           type="button"
-          onClick={nextWizardStep}
+          onClick={() => {
+            if (!bundesland) return
+            trackEvent('wizard_step_2_complete', withAttribution({
+              problem_type: problemType ?? undefined,
+              bundesland,
+              consulate: consulate ?? undefined,
+            }))
+            nextWizardStep()
+          }}
           disabled={!bundesland}
           className="flex-[2] py-4 bg-gray-900 text-white font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
         >
@@ -309,6 +322,11 @@ function Step3() {
 
   const handleNext = async () => {
     if (isLast) {
+      trackEvent('wizard_step_3_complete', withAttribution({
+        problem_type: problemType,
+        current_substep: currentSubStep + 1,
+        total_substeps: questions.length,
+      }))
       await handleFinalSubmit()
     } else {
       const updatedQuestions = getVisibleQuestions(problemType, situation)
@@ -341,6 +359,18 @@ function Step3() {
       const data = await res.json() as Partial<CreateSessionResponse> & { wizardResult?: WizardResult }
 
       if (data.sessionId && data.guideId && data.wizardResult) {
+        trackOnce(
+          `wizard_submit_success:${data.sessionId}`,
+          'wizard_submit_success',
+          withAttribution({
+            problem_type: problemType,
+            guide_id: data.guideId,
+            route_id: data.wizardResult.type === 'route' ? data.wizardResult.routeId : undefined,
+            result_type: data.wizardResult.type,
+            bundesland: situation.bundesland ?? undefined,
+            consulate: situation.consulate ?? undefined,
+          }, searchParams)
+        )
         setSessionId(data.sessionId)
         setGuideId(data.guideId)
         setWizardResult(data.wizardResult)
@@ -349,6 +379,12 @@ function Step3() {
       }
 
       if (data.wizardResult?.type === 'waitlist') {
+        trackEvent('wizard_submit_success', withAttribution({
+          problem_type: problemType,
+          result_type: data.wizardResult.type,
+          bundesland: situation.bundesland ?? undefined,
+          consulate: situation.consulate ?? undefined,
+        }, searchParams))
         setWizardResult(data.wizardResult)
         router.push(`/in-curand?service=${problemType}&country=${country ?? 'de'}`)
         return
@@ -495,6 +531,21 @@ function getProgressPercent(
 
 function WizardPageContent() {
   const { currentWizardStep, currentSubStep, totalSubSteps } = useAppStore()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    persistAttribution(searchParams)
+    trackOnce(
+      'wizard_start',
+      'wizard_start',
+      withAttribution(
+        {
+          problem_prefill: searchParams.get('problem') ?? undefined,
+        },
+        searchParams
+      )
+    )
+  }, [searchParams])
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

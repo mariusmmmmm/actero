@@ -6,6 +6,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { bundeslandOptions, consulates } from '@/lib/content/consulates/de'
 import { useAppStore } from '@/store/appStore'
 import type { GuideId, ProblemType } from '@/types'
@@ -562,8 +563,24 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
     }
   }, [visible])
 
-  const handleFree = () => router.push(`/ghid?session=${sessionId}`)
-  const handlePaid = () => router.push(`/paywall?session=${sessionId}`)
+  const handleFree = () => {
+    trackEvent('diagnostic_cta_free_click', withAttribution({
+      guide_id: guideId ?? undefined,
+      route_id: wizardResult?.type === 'route' ? wizardResult.routeId : undefined,
+      result_type: wizardResult?.type ?? undefined,
+      problem_type: problemType ?? undefined,
+    }))
+    router.push(`/ghid?session=${sessionId}`)
+  }
+  const handlePaid = () => {
+    trackEvent('diagnostic_cta_paid_click', withAttribution({
+      guide_id: guideId ?? undefined,
+      route_id: wizardResult?.type === 'route' ? wizardResult.routeId : undefined,
+      result_type: wizardResult?.type ?? undefined,
+      problem_type: problemType ?? undefined,
+    }))
+    router.push(`/paywall?session=${sessionId}`)
+  }
   const handleRouteGuide = (guideId: string) => {
     router.push(`/ghid?session=${sessionId}&guide=${guideId}`)
   }
@@ -684,7 +701,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
 function DiagnosticPageContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session') ?? ''
-  const { guideId, wizardResult } = useAppStore()
+  const { guideId, wizardResult, problemType, situation } = useAppStore()
   const [showResult, setShowResult] = useState(false)
 
   // Determină datele diagnosticului
@@ -705,6 +722,27 @@ function DiagnosticPageContent() {
       </main>
     )
   }
+
+  useEffect(() => {
+    persistAttribution(searchParams)
+  }, [searchParams])
+
+  useEffect(() => {
+    if (!showResult || !diagnosticData) return
+
+    trackOnce(
+      `diagnostic_view:${sessionId || guideId || wizardResult?.type || 'unknown'}`,
+      'diagnostic_view',
+      withAttribution({
+        problem_type: problemType ?? undefined,
+        guide_id: guideId ?? undefined,
+        route_id: wizardResult?.type === 'route' ? wizardResult.routeId : undefined,
+        result_type: wizardResult?.type ?? undefined,
+        bundesland: situation.bundesland ?? undefined,
+        consulate: situation.consulate ?? undefined,
+      }, searchParams)
+    )
+  }, [showResult, diagnosticData, sessionId, guideId, wizardResult, problemType, situation, searchParams])
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

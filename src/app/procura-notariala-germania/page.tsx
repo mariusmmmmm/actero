@@ -74,6 +74,8 @@ const breadcrumbSchema = {
 export default function ProcuraNotarialaGermaniaPage() {
   return (
     <LlmOptimizedPage
+      lpSlug="procura-notariala-germania"
+      lpTopic="procura"
       h1="Procură notarială în Germania?"
       intro="Dacă ai ceva de rezolvat în România, procura de la consulat te poate scuti de drumuri, traduceri și pași inutili."
       tldr="O procură notarială de la consulatul României din Germania este gratuită (+ 3€ publicitate notarială pentru imobil), recunoscută direct în România fără apostilă sau traducere. Valabilă 3 ani. Se obține în aceeași zi a programării la consulat."

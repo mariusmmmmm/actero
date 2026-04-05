@@ -6,6 +6,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { persistAttribution, trackOnce, withAttribution } from '@/lib/analytics'
 import { useAppStore } from '@/store/appStore'
 
 const POLL_INTERVAL_MS = 2000
@@ -48,6 +49,10 @@ function SuccesPageContent() {
   const [copied, setCopied] = useState(false)
   const isPaid = status === 'ready'
 
+  useEffect(() => {
+    persistAttribution(searchParams)
+  }, [searchParams])
+
   // Polling — verifică dacă webhook-ul a setat is_paid = true
   useEffect(() => {
     if (!sessionId || status !== 'polling' || timedOut) return
@@ -71,6 +76,32 @@ function SuccesPageContent() {
       clearInterval(interval)
     }
   }, [sessionId, status, timedOut, unlockPaid])
+
+  useEffect(() => {
+    if (!isPaid) return
+    const offerType =
+      typeof window !== 'undefined'
+        ? window.sessionStorage.getItem('actero:last_offer_type') ?? 'single'
+        : 'single'
+    const rawValue =
+      typeof window !== 'undefined'
+        ? window.sessionStorage.getItem('actero:last_offer_value') ?? '9.99'
+        : '9.99'
+    const parsedValue = Number(rawValue)
+
+    trackOnce(
+      `paid_access_granted:${sessionId}`,
+      'paid_access_granted',
+      withAttribution({
+        guide_id: useAppStore.getState().guideId ?? undefined,
+        problem_type: problemType ?? undefined,
+        offer_type: offerType,
+        value: Number.isFinite(parsedValue) ? parsedValue : 9.99,
+        currency: 'EUR',
+        payment_provider: 'gumroad',
+      }, searchParams)
+    )
+  }, [isPaid, problemType, searchParams, sessionId])
 
   const handleOpenGuide = () => {
     router.push(`/ghid/${sessionId}`)

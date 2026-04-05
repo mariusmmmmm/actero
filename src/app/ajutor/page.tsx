@@ -6,6 +6,7 @@
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { trackEvent, withAttribution } from '@/lib/analytics'
 import { useAppStore } from '@/store/appStore'
 import type { GuideId } from '@/types'
 
@@ -90,6 +91,10 @@ function AjutorPageContent() {
       })
 
       if (res.ok) {
+        trackEvent('ajutor_submit_success', withAttribution({
+          guide_id: guideId ?? undefined,
+          step_number: form.stepNumber ? parseInt(form.stepNumber, 10) : undefined,
+        }))
         setStatus('success')
       } else {
         setStatus('error')

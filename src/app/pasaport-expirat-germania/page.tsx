@@ -107,6 +107,8 @@ const breadcrumbSchema = {
 export default function PasaportExpiratGermaniaPage() {
   return (
     <LlmOptimizedPage
+      lpSlug="pasaport-expirat-germania"
+      lpTopic="pasaport"
       h1="Pașaport expirat în Germania?"
       intro="Ghidul tău exact — adaptat pentru consulatul tău din Germania. Fără drumuri degeaba."
       tldr="Românii din Germania pot reînnoi pașaportul la unul din cele 4 consulate (München, Bonn, Stuttgart, Berlin). Taxa este 53€, durata 6-10 săptămâni, fotografiile se fac la consulat. Cei cu domiciliu în Germania obțin pașaport CRDS; cei cu domiciliu în România obțin pașaport clasic. Programarea se face pe econsulat.ro, de obicei disponibilă luni la 08:00."

@@ -7,6 +7,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { TEST_MODE } from '@/lib/config'
 import SiteHeader from '@/components/layout/SiteHeader'
+import { trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { useAppStore } from '@/store/appStore'
 import { getConsulateCard } from '@/lib/utils/deriveConsulate'
 import type { GuideId, ConsulateId } from '@/types'
@@ -401,7 +402,13 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
 
 // ─── CARD CONSULAT ────────────────────────────────────────────────────────────
 
-function ConsulateCard({ consulateId }: { consulateId: ConsulateId }) {
+function ConsulateCard({
+  consulateId,
+  guideId,
+}: {
+  consulateId: ConsulateId
+  guideId?: GuideId | null
+}) {
   const card = getConsulateCard(consulateId)
 
   return (
@@ -418,10 +425,20 @@ function ConsulateCard({ consulateId }: { consulateId: ConsulateId }) {
       {/* Links Maps + Waze */}
       <div className="flex gap-2 mb-3">
         <a href={card.googleMapsUrl} target="_blank" rel="noopener noreferrer"
+           onClick={() => trackEvent('paid_guide_external_consulate_click', withAttribution({
+             guide_id: guideId ?? undefined,
+             consulate: consulateId,
+             link_type: 'google_maps',
+           }))}
            className="flex-1 py-2 bg-gray-800 rounded-lg text-xs text-center font-medium text-gray-200 hover:bg-gray-700">
           🗺 Google Maps
         </a>
         <a href={card.wazeUrl} target="_blank" rel="noopener noreferrer"
+           onClick={() => trackEvent('paid_guide_external_consulate_click', withAttribution({
+             guide_id: guideId ?? undefined,
+             consulate: consulateId,
+             link_type: 'waze',
+           }))}
            className="flex-1 py-2 bg-gray-800 rounded-lg text-xs text-center font-medium text-gray-200 hover:bg-gray-700">
           🚗 Waze
         </a>
@@ -460,7 +477,14 @@ function ConsulateCard({ consulateId }: { consulateId: ConsulateId }) {
       {/* Poștă */}
       {card.postalPickup && card.postalPickupUrl && (
         <a href={card.postalPickupUrl} target="_blank" rel="noopener noreferrer"
-           onClick={(e) => e.stopPropagation()}
+           onClick={(e) => {
+             e.stopPropagation()
+             trackEvent('paid_guide_external_consulate_click', withAttribution({
+               guide_id: guideId ?? undefined,
+               consulate: consulateId,
+               link_type: 'postal_pickup',
+             }))
+           }}
            className="block mt-3 text-xs text-blue-300 underline">
           ✉ Ridicare prin poștă disponibilă — vezi instrucțiuni
         </a>
@@ -468,7 +492,14 @@ function ConsulateCard({ consulateId }: { consulateId: ConsulateId }) {
 
       {/* URL căutare pașaport */}
       <a href={card.pasaportSearchUrl} target="_blank" rel="noopener noreferrer"
-         onClick={(e) => e.stopPropagation()}
+         onClick={(e) => {
+           e.stopPropagation()
+           trackEvent('paid_guide_external_consulate_click', withAttribution({
+             guide_id: guideId ?? undefined,
+             consulate: consulateId,
+             link_type: 'passport_search',
+           }))
+         }}
          className="block mt-2 text-xs text-blue-300 underline">
         🔍 Verifică dacă pașaportul a sosit
       </a>
@@ -513,6 +544,30 @@ function GhidPaidPageContent() {
     }
   }, [currentStepIndex, activeGuideId, notes])
 
+  useEffect(() => {
+    if (!activeGuideId) return
+    trackOnce(
+      `paid_guide_view:${sessionId}:${activeGuideId}`,
+      'paid_guide_view',
+      withAttribution({
+        guide_id: activeGuideId,
+        problem_type: useAppStore.getState().problemType ?? undefined,
+      })
+    )
+  }, [activeGuideId, sessionId])
+
+  const step = content?.steps[currentStepIndex]
+
+  useEffect(() => {
+    if (!activeGuideId || !step) return
+    trackEvent('paid_guide_step_view', withAttribution({
+      guide_id: activeGuideId,
+      problem_type: useAppStore.getState().problemType ?? undefined,
+      step_id: step.id,
+      step_title: step.shortLabel,
+    }))
+  }, [activeGuideId, step])
+
   if (!content) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
@@ -524,10 +579,11 @@ function GhidPaidPageContent() {
     )
   }
 
-  const step = content.steps[currentStepIndex]
+  const stepSafe = step
+  if (!stepSafe) return null
   const isFirst = currentStepIndex === 0
   const isLast = currentStepIndex === content.steps.length - 1
-  const showNoteField = step.id === 5
+  const showNoteField = stepSafe.id === 5
 
   const handleNoteChange = (val: string) => {
     setNoteValue(val)
@@ -576,17 +632,17 @@ function GhidPaidPageContent() {
         {/* Step counter */}
         <div className="px-5 mb-1">
           <span className="text-xs text-gray-400">
-            Pasul {currentStepIndex + 1} / {totalSteps} — {step.shortLabel}
+            Pasul {currentStepIndex + 1} / {totalSteps} — {stepSafe.shortLabel}
           </span>
         </div>
 
         {/* Conținut pas */}
         <div className="flex-1 px-5 overflow-y-auto pb-32">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">{step.title}</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-4">{stepSafe.title}</h2>
 
           {/* Blocks */}
           <div className="flex flex-col gap-3 mb-4">
-            {step.blocks.map((block, i) => (
+            {stepSafe.blocks.map((block, i) => (
               <div
                 key={i}
                 className={`rounded-xl px-3 py-3 text-sm flex gap-2 ${blockStyles[block.type]}`}
@@ -598,14 +654,14 @@ function GhidPaidPageContent() {
           </div>
 
           {/* Card consulat dinamic */}
-          {step.hasConsulateCard && consulate && (
-            <ConsulateCard consulateId={consulate as ConsulateId} />
+          {stepSafe.hasConsulateCard && consulate && (
+            <ConsulateCard consulateId={consulate as ConsulateId} guideId={activeGuideId} />
           )}
 
           {/* Action item */}
-          {step.actionItem && (
+          {stepSafe.actionItem && (
             <div className="bg-gray-900 rounded-xl px-4 py-3 text-white text-sm font-semibold mb-4">
-              {step.actionItem}
+              {stepSafe.actionItem}
             </div>
           )}
 
@@ -635,7 +691,13 @@ function GhidPaidPageContent() {
                 Când primești documentul, marchează ghidul ca finalizat.
               </div>
               <button
-                onClick={() => router.push(`/succes?session=${sessionId}`)}
+                onClick={() => {
+                  trackEvent('paid_guide_completion_click', withAttribution({
+                    guide_id: activeGuideId ?? undefined,
+                    problem_type: useAppStore.getState().problemType ?? undefined,
+                  }))
+                  router.push(`/succes?session=${sessionId}`)
+                }}
                 className="w-full py-3 bg-green-500 text-white font-bold rounded-xl text-sm"
               >
                 Am rezolvat! →

@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import SeoAnalytics from '@/components/analytics/SeoAnalytics'
+import TrackedLink from '@/components/analytics/TrackedLink'
 import SiteFooter from '@/components/layout/SiteFooter'
 import SiteHeader from '@/components/layout/SiteHeader'
 import type { ReactNode } from 'react'
@@ -20,6 +21,8 @@ type SectionItem = {
 }
 
 type LlmOptimizedPageProps = {
+  lpSlug: string
+  lpTopic: string
   h1: string
   intro: string
   tldr: string
@@ -38,6 +41,8 @@ type LlmOptimizedPageProps = {
 }
 
 export default function LlmOptimizedPage({
+  lpSlug,
+  lpTopic,
   h1,
   intro,
   tldr,
@@ -91,6 +96,7 @@ export default function LlmOptimizedPage({
       ))}
 
       <main className="min-h-screen bg-white">
+        <SeoAnalytics lpSlug={lpSlug} lpTopic={lpTopic} />
         <SiteHeader />
         <div className="max-w-3xl mx-auto px-5 py-8">
           <section data-llm-section="hero" className="mb-8">
@@ -106,12 +112,18 @@ export default function LlmOptimizedPage({
 
             <p className="text-base text-gray-600 leading-relaxed mb-6">{intro}</p>
 
-            <Link
+            <TrackedLink
               href={ctaHref}
+              eventName="seo_cta_click"
+              eventParams={{
+                lp_slug: lpSlug,
+                lp_topic: lpTopic,
+                cta_label: 'hero_cta',
+              }}
               className="inline-flex rounded-xl bg-gray-900 px-6 py-4 text-base font-bold text-white"
             >
               {ctaLabel}
-            </Link>
+            </TrackedLink>
             <p className="text-sm text-gray-500 mt-3">Fără cont · Fără card · 30 de secunde</p>
           </section>
 
@@ -142,12 +154,18 @@ export default function LlmOptimizedPage({
             <div className="rounded-2xl bg-gray-50 border border-gray-200 p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-3">{finalCtaTitle}</h2>
               <p className="text-gray-600 leading-relaxed mb-5">{finalCtaText}</p>
-              <Link
+              <TrackedLink
                 href={ctaHref}
+                eventName="seo_cta_click"
+                eventParams={{
+                  lp_slug: lpSlug,
+                  lp_topic: lpTopic,
+                  cta_label: 'final_cta',
+                }}
                 className="inline-flex rounded-xl bg-gray-900 px-6 py-4 text-base font-bold text-white"
               >
                 Rezolvă gratuit →
-              </Link>
+              </TrackedLink>
             </div>
           </section>
 
