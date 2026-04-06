@@ -61,6 +61,48 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Checklist downloadabil pentru ghișeu + Tracker dosar',
     ],
   },
+  'pasaport-crds-de-pierdut': {
+    title: 'Ghid pașaport CRDS pierdut/furat · Germania',
+    meta: { free: '2 pași gratuiți', total: '7 pași total' },
+    totalSteps: 7,
+    steps: [
+      {
+        id: 1,
+        title: 'Documentele necesare',
+        blocks: [
+          { text: 'Cartea de identitate românească (dacă o ai, chiar expirată) — original. Dacă nu o mai ai, nu este blocant: consulatul poate verifica identitatea și în bazele de date.', type: 'info' },
+          { text: 'Certificat de naștere românesc — original. Certificatele plastifiate, rupte sau pătate sunt nule de drept — solicită duplicat dacă e cazul.', type: 'info' },
+          { text: 'Document de domiciliu în Germania: Meldebescheinigung, Anmeldung sau Personalausweis german — original, emis în ultimii 5 ani.', type: 'info' },
+          { text: 'Dacă a fost PIERDUT: declarație pe proprie răspundere — se completează exclusiv la ghișeul consulatului, în ziua programării.', type: 'info' },
+          { text: 'Dacă a fost FURAT: adeverință poliție locală (Verlustanzeige / Diebstahlsanzeige) + traducere conform consulatului: Bonn = autorizată în română; München = autorizată; Stuttgart = legalizată; Berlin = autorizată.', type: 'warning' },
+          { text: 'Certificat de căsătorie românesc — doar dacă ești căsătorit/ă ȘI ți-ai schimbat numele prin căsătorie.', type: 'info' },
+          { text: 'Fotografii: NU sunt necesare separat — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate. Îmbracă-te în culori închise.', type: 'tip' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Pregătește documentele',
+        blocks: [
+          { text: 'Dacă pașaportul a fost FURAT în Germania: raportează la poliția locală (Diebstahlsanzeige) în 24 ore de la constatare și anunță consulatul pentru blocarea documentului în sistemul MAI.', type: 'warning' },
+          { text: 'Dacă a fost PIERDUT: nu trebuie să pregătești nicio declarație în avans — se completează la ghișeu.', type: 'info' },
+          { text: 'Scanează documentele disponibile (CI, certificat de naștere, document domiciliu Germania, adeverință poliție dacă e cazul). Format recomandat: JPG sau PDF, sub 2 MB per fișier.', type: 'info' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Cont și cerere pe econsulat.ro' },
+      { id: 4, title: 'Obține programarea' },
+      { id: 5, title: 'Pregătire pentru ziua programării' },
+      { id: 6, title: 'Ziua consulatului' },
+      { id: 7, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum completezi corect cererea CRDS când pașaportul este pierdut sau furat',
+      'Ce se întâmplă la ghișeu cu declarația de pierdere sau adeverința de furt',
+      'Card consulat complet: adresă, telefon, Maps, Waze, program',
+      'Checklist downloadabil pentru ghișeu + Tracker dosar',
+    ],
+  },
   'pasaport-crds-nou-de': {
     title: 'Ghid primul pașaport CRDS · Germania',
     meta: { free: '2 pași gratuiți', total: '7 pași total' },

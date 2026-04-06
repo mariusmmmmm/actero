@@ -3,13 +3,13 @@
 
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { bundeslandOptions } from '@/lib/content/consulates/de'
 import { useAppStore } from '@/store/appStore'
-import type { BundeslandCode, CreateSessionResponse, ProblemType, SituationFlags, WizardResult } from '@/types'
+import type { BundeslandCode, CreateSessionResponse, GuideId, ProblemType, SituationFlags, WizardResult } from '@/types'
 
 // ─── STEP 1 — PROBLEMA ───────────────────────────────────────────────────────
 
@@ -28,7 +28,7 @@ const STEP1_OPTIONS = [
   },
   {
     icon: '⚡',
-    label: 'Trebuie să plec urgent',
+    label: 'Trebuie să plec urgent și n-am timp de programare',
     sublabel: 'Titlu de călătorie — fără programare',
     value: 'titlu-calatorie' as ProblemType,
   },
@@ -37,6 +37,12 @@ const STEP1_OPTIONS = [
     label: 'Am ceva de rezolvat în România, dar nu pot merge acolo',
     sublabel: 'Procură notarială',
     value: 'procura' as ProblemType,
+  },
+  {
+    icon: '🧒',
+    label: 'Copilul meu s-a născut în Germania și nu are acte românești',
+    sublabel: 'Transcriere certificat de naștere german',
+    value: 'transcriere-nastere' as ProblemType,
   },
 ] as const
 
@@ -159,6 +165,44 @@ type Question = {
   options: { value: string | boolean; label: string; sublabel?: string }[]
 }
 
+function getProblemTypeFromHint(hint: string | null): ProblemType | null {
+  if (!hint) return null
+  if (hint.startsWith('pasaport-')) return 'pasaport'
+  if (hint.startsWith('buletin-')) return 'buletin'
+  if (hint.startsWith('titlu-calatorie-')) return 'titlu-calatorie'
+  if (hint.startsWith('procura-')) return 'procura'
+  if (hint === 'transcriere-nastere-de') return 'transcriere-nastere'
+  return null
+}
+
+function getExactSituationFromHint(hint: string | null): { problemType: ProblemType; situation: Partial<SituationFlags> } | null {
+  switch (hint as GuideId | null) {
+    case 'pasaport-crds-nou-de':
+      return {
+        problemType: 'pasaport',
+        situation: {
+          hasDomiciliuRO: false,
+          pasaportCrdsCase: 'primul',
+          isPrimulPasaport: true,
+          locuNastere: 'ro',
+        },
+      }
+    case 'buletin-de-primul-de-b':
+      return {
+        problemType: 'buletin',
+        situation: {
+          buletinStatus: 'niciodata',
+          primulBuletin: true,
+          hasDomiciliuRO: false,
+          hasDomiciliuAnteriorRO: false,
+          locuNastere: 'de-strainatate',
+        },
+      }
+    default:
+      return null
+  }
+}
+
 function getQuestions(problemType: ProblemType): Question[] {
   switch (problemType) {
     case 'pasaport':
@@ -172,19 +216,12 @@ function getQuestions(problemType: ProblemType): Question[] {
           ],
         },
         {
-          key: 'pasaportStatus',
-          question: 'Care este situația ta cu pașaportul?',
+          key: 'pasaportCrdsCase',
+          question: 'Ai mai avut pașaport românesc?',
           options: [
-            { value: 'expirat-distrus', label: 'A expirat sau e deteriorat', sublabel: 'Îl am încă la mine' },
-            { value: 'pierdut-furat', label: 'L-am pierdut sau mi-a fost furat', sublabel: 'Nu îl mai am' },
-          ],
-        },
-        {
-          key: 'isPrimulPasaport',
-          question: 'Ai mai avut pașaport românesc până acum?',
-          options: [
-            { value: false, label: 'Da, am mai avut', sublabel: 'A expirat sau e distrus' },
-            { value: true, label: 'Nu, acesta ar fi primul', sublabel: 'Nu am avut niciodată' },
+            { value: 'expirat-deteriorat', label: 'Da (expirat sau deteriorat)', sublabel: 'Îl am sau îl pot prezenta la ghișeu' },
+            { value: 'pierdut-furat', label: 'Da (pierdut sau furat)', sublabel: 'Nu îl mai am la mine' },
+            { value: 'primul', label: 'Nu, primul meu', sublabel: 'Nu am avut niciodată pașaport românesc' },
           ],
         },
         {
@@ -235,12 +272,12 @@ function getQuestions(problemType: ProblemType): Question[] {
     case 'titlu-calatorie':
       return [
         {
-          key: 'actDisponibil',
-          question: 'Ce act de identitate ai acum la tine?',
+          key: 'tipDocumentLipsa',
+          question: 'Ce acte îți lipsesc acum?',
           options: [
-            { value: 'pasaport-expirat', label: 'Pașaport expirat' },
-            { value: 'buletin-expirat', label: 'Buletin expirat' },
-            { value: 'ambele', label: 'Ambele expirate, pierdute sau distruse' },
+            { value: 'pasaport', label: 'Pașaportul (expirat sau pierdut/furat)' },
+            { value: 'buletin', label: 'Buletinul (expirat sau pierdut/furat)' },
+            { value: 'ambele', label: 'Ambele (expirate sau pierdute/furate)' },
           ],
         },
         {
@@ -272,6 +309,8 @@ function getQuestions(problemType: ProblemType): Question[] {
           ],
         },
       ]
+    case 'transcriere-nastere':
+      return []
   }
 }
 
@@ -281,9 +320,9 @@ function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags
   if (problemType === 'pasaport') {
     return all.filter((q, i) => {
       if (i === 0) return true
-      if (i === 1) return situation.hasDomiciliuRO === true
-      if (i === 2) return situation.hasDomiciliuRO === false
-      if (i === 3) return situation.hasDomiciliuRO === false && situation.isPrimulPasaport === true
+      if (i === 1) return situation.hasDomiciliuRO === false
+      if (i === 2) return situation.hasDomiciliuRO === false && situation.isPrimulPasaport === true
+      if (i === 3) return situation.hasDomiciliuRO === true
       return false
     })
   }
@@ -326,21 +365,94 @@ function Step3() {
   const searchParams = useSearchParams()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
-
-  if (!problemType) return null
-
-  const questions = getVisibleQuestions(problemType, situation)
+  const hasAutoSubmittedRef = useRef(false)
+  const questions = problemType ? getVisibleQuestions(problemType, situation) : []
   const currentQuestion = questions[currentSubStep]
   const currentValue = currentQuestion ? situation[currentQuestion.key] : undefined
   const isLast = currentSubStep >= questions.length - 1
   const isUrgencyPath = problemType === 'titlu-calatorie'
+  const showBuletinEdgeCaseClarification =
+    problemType === 'buletin' &&
+    situation.buletinStatus === 'pierdut-furat-distrus' &&
+    situation.hasDomiciliuRO === false &&
+    situation.hasDomiciliuAnteriorRO === false &&
+    currentQuestion?.key === 'locuNastere'
 
   useEffect(() => {
     setTotalSubSteps(questions.length)
   }, [questions.length, setTotalSubSteps])
 
+  useEffect(() => {
+    if (questions.length === 0 && !isSubmitting) {
+      void handleFinalSubmit()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions.length])
+
+  useEffect(() => {
+    const exactPrefill = getExactSituationFromHint(searchParams.get('hint'))
+    if (!exactPrefill || exactPrefill.problemType !== problemType) return
+    if (hasAutoSubmittedRef.current || isSubmitting || questions.length === 0) return
+
+    const allAnswersKnown = questions.every((question) => situation[question.key] !== undefined)
+    if (!allAnswersKnown) return
+
+    hasAutoSubmittedRef.current = true
+    trackEvent('wizard_step_3_complete', withAttribution({
+      problem_type: problemType,
+      current_substep: questions.length,
+      total_substeps: questions.length,
+      source: 'post_transcriere_deeplink',
+    }))
+    void handleFinalSubmit()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [problemType, questions, searchParams, situation, isSubmitting])
+
+  if (!problemType) return null
+
   const handleSelect = (value: string | boolean) => {
     if (!currentQuestion) return
+
+    if (problemType === 'pasaport' && currentQuestion.key === 'pasaportCrdsCase') {
+      if (value === 'expirat-deteriorat') {
+        setSituationFlag('pasaportCrdsCase', value)
+        setSituationFlag('isPrimulPasaport', false)
+        setSituationFlag('pasaportStatus', 'expirat-distrus')
+        setSituationFlag('pasaportPierdutFurat', false)
+        return
+      }
+      if (value === 'pierdut-furat') {
+        setSituationFlag('pasaportCrdsCase', value)
+        setSituationFlag('isPrimulPasaport', false)
+        setSituationFlag('pasaportStatus', 'pierdut-furat')
+        setSituationFlag('pasaportPierdutFurat', true)
+        return
+      }
+      if (value === 'primul') {
+        setSituationFlag('pasaportCrdsCase', value)
+        setSituationFlag('isPrimulPasaport', true)
+        return
+      }
+    }
+
+    if (problemType === 'titlu-calatorie' && currentQuestion.key === 'tipDocumentLipsa') {
+      setSituationFlag('tipDocumentLipsa', value as SituationFlags['tipDocumentLipsa'])
+      setSituationFlag('actDisponibil', value === 'pasaport' ? 'pasaport-expirat' : value === 'buletin' ? 'buletin-expirat' : 'ambele')
+      return
+    }
+
+    if (problemType === 'buletin' && currentQuestion.key === 'buletinStatus') {
+      setSituationFlag('buletinStatus', value as SituationFlags['buletinStatus'])
+      setSituationFlag('primulBuletin', value === 'niciodata')
+      return
+    }
+
+    if (problemType === 'procura' && currentQuestion.key === 'areNotar') {
+      setSituationFlag('areNotar', value as SituationFlags['areNotar'])
+      setSituationFlag('notarAles', value as SituationFlags['notarAles'])
+      return
+    }
+
     setSituationFlag(currentQuestion.key, value as SituationFlags[keyof SituationFlags])
   }
 
@@ -421,7 +533,17 @@ function Step3() {
     }
   }
 
-  if (!currentQuestion) return null
+  if (!currentQuestion) {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="rounded-xl bg-gray-50 p-4">
+          <p className="text-lg font-bold text-gray-900 leading-snug">
+            Pregătim ghidul potrivit pentru situația ta…
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
@@ -490,6 +612,18 @@ function Step3() {
             )
           })}
         </div>
+        {showBuletinEdgeCaseClarification && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <p className="text-sm font-semibold text-amber-900 mb-1">
+              Verificăm încă o dată situația ta
+            </p>
+            <p className="text-sm text-amber-800 leading-relaxed">
+              Dacă buletinul e pierdut sau furat, în mod normal ai fost deja înregistrat în
+              România. Te lăsăm să continui ca să nu te blocăm, dar la final îți vom arăta
+              varianta cea mai apropiată și pașii de clarificare.
+            </p>
+          </div>
+        )}
         <div className="flex gap-3 mt-2">
           <button
             type="button"
@@ -556,6 +690,9 @@ function getProgressPercent(
 function WizardPageContent() {
   const { currentWizardStep, currentSubStep, totalSubSteps } = useAppStore()
   const searchParams = useSearchParams()
+  const hintedProblemType = getProblemTypeFromHint(searchParams.get('hint'))
+  const exactHintPrefill = getExactSituationFromHint(searchParams.get('hint'))
+  const explicitProblemType = searchParams.get('problem') as ProblemType | null
 
   useEffect(() => {
     persistAttribution(searchParams)
@@ -570,6 +707,40 @@ function WizardPageContent() {
       )
     )
   }, [searchParams])
+
+  useEffect(() => {
+    const targetProblemType = explicitProblemType ?? exactHintPrefill?.problemType ?? hintedProblemType
+    if (!targetProblemType) return
+
+    const state = useAppStore.getState()
+    const preservedSituation = {
+      bundesland: state.situation.bundesland,
+      consulate: state.situation.consulate,
+    }
+    const nextSituation = exactHintPrefill
+      ? { ...preservedSituation, ...exactHintPrefill.situation }
+      : state.situation
+
+    const nextWizardStep = state.bundesland ? 3 : 2
+
+    if (
+      state.problemType === targetProblemType &&
+      state.currentWizardStep === nextWizardStep &&
+      (!exactHintPrefill || Object.entries(exactHintPrefill.situation).every(([key, value]) => nextSituation[key as keyof SituationFlags] === value))
+    ) {
+      return
+    }
+
+    useAppStore.setState({
+      problemType: targetProblemType,
+      country: 'de',
+      situation: nextSituation,
+      currentWizardStep: nextWizardStep,
+      currentSubStep: 0,
+      totalSubSteps: 1,
+      wizardDirection: 'forward',
+    })
+  }, [exactHintPrefill, explicitProblemType, hintedProblemType])
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

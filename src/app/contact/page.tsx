@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { trackEvent, withAttribution } from '@/lib/analytics'
@@ -66,12 +67,12 @@ export default function ContactPage() {
           <p className="text-sm text-gray-600 leading-relaxed mb-6">
             Mulțumim. Mesajul tău a fost trimis către contact@actero.ro.
           </p>
-          <a
+          <Link
             href="/"
             className="block w-full py-4 bg-gray-900 text-white font-semibold rounded-xl text-sm text-center"
           >
             Înapoi la homepage
-          </a>
+          </Link>
         </div>
       </main>
     )
@@ -82,9 +83,9 @@ export default function ContactPage() {
       <SiteHeader />
       <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-8 flex justify-end">
-          <a href="/" className="text-sm text-gray-400 hover:text-gray-600">
+          <Link href="/" className="text-sm text-gray-400 hover:text-gray-600">
             ← Înapoi
-          </a>
+          </Link>
         </div>
 
         <div className="mb-8">

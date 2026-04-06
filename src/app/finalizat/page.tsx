@@ -76,6 +76,7 @@ function FinalizatPageContent() {
 
   const ghidLabel = getGuideTitle(guideId) ?? 'actul'
   const crossSell = getCrossSellGuides(guideId, consulate)
+  const isBirthTranscriptionGuide = guideId === 'transcriere-nastere-de'
   const shareText = SHARE_TEXT(ghidLabel)
   const shareEncoded = encodeURIComponent(shareText + '\n' + SHARE_URL)
 
@@ -115,7 +116,7 @@ function FinalizatPageContent() {
           </p>
           <div className="bg-gray-50 rounded-2xl p-4 mb-3">
             <p className="text-sm text-gray-600 italic leading-relaxed mb-4">
-              „{shareText}"
+              „{shareText}”
             </p>
             <div className="flex gap-2">
               <a
@@ -147,8 +148,14 @@ function FinalizatPageContent() {
         {crossSell.length > 0 && (
           <div className="mb-6">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">
-              Ce urmează
+              {isBirthTranscriptionGuide ? 'Acum poți obține primul pașaport sau buletin al copilului' : 'Ce urmează'}
             </p>
+            {isBirthTranscriptionGuide && (
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                Transcrierea a deblocat următorul pas. Alege dacă vrei să continui cu primul
+                pașaport sau cu primul buletin al copilului.
+              </p>
+            )}
             <div className="flex flex-col gap-2">
               {crossSell.map(item => (
                 <Link

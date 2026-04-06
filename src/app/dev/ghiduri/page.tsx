@@ -1,10 +1,12 @@
 'use client'
 
+import Link from 'next/link'
 import SiteHeader from '@/components/layout/SiteHeader'
 import type { GuideId } from '@/types'
 
 const guides: { id: GuideId; title: string }[] = [
   { id: 'pasaport-crds-de', title: 'Reînnoire pașaport CRDS · Germania' },
+  { id: 'pasaport-crds-de-pierdut', title: 'Pașaport CRDS pierdut/furat · Germania' },
   { id: 'pasaport-crds-nou-de', title: 'Primul pașaport CRDS · Germania' },
   { id: 'pasaport-de-cu-domiciliu', title: 'Pașaport · Domiciliu România · Germania' },
   { id: 'pasaport-de-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Germania' },
@@ -23,6 +25,12 @@ const guides: { id: GuideId; title: string }[] = [
 ]
 
 const seoPages = [
+  { title: 'Acte romanesti Germania', path: '/acte-romanesti-germania' },
+  { title: 'Pasaport Romania Germania', path: '/pasaport-romania-germania' },
+  { title: 'Pasaport CRDS Germania', path: '/pasaport-crds-germania' },
+  { title: 'Buletin Romania Germania', path: '/buletin-romania-germania' },
+  { title: 'Acte copil nascut in Germania', path: '/acte-copil-nascut-in-germania' },
+  { title: 'Titlu calatorie Germania', path: '/titlu-calatorie-germania' },
   { title: 'Pasaport expirat Germania', path: '/pasaport-expirat-germania' },
   { title: 'Buletin expirat Germania', path: '/buletin-expirat-germania' },
   { title: 'Programare consulat Romania', path: '/programare-consulat-romania' },
@@ -51,9 +59,9 @@ export default function DevGhiduriPage() {
       <SiteHeader />
       <div className="max-w-3xl mx-auto px-5 py-8">
         <div className="mb-8 flex justify-end gap-4">
-          <a href="/" className="text-sm text-gray-400 hover:text-gray-600">
+          <Link href="/" className="text-sm text-gray-400 hover:text-gray-600">
             Inapoi acasa
-          </a>
+          </Link>
         </div>
 
         <div className="mb-8">
@@ -69,18 +77,18 @@ export default function DevGhiduriPage() {
               <div className="mb-1 text-sm font-semibold text-gray-900">{guide.title}</div>
               <div className="mb-4 text-xs text-gray-400">{guide.id}</div>
               <div className="flex flex-col gap-2 sm:flex-row">
-                <a
+                <Link
                   href={`/ghid?session=test-session&guide=${guide.id}`}
                   className="rounded-xl bg-gray-900 px-4 py-3 text-center text-sm font-semibold text-white"
                 >
                   Deschide ghid free
-                </a>
-                <a
+                </Link>
+                <Link
                   href={`/ghid/test-session?guide=${guide.id}`}
                   className="rounded-xl border-2 border-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-700"
                 >
                   Deschide ghid paid
-                </a>
+                </Link>
               </div>
             </div>
           ))}
@@ -108,20 +116,20 @@ export default function DevGhiduriPage() {
                     <td className="px-4 py-3 text-sm font-semibold text-gray-900">{route.id}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">{route.when}</td>
                     <td className="px-4 py-3 text-sm text-gray-600">
-                      <a
+                      <Link
                         href={`/ghid?session=test-session&guide=${route.guideA}`}
                         className="underline underline-offset-2"
                       >
                         {route.guideA}
-                      </a>
+                      </Link>
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
-                      <a
+                      <Link
                         href={`/ghid?session=test-session&guide=${route.guideB}`}
                         className="underline underline-offset-2"
                       >
                         {route.guideB}
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 ))}
@@ -151,12 +159,12 @@ export default function DevGhiduriPage() {
                     <td className="px-4 py-3 text-sm font-semibold text-gray-900">{page.title}</td>
                     <td className="px-4 py-3 text-sm text-gray-500">{page.path}</td>
                     <td className="px-4 py-3">
-                      <a
+                      <Link
                         href={page.path}
                         className="inline-flex rounded-lg bg-gray-900 px-3 py-2 text-sm font-semibold text-white"
                       >
                         Deschide
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 ))}

@@ -142,6 +142,53 @@ const pasaportCrdsSteps: PaidStep[] = [
   },
 ]
 
+const pasaportCrdsPierdutSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Cont și cerere pe econsulat.ro',
+    shortLabel: 'Cerere',
+    blocks: [
+      { text: 'Mergi pe econsulat.ro și creează un cont dacă nu ai unul — folosești email + parolă.', type: 'info' },
+      { text: 'După login → „Cerere nouă” → Pașapoarte → „Pașaport simplu electronic CRDS”.', type: 'action' },
+      { text: 'Completează formularul: date personale, adresa din Germania, consulatul arondat landului tău.', type: 'info' },
+      { text: 'La câmpul pentru pașaportul anterior menționezi că documentul este pierdut sau furat. Dacă știi numărul lui, completează-l; dacă nu, explică situația în textul liber al cererii.', type: 'warning' },
+      { text: 'Încarci documentele scanate pregătite la Pasul 2 și trimiți cererea. Starea inițială: „În așteptare”.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Deschide econsulat.ro',
+      href: 'https://www.econsulat.ro',
+    },
+  },
+  ...pasaportCrdsSteps.slice(1, 2),
+  {
+    id: 5,
+    title: 'Pregătire pentru ziua programării',
+    shortLabel: 'Pregătire',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Verifică că ai toate documentele disponibile în original: CI dacă o ai, certificatul de naștere, documentul de domiciliu în Germania.', type: 'info' },
+      { text: 'Dacă pașaportul a fost furat: ai la tine și adeverința poliției + traducerea corectă pentru consulatul tău.', type: 'warning' },
+      { text: 'Ai câte o copie simplă din fiecare document original și programarea este activă în contul tău pe econsulat.ro.', type: 'info' },
+      { text: 'Nu trebuie să aduci fotografii — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate.', type: 'info' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ziua consulatului',
+    shortLabel: 'Consulat',
+    blocks: [
+      { text: 'Ajungi cu 10 minute înainte de programare și prezinți documentele la ghișeu.', type: 'info' },
+      { text: 'Dacă pașaportul a fost PIERDUT: funcționarul îți pune la dispoziție declarația pe proprie răspundere — o completezi și o semnezi direct la ghișeu.', type: 'action' },
+      { text: 'Dacă pașaportul a fost FURAT: predai adeverința poliției și traducerea în română. Funcționarul înregistrează furtul în sistemul MAI.', type: 'info' },
+      { text: 'Taxa: 53€ — se achită la consulat (metodă diferită per consulat: Bonn = EC-Karte, München = numerar, Stuttgart = POS sau transfer bancar, Berlin = POS card debit sau virament).', type: 'action' },
+      { text: 'Primești chitanța de depunere — păstreaz-o ca dovadă și fă-i imediat o poză cu telefonul.', type: 'note' },
+      { text: 'Dacă funcționarul cere ceva ce nu e în lista ta: notează calm și întreabă diplomatic de ce s-a modificat procedura.', type: 'warning' },
+      { text: 'Pașaportul se produce la București și se trimite la consulat. Termen: 45 zile lucrătoare.', type: 'info' },
+    ],
+  },
+  pasaportCrdsSteps[4],
+]
+
 // Pași paid pentru pașaport cu domiciliu România (#3 și #4)
 const pasaportDomRoSteps: PaidStep[] = [
   {
@@ -753,6 +800,10 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
     title: 'Reînnoire pașaport CRDS · Germania',
     steps: pasaportCrdsSteps,
   },
+  'pasaport-crds-de-pierdut': {
+    title: 'Pașaport CRDS pierdut/furat · Germania',
+    steps: pasaportCrdsPierdutSteps,
+  },
   'pasaport-crds-nou-de': {
     title: 'Primul pașaport CRDS · Germania',
     steps: pasaportCrdsSteps,
@@ -973,6 +1024,102 @@ function getFullPaidGuideContent(guideId: GuideId): GhidPaidContent | null {
   }
 }
 
+function personalizeGuideContent(
+  content: GhidPaidContent,
+  guideId: GuideId,
+  situation: SituationFlags
+): GhidPaidContent {
+  if (guideId === 'buletin-de-fara-domiciliu' && situation.primulBuletin) {
+    return {
+      ...content,
+      steps: content.steps.map((step) => {
+        if (step.id === 4) {
+          return {
+            ...step,
+            blocks: [
+              { text: 'Ai documentul cu care călătorești în România și toate originalele puse în geantă: certificatul de naștere, certificatul de căsătorie dacă e cazul și orice alt act românesc pe care îl mai ai deja.', type: 'action' },
+              ...step.blocks.slice(1),
+            ],
+          }
+        }
+        if (step.id === 5) {
+          return {
+            ...step,
+            blocks: [
+              { text: 'Te prezinți la ghișeu și spui clar că vii pentru eliberarea primei tale cărți de identitate, fără domiciliu activ în România.', type: 'action' },
+              ...step.blocks.slice(1),
+            ],
+          }
+        }
+        return step
+      }),
+    }
+  }
+
+  if (guideId === 'buletin-de-cu-domiciliu' && situation.primulBuletin) {
+    return {
+      ...content,
+      steps: content.steps.map((step) => {
+        if (step.id === 4) {
+          return {
+            ...step,
+            blocks: [
+              { text: 'Pune în geantă toate originalele: certificatul de naștere, dovada adresei, certificatul de căsătorie dacă e cazul și documentul de călătorie pentru România.', type: 'action' },
+              ...step.blocks.slice(1),
+            ],
+          }
+        }
+        if (step.id === 5) {
+          return {
+            ...step,
+            blocks: [
+              { text: 'Te prezinți la ghișeu și spui că soliciți prima carte de identitate pentru un domiciliu deja activ în România.', type: 'action' },
+              ...step.blocks.slice(1),
+            ],
+          }
+        }
+        return step
+      }),
+    }
+  }
+
+  if (guideId === 'procura-vanzare-de') {
+    return {
+      ...content,
+      steps: content.steps.map((step) => {
+        if (step.id !== 5) return step
+        const notarBlock: Block = situation.notarAles
+          ? { text: 'Ai notar ales: păstrează la tine numele, localitatea și instrucțiunile exacte primite de la notarul din România. Cel mai sigur e să le ai și într-un email sau PDF deschis pe telefon.', type: 'tip' }
+          : { text: 'Nu ai notar ales încă: caută pe unnpr.ro (Uniunea Națională a Notarilor Publici) înainte de programare, ca să fixezi conținutul exact al procurii și datele pe care le vei folosi la consulat.', type: 'tip' }
+
+        return {
+          ...step,
+          blocks: [step.blocks[0], step.blocks[1], notarBlock, ...step.blocks.slice(2)],
+        }
+      }),
+    }
+  }
+
+  if (guideId === 'procura-mostenire-de') {
+    return {
+      ...content,
+      steps: content.steps.map((step) => {
+        if (step.id !== 4) return step
+        const notarBlock: Block = situation.notarAles
+          ? { text: 'Ai notar ales: verifică înainte să pleci că ai toate datele biroului notarial și cerințele exacte pentru procura de succesiune, ideal într-un email sau PDF primit de la notar.', type: 'tip' }
+          : { text: 'Nu ai notar ales încă: caută un birou pe unnpr.ro sau cere o recomandare familiei din România înainte de programare. Pentru succesiune contează să existe deja un notar care știe dosarul sau îl poate deschide corect.', type: 'tip' }
+
+        return {
+          ...step,
+          blocks: [step.blocks[0], step.blocks[1], notarBlock, ...step.blocks.slice(2)],
+        }
+      }),
+    }
+  }
+
+  return content
+}
+
 // ─── CARD CONSULAT ────────────────────────────────────────────────────────────
 
 function ConsulateCard({
@@ -1179,6 +1326,8 @@ function GhidPaidPageContent() {
   const router = useRouter()
   const guideId = useAppStore((s) => s.guideId)
   const consulate = useAppStore((s) => s.consulate)
+  const situation = useAppStore((s) => s.situation)
+  const setSituationFlag = useAppStore((s) => s.setSituationFlag)
   const currentStepIndex = useAppStore((s) => s.currentStepIndex)
   const totalSteps = useAppStore((s) => s.totalSteps)
   const notes = useAppStore((s) => s.notes)
@@ -1199,7 +1348,10 @@ function GhidPaidPageContent() {
     !!testGuideId
   const activeGuideId = (TEST_MODE || isDevGuidePreview) && testGuideId ? testGuideId : guideId
 
-  const content = activeGuideId ? getFullPaidGuideContent(activeGuideId) : null
+  const baseContent = activeGuideId ? getFullPaidGuideContent(activeGuideId) : null
+  const content = activeGuideId && baseContent
+    ? personalizeGuideContent(baseContent, activeGuideId, situation)
+    : null
 
   useEffect(() => {
     let cancelled = false
@@ -1350,6 +1502,22 @@ function GhidPaidPageContent() {
   const isLast = currentStepIndex === content.steps.length - 1
   const showNoteField = stepSafe.id === 5
   const showGuideTab = activeTab === 'ghid'
+  const showBuletinActSelector =
+    showGuideTab &&
+    stepSafe.id === 2 &&
+    (
+      activeGuideId === 'buletin-de-fara-domiciliu' ||
+      activeGuideId === 'buletin-de-cu-domiciliu' ||
+      activeGuideId === 'buletin-de-fara-domiciliu-pierdut' ||
+      activeGuideId === 'buletin-de-cu-domiciliu-pierdut'
+    )
+  const showBuletinLossSelector =
+    showGuideTab &&
+    stepSafe.id === 2 &&
+    (
+      activeGuideId === 'buletin-de-fara-domiciliu-pierdut' ||
+      activeGuideId === 'buletin-de-cu-domiciliu-pierdut'
+    )
 
   const tabs: Array<{ id: GhidTab; label: string; icon: string }> = [
     { id: 'ghid', label: 'Ghid', icon: '📄' },
@@ -1468,6 +1636,68 @@ function GhidPaidPageContent() {
                   </div>
                 ))}
               </div>
+
+              {showBuletinActSelector && (
+                <div className="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <p className="mb-2 text-sm font-semibold text-gray-900">
+                    Ce tip de act vrei să soliciți?
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSituationFlag('tipActSolicitat', 'CEI')}
+                      className={`flex-1 rounded-xl px-3 py-2 text-sm font-medium ${
+                        situation.tipActSolicitat === 'CEI'
+                          ? 'bg-gray-900 text-white'
+                          : 'bg-white text-gray-700 border border-gray-200'
+                      }`}
+                    >
+                      CEI
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSituationFlag('tipActSolicitat', 'CIS')}
+                      className={`flex-1 rounded-xl px-3 py-2 text-sm font-medium ${
+                        situation.tipActSolicitat === 'CIS'
+                          ? 'bg-gray-900 text-white'
+                          : 'bg-white text-gray-700 border border-gray-200'
+                      }`}
+                    >
+                      CIS
+                    </button>
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">
+                    Alegerea asta personalizează checklistul și explicațiile de ridicare.
+                  </p>
+                </div>
+              )}
+
+              {showBuletinLossSelector && (
+                <div className="mb-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                  <p className="mb-2 text-sm font-semibold text-gray-900">
+                    Cum a dispărut documentul?
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {(['pierdut', 'furat', 'distrus'] as const).map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setSituationFlag('documentPierdut', value)}
+                        className={`rounded-xl px-3 py-2 text-sm font-medium ${
+                          situation.documentPierdut === value
+                            ? 'bg-gray-900 text-white'
+                            : 'bg-white text-gray-700 border border-gray-200'
+                        }`}
+                      >
+                        {value === 'pierdut' ? 'Pierdut' : value === 'furat' ? 'Furat' : 'Distrus'}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">
+                    Asta personalizează documentele utile din checklist și explicațiile pentru ghișeu.
+                  </p>
+                </div>
+              )}
 
               {stepSafe.hasConsulateCard && consulate && (
                 <ConsulateCard consulateId={consulate as ConsulateId} guideId={activeGuideId} />

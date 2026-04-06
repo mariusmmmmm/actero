@@ -28,9 +28,6 @@ type ChecklistFn = (c: ConsulateId | null, s: SituationFlags) => ChecklistSectio
 // ── Ghid #1 + #2 — pasaport CRDS ─────────────────────────────────────────────
 
 function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
-  const fotoDetail = consulate === 'bonn'
-    ? '2 foto color 3,5×4,5 cm, fond alb · Rossmann/DM (biometric) acceptate'
-    : 'Fotografiile se fac la ghișeul consulatului — nu le aduce proprii'
   return [
     {
       id: 'obligatorii',
@@ -40,7 +37,7 @@ function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags
         { id: 'p1_ci', name: 'Cartea de identitate românească', detail: 'Original · chiar expirată · va fi anulată la ridicare' },
         { id: 'p1_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat, rupt sau corectat' },
         { id: 'p1_domiciliu', name: 'Document domiciliu Germania', detail: 'Meldebescheinigung / Anmeldung / Personalausweis german · original · max 5 ani' },
-        { id: 'p1_foto', name: 'Fotografii', detail: fotoDetail },
+        { id: 'p1_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate' },
       ],
     },
     {
@@ -48,6 +45,36 @@ function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags
       title: 'Dacă ți-ai schimbat numele prin căsătorie',
       items: [
         { id: 'p1_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · doar dacă ți-ai schimbat numele' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'p17_ci', name: 'Cartea de identitate românească', detail: 'Original · dacă o ai, chiar expirată · nu este blocant dacă lipsește' },
+        { id: 'p17_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat, rupt sau corectat' },
+        { id: 'p17_domiciliu', name: 'Document domiciliu Germania', detail: 'Meldebescheinigung / Anmeldung / Personalausweis german · original · max 5 ani' },
+        { id: 'p17_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate' },
+      ],
+    },
+    {
+      id: 'pierdere_furt',
+      title: 'Dacă pașaportul a fost pierdut sau furat',
+      items: [
+        { id: 'p17_pierdut', name: 'Declarație pe proprie răspundere', detail: 'Pentru pașaport pierdut · se completează exclusiv la ghișeul consulatului' },
+        { id: 'p17_furat', name: 'Adeverință poliție + traducere', detail: 'Pentru pașaport furat · Bonn/München/Berlin = traducere autorizată, Stuttgart = traducere legalizată' },
+      ],
+    },
+    {
+      id: 'casatorie',
+      title: 'Dacă ți-ai schimbat numele prin căsătorie',
+      items: [
+        { id: 'p17_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · doar dacă ți-ai schimbat numele' },
       ],
     },
   ]
@@ -83,6 +110,8 @@ function checklistPasaportDomiciliuRo(consulate: ConsulateId | null, _s: Situati
 // ── Ghid #8 — buletin pierdut domiciliu RO ───────────────────────────────────
 
 function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  const tipActSolicitat = _s.tipActSolicitat
+  const documentPierdut = _s.documentPierdut
   return [
     {
       id: 'obligatorii',
@@ -98,8 +127,12 @@ function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags
       id: 'cei_cis',
       title: 'Alege între CEI și CIS',
       items: [
-        { id: 'b8_cei', name: 'CEI', detail: 'Prima emitere 14+ gratuită până la 30 iun 2026 · ridicare personală · setezi PIN-urile la ridicare' },
-        { id: 'b8_cis', name: 'CIS', detail: '40 RON · termen mai lung · întreabă la depunere dacă localitatea permite ridicare prin procură specială' },
+        ...(tipActSolicitat !== 'CIS'
+          ? [{ id: 'b8_cei', name: 'CEI', detail: 'Prima emitere 14+ gratuită până la 30 iun 2026 · ridicare personală · setezi PIN-urile la ridicare' }]
+          : []),
+        ...(tipActSolicitat !== 'CEI'
+          ? [{ id: 'b8_cis', name: 'CIS', detail: '40 RON · termen mai lung · poate fi ridicat prin procură specială notarială' }]
+          : []),
       ],
     },
     {
@@ -114,19 +147,27 @@ function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags
       title: 'Dacă nu ești proprietarul locuinței',
       items: [
         { id: 'b8_gazduire', name: 'Consimțământul proprietarului/găzduitorului', detail: 'Dat la ghișeul SPCLEP, la notar sau — din Germania — la consulatul român (max 6 luni, tradus dacă e de la autorități germane)' },
-        { id: 'b8_politie', name: 'Sesizarea poliției', detail: 'Utilă dacă buletinul a fost furat, dar NU înlocuiește documentele SPCLEP; furtul se trece în declarația de la ghișeu' },
+        ...(documentPierdut === 'furat'
+          ? [{ id: 'b8_politie', name: 'Sesizarea poliției', detail: 'Utilă dacă buletinul a fost furat, dar NU înlocuiește documentele SPCLEP; furtul se trece în declarația de la ghișeu' }]
+          : documentPierdut === 'distrus'
+            ? [{ id: 'b8_fragmente', name: 'Fragmentele documentului deteriorat', detail: 'Ia cu tine tot ce a rămas din buletin dacă documentul a fost distrus.' }]
+            : [{ id: 'b8_declaratie', name: 'Detaliile despre pierdere', detail: 'Ține minte data aproximativă și împrejurările, pentru declarația de la ghișeu.' }]),
       ],
     },
   ]
 }
 
-function checklistBuletinExpiratFaraDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function checklistBuletinExpiratFaraDomRo(_c: ConsulateId | null, s: SituationFlags): ChecklistSection[] {
+  const isPrimulBuletin = s.primulBuletin === true
+  const tipActSolicitat = s.tipActSolicitat
   return [
     {
       id: 'obligatorii',
       title: 'Documente obligatorii',
       items: [
-        { id: 'b5_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' },
+        ...(!isPrimulBuletin
+          ? [{ id: 'b5_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' }]
+          : []),
         { id: 'b5_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat sau deteriorat' },
         { id: 'b5_calatorie', name: 'Document de călătorie valabil', detail: 'Pașaport sau titlu de călătorie pentru drumul în România' },
       ],
@@ -137,18 +178,27 @@ function checklistBuletinExpiratFaraDomRo(_c: ConsulateId | null, _s: SituationF
       items: [
         { id: 'b5_spclep', name: 'SPCLEP-ul competent', detail: 'Identifică localitatea ultimului domiciliu înregistrat în România' },
         { id: 'b5_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · doar dacă ți-ai schimbat numele' },
+        ...(tipActSolicitat === 'CEI'
+          ? [{ id: 'b5_cei', name: 'Ai ales CEI', detail: 'Ridicarea va fi personală și vei seta PIN-urile după emitere.' }]
+          : tipActSolicitat === 'CIS'
+            ? [{ id: 'b5_cis', name: 'Ai ales CIS', detail: 'Termenul poate fi mai lung, dar ridicarea se poate organiza și prin procură specială notarială.' }]
+            : []),
       ],
     },
   ]
 }
 
-function checklistBuletinExpiratDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function checklistBuletinExpiratDomRo(_c: ConsulateId | null, s: SituationFlags): ChecklistSection[] {
+  const isPrimulBuletin = s.primulBuletin === true
+  const tipActSolicitat = s.tipActSolicitat
   return [
     {
       id: 'obligatorii',
       title: 'Documente obligatorii',
       items: [
-        { id: 'b6_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' },
+        ...(!isPrimulBuletin
+          ? [{ id: 'b6_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' }]
+          : []),
         { id: 'b6_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat sau deteriorat' },
         { id: 'b6_adresa', name: 'Dovada adresei din România', detail: 'Extras CF recent, act de proprietate sau documentul cerut de SPCLEP-ul tău' },
         { id: 'b6_calatorie', name: 'Document de călătorie valabil', detail: 'Pașaport sau alt document cu care ajungi în România' },
@@ -159,12 +209,19 @@ function checklistBuletinExpiratDomRo(_c: ConsulateId | null, _s: SituationFlags
       title: 'Dacă ți-ai schimbat numele',
       items: [
         { id: 'b6_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · dacă numele actual diferă de cel din certificatul de naștere' },
+        ...(tipActSolicitat === 'CEI'
+          ? [{ id: 'b6_cei', name: 'Ai ales CEI', detail: 'Ridicarea este personală și vei seta PIN-urile la final.' }]
+          : tipActSolicitat === 'CIS'
+            ? [{ id: 'b6_cis', name: 'Ai ales CIS', detail: 'Poți pregăti din timp o procură specială notarială dacă vrei ridicare prin altă persoană.' }]
+            : []),
       ],
     },
   ]
 }
 
-function checklistBuletinPierdutFaraDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function checklistBuletinPierdutFaraDomRo(_c: ConsulateId | null, s: SituationFlags): ChecklistSection[] {
+  const documentPierdut = s.documentPierdut
+  const tipActSolicitat = s.tipActSolicitat
   return [
     {
       id: 'obligatorii',
@@ -179,8 +236,17 @@ function checklistBuletinPierdutFaraDomRo(_c: ConsulateId | null, _s: SituationF
       id: 'daca_lipsa',
       title: 'Dacă buletinul este pierdut sau furat',
       items: [
-        { id: 'b7_declaratie', name: 'Detaliile despre pierdere / furt', detail: 'Locul, data aproximativă și împrejurările vor fi cerute în declarația de la ghișeu' },
-        { id: 'b7_politie', name: 'Dovada poliției', detail: 'Utilă dacă a fost furat, chiar dacă nu este documentul principal cerut de SPCLEP' },
+        ...(documentPierdut === 'distrus'
+          ? [{ id: 'b7_fragmente', name: 'Fragmentele buletinului deteriorat', detail: 'Ia cu tine tot ce a rămas din documentul distrus.' }]
+          : [{ id: 'b7_declaratie', name: 'Detaliile despre pierdere / furt', detail: 'Locul, data aproximativă și împrejurările vor fi cerute în declarația de la ghișeu' }]),
+        ...(documentPierdut === 'furat'
+          ? [{ id: 'b7_politie', name: 'Dovada poliției', detail: 'Utilă dacă a fost furat, chiar dacă nu este documentul principal cerut de SPCLEP' }]
+          : []),
+        ...(tipActSolicitat === 'CEI'
+          ? [{ id: 'b7_cei', name: 'Ai ales CEI', detail: 'Ridicarea este personală și vei activa PIN-urile după emitere.' }]
+          : tipActSolicitat === 'CIS'
+            ? [{ id: 'b7_cis', name: 'Ai ales CIS', detail: 'Dacă nu poți reveni la ridicare, pregătește din timp o procură specială notarială.' }]
+            : []),
       ],
     },
   ]
@@ -257,7 +323,101 @@ function checklistBuletinPrimulDeB(_c: ConsulateId | null, _s: SituationFlags): 
   ]
 }
 
-function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function getTravelDocumentSections(
+  consulate: ConsulateId | null,
+  situation: SituationFlags,
+  prefix: 'tc11' | 'tc12'
+): ChecklistSection[] {
+  const tipDocumentLipsa = situation.tipDocumentLipsa ?? 'ambele'
+  const includePassport = tipDocumentLipsa === 'pasaport' || tipDocumentLipsa === 'ambele'
+  const includeBuletin = tipDocumentLipsa === 'buletin' || tipDocumentLipsa === 'ambele'
+
+  const sections: ChecklistSection[] = []
+
+  if (includePassport) {
+    sections.push({
+      id: `${prefix}_pasaport`,
+      title: 'Dacă îți lipsește pașaportul',
+      items: [
+        {
+          id: `${prefix}_pasaport_doc`,
+          name: 'Pașaport românesc expirat sau orice detaliu despre documentul pierdut/furat',
+          detail: 'Dacă îl ai, ia documentul expirat. Dacă nu îl mai ai, ajută să știi seria, numărul sau măcar anul aproximativ al emiterii.',
+        },
+      ],
+    })
+  }
+
+  if (includeBuletin) {
+    sections.push({
+      id: `${prefix}_buletin`,
+      title: 'Dacă îți lipsește buletinul',
+      items: [
+        {
+          id: `${prefix}_buletin_doc`,
+          name: 'Buletin expirat sau alt act românesc cu datele tale',
+          detail: 'Poate fi buletinul expirat, permisul românesc sau un alt document care ajută consulatul să te identifice rapid.',
+        },
+      ],
+    })
+  }
+
+  if (tipDocumentLipsa === 'ambele') {
+    sections.push({
+      id: `${prefix}_ambele`,
+      title: 'Dacă îți lipsesc ambele documente',
+      items: [
+        {
+          id: `${prefix}_ambele_nastere`,
+          name: 'Certificat de naștere românesc sau alt document cu CNP',
+          detail: 'Foarte util când nu mai ai nici pașaport, nici buletin la tine.',
+        },
+      ],
+    })
+  }
+
+  if (consulate === 'muenchen') {
+    sections.push({
+      id: `${prefix}_foto`,
+      title: 'Fotografii pentru München',
+      items: [
+        {
+          id: `${prefix}_foto_muenchen`,
+          name: '2 fotografii biometrice color 3,5 × 4,5 cm',
+          detail: 'Tipărite, nu pe telefon.',
+        },
+      ],
+    })
+  } else if (consulate === 'stuttgart') {
+    sections.push({
+      id: `${prefix}_foto`,
+      title: 'Fotografii pentru Stuttgart',
+      items: [
+        {
+          id: `${prefix}_foto_stuttgart`,
+          name: 'Regula pentru fotografie',
+          detail: 'Adulți și minori 14+: foto la ghișeu. Minori sub 14 ani: 1 fotografie color 3,5 × 4,5 cm pe hârtie.',
+        },
+      ],
+    })
+  } else {
+    sections.push({
+      id: `${prefix}_foto`,
+      title: 'Fotografie',
+      items: [
+        {
+          id: `${prefix}_foto_default`,
+          name: 'Fotografia se preia la ghișeu',
+          detail: 'La Bonn și Berlin nu aduci fotografii proprii.',
+        },
+      ],
+    })
+  }
+
+  return sections
+}
+
+function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, situation: SituationFlags): ChecklistSection[] {
   const fotoDetail = consulate === 'muenchen'
     ? '2 fotografii biometrice color 3,5 × 4,5 cm · tipărite, nu pe telefon'
     : 'La Bonn, Stuttgart și Berlin fotografia se preia la ghișeu; dacă nu ești sigur, adu 2 fotografii biometrice de rezervă'
@@ -271,6 +431,7 @@ function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: Situa
         { id: 'tc11_foto', name: 'Fotografii biometrice', detail: fotoDetail },
       ],
     },
+    ...getTravelDocumentSections(consulate, situation, 'tc11'),
     {
       id: 'furt',
       title: 'Dacă documentul a fost furat',
@@ -282,7 +443,7 @@ function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: Situa
   ]
 }
 
-function checklistTitluCalatorie(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function checklistTitluCalatorie(consulate: ConsulateId | null, situation: SituationFlags): ChecklistSection[] {
   let fotoDetail = 'Verifică regulile consulatului tău pentru fotografie'
 
   if (consulate === 'bonn') {
@@ -304,6 +465,7 @@ function checklistTitluCalatorie(consulate: ConsulateId | null, _s: SituationFla
         { id: 'tc12_foto', name: 'Fotografie / reguli foto', detail: fotoDetail },
       ],
     },
+    ...getTravelDocumentSections(consulate, situation, 'tc12'),
     {
       id: 'fara_act',
       title: 'Dacă nu mai ai niciun act de identitate',
@@ -492,6 +654,7 @@ function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): Checklist
 
 const CHECKLISTS: Record<string, ChecklistFn> = {
   'pasaport-crds-de': checklistPasaportCrds,
+  'pasaport-crds-de-pierdut': checklistPasaportCrdsPierdut,
   'pasaport-crds-nou-de': checklistPasaportCrds,
   'pasaport-de-cu-domiciliu': checklistPasaportDomiciliuRo,
   'pasaport-de-cu-domiciliu-pierdut': checklistPasaportDomiciliuRo,

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
@@ -99,7 +100,14 @@ export default function ProgramareConsulatRomaniaPage() {
           content: (
             <>
               <p className="mb-3">Mulți utilizatori cred că lipsa locurilor este problema principală. În practică, cele mai multe blocaje apar înainte: serviciul ales greșit, documente ilizibile sau încercarea de programare înainte de validare.</p>
-              <p>Programările sunt gratuite. Dacă cineva cere bani pentru un loc, nu lucrează pentru consulat și nu oferă niciun avantaj legitim.</p>
+              <p>
+                Programările sunt gratuite. Dacă cineva cere bani pentru un loc, nu lucrează
+                pentru consulat și nu oferă niciun avantaj legitim. Dacă vrei să vezi pentru ce
+                acte ai nevoie de econsulat și pentru ce nu, vezi și{' '}
+                <Link href="/acte-romanesti-germania" className="underline text-blue-600 hover:text-blue-800">
+                  hub-ul cu toate actele românești din Germania
+                </Link>.
+              </p>
             </>
           ),
         },

@@ -32,7 +32,7 @@ type DiagnosticData = {
 const diagnosticMap: Record<string, DiagnosticData> = {
   'pasaport-crds-de': {
     title: 'Pașaport CRDS · Domiciliu Germania',
-    subtitle: 'Pașaport expirat sau distrus · 1 deplasare la consulat',
+    subtitle: 'Pașaport expirat sau distrus · o singură vizită la consulat',
     warnings: [],
     estimatedWeeks: '6–10 săptămâni',
     estimatedAppointments: 1,
@@ -48,9 +48,30 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       { id: 7, label: 'Ridică pașaportul', locked: true },
     ],
   },
+  'pasaport-crds-de-pierdut': {
+    title: 'Pașaport pierdut / furat · Domiciliu Germania',
+    subtitle: 'Pașaport CRDS anterior · o singură vizită la consulat',
+    warnings: [
+      'Dacă pașaportul a fost PIERDUT: declarația se completează exclusiv la ghișeul consulatului, în ziua programării.',
+      'Dacă pașaportul a fost FURAT: ai nevoie de adeverință de poliție + traducere în română conform consulatului tău: Bonn = autorizată, Stuttgart = legalizată, München și Berlin = autorizată.',
+    ],
+    estimatedWeeks: '6–10 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Ghid pașaport CRDS pierdut/furat',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește documentele', locked: false },
+      { id: 3, label: 'Cont și cerere pe econsulat.ro', locked: true },
+      { id: 4, label: 'Obține programarea', locked: true },
+      { id: 5, label: 'Pregătire pentru ziua programării', locked: true },
+      { id: 6, label: 'Ziua consulatului', locked: true },
+      { id: 7, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
   'pasaport-crds-nou-de': {
     title: 'Primul pașaport CRDS · Domiciliu Germania',
-    subtitle: 'Născut în România · 1 deplasare la consulat',
+    subtitle: 'Născut în România · o singură vizită la consulat',
     warnings: [],
     estimatedWeeks: '8–12 săptămâni',
     estimatedAppointments: 1,
@@ -68,7 +89,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
   },
   'pasaport-de-cu-domiciliu': {
     title: 'Pașaport expirat · Domiciliu România',
-    subtitle: 'Rezident în Germania · 1 deplasare la consulat',
+    subtitle: 'Rezident în Germania · o singură vizită la consulat',
     warnings: [],
     estimatedWeeks: '4–8 săptămâni',
     estimatedAppointments: 1,
@@ -86,7 +107,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
   },
   'pasaport-de-cu-domiciliu-pierdut': {
     title: 'Pașaport pierdut / furat / distrus · Domiciliu România',
-    subtitle: 'Rezident în Germania · 1 deplasare la consulat',
+    subtitle: 'Rezident în Germania · o singură vizită la consulat',
     warnings: ['Dacă pașaportul a fost furat — ai nevoie de adeverință de poliție + traducere în română conform consulatului tău: Bonn = autorizată, Stuttgart = legalizată, München și Berlin = autorizată.'],
     estimatedWeeks: '4–8 săptămâni',
     estimatedAppointments: 1,
@@ -188,7 +209,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Această procedură folosește un formular distinct față de reînnoirea standard de CI — spune la ghișeu că vii pentru schimbarea domiciliului din străinătate în România.',
     ],
     estimatedWeeks: '1–6 săptămâni de la deplasare (CEI: ~5 zile calendaristice / CIS: ~30–45 zile)',
-    estimatedAppointments: '1 deplasare în România · 1 vizită la SPCLEP pentru depunere · 1 vizită pentru ridicare',
+    estimatedAppointments: 'o singură deplasare în România · 1 vizită la SPCLEP pentru depunere · 1 vizită pentru ridicare',
     guideTitle: 'Ghid: Primul buletin românesc · Schimbare domiciliu din străinătate în România',
     isRoute: false,
     previewSteps: [
@@ -212,7 +233,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       "CEI cu mențiunea 'fără domiciliu în România': dacă nu stabilești o adresă în RO, aceasta apare pe actul electronic. Poți stabili domiciliu la o rudă — comunică la ghișeu înainte de semnarea cererii.",
     ],
     estimatedWeeks: '1–2 săptămâni (din momentul sosirii în România)',
-    estimatedAppointments: '1 deplasare în România · 1 vizită SPCLEP pentru depunere (cu programare prealabilă) · 1 vizită SPCLEP pentru ridicare',
+    estimatedAppointments: 'o singură deplasare în România · 1 vizită SPCLEP pentru depunere (cu programare prealabilă) · 1 vizită SPCLEP pentru ridicare',
     guideTitle: 'Primul buletin românesc · Germania',
     isRoute: false,
     previewSteps: [
@@ -233,7 +254,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Odată în România, titlul de călătorie nu mai are nicio valabilitate. Trebuie să obții pașaport sau carte de identitate înainte de orice viitoare deplasare în afara țării.',
     ],
     estimatedWeeks: '1 zi lucrătoare',
-    estimatedAppointments: '1 deplasare la consulat · fără programare · eliberare în aceeași zi',
+    estimatedAppointments: 'o vizită la consulat · fără programare · eliberare în aceeași zi',
     guideTitle: 'Titlu de călătorie urgență · Germania',
     isRoute: false,
     previewSteps: [
@@ -252,7 +273,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Dacă documentul a fost FURAT (nu expirat/pierdut), ai nevoie și de adeverință poliție. La München, Stuttgart și Berlin trebuie și traducere autorizată în română — pregătește-o înainte.',
     ],
     estimatedWeeks: '1–2 săptămâni',
-    estimatedAppointments: '1 deplasare la consulat (fără programare) · eliberare de regulă în aceeași zi',
+    estimatedAppointments: 'o vizită la consulat (fără programare) · eliberare de regulă în aceeași zi',
     guideTitle: 'Titlu de călătorie · Germania · 1–2 săptămâni',
     isRoute: false,
     previewSteps: [
@@ -273,7 +294,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Înainte de programare: contactează notarul din România care va instrumenta tranzacția și întreabă ce conținut exact trebuie să aibă procura.',
     ],
     estimatedWeeks: 'Procura = 1 zi · Tranzacția finală în România: depinde de notar și dosar',
-    estimatedAppointments: '1 programare · 1 deplasare la consulat · procura se ridică în aceeași zi',
+    estimatedAppointments: '1 programare · o vizită la consulat · procura se ridică în aceeași zi',
     guideTitle: 'Procură de vânzare/cumpărare proprietate din Germania',
     isRoute: false,
     previewSteps: [
@@ -315,7 +336,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Dacă procura e pentru divorț notarial, succesiune sau vânzare prin mandatar: taxa de publicitate notarială de 3 euro se plătește după regula consulatului tău — Bonn = EC-Karte, München = numerar, Stuttgart = POS sau virament, Berlin = virament în avans.',
     ],
     estimatedWeeks: '1–2 săptămâni',
-    estimatedAppointments: '1 programare · 1 deplasare la consulat · procura se eliberează pe loc în aceeași zi',
+    estimatedAppointments: '1 programare · o vizită la consulat · procura se eliberează pe loc în aceeași zi',
     guideTitle: 'Procură notarială generală · Germania',
     isRoute: false,
     previewSteps: [
@@ -490,6 +511,13 @@ function getEmotionalCopy(
     }
   }
 
+  if (guideId === 'pasaport-crds-de-pierdut') {
+    return {
+      title: 'Pașaportul CRDS pierdut sau furat se rezolvă — iată exact pașii.',
+      subtitle: 'Îți arătăm exact ce pregătești pentru consulat și ce se completează direct la ghișeu.',
+    }
+  }
+
   if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
     return {
       title: 'Primul tău buletin românesc se rezolvă — ghid exact pentru situația ta.',
@@ -563,6 +591,11 @@ function getEmotionalCopy(
         title: 'Procura notarială din Germania — fără drumuri în România.',
         subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
       }
+    case 'transcriere-nastere':
+      return {
+        title: 'Transcrierea certificatului de naștere este primul pas corect.',
+        subtitle: 'Îți arătăm exact cum obții certificatul românesc și CNP-ul copilului.',
+      }
     default:
       return {
         title: 'Am înțeles. Îți arătăm exact ce ai de făcut.',
@@ -579,6 +612,8 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
   switch (guideId) {
     case 'pasaport-crds-de':
       return '⏱ o singură vizită la consulat · 6–8 săptămâni'
+    case 'pasaport-crds-de-pierdut':
+      return '⏱ o singură vizită la consulat · 6–10 săptămâni'
     case 'pasaport-crds-nou-de':
       return '⏱ o singură vizită la consulat · 8–10 săptămâni'
     case 'pasaport-de-cu-domiciliu':
@@ -586,19 +621,19 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
       return '⏱ o singură vizită la consulat · 4–6 săptămâni'
     case 'buletin-de-fara-domiciliu':
     case 'buletin-de-fara-domiciliu-pierdut':
-      return '⏱ 1 deplasare în România · 3–5 săptămâni'
+      return '⏱ o singură deplasare în România · 3–5 săptămâni'
     case 'buletin-de-cu-domiciliu':
     case 'buletin-de-cu-domiciliu-pierdut':
-      return '⏱ 1 deplasare în România · 2–4 săptămâni'
+      return '⏱ o singură deplasare în România · 2–4 săptămâni'
     case 'procura-vanzare-de':
       return '⏱ 1 programare · o singură vizită la consulat · procura în aceeași zi'
     case 'procura-mostenire-de':
     case 'procura-generala-de':
       return '⏱ o singură vizită la consulat · 1–2 săptămâni'
     case 'titlu-calatorie-urgenta-de':
-      return '⏱ 1 deplasare la consulat · fără programare · aceeași zi'
+      return '⏱ o vizită la consulat · fără programare · aceeași zi'
     case 'titlu-calatorie-de':
-      return '⏱ 1 deplasare la consulat · fără programare · aceeași zi în majoritatea cazurilor'
+      return '⏱ o vizită la consulat · fără programare · aceeași zi în majoritatea cazurilor'
     case 'transcriere-nastere-de':
       return '⏱ 1 programare pentru depunere · 1 ridicare sau poștă la Stuttgart · ~3–6 luni total'
     default:
@@ -624,6 +659,14 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
   }
 
   if (problemType === 'pasaport') {
+    if (guideId === 'pasaport-crds-de-pierdut') {
+      return {
+        icon: '📕',
+        title: 'Pașaport CRDS',
+        subtitle: 'Pierdut / furat',
+      }
+    }
+
     if (guideId?.includes('crds')) {
       return {
         icon: '📕',
@@ -705,6 +748,17 @@ function getPhotoInfo(
   if (!guideId || !problemType || !consulate) return null
 
   if (problemType === 'pasaport') {
+    if (
+      guideId === 'pasaport-crds-de' ||
+      guideId === 'pasaport-crds-de-pierdut' ||
+      guideId === 'pasaport-crds-nou-de'
+    ) {
+      return {
+        title: 'Fotografia se preia la ghișeu',
+        subtitle: 'Pentru pașapoartele CRDS nu trebuie să aduci fotografii proprii la niciunul dintre cele 4 consulate',
+      }
+    }
+
     return {
       title: consulate.fotografiiLaGhiseu ? 'Fotografii — se fac la consulat' : 'Fotografii biometrice necesare',
       subtitle: consulate.fotografiiLaGhiseu

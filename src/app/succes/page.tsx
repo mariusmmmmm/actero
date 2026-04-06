@@ -193,7 +193,7 @@ function SuccesPageContent() {
               </div>
               <div className="bg-gray-50 rounded-xl p-4 mb-3">
                 <p className="text-sm text-gray-600 italic leading-relaxed mb-3">
-                  „{shareText}"
+                  „{shareText}”
                 </p>
                 <div className="flex gap-2">
                   <button

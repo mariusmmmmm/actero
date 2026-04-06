@@ -1,6 +1,6 @@
 // ActeRO — lib/utils/deriveGuideId.ts
 // Transformă răspunsurile din wizard în GuideId sau RouteId
-// Bazat pe spec_final_v4 — toate bifurcările sunt finale
+// Bazat pe spec_final_v5.3 — toate bifurcările sunt finale
 
 import type { ProblemType, SituationFlags, GuideId, WizardResult } from '@/types'
 
@@ -23,6 +23,8 @@ export function deriveGuideId(
       return deriveTitluCalatorie(situation)
     case 'procura':
       return deriveProcura(situation)
+    case 'transcriere-nastere':
+      return guide('transcriere-nastere-de')
     default:
       return { type: 'waitlist', country, service: problemType }
   }
@@ -42,6 +44,9 @@ function derivePasaport(s: SituationFlags): WizardResult {
 
   // Domiciliu Germania
   if (!s.isPrimulPasaport) {
+    if (s.pasaportStatus === 'pierdut-furat') {
+      return guide('pasaport-crds-de-pierdut')
+    }
     // A mai avut pașaport — expirat sau distrus → Ghid #1
     return guide('pasaport-crds-de')
   }
@@ -101,7 +106,7 @@ function deriveBuletin(s: SituationFlags): WizardResult {
 // ─── PATH 3 — TITLU DE CĂLĂTORIE ─────────────────────────────────────────────
 
 function deriveTitluCalatorie(s: SituationFlags): WizardResult {
-  // Q1 (actDisponibil) nu schimbă ghidul — ajustează doar lista de documente
+  // Q1 (tipDocumentLipsa) nu schimbă ghidul — ajustează doar lista de documente
   if (s.urgenta === 'sub-3-zile') {
     return guide('titlu-calatorie-urgenta-de')
   }

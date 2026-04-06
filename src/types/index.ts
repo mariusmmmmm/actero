@@ -60,7 +60,7 @@ export type ConsulateInfo = {
 
 // ─── WIZARD ──────────────────────────────────────────────────────────────────
 
-export type ProblemType = 'pasaport' | 'buletin' | 'titlu-calatorie' | 'procura'
+export type ProblemType = 'pasaport' | 'buletin' | 'titlu-calatorie' | 'procura' | 'transcriere-nastere'
 
 export type SituationFlags = {
   // Wizard Step 2
@@ -72,18 +72,25 @@ export type SituationFlags = {
   isPrimulPasaport?: boolean
   locuNastere?: 'ro' | 'de-strainatate'  // Q3 path pașaport + buletin
   pasaportStatus?: 'expirat-distrus' | 'pierdut-furat'
+  pasaportCrdsCase?: 'expirat-deteriorat' | 'pierdut-furat' | 'primul'
+  pasaportPierdutFurat?: boolean
 
   // Path Buletin
   buletinStatus?: 'expirat' | 'pierdut-furat-distrus' | 'niciodata'
   hasDomiciliuAnteriorRO?: boolean  // a mai fost înregistrat vreodată în RO
+  primulBuletin?: boolean
+  documentPierdut?: 'pierdut' | 'furat' | 'distrus'
+  tipActSolicitat?: 'CEI' | 'CIS'
 
   // Path Titlu de călătorie
   actDisponibil?: 'pasaport-expirat' | 'buletin-expirat' | 'ambele'
   urgenta?: 'sub-3-zile' | '1-2-saptamani'
+  tipDocumentLipsa?: 'pasaport' | 'buletin' | 'ambele'
 
   // Path Procură
   scopProcura?: 'vanzare' | 'mostenire' | 'altceva'
   areNotar?: boolean
+  notarAles?: boolean
 
   // Condiționale checklist (toate path-urile, colectate în checklist nu în wizard)
   isCasatorit?: boolean
@@ -95,6 +102,7 @@ export type SituationFlags = {
 
 export type GuideId =
   | 'pasaport-crds-de'
+  | 'pasaport-crds-de-pierdut'
   | 'pasaport-crds-nou-de'
   | 'pasaport-de-cu-domiciliu'
   | 'pasaport-de-cu-domiciliu-pierdut'

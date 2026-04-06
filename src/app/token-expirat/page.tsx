@@ -1,6 +1,7 @@
 // ActeRO — app/token-expirat/page.tsx
 // Pagina afișată când tokenul din email e invalid sau expirat
 
+import Link from 'next/link'
 import SiteHeader from '@/components/layout/SiteHeader'
 
 export default function TokenExpiratPage() {
@@ -51,12 +52,12 @@ export default function TokenExpiratPage() {
           >
             Scrie-ne la contact@actero.ro →
           </a>
-          <a
+          <Link
             href="/"
             className="block w-full py-4 bg-gray-100 text-gray-600 font-medium rounded-xl text-sm text-center"
           >
             Înapoi la ActeRO
-          </a>
+          </Link>
         </div>
 
       </div>

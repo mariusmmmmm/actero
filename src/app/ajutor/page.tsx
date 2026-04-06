@@ -4,6 +4,7 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { trackEvent, withAttribution } from '@/lib/analytics'
@@ -12,6 +13,7 @@ import type { GuideId } from '@/types'
 
 const guideTitles: Partial<Record<GuideId, string>> = {
   'pasaport-crds-de': 'Reînnoire pașaport CRDS · Germania',
+  'pasaport-crds-de-pierdut': 'Pașaport CRDS pierdut/furat · Germania',
   'pasaport-crds-nou-de': 'Primul pașaport CRDS · Germania',
   'pasaport-de-cu-domiciliu': 'Pașaport expirat · Domiciliu România',
   'pasaport-de-cu-domiciliu-pierdut': 'Pașaport pierdut/furat · Germania',
@@ -117,19 +119,19 @@ function AjutorPageContent() {
             Verifică și folderul Spam dacă nu vezi mesajul nostru.
           </p>
           {sessionId && guideId && (
-            <a
+            <Link
               href={`/ghid/${sessionId}`}
               className="w-full py-4 bg-gray-900 text-white font-semibold rounded-xl text-sm text-center block"
             >
               ← Înapoi la ghidul meu
-            </a>
+            </Link>
           )}
-          <a
+          <Link
             href="/"
             className="w-full py-4 bg-gray-900 text-white font-semibold rounded-xl text-sm text-center block mt-3"
           >
             Înapoi la homepage
-          </a>
+          </Link>
         </div>
       </main>
     )
@@ -141,9 +143,9 @@ function AjutorPageContent() {
       <div className="max-w-2xl mx-auto w-full px-5 py-8 flex-1">
         <div className="mb-6 flex justify-end">
           {sessionId && (
-            <a href={`/ghid/${sessionId}`} className="text-sm text-gray-400 hover:text-gray-600">
+            <Link href={`/ghid/${sessionId}`} className="text-sm text-gray-400 hover:text-gray-600">
               ← Înapoi la ghid
-            </a>
+            </Link>
           )}
         </div>
 

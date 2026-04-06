@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
@@ -94,7 +95,14 @@ export default function BuletinExpiratGermaniaPage() {
           content: (
             <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
               <p className="font-semibold text-orange-900 mb-2">⚠️ Ce trebuie să știi înainte să te bazezi pe informații vechi</p>
-              <p>Începând cu noile proceduri pentru CEI/CIS, prezența personală pentru biometrie a devenit punctul critic. Multe răspunsuri vechi de pe grupuri sau forumuri nu mai reflectă corect realitatea din 2025–2026.</p>
+              <p>
+                Începând cu noile proceduri pentru CEI/CIS, prezența personală pentru biometrie a
+                devenit punctul critic. Multe răspunsuri vechi de pe grupuri sau forumuri nu mai
+                reflectă corect realitatea din 2025–2026. Pentru contextul mai larg, vezi și{' '}
+                <Link href="/acte-romanesti-germania" className="underline text-blue-600 hover:text-blue-800">
+                  ce acte românești poți rezolva din Germania
+                </Link>.
+              </p>
             </div>
           ),
         },

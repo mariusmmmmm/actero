@@ -118,6 +118,7 @@ const STEPS_GENERIC: TrackerStep[] = [
 
 const STEPS: Record<string, TrackerStep[]> = {
   'pasaport-crds-de': STEPS_PASAPORT,
+  'pasaport-crds-de-pierdut': STEPS_PASAPORT,
   'pasaport-crds-nou-de': STEPS_PASAPORT,
   'pasaport-de-cu-domiciliu': STEPS_PASAPORT,
   'pasaport-de-cu-domiciliu-pierdut': STEPS_PASAPORT,

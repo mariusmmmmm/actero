@@ -1,13 +1,27 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură notarială în Germania — Ghid complet 2026 | ActeRO',
-  description: 'Cum faci procură notarială la consulatul României din Germania: documente, valabilitate, costuri, tipuri de procuri și diferența față de notarul german.',
-  keywords: ['procura notariala germania', 'procura consulat romania germania', 'procura vanzare germania', 'procura mostenire germania', 'notar german vs consulat'],
+  title: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026 | ActeRO',
+  description:
+    'Procură pentru vânzare, moștenire, divorț sau firmă la consulatul României din Germania. Programare pe econsulat.ro, eliberare în aceeași zi, taxa 3€ RNNEPR.',
+  keywords: [
+    'procura notariala germania',
+    'procura consulat romania germania',
+    'notar german procura romania',
+    'procura vanzare proprietate germania',
+    'procura mostenire germania',
+    'rnnepr procura germania',
+    'procura generala romania din germania',
+    'procura divort germania',
+    'procura firma romania din germania',
+    'programare procura econsulat romania',
+  ],
   openGraph: {
-    title: 'Procură notarială în Germania — Ghid complet',
-    description: 'Procură la consulat, valabilitate, costuri și pași clari.',
+    title: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
+    description:
+      'Procuri pentru vânzare, moștenire, divorț sau firmă la consulatul României. Aceeași zi, taxa 3€ RNNEPR și diferențele per consulat.',
     url: 'https://actero.ro/procura-notariala-germania',
     type: 'article',
   },
@@ -18,43 +32,78 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    question: 'Este valabilă în România o procură făcută la consulatul din Germania?',
-    answer: 'Da. O procură autentificată la consulatul României din Germania este recunoscută direct în România, fără apostilă sau traducere suplimentară.',
+    question: 'Pot face o procură la un notar german care să fie valabilă în România?',
+    answer:
+      'Da, dar este mult mai complicat și mai scump. O procură făcută la notar german trebuie apostilată, apoi tradusă și legalizată. Consulatul românesc din Germania eliberează procuri direct recunoscute în România, fără apostilă sau traducere.',
   },
   {
-    question: 'Cât costă o procură notarială la consulat?',
-    answer: 'Procura notarială este gratuită în majoritatea cazurilor. Pentru tranzacții imobiliare poate exista o taxă suplimentară de 3€ pentru publicitate notarială.',
+    question: 'Cât costă o procură la consulatul din Germania?',
+    answer:
+      'Taxa de bază importantă este cea de 3€ pentru înscrierea în RNNEPR. În funcție de tipul procurii pot exista și taxe consulare suplimentare. Procura se eliberează în aceeași zi.',
   },
   {
-    question: 'Cât timp este valabilă o procură notarială?',
-    answer: 'În practică, procura este folosită de regulă într-un interval de până la 3 ani, în funcție de conținutul ei și de scopul pentru care a fost emisă.',
+    question: 'Ce este RNNEPR și de ce trebuie să plătesc 3€?',
+    answer:
+      'RNNEPR este Registrul Național Notarial al Evidenței Procurilor și Revocărilor. Înscrierea unei procuri în acest registru este obligatorie și costă 3€.',
   },
   {
-    question: 'Ce tipuri de procuri pot face la consulat?',
-    answer: 'Cele mai comune sunt procura pentru vânzare sau cumpărare proprietate, procura pentru moștenire sau succesiune și procura generală pentru reprezentare în fața autorităților sau notarilor.',
+    question: 'Am nevoie de programare pentru a face o procură la consulat?',
+    answer:
+      'Da. Programarea se face obligatoriu pe econsulat.ro. Nu există serviciu walk-in pentru procuri notariale.',
   },
   {
-    question: 'Ce documente îmi trebuie pentru procură?',
-    answer: 'Ai nevoie de actul de identitate valabil și de datele exacte ale persoanei împuternicite, notarului sau tranzacției. Pentru imobile și succesiuni, informațiile trebuie să fie cât mai precise.',
+    question: 'Procura se face în aceeași zi sau trebuie să revin?',
+    answer:
+      'Procura se eliberează în aceeași zi cu programarea la toate cele 4 consulate din Germania.',
+  },
+  {
+    question: 'Cum plătesc taxa de 3€ la consulatul din Berlin?',
+    answer:
+      'La Berlin, taxa de 3€ RNNEPR se plătește exclusiv prin virament bancar, cu cel puțin 3–4 zile lucrătoare înainte de programare. Fără plata făcută în avans, procura nu poate fi eliberată.',
+  },
+  {
+    question: 'Trebuie să știu exact datele notarului din România înainte de programare?',
+    answer:
+      'Nu neapărat. Dacă ai deja un notar ales, procura poate fi redactată mai specific. Dacă nu, procura se poate face în termeni mai generali și notarul din România va lucra cu ea.',
+  },
+  {
+    question: 'O procură pentru vânzare de proprietate este diferită de una generală?',
+    answer:
+      'Da. Procura pentru vânzare sau cumpărare proprietate este mult mai specifică și include de regulă date despre imobil sau tranzacție. O procură generală poate fi prea vagă pentru o tranzacție imobiliară.',
   },
 ]
 
 const howToSteps = [
-  { name: 'Clarifică scopul procurii', text: 'Stabilește dacă ai nevoie de procură pentru vânzare, moștenire sau reprezentare generală.' },
-  { name: 'Strânge datele complete', text: 'Pregătește datele persoanei împuternicite, ale notarului și ale bunului sau procedurii vizate.' },
-  { name: 'Intră pe econsulat.ro', text: 'Selectează serviciul de acte notariale și tipul de procură apropiat situației tale.' },
-  { name: 'Obține programarea', text: 'După validarea cererii, rezervă locul la consulat.' },
-  { name: 'Semnează la ghișeu', text: 'Funcționarul consular autentifică procura în prezența ta.' },
-  { name: 'Trimite originalul în România', text: 'După emitere, procura se trimite notarului sau persoanei care te reprezintă.' },
+  {
+    name: 'Identifică tipul de procură',
+    text: 'Vânzare sau cumpărare proprietate, moștenire ori succesiune sau altceva, cum ar fi divorț, firmă ori cont bancar.',
+  },
+  {
+    name: 'Verifică dacă ai notar ales în România',
+    text: 'Dacă ai notar ales, procura poate include datele lui. Dacă nu, se poate redacta într-o formă mai generală.',
+  },
+  {
+    name: 'Plătește taxa de 3€ RNNEPR conform regulii consulatului tău',
+    text: 'Berlin cere virament în avans. Stuttgart acceptă POS sau virament. Bonn cere EC-Karte, iar München cash.',
+  },
+  {
+    name: 'Creează programarea pe econsulat.ro',
+    text: 'Programarea este obligatorie. În funcție de consulat, poate fi nevoie și de documente scanate încărcate înainte.',
+  },
+  {
+    name: 'Prezintă-te la consulat cu documentele originale',
+    text: 'Procura se redactează, se semnează în fața funcționarului consular și se eliberează în aceeași zi.',
+  },
 ]
 
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   '@id': 'https://actero.ro/procura-notariala-germania#article',
-  headline: 'Procură notarială în Germania — Ghid complet 2026',
-  description: 'Ghid pentru procură notarială la consulatul României din Germania: costuri, valabilitate și pași.',
-  datePublished: '2026-01-01',
+  headline: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
+  description:
+    'Hub pentru procuri notariale la consulatul României din Germania: vânzare, moștenire, generală, taxa RNNEPR de 3€ și diferența dintre consulat și notar german.',
+  datePublished: '2026-04-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
   publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -67,51 +116,272 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
-    { '@type': 'ListItem', position: 2, name: 'Procură notarială Germania', item: 'https://actero.ro/procura-notariala-germania' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Acte românești Germania',
+      item: 'https://actero.ro/acte-romanesti-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Procură notarială Germania',
+      item: 'https://actero.ro/procura-notariala-germania',
+    },
   ],
 }
+
+const sections = [
+  {
+    id: 'consulat-vs-notar',
+    title: 'Consulat românesc sau notar german',
+    content: (
+      <div className="space-y-4">
+        <p className="text-gray-700">
+          Întrebarea clasică este dacă nu cumva e mai simplu să mergi la un notar german local. Tehnic,
+          se poate. Practic, <strong>consulatul românesc este aproape întotdeauna varianta mai simplă și mai ieftină</strong>.
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="mb-2 font-semibold text-green-900">Consulat românesc — varianta recomandată</p>
+            <ul className="space-y-1 text-sm text-green-800">
+              <li>procura este recunoscută direct în România</li>
+              <li>nu ai nevoie de apostilă</li>
+              <li>nu ai nevoie de traducere legalizată</li>
+              <li>costul este mai mic</li>
+              <li>procura se eliberează în aceeași zi</li>
+              <li>documentul este redactat direct în română</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p className="mb-2 font-semibold text-gray-800">Notar german — mai complicat</p>
+            <ul className="space-y-1 text-sm text-gray-700">
+              <li>necesită apostilă Haga</li>
+              <li>necesită traducere autorizată și legalizată</li>
+              <li>costul total este de obicei mai mare</li>
+              <li>durata totală este mai mare</li>
+              <li>există risc de refuz sau neclarități la folosirea în România</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'tipuri',
+    title: 'Tipul procurii tale',
+    content: (
+      <div className="space-y-3">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border border-gray-200 p-2 text-left font-semibold text-gray-700">Ai nevoie de procură pentru</th>
+                <th className="hidden border border-gray-200 p-2 text-left font-semibold text-gray-700 sm:table-cell">Notar ales?</th>
+                <th className="hidden border border-gray-200 p-2 text-left font-semibold text-gray-700 sm:table-cell">Capcana frecventă</th>
+                <th className="border border-gray-200 p-2 text-left font-semibold text-gray-700">Ghid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {
+                  scop: 'Vânzare sau cumpărare proprietate',
+                  notar: 'Recomandat',
+                  capcana: 'Procura generală poate fi refuzată de notarul imobiliar',
+                  href: '/wizard?problem=procura',
+                  label: 'Vezi traseul în wizard →',
+                },
+                {
+                  scop: 'Moștenire sau succesiune',
+                  notar: 'Recomandat',
+                  capcana: 'Datele incomplete încetinesc dosarul',
+                  href: '/wizard?problem=procura',
+                  label: 'Vezi traseul în wizard →',
+                },
+                {
+                  scop: 'Divorț, firmă, cont bancar sau alt act',
+                  notar: 'Opțional',
+                  capcana: 'Procura prea generală poate fi refuzată',
+                  href: '/wizard?problem=procura',
+                  label: 'Vezi traseul în wizard →',
+                },
+              ].map(({ scop, notar, capcana, href, label }, i) => (
+                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <td className="border border-gray-200 p-2 font-medium text-gray-800">{scop}</td>
+                  <td className="hidden border border-gray-200 p-2 text-xs text-gray-600 sm:table-cell">{notar}</td>
+                  <td className="hidden border border-gray-200 p-2 text-xs text-red-600 sm:table-cell">{capcana}</td>
+                  <td className="border border-gray-200 p-2">
+                    <Link href={href} className="text-xs font-medium text-blue-600 underline hover:text-blue-800">
+                      {label}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'rnnepr',
+    title: 'Taxa de 3€ RNNEPR',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          RNNEPR este registrul național în care se înscriu procurile notariale. Înscrierea este obligatorie și costă <strong>3€</strong>.
+        </p>
+
+        <div className="mb-1 rounded-lg border border-amber-200 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Atenție Berlin:</strong> taxa se plătește exclusiv prin virament bancar, cu cel puțin 3–4 zile lucrătoare înainte.
+          </p>
+        </div>
+
+        <div className="grid gap-2 sm:grid-cols-2">
+          {[
+            {
+              oras: 'Bonn',
+              metoda: 'EC-Karte (card debit bancă germană)',
+              timing: 'Ziua programării',
+              alert: null,
+            },
+            {
+              oras: 'München',
+              metoda: 'Numerar (cash)',
+              timing: 'Ziua programării',
+              alert: null,
+            },
+            {
+              oras: 'Stuttgart',
+              metoda: 'POS sau virament bancar\nIBAN: DE04 1007 0000 0976 1909 01\nBIC: DEUTDEBBXXX',
+              timing: 'POS în ziua programării\nVirament cu minimum 3 zile înainte',
+              alert: null,
+            },
+            {
+              oras: 'Berlin',
+              metoda: 'Numai virament bancar\nIBAN: DE83 1007 0000 0435 4429 00\nBIC: DEUTDEBBXXX',
+              timing: 'Minimum 3–4 zile lucrătoare înainte',
+              alert: 'Fără virament în avans nu primești procura',
+            },
+          ].map(({ oras, metoda, timing, alert }) => (
+            <div
+              key={oras}
+              className={`rounded-lg border p-3 ${alert ? 'border-red-200 bg-red-50' : 'border-gray-200 bg-white'}`}
+            >
+              <p className="mb-1 font-semibold text-gray-900">{oras}</p>
+              <p className="mb-1 whitespace-pre-line text-xs text-gray-700">💳 {metoda}</p>
+              <p className="whitespace-pre-line text-xs text-gray-500">⏱ {timing}</p>
+              {alert ? <p className="mt-1 text-xs font-semibold text-red-700">{alert}</p> : null}
+            </div>
+          ))}
+        </div>
+
+        <p className="text-xs text-gray-500">
+          Taxa RNNEPR este separată de eventualele taxe consulare pentru redactarea procurii.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: 'bonn-regula',
+    title: 'Regula specială Bonn',
+    content: (
+      <div className="space-y-2 rounded-xl border border-blue-100 bg-blue-50 p-4">
+        <p className="font-semibold text-blue-900">Consulatul Bonn cere documente scanate pe econsulat.ro înainte de programare</p>
+        <p className="text-sm text-blue-800">
+          Dacă ești arondat la Bonn, încarci documentele necesare pe econsulat.ro înainte de ziua programării. Prezentarea fără documente scanate poate duce la respingerea cererii.
+        </p>
+        <p className="text-sm text-blue-800">
+          La München, Stuttgart și Berlin accentul rămâne pe documentele originale aduse în ziua programării.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Merg la un notar german pentru o procură folosită în România',
+            corect:
+              'Procura de la notar german necesită apostilă și traducere. Consulatul românesc este de obicei mai simplu și mai ieftin.',
+          },
+          {
+            gresit: 'Nu trimit viramentul de 3€ în avans la Berlin',
+            corect:
+              'La Berlin, plata se face doar prin virament cu minimum 3–4 zile lucrătoare înainte.',
+          },
+          {
+            gresit: 'Fac o procură generală pentru vânzare imobiliară',
+            corect:
+              'Pentru tranzacții imobiliare, procura trebuie să fie specifică și suficient de clară pentru notarul din România.',
+          },
+          {
+            gresit: 'Nu știu că procura poate fi revocată',
+            corect:
+              'Procura poate fi revocată ulterior prin act notarial. Revocarea se înscrie și ea în RNNEPR.',
+          },
+          {
+            gresit: 'La Bonn vin doar cu originalele, fără documente scanate',
+            corect:
+              'Bonn are regulă specială: documentele trebuie încărcate pe econsulat.ro înainte de programare.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="mb-0.5 text-xs font-semibold text-red-700">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    id: 'wizard',
+    title: 'Când folosești wizardul ActeRO',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Dacă nu știi exact ce tip de procură ai nevoie, dacă trebuie notar ales sau nu ori cum plătești taxa de 3€ la consulatul tău, wizardul îți dă traseul corect pentru situația ta.
+        </p>
+        <div className="space-y-2 rounded-xl border border-gray-200 bg-gray-50 p-4">
+          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <ul className="space-y-1 text-sm text-gray-700">
+            <li>tipul corect de procură pentru cazul tău</li>
+            <li>dacă ai nevoie de notar ales în România</li>
+            <li>cum și când plătești taxa RNNEPR</li>
+            <li>lista exactă de documente originale</li>
+            <li>dacă ți se aplică regula specială de la Bonn</li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
+]
 
 export default function ProcuraNotarialaGermaniaPage() {
   return (
     <LlmOptimizedPage
       lpSlug="procura-notariala-germania"
       lpTopic="procura"
-      h1="Procură notarială în Germania?"
-      intro="Dacă ai ceva de rezolvat în România, procura de la consulat te poate scuti de drumuri, traduceri și pași inutili."
-      tldr="O procură notarială de la consulatul României din Germania este gratuită (+ 3€ publicitate notarială pentru imobil), recunoscută direct în România fără apostilă sau traducere. Valabilă 3 ani. Se obține în aceeași zi a programării la consulat."
+      h1="Procură notarială din Germania — consulat sau notar german?"
+      intro="Ai ceva de rezolvat în România și nu poți merge personal. Consulatul României din Germania emite procuri notariale direct recunoscute în România, în aceeași zi, fără apostilă și fără traducere. Dar taxa de 3€ RNNEPR și regulile de plată diferă per consulat."
+      tldr="Procura se face, de regulă, la consulat, nu la notar german. Programare obligatorie pe econsulat.ro. Taxă RNNEPR: 3€. Berlin cere virament în avans, iar Bonn are regulă specială pentru documente scanate. Procura se eliberează în aceeași zi."
       ctaHref="/wizard?problem=procura"
-      ctaLabel="Rezolvă gratuit în 30 de secunde →"
+      ctaLabel="Găsește tipul de procură potrivit →"
       updatedAt="aprilie 2026"
-      sourceNote="consulatele României din Germania, practică notarială"
+      sourceNote="Consulatele României din Germania, RNNEPR — date verificate live per consulat"
       faqItems={faqItems}
       howToSteps={howToSteps}
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
-      sections={[
-        {
-          id: 'context',
-          title: 'Consulat vs notar german',
-          content: (
-            <>
-              <p className="mb-3">O procură de la consulatul României este, de regulă, mai simplă pentru folosirea directă în România. În multe cazuri, evită apostila și traducerea autorizată cerute pentru documentele făcute la notar german.</p>
-              <p>Dacă știi deja scopul exact al procurii, procesul este mult mai rapid și mai clar.</p>
-            </>
-          ),
-        },
-        {
-          id: 'steps',
-          title: 'Cum o obții',
-          content: (
-            <ol className="list-decimal pl-5 space-y-2">
-              {howToSteps.map((step) => (
-                <li key={step.name}><strong>{step.name}:</strong> {step.text}</li>
-              ))}
-            </ol>
-          ),
-        },
-      ]}
-      finalCtaTitle="Află ce tip de procură ți se potrivește"
-      finalCtaText="ActeRO te ajută să alegi între procură pentru vânzare, moștenire sau mandat general și îți spune ce pregătești pentru consulat."
+      sections={sections}
+      finalCtaTitle="Nu știi exact ce procură ai nevoie?"
+      finalCtaText="Spune-i wizardul pentru ce ai nevoie de procură și din ce land ești. Primești tipul corect de procură, lista de documente și instrucțiunile exacte pentru taxa de 3€ la consulatul tău."
     />
   )
 }

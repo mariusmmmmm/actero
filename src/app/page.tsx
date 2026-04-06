@@ -1,11 +1,58 @@
 // ActeRO — app/page.tsx
 // S1 — Homepage: hero + social proof + features + testimonial + CTA
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import SocialProofAvatars from '@/components/home/SocialProofAvatars'
 import TestimonialCarousel from '@/components/home/TestimonialCarousel'
 import SiteFooter from '@/components/layout/SiteFooter'
 import SiteHeader from '@/components/layout/SiteHeader'
+
+export const metadata: Metadata = {
+  title: 'ActeRO | Ghiduri pentru acte românești în diaspora',
+  description:
+    'ActeRO te ajută să afli exact ce pași urmezi pentru pașaport, buletin, titlu de călătorie, procuri și actele copilului născut în străinătate.',
+  keywords: [
+    'acte românești diaspora',
+    'acte românești în străinătate',
+    'pașaport românesc diaspora',
+    'buletin românesc diaspora',
+    'procură notarială diaspora',
+    'titlu de călătorie românia',
+  ],
+  openGraph: {
+    title: 'ActeRO | Ghiduri pentru acte românești în diaspora',
+    description:
+      'Ghiduri clare pentru pașaport, buletin, titlu de călătorie, procuri și actele copilului născut în străinătate.',
+    url: 'https://actero.ro',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://actero.ro',
+  },
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://actero.ro/#organization',
+  name: 'ActeRO',
+  url: 'https://actero.ro',
+  email: 'contact@actero.ro',
+  description:
+    'ActeRO oferă ghiduri clare pentru acte românești în diaspora: pașaport, buletin, titlu de călătorie, procuri și acte pentru copii născuți în străinătate.',
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://actero.ro/#website',
+  url: 'https://actero.ro',
+  name: 'ActeRO',
+  inLanguage: 'ro',
+  description:
+    'Ghiduri pentru acte românești în diaspora, cu pași clari și orientare rapidă spre situația potrivită.',
+}
 
 // ─── COMPONENTE ───────────────────────────────────────────────────────────────
 
@@ -14,12 +61,17 @@ function Hero() {
     <section className="bg-gradient-to-br from-gray-900 to-gray-800 px-5 pt-10 pb-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-extrabold text-white leading-tight mb-3">
-          Acte românești din Germania.{' '}
-          <span className="text-green-400">Rezolvate corect.</span>
+          Ghiduri clare pentru{' '}
+          <span className="text-green-400">acte românești în diaspora.</span>
         </h1>
+        <p className="text-sm text-gray-300 leading-relaxed mb-3">
+          ActeRO te ajută să afli rapid ce urmează pentru pașaport, buletin, titlu de
+          călătorie, procuri și actele copilului născut în străinătate.
+        </p>
         <p className="text-sm text-gray-400 leading-relaxed mb-6">
-          Ghid personalizat pentru situația ta exactă —
-          fără drumuri degeaba la consulat.
+          Primești ghidul potrivit pentru situația ta exactă —
+          fără drumuri degeaba, fără informații contradictorii și fără să cauți ore întregi
+          prin grupuri sau forumuri.
         </p>
 
         {/* Social proof deasupra CTA */}
@@ -52,17 +104,17 @@ function Features() {
     {
       icon: '🎯',
       title: 'Ghid exact pentru situația ta',
-      desc: 'Nu generic. Știm că ești în Germania, că ai buletin expirat, că nu ai domiciliu în RO.',
+      desc: 'Nu primești informație generică. Începem de la țara ta, problema ta și autoritatea unde ajungi efectiv.',
     },
     {
       icon: '✅',
-      title: 'Zero drumuri degeaba la consulat',
-      desc: 'Verifici documentele înainte de drum. Ajungi o singură dată, cu tot ce trebuie.',
+      title: 'Mai puține drumuri făcute degeaba',
+      desc: 'Verifici din timp documentele, costurile, programarea și diferențele importante dintre autorități.',
     },
     {
       icon: '🔔',
       title: 'Te anunțăm înainte să expire',
-      desc: 'Nu mai descoperi actul expirat când ai nevoie urgent de el.',
+      desc: 'Primești reminder înainte să expire actul, ca să nu ajungi din nou în urgență.',
     },
   ]
 
@@ -83,19 +135,51 @@ function Features() {
   )
 }
 
+function AudienceFit() {
+  const items = [
+    'românilor care locuiesc în altă țară și trebuie să rezolve acte românești',
+    'părinților cu copii născuți în străinătate care au nevoie de acte românești',
+    'persoanelor care au o urgență și trebuie să înțeleagă rapid ce variantă li se aplică',
+  ]
+
+  return (
+    <div className="px-5 py-8 border-t border-gray-100">
+      <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
+        Pentru Cine Este
+      </div>
+      <h2 className="text-xl font-bold text-gray-900 mb-3">ActeRO este pentru românii care vor claritate, nu presupuneri</h2>
+      <div className="space-y-2 text-sm text-gray-600 leading-relaxed">
+        {items.map((item) => (
+          <p key={item}>• ActeRO se potrivește {item}.</p>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Services() {
   const services = [
-    { icon: '🛂', title: 'Pașaport CRDS', desc: 'Expirat sau nou din Germania', href: '/wizard' },
-    { icon: '🪪', title: 'Buletin', desc: 'Expirat sau pierdut', href: '/wizard' },
-    { icon: '⚡', title: 'Titlu de călătorie', desc: 'Urgență — fără programare', href: '/wizard' },
-    { icon: '📜', title: 'Procură notarială', desc: 'Proprietate, moștenire, altceva', href: '/wizard' },
+    { icon: '🛂', title: 'Pașaport', desc: 'Expirat, pierdut, CRDS sau domiciliu în România', href: '/pasaport-expirat-germania' },
+    { icon: '🪪', title: 'Buletin', desc: 'Expirat, pierdut sau primul buletin', href: '/buletin-expirat-germania' },
+    { icon: '⚡', title: 'Titlu de călătorie', desc: 'Urgență, fără programare', href: '/titlu-calatorie-urgenta-germania' },
+    { icon: '📜', title: 'Procură notarială', desc: 'Proprietate, moștenire, bancă, divorț', href: '/procura-notariala-germania' },
   ]
 
   return (
     <div className="px-5 pb-8">
       <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
-        Ce rezolvăm
+        Ce Poți Rezolva Cu ActeRO
       </div>
+      <h2 className="text-xl font-bold text-gray-900 mb-3">Pornim de la problema ta, nu de la o listă generică de acte</h2>
+      <p className="text-sm text-gray-600 leading-relaxed mb-5">
+        Fiecare categorie de mai jos duce spre ghiduri și pași adaptați situației tale, iar pe
+        măsură ce adăugăm țări noi, aceeași logică rămâne valabilă.
+      </p>
+      <p className="text-sm text-gray-600 leading-relaxed mb-5">
+        <Link href="/acte-romanesti-germania" className="font-medium text-blue-600 hover:text-blue-800 underline">
+          Vezi și pagina hub: toate actele românești pe care le poți porni din Germania →
+        </Link>
+      </p>
       <div className="grid grid-cols-2 gap-3">
         {services.map((s) => (
           <Link
@@ -115,9 +199,9 @@ function Services() {
 
 function HowItWorks() {
   const steps = [
-    { n: '1', title: 'Descrii situația ta', desc: '3 întrebări · 30 secunde' },
-    { n: '2', title: 'Primești ghidul tău', desc: 'Personalizat, pas cu pas' },
-    { n: '3', title: 'Rezolvi actul', desc: 'Tu faci acțiunile, noi te ghidăm' },
+    { n: '1', title: 'Descrii situația ta', desc: 'Alegi problema și țara sau zona care ți se aplică' },
+    { n: '2', title: 'Primești traseul corect', desc: 'ActeRO separă situațiile care par similare, dar au pași diferiți' },
+    { n: '3', title: 'Urmezi ghidul potrivit', desc: 'Știi ce documente pregătești, unde mergi și ce greșeli eviți' },
   ]
 
   return (
@@ -142,6 +226,52 @@ function HowItWorks() {
   )
 }
 
+function Guidance() {
+  const links = [
+    {
+      title: 'Cum obții programare',
+      desc: 'Dacă serviciul trece prin econsulat sau prin consulat, ordinea pașilor contează.',
+      href: '/programare-consulat-romania',
+    },
+    {
+      title: 'Pașaport din străinătate',
+      desc: 'CRDS, domiciliu în România, expirat sau pierdut — situații diferite, trasee diferite.',
+      href: '/pasaport-expirat-germania',
+    },
+    {
+      title: 'Buletin din străinătate',
+      desc: 'Prezență fizică, CEI vs CIS, domiciliu activ sau nu — nu toate cazurile arată la fel.',
+      href: '/buletin-expirat-germania',
+    },
+  ]
+
+  return (
+    <div className="bg-gray-50 px-5 py-8">
+      <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
+        Cum Alegi Ghidul Corect
+      </div>
+      <h2 className="text-xl font-bold text-gray-900 mb-3">Cea mai mare greșeală este să pornești de la informația greșită</h2>
+      <p className="text-sm text-gray-600 leading-relaxed mb-5">
+        Multe proceduri par asemănătoare la suprafață, dar se schimbă în funcție de țară,
+        domiciliu, urgență sau autoritatea unde ajungi. De aceea, ActeRO pornește de la
+        situația ta exactă și apoi te trimite spre ghidul potrivit.
+      </p>
+      <div className="space-y-3">
+        {links.map((item) => (
+          <Link
+            key={item.title}
+            href={item.href}
+            className="block rounded-xl border-2 border-white bg-white p-4 hover:border-gray-300 transition-all"
+          >
+            <p className="text-sm font-semibold text-gray-900 mb-1">{item.title}</p>
+            <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Countries() {
   const countries = [
     { flag: '🇩🇪', name: 'Germania', status: 'Disponibil', href: '/wizard', available: true },
@@ -157,6 +287,11 @@ function Countries() {
       <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
         Țări disponibile
       </div>
+      <p className="text-sm text-gray-600 leading-relaxed mb-5">
+        Începem cu Germania și extindem treptat ghidurile pentru alte țări și alte tipuri de
+        nevoi. Homepage-ul rămâne punctul de intrare general, iar ghidurile se adaptează în
+        funcție de ce adăugăm mai departe.
+      </p>
       <div className="grid grid-cols-3 gap-2">
         {countries.map((c) => (
           <Link
@@ -175,6 +310,31 @@ function Countries() {
             </span>
           </Link>
         ))}
+      </div>
+    </div>
+  )
+}
+
+function Trust() {
+  return (
+    <div className="px-5 py-8 border-t border-gray-100">
+      <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
+        Surse Și Clarificări
+      </div>
+      <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
+        <p>
+          ActeRO nu este consulat și nu promite scurtături. Rolul proiectului nostru este să
+          transforme informația oficială și diferențele reale dintre proceduri într-un traseu
+          clar, pe înțelesul omului.
+        </p>
+        <p>
+          Folosim surse oficiale și verificări recurente, iar acolo unde regulile diferă între
+          autorități, explicăm explicit diferența în loc să o ascundem sub o listă generică.
+        </p>
+        <p>
+          Programările oficiale sunt gratuite, iar reminder-ele te ajută să nu descoperi din nou
+          actul expirat exact când ai nevoie urgent de el.
+        </p>
       </div>
     </div>
   )
@@ -201,14 +361,25 @@ function BottomCTA() {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <SiteHeader />
       <Hero />
       <div className="max-w-2xl mx-auto">
         <Features />
+        <AudienceFit />
         <Services />
         <HowItWorks />
+        <Guidance />
         <TestimonialCarousel />
         <Countries />
+        <Trust />
         <BottomCTA />
         <SiteFooter />
       </div>

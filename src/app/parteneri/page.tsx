@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import SiteHeader from '@/components/layout/SiteHeader'
 
 export default function ParteneriPlaceholderPage() {
@@ -9,12 +10,12 @@ export default function ParteneriPlaceholderPage() {
 
       <div className="max-w-2xl mx-auto w-full flex-1 px-5 py-8">
         <div className="mb-6 flex justify-end">
-          <a
+          <Link
             href="/ghid"
             className="text-sm text-gray-400 hover:text-gray-600"
           >
             ← Înapoi la ghid
-          </a>
+          </Link>
         </div>
 
         <div className="rounded-2xl border border-gray-100 bg-gray-50 p-6">

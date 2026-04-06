@@ -55,7 +55,7 @@ export default function DesprePage() {
             <p className="text-base italic leading-relaxed text-gray-700">
               „Am făcut 3 drumuri până la consulat. De fiecare dată mi s-a spus
               că lipsește ceva. Nimeni nu mi-a spus de la început exact ce
-              trebuie."
+              trebuie.”
             </p>
             <footer className="mt-3 text-xs font-semibold uppercase tracking-wide text-gray-500">
               — Român din Germania, grup Facebook diaspora

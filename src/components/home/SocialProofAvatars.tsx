@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 
 const avatarPaths = [
@@ -18,11 +18,7 @@ function pickRandomAvatars(count: number) {
 }
 
 export default function SocialProofAvatars() {
-  const [avatars, setAvatars] = useState(avatarPaths.slice(0, 4))
-
-  useEffect(() => {
-    setAvatars(pickRandomAvatars(4))
-  }, [])
+  const [avatars] = useState(() => pickRandomAvatars(4))
 
   return (
     <div className="flex -space-x-2">

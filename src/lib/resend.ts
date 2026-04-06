@@ -12,6 +12,7 @@ const REPLY_TO = process.env.RESEND_REPLY_TO ?? 'contact@actero.ro'
 
 const GUIDE_TITLES: Record<string, string> = {
   'pasaport-crds-de': 'Reînnoire pașaport CRDS · Germania',
+  'pasaport-crds-de-pierdut': 'Pașaport CRDS pierdut/furat · Germania',
   'pasaport-crds-nou-de': 'Primul pașaport CRDS · Germania',
   'pasaport-de-cu-domiciliu': 'Pașaport · Domiciliu România · Germania',
   'pasaport-de-cu-domiciliu-pierdut': 'Pașaport pierdut/furat · Germania',

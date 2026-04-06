@@ -22,6 +22,7 @@ export function getCrossSellGuides(
 
 const GUIDE_TITLES: Record<string, string> = {
   'pasaport-crds-de': 'pașaportul CRDS din Germania',
+  'pasaport-crds-de-pierdut': 'pașaportul CRDS pierdut sau furat din Germania',
   'pasaport-crds-nou-de': 'primul pașaport CRDS din Germania',
   'pasaport-de-cu-domiciliu': 'pașaportul din Germania',
   'pasaport-de-cu-domiciliu-pierdut': 'pașaportul pierdut din Germania',
@@ -43,6 +44,10 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'pasaport-crds-de': [
     { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai buletin expirat sau lipsă', icon: '🪪' },
     { guideId: 'procura-vanzare-de', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+  'pasaport-crds-de-pierdut': [
+    { guideId: 'titlu-calatorie-urgenta-de', title: 'Titlu de călătorie urgent', subtitle: 'Dacă trebuie să pleci imediat în România', icon: '⚡' },
+    { guideId: 'buletin-de-fara-domiciliu-pierdut', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai și buletinul lipsă sau expirat', icon: '🪪' },
   ],
   'buletin-de-cu-domiciliu-pierdut': [
     { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul CRDS', subtitle: 'Dacă ai și pașaport expirat', icon: '📕' },

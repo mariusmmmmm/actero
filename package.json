@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "typecheck": "tsc --noEmit",
-    "preflight": "npm run typecheck && next build --webpack",
+    "typecheck": "next typegen && tsc --noEmit",
+    "preflight": "npm run lint && npm run typecheck && next build --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.0",

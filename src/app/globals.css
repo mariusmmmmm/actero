@@ -11,11 +11,30 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Readability-first type scale for an information-heavy service.
+     We reserve the smallest size for secondary UI text and keep body text at 16px+. */
+  .text-xs {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-sm {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-base {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
@@ -93,7 +94,15 @@ export default function TitluCalatorieUrgentaGermaniaPage() {
           content: (
             <div className="rounded-xl border border-green-200 bg-green-50 p-4">
               <p className="font-semibold text-green-900 mb-2">FĂRĂ programare</p>
-              <p>Acesta este serviciul cel mai căutat în regim de urgență și, în același timp, cel mai puțin explicat clar online. Pentru titlul de călătorie, mergi direct la consulat în programul dedicat.</p>
+              <p>
+                Acesta este serviciul cel mai căutat în regim de urgență și, în același timp, cel
+                mai puțin explicat clar online. Pentru titlul de călătorie, mergi direct la
+                consulat în programul dedicat. Dacă vrei imaginea completă a actelor pe care le
+                poți porni din Germania, vezi și{' '}
+                <Link href="/acte-romanesti-germania" className="underline text-blue-600 hover:text-blue-800">
+                  pagina hub ActeRO
+                </Link>.
+              </p>
             </div>
           ),
         },
