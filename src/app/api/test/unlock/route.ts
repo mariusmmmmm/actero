@@ -1,5 +1,5 @@
 // ActeRO — app/api/test/unlock/route.ts
-// Simulează plata Gumroad în local — DOAR în development
+// Simulează confirmarea plății în local — DOAR în development
 // Setează is_paid=true + trimite emailul real via Resend
 
 import { NextResponse } from 'next/server'
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { sessionId, email, type = 'single' } = (await req.json()) as {
+  const { sessionId, email, type = 'single' } = (await req.json()) as {
       sessionId: string
       email: string
       type?: 'single' | 'familie'
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         .update({
           is_paid: true,
           product_type: 'familie',
-          gumroad_sale_id: `test_${Date.now()}`,
+          gumroad_sale_id: `stripe_test_${Date.now()}`,
           paid_at: new Date().toISOString(),
           email,
           token_expires_at: tokenExpiry.toISOString(),
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       .update({
         is_paid: true,
         product_type: 'ghid',
-        gumroad_sale_id: `test_${Date.now()}`,
+        gumroad_sale_id: `stripe_test_${Date.now()}`,
         paid_at: new Date().toISOString(),
         email,
         token_expires_at: tokenExpiry.toISOString(),

@@ -42,6 +42,7 @@ function SuccesPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const sessionId = searchParams.get('session') ?? ''
+  const checkoutSessionId = searchParams.get('checkout_session_id') ?? ''
   const { problemType, unlockPaid } = useAppStore()
 
   const [status, setStatus] = useState<'polling' | 'ready'>('polling')
@@ -53,12 +54,32 @@ function SuccesPageContent() {
     persistAttribution(searchParams)
   }, [searchParams])
 
-  // Polling — verifică dacă webhook-ul a setat is_paid = true
+  // Polling — verifică dacă webhook-ul a setat is_paid = true.
+  // În local, dacă webhook-ul nu ajunge, confirmăm direct prin Stripe checkout session.
   useEffect(() => {
     if (!sessionId || status !== 'polling' || timedOut) return
 
     const poll = async () => {
       try {
+        if (checkoutSessionId) {
+          const confirmRes = await fetch('/api/stripe/confirm-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sessionId,
+              checkoutSessionId,
+            }),
+          })
+
+          const confirmData = await confirmRes.json()
+          if (confirmData.isPaid) {
+            unlockPaid()
+            setStatus('ready')
+            setTimedOut(false)
+            return
+          }
+        }
+
         const res = await fetch(`/api/session/status?session=${sessionId}`)
         const data = await res.json()
         if (data.isPaid) {
@@ -75,7 +96,7 @@ function SuccesPageContent() {
       clearTimeout(timeout)
       clearInterval(interval)
     }
-  }, [sessionId, status, timedOut, unlockPaid])
+  }, [checkoutSessionId, sessionId, status, timedOut, unlockPaid])
 
   useEffect(() => {
     if (!isPaid) return
@@ -98,7 +119,7 @@ function SuccesPageContent() {
         offer_type: offerType,
         value: Number.isFinite(parsedValue) ? parsedValue : 9.99,
         currency: 'EUR',
-        payment_provider: 'gumroad',
+        payment_provider: 'stripe',
       }, searchParams)
     )
   }, [isPaid, problemType, searchParams, sessionId])

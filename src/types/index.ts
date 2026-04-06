@@ -264,7 +264,7 @@ export type UserSession = {
   situation: SituationFlags
   guideId: GuideId
   isPaid: boolean
-  gumroadSaleId?: string
+  paymentReferenceId?: string
   paidAt?: string
   email?: string
   accessToken?: string

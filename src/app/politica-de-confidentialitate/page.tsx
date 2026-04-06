@@ -151,7 +151,7 @@ export default function PoliticaPage() {
             <li><strong className="text-gray-900">Vercel</strong> — pentru hosting și infrastructura aplicației;</li>
             <li><strong className="text-gray-900">Supabase</strong> — pentru stocarea sesiunilor, cererilor și datelor operaționale;</li>
             <li><strong className="text-gray-900">Resend</strong> — pentru trimiterea emailurilor tranzacționale;</li>
-            <li><strong className="text-gray-900">Gumroad</strong> și alți furnizori de plată — pentru procesarea plăților și confirmarea accesului;</li>
+            <li><strong className="text-gray-900">Stripe</strong> și alți furnizori de plată — pentru procesarea plăților și confirmarea accesului;</li>
             <li><strong className="text-gray-900">Google</strong> — dacă folosim Google Analytics pentru măsurarea traficului și performanței site-ului.</li>
           </ul>
           <p>

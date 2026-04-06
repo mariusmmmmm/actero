@@ -1,5 +1,5 @@
 // ActeRO — app/paywall/page.tsx
-// Ecran de conversie Free → Paid · 2 opțiuni + Gumroad overlay
+// Ecran de conversie Free → Paid · 2 opțiuni + Stripe Checkout
 
 'use client'
 
@@ -9,11 +9,6 @@ import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
 import { useAppStore } from '@/store/appStore'
-
-// ─── CONFIGURARE GUMROAD ──────────────────────────────────────────────────────
-
-const GUMROAD_LINK_GHID = process.env.NEXT_PUBLIC_GUMROAD_LINK_GHID ?? 'https://actero.gumroad.com/l/ghid'
-const GUMROAD_LINK_FAMILIE = process.env.NEXT_PUBLIC_GUMROAD_LINK_FAMILIE ?? 'https://actero.gumroad.com/l/familie'
 
 // ─── CONȚINUT PAYWALL per ghid ────────────────────────────────────────────────
 
@@ -120,8 +115,8 @@ function PaywallPageContent() {
     )
   }, [guideId, problemType, searchParams, sessionId])
 
-  const buildGumroadUrl = async (baseUrl: string, offerType: 'single' | 'family') => {
-    const res = await fetch('/api/gumroad/session-token', {
+  const createCheckoutSession = async (offerType: 'single' | 'family') => {
+    const res = await fetch('/api/stripe/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -135,10 +130,8 @@ function PaywallPageContent() {
       throw new Error('Nu am putut inițializa checkout-ul')
     }
 
-    const data = await res.json() as { token: string; fieldName: string }
-    const url = new URL(baseUrl)
-    url.searchParams.set(data.fieldName, data.token)
-    return url.toString()
+    const data = await res.json() as { url: string }
+    return data.url
   }
 
   const handleGhid = async () => {
@@ -161,9 +154,9 @@ function PaywallPageContent() {
     }
     try {
       setCheckoutLoading('single')
-      window.location.href = await buildGumroadUrl(GUMROAD_LINK_GHID, 'single')
+      window.location.href = await createCheckoutSession('single')
     } catch (error) {
-      console.error('Gumroad checkout init error:', error)
+      console.error('Stripe checkout init error:', error)
       setCheckoutError('Checkout-ul nu a putut fi inițializat. Încearcă din nou.')
       setCheckoutLoading(null)
     }
@@ -189,9 +182,9 @@ function PaywallPageContent() {
     }
     try {
       setCheckoutLoading('family')
-      window.location.href = await buildGumroadUrl(GUMROAD_LINK_FAMILIE, 'family')
+      window.location.href = await createCheckoutSession('family')
     } catch (error) {
-      console.error('Gumroad family checkout init error:', error)
+      console.error('Stripe family checkout init error:', error)
       setCheckoutError('Checkout-ul nu a putut fi inițializat. Încearcă din nou.')
       setCheckoutLoading(null)
     }
@@ -315,8 +308,8 @@ function PaywallPageContent() {
             După plată primești imediat emailul cu linkul tău de acces
           </div>
           <p className="text-sm leading-relaxed text-blue-800">
-            Checkout-ul se finalizează pe Gumroad, iar apoi primești pe email linkul personal către ghidul tău complet.
-            Dacă rămâi pe pagina de confirmare Gumroad, verifică inbox-ul și spam-ul pentru emailul de la ActeRO.
+            Plata se finalizează securizat prin Stripe, iar apoi primești pe email linkul personal către ghidul tău complet.
+            După confirmare, verifică inbox-ul și spam-ul pentru emailul de la ActeRO.
           </p>
         </div>
 
