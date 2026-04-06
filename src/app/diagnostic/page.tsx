@@ -262,29 +262,38 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     ],
   },
   'procura-vanzare-de': {
-    title: 'Procură notarială · Vânzare / Cumpărare proprietate',
-    subtitle: '1 deplasare la consulat',
-    warnings: [],
-    estimatedWeeks: '1–2 săptămâni',
-    estimatedAppointments: 1,
-    guideTitle: 'Ghid procură vânzare proprietate',
+    title: 'Procură notarială pentru proprietate',
+    subtitle: 'Ești în Germania și vrei să vinzi sau cumperi o proprietate în România fără să te deplasezi — împuternicești pe cineva din România să semneze în locul tău la notar.',
+    warnings: [
+      'Consulatul autentifică PROCURA — nu contractul de vânzare. Tranzacția propriu-zisă se semnează la notar în România, de către persoana pe care o împuternicești.',
+      'Procura de vânzare TREBUIE să fie specială (nu generală). Procura generală nu este valabilă pentru transferul de proprietate.',
+      'Dacă imobilul este bun comun (dobândit în căsătorie) — ambii soți trebuie să dea procura, fie împreună la același consulat, fie separat.',
+      'Înainte de programare: contactează notarul din România care va instrumenta tranzacția și întreabă ce conținut exact trebuie să aibă procura.',
+    ],
+    estimatedWeeks: 'Procura = 1 zi · Tranzacția finală în România: depinde de notar și dosar',
+    estimatedAppointments: '1 programare · 1 deplasare la consulat · procura se ridică în aceeași zi',
+    guideTitle: 'Procură de vânzare/cumpărare proprietate din Germania',
     isRoute: false,
     previewSteps: [
-      { id: 1, label: 'Documentele necesare', locked: false },
-      { id: 2, label: 'Pregătește documentele', locked: false },
-      { id: 3, label: 'Obține programarea', locked: true },
-      { id: 4, label: 'Pregătire pentru ziua programării', locked: true },
-      { id: 5, label: 'Ziua consulatului', locked: true },
-      { id: 6, label: 'Trimite procura în România', locked: true },
+      { id: 1, label: 'Adună documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește conținutul procurii', locked: false },
+      { id: 3, label: 'Creează cererea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Obține programarea la consulat', locked: true },
+      { id: 5, label: 'Pregătire pentru ziua programării', locked: true },
+      { id: 6, label: 'Ziua consulatului — semnezi procura', locked: true },
+      { id: 7, label: 'Trimite procura și coordonează cu notarul din România', locked: true },
     ],
   },
   'procura-mostenire-de': {
-    title: 'Procură notarială · Moștenire / Succesiune',
-    subtitle: '1 deplasare la consulat',
-    warnings: [],
+    title: 'Procură pentru moștenire în România',
+    subtitle: 'Ești în Germania și vrei să împuternicești pe cineva să te reprezinte în succesiune, fără să mergi personal în România.',
+    warnings: [
+      'Conținutul procurii trebuie să se potrivească exact cu dosarul de succesiune și cu cerințele notarului din România. Dacă ai deja notar ales, cere-i înainte lista exactă de date.',
+      'Lista documentelor-suport pentru succesiune poate varia în funcție de notar și de dosar. Dacă ți se cer certificatul de deces sau acte care dovedesc calitatea de moștenitor, pregătește-le înainte de programare.',
+    ],
     estimatedWeeks: '1–2 săptămâni',
     estimatedAppointments: 1,
-    guideTitle: 'Ghid procură moștenire',
+    guideTitle: 'Ghid procură moștenire · Germania',
     isRoute: false,
     previewSteps: [
       { id: 1, label: 'Documentele necesare', locked: false },
@@ -452,6 +461,20 @@ function getEmotionalCopy(
     }
   }
 
+  if (guideId === 'procura-mostenire-de') {
+    return {
+      title: 'Moștenirea se poate mișca și din Germania — iată procura corectă.',
+      subtitle: 'Îți arătăm exact ce pregătești înainte de consulat și ce trimiți notarului din România.',
+    }
+  }
+
+  if (guideId === 'procura-vanzare-de') {
+    return {
+      title: 'Tranzacția se poate face și din Germania — iată procura corectă.',
+      subtitle: 'Îți arătăm exact ce pregătești, ce trebuie să conțină procura și ce verifici cu notarul din România.',
+    }
+  }
+
   switch (problemType) {
     case 'pasaport':
       return {
@@ -501,6 +524,7 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
     case 'buletin-de-cu-domiciliu-pierdut':
       return '⏱ 1 deplasare în România · 2–4 săptămâni'
     case 'procura-vanzare-de':
+      return '⏱ 1 programare · 1 deplasare la consulat · procura în aceeași zi'
     case 'procura-mostenire-de':
     case 'procura-generala-de':
       return '⏱ 1 singură deplasare la consulat · 1–2 săptămâni'
@@ -514,6 +538,14 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
 }
 
 function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isPrimulPasaport?: boolean) {
+  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
+    return {
+      icon: '🪪',
+      title: 'Carte de identitate',
+      subtitle: 'Primul buletin românesc',
+    }
+  }
+
   if (problemType === 'pasaport') {
     if (guideId?.includes('crds')) {
       return {
@@ -554,6 +586,109 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
       ? 'Moștenire / succesiune'
       : 'Mandat general',
   }
+}
+
+function getFeeInfo(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  consulateName: string,
+  paymentMethod?: string
+): { title: string; subtitle: string } | null {
+  if (!guideId || !problemType) return null
+
+  if (problemType === 'titlu-calatorie') {
+    return {
+      title: 'Taxă: gratuit',
+      subtitle: 'Titlul de călătorie se eliberează fără taxă consulară',
+    }
+  }
+
+  if (problemType === 'pasaport' && paymentMethod) {
+    return {
+      title: `Taxă: 53€ — ${getPaymentLabel(paymentMethod)}`,
+      subtitle: getPaymentSubtitle(consulateName, paymentMethod),
+    }
+  }
+
+  return null
+}
+
+function getPhotoInfo(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  consulate?: (typeof consulates)[keyof typeof consulates] | null
+): { title: string; subtitle: string } | null {
+  if (!guideId || !problemType || !consulate) return null
+
+  if (problemType === 'pasaport') {
+    return {
+      title: consulate.fotografiiLaGhiseu ? 'Fotografii — se fac la consulat' : 'Fotografii biometrice necesare',
+      subtitle: consulate.fotografiiLaGhiseu
+        ? 'Nu trebuie să aduci poze de acasă'
+        : 'Vino cu fotografiile pregătite înainte de programare',
+    }
+  }
+
+  if (problemType === 'titlu-calatorie') {
+    if (consulate.id === 'muenchen') {
+      return {
+        title: 'Fotografii biometrice necesare',
+        subtitle: 'La München trebuie să vii cu 2 fotografii biometrice tipărite',
+      }
+    }
+
+    if (consulate.id === 'stuttgart') {
+      return {
+        title: 'Fotografia depinde de vârstă',
+        subtitle: 'Adulții fac poza la ghișeu; sub 14 ani au nevoie de 1 fotografie pe hârtie',
+      }
+    }
+
+    return {
+      title: 'Fotografia se preia la ghișeu',
+      subtitle: 'Nu trebuie să aduci fotografii proprii',
+    }
+  }
+
+  return null
+}
+
+function getContextRow(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  hasDomiciliuRO?: boolean
+): { icon: string; title: string; subtitle: string } | null {
+  if (!guideId || !problemType) return null
+
+  if (problemType === 'buletin') {
+    if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
+      return {
+        icon: '🏠',
+        title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
+        subtitle: hasDomiciliuRO
+          ? 'Ai adresă activă în România'
+          : 'Procedura pentru primul buletin se finalizează în România',
+      }
+    }
+
+    return {
+      icon: '🏠',
+      title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
+      subtitle: hasDomiciliuRO
+        ? 'Cererea se depune personal la SPCLEP-ul competent'
+        : 'Trebuie să te prezinți personal în România pentru depunere',
+    }
+  }
+
+  if (problemType === 'pasaport') {
+    return {
+      icon: '🏠',
+      title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
+      subtitle: hasDomiciliuRO ? 'Ai adresă activă în România' : 'Fără adresă activă în România',
+    }
+  }
+
+  return null
 }
 
 function getPaymentLabel(paymentMethod: string) {
@@ -623,51 +758,59 @@ function SituationCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-xl">🏠</span>
-        <div>
-          <p className="text-sm font-semibold text-gray-900">
-            {hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania'}
-          </p>
-          <p className="text-xs text-gray-500">
-            {hasDomiciliuRO ? 'Ai adresă activă în România' : 'Fără adresă activă în România'}
-          </p>
+      {getContextRow(guideId, problemType, hasDomiciliuRO) && (
+        <div className="flex items-center gap-3">
+          <span className="text-xl">{getContextRow(guideId, problemType, hasDomiciliuRO)?.icon}</span>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">
+              {getContextRow(guideId, problemType, hasDomiciliuRO)?.title}
+            </p>
+            <p className="text-xs text-gray-500">
+              {getContextRow(guideId, problemType, hasDomiciliuRO)?.subtitle}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex items-center gap-3">
-        <span className="text-xl">📍</span>
-        <div>
-          <p className="text-sm font-semibold text-gray-900">
-            {bundeslandName} → {consulateShortName}
-          </p>
-          <p className="text-xs text-gray-500">{consulate?.address ?? 'Adresa consulatului va fi confirmată în ghid'}</p>
+      {problemType !== 'buletin' && (
+        <div className="flex items-center gap-3">
+          <span className="text-xl">📍</span>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">
+              {bundeslandName} → {consulateShortName}
+            </p>
+            <p className="text-xs text-gray-500">{consulate?.address ?? 'Adresa consulatului va fi confirmată în ghid'}</p>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex items-center gap-3">
-        <span className="text-xl">💶</span>
-        <div>
-          <p className="text-sm font-semibold text-gray-900">
-            Taxă: 53€ — {consulate ? getPaymentLabel(consulate.paymentMethod) : 'vezi ghidul'}
-          </p>
-          <p className="text-xs text-gray-500">
-            {consulate ? getPaymentSubtitle(consulateShortName, consulate.paymentMethod) : 'Metoda exactă apare în ghidul tău'}
-          </p>
+      {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod) && (
+        <div className="flex items-center gap-3">
+          <span className="text-xl">💶</span>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">
+              {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod)?.title}
+            </p>
+            <p className="text-xs text-gray-500">
+              {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod)?.subtitle}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex items-center gap-3">
-        <span className="text-xl">📸</span>
-        <div>
-          <p className="text-sm font-semibold text-gray-900">
-            {consulate?.fotografiiLaGhiseu ? 'Fotografii — se fac la consulat' : 'Fotografii biometrice necesare'}
-          </p>
-          <p className="text-xs text-gray-500">
-            {consulate?.fotografiiLaGhiseu ? 'Nu trebuie să aduci poze de acasă' : 'Vino cu fotografiile pregătite înainte de programare'}
-          </p>
+      {getPhotoInfo(guideId, problemType, consulate) && (
+        <div className="flex items-center gap-3">
+          <span className="text-xl">📸</span>
+          <div>
+            <p className="text-sm font-semibold text-gray-900">
+              {getPhotoInfo(guideId, problemType, consulate)?.title}
+            </p>
+            <p className="text-xs text-gray-500">
+              {getPhotoInfo(guideId, problemType, consulate)?.subtitle}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

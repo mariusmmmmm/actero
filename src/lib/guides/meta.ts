@@ -33,7 +33,7 @@ const GUIDE_TITLES: Record<string, string> = {
   'buletin-de-primul-de-b': 'primul buletin românesc din Germania',
   'titlu-calatorie-urgenta-de': 'titlul de călătorie de urgență din Germania',
   'titlu-calatorie-de': 'titlul de călătorie din Germania',
-  'procura-vanzare-de': 'procura notarială din Germania',
+  'procura-vanzare-de': 'procura de vânzare/cumpărare proprietate din Germania',
   'procura-mostenire-de': 'procura pentru moștenire din Germania',
   'procura-generala-de': 'procura notarială din Germania',
   'transcriere-nastere-de': 'transcrierea certificatului de naștere',

@@ -7,8 +7,13 @@ import {
   type ChecklistSection,
 } from '@/lib/guides/checklists'
 
-export default function ChecklistTab() {
-  const guideId = useAppStore((s) => s.guideId)
+export default function ChecklistTab({
+  guideIdOverride,
+}: {
+  guideIdOverride?: string | null
+}) {
+  const storeGuideId = useAppStore((s) => s.guideId)
+  const guideId = guideIdOverride ?? storeGuideId
   const consulate = useAppStore((s) => s.consulate)
   const situation = useAppStore((s) => s.situation)
   const checklistState = useAppStore((s) => s.checklistState)

@@ -44,6 +44,7 @@ export function getConsulateCard(consulateId: ConsulateId): {
   wazeUrl: string
   scheduleDeponere: string
   scheduleRidicare: string
+  scheduleTitluCalatorie: string
   paymentMethod: string
   paymentNote?: string
   postalPickup: boolean
@@ -79,6 +80,7 @@ export function getConsulateCard(consulateId: ConsulateId): {
     wazeUrl: c.wazeUrl,
     scheduleDeponere: c.scheduleDeponere,
     scheduleRidicare: c.scheduleRidicare,
+    scheduleTitluCalatorie: c.scheduleTitluCalatorie,
     paymentMethod: c.paymentMethod,
     paymentNote: c.paymentNote,
     postalPickup: c.postalPickup,

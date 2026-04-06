@@ -90,8 +90,8 @@ function SuccesPageContent() {
     const parsedValue = Number(rawValue)
 
     trackOnce(
-      `paid_access_granted:${sessionId}`,
-      'paid_access_granted',
+      `paid_success_page_view:${sessionId}`,
+      'paid_success_page_view',
       withAttribution({
         guide_id: useAppStore.getState().guideId ?? undefined,
         problem_type: problemType ?? undefined,

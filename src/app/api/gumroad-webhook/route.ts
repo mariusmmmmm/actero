@@ -6,6 +6,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
+import { sendGaMeasurementEvent } from '@/lib/ga-measurement'
 import { extractGumroadSessionToken, verifyGumroadSessionToken } from '@/lib/gumroad-session-token'
 import { createClient } from '@/lib/supabase/server'
 import { sendAccessEmail, sendFamilieEmail } from '@/lib/resend'
@@ -119,7 +120,7 @@ export async function POST(req: NextRequest) {
         last_accessed_at: new Date().toISOString(),
       })
       .eq('id', sessionId)
-      .select('id, access_token, guide_id')
+      .select('id, access_token, guide_id, document_type')
       .single()
 
     if (error || !session) {
@@ -129,6 +130,20 @@ export async function POST(req: NextRequest) {
 
     const accessUrl = `${getBaseUrl()}/ghid/access?token=${session.access_token}`
     await sendAccessEmail({ to: email, accessUrl, guideId: session.guide_id })
+    await sendGaMeasurementEvent({
+      clientId: `${session.id}.gumroad`,
+      eventName: 'paid_access_granted',
+      params: {
+        guide_id: session.guide_id,
+        problem_type: session.document_type,
+        offer_type: 'single',
+        value: 9.99,
+        currency: 'EUR',
+        payment_provider: 'gumroad',
+        transaction_id: saleId,
+        actero_session_id: session.id,
+      },
+    })
 
     return NextResponse.json({ ok: true, action: 'paid_ghid' })
   } catch (err) {
@@ -157,6 +172,8 @@ async function handleFamiliePayment({
   // Sesiunea 1 — cea din wizard (dacă există), sau nouă goală
   let session1Id: string
   let session1Token: string
+  let session1GuideId: string | null = null
+  let session1ProblemType: string | null = null
 
   if (sessionId) {
     // Actualizează sesiunea existentă din wizard
@@ -172,7 +189,7 @@ async function handleFamiliePayment({
         last_accessed_at: new Date().toISOString(),
       })
       .eq('id', sessionId)
-      .select('id, access_token, guide_id')
+      .select('id, access_token, guide_id, document_type')
       .single()
 
     if (error || !data) {
@@ -182,6 +199,8 @@ async function handleFamiliePayment({
 
     session1Id = data.id
     session1Token = data.access_token
+    session1GuideId = data.guide_id
+    session1ProblemType = data.document_type
   } else {
     // Creează sesiune goală (va fi completată când userul face wizardul)
     const { data, error } = await supabase
@@ -249,6 +268,20 @@ async function handleFamiliePayment({
 
   // Trimite emailul cu toate cele 4 linkuri
   await sendFamilieEmail({ to: email, accessLinks })
+  await sendGaMeasurementEvent({
+    clientId: `${session1Id}.gumroad`,
+    eventName: 'paid_access_granted',
+    params: {
+      guide_id: session1GuideId ?? undefined,
+      problem_type: session1ProblemType ?? undefined,
+      offer_type: 'family',
+      value: 24.99,
+      currency: 'EUR',
+      payment_provider: 'gumroad',
+      transaction_id: saleId,
+      actero_session_id: session1Id,
+    },
+  })
 
   return NextResponse.json({ ok: true, action: 'paid_familie', linksGenerated: accessLinks.length })
 }

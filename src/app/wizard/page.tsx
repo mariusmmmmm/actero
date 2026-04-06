@@ -172,6 +172,14 @@ function getQuestions(problemType: ProblemType): Question[] {
           ],
         },
         {
+          key: 'pasaportStatus',
+          question: 'Care este situația ta cu pașaportul?',
+          options: [
+            { value: 'expirat-distrus', label: 'A expirat sau e deteriorat', sublabel: 'Îl am încă la mine' },
+            { value: 'pierdut-furat', label: 'L-am pierdut sau mi-a fost furat', sublabel: 'Nu îl mai am' },
+          ],
+        },
+        {
           key: 'isPrimulPasaport',
           question: 'Ai mai avut pașaport românesc până acum?',
           options: [
@@ -273,8 +281,9 @@ function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags
   if (problemType === 'pasaport') {
     return all.filter((q, i) => {
       if (i === 0) return true
-      if (i === 1) return situation.hasDomiciliuRO === false
-      if (i === 2) return situation.hasDomiciliuRO === false && situation.isPrimulPasaport === true
+      if (i === 1) return situation.hasDomiciliuRO === true
+      if (i === 2) return situation.hasDomiciliuRO === false
+      if (i === 3) return situation.hasDomiciliuRO === false && situation.isPrimulPasaport === true
       return false
     })
   }

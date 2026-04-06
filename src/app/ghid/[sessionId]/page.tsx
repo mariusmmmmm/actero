@@ -400,6 +400,131 @@ const procuraSteps: PaidStep[] = [
   },
 ]
 
+const procuraVanzareSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Creează cererea pe econsulat.ro',
+    shortLabel: 'Cerere',
+    blocks: [
+      { text: 'Mergi pe econsulat.ro → autentifică-te sau creează cont → apasă „Cerere nouă” → selectează „Acte notariale” → „Procură”. Serviciul există pe platformă.', type: 'action' },
+      { text: 'Completează datele tale de identificare și alege consulatul arondat landului tău.', type: 'info' },
+      { text: 'La câmpul de conținut al procurii: descrie scopul (ex. „vânzare imobil la adresa X, municipiul Y, județ Z, nr. cadastral Z”). Copiază datele complete ale mandatarului din nota pregătită la Pasul 2.', type: 'action' },
+      { text: 'BONN — REGULĂ SPECIALĂ: Dacă nu trimiți în avans pe econsulat.ro copia actului de proprietate și copia CI a mandatarului, procura NU se eliberează în aceeași zi. Trimite documentele scanate înainte de a veni la consulat.', type: 'warning' },
+      { text: 'München / Stuttgart / Berlin: poți veni cu documentele în ziua programării și procura se redactează în aceeași zi — fără pre-scanning obligatoriu.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Deschide econsulat.ro',
+      href: 'https://econsulat.ro',
+    },
+  },
+  {
+    id: 4,
+    title: 'Obține programarea la consulat',
+    shortLabel: 'Programare',
+    blocks: [
+      { text: 'Programarea se face prin econsulat.ro → „Programările mele” → „Programare nouă” → alegi consulatul tău → prima dată disponibilă. Obligatorie la toate cele 4 consulatele.', type: 'info' },
+      { text: 'Programările pentru acte notariale sunt separate de cele pentru pașapoarte și sunt de regulă mai disponibile — timpi de așteptare mai scurți.', type: 'tip' },
+      { text: 'BERLIN — PLATĂ ÎN AVANS: taxa de 3€ RNNEPR se achită NUMAI prin virament bancar, cu 3–4 zile lucrătoare înainte de prezentarea la consulat. Fă transferul imediat după ce primești programarea.', type: 'warning' },
+      { text: 'Programările sunt gratuite. Nu apela la intermediari.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Programare econsulat.ro',
+      href: 'https://econsulat.ro',
+    },
+  },
+  {
+    id: 5,
+    title: 'Pregătire pentru ziua programării',
+    shortLabel: 'Pregătire',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Verifică lista înainte de a pleca: act de identitate original valabil + copie CI mandatar + copie act de proprietate + cadastru/intabulare dacă există + nota cu conținutul procurii.', type: 'action' },
+      { text: 'Trebuie să cunoști limba română — consulul verifică că înțelegi conținutul procurii înainte să semnezi.', type: 'warning' },
+      { text: 'Tarif 3€ RNNEPR — pregătește metoda de plată conform consulatului tău: Bonn = EC-Karte la ghișeu, München = numerar la ghișeu, Stuttgart = POS sau virament, Berlin = numai virament înainte de programare.', type: 'info' },
+      { text: 'Dacă ești căsătorit/ă și imobilul este bun comun, soțul/soția trebuie să vă programați separat sau împreună pentru a da fiecare câte o procură. Nu te prezenta singur cu intenția de a da procură și pentru celălalt soț — nu este posibil legal.', type: 'note' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ziua consulatului — semnezi procura',
+    shortLabel: 'Consulat',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Ajungi cu 10 minute înainte. Prezinți actele la ghișeu. Funcționarul consular redactează procura pe loc sau verifică textul din cerere.', type: 'action' },
+      { text: 'Citești procura, confirmi că datele sunt corecte (imobil, mandatar, puteri), semnezi în fața consulului. Consulul autentifică și aplică sigiliul.', type: 'info' },
+      { text: 'Primești un duplicat al procurii. Originalul rămâne în arhiva consulatului. Duplicatul are aceeași forță juridică și este singurul document pe care îl vei folosi.', type: 'info' },
+      { text: 'Consulatul înscrie procura din oficiu în RNNEPR (Registrul Național Notarial de Evidență a Procurilor). Notarul din România verifică obligatoriu această înregistrare înainte de tranzacție.', type: 'info' },
+      { text: 'Fotografiază imediat procura primită și salvează imaginea în cloud. Dacă o pierzi în transport, poți solicita un duplicat suplimentar de la consulat.', type: 'tip' },
+      { text: 'Dacă funcționarul cere un document neprevăzut în lista ta: notează calm ce se cere și întreabă diplomatic care este temeiul legal sau dacă s-a modificat procedura.', type: 'warning' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'Trimite procura și coordonează cu notarul din România',
+    shortLabel: 'Trimitere',
+    blocks: [
+      { text: 'Trimite procura (duplicatul) mandatarului tău din România prin curier rapid cu număr de urmărire (DHL, FAN Curier, Cargus). Nu trimite prin poștă obișnuită — risc de pierdere.', type: 'action' },
+      { text: 'Trimite și o copie scanată direct notarului din România, ca să verifice conținutul în avans și să pregătească actele. Îi economisești timp la semnarea contractului.', type: 'tip' },
+      { text: 'Mandatarul duce procura la notar. Notarul verifică în RNNEPR că procura este valabilă și nerevocată, apoi instrumentează tranzacția.', type: 'info' },
+      { text: 'Procura este valabilă 3 ani dacă nu ai specificat un termen mai scurt. Dacă renunți la tranzacție, o poți revoca oricând printr-o declarație notarială de revocare — la consulat sau la orice notar din România.', type: 'info' },
+      { text: 'Cauze frecvente de refuz la notar: (1) procură generală în loc de specială; (2) mandatarul cumpără imobilul în același timp — în acest caz prețul trebuie menționat explicit în procură; (3) procura a fost revocată fără știrea mandatarului.', type: 'warning' },
+    ],
+  },
+]
+
+const procuraMostenireSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Obține programarea',
+    shortLabel: 'Programare',
+    blocks: [
+      { text: 'Intră pe econsulat.ro → „Cerere nouă” → „Acte notariale” → serviciul pentru procuri. ✅', type: 'action' },
+      { text: 'Completează cererea cu datele tale și descrierea clară a scopului: reprezentare într-un dosar de moștenire / succesiune în România. ⚠️ Verifică să folosești formularea cerută de notar, nu una generică.', type: 'warning' },
+      { text: 'Serviciul consular pentru procuri este gratuit ✅. Dacă procura trebuie înscrisă în registrele naționale notariale din România, se adaugă tariful de publicitate notarială de 3 euro ✅.', type: 'info' },
+      { text: 'Procurile se autentifică de regulă pe loc, în aceeași zi ✅, dacă te prezinți cu toate datele și documentele necesare.', type: 'tip' },
+    ],
+    actionItem: {
+      label: 'Deschide econsulat.ro',
+      href: 'https://www.econsulat.ro/',
+    },
+  },
+  {
+    id: 4,
+    title: 'Pregătește-te pentru consulat',
+    shortLabel: 'Consulat',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Ai la tine actul de identitate valabil în original. ✅ Fără el, procura nu poate fi autentificată.', type: 'info' },
+      { text: 'Ai notate clar datele mandatarului și ale notarului din România. ✅ Cel mai sigur este să le ai și într-un email sau PDF trimis de notar.', type: 'info' },
+      { text: 'Dacă notarul ți-a trimis modelul sau formularea dorită pentru procură, ia-l cu tine. ⚠️ Acest lucru reduce mult riscul ca procura să nu fie acceptată ulterior în dosarul de succesiune.', type: 'tip' },
+      { text: 'Dacă ți s-a cerut explicit certificatul de deces sau actele de rudenie, pune-le și pe ele în geantă. ⚠️', type: 'warning' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Semnează procura la consulat',
+    shortLabel: 'Semnare',
+    blocks: [
+      { text: 'Te prezinți personal la programare cu documentele și datele pregătite. ✅', type: 'action' },
+      { text: 'Funcționarul consular redactează sau autentifică procura pe baza instrucțiunilor și a datelor furnizate. ✅ Verifică atent numele, CNP-urile, calitatea de moștenitor și scopul procurii înainte să semnezi.', type: 'info' },
+      { text: 'Serviciul se prestează, de regulă, pe loc în aceeași zi ✅. Durata poate crește în zile aglomerate sau dacă lipsesc date importante.', type: 'info' },
+      { text: 'Poți cere duplicate ale aceleiași procuri dacă ai nevoie de mai multe exemplare pentru notar sau pentru dosar. ✅', type: 'tip' },
+      { text: 'Fă imediat o fotografie procurii și salvează și o scanare PDF înainte să trimiți originalul în România.', type: 'note' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Trimite procura în România',
+    shortLabel: 'Trimitere',
+    blocks: [
+      { text: 'Trimite procura autentificată în original către notarul din România sau către persoana împuternicită, exact cum ți-a indicat notarul. ✅', type: 'action' },
+      { text: 'Folosește curier cu tracking și confirmare de livrare — nu trimite documentul prin poștă simplă.', type: 'warning' },
+      { text: 'Anunță notarul că documentul este pe drum și trimite-i și fotografia/scanarea, ca să confirme că textul este cel corect înainte de livrarea originalului. ⚠️', type: 'tip' },
+      { text: 'Păstrează numărul AWB și o copie digitală a procurii până se închide dosarul de succesiune.', type: 'note' },
+    ],
+  },
+]
+
 const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
   'pasaport-crds-de': {
     title: 'Reînnoire pașaport CRDS · Germania',
@@ -533,8 +658,8 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
       },
     ],
   },
-  'procura-vanzare-de': { title: 'Procură vânzare proprietate · Germania', steps: procuraSteps },
-  'procura-mostenire-de': { title: 'Procură moștenire · Germania', steps: procuraSteps },
+  'procura-vanzare-de': { title: 'Procură de vânzare/cumpărare proprietate · Germania', steps: procuraVanzareSteps },
+  'procura-mostenire-de': { title: 'Procură moștenire · Germania', steps: procuraMostenireSteps },
   'procura-generala-de': { title: 'Procură generală · Germania', steps: procuraSteps },
   'transcriere-nastere-de': {
     title: 'Transcriere certificat de naștere · Germania',
@@ -614,6 +739,45 @@ function ConsulateCard({
   guideId?: GuideId | null
 }) {
   const card = getConsulateCard(consulateId)
+  const isTravelTitleGuide = guideId === 'titlu-calatorie-de' || guideId === 'titlu-calatorie-urgenta-de'
+  const displaySchedule = isTravelTitleGuide ? card.scheduleTitluCalatorie : card.scheduleDeponere
+  const displayPickup = isTravelTitleGuide
+    ? consulateId === 'bonn'
+      ? 'Luni–Joi 14:00–15:00 · vinerea nu se ridică, dacă depui vineri revii luni'
+      : consulateId === 'muenchen'
+        ? 'În aceeași zi, în programul normal al consulatului'
+        : consulateId === 'stuttgart'
+          ? 'În aceeași zi, în intervalul 10:00–14:00'
+          : 'În aceeași zi, în intervalul 08:00–10:00'
+    : card.scheduleRidicare
+  const displayPaymentMethod = isTravelTitleGuide ? 'gratuit' : card.paymentMethod
+  const displayPaymentNote = isTravelTitleGuide
+    ? 'Titlul de călătorie se eliberează fără taxă consulară.'
+    : card.paymentNote
+  const displayWarnings = isTravelTitleGuide
+    ? [
+        ...(consulateId === 'bonn'
+          ? [
+              'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii.',
+              'Dacă documentul a fost furat: ai nevoie de adeverința poliției, fără traducere autorizată în română.',
+            ]
+          : consulateId === 'muenchen'
+            ? [
+                'Adu 2 fotografii biometrice proprii, tipărite — nu fotografii de pe telefon.',
+                'Dacă documentul a fost furat: ai nevoie de adeverința poliției + traducere autorizată în română.',
+              ]
+            : consulateId === 'stuttgart'
+              ? [
+                  'Intrarea se face prin Gerberstr. 28, nu prin Hauptstätter Str.',
+                  'Adulți: fotografia se preia la ghișeu. Minori sub 14 ani: adu 1 fotografie 3,5 × 4,5 cm pe hârtie.',
+                  'Dacă documentul a fost furat: ai nevoie de adeverința poliției + traducere autorizată în română, dacă este cazul.',
+                ]
+              : [
+                  'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii.',
+                  'Dacă documentul a fost furat: ai nevoie de adeverința poliției + traducere autorizată în română.',
+                ]),
+      ]
+    : card.warnings
 
   return (
     <div className="bg-gray-900 rounded-2xl p-4 my-3 text-white">
@@ -650,16 +814,16 @@ function ConsulateCard({
 
       {/* Program + plată */}
       <div className="text-xs text-gray-400 mb-1">
-        <span className="text-gray-500">Program depunere:</span> {card.scheduleDeponere}
+        <span className="text-gray-500">Program depunere:</span> {displaySchedule}
       </div>
       <div className="text-xs text-gray-400 mb-1">
-        <span className="text-gray-500">Ridicare:</span> {card.scheduleRidicare}
+        <span className="text-gray-500">Ridicare:</span> {displayPickup}
       </div>
       <div className="text-xs text-gray-400 mb-2">
-        <span className="text-gray-500">Plată:</span> {card.paymentMethod}
+        <span className="text-gray-500">Plată:</span> {displayPaymentMethod}
       </div>
-      {card.paymentNote && (
-        <div className="text-xs text-gray-500 mb-2">{card.paymentNote}</div>
+      {displayPaymentNote && (
+        <div className="text-xs text-gray-500 mb-2">{displayPaymentNote}</div>
       )}
 
       {/* Tel */}
@@ -668,9 +832,9 @@ function ConsulateCard({
       </div>
 
       {/* Warnings */}
-      {card.warnings.length > 0 && (
+      {displayWarnings.length > 0 && (
         <div className="mt-3 flex flex-col gap-1">
-          {card.warnings.map((w, i) => (
+          {displayWarnings.map((w, i) => (
             <div key={i} className="text-xs text-orange-300 bg-orange-900/30 rounded-lg px-3 py-2">
               ⚠️ {w}
             </div>
@@ -733,7 +897,11 @@ function GhidPaidPageContent() {
   const [activeTab, setActiveTab] = useState<GhidTab>('ghid')
   const [isBootstrapping, setIsBootstrapping] = useState(true)
   const testGuideId = searchParams.get('guide') as GuideId | null
-  const activeGuideId = TEST_MODE && testGuideId ? testGuideId : guideId
+  const isDevGuidePreview =
+    process.env.NODE_ENV !== 'production' &&
+    sessionId === 'test-session' &&
+    !!testGuideId
+  const activeGuideId = (TEST_MODE || isDevGuidePreview) && testGuideId ? testGuideId : guideId
 
   const content = activeGuideId ? getFullPaidGuideContent(activeGuideId) : null
 
@@ -741,7 +909,7 @@ function GhidPaidPageContent() {
     let cancelled = false
 
     async function bootstrapSession() {
-      if (!sessionId || (TEST_MODE && !!testGuideId)) {
+      if (!sessionId || ((TEST_MODE || isDevGuidePreview) && !!testGuideId)) {
         if (!cancelled) setIsBootstrapping(false)
         return
       }
@@ -796,7 +964,7 @@ function GhidPaidPageContent() {
     return () => {
       cancelled = true
     }
-  }, [router, sessionId, testGuideId])
+  }, [isDevGuidePreview, router, sessionId, testGuideId])
 
   useEffect(() => {
     if (content) setTotalSteps(content.steps.length)
@@ -1074,8 +1242,8 @@ function GhidPaidPageContent() {
             </>
           )}
 
-          {activeTab === 'checklist' && <ChecklistTab />}
-          {activeTab === 'tracker' && <TrackerTab />}
+          {activeTab === 'checklist' && <ChecklistTab guideIdOverride={activeGuideId} />}
+          {activeTab === 'tracker' && <TrackerTab guideIdOverride={activeGuideId} />}
           {activeTab === 'parteneri' && <ParteneriTab />}
         </div>
 

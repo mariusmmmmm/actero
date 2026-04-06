@@ -4,9 +4,14 @@ import { useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/appStore'
 import { getGuideSteps } from '@/lib/guides/steps'
 
-export default function TrackerTab() {
+export default function TrackerTab({
+  guideIdOverride,
+}: {
+  guideIdOverride?: string | null
+}) {
   const router = useRouter()
-  const guideId = useAppStore((s) => s.guideId)
+  const storeGuideId = useAppStore((s) => s.guideId)
+  const guideId = guideIdOverride ?? storeGuideId
   const currentStepIndex = useAppStore((s) => s.currentStepIndex)
   const trackerState = useAppStore((s) => s.trackerState)
   const setTrackerStep = useAppStore((s) => s.setTrackerStep)

@@ -62,6 +62,25 @@ const STEPS_TITLU_STANDARD: TrackerStep[] = [
   { id: 'romania', title: 'Ce faci în România', shortLabel: 'România', todoNote: 'Rezolvă documentul permanent înainte să pleci iar' },
 ]
 
+const STEPS_PROCURA: TrackerStep[] = [
+  { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Strânge actul de identitate, datele mandatarului și cerințele notarului' },
+  { id: 'pregatire', title: 'Pregătește documentele', shortLabel: 'Pregătire', todoNote: 'Scanează actele și clarifică textul procurii cu notarul din România' },
+  { id: 'programare', title: 'Obține programarea', shortLabel: 'Programare', todoNote: 'Cererea pentru procuri se face din econsulat.ro' },
+  { id: 'consulat', title: 'Mergi la consulat', shortLabel: 'Consulat', todoNote: 'Te prezinți personal cu documentele în original' },
+  { id: 'semnare', title: 'Semnează procura', shortLabel: 'Semnare', todoNote: 'Verifici cu atenție textul înainte să semnezi' },
+  { id: 'trimitere', title: 'Trimite procura în România', shortLabel: 'Trimitere', todoNote: 'Trimite originalul către notar sau mandatar cu tracking' },
+]
+
+const STEPS_PROCURA_VANZARE: TrackerStep[] = [
+  { id: 'documente', title: 'Adună documentele necesare', shortLabel: 'Documente', todoNote: 'Act identitate, act de proprietate și datele mandatarului' },
+  { id: 'continut', title: 'Pregătește conținutul procurii', shortLabel: 'Conținut', todoNote: 'Clarifică puterile exacte cu notarul din România' },
+  { id: 'cerere', title: 'Creează cererea pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'La Bonn încarcă și copiile cerute înainte de programare' },
+  { id: 'programare', title: 'Obține programarea la consulat', shortLabel: 'Programare', todoNote: 'La Berlin plătești 3€ prin virament înainte de prezentare' },
+  { id: 'pregatire', title: 'Pregătire pentru ziua programării', shortLabel: 'Pregătire', todoNote: 'Verifică metoda de plată a consulatului tău' },
+  { id: 'consulat', title: 'Ziua consulatului — semnezi procura', shortLabel: 'Consulat', todoNote: 'Verifică atent datele imobilului și ale mandatarului înainte să semnezi' },
+  { id: 'trimitere', title: 'Trimite procura și coordonează cu notarul', shortLabel: 'Trimitere', todoNote: 'Trimite duplicatul cu tracking și o scanare către notar' },
+]
+
 const STEPS_GENERIC: TrackerStep[] = [
   { id: 'documente', title: 'Strânge documentele', shortLabel: 'Documente' },
   { id: 'cerere', title: 'Depune cererea', shortLabel: 'Cerere' },
@@ -82,4 +101,7 @@ const STEPS: Record<string, TrackerStep[]> = {
   'buletin-de-primul-de-b': STEPS_BULETIN_PRIMUL_B,
   'titlu-calatorie-urgenta-de': STEPS_TITLU_URGENTA,
   'titlu-calatorie-de': STEPS_TITLU_STANDARD,
+  'procura-vanzare-de': STEPS_PROCURA_VANZARE,
+  'procura-mostenire-de': STEPS_PROCURA,
+  'procura-generala-de': STEPS_PROCURA,
 }

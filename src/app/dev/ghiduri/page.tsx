@@ -4,22 +4,22 @@ import SiteHeader from '@/components/layout/SiteHeader'
 import type { GuideId } from '@/types'
 
 const guides: { id: GuideId; title: string }[] = [
-  { id: 'pasaport-crds-de', title: 'Pasaport CRDS' },
-  { id: 'pasaport-crds-nou-de', title: 'Primul pasaport CRDS' },
-  { id: 'pasaport-de-cu-domiciliu', title: 'Pasaport cu domiciliu in Romania' },
-  { id: 'pasaport-de-cu-domiciliu-pierdut', title: 'Pasaport pierdut/furat cu domiciliu in Romania' },
-  { id: 'buletin-de-fara-domiciliu', title: 'Buletin fara domiciliu RO' },
-  { id: 'buletin-de-cu-domiciliu', title: 'Buletin cu domiciliu activ RO' },
-  { id: 'buletin-de-fara-domiciliu-pierdut', title: 'Buletin pierdut/furat fara domiciliu RO' },
-  { id: 'buletin-de-cu-domiciliu-pierdut', title: 'Buletin pierdut/furat cu domiciliu activ RO' },
-  { id: 'buletin-de-primul-de', title: 'Primul buletin nascut in Romania' },
-  { id: 'buletin-de-primul-de-b', title: 'Primul buletin nascut in Germania' },
-  { id: 'titlu-calatorie-urgenta-de', title: 'Titlu de calatorie urgenta' },
-  { id: 'titlu-calatorie-de', title: 'Titlu de calatorie standard' },
-  { id: 'procura-vanzare-de', title: 'Procura vanzare' },
-  { id: 'procura-mostenire-de', title: 'Procura mostenire' },
-  { id: 'procura-generala-de', title: 'Procura generala' },
-  { id: 'transcriere-nastere-de', title: 'Transcriere certificat de nastere' },
+  { id: 'pasaport-crds-de', title: 'Reînnoire pașaport CRDS · Germania' },
+  { id: 'pasaport-crds-nou-de', title: 'Primul pașaport CRDS · Germania' },
+  { id: 'pasaport-de-cu-domiciliu', title: 'Pașaport · Domiciliu România · Germania' },
+  { id: 'pasaport-de-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Germania' },
+  { id: 'buletin-de-fara-domiciliu', title: 'Buletin expirat · Fără domiciliu RO' },
+  { id: 'buletin-de-cu-domiciliu', title: 'Buletin expirat · Domiciliu activ RO' },
+  { id: 'buletin-de-fara-domiciliu-pierdut', title: 'Buletin pierdut/furat · Fără domiciliu RO' },
+  { id: 'buletin-de-cu-domiciliu-pierdut', title: 'Buletin pierdut/furat · Domiciliu activ RO' },
+  { id: 'buletin-de-primul-de', title: 'Primul buletin românesc · Născut în România' },
+  { id: 'buletin-de-primul-de-b', title: 'Primul buletin românesc · Născut în Germania' },
+  { id: 'titlu-calatorie-urgenta-de', title: 'Titlu de călătorie · Urgență' },
+  { id: 'titlu-calatorie-de', title: 'Titlu de călătorie · Germania · 1–2 săptămâni' },
+  { id: 'procura-vanzare-de', title: 'Procură notarială · Vânzare / cumpărare proprietate' },
+  { id: 'procura-mostenire-de', title: 'Procură notarială · Moștenire / succesiune' },
+  { id: 'procura-generala-de', title: 'Procură notarială · Altceva' },
+  { id: 'transcriere-nastere-de', title: 'Transcriere certificat de naștere · Germania' },
 ]
 
 const seoPages = [

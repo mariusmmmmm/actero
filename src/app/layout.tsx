@@ -79,7 +79,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const gaId = 'G-YT5RBX61RR'
+  const gaId = process.env.NEXT_PUBLIC_GA_ID ?? 'G-YT5RBX61RR'
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',

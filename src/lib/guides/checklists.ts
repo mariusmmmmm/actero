@@ -233,6 +233,72 @@ function checklistTitluCalatorie(consulate: ConsulateId | null, _s: SituationFla
   ]
 }
 
+function checklistProcuraMostenire(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'identitate',
+      title: 'Documente de bază',
+      items: [
+        { id: 'pm14_id', name: 'Act de identitate valabil', detail: 'Original · pașaport sau carte de identitate românească valabilă' },
+        { id: 'pm14_mandatar', name: 'Datele mandatarului din România', detail: 'Nume complet, CNP, serie și număr CI, adresă exactă' },
+        { id: 'pm14_notar', name: 'Datele notarului din România', detail: 'Nume + localitate + date de contact + cerințele pentru procura de succesiune' },
+      ],
+    },
+    {
+      id: 'succesiune',
+      title: 'Documente utile pentru dosarul de succesiune',
+      items: [
+        { id: 'pm14_deces', name: 'Certificatul de deces', detail: 'Original sau copie · verifică înainte cu notarul dacă trebuie și la consulat' },
+        { id: 'pm14_rudenie', name: 'Acte care dovedesc calitatea de moștenitor', detail: 'Certificat de naștere / căsătorie, după caz · verifică exact lista cu notarul' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraVanzare(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  let plataDetail = '3€ RNNEPR, conform regulilor consulatului tău'
+
+  if (consulate === 'bonn') {
+    plataDetail = '3€ RNNEPR · EC-Karte la ghișeu în ziua programării'
+  } else if (consulate === 'muenchen') {
+    plataDetail = '3€ RNNEPR · numerar la ghișeu în ziua programării'
+  } else if (consulate === 'stuttgart') {
+    plataDetail = '3€ RNNEPR · POS la ghișeu sau virament bancar cu cel puțin 3 zile înainte'
+  } else if (consulate === 'berlin') {
+    plataDetail = '3€ RNNEPR · numai virament bancar, cu 3–4 zile lucrătoare înainte de programare'
+  }
+
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'pv13_id', name: 'Act de identitate valabil', detail: 'Original · pașaport sau carte de identitate românească' },
+        { id: 'pv13_mandatar', name: 'Datele complete ale mandatarului', detail: 'Nume, CNP, serie și număr CI/pașaport, dată și loc eliberare, adresă' },
+        { id: 'pv13_proprietate', name: 'Copie după actul de proprietate', detail: 'Contract, certificat de moștenitor, titlu de proprietate sau alt act care dovedește proprietatea' },
+        { id: 'pv13_cadastru', name: 'Cadastru și încheiere de intabulare', detail: 'Dacă există · recomandate pentru redactarea corectă a procurii' },
+      ],
+    },
+    {
+      id: 'continut',
+      title: 'Înainte de programare',
+      items: [
+        { id: 'pv13_notar', name: 'Instrucțiunile notarului din România', detail: 'Ce puteri exacte trebuie să conțină procura pentru tranzacție' },
+        { id: 'pv13_puteri', name: 'Nota cu conținutul procurii', detail: 'Imobil, mandatar, preț fix sau negociere, încasarea banilor, predarea imobilului' },
+        { id: 'pv13_soti', name: 'Verificare bun comun', detail: 'Dacă imobilul este bun comun, ambii soți trebuie să dea procură' },
+      ],
+    },
+    {
+      id: 'plata',
+      title: 'Plata și programarea',
+      items: [
+        { id: 'pv13_plata', name: 'Tarif publicitate notarială (RNNEPR)', detail: plataDetail },
+        { id: 'pv13_bonn', name: 'Regulă specială Bonn', detail: 'Încarcă din timp pe econsulat copia actului de proprietate și copia CI a mandatarului pentru eliberare în aceeași zi' },
+      ],
+    },
+  ]
+}
+
 // ── Generic fallback ──────────────────────────────────────────────────────────
 
 function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -261,4 +327,6 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'buletin-de-primul-de-b': checklistBuletinPrimulDeB,
   'titlu-calatorie-urgenta-de': checklistTitluCalatorieUrgenta,
   'titlu-calatorie-de': checklistTitluCalatorie,
+  'procura-vanzare-de': checklistProcuraVanzare,
+  'procura-mostenire-de': checklistProcuraMostenire,
 }
