@@ -99,7 +99,7 @@ const pasaportCrdsSteps: PaidStep[] = [
     blocks: [
       { text: 'Programarea devine disponibilă după ce cererea trece în starea „Validată".', type: 'info' },
       { text: 'Intră pe econsulat.ro → „Programările mele" → „Programare nouă" → alege consulatul tău → alege prima dată disponibilă.', type: 'action' },
-      { text: 'Programările se eliberează de obicei luni dimineața la 08:00. Intră exact la 08:00 pentru cele mai bune șanse.', type: 'tip' },
+      { text: 'Din experiența comunității, sloturile apar mai des la început de săptămână sau după validarea cererilor și anulărilor. Verifică periodic econsulat.ro. (neconfirmat oficial)', type: 'tip' },
       { text: 'Programările sunt GRATUITE. Nu apela la intermediari care oferă programări contra cost.', type: 'warning' },
     ],
   },
@@ -111,7 +111,7 @@ const pasaportCrdsSteps: PaidStep[] = [
     blocks: [
       { text: 'Verifică că ai toate documentele originale în geantă (nu doar copiile).', type: 'info' },
       { text: 'Ai câte o copie simplă din fiecare document original.', type: 'info' },
-      { text: 'Fotografiile sunt conform specificațiilor (3,5 × 4,5 cm, fond alb).', type: 'info' },
+      { text: 'Nu trebuie să aduci fotografii — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate.', type: 'info' },
       { text: 'Programarea e activă în contul tău pe econsulat.ro.', type: 'info' },
     ],
   },
@@ -179,7 +179,7 @@ const buletinExpiratFaraDomSteps: PaidStep[] = [
     shortLabel: 'Pregătire',
     blocks: [
       { text: 'Ai documentul cu care călătorești în România și toate originalele puse în geantă: buletinul expirat, certificatul de naștere, certificatul de căsătorie dacă e cazul.', type: 'action' },
-      { text: 'Verifică dacă SPCLEP-ul tău cere fotografie tipărită sau o face la ghișeu. Practica nu este uniformă în toate localitățile.', type: 'warning' },
+      { text: 'Fotografia și amprentele se preiau biometric la ghișeul SPCLEP. Verifică doar modalitatea de plată și dacă localitatea cere copii simple ale actelor.', type: 'warning' },
       { text: 'Notează și adresa exactă a ghișeului, programul și modalitatea de plată. Nu presupune că aceeași regulă se aplică în toate orașele.', type: 'info' },
     ],
   },
@@ -224,7 +224,7 @@ const buletinExpiratDomSteps: PaidStep[] = [
     shortLabel: 'Pregătire',
     blocks: [
       { text: 'Pune în geantă toate originalele: buletinul expirat, certificatul de naștere, dovada adresei, certificatul de căsătorie dacă e cazul și documentul de călătorie pentru România.', type: 'action' },
-      { text: 'Verifică dacă localitatea ta cere plată în avans, chitanță sau fotografie tipărită. Nu toate SPCLEP-urile lucrează identic.', type: 'warning' },
+      { text: 'Verifică dacă localitatea ta cere plată în avans sau chitanță. Fotografia și amprentele se preiau biometric la ghișeu, nu trebuie să vii cu poze proprii.', type: 'warning' },
       { text: 'Dacă adresa este pe locuința altcuiva, clarifică înainte dacă proprietarul trebuie să vină fizic sau dacă este suficient actul de spațiu pregătit.', type: 'tip' },
     ],
   },
@@ -235,7 +235,7 @@ const buletinExpiratDomSteps: PaidStep[] = [
     blocks: [
       { text: 'Te prezinți la ghișeu și spui că soliciți reînnoirea cărții de identitate pentru un domiciliu deja activ în România.', type: 'action' },
       { text: 'Funcționarul verifică actele, îți generează cererea și îți explică dacă localitatea emite CEI, CIS sau ambele.', type: 'info' },
-      { text: 'Dacă se preiau biometrice la ghișeu, urmezi instrucțiunile funcționarului. Dacă localitatea cere fotografie sau copii, le depui conform cerinței locale.', type: 'info' },
+      { text: 'Funcționarul îți preia fotografia biometrică și amprentele direct la ghișeu. Nu trebuie să vii cu fotografii proprii.', type: 'info' },
       { text: 'La final primești recipisa sau numărul cererii. Fotografiaz-o și notează termenul exact comunicat pentru ridicare.', type: 'tip' },
       { text: 'Dacă ți se cere un act care nu apare în lista ta, întreabă calm dacă este cerință legală sau practică locală și notează răspunsul.', type: 'warning' },
     ],
@@ -247,7 +247,7 @@ const buletinExpiratDomSteps: PaidStep[] = [
     blocks: [
       { text: 'Revii la același SPCLEP sau la punctul indicat de funcționar, în termenul comunicat la depunere.', type: 'info' },
       { text: 'Prezinți recipisa și ridici noul document. Verifică imediat numele, CNP-ul și adresa înainte să pleci din ghișeu.', type: 'action' },
-      { text: 'Întreabă de la depunere dacă ridicarea este strict personală sau dacă există excepții pentru varianta simplă emisă local. Nu presupune automat o regulă unică.', type: 'warning' },
+      { text: 'CEI se ridică obligatoriu personal. Pentru CIS, întreabă de la depunere dacă localitatea permite ridicare prin procură specială notarială.', type: 'warning' },
     ],
   },
 ]
@@ -292,7 +292,7 @@ const buletinLipsaFaraDomSteps: PaidStep[] = [
     blocks: [
       { text: 'Revii la SPCLEP după termenul primit la depunere. Nu te baza pe durata medie din alt oraș.', type: 'info' },
       { text: 'Prezinți recipisa și ridici noul document conform regulii locale de predare.', type: 'action' },
-      { text: 'Verifică imediat datele noului act și întreabă încă de la depunere dacă ridicarea este strict personală sau există o excepție locală pentru CIS.', type: 'warning' },
+      { text: 'Verifică imediat datele noului act. CEI se ridică personal; dacă ai ales CIS, poți organiza ridicarea prin procură specială notarială.', type: 'warning' },
     ],
   },
 ]
@@ -343,8 +343,8 @@ const buletinLipsaDomSteps: PaidStep[] = [
       { text: 'Revii la SPCLEP sau la punctul indicat de funcționar, în termenul transmis la depunere.', type: 'info' },
       { text: 'Prezinți recipisa și ridici noul document. Verifică imediat corectitudinea datelor înainte să pleci.', type: 'action' },
       { text: 'CEI: ridicare personală, de regulă în câteva zile, iar la ridicare stabilești PIN-ul de autentificare și PIN-ul de semnătură. Fără prezența ta, documentul nu se finalizează corect.', type: 'info' },
-      { text: 'CIS: termenul este de obicei mai lung. Întreabă la depunere dacă localitatea ta permite ridicare prin procură specială notarială sau cere prezență personală și la acest tip de document.', type: 'info' },
-      { text: 'Pentru CEI, ridicarea este în mod normal personală; pentru CIS, întreabă la depunere dacă există vreo excepție locală. Nu pleca fără această clarificare dacă revii repede în Germania.', type: 'warning' },
+      { text: 'CIS: termenul este de obicei mai lung, dar documentul poate fi ridicat prin procură specială notarială dacă alegi această variantă.', type: 'info' },
+      { text: 'Nu pleca fără să clarifici de la depunere cine ridică documentul și când, mai ales dacă revii repede în Germania.', type: 'warning' },
     ],
   },
 ]
@@ -627,9 +627,11 @@ const procuraGeneralaSteps: PaidStep[] = [
     shortLabel: 'Taxă',
     blocks: [
       { text: 'Pasul acesta se aplică DOAR dacă procura ta va fi folosită la un notar din România: divorț notarial, succesiune, vânzare prin mandatar. Dacă faci procura pentru firmă, bancă, cazier, auto sau orice altceva care NU implică un notar — SARI direct la Pasul 4.', type: 'warning' },
-      { text: 'Plătește 3 euro prin virament bancar în avans, cu cel puțin 3–4 zile lucrătoare înainte de programare. Adu ordinul de plată la consulat ca dovadă. (econsulat.ro/Procura/ActeNecesare + berlin.mae.ro/node/258)', type: 'action' },
-      { text: 'Berlin: virament la IBAN DE83 1007 0000 0435 4429 00 · BIC DEUTDEBBXXX · Botschaft von Rumänien · Deutsche Bank Berlin. (berlin.mae.ro/node/258 — confirmat live)', type: 'info' },
-      { text: 'Bonn, München, Stuttgart: IBAN-ul specific se găsește la programare pe econsulat.ro — nu apare publicat pe site-urile consulatelor. Regulă generală: virament bancar în avans. La Stuttgart, IBAN-ul de pașapoarte (DE04 1007 0000 0976 1909 01) e cel mai probabil același — confirmă la programare.', type: 'info' },
+      { text: 'Pasul acesta se aplică doar dacă procura va fi folosită la un notar din România. Metoda de plată pentru taxa de 3€ diferă per consulat și trebuie respectată exact.', type: 'action' },
+      { text: 'Bonn: EC-Karte (card de debit bancă germană) la ghișeu, în ziua programării.', type: 'info' },
+      { text: 'München: numerar (cash) la ghișeu, în ziua programării.', type: 'info' },
+      { text: 'Stuttgart: POS (EC-Karte) la ghișeu sau virament în avans la IBAN DE04 1007 0000 0976 1909 01 · BIC DEUTDEBBXXX.', type: 'info' },
+      { text: 'Berlin: NUMAI virament bancar în avans la IBAN DE83 1007 0000 0435 4429 00 · BIC DEUTDEBBXXX · Botschaft von Rumänien · Deutsche Bank Berlin, cu 3–4 zile lucrătoare înainte.', type: 'info' },
       { text: 'Taxa de 3 euro nu e o taxă consulară — se virează la CNARNN (registrele notariale din România).', type: 'note' },
     ],
   },
@@ -715,10 +717,10 @@ const procuraMostenireSteps: PaidStep[] = [
     shortLabel: 'Consulat',
     hasConsulateCard: true,
     blocks: [
-      { text: 'Ai la tine actul de identitate valabil în original. ✅ Fără el, procura nu poate fi autentificată.', type: 'info' },
-      { text: 'Ai notate clar datele mandatarului și ale notarului din România. ✅ Cel mai sigur este să le ai și într-un email sau PDF trimis de notar.', type: 'info' },
-      { text: 'Dacă notarul ți-a trimis modelul sau formularea dorită pentru procură, ia-l cu tine. ⚠️ Acest lucru reduce mult riscul ca procura să nu fie acceptată ulterior în dosarul de succesiune.', type: 'tip' },
-      { text: 'Dacă ți s-a cerut explicit certificatul de deces sau actele de rudenie, pune-le și pe ele în geantă. ⚠️', type: 'warning' },
+      { text: 'Ai la tine actul de identitate valabil în original. Fără el, procura nu poate fi autentificată.', type: 'info' },
+      { text: 'Ai notate clar datele mandatarului și ale notarului din România. Cel mai sigur este să le ai și într-un email sau PDF trimis de notar.', type: 'info' },
+      { text: 'Dacă notarul ți-a trimis modelul sau formularea dorită pentru procură, ia-l cu tine. Acest lucru reduce mult riscul ca procura să nu fie acceptată ulterior în dosarul de succesiune.', type: 'tip' },
+      { text: 'La Bonn, Stuttgart și Berlin: ai la tine și copia certificatului de deces. Actele de rudenie sau de calitate de moștenitor nu sunt cerute de consulat, dar rămân utile pentru notarul din România.', type: 'warning' },
     ],
   },
   {
@@ -727,7 +729,7 @@ const procuraMostenireSteps: PaidStep[] = [
     shortLabel: 'Semnare',
     blocks: [
       { text: 'Te prezinți personal la programare cu documentele și datele pregătite. ✅', type: 'action' },
-      { text: 'Funcționarul consular redactează sau autentifică procura pe baza instrucțiunilor și a datelor furnizate. ✅ Verifică atent numele, CNP-urile, calitatea de moștenitor și scopul procurii înainte să semnezi.', type: 'info' },
+      { text: 'Funcționarul consular redactează sau autentifică procura pe baza instrucțiunilor și a datelor furnizate. Verifică atent numele, CNP-urile, datele mandatarului și scopul procurii înainte să semnezi.', type: 'info' },
       { text: 'Serviciul se prestează, de regulă, pe loc în aceeași zi ✅. Durata poate crește în zile aglomerate sau dacă lipsesc date importante.', type: 'info' },
       { text: 'Poți cere duplicate ale aceleiași procuri dacă ai nevoie de mai multe exemplare pentru notar sau pentru dosar. ✅', type: 'tip' },
       { text: 'Fă imediat o fotografie procurii și salvează și o scanare PDF înainte să trimiți originalul în România.', type: 'note' },
@@ -909,7 +911,7 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
         },
         blocks: [
           { text: 'Programarea devine disponibilă după ce cererea trece în starea „Validată”. Intră în cont → „Programările mele” → „Programare nouă” → alege consulatul și prima dată disponibilă.', type: 'info' },
-          { text: 'Din experiența comunității, programările se eliberează de obicei luni dimineața la 08:00. Intră pe econsulat.ro luni dimineața imediat după ora 08:00 pentru cele mai bune șanse.', type: 'tip' },
+          { text: 'Din experiența comunității, la început de săptămână apar mai des locuri noi după validări și anulări. Verifică periodic econsulat.ro. (neconfirmat oficial)', type: 'tip' },
           { text: 'Programările sunt gratuite. Nu apela la intermediari care oferă „locuri urgente” contra cost.', type: 'warning' },
           { text: 'München: verifică pe muenchen.mae.ro dacă există consulat itinerant planificat în Bavaria — ar reduce distanța până la consulat. Calendarul 2026 nu era publicat la apr. 2026, dar procedura de consultare a fost lansată.', type: 'info' },
         ],

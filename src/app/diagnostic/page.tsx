@@ -87,7 +87,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
   'pasaport-de-cu-domiciliu-pierdut': {
     title: 'Pașaport pierdut / furat / distrus · Domiciliu România',
     subtitle: 'Rezident în Germania · 1 deplasare la consulat',
-    warnings: ['Dacă pașaportul a fost furat — ai nevoie de confirmare poliție + traducere autorizată în română.'],
+    warnings: ['Dacă pașaportul a fost furat — ai nevoie de adeverință de poliție + traducere în română conform consulatului tău: Bonn = autorizată, Stuttgart = legalizată, München și Berlin = autorizată.'],
     estimatedWeeks: '4–8 săptămâni',
     estimatedAppointments: 1,
     guideTitle: 'Ghid pașaport pierdut/furat',
@@ -291,7 +291,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     subtitle: 'Ești în Germania și vrei să împuternicești pe cineva să te reprezinte în succesiune, fără să mergi personal în România.',
     warnings: [
       'Conținutul procurii trebuie să se potrivească exact cu dosarul de succesiune și cu cerințele notarului din România. Dacă ai deja notar ales, cere-i înainte lista exactă de date.',
-      'Lista documentelor-suport pentru succesiune poate varia în funcție de notar și de dosar. Dacă ți se cer certificatul de deces sau acte care dovedesc calitatea de moștenitor, pregătește-le înainte de programare.',
+      'La Bonn, Stuttgart și Berlin, copia certificatului de deces trebuie pregătită înainte de programare. Actele de rudenie sau de calitate de moștenitor nu sunt cerute de consulat, dar rămân utile pentru notarul din România.',
     ],
     estimatedWeeks: '1–2 săptămâni',
     estimatedAppointments: 1,
@@ -312,7 +312,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     warnings: [
       'Consulatele NU fac procedura de divorț. Pot autentifica procura pentru depunerea cererii de divorț la notar din România — sunt lucruri diferite.',
       'Conținutul exact al procurii trebuie stabilit în avans cu autoritatea sau notarul din România unde va fi folosită. Răspunderea pentru conținut incorect este exclusiv a ta.',
-      'Dacă procura e pentru divorț notarial, succesiune sau vânzare prin mandatar: taxa de publicitate notarială de 3 euro se plătește prin virament bancar în avans, înainte de programare.',
+      'Dacă procura e pentru divorț notarial, succesiune sau vânzare prin mandatar: taxa de publicitate notarială de 3 euro se plătește după regula consulatului tău — Bonn = EC-Karte, München = numerar, Stuttgart = POS sau virament, Berlin = virament în avans.',
     ],
     estimatedWeeks: '1–2 săptămâni',
     estimatedAppointments: '1 programare · 1 deplasare la consulat · procura se eliberează pe loc în aceeași zi',
@@ -336,7 +336,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Minorul sub 14 ani NU trebuie să fie prezent. Un singur părinte cetățean român este suficient.',
       'Minorul care a împlinit 14 ani vine personal la consulat, asistat de un părinte.',
     ],
-    estimatedWeeks: '4–8 săptămâni procesare + timp de așteptare programare',
+    estimatedWeeks: '3–6 luni total cu programare și procesare',
     estimatedAppointments: '1 programare pentru depunere · 1 prezentare pentru ridicare (sau poștă la Stuttgart)',
     guideTitle: 'Transcriere naștere Germania → România',
     isRoute: false,
@@ -358,12 +358,12 @@ const routeMap: Record<string, DiagnosticData> = {
     title: 'Primul pașaport · Născut în Germania',
     subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi pașaportul',
     warnings: ['Nu poți solicita încă pașaportul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul de pașaport.'],
-    estimatedWeeks: '3–5 luni total',
+    estimatedWeeks: '3–6 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · 4–8 săptămâni + programare' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
       { guideId: 'pasaport-crds-nou-de', title: 'Ghid B: Primul pașaport CRDS (după transcriere)', weeks: 'pasul 2 · ~6–8 săptămâni' },
     ],
     previewSteps: [],
@@ -372,12 +372,12 @@ const routeMap: Record<string, DiagnosticData> = {
     title: 'Primul buletin · Născut în Germania',
     subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi primul buletin',
     warnings: ['Nu poți solicita încă buletinul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul pentru primul buletin.'],
-    estimatedWeeks: '2–4 luni total',
+    estimatedWeeks: '3–6 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · 4–8 săptămâni + programare' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
       { guideId: 'buletin-de-primul-de-b', title: 'Ghid B: Primul buletin (după transcriere)', weeks: 'pasul 2 · după obținerea certificatului românesc și a CNP-ului' },
     ],
     previewSteps: [],
@@ -385,7 +385,7 @@ const routeMap: Record<string, DiagnosticData> = {
 }
 
 const BULETIN_COMMON_WARNING_RIDICARE =
-  'Regulă comună pentru ghidurile de buletin: la CEI ridicarea este personală și activezi PIN-urile la ridicare; la CIS verifici la depunere dacă localitatea admite vreo excepție de predare.'
+  'Regulă comună pentru ghidurile de buletin: la CEI ridicarea este personală și activezi PIN-urile la ridicare; la CIS poți organiza ridicarea prin procură specială notarială.'
 
 const BULETIN_COMMON_WARNING_REZIDENTA_DE =
   'Când ghidul cere dovada rezidenței în Germania, Anmeldung sau Meldebescheinigung se acceptă în original, fără apostilă și fără traducere autorizată în română.'
@@ -578,12 +578,12 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
 
   switch (guideId) {
     case 'pasaport-crds-de':
-      return '⏱ 1 singură deplasare la consulat · 6–8 săptămâni'
+      return '⏱ o singură vizită la consulat · 6–8 săptămâni'
     case 'pasaport-crds-nou-de':
-      return '⏱ 1 singură deplasare la consulat · 8–10 săptămâni'
+      return '⏱ o singură vizită la consulat · 8–10 săptămâni'
     case 'pasaport-de-cu-domiciliu':
     case 'pasaport-de-cu-domiciliu-pierdut':
-      return '⏱ 1 singură deplasare la consulat · 4–6 săptămâni'
+      return '⏱ o singură vizită la consulat · 4–6 săptămâni'
     case 'buletin-de-fara-domiciliu':
     case 'buletin-de-fara-domiciliu-pierdut':
       return '⏱ 1 deplasare în România · 3–5 săptămâni'
@@ -591,18 +591,18 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
     case 'buletin-de-cu-domiciliu-pierdut':
       return '⏱ 1 deplasare în România · 2–4 săptămâni'
     case 'procura-vanzare-de':
-      return '⏱ 1 programare · 1 deplasare la consulat · procura în aceeași zi'
+      return '⏱ 1 programare · o singură vizită la consulat · procura în aceeași zi'
     case 'procura-mostenire-de':
     case 'procura-generala-de':
-      return '⏱ 1 singură deplasare la consulat · 1–2 săptămâni'
+      return '⏱ o singură vizită la consulat · 1–2 săptămâni'
     case 'titlu-calatorie-urgenta-de':
       return '⏱ 1 deplasare la consulat · fără programare · aceeași zi'
     case 'titlu-calatorie-de':
       return '⏱ 1 deplasare la consulat · fără programare · aceeași zi în majoritatea cazurilor'
     case 'transcriere-nastere-de':
-      return '⏱ 1 programare pentru depunere · 1 ridicare sau poștă la Stuttgart · 4–8 săptămâni procesare'
+      return '⏱ 1 programare pentru depunere · 1 ridicare sau poștă la Stuttgart · ~3–6 luni total'
     default:
-      return `⏱ ${estimatedAppointments === 1 ? '1 singură deplasare' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
+      return `⏱ ${estimatedAppointments === 1 ? 'o singură vizită' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
   }
 }
 

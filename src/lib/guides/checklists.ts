@@ -276,7 +276,7 @@ function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, _s: Situa
       title: 'Dacă documentul a fost furat',
       items: [
         { id: 'tc11_politie', name: 'Diebstahlsanzeige de la poliția locală', detail: 'Obligatorie înainte de consulat' },
-        { id: 'tc11_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; recomandată și la Bonn' },
+        { id: 'tc11_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; la Bonn nu este cerută' },
       ],
     },
   ]
@@ -389,12 +389,16 @@ function checklistProcuraVanzare(consulate: ConsulateId | null, _s: SituationFla
 }
 
 function checklistProcuraGenerala(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
-  let plataDetail = 'Procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, plata se face prin virament bancar în avans'
+  let plataDetail = 'Procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, metoda depinde de consulatul tău'
 
-  if (consulate === 'berlin') {
+  if (consulate === 'bonn') {
+    plataDetail = 'Bonn: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește cu EC-Karte la ghișeu'
+  } else if (consulate === 'muenchen') {
+    plataDetail = 'München: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește numerar la ghișeu'
+  } else if (consulate === 'stuttgart') {
+    plataDetail = 'Stuttgart: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește la POS sau prin virament bancar cu cel puțin 3 zile înainte'
+  } else if (consulate === 'berlin') {
     plataDetail = 'Berlin: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește numai prin virament bancar, cu 3–4 zile înainte'
-  } else if (consulate === 'bonn' || consulate === 'muenchen' || consulate === 'stuttgart') {
-    plataDetail = 'Bonn / München / Stuttgart: procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, verifici IBAN-ul în econsulat și plătești prin virament în avans'
   }
 
   return [
