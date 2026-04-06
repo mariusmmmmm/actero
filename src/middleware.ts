@@ -11,6 +11,11 @@ const ADMIN_ROUTES = ['/admin']
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
+  // Linkul din email trebuie să poată seta cookie-ul înainte să protejăm ghidul paid.
+  if (pathname === '/ghid/access') {
+    return NextResponse.next()
+  }
+
   // ── Rute paid ────────────────────────────────────────────────────────────────
   if (!TEST_MODE && PAID_ROUTES.some((r) => pathname.startsWith(r))) {
     const sessionCookie = req.cookies.get('actero_session')
