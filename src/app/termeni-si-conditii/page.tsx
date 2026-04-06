@@ -46,8 +46,8 @@ export default function TermeniPage() {
           </p>
           <p className="text-sm text-gray-500">
             Dacă ai întrebări despre acești termeni, ne poți scrie la{' '}
-            <a href="mailto:contac@actero.ro" className="underline underline-offset-2">
-              contac@actero.ro
+            <a href="mailto:contact@actero.ro" className="underline underline-offset-2">
+              contact@actero.ro
             </a>
             .
           </p>
@@ -189,8 +189,8 @@ export default function TermeniPage() {
             Dacă apare o problemă tehnică reală care împiedică livrarea accesului
             cumpărat sau dacă ai fost taxat fără să primești accesul promis, ne
             poți scrie la{' '}
-            <a href="mailto:contac@actero.ro" className="underline underline-offset-2">
-              contac@actero.ro
+            <a href="mailto:contact@actero.ro" className="underline underline-offset-2">
+              contact@actero.ro
             </a>{' '}
             și vom analiza situația într-un termen rezonabil.
           </p>
@@ -312,8 +312,8 @@ export default function TermeniPage() {
           <p>
             Pentru întrebări despre site, plăți, acces sau acești termeni, ne
             poți scrie la{' '}
-            <a href="mailto:contac@actero.ro" className="underline underline-offset-2">
-              contac@actero.ro
+            <a href="mailto:contact@actero.ro" className="underline underline-offset-2">
+              contact@actero.ro
             </a>
             .
           </p>

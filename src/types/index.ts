@@ -35,14 +35,27 @@ export type ConsulateInfo = {
   wazeUrl: string
   scheduleDeponere: string   // ex: 'Luni–Joi 08:00–14:00, Vineri 08:00–12:00'
   scheduleRidicare: string   // ex: 'Luni–Joi 14:00–16:00 (fără programare)'
+  schedulePassportPickup?: string
   scheduleTitluCalatorie: string
+  scheduleTravelDoc?: string
   paymentMethod: string      // ex: 'exclusiv EC-Karte' | 'exclusiv numerar'
+  paymentPassport?: string
+  paymentNotarial?: string
   paymentNote?: string       // ex: IBAN pentru Stuttgart
+  paymentPassportNote?: string
+  paymentNotarialNote?: string
   postalPickup: boolean
   postalPickupUrl?: string
   pasaportSearchUrl: string
   staffShortageNotice?: boolean
   fotografiiLaGhiseu: boolean // true = nu aduci fotografii proprii (München)
+  starecivilaProgramRidicare?: string
+  starecivilaPosta?: boolean
+  starecivilaTermen?: string | null
+  certNastereParintiRegula?: 'if_ci_lacks_birthplace' | 'if_both_romanian' | 'if_unmarried' | 'always_required'
+  patronimicWarning?: boolean
+  formularPrintLaConsulat?: boolean
+  munchenAcelasiZiBonusPasaport?: boolean
 }
 
 // ─── WIZARD ──────────────────────────────────────────────────────────────────

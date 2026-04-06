@@ -18,7 +18,7 @@ const guides: { id: GuideId; title: string }[] = [
   { id: 'titlu-calatorie-de', title: 'Titlu de călătorie · Germania · 1–2 săptămâni' },
   { id: 'procura-vanzare-de', title: 'Procură notarială · Vânzare / cumpărare proprietate' },
   { id: 'procura-mostenire-de', title: 'Procură notarială · Moștenire / succesiune' },
-  { id: 'procura-generala-de', title: 'Procură notarială · Altceva' },
+  { id: 'procura-generala-de', title: 'Procură notarială generală · Germania' },
   { id: 'transcriere-nastere-de', title: 'Transcriere certificat de naștere · Germania' },
 ]
 

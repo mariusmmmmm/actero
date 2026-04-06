@@ -20,7 +20,7 @@ import type { BundeslandCode, GuideId, ConsulateId, ProblemType, SituationFlags 
 
 type Block = {
   text: string
-  type: 'info' | 'warning' | 'tip' | 'action' | 'note'
+  type: 'info' | 'warning' | 'tip' | 'action' | 'note' | 'alert'
 }
 
 type PaidStep = {
@@ -45,6 +45,7 @@ type GhidTab = 'ghid' | 'checklist' | 'tracker' | 'parteneri'
 const blockStyles: Record<string, string> = {
   info: 'bg-gray-50 border border-gray-200 text-gray-700',
   warning: 'bg-orange-50 border border-orange-200 text-orange-800',
+  alert: 'bg-red-50 border-2 border-red-300 text-red-900 shadow-sm',
   tip: 'bg-green-50 border border-green-200 text-green-800',
   action: 'bg-blue-50 border border-blue-200 text-blue-800',
   note: 'bg-yellow-50 border border-yellow-200 text-yellow-800',
@@ -53,6 +54,7 @@ const blockStyles: Record<string, string> = {
 const blockIcons: Record<string, string> = {
   info: '📋',
   warning: '⚠️',
+  alert: '🚨',
   tip: '💡',
   action: '→',
   note: '📝',
@@ -159,17 +161,16 @@ const pasaportDomRoSteps: PaidStep[] = [
   ...pasaportCrdsSteps.slice(1), // pașii 4-7 sunt identici
 ]
 
-// Pași paid pentru buletin (SPCLEP)
-const buletinSteps: PaidStep[] = [
+const buletinExpiratFaraDomSteps: PaidStep[] = [
   {
     id: 3,
     title: 'Planifică deplasarea în România',
     shortLabel: 'Planificare',
     blocks: [
-      { text: 'Identifică SPCLEP-ul competent: cel din orașul unde ai ultimul domiciliu înregistrat în România.', type: 'info' },
-      { text: 'Verifică dacă SPCLEP-ul tău permite programare online (unele prin ghiseul.ro sau site-ul primăriei locale).', type: 'action' },
-      { text: 'Dacă nu există programare online → te prezinți dimineața la prima oră.', type: 'tip' },
-      { text: 'Verifică programul de lucru pe site-ul primăriei înainte de a pleca din Germania.', type: 'warning' },
+      { text: 'Identifică exact SPCLEP-ul de care aparții: cel corespunzător ultimului domiciliu pe care l-ai avut înregistrat în România.', type: 'info' },
+      { text: 'Verifică dacă acel SPCLEP lucrează cu programare online, prin platforma locală a primăriei, sau doar cu prezentare directă la ghișeu.', type: 'action' },
+      { text: 'Rezervă drumul în România doar după ce știi exact unde depui și în ce zile are program cu publicul. Nu toate ghișeele lucrează zilnic pentru evidența persoanelor.', type: 'warning' },
+      { text: 'Dacă localitatea ta are programări puține, sună sau verifică site-ul primăriei la prima oră a zilei. Uneori locurile apar din anulări de pe o zi pe alta.', type: 'tip' },
     ],
   },
   {
@@ -177,9 +178,9 @@ const buletinSteps: PaidStep[] = [
     title: 'Pregătire pentru deplasare',
     shortLabel: 'Pregătire',
     blocks: [
-      { text: 'Ai un document valabil cu care poți călători în România (pașaport valabil sau titlu de călătorie).', type: 'warning' },
-      { text: 'Toate documentele originale în geantă.', type: 'info' },
-      { text: 'Adresa exactă a SPCLEP-ului și programul de lucru verificate.', type: 'info' },
+      { text: 'Ai documentul cu care călătorești în România și toate originalele puse în geantă: buletinul expirat, certificatul de naștere, certificatul de căsătorie dacă e cazul.', type: 'action' },
+      { text: 'Verifică dacă SPCLEP-ul tău cere fotografie tipărită sau o face la ghișeu. Practica nu este uniformă în toate localitățile.', type: 'warning' },
+      { text: 'Notează și adresa exactă a ghișeului, programul și modalitatea de plată. Nu presupune că aceeași regulă se aplică în toate orașele.', type: 'info' },
     ],
   },
   {
@@ -187,11 +188,11 @@ const buletinSteps: PaidStep[] = [
     title: 'Ziua la SPCLEP',
     shortLabel: 'SPCLEP',
     blocks: [
-      { text: 'Te prezinți la ghișeul SPCLEP cu documentele.', type: 'info' },
-      { text: 'Funcționarul preia documentele, îți face fotografia biometrică și amprentele.', type: 'info' },
-      { text: 'Plătești taxa (câțiva lei). Primești bon/recipisă.', type: 'action' },
-      { text: 'Buletinul gata în 1–5 zile lucrătoare (expres) sau până la 30 de zile (normal).', type: 'info' },
-      { text: 'Dacă funcționarul cere ceva suplimentar: notează calm și întreabă diplomatic.', type: 'warning' },
+      { text: 'Te prezinți la ghișeu și spui clar că vii pentru eliberarea unei noi cărți de identitate după expirare, fără domiciliu activ în România.', type: 'action' },
+      { text: 'Funcționarul verifică actele, stabilește ce tip de document îți poate emite localitatea respectivă și îți generează cererea.', type: 'info' },
+      { text: 'Dacă ți se cere taxă sau chitanță, plătești exact după instrucțiunile ghișeului sau ale primăriei locale. Nu există o practică uniformă între toate SPCLEP-urile.', type: 'info' },
+      { text: 'Primești recipisă sau număr de înregistrare. Fă imediat o poză cu telefonul și notează termenul comunicat de funcționar.', type: 'tip' },
+      { text: 'Dacă funcționarul cere un document neașteptat, notează exact ce cere și întreabă calm dacă este o regulă locală sau o schimbare de procedură.', type: 'warning' },
     ],
   },
   {
@@ -199,9 +200,151 @@ const buletinSteps: PaidStep[] = [
     title: 'Ridică buletinul',
     shortLabel: 'Ridicare',
     blocks: [
-      { text: 'Revii la SPCLEP după termenul comunicat.', type: 'info' },
-      { text: 'Prezinți recipisa și primești noul buletin.', type: 'action' },
-      { text: 'Dacă nu poți rămâne în România: poți autoriza o rudă de gradul I să ridice buletinul cu o procură notarială.', type: 'tip' },
+      { text: 'Revii la SPCLEP după termenul comunicat de ghișeu. Nu te baza pe un termen generic văzut online pentru alt oraș.', type: 'info' },
+      { text: 'Prezinți recipisa și ridici noua carte de identitate conform regulii locale de predare.', type: 'action' },
+      { text: 'Întreabă din start la depunere dacă ridicarea este strict personală sau dacă localitatea respectivă permite excepții pentru CIS. Regulile practice diferă între CEI și CIS.', type: 'warning' },
+    ],
+  },
+]
+
+const buletinExpiratDomSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Planifică deplasarea în România',
+    shortLabel: 'Planificare',
+    blocks: [
+      { text: 'Identifică SPCLEP-ul exact corespunzător domiciliului tău activ din România. Nu poți depune oriunde doar pentru că ai deja adresă în țară.', type: 'info' },
+      { text: 'Verifică dacă acest SPCLEP lucrează cu programare online sau prin prezentare directă și notează zilele cu publicul.', type: 'action' },
+      { text: 'Confirmă înainte de drum și dacă trebuie adusă din nou dovada spațiului pentru adresa actuală. Unele ghișee o cer, altele nu.', type: 'warning' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Pregătire pentru deplasare',
+    shortLabel: 'Pregătire',
+    blocks: [
+      { text: 'Pune în geantă toate originalele: buletinul expirat, certificatul de naștere, dovada adresei, certificatul de căsătorie dacă e cazul și documentul de călătorie pentru România.', type: 'action' },
+      { text: 'Verifică dacă localitatea ta cere plată în avans, chitanță sau fotografie tipărită. Nu toate SPCLEP-urile lucrează identic.', type: 'warning' },
+      { text: 'Dacă adresa este pe locuința altcuiva, clarifică înainte dacă proprietarul trebuie să vină fizic sau dacă este suficient actul de spațiu pregătit.', type: 'tip' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Ziua la SPCLEP',
+    shortLabel: 'SPCLEP',
+    blocks: [
+      { text: 'Te prezinți la ghișeu și spui că soliciți reînnoirea cărții de identitate pentru un domiciliu deja activ în România.', type: 'action' },
+      { text: 'Funcționarul verifică actele, îți generează cererea și îți explică dacă localitatea emite CEI, CIS sau ambele.', type: 'info' },
+      { text: 'Dacă se preiau biometrice la ghișeu, urmezi instrucțiunile funcționarului. Dacă localitatea cere fotografie sau copii, le depui conform cerinței locale.', type: 'info' },
+      { text: 'La final primești recipisa sau numărul cererii. Fotografiaz-o și notează termenul exact comunicat pentru ridicare.', type: 'tip' },
+      { text: 'Dacă ți se cere un act care nu apare în lista ta, întreabă calm dacă este cerință legală sau practică locală și notează răspunsul.', type: 'warning' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ridică buletinul',
+    shortLabel: 'Ridicare',
+    blocks: [
+      { text: 'Revii la același SPCLEP sau la punctul indicat de funcționar, în termenul comunicat la depunere.', type: 'info' },
+      { text: 'Prezinți recipisa și ridici noul document. Verifică imediat numele, CNP-ul și adresa înainte să pleci din ghișeu.', type: 'action' },
+      { text: 'Întreabă de la depunere dacă ridicarea este strict personală sau dacă există excepții pentru varianta simplă emisă local. Nu presupune automat o regulă unică.', type: 'warning' },
+    ],
+  },
+]
+
+const buletinLipsaFaraDomSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Planifică deplasarea în România',
+    shortLabel: 'Planificare',
+    blocks: [
+      { text: 'Identifică SPCLEP-ul competent: localitatea ultimului domiciliu înregistrat în România.', type: 'info' },
+      { text: 'Dacă buletinul a fost furat, notează exact data și locul evenimentului și păstrează dovada poliției. Îți va fi utilă la explicații și în declarație.', type: 'action' },
+      { text: 'Asigură-te mai întâi că poți intra legal în România cu un document valabil de călătorie. Fără asta, partea de SPCLEP nici nu începe.', type: 'warning' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Pregătire pentru deplasare',
+    shortLabel: 'Pregătire',
+    blocks: [
+      { text: 'Pune în geantă toate actele rămase care te pot identifica: certificat de naștere, pașaport, permis românesc, certificat de căsătorie, copii vechi de buletin dacă există.', type: 'action' },
+      { text: 'Pregătește explicația clară pentru ghișeu: când ai observat lipsa, dacă a fost pierdere sau furt, și dacă ai declarat la poliție.', type: 'tip' },
+      { text: 'Nu presupune că dovada poliției înlocuiește actul de identitate. Ea doar susține declarația ta; identificarea se face pe baza documentelor și a verificărilor din sistem.', type: 'warning' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Ziua la SPCLEP',
+    shortLabel: 'SPCLEP',
+    blocks: [
+      { text: 'Te prezinți la ghișeu și spui clar că documentul de identitate este pierdut, furat sau distrus și că soliciți emiterea unei noi cărți de identitate.', type: 'action' },
+      { text: 'Funcționarul te identifică pe baza actelor pe care le ai și a verificărilor din sistem, apoi îți cere declarația privind lipsa documentului.', type: 'info' },
+      { text: 'Dacă ai sesizarea de la poliție, o arăți ca document-suport; dacă nu, continui cu declarația de la ghișeu conform explicațiilor funcționarului.', type: 'info' },
+      { text: 'Primești recipisă sau număr de cerere. Notează termenul comunicat și fotografiază imediat dovada depunerii.', type: 'tip' },
+      { text: 'Dacă ți se spune că mai lipsește ceva, cere să ți se spună exact ce document și în ce calitate este necesar, ca să nu revii inutil a doua oară.', type: 'warning' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ridică buletinul',
+    shortLabel: 'Ridicare',
+    blocks: [
+      { text: 'Revii la SPCLEP după termenul primit la depunere. Nu te baza pe durata medie din alt oraș.', type: 'info' },
+      { text: 'Prezinți recipisa și ridici noul document conform regulii locale de predare.', type: 'action' },
+      { text: 'Verifică imediat datele noului act și întreabă încă de la depunere dacă ridicarea este strict personală sau există o excepție locală pentru CIS.', type: 'warning' },
+    ],
+  },
+]
+
+const buletinLipsaDomSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Planifică deplasarea în România',
+    shortLabel: 'Planificare',
+    blocks: [
+      { text: 'Identifică exact SPCLEP-ul care corespunde domiciliului tău activ din România și verifică programul pentru emitere document lipsă.', type: 'info' },
+      { text: 'Alege înainte de drum dacă vrei CEI sau CIS. CEI este gratuită la prima emitere pentru 14+ până la 30 iunie 2026, are termen mai scurt și se ridică personal; CIS costă 40 RON și durează mai mult.', type: 'info' },
+      { text: 'Dacă documentul a fost furat, păstrează și dovada poliției. Dacă a fost pierdut, notează când ai constatat lipsa — informația îți va fi cerută la ghișeu.', type: 'action' },
+      { text: 'Confirmă înainte de drum dacă ghișeul cere și dovada adresei actuale sau extras CF recent la reemiterea pentru document lipsă.', type: 'warning' },
+      { text: 'Raportul poliției NU este documentul principal SPCLEP. Îl ai doar ca suport dacă a fost furt; funcționarul îți ia oricum declarația la ghișeu.', type: 'warning' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Pregătire pentru deplasare',
+    shortLabel: 'Pregătire',
+    blocks: [
+      { text: 'Pune în geantă actele de identificare rămase, certificatul de naștere, dovada adresei și certificatul de căsătorie dacă numele actual diferă.', type: 'action' },
+      { text: 'Extrasul de carte funciară trebuie să fie recent: maxim 30 de zile. PDF-ul emis din epay.ancpi.ro este acceptat la ghișeu, nu e nevoie să alergi după o ștampilă fizică dacă ai extrasul electronic corect.', type: 'info' },
+      { text: 'Dacă alegi CIS sau dacă nu mai beneficiezi de gratuitatea primei CEI, plătește taxa la CEC Bank sau SelfPay înainte de depunere și ia dovada cu tine.', type: 'info' },
+      { text: 'Dacă ai copii vechi după buletinul dispărut sau după recipise mai vechi, ia-le cu tine. Nu înlocuiesc documentul, dar pot ajuta la verificarea rapidă a datelor.', type: 'tip' },
+      { text: 'Asigură-te că ai și documentul cu care călătorești în România. Ghidul de emitere a buletinului nu înlocuiește partea de transport internațional.', type: 'warning' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Ziua la SPCLEP',
+    shortLabel: 'SPCLEP',
+    blocks: [
+      { text: 'La ghișeu spui clar că ai domiciliul activ în România, dar buletinul este pierdut, furat sau distrus și vrei emiterea unui nou document.', type: 'action' },
+      { text: 'Funcționarul verifică actele, îți ia declarația privind lipsa documentului și îți spune exact ce variantă de carte de identitate se emite local.', type: 'info' },
+      { text: 'Dacă ai sesizarea de la poliție, o prezinți ca document-suport. Dacă nu, continui pe baza declarației și a verificărilor în sistem. Important: și în cazul furtului, documentul-cheie pentru SPCLEP rămâne declarația ta, nu procesul-verbal al poliției.', type: 'info' },
+      { text: 'Dacă alegi CEI, întreabă explicit despre termenul estimat și despre ridicarea personală cu setarea PIN-urilor. Dacă alegi CIS, întreabă dacă localitatea admite ridicare prin procură specială notarială.', type: 'tip' },
+      { text: 'Primești recipisă sau număr de cerere. Fă o fotografie și notează termenul și locul de ridicare comunicate de funcționar.', type: 'tip' },
+      { text: 'Dacă ți se cere un act în plus, notează exact ce este și de ce îl solicită, ca să poți reveni țintit dacă este nevoie.', type: 'warning' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ridică buletinul',
+    shortLabel: 'Ridicare',
+    blocks: [
+      { text: 'Revii la SPCLEP sau la punctul indicat de funcționar, în termenul transmis la depunere.', type: 'info' },
+      { text: 'Prezinți recipisa și ridici noul document. Verifică imediat corectitudinea datelor înainte să pleci.', type: 'action' },
+      { text: 'CEI: ridicare personală, de regulă în câteva zile, iar la ridicare stabilești PIN-ul de autentificare și PIN-ul de semnătură. Fără prezența ta, documentul nu se finalizează corect.', type: 'info' },
+      { text: 'CIS: termenul este de obicei mai lung. Întreabă la depunere dacă localitatea ta permite ridicare prin procură specială notarială sau cere prezență personală și la acest tip de document.', type: 'info' },
+      { text: 'Pentru CEI, ridicarea este în mod normal personală; pentru CIS, întreabă la depunere dacă există vreo excepție locală. Nu pleca fără această clarificare dacă revii repede în Germania.', type: 'warning' },
     ],
   },
 ]
@@ -345,6 +488,11 @@ const buletinPrimulGermaniaSteps: PaidStep[] = [
   },
 ]
 
+const travelReturnToRomaniaBlocks: PaidStep['blocks'] = [
+  { text: 'Opțiuni pașaport în România: pașaport simplu electronic — 265 lei, max 5 zile lucrătoare (în prezent 1–2 zile în medie), fără taxă suplimentară de urgență, livrare gratuită la domiciliu. Pașaport simplu temporar — 265 lei, max 3 zile lucrătoare, valabil 12 luni. Programare online la epasapoarte.ro. Poți merge la ORICE serviciu de pașapoarte din țară.', type: 'info' },
+  { text: 'Opțiuni carte de identitate în România: CEI — programare pe hub.mai.gov.ro/cei/programari, termen orientativ ~10 zile lucrătoare, fără posibilitate de urgentare. Dacă ai deja domiciliu activ în România și alegi alt tip de document, verifică SPCLEP-ul competent pentru situația ta concretă.', type: 'info' },
+]
+
 // Pași paid procură
 const procuraSteps: PaidStep[] = [
   {
@@ -409,7 +557,7 @@ const procuraVanzareSteps: PaidStep[] = [
       { text: 'Mergi pe econsulat.ro → autentifică-te sau creează cont → apasă „Cerere nouă” → selectează „Acte notariale” → „Procură”. Serviciul există pe platformă.', type: 'action' },
       { text: 'Completează datele tale de identificare și alege consulatul arondat landului tău.', type: 'info' },
       { text: 'La câmpul de conținut al procurii: descrie scopul (ex. „vânzare imobil la adresa X, municipiul Y, județ Z, nr. cadastral Z”). Copiază datele complete ale mandatarului din nota pregătită la Pasul 2.', type: 'action' },
-      { text: 'BONN — REGULĂ SPECIALĂ: Dacă nu trimiți în avans pe econsulat.ro copia actului de proprietate și copia CI a mandatarului, procura NU se eliberează în aceeași zi. Trimite documentele scanate înainte de a veni la consulat.', type: 'warning' },
+      { text: 'BONN — REGULĂ SPECIALĂ: Dacă nu trimiți în avans pe econsulat.ro copia actului de proprietate și copia CI a mandatarului, procura NU se eliberează în aceeași zi. Este singurul flux din produs în care econsulat este folosit și pentru transmiterea documentelor scanate înainte de vizită. Trimite documentele înainte de a veni la consulat.', type: 'alert' },
       { text: 'München / Stuttgart / Berlin: poți veni cu documentele în ziua programării și procura se redactează în aceeași zi — fără pre-scanning obligatoriu.', type: 'info' },
     ],
     actionItem: {
@@ -468,6 +616,79 @@ const procuraVanzareSteps: PaidStep[] = [
       { text: 'Mandatarul duce procura la notar. Notarul verifică în RNNEPR că procura este valabilă și nerevocată, apoi instrumentează tranzacția.', type: 'info' },
       { text: 'Procura este valabilă 3 ani dacă nu ai specificat un termen mai scurt. Dacă renunți la tranzacție, o poți revoca oricând printr-o declarație notarială de revocare — la consulat sau la orice notar din România.', type: 'info' },
       { text: 'Cauze frecvente de refuz la notar: (1) procură generală în loc de specială; (2) mandatarul cumpără imobilul în același timp — în acest caz prețul trebuie menționat explicit în procură; (3) procura a fost revocată fără știrea mandatarului.', type: 'warning' },
+    ],
+  },
+]
+
+const procuraGeneralaSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Plătește taxa de publicitate notarială (doar dacă e cazul)',
+    shortLabel: 'Taxă',
+    blocks: [
+      { text: 'Pasul acesta se aplică DOAR dacă procura ta va fi folosită la un notar din România: divorț notarial, succesiune, vânzare prin mandatar. Dacă faci procura pentru firmă, bancă, cazier, auto sau orice altceva care NU implică un notar — SARI direct la Pasul 4.', type: 'warning' },
+      { text: 'Plătește 3 euro prin virament bancar în avans, cu cel puțin 3–4 zile lucrătoare înainte de programare. Adu ordinul de plată la consulat ca dovadă. (econsulat.ro/Procura/ActeNecesare + berlin.mae.ro/node/258)', type: 'action' },
+      { text: 'Berlin: virament la IBAN DE83 1007 0000 0435 4429 00 · BIC DEUTDEBBXXX · Botschaft von Rumänien · Deutsche Bank Berlin. (berlin.mae.ro/node/258 — confirmat live)', type: 'info' },
+      { text: 'Bonn, München, Stuttgart: IBAN-ul specific se găsește la programare pe econsulat.ro — nu apare publicat pe site-urile consulatelor. Regulă generală: virament bancar în avans. La Stuttgart, IBAN-ul de pașapoarte (DE04 1007 0000 0976 1909 01) e cel mai probabil același — confirmă la programare.', type: 'info' },
+      { text: 'Taxa de 3 euro nu e o taxă consulară — se virează la CNARNN (registrele notariale din România).', type: 'note' },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Cerere pe econsulat.ro',
+    shortLabel: 'Cerere',
+    blocks: [
+      { text: 'Mergi pe econsulat.ro → Login → clic pe „Acte notariale” din grila de servicii → în popup selectezi AUTENTIFICĂRI → „Procuri”. (navigat live pe econsulat.ro, Aprilie 2026)', type: 'action' },
+      { text: 'Nu selecta altă categorie — Declarații, Legalizări sau alte opțiuni sunt servicii diferite. Trebuie să ajungi la pagina „Cerere pentru Procuri”.', type: 'warning' },
+      { text: 'Completează datele tale + datele complete ale mandatarului. În câmpul de conținut al procurii descrie clar și specific ce îl/o împuternicești să facă.', type: 'info' },
+      { text: 'Dacă plătești taxa de 3 euro (Pasul 3) — încarci dovada plății (ordinul de plată) în cerere. (econsulat.ro/Procura/ActeNecesare)', type: 'info' },
+      { text: 'Starea inițială: „În așteptare”. Programarea devine disponibilă după validarea cererii de consulat.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Mergi pe econsulat.ro',
+      href: 'https://www.econsulat.ro',
+    },
+  },
+  {
+    id: 5,
+    title: 'Obține programarea',
+    shortLabel: 'Programare',
+    blocks: [
+      { text: 'Programarea devine disponibilă după validarea cererii. Intră pe econsulat.ro → „Programările mele” → „Programare nouă” → alege consulatul arondat landului tău.', type: 'info' },
+      { text: 'Procurile se eliberează de obicei în aceeași zi. Nu există un ritm fix de eliberare a programărilor pentru acte notariale — verifică periodic în platformă. (econsulat.ro/Procura/ModSolutionare)', type: 'info' },
+      { text: 'Poți solicita la programare IBAN-ul pentru taxa de 3 euro (Bonn/München/Stuttgart), dacă nu l-ai identificat anterior.', type: 'tip' },
+      { text: 'Programările sunt GRATUITE. Nu plăti niciodată unui intermediar.', type: 'warning' },
+    ],
+    actionItem: {
+      label: 'Programare pe econsulat.ro',
+      href: 'https://www.econsulat.ro',
+    },
+  },
+  {
+    id: 6,
+    title: 'Ziua consulatului — semnezi și ridici procura',
+    shortLabel: 'Consulat',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Ajungi cu 10 minute înainte de programare. Ai la tine actul de identitate original, datele complete ale mandatarului și, dacă e cazul, ordinul de plată al taxei de 3 euro.', type: 'action' },
+      { text: 'Funcționarul consular îți verifică identitatea, redactează procura pe baza cererii tale și ți-o prezintă. Citești conținutul, confirmi că e corect, semnezi în fața consulului. (berlin.mae.ro/node/470)', type: 'info' },
+      { text: 'Procura se eliberează pe loc, în aceeași zi. (econsulat.ro/Procura/ModSolutionare)', type: 'info' },
+      { text: 'Excepție Bonn: procurile imobiliare (vânzare, succesiune) NU se eliberează în aceeași zi dacă nu ai trimis în prealabil copiile actelor de proprietate și CI-urile scanate pe econsulat.ro. (bonn.mae.ro/node/496)', type: 'warning' },
+      { text: 'Poți solicita duplicate ale aceleiași procuri în număr nelimitat — cu aceeași forță juridică ca originalul. (econsulat.ro/Procura/ModSolutionare)', type: 'tip' },
+      { text: 'Dacă funcționarul cere ceva ce nu era în lista ta: notează calm și întreabă diplomatic de ce s-a modificat procedura.', type: 'warning' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'Trimite procura mandatarului în România',
+    shortLabel: 'Trimitere',
+    blocks: [
+      { text: 'Scanează originalul procurii înainte să îl trimiți — păstrează o copie digitală. Trimite originalul prin curier internațional (DHL, DPD, UPS) cu număr de urmărire.', type: 'action' },
+      { text: 'Mandatarul prezintă procura în original la autoritatea din România. Fără original, procura nu produce efecte juridice.', type: 'info' },
+      { text: 'Procura autentificată la consulatul României NU necesită apostilă pentru a fi folosită în România. Excepție: dacă o faci la un notar german — atunci DA, necesită apostilă + traducere legalizată în română.', type: 'warning' },
+      { text: 'Dacă ai solicitat duplicate la consulat, trimite unul și păstrează unul la tine.', type: 'tip' },
+      { text: 'Valabilitate: 3 ani dacă nu s-a specificat termen. Revocare posibilă oricând. Excepție: procuri pensie = 18 luni.', type: 'info' },
+      { text: 'Procura de divorț: acoperă NUMAI depunerea cererii. Certificatul final de divorț necesită prezența fizică a ambilor soți la notar — nu se poate ridica prin procură. (notari.pro)', type: 'warning' },
     ],
   },
 ]
@@ -544,19 +765,19 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
   },
   'buletin-de-fara-domiciliu': {
     title: 'Buletin expirat · Fără domiciliu RO',
-    steps: buletinSteps,
+    steps: buletinExpiratFaraDomSteps,
   },
   'buletin-de-cu-domiciliu': {
     title: 'Buletin expirat · Domiciliu activ RO',
-    steps: buletinSteps,
+    steps: buletinExpiratDomSteps,
   },
   'buletin-de-fara-domiciliu-pierdut': {
     title: 'Buletin pierdut/furat · Fără domiciliu RO',
-    steps: buletinSteps,
+    steps: buletinLipsaFaraDomSteps,
   },
   'buletin-de-cu-domiciliu-pierdut': {
     title: 'Buletin pierdut/furat · Domiciliu activ RO',
-    steps: buletinSteps,
+    steps: buletinLipsaDomSteps,
   },
   'buletin-de-primul-de': {
     title: 'Primul buletin românesc · Schimbare domiciliu din străinătate',
@@ -577,7 +798,7 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
         blocks: [
           { text: 'Titlul de călătorie se preia fără programare, în intervalul dedicat al consulatului tău. Nu trebuie să creezi cerere pe econsulat.ro. Intervalul diferă per consulat — verifică cardul de mai jos.', type: 'info' },
           { text: 'Prezintă-te DOAR în intervalul de preluare titluri — nu în programul general de depunere pașapoarte. Dacă vii în afara intervalului, riști să nu fii primit.', type: 'warning' },
-          { text: 'Dacă documentul a fost furat și nu ai depus încă Diebstahlsanzeige la poliție — fă asta ÎNAINTE de a pleca la consulat. Adeverința poliției este obligatorie la toate consulatele. Traducerea autorizată în română este obligatorie: München, Stuttgart, Berlin. La Bonn pagina nu specifică traducerea, dar la toate celelalte 3 consulate este obligatorie — adu traducere și la Bonn.', type: 'warning' },
+          { text: 'Dacă documentul a fost furat și nu ai depus încă Diebstahlsanzeige la poliție — fă asta ÎNAINTE de a pleca la consulat. Adeverința poliției este obligatorie la toate consulatele. Traducerea autorizată în română este obligatorie: München, Stuttgart, Berlin. La Bonn traducerea nu este cerută — adeverința poliției este suficientă.', type: 'warning' },
           { text: 'Vino cât mai devreme în interval. Dacă nu ai niciun document românesc cu fotografie, verificarea în baze de date durează mai mult.', type: 'tip' },
         ],
         actionItem: null,
@@ -604,8 +825,7 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
           { text: 'Titlul de călătorie expiră în momentul în care intri în România — trecerea frontierei îi încetează valabilitatea de drept. NU îl predai la frontieră — continuă să îl ai la tine.', type: 'warning' },
           { text: 'Titlul se predă când depui cererea pentru noul pașaport în România, la ghișeul serviciului de pașapoarte.', type: 'info' },
           { text: 'Imediat după ajungerea în România: depune cerere pentru pașaport sau carte de identitate. Fără act valabil, nu poți reveni în Germania.', type: 'action' },
-          { text: 'Opțiuni pașaport în România: pașaport simplu electronic — 265 lei, max 5 zile lucrătoare (în prezent 1–2 zile în medie), fără taxă suplimentară de urgență, livrare gratuită la domiciliu. Pașaport simplu temporar — 265 lei, max 3 zile lucrătoare, valabil 12 luni. Programare online la epasapoarte.ro. Poți merge la ORICE serviciu de pașapoarte din țară.', type: 'info' },
-          { text: 'Opțiuni carte de identitate în România: mergi la SPCLEP din sectorul/orașul de domiciliu. Prezența fizică obligatorie (din sept. 2025).', type: 'info' },
+          ...travelReturnToRomaniaBlocks,
           { text: 'Dacă știi deja ce document îți trebuie după revenire, ghidurile ActeRO pentru pașaport și carte de identitate te pot ajuta să pregătești dosarul din Germania, înainte de a pleca.', type: 'tip' },
         ],
       },
@@ -649,8 +869,7 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
         blocks: [
           { text: 'Titlul ÎȘI PIERDE VALABILITATEA la data intrării în România — nu contează câte zile mai are. Nu poți reveni în Germania cu el.', type: 'warning' },
           { text: 'Imediat ce ajungi în România, depune cerere pentru un document nou. Alege în funcție de ce îți trebuie mai repede: pașaport în ~5 zile sau CEI în ~10 zile.', type: 'action' },
-          { text: 'Pașaport simplu electronic: depui la orice serviciu de pașapoarte din România (cu programare online pe hub.mai.gov.ro/epasapoarte). Termen: ~5 zile lucrătoare. Nu există regim separat de urgență — este pur și simplu rapid. Taxa: 265 RON (adulți 12+).', type: 'info' },
-          { text: 'CEI (carte electronică de identitate): depui la orice SPCEP din România (din august 2025, indiferent de domiciliu). Programare: hub.mai.gov.ro/cei/programari. Termen: ~10 zile lucrătoare. ATENȚIE: nu există posibilitate de urgentare. Gratuit (prima CEI).', type: 'info' },
+          ...travelReturnToRomaniaBlocks,
           { text: 'Dacă ai nevoie urgent de un document să ieși din România iar pașaportul nu e gata: poți solicita pașaport simplu temporar — termen maxim 3 zile lucrătoare, valabil 12 luni. Taxa: 96 RON.', type: 'tip' },
           { text: 'Nu pleca din România înainte să ai noul document în mână. La controlul de frontieră german ai nevoie de un document valabil — titlul nu mai este valabil odată ce ai intrat în țară.', type: 'warning' },
           { text: 'La depunerea cererii pentru pașaport sau buletin în România, prezinți și titlul de călătorie — va fi preluat și anulat de autorități.', type: 'note' },
@@ -660,26 +879,39 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
   },
   'procura-vanzare-de': { title: 'Procură de vânzare/cumpărare proprietate · Germania', steps: procuraVanzareSteps },
   'procura-mostenire-de': { title: 'Procură moștenire · Germania', steps: procuraMostenireSteps },
-  'procura-generala-de': { title: 'Procură generală · Germania', steps: procuraSteps },
+  'procura-generala-de': { title: 'Procură notarială generală · Germania', steps: procuraGeneralaSteps },
   'transcriere-nastere-de': {
-    title: 'Transcriere certificat de naștere · Germania',
+    title: 'Transcriere naștere Germania → România',
     steps: [
       {
         id: 3,
-        title: 'Cont și cerere pe econsulat.ro',
+        title: 'Creează cererea pe econsulat.ro',
         shortLabel: 'Cerere',
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
         blocks: [
-          { text: 'econsulat.ro → „Cerere nouă" → „Acte de stare civilă" → „Transcriere certificat de naștere".', type: 'action' },
-          { text: 'Completează datele copilului și ale părinților. Încarc documentele scanate inclusiv traducerea legalizată.', type: 'info' },
+          { text: 'Mergi pe econsulat.ro și creează un cont — email + parolă. CNP-ul nu este obligatoriu pentru cont.', type: 'action' },
+          { text: 'Apasă „Cerere nouă” → „Acte de stare civilă” → „Transcriere certificat de naștere străin în registrele de stare civilă române”. La unele consulate apare ca „Înscriere certificat de naștere” — este același serviciu.', type: 'action' },
+          { text: 'Nu selecta servicii de pașaport sau carte de identitate — sunt categorii separate. Transcrierea de stare civilă este serviciu distinct.', type: 'warning' },
+          { text: 'Completezi datele copilului, ale ambilor părinți și consulatul arondat landului tău, apoi încarci documentele scanate. Trimiți cererea — starea inițială: „În așteptare”.', type: 'info' },
+          { text: 'München: la ridicarea certificatului transcris, dacă era singurul document lipsă pentru pașaportul copilului, poți depune pașaportul în aceeași zi — fără programare separată.', type: 'tip' },
         ],
       },
       {
         id: 4,
         title: 'Obține programarea',
         shortLabel: 'Programare',
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
         blocks: [
-          { text: 'Programare pe econsulat.ro după validarea cererii.', type: 'action' },
-          { text: 'Transcrierea e un serviciu cu timp de procesare lung — termenul legal este de până la 6 luni de la depunere.', type: 'warning' },
+          { text: 'Programarea devine disponibilă după ce cererea trece în starea „Validată”. Intră în cont → „Programările mele” → „Programare nouă” → alege consulatul și prima dată disponibilă.', type: 'info' },
+          { text: 'Din experiența comunității, programările se eliberează de obicei luni dimineața la 08:00. Intră pe econsulat.ro luni dimineața imediat după ora 08:00 pentru cele mai bune șanse.', type: 'tip' },
+          { text: 'Programările sunt gratuite. Nu apela la intermediari care oferă „locuri urgente” contra cost.', type: 'warning' },
+          { text: 'München: verifică pe muenchen.mae.ro dacă există consulat itinerant planificat în Bavaria — ar reduce distanța până la consulat. Calendarul 2026 nu era publicat la apr. 2026, dar procedura de consultare a fost lansată.', type: 'info' },
         ],
       },
       {
@@ -688,8 +920,11 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
         shortLabel: 'Pregătire',
         hasConsulateCard: true,
         blocks: [
-          { text: 'Toate documentele originale + traducerile legalizate în geantă.', type: 'info' },
-          { text: 'La unele consulate, ambii părinți trebuie să fie prezenți la depunere — verifică în avans.', type: 'warning' },
+          { text: 'Verifică lista de documente din Pasul 1 și pune-le în geantă — toate în original, plus câte o copie simplă din fiecare.', type: 'action' },
+          { text: 'Cine vine la consulat: minor sub 14 ani — nu este necesar; minor 14+ ani — vine personal, asistat de un părinte; un singur părinte cetățean român este suficient — nu trebuie ambii.', type: 'info' },
+          { text: 'Dacă ai pașaport CRDS (mențiunea domiciliu Germania), ia și Meldebescheinigung sau Anmeldung. Fără el, ghișeul poate refuza dosarul.', type: 'warning' },
+          { text: 'Stuttgart: dacă vrei certificatul prin poștă, pregătește un plic DIN C5 autoadresat, timbrat 6,65 EUR, și ia-l cu tine la depunere. Fără plic, ridici personal.', type: 'tip' },
+          { text: 'Verifică adresa, programul de ridicare și particularitățile consulatului tău în cardul de mai jos.', type: 'note' },
         ],
       },
       {
@@ -697,19 +932,26 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
         title: 'Ziua consulatului',
         shortLabel: 'Consulat',
         blocks: [
-          { text: 'Depui dosarul complet la ghișeu. Funcționarul verifică documentele.', type: 'info' },
-          { text: 'Plătești taxa consulară. Primești numărul de dosar / recipisa.', type: 'action' },
-          { text: 'Procesarea se face la Direcția de Stare Civilă din România — consulatul transmite dosarul.', type: 'info' },
+          { text: 'Ajungi cu 10 minute înainte de ora programării. Nu te prezenta mult mai devreme — nu vei fi preluat înainte de ora stabilită.', type: 'action' },
+          { text: 'La ghișeu funcționarul verifică documentele originale și printează formularul cererii (Stuttgart: se printează exclusiv la consulat). Semnezi pe loc declarația că nașterea nu a mai fost înscrisă în registrele românești — generată automat de sistemul SIMISC.', type: 'info' },
+          { text: 'Taxă: zero. Transcrierea este gratuită la toate consulatele din Germania.', type: 'info' },
+          { text: 'Primești un bon/recipisă de depunere. Termen de procesare: Bonn 7–30 de zile; München: cazurile simple se pot ridica în aceeași zi; Stuttgart și Berlin: termen nepublicat oficial, estimat similar Bonn.', type: 'info' },
+          { text: 'Fă imediat o poză recipisei — e dovada depunerii dacă ceva merge prost.', type: 'note' },
+          { text: 'Dacă funcționarul cere ceva ce nu e în lista ta, notează calm și întreabă diplomatic de ce s-a modificat procedura.', type: 'warning' },
+          { text: 'Dosare incomplete: cererea nu poate fi preluată. Dacă lipsește orice document, trebuie să revii cu programare nouă — verifică lista de două ori înainte de drum.', type: 'warning' },
         ],
       },
       {
         id: 7,
-        title: 'Ridică certificatul de naștere românesc',
+        title: 'Ridică certificatul românesc',
         shortLabel: 'Ridicare',
+        hasConsulateCard: true,
         blocks: [
-          { text: 'După procesare (3–6 luni), certificatul de naștere românesc e disponibil la consulat.', type: 'info' },
-          { text: 'Odată obținut certificatul, CNP-ul este atribuit automat.', type: 'tip' },
-          { text: 'Cu CNP-ul, poți continua cu ghidul de pașaport sau buletin.', type: 'action' },
+          { text: 'Când certificatul este gata, te prezinți în programul de ridicare al consulatului, fără programare prealabilă. Prezinți recipisa de depunere și un act de identitate valabil.', type: 'info' },
+          { text: 'Program ridicare acte stare civilă: Bonn — Luni–Joi 14:00–15:00; München — Luni/Miercuri/Joi 11:00–14:00, Marți 15:00–18:00; Stuttgart — Luni–Vineri 14:00–15:00; Berlin — Luni–Vineri 13:00–14:00.', type: 'info' },
+          { text: 'München: dacă nu ridici în 3 luni de la data depunerii, certificatul este trimis la DPCS Sector 1 București și poate fi ridicat doar de acolo.', type: 'warning' },
+          { text: 'Stuttgart: dacă ai adus plicul DIN C5 la depunere, certificatul îți este trimis prin poștă — nu mai trebuie să revii la consulat.', type: 'tip' },
+          { text: 'Ce urmează: cu certificatul de naștere românesc care conține CNP poți continua cu primul pașaport CRDS sau primul buletin.', type: 'note' },
         ],
       },
     ],
@@ -740,7 +982,13 @@ function ConsulateCard({
 }) {
   const card = getConsulateCard(consulateId)
   const isTravelTitleGuide = guideId === 'titlu-calatorie-de' || guideId === 'titlu-calatorie-urgenta-de'
-  const displaySchedule = isTravelTitleGuide ? card.scheduleTitluCalatorie : card.scheduleDeponere
+  const isGeneralPoaGuide = guideId === 'procura-generala-de'
+  const isBirthTranscriptionGuide = guideId === 'transcriere-nastere-de'
+  const displaySchedule = isBirthTranscriptionGuide
+    ? card.scheduleDeponere
+    : isTravelTitleGuide
+      ? card.scheduleTravelDoc ?? card.scheduleTitluCalatorie
+      : card.scheduleDeponere
   const displayPickup = isTravelTitleGuide
     ? consulateId === 'bonn'
       ? 'Luni–Joi 14:00–15:00 · vinerea nu se ridică, dacă depui vineri revii luni'
@@ -749,11 +997,25 @@ function ConsulateCard({
         : consulateId === 'stuttgart'
           ? 'În aceeași zi, în intervalul 10:00–14:00'
           : 'În aceeași zi, în intervalul 08:00–10:00'
-    : card.scheduleRidicare
-  const displayPaymentMethod = isTravelTitleGuide ? 'gratuit' : card.paymentMethod
+    : isBirthTranscriptionGuide
+      ? card.starecivilaProgramRidicare ?? 'Verifică direct programul de ridicare al actelor de stare civilă'
+    : card.schedulePassportPickup ?? card.scheduleRidicare
+  const displayPaymentMethod = isTravelTitleGuide
+    ? 'gratuit'
+    : isBirthTranscriptionGuide
+      ? 'gratuit'
+    : isGeneralPoaGuide
+      ? card.paymentNotarial ?? 'procură obișnuită = gratuită · dacă se aplică taxa de 3€, plata se face prin virament în avans'
+    : card.paymentPassport ?? card.paymentMethod
   const displayPaymentNote = isTravelTitleGuide
     ? 'Titlul de călătorie se eliberează fără taxă consulară.'
-    : card.paymentNote
+    : isBirthTranscriptionGuide
+      ? card.starecivilaTermen
+        ? `Termen orientativ confirmat: ${card.starecivilaTermen}.`
+        : 'Termenul exact nu este publicat oficial la acest consulat; ia în calcul un interval similar cu Bonn.'
+    : isGeneralPoaGuide
+      ? card.paymentNotarialNote ?? 'Dacă se aplică taxa de 3€ RNNEPR, verifică IBAN-ul și momentul plății înainte de programare.'
+    : card.paymentPassportNote ?? card.paymentNote
   const displayWarnings = isTravelTitleGuide
     ? [
         ...(consulateId === 'bonn'
@@ -777,6 +1039,36 @@ function ConsulateCard({
                   'Dacă documentul a fost furat: ai nevoie de adeverința poliției + traducere autorizată în română.',
                 ]),
       ]
+    : isBirthTranscriptionGuide
+      ? [
+          ...(consulateId === 'bonn'
+            ? [
+                'Certificatul de naștere românesc al părinților este necesar dacă actele lor nu conțin locul nașterii.',
+                'Minorul sub 14 ani nu trebuie să fie prezent la depunere.',
+              ]
+            : consulateId === 'muenchen'
+              ? [
+                  'Dacă ambii părinți sunt cetățeni români, ia și certificatele lor de naștere românești.',
+                  'Dacă certificatul transcris era ultimul act lipsă, la ridicare poți depune și pașaportul copilului în aceeași zi.',
+                ]
+              : consulateId === 'stuttgart'
+                ? [
+                    'Formularul cererii se printează exclusiv la consulat.',
+                    'Dacă vrei trimiterea prin poștă, adu la depunere plic DIN C5 autoadresat, timbrat 6,65 EUR.',
+                  ]
+                : [
+                    'La Berlin, certificatele de naștere românești ale părinților sunt obligatorii fără excepție.',
+                    'Dacă un părinte are nume patronimic, Formule A nu este acceptat — ai nevoie de Geburtsurkunde + apostilă + traducere.',
+                  ]),
+        ]
+    : isGeneralPoaGuide
+      ? [
+          ...(consulateId === 'berlin'
+            ? ['Taxa de 3€ RNNEPR se plătește exclusiv prin virament bancar cu 3–4 zile lucrătoare înainte, dacă procura va fi folosită la notar în România.']
+            : []),
+          'Mandatarul nu trebuie să fie prezent la consulat.',
+          'Conținutul procurii trebuie stabilit în avans cu notarul, banca sau autoritatea unde va fi folosită în România.',
+        ]
     : card.warnings
 
   return (
@@ -843,7 +1135,7 @@ function ConsulateCard({
       )}
 
       {/* Poștă */}
-      {card.postalPickup && card.postalPickupUrl && (
+      {!isTravelTitleGuide && !isGeneralPoaGuide && !isBirthTranscriptionGuide && card.postalPickup && card.postalPickupUrl && (
         <a href={card.postalPickupUrl} target="_blank" rel="noopener noreferrer"
            onClick={(e) => {
              e.stopPropagation()
@@ -859,6 +1151,7 @@ function ConsulateCard({
       )}
 
       {/* URL căutare pașaport */}
+      {!isTravelTitleGuide && !isGeneralPoaGuide && !isBirthTranscriptionGuide && (
       <a href={card.pasaportSearchUrl} target="_blank" rel="noopener noreferrer"
          onClick={(e) => {
            e.stopPropagation()
@@ -871,6 +1164,7 @@ function ConsulateCard({
          className="block mt-2 text-xs text-blue-300 underline">
         🔍 Verifică dacă pașaportul a sosit
       </a>
+      )}
     </div>
   )
 }
@@ -1251,16 +1545,18 @@ function GhidPaidPageContent() {
         {showGuideTab && (
           <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-5 py-4">
             <div className="max-w-2xl mx-auto w-full flex gap-3">
-              <button
-                onClick={isFirst ? () => router.push(`/ghid?session=${sessionId}`) : goToPrevStep}
-                className="flex-1 py-3 bg-gray-100 text-gray-600 font-medium rounded-xl text-sm"
-              >
-                ← {isFirst ? 'Înapoi' : content.steps[currentStepIndex - 1]?.shortLabel}
-              </button>
+              {!isFirst && (
+                <button
+                  onClick={goToPrevStep}
+                  className="flex-1 py-3 bg-gray-100 text-gray-600 font-medium rounded-xl text-sm"
+                >
+                  ← {content.steps[currentStepIndex - 1]?.shortLabel}
+                </button>
+              )}
               {!isLast && (
                 <button
                   onClick={goToNextStep}
-                  className="flex-[2] py-3 bg-gray-900 text-white font-semibold rounded-xl text-sm"
+                  className={`${isFirst ? 'flex-1' : 'flex-[2]'} py-3 bg-gray-900 text-white font-semibold rounded-xl text-sm`}
                 >
                   {content.steps[currentStepIndex + 1]?.shortLabel} →
                 </button>

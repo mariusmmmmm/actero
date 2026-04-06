@@ -101,7 +101,7 @@ export default function RootLayout({
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'contac@actero.ro',
+      email: 'contact@actero.ro',
       contactType: 'customer support',
       availableLanguage: 'Romanian'
     }

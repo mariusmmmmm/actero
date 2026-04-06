@@ -95,6 +95,14 @@ function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags
       ],
     },
     {
+      id: 'cei_cis',
+      title: 'Alege între CEI și CIS',
+      items: [
+        { id: 'b8_cei', name: 'CEI', detail: 'Prima emitere 14+ gratuită până la 30 iun 2026 · ridicare personală · setezi PIN-urile la ridicare' },
+        { id: 'b8_cis', name: 'CIS', detail: '40 RON · termen mai lung · întreabă la depunere dacă localitatea permite ridicare prin procură specială' },
+      ],
+    },
+    {
       id: 'casatorie',
       title: 'Dacă ți-ai schimbat numele prin căsătorie',
       items: [
@@ -106,6 +114,73 @@ function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags
       title: 'Dacă nu ești proprietarul locuinței',
       items: [
         { id: 'b8_gazduire', name: 'Consimțământul proprietarului/găzduitorului', detail: 'Dat la ghișeul SPCLEP, la notar sau — din Germania — la consulatul român (max 6 luni, tradus dacă e de la autorități germane)' },
+        { id: 'b8_politie', name: 'Sesizarea poliției', detail: 'Utilă dacă buletinul a fost furat, dar NU înlocuiește documentele SPCLEP; furtul se trece în declarația de la ghișeu' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinExpiratFaraDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'b5_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' },
+        { id: 'b5_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat sau deteriorat' },
+        { id: 'b5_calatorie', name: 'Document de călătorie valabil', detail: 'Pașaport sau titlu de călătorie pentru drumul în România' },
+      ],
+    },
+    {
+      id: 'situatie',
+      title: 'Înainte să pleci',
+      items: [
+        { id: 'b5_spclep', name: 'SPCLEP-ul competent', detail: 'Identifică localitatea ultimului domiciliu înregistrat în România' },
+        { id: 'b5_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · doar dacă ți-ai schimbat numele' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinExpiratDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'b6_ci', name: 'Buletinul expirat', detail: 'Original · dacă îl mai ai, îl duci la ghișeu pentru anulare' },
+        { id: 'b6_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat sau deteriorat' },
+        { id: 'b6_adresa', name: 'Dovada adresei din România', detail: 'Extras CF recent, act de proprietate sau documentul cerut de SPCLEP-ul tău' },
+        { id: 'b6_calatorie', name: 'Document de călătorie valabil', detail: 'Pașaport sau alt document cu care ajungi în România' },
+      ],
+    },
+    {
+      id: 'daca_nume_schimbat',
+      title: 'Dacă ți-ai schimbat numele',
+      items: [
+        { id: 'b6_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original · dacă numele actual diferă de cel din certificatul de naștere' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinPierdutFaraDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'b7_nastere', name: 'Certificat de naștere românesc', detail: 'Original · baza de identificare dacă buletinul lipsește' },
+        { id: 'b7_pasaport', name: 'Pașaport sau alt act românesc cu fotografie', detail: 'Original · dacă îl ai, ajută mult la identificare' },
+        { id: 'b7_calatorie', name: 'Document de călătorie valabil', detail: 'Necesar pentru întoarcerea în România' },
+      ],
+    },
+    {
+      id: 'daca_lipsa',
+      title: 'Dacă buletinul este pierdut sau furat',
+      items: [
+        { id: 'b7_declaratie', name: 'Detaliile despre pierdere / furt', detail: 'Locul, data aproximativă și împrejurările vor fi cerute în declarația de la ghișeu' },
+        { id: 'b7_politie', name: 'Dovada poliției', detail: 'Utilă dacă a fost furat, chiar dacă nu este documentul principal cerut de SPCLEP' },
       ],
     },
   ]
@@ -121,6 +196,13 @@ function checklistBuletinPrimulDe(_c: ConsulateId | null, _s: SituationFlags): C
         { id: 'b9_pasaport', name: 'Pașaport românesc valabil sau expirat', detail: 'Original · obligatoriu pentru schimbarea domiciliului din străinătate în România' },
         { id: 'b9_id_german', name: 'Act de identitate german', detail: 'Personalausweis sau pașaport german · original' },
         { id: 'b9_adresa', name: 'Dovada adresei de domiciliu în România', detail: 'Act de proprietate / declarație de primire în spațiu / contract de închiriere conform cerințelor SPCLEP' },
+      ],
+    },
+    {
+      id: 'spclep_corect',
+      title: 'Alege ghișeul corect',
+      items: [
+        { id: 'b9_spclep_teritorial', name: 'SPCLEP-ul de pe raza adresei alese', detail: "Pentru schimbarea domiciliului din străinătate în România nu poți merge la orice SPCLEP; trebuie să depui exact la ghișeul competent pentru adresa pe care o stabilești ca domiciliu" },
       ],
     },
     {
@@ -149,6 +231,13 @@ function checklistBuletinPrimulDeB(_c: ConsulateId | null, _s: SituationFlags): 
         { id: 'b10_nastere', name: 'Certificat de naștere românesc transcris', detail: 'Original · trebuie să conțină CNP-ul · dacă e deteriorat, solicită duplicat înainte de deplasare' },
         { id: 'b10_rezidenta', name: 'Dovada rezidenței în Germania', detail: 'Pașaport CRDS valabil sau Anmeldung / Meldebescheinigung · original · fără apostilă și fără traducere' },
         { id: 'b10_programare', name: 'Programare activă pe hub.mai.gov.ro', detail: 'Obligatorie pentru depunerea CEI · confirmată prin email' },
+      ],
+    },
+    {
+      id: 'rezidenta_germania',
+      title: 'Document german acceptat direct',
+      items: [
+        { id: 'b10_fara_traducere', name: 'Anmeldung / Meldebescheinigung', detail: 'Se acceptă în original, fără apostilă și fără traducere autorizată în română' },
       ],
     },
     {
@@ -299,6 +388,89 @@ function checklistProcuraVanzare(consulate: ConsulateId | null, _s: SituationFla
   ]
 }
 
+function checklistProcuraGenerala(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  let plataDetail = 'Procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, plata se face prin virament bancar în avans'
+
+  if (consulate === 'berlin') {
+    plataDetail = 'Berlin: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește numai prin virament bancar, cu 3–4 zile înainte'
+  } else if (consulate === 'bonn' || consulate === 'muenchen' || consulate === 'stuttgart') {
+    plataDetail = 'Bonn / München / Stuttgart: procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, verifici IBAN-ul în econsulat și plătești prin virament în avans'
+  }
+
+  return [
+    {
+      id: 'identitate',
+      title: 'Date și documente obligatorii',
+      items: [
+        { id: 'pg15_id', name: 'Act de identitate românesc valabil', detail: 'Original · pașaport sau carte de identitate' },
+        { id: 'pg15_mandatar', name: 'Datele complete ale mandatarului', detail: 'Nume complet, adresă, CNP, serie și număr act identitate, data și locul eliberării' },
+        { id: 'pg15_copie', name: 'Copie CI mandatar', detail: 'Recomandată · nu obligatorie, dar ajută la redactare' },
+      ],
+    },
+    {
+      id: 'continut',
+      title: 'Conținutul procurii',
+      items: [
+        { id: 'pg15_scop', name: 'Instrucțiunile autorității / notarului / băncii', detail: 'Ce operațiuni exacte trebuie să acopere procura' },
+        { id: 'pg15_divort', name: 'Limită pentru divorțul notarial', detail: 'Procura acoperă depunerea cererii, nu și ridicarea certificatului final de divorț' },
+        { id: 'pg15_banca', name: 'Limită pentru bănci', detail: 'ING nu acceptă procuri pentru deschidere cont; la celelalte bănci specifici operațiunile dorite' },
+      ],
+    },
+    {
+      id: 'plata',
+      title: 'Plata și trimiterea în România',
+      items: [
+        { id: 'pg15_plata', name: 'Regula de plată', detail: plataDetail },
+        { id: 'pg15_original', name: 'Originalul procurii', detail: 'Trebuie trimis prin curier mandatarului; fără original, procura nu produce efecte' },
+        { id: 'pg15_apostila', name: 'Apostilă', detail: 'Nu este necesară dacă procura e făcută la consulatul României' },
+      ],
+    },
+  ]
+}
+
+function checklistTranscriereNastere(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  let regulaParinti = 'Adu certificatele de naștere românești ale ambilor părinți — cel mai sigur este să le ai indiferent de consulat.'
+
+  if (consulate === 'bonn') {
+    regulaParinti = 'Certificatele de naștere românești ale părinților sunt necesare dacă CI/pașaport nu conțin locul nașterii.'
+  } else if (consulate === 'muenchen') {
+    regulaParinti = 'Certificatele de naștere românești ale părinților sunt obligatorii dacă ambii părinți sunt cetățeni români.'
+  } else if (consulate === 'stuttgart') {
+    regulaParinti = 'Certificatele de naștere românești ale părinților sunt necesare dacă părinții nu sunt căsătoriți.'
+  } else if (consulate === 'berlin') {
+    regulaParinti = 'Certificatele de naștere românești ale părinților sunt obligatorii fără excepție.'
+  }
+
+  return [
+    {
+      id: 'copil',
+      title: 'Documentele copilului',
+      items: [
+        { id: 'tn16_formulea', name: 'Formule A sau Geburtsurkunde', detail: 'Formule A = fără apostilă și fără traducere · Geburtsurkunde = apostilă + traducere autorizată' },
+        { id: 'tn16_patronimic', name: 'Excepție Berlin pentru patronimice', detail: 'Dacă un părinte are nume patronimic, la Berlin nu merge Formule A — ai nevoie de Geburtsurkunde + apostilă + traducere' },
+      ],
+    },
+    {
+      id: 'parinti',
+      title: 'Actele părinților',
+      items: [
+        { id: 'tn16_id', name: 'Acte de identitate valabile ale ambilor părinți', detail: 'Original · CI sau pașaport românesc' },
+        { id: 'tn16_crds', name: 'Dovada domiciliului în Germania', detail: 'Necesară dacă un părinte are pașaport CRDS: Meldebescheinigung / Anmeldung / Personalausweis german' },
+        { id: 'tn16_nastere_parinti', name: 'Certificatele de naștere românești ale părinților', detail: regulaParinti },
+        { id: 'tn16_casatorie', name: 'Certificat de căsătorie românesc sau act de divorț', detail: 'Original · dacă părinții sunt căsătoriți sau divorțați' },
+      ],
+    },
+    {
+      id: 'particularitati',
+      title: 'Particularități importante',
+      items: [
+        { id: 'tn16_casatorie_neinregistrata', name: 'Căsătorie germană netranscrisă', detail: 'Dacă părinții s-au căsătorit în Germania și căsătoria nu este înregistrată în România, trebuie transcrisă mai întâi' },
+        { id: 'tn16_stuttgart', name: 'Opțiune poștă la Stuttgart', detail: 'Dacă vrei certificatul prin poștă, aduci la depunere plic DIN C5 autoadresat, timbrat 6,65 EUR' },
+      ],
+    },
+  ]
+}
+
 // ── Generic fallback ──────────────────────────────────────────────────────────
 
 function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -319,9 +491,9 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'pasaport-crds-nou-de': checklistPasaportCrds,
   'pasaport-de-cu-domiciliu': checklistPasaportDomiciliuRo,
   'pasaport-de-cu-domiciliu-pierdut': checklistPasaportDomiciliuRo,
-  'buletin-de-fara-domiciliu': checklistGeneric,
-  'buletin-de-cu-domiciliu': checklistGeneric,
-  'buletin-de-fara-domiciliu-pierdut': checklistGeneric,
+  'buletin-de-fara-domiciliu': checklistBuletinExpiratFaraDomRo,
+  'buletin-de-cu-domiciliu': checklistBuletinExpiratDomRo,
+  'buletin-de-fara-domiciliu-pierdut': checklistBuletinPierdutFaraDomRo,
   'buletin-de-cu-domiciliu-pierdut': checklistBuletinPierdutDomRo,
   'buletin-de-primul-de': checklistBuletinPrimulDe,
   'buletin-de-primul-de-b': checklistBuletinPrimulDeB,
@@ -329,4 +501,6 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'titlu-calatorie-de': checklistTitluCalatorie,
   'procura-vanzare-de': checklistProcuraVanzare,
   'procura-mostenire-de': checklistProcuraMostenire,
+  'procura-generala-de': checklistProcuraGenerala,
+  'transcriere-nastere-de': checklistTranscriereNastere,
 }

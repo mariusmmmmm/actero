@@ -49,7 +49,7 @@ export default function ParteneriTab() {
       <div className="px-5 pt-5">
         <p className="text-center text-[11px] leading-relaxed text-gray-400">
           Partenerii sunt verificati de echipa ActeRO.{' '}
-          <a href="mailto:contac@actero.ro" className="underline">
+          <a href="mailto:contact@actero.ro" className="underline">
             Sugereaza un partener
           </a>
         </p>

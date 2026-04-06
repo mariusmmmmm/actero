@@ -25,8 +25,8 @@ const GUIDE_TITLES: Record<string, string> = {
   'buletin-de-primul-de-b': 'Primul buletin românesc · Germania',
   'procura-vanzare-de': 'Procură de vânzare/cumpărare proprietate · Germania',
   'procura-mostenire-de': 'Procură · Moștenire · Germania',
-  'procura-generala-de': 'Procură notarială · Germania',
-  'transcriere-nastere-de': 'Transcriere certificat de naștere',
+  'procura-generala-de': 'Procură notarială generală · Germania',
+  'transcriere-nastere-de': 'Transcriere certificat de naștere · Germania',
 }
 
 function getGuideTitle(guideId: string | null): string {
@@ -335,7 +335,7 @@ export async function sendHelpConfirmation({ to, firstName }: SendHelpConfirmati
     pe acest email.
   </p>
   <p style="font-size:13px;color:#888;margin-top:24px;">
-    Echipa ActeRO · <a href="mailto:contac@actero.ro" style="color:#888;">contac@actero.ro</a>
+    Echipa ActeRO · <a href="mailto:contact@actero.ro" style="color:#888;">contact@actero.ro</a>
   </p>
 </div>
       `,

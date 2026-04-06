@@ -45,8 +45,8 @@ export default function PoliticaPage() {
           </p>
           <p className="text-sm text-gray-500">
             Dacă ai întrebări despre această politică, ne poți scrie la{' '}
-            <a href="mailto:contac@actero.ro" className="underline underline-offset-2">
-              contac@actero.ro
+            <a href="mailto:contact@actero.ro" className="underline underline-offset-2">
+              contact@actero.ro
             </a>
             .
           </p>
@@ -63,7 +63,7 @@ export default function PoliticaPage() {
           <p>
             Date de contact pentru întrebări privind protecția datelor:
             <br />
-            Email: <a href="mailto:contac@actero.ro" className="underline underline-offset-2">contac@actero.ro</a>
+            Email: <a href="mailto:contact@actero.ro" className="underline underline-offset-2">contact@actero.ro</a>
           </p>
         </Section>
 
@@ -193,8 +193,8 @@ export default function PoliticaPage() {
           </ul>
           <p>
             Pentru exercitarea acestor drepturi, ne poți scrie la{' '}
-            <a href="mailto:contac@actero.ro" className="underline underline-offset-2">
-              contac@actero.ro
+            <a href="mailto:contact@actero.ro" className="underline underline-offset-2">
+              contact@actero.ro
             </a>
             .
           </p>

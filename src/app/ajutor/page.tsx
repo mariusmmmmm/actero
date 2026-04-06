@@ -243,7 +243,7 @@ function AjutorPageContent() {
           {status === 'error' && (
             <p className="text-sm text-red-500 text-center">
               A apărut o eroare. Încearcă din nou sau scrie direct la{' '}
-              <a href="mailto:contac@actero.ro" className="underline">contac@actero.ro</a>
+              <a href="mailto:contact@actero.ro" className="underline">contact@actero.ro</a>
             </p>
           )}
 

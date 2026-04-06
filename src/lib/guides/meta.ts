@@ -35,8 +35,8 @@ const GUIDE_TITLES: Record<string, string> = {
   'titlu-calatorie-de': 'titlul de călătorie din Germania',
   'procura-vanzare-de': 'procura de vânzare/cumpărare proprietate din Germania',
   'procura-mostenire-de': 'procura pentru moștenire din Germania',
-  'procura-generala-de': 'procura notarială din Germania',
-  'transcriere-nastere-de': 'transcrierea certificatului de naștere',
+  'procura-generala-de': 'procura notarială generală din Germania',
+  'transcriere-nastere-de': 'transcrierea certificatului de naștere din Germania',
 }
 
 const CROSS_SELL: Record<string, CrossSellGuide[]> = {
@@ -63,5 +63,9 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'titlu-calatorie-de': [
     { guideId: 'pasaport-crds-de', title: 'Rezolvă și pașaportul', subtitle: 'Documentul permanent după revenirea în România', icon: '📕' },
     { guideId: 'buletin-de-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai nevoie de carte de identitate nouă', icon: '🪪' },
+  ],
+  'transcriere-nastere-de': [
+    { guideId: 'pasaport-crds-nou-de', title: 'Continuă cu primul pașaport', subtitle: 'După ce copilul primește certificatul românesc și CNP', icon: '📕' },
+    { guideId: 'buletin-de-primul-de-b', title: 'Continuă cu primul buletin', subtitle: 'Pentru primul act de identitate românesc după transcriere', icon: '🪪' },
   ],
 }

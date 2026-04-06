@@ -27,6 +27,14 @@ const STEPS_BULETIN: TrackerStep[] = [
   { id: 'ridicare', title: 'Ridică buletinul', shortLabel: 'Ridicare', todoNote: 'La ~5 zile (CEI) sau ~30 zile (CIS)' },
 ]
 
+const STEPS_BULETIN_LIPSA: TrackerStep[] = [
+  { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Strânge actele care te identifică și clarifică situația pierdere/furt' },
+  { id: 'planificare', title: 'Planifică deplasarea în România', shortLabel: 'Planificare', todoNote: 'Verifică SPCLEP-ul competent și cum ajungi în țară' },
+  { id: 'pregatire', title: 'Pregătire pentru deplasare', shortLabel: 'Pregătire', todoNote: 'Pune în ordine actele și detaliile despre lipsa documentului' },
+  { id: 'spclep', title: 'Ziua la SPCLEP', shortLabel: 'SPCLEP', todoNote: 'Dai declarația și depui cererea pentru noua carte de identitate' },
+  { id: 'ridicare', title: 'Ridică noul buletin', shortLabel: 'Ridicare', todoNote: 'Verifică dacă primești CEI sau CIS și cum se ridică în localitatea ta' },
+]
+
 const STEPS_BULETIN_PRIMUL: TrackerStep[] = [
   { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Pregătește actele de identitate și certificatul de naștere' },
   { id: 'adresa', title: 'Pregătește dovada de adresă', shortLabel: 'Adresă', todoNote: 'Fără adresă în România nu poți depune cererea' },
@@ -81,6 +89,26 @@ const STEPS_PROCURA_VANZARE: TrackerStep[] = [
   { id: 'trimitere', title: 'Trimite procura și coordonează cu notarul', shortLabel: 'Trimitere', todoNote: 'Trimite duplicatul cu tracking și o scanare către notar' },
 ]
 
+const STEPS_PROCURA_GENERALA: TrackerStep[] = [
+  { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Pregătește actul de identitate și datele complete ale mandatarului' },
+  { id: 'continut', title: 'Stabilește conținutul exact al procurii', shortLabel: 'Conținut', todoNote: 'Clarifică exact operațiunile cu notarul, banca sau autoritatea din România' },
+  { id: 'taxa', title: 'Plătește taxa de publicitate notarială', shortLabel: 'Taxă', todoNote: 'Doar dacă procura va fi folosită la notar în România' },
+  { id: 'cerere', title: 'Cerere pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'Selectează Acte notariale → Autentificări → Procuri' },
+  { id: 'programare', title: 'Obține programarea', shortLabel: 'Programare', todoNote: 'Disponibilă după validarea cererii' },
+  { id: 'consulat', title: 'Ziua consulatului — semnezi și ridici procura', shortLabel: 'Consulat', todoNote: 'Procura se eliberează pe loc, în aceeași zi' },
+  { id: 'trimitere', title: 'Trimite procura mandatarului în România', shortLabel: 'Trimitere', todoNote: 'Trimite originalul prin curier și păstrează o copie scanată' },
+]
+
+const STEPS_TRANSCRIERE_NASTERE: TrackerStep[] = [
+  { id: 'documente', title: 'Documentele necesare', shortLabel: 'Documente', todoNote: 'Alege între Formule A și Geburtsurkunde + verifică actele părinților' },
+  { id: 'pregatire', title: 'Pregătește documentele', shortLabel: 'Pregătire', todoNote: 'Scanează actele și verifică particularitățile consulatului tău' },
+  { id: 'cerere', title: 'Creează cererea pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'Selectează serviciul de transcriere naștere din Acte de stare civilă' },
+  { id: 'programare', title: 'Obține programarea', shortLabel: 'Programare', todoNote: 'Disponibilă după validarea cererii în econsulat' },
+  { id: 'consulat', title: 'Pregătire pentru ziua programării', shortLabel: 'Consulat', todoNote: 'Originale + copii, iar la Stuttgart și plicul dacă vrei poștă' },
+  { id: 'depunere', title: 'Ziua consulatului', shortLabel: 'Depunere', todoNote: 'Semnezi declarația că nașterea nu a mai fost înscrisă în registrele românești' },
+  { id: 'ridicare', title: 'Ridică certificatul românesc', shortLabel: 'Ridicare', todoNote: 'Verifică programul de ridicare sau opțiunea prin poștă la Stuttgart' },
+]
+
 const STEPS_GENERIC: TrackerStep[] = [
   { id: 'documente', title: 'Strânge documentele', shortLabel: 'Documente' },
   { id: 'cerere', title: 'Depune cererea', shortLabel: 'Cerere' },
@@ -95,13 +123,14 @@ const STEPS: Record<string, TrackerStep[]> = {
   'pasaport-de-cu-domiciliu-pierdut': STEPS_PASAPORT,
   'buletin-de-fara-domiciliu': STEPS_BULETIN,
   'buletin-de-cu-domiciliu': STEPS_BULETIN,
-  'buletin-de-fara-domiciliu-pierdut': STEPS_BULETIN,
-  'buletin-de-cu-domiciliu-pierdut': STEPS_BULETIN,
+  'buletin-de-fara-domiciliu-pierdut': STEPS_BULETIN_LIPSA,
+  'buletin-de-cu-domiciliu-pierdut': STEPS_BULETIN_LIPSA,
   'buletin-de-primul-de': STEPS_BULETIN_PRIMUL,
   'buletin-de-primul-de-b': STEPS_BULETIN_PRIMUL_B,
   'titlu-calatorie-urgenta-de': STEPS_TITLU_URGENTA,
   'titlu-calatorie-de': STEPS_TITLU_STANDARD,
   'procura-vanzare-de': STEPS_PROCURA_VANZARE,
   'procura-mostenire-de': STEPS_PROCURA,
-  'procura-generala-de': STEPS_PROCURA,
+  'procura-generala-de': STEPS_PROCURA_GENERALA,
+  'transcriere-nastere-de': STEPS_TRANSCRIERE_NASTERE,
 }

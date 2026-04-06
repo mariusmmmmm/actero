@@ -26,7 +26,7 @@ export default function TokenExpiratPage() {
             <div className="flex flex-col gap-2">
               <div className="flex gap-2 text-sm text-orange-700">
                 <span className="flex-shrink-0">1.</span>
-                <span>Caută în email un mesaj de la <strong>ghid@actero.ro</strong></span>
+                <span>Caută în email un mesaj de la <strong>noreply@actero.ro</strong></span>
               </div>
               <div className="flex gap-2 text-sm text-orange-700">
                 <span className="flex-shrink-0">2.</span>
@@ -36,8 +36,8 @@ export default function TokenExpiratPage() {
                 <span className="flex-shrink-0">3.</span>
                 <span>
                   Dacă tot nu găsești, scrie la{' '}
-                  <a href="mailto:contac@actero.ro" className="font-semibold underline">
-                    contac@actero.ro
+                  <a href="mailto:contact@actero.ro" className="font-semibold underline">
+                    contact@actero.ro
                   </a>{' '}
                   cu data plății — îți trimitem un link nou în cel mult 24h.
                 </span>
@@ -46,10 +46,10 @@ export default function TokenExpiratPage() {
           </div>
 
           <a
-            href="mailto:contac@actero.ro"
+            href="mailto:contact@actero.ro"
             className="block w-full py-4 bg-gray-900 text-white font-semibold rounded-xl text-sm text-center mb-3"
           >
-            Scrie-ne la contac@actero.ro →
+            Scrie-ne la contact@actero.ro →
           </a>
           <a
             href="/"

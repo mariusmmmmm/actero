@@ -184,6 +184,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     warnings: [
       'Prezența fizică în România este obligatorie — nu există procură sau alternativă la distanță.',
       'Ai nevoie de o adresă de domiciliu în România. Fără aceasta, cererea nu poate fi depusă.',
+      "Excepție importantă față de regula generică CEI: în această procedură NU poți merge la orice SPCLEP. Schimbarea domiciliului din străinătate în România se face obligatoriu la SPCLEP-ul de pe raza adresei unde îți stabilești domiciliul.",
       'Această procedură folosește un formular distinct față de reînnoirea standard de CI — spune la ghișeu că vii pentru schimbarea domiciliului din străinătate în România.',
     ],
     estimatedWeeks: '1–6 săptămâni de la deplasare (CEI: ~5 zile calendaristice / CIS: ~30–45 zile)',
@@ -207,6 +208,7 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       'Prezența fizică obligatorie în România — biometricele (fotografie, amprente, semnătură) se preiau exclusiv la ghișeu. Nu există procură pentru depunere.',
       'Ridicarea CEI este de asemenea personală — la ridicare stabilești tu PIN-urile cu aplicația MAI. Nu se poate ridica prin procură.',
       'Prima CEI este GRATUITĂ (14+ ani) până la 30 iunie 2026 prin PNRR. Plata de 70 lei intervine doar de la a doua emitere sau dacă solicitantul are sub 14 ani.',
+      'Dovada rezidenței în Germania se acceptă direct în original: Anmeldung sau Meldebescheinigung, fără apostilă și fără traducere autorizată în română.',
       "CEI cu mențiunea 'fără domiciliu în România': dacă nu stabilești o adresă în RO, aceasta apare pe actul electronic. Poți stabili domiciliu la o rudă — comunică la ghișeu înainte de semnarea cererii.",
     ],
     estimatedWeeks: '1–2 săptămâni (din momentul sosirii în România)',
@@ -305,20 +307,47 @@ const diagnosticMap: Record<string, DiagnosticData> = {
     ],
   },
   'procura-generala-de': {
-    title: 'Procură notarială · Altceva',
-    subtitle: 'Divorț, firmă, cont bancar · 1 deplasare la consulat',
-    warnings: [],
+    title: 'Procură notarială — divorț, firmă sau cont bancar',
+    subtitle: 'Îți împuternicești o persoană din România să acționeze în numele tău — fără să te deplasezi în țară.',
+    warnings: [
+      'Consulatele NU fac procedura de divorț. Pot autentifica procura pentru depunerea cererii de divorț la notar din România — sunt lucruri diferite.',
+      'Conținutul exact al procurii trebuie stabilit în avans cu autoritatea sau notarul din România unde va fi folosită. Răspunderea pentru conținut incorect este exclusiv a ta.',
+      'Dacă procura e pentru divorț notarial, succesiune sau vânzare prin mandatar: taxa de publicitate notarială de 3 euro se plătește prin virament bancar în avans, înainte de programare.',
+    ],
     estimatedWeeks: '1–2 săptămâni',
-    estimatedAppointments: 1,
-    guideTitle: 'Ghid procură generală',
+    estimatedAppointments: '1 programare · 1 deplasare la consulat · procura se eliberează pe loc în aceeași zi',
+    guideTitle: 'Procură notarială generală · Germania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Documentele necesare', locked: false },
+      { id: 2, label: 'Stabilește conținutul exact al procurii', locked: false },
+      { id: 3, label: 'Plătește taxa de publicitate notarială (dacă e cazul)', locked: true },
+      { id: 4, label: 'Cerere pe econsulat.ro', locked: true },
+      { id: 5, label: 'Obține programarea', locked: true },
+      { id: 6, label: 'Ziua consulatului — semnezi și ridici procura', locked: true },
+      { id: 7, label: 'Trimite procura mandatarului în România', locked: true },
+    ],
+  },
+  'transcriere-nastere-de': {
+    title: 'Transcriere certificat de naștere german',
+    subtitle: 'Copilul tău este născut în Germania. Ca să primească CNP și documente românești, nașterea trebuie înregistrată în registrele de stare civilă din România — prin consulat.',
+    warnings: [
+      'Dacă părinții s-au căsătorit în Germania și căsătoria NU este înregistrată în RO, trebuie transcrisă MAI ÎNTÂI — abia după poți depune cererea de naștere.',
+      'Minorul sub 14 ani NU trebuie să fie prezent. Un singur părinte cetățean român este suficient.',
+      'Minorul care a împlinit 14 ani vine personal la consulat, asistat de un părinte.',
+    ],
+    estimatedWeeks: '4–8 săptămâni procesare + timp de așteptare programare',
+    estimatedAppointments: '1 programare pentru depunere · 1 prezentare pentru ridicare (sau poștă la Stuttgart)',
+    guideTitle: 'Transcriere naștere Germania → România',
     isRoute: false,
     previewSteps: [
       { id: 1, label: 'Documentele necesare', locked: false },
       { id: 2, label: 'Pregătește documentele', locked: false },
-      { id: 3, label: 'Obține programarea', locked: true },
-      { id: 4, label: 'Pregătire pentru ziua programării', locked: true },
-      { id: 5, label: 'Ziua consulatului', locked: true },
-      { id: 6, label: 'Trimite procura în România', locked: true },
+      { id: 3, label: 'Creează cererea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Obține programarea', locked: true },
+      { id: 5, label: 'Pregătire pentru ziua programării', locked: true },
+      { id: 6, label: 'Ziua consulatului', locked: true },
+      { id: 7, label: 'Ridică certificatul românesc', locked: true },
     ],
   },
 }
@@ -329,12 +358,12 @@ const routeMap: Record<string, DiagnosticData> = {
     title: 'Primul pașaport · Născut în Germania',
     subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi pașaportul',
     warnings: ['Nu poți solicita încă pașaportul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul de pașaport.'],
-    estimatedWeeks: '4–8 luni total',
+    estimatedWeeks: '3–5 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · 4–8 săptămâni + programare' },
       { guideId: 'pasaport-crds-nou-de', title: 'Ghid B: Primul pașaport CRDS (după transcriere)', weeks: 'pasul 2 · ~6–8 săptămâni' },
     ],
     previewSteps: [],
@@ -343,16 +372,40 @@ const routeMap: Record<string, DiagnosticData> = {
     title: 'Primul buletin · Născut în Germania',
     subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi primul buletin',
     warnings: ['Nu poți solicita încă buletinul. Mai întâi trebuie să transcrii certificatul de naștere în România și să obții CNP-ul, apoi continui cu ghidul pentru primul buletin.'],
-    estimatedWeeks: '4–8 luni total',
+    estimatedWeeks: '2–4 luni total',
     estimatedAppointments: 2,
     guideTitle: '',
     isRoute: true,
     routeSteps: [
-      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · ~3–6 luni' },
+      { guideId: 'transcriere-nastere-de', title: 'Ghid A: Transcriere certificat de naștere', weeks: 'pasul obligatoriu 1 · 4–8 săptămâni + programare' },
       { guideId: 'buletin-de-primul-de-b', title: 'Ghid B: Primul buletin (după transcriere)', weeks: 'pasul 2 · după obținerea certificatului românesc și a CNP-ului' },
     ],
     previewSteps: [],
   },
+}
+
+const BULETIN_COMMON_WARNING_RIDICARE =
+  'Regulă comună pentru ghidurile de buletin: la CEI ridicarea este personală și activezi PIN-urile la ridicare; la CIS verifici la depunere dacă localitatea admite vreo excepție de predare.'
+
+const BULETIN_COMMON_WARNING_REZIDENTA_DE =
+  'Când ghidul cere dovada rezidenței în Germania, Anmeldung sau Meldebescheinigung se acceptă în original, fără apostilă și fără traducere autorizată în română.'
+
+function getDiagnosticWarnings(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  baseWarnings: string[]
+) {
+  const extra: string[] = []
+
+  if (problemType === 'buletin') {
+    extra.push(BULETIN_COMMON_WARNING_RIDICARE)
+  }
+
+  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
+    extra.push(BULETIN_COMMON_WARNING_REZIDENTA_DE)
+  }
+
+  return [...baseWarnings, ...extra.filter((item) => !baseWarnings.includes(item))]
 }
 
 // ─── LOADER ───────────────────────────────────────────────────────────────────
@@ -475,6 +528,20 @@ function getEmotionalCopy(
     }
   }
 
+  if (guideId === 'procura-generala-de') {
+    return {
+      title: 'Procura se face din Germania — important e să fie redactată corect.',
+      subtitle: 'Îți arătăm exact ce pregătești, când se aplică taxa de 3 euro și ce limite ai pentru divorț, firmă sau bancă.',
+    }
+  }
+
+  if (guideId === 'transcriere-nastere-de') {
+    return {
+      title: 'Transcrierea nașterii se face prin consulat — iată ordinea corectă.',
+      subtitle: 'Îți arătăm exact ce documente pregătești, cum faci cererea și când ridici certificatul românesc cu CNP.',
+    }
+  }
+
   switch (problemType) {
     case 'pasaport':
       return {
@@ -532,12 +599,22 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
       return '⏱ 1 deplasare la consulat · fără programare · aceeași zi'
     case 'titlu-calatorie-de':
       return '⏱ 1 deplasare la consulat · fără programare · aceeași zi în majoritatea cazurilor'
+    case 'transcriere-nastere-de':
+      return '⏱ 1 programare pentru depunere · 1 ridicare sau poștă la Stuttgart · 4–8 săptămâni procesare'
     default:
       return `⏱ ${estimatedAppointments === 1 ? '1 singură deplasare' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
   }
 }
 
 function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isPrimulPasaport?: boolean) {
+  if (guideId === 'transcriere-nastere-de') {
+    return {
+      icon: '🍼',
+      title: 'Stare civilă românească',
+      subtitle: 'Transcriere naștere Germania → România',
+    }
+  }
+
   if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
     return {
       icon: '🪪',
@@ -584,7 +661,7 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
       ? 'Vânzare / cumpărare proprietate'
       : guideId?.includes('mostenire')
       ? 'Moștenire / succesiune'
-      : 'Mandat general',
+      : 'Divorț / firmă / cont bancar',
   }
 }
 
@@ -600,6 +677,13 @@ function getFeeInfo(
     return {
       title: 'Taxă: gratuit',
       subtitle: 'Titlul de călătorie se eliberează fără taxă consulară',
+    }
+  }
+
+  if (guideId === 'transcriere-nastere-de') {
+    return {
+      title: 'Taxă: gratuit',
+      subtitle: 'Transcrierea certificatului de naștere este gratuită la toate consulatele din Germania',
     }
   }
 
@@ -661,13 +745,19 @@ function getContextRow(
   if (!guideId || !problemType) return null
 
   if (problemType === 'buletin') {
-    if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
+    if (guideId === 'buletin-de-primul-de') {
       return {
         icon: '🏠',
-        title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
-        subtitle: hasDomiciliuRO
-          ? 'Ai adresă activă în România'
-          : 'Procedura pentru primul buletin se finalizează în România',
+        title: 'Domiciliu în Germania → România',
+        subtitle: 'Depui doar la SPCLEP-ul competent pentru adresa pe care o alegi ca domiciliu',
+      }
+    }
+
+    if (guideId === 'buletin-de-primul-de-b') {
+      return {
+        icon: '🏠',
+        title: 'Rezidență Germania · CEI în România',
+        subtitle: 'Poți depune la orice SPCLEP din România, cu programare activă pe hub.mai.gov.ro',
       }
     }
 
@@ -824,6 +914,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
     problemType,
     wizardResult?.type === 'route' ? wizardResult.routeId : undefined
   )
+  const resolvedWarnings = getDiagnosticWarnings(guideId, problemType, data.warnings)
 
   // Reveal progresiv — câte o secțiune la 150ms
   useEffect(() => {
@@ -874,12 +965,12 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
       )}
 
       {/* Avertizări */}
-      {visible >= 2 && data.warnings.length > 0 && (
+      {visible >= 2 && resolvedWarnings.length > 0 && (
         <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4 animate-fadeIn">
           <div className="text-xs font-bold text-orange-700 uppercase tracking-wide mb-2">
             De știut în cazul tău
           </div>
-          {data.warnings.map((w, i) => (
+          {resolvedWarnings.map((w, i) => (
             <div key={i} className="flex gap-2 items-start mb-1">
               <span className="text-orange-400 mt-0.5">•</span>
               <span className="text-sm text-orange-800">{w}</span>
