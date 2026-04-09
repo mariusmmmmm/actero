@@ -40,7 +40,7 @@ export default function TrackerTab({
   if (!steps.length) {
     return (
       <div className="px-5 py-8 text-center text-sm text-gray-400">
-        Tracker indisponibil pentru ghidul selectat.
+        Stadiul dosarului nu este disponibil pentru ghidul selectat.
       </div>
     )
   }
@@ -48,7 +48,7 @@ export default function TrackerTab({
   return (
     <div className="pb-6">
       <div className="border-b border-gray-100 px-5 pb-4 pt-5">
-        <h2 className="mb-1 text-base font-bold text-gray-900">Dosarul tau</h2>
+        <h2 className="mb-1 text-base font-bold text-gray-900">Unde ai ajuns</h2>
         <p className="text-xs text-gray-400">
           Marchezi tu progresul · actualizat de tine
         </p>
@@ -109,7 +109,7 @@ export default function TrackerTab({
                     checklistTotal > 0 &&
                     checklistDone < checklistTotal ? (
                       <div className="rounded-lg bg-orange-50 px-3 py-2 text-xs text-orange-700">
-                        {checklistDone} din {checklistTotal} documente bifate · vezi Checklist
+                        {checklistDone} din {checklistTotal} documente bifate · vezi lista de acte
                       </div>
                     ) : (
                       <div className="rounded-lg bg-orange-50 px-3 py-2 text-xs text-orange-700">

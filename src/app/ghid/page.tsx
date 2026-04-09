@@ -9,7 +9,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
-import { ghidFreeMap, type FreeStep, type GhidFreeContent } from '@/lib/guides/freeContent'
+import { ghidFreeMap, type FreeStep } from '@/lib/guides/freeContent'
 import { useAppStore } from '@/store/appStore'
 import type { GuideId } from '@/types'
 
@@ -181,7 +181,7 @@ function PaywallBanner({
         Deblochează ghidul complet →
       </button>
       <div className="text-xs text-gray-500 text-center mt-2 mb-4">
-        Checklist + tracker + parteneri verificați
+        Listă de acte + progres + parteneri verificați
       </div>
       <div className="flex flex-col gap-2">
         {visibleTeaser.map((item, i) => (

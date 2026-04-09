@@ -87,6 +87,28 @@ const diagnosticMap: Record<string, DiagnosticData> = {
       { id: 7, label: 'Ridică pașaportul', locked: true },
     ],
   },
+  'pasaport-minor-crds-de': {
+    title: 'Pașaport pentru copilul tău din Germania',
+    subtitle: 'Prim pașaport sau reînnoire pentru minori cu domiciliu în Germania',
+    warnings: [
+      'Prezența minorului și a ambilor părinți este obligatorie la depunere. Dacă un singur părinte vine, ai nevoie de procură specială sau acord scris autentificat.',
+      'Minorul poate obține pașaport CRDS numai dacă cel puțin un părinte are deja pașaport CRDS sau depune cerere CRDS simultan cu minorul.',
+      'Dacă minorul s-a născut în Germania și nu are certificat de naștere românesc, transcrierea trebuie făcută mai întâi.',
+    ],
+    estimatedWeeks: '8–12 săptămâni',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Pașaport copil CRDS — Germania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Documentele necesare', locked: false },
+      { id: 2, label: 'Pregătește documentele', locked: false },
+      { id: 3, label: 'Cerere pe econsulat.ro', locked: true },
+      { id: 4, label: 'Obține programarea', locked: true },
+      { id: 5, label: 'Pregătire pentru ziua programării', locked: true },
+      { id: 6, label: 'Ziua consulatului', locked: true },
+      { id: 7, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
   'pasaport-de-cu-domiciliu': {
     title: 'Pașaport expirat · Domiciliu România',
     subtitle: 'Rezident în Germania · o singură vizită la consulat',
@@ -511,6 +533,13 @@ function getEmotionalCopy(
     }
   }
 
+  if (guideId === 'pasaport-minor-crds-de') {
+    return {
+      title: 'Pașaportul copilului se rezolvă — iată pașii corecți pentru consulat.',
+      subtitle: 'Îți arătăm exact ce pregătești pentru minor, pentru părinți și pentru ziua programării.',
+    }
+  }
+
   if (guideId === 'pasaport-crds-de-pierdut') {
     return {
       title: 'Pașaportul CRDS pierdut sau furat se rezolvă — iată exact pașii.',
@@ -616,6 +645,8 @@ function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimated
       return '⏱ o singură vizită la consulat · 6–10 săptămâni'
     case 'pasaport-crds-nou-de':
       return '⏱ o singură vizită la consulat · 8–10 săptămâni'
+    case 'pasaport-minor-crds-de':
+      return '⏱ o singură vizită la consulat · 8–12 săptămâni'
     case 'pasaport-de-cu-domiciliu':
     case 'pasaport-de-cu-domiciliu-pierdut':
       return '⏱ o singură vizită la consulat · 4–6 săptămâni'
@@ -659,6 +690,14 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
   }
 
   if (problemType === 'pasaport') {
+    if (guideId === 'pasaport-minor-crds-de') {
+      return {
+        icon: '🧒',
+        title: 'Pașaport CRDS pentru minor',
+        subtitle: 'Prim pașaport sau reînnoire pentru copil cu domiciliu în Germania',
+      }
+    }
+
     if (guideId === 'pasaport-crds-de-pierdut') {
       return {
         icon: '📕',
@@ -751,7 +790,8 @@ function getPhotoInfo(
     if (
       guideId === 'pasaport-crds-de' ||
       guideId === 'pasaport-crds-de-pierdut' ||
-      guideId === 'pasaport-crds-nou-de'
+      guideId === 'pasaport-crds-nou-de' ||
+      guideId === 'pasaport-minor-crds-de'
     ) {
       return {
         title: 'Fotografia se preia la ghișeu',
@@ -1089,7 +1129,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
             Primesc primii 2 pași gratuit →
           </button>
           <p className="text-center text-xs text-gray-400 mt-2">
-            Fără cont · Fără card · 30 de secunde
+            Fără cont · Începi gratuit · 30 de secunde
           </p>
           <div className="flex items-center gap-3 my-3">
             <div className="flex-1 h-px bg-gray-100" />
@@ -1103,7 +1143,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
             Ghid complet  9,99€  →
           </button>
           <p className="text-center text-xs text-gray-400 mt-1">
-            Ghid complet + checklist + parteneri verificați
+            Ghid complet + listă de acte + parteneri verificați
           </p>
         </div>
       )}

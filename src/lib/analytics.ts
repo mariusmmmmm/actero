@@ -1,5 +1,10 @@
-type AnalyticsPrimitive = string | number | boolean
-type AnalyticsParams = Record<string, AnalyticsPrimitive | null | undefined>
+type AnalyticsValue =
+  | string
+  | number
+  | boolean
+  | AnalyticsValue[]
+  | { [key: string]: AnalyticsValue }
+type AnalyticsParams = Record<string, AnalyticsValue | null | undefined>
 
 type SearchParamsLike = {
   get: (name: string) => string | null
@@ -21,10 +26,10 @@ declare global {
 
 const ATTRIBUTION_KEY = 'actero:attribution'
 
-function cleanParams(params: AnalyticsParams): Record<string, AnalyticsPrimitive> {
+function cleanParams(params: AnalyticsParams): Record<string, AnalyticsValue> {
   return Object.fromEntries(
     Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '')
-  ) as Record<string, AnalyticsPrimitive>
+  ) as Record<string, AnalyticsValue>
 }
 
 export function trackEvent(eventName: string, params: AnalyticsParams = {}) {
@@ -80,10 +85,27 @@ export function getStoredAttribution(): StoredAttribution {
 export function withAttribution(
   params: AnalyticsParams = {},
   searchParams?: SearchParamsLike
-): Record<string, AnalyticsPrimitive> {
+): Record<string, AnalyticsValue> {
   return cleanParams({
     ...getStoredAttribution(),
     ...getUtmParams(searchParams),
     ...params,
   })
+}
+
+export function getGaClientId(): string | null {
+  if (typeof document === 'undefined') return null
+
+  const gaCookie = document.cookie
+    .split('; ')
+    .find((part) => part.startsWith('_ga='))
+
+  if (!gaCookie) return null
+
+  const raw = decodeURIComponent(gaCookie.slice(4))
+  const parts = raw.split('.')
+
+  if (parts.length < 4) return null
+
+  return `${parts[2]}.${parts[3]}`
 }

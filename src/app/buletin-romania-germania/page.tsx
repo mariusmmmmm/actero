@@ -102,7 +102,7 @@ const articleSchema = {
   '@id': 'https://actero.ro/buletin-romania-germania#article',
   headline: 'Buletin românesc din Germania — Ghid complet 2026',
   description:
-    'Hub pentru toate situațiile de buletin pentru românii din Germania: expirat, pierdut, cu sau fără domiciliu, CEI și CIS.',
+    'Ghidul principal pentru toate situațiile de buletin pentru românii din Germania: expirat, pierdut, cu sau fără domiciliu, CEI și CIS.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -221,48 +221,48 @@ const sections = [
                 domiciliu: 'Da',
                 unde: 'SPCLEP de domiciliu',
                 ceicis: 'CEI sau CIS',
-                href: '/buletin-expirat-germania',
-                label: 'Ghid →',
+                href: '/buletin-expirat-cu-domiciliu-romania',
+                label: 'Ghid cu domiciliu RO →',
               },
               {
                 situatie: 'Buletin expirat',
                 domiciliu: 'Nu, dar ai mai fost înregistrat',
                 unde: 'SPCLEP ultim domiciliu sau orice SPCLEP dacă alegi CEI',
                 ceicis: 'CEI sau CIS',
-                href: '/buletin-expirat-germania',
-                label: 'Ghid →',
+                href: '/buletin-expirat-fara-domiciliu-romania',
+                label: 'Ghid fără domiciliu RO →',
               },
               {
                 situatie: 'Buletin pierdut sau furat',
                 domiciliu: 'Da',
                 unde: 'SPCLEP de domiciliu',
                 ceicis: 'CEI sau CIS',
-                href: '/wizard?problem=buletin',
-                label: 'Vezi traseul în wizard →',
+                href: '/buletin-pierdut-furat-cu-domiciliu-romania',
+                label: 'Ghid pierdut/furat cu domiciliu RO →',
               },
               {
                 situatie: 'Buletin pierdut sau furat',
                 domiciliu: 'Nu, dar ai mai fost înregistrat',
                 unde: 'SPCLEP ultim domiciliu sau orice SPCLEP dacă alegi CEI',
                 ceicis: 'CEI sau CIS',
-                href: '/wizard?problem=buletin',
-                label: 'Vezi traseul în wizard →',
+                href: '/buletin-pierdut-furat-fara-domiciliu-romania',
+                label: 'Ghid pierdut/furat fără domiciliu RO →',
               },
               {
                 situatie: 'Primul buletin, niciodată înregistrat în România',
                 domiciliu: 'Nu',
                 unde: 'Orice SPCLEP',
                 ceicis: 'CEI',
-                href: '/wizard?problem=buletin',
-                label: 'Vezi traseul în wizard →',
+                href: '/cei-vs-cis-diaspora',
+                label: 'Vezi mai întâi CEI vs CIS →',
               },
               {
                 situatie: 'Primul buletin, copil născut în Germania',
                 domiciliu: 'Nu',
                 unde: 'Mai întâi transcriere, apoi SPCLEP',
                 ceicis: 'CEI după transcriere',
-                href: '/wizard?problem=transcriere-nastere',
-                label: 'Pornește cu transcrierea →',
+                href: '/primul-buletin-copil-nascut-in-germania',
+                label: 'Ghid primul buletin copil →',
               },
             ].map(({ situatie, domiciliu, unde, ceicis, href, label }, i) => (
               <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
@@ -279,6 +279,55 @@ const sections = [
             ))}
           </tbody>
         </table>
+      </div>
+    ),
+  },
+  {
+    id: 'ghiduri-conexe',
+    title: 'Ghiduri utile pentru alegerea traseului corect',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            href: '/buletin-expirat-cu-domiciliu-romania',
+            title: 'Buletin expirat cu domiciliu în România',
+            text: 'Cazul cel mai simplu: mergi la SPCLEP-ul de domiciliu și alegi între CEI și CIS.',
+          },
+          {
+            href: '/buletin-expirat-fara-domiciliu-romania',
+            title: 'Buletin expirat fără domiciliu activ în România',
+            text: 'Explică traseul când locuiești în Germania și nu mai ai adresă activă în România.',
+          },
+          {
+            href: '/buletin-pierdut-furat-cu-domiciliu-romania',
+            title: 'Buletin pierdut sau furat cu domiciliu în România',
+            text: 'Include obligația legală de 15 zile și diferențele dintre pierdut și furat.',
+          },
+          {
+            href: '/buletin-pierdut-furat-fara-domiciliu-romania',
+            title: 'Buletin pierdut sau furat fără domiciliu în România',
+            text: 'Te ajută să alegi SPCLEP-ul corect și să nu încurci traseul cu varianta CEI/CIS.',
+          },
+          {
+            href: '/cei-vs-cis-diaspora',
+            title: 'CEI vs CIS pentru diaspora',
+            text: 'Pagina de comparație rapidă ca să alegi documentul potrivit înainte de drum.',
+          },
+          {
+            href: '/schimbare-domiciliu-copil-din-germania-in-romania',
+            title: 'Domiciliu pentru copil în România',
+            text: 'Util dacă pregătești primul buletin pentru copil și trebuie să clarifici adresa din România.',
+          },
+        ].map(({ href, title, text }) => (
+          <Link
+            key={href}
+            href={href}
+            className="rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue-200"
+          >
+            <p className="mb-1 font-semibold text-gray-900">{title}</p>
+            <p className="text-sm text-gray-600">{text}</p>
+          </Link>
+        ))}
       </div>
     ),
   },
@@ -349,15 +398,15 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când merită să folosești wizardul ActeRO',
+    title: 'Când merită să folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă ai mai multe neclarități, wizardul îți dă răspunsul exact pentru situația ta
+          Dacă ai mai multe neclarități, ghidul rapid îți dă răspunsul exact pentru situația ta
           concretă: domiciliu activ sau nu, expirat sau pierdut, CEI sau CIS.
         </p>
         <div className="space-y-2 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <p className="text-sm font-medium text-gray-800">Wizardul îți clarifică:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid îți clarifică:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>la ce SPCLEP mergi exact</li>
             <li>ce documente pregătești înainte de drum</li>
@@ -378,8 +427,8 @@ export default function BuletinRomaniaGermaniaPage() {
       h1="Buletin românesc din Germania — ce s-a schimbat și cum procedezi"
       intro="Spre deosebire de pașaport, buletinul nu se rezolvă la consulatul din Germania. Din 2025, prezența fizică în România este obligatorie pentru depunere. Înainte să pleci la drum, merită să afli exact la ce SPCLEP mergi și dacă alegi CEI sau CIS."
       tldr="Buletinul înseamnă deplasare în România la SPCLEP. CEI: valabilă UE, orice SPCLEP, termen mai scurt. CIS: nu este valabilă UE, doar la SPCLEP de domiciliu, termen mai lung. Fotografii proprii nu sunt necesare. CEI se ridică obligatoriu personal."
-      ctaHref="/wizard?problem=buletin"
-      ctaLabel="Găsește traseul tău exact →"
+      ctaHref="/cei-vs-cis-diaspora"
+      ctaLabel="Vezi mai întâi diferența dintre CEI și CIS →"
       updatedAt="aprilie 2026"
       sourceNote="MAI, hub.mai.gov.ro, carteadeidentitate.gov.ro — date verificate live"
       faqItems={faqItems}
@@ -387,8 +436,8 @@ export default function BuletinRomaniaGermaniaPage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
-      finalCtaTitle="Nu știi la ce SPCLEP mergi sau ce acte pregătești?"
-      finalCtaText="Spune-i wizardul dacă ai domiciliu activ în România, dacă buletinul este expirat sau pierdut și ce land ești. Primești traseul corect și lista exactă de documente."
+      finalCtaTitle="Încă nu e clar ce pagină ți se aplică?"
+      finalCtaText="Pornește cu CEI vs CIS și cu ghidul care corespunde cazului tău de expirat sau pierdut. Dacă situația rămâne neclară, ghidul rapid îți confirmă traseul final."
     />
   )
 }

@@ -15,6 +15,7 @@ const guideTitles: Partial<Record<GuideId, string>> = {
   'pasaport-crds-de': 'Reînnoire pașaport CRDS · Germania',
   'pasaport-crds-de-pierdut': 'Pașaport CRDS pierdut/furat · Germania',
   'pasaport-crds-nou-de': 'Primul pașaport CRDS · Germania',
+  'pasaport-minor-crds-de': 'Pașaport copil CRDS · Germania',
   'pasaport-de-cu-domiciliu': 'Pașaport expirat · Domiciliu România',
   'pasaport-de-cu-domiciliu-pierdut': 'Pașaport pierdut/furat · Germania',
   'buletin-de-fara-domiciliu': 'Buletin expirat · Fără domiciliu RO',

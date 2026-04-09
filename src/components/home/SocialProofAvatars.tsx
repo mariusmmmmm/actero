@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 
 const avatarPaths = [
@@ -12,17 +11,12 @@ const avatarPaths = [
   '/avatars/avatar-6.jpeg',
 ]
 
-function pickRandomAvatars(count: number) {
-  const shuffled = [...avatarPaths].sort(() => Math.random() - 0.5)
-  return shuffled.slice(0, count)
-}
+const visibleAvatars = avatarPaths.slice(0, 4)
 
 export default function SocialProofAvatars() {
-  const [avatars] = useState(() => pickRandomAvatars(4))
-
   return (
     <div className="flex -space-x-2">
-      {avatars.map((src, index) => (
+      {visibleAvatars.map((src, index) => (
         <div
           key={`${src}-${index}`}
           className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-gray-800 bg-gray-600"

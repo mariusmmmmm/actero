@@ -219,7 +219,7 @@ const sections = [
             titlu: 'Pașaport CRDS anterior pierdut sau furat',
             descriere: 'Ai mai avut pașaport CRDS, dar l-ai pierdut sau ți-a fost furat.',
             href: '/wizard?problem=pasaport',
-            label: 'Vezi traseul în wizard →',
+            label: 'Vezi traseul în ghidul rapid →',
             color: 'border-red-100 bg-red-50',
             textColor: 'text-red-900',
             linkColor: 'text-red-700',
@@ -229,7 +229,7 @@ const sections = [
             titlu: 'Primul pașaport CRDS — născut în România',
             descriere: 'Nu ai mai avut niciodată pașaport, dar ai CNP și domiciliul este în Germania.',
             href: '/wizard?problem=pasaport',
-            label: 'Vezi traseul în wizard →',
+            label: 'Vezi traseul în ghidul rapid →',
             color: 'border-blue-100 bg-blue-50',
             textColor: 'text-blue-900',
             linkColor: 'text-blue-700',
@@ -239,7 +239,7 @@ const sections = [
             titlu: 'Primul pașaport CRDS — născut în Germania',
             descriere: 'Înainte de pașaport trebuie transcris certificatul de naștere german.',
             href: '/acte-copil-nascut-in-germania',
-            label: 'Ghid acte copil / Route A →',
+            label: 'Ghid acte copil / varianta pașaport →',
             color: 'border-purple-100 bg-purple-50',
             textColor: 'text-purple-900',
             linkColor: 'text-purple-700',
@@ -444,14 +444,14 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când folosești wizardul ActeRO',
+    title: 'Când folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă ai confirmat că ești pe fluxul CRDS, dar nu ești sigur de sub-situația exactă, wizardul îți spune ce traseu ți se aplică și ce documente trebuie să pregătești.
+          Dacă ai confirmat că ești pe fluxul CRDS, dar nu ești sigur de situația exactă, ghidul rapid îți spune ce traseu ți se aplică și ce documente trebuie să pregătești.
         </p>
         <div className="space-y-2 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid te ajută să afli:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>sub-situația ta exactă</li>
             <li>ce se întâmplă cu cartea de identitate</li>
@@ -482,7 +482,7 @@ export default function PasaportCRDSGermaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Ești pe CRDS dar nu știi exact ce sub-situație ai?"
-      finalCtaText="Wizardul ActeRO îți confirmă dacă ești pe fluxul CRDS, identifică sub-situația exactă și îți dă lista completă de documente pentru consulatul tău."
+      finalCtaText="Ghidul rapid ActeRO îți confirmă dacă ești pe fluxul CRDS, identifică situația exactă și îți dă lista completă de documente pentru consulatul tău."
     />
   )
 }

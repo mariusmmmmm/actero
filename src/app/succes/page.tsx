@@ -80,12 +80,16 @@ function SuccesPageContent() {
           }
         }
 
-        const res = await fetch(`/api/session/status?session=${sessionId}`)
-        const data = await res.json()
-        if (data.isPaid) {
-          unlockPaid()
-          setStatus('ready')
-          setTimedOut(false)
+        if (!checkoutSessionId) {
+          const res = await fetch(`/api/session/status?session=${sessionId}`, {
+            cache: 'no-store',
+          })
+          const data = await res.json()
+          if (data.isPaid) {
+            unlockPaid()
+            setStatus('ready')
+            setTimedOut(false)
+          }
         }
       } catch {}
     }

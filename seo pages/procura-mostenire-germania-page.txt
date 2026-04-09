@@ -1,0 +1,539 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: tranzacțională
+//   Utilizatorul are o moștenire sau succesiune de rezolvat în
+//   România și nu poate fi prezent. Vrea să știe exact ce procură
+//   face, ce documente trebuie la consulat și ce cere notarul.
+//
+// Keyword principal: procură moștenire germania
+// Keyword-uri secundare:
+//   - procura succesiune germania romania
+//   - procura mostenire consulat romania germania
+//   - procura succesiune notariat romania din germania
+//   - certificat de deces procura germania
+//   - notar succesiune procura romania din germania
+//   - procura mostenire rnnepr germania
+//   - procura acceptare mostenire germania
+//   - dosar succesoral romania din germania
+//   - procura notariala mostenire bonn munchen stuttgart berlin
+//   - ce documente procura mostenire consulat
+//
+// Unghi diferențiator:
+//   (1) Ce cere consulatul vs ce cere notarul din România —
+//       confuzie frecventă: oamenii aduc la consulat documente
+//       care sunt necesare de fapt abia la notar.
+//   (2) Certificatul de deces — nu e obligatoriu la consulat
+//       dar notarul din România îl cere. Distinție critică.
+//   (3) Procura de acceptare a moștenirii vs procura de renunțare
+//       — sunt acte diferite, cu consecințe juridice diferite.
+//   (4) Taxa RNNEPR 3€ per consulat — identică cu procura vânzare.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Procură moștenire din Germania — Consulat sau notar, ce trebuie | ActeRO',
+  description:
+    'Procură pentru moștenire sau succesiune în România, din Germania. Ce cere consulatul vs ce cere notarul, certificat de deces, taxa 3€ RNNEPR per consulat.',
+  keywords: [
+    'procura mostenire germania',
+    'procura succesiune germania romania',
+    'procura mostenire consulat romania germania',
+    'certificat de deces procura germania',
+    'notar succesiune procura romania din germania',
+    'procura acceptare mostenire germania',
+    'dosar succesoral romania din germania',
+    'procura mostenire rnnepr germania',
+    'procura notariala mostenire bonn munchen stuttgart berlin',
+    'ce documente procura mostenire consulat',
+  ],
+  openGraph: {
+    title: 'Procură moștenire din Germania — Ce cere consulatul vs notarul',
+    description:
+      'Certificatul de deces nu e la consulat — e la notar. Taxa 3€ RNNEPR, procură acceptare vs renunțare, eliberare aceeași zi.',
+    url: 'https://actero.ro/procura-mostenire-germania',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/procura-mostenire-germania',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Trebuie să aduc certificatul de deces la consulat pentru procura de moștenire?',
+    answer:
+      'Nu. Certificatul de deces nu este cerut de consulat pentru redactarea procurii. Îl vei folosi la notarul din România când se deschide dosarul succesoral. La consulat ai nevoie de documentele tale de identitate și de datele mandatarului.',
+  },
+  {
+    question: 'Care este diferența dintre procura de acceptare și procura de renunțare la moștenire?',
+    answer:
+      'Procura de acceptare îl împuternicește pe mandatar să accepte moștenirea și să finalizeze procedura succesorală în numele tău. Procura de renunțare îl împuternicește să renunți la moștenire — decizie ireversibilă. Asigură-te că știi exact ce vrei înainte de programare.',
+  },
+  {
+    question: 'Cât costă procura de moștenire la consulat?',
+    answer:
+      'Taxa principală este 3€ pentru înscrierea în RNNEPR. La aceasta se pot adăuga taxe consulare pentru redactarea actului. Metoda de plată a celor 3€ diferă per consulat — Berlin cere virament cu 3-4 zile înainte.',
+  },
+  {
+    question: 'Primesc procura în aceeași zi?',
+    answer:
+      'Da. Procura se eliberează în aceeași zi cu programarea la toate cele 4 consulate din Germania.',
+  },
+  {
+    question: 'Ce date ale defunctului trebuie să am pentru procură?',
+    answer:
+      'Numele complet al defunctului, data decesului și, dacă îl ai, locul decesului. Aceste date vor apărea în procură pentru a identifica moștenirea la care te referi.',
+  },
+  {
+    question: 'Trebuie să știu dinainte care este notarul care se ocupă de succesiune?',
+    answer:
+      'Nu este obligatoriu. Dacă ai notar ales, procura poate fi specifică acestuia. Dacă nu, procura se redactează cu formulare mai generală și mandatarul poate merge la orice notar.',
+  },
+  {
+    question: 'Mandatarul meu trebuie să fie prezent la consulat?',
+    answer:
+      'Nu. Mandatarul nu trebuie să fie prezent la consulat. Ai nevoie doar de datele lui de identitate (CNP + serie și număr CI). El va folosi procura la notarul din România.',
+  },
+  {
+    question: 'Ce face notarul din România cu procura mea?',
+    answer:
+      'Notarul verifică procura, deschide sau continuă dosarul succesoral și finalizează procedura în baza împuternicirii date mandatarului. Procura de la consulat este direct recunoscută — fără apostilă sau traducere.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Decide: acceptare sau renunțare la moștenire',
+    text: 'Sunt două procuri diferite cu consecințe juridice diferite. Renunțarea este ireversibilă. Decide înainte de programare.',
+  },
+  {
+    name: 'Pregătește datele defunctului și ale mandatarului',
+    text: 'Numele defunctului, data decesului. CNP + serie și număr CI ale mandatarului. Dacă ai notar ales: datele biroului notarial.',
+  },
+  {
+    name: 'Verifică metoda de plată 3€ RNNEPR pentru consulatul tău',
+    text: 'Berlin: virament obligatoriu cu 3-4 zile înainte. Bonn: EC-Karte + pre-scanning documente. Stuttgart: POS sau virament. München: cash.',
+  },
+  {
+    name: 'Creezi programarea pe econsulat.ro și te prezinți cu originalele',
+    text: 'Pașaport/CI în original. Semnezi în fața funcționarului consular.',
+  },
+  {
+    name: 'Trimite procura mandatarului — acesta merge la notarul din România',
+    text: 'Procura este direct recunoscută. Mandatarul prezintă procura + CI propriu + certificatul de deces + actele imobilului/averii la notar.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/procura-mostenire-germania#article',
+  headline: 'Procură moștenire din Germania — Ce cere consulatul vs notarul 2026',
+  description:
+    'Ghid leaf pentru procura de moștenire/succesiune din Germania: certificat de deces, acceptare vs renunțare, RNNEPR 3€ per consulat.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/procura-mostenire-germania',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Procură notarială Germania',
+      item: 'https://actero.ro/procura-notariala-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Procură moștenire Germania',
+      item: 'https://actero.ro/procura-mostenire-germania',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'consulat-vs-notar',
+    title: 'Ce cere consulatul vs ce cere notarul — confuzia frecventă',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Cea mai frecventă greșeală: oamenii vin la consulat cu documente care sunt necesare de
+          fapt abia la notarul din România. Consulatul are nevoie de mult mai puțin.
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <p className="font-semibold text-blue-900 mb-2">🏛️ Ce cere consulatul</p>
+            <ul className="space-y-1 text-sm text-blue-800">
+              <li>✅ Actul tău de identitate (pașaport/CI)</li>
+              <li>✅ Datele mandatarului (CNP + CI)</li>
+              <li>✅ Datele defunctului (nume, dată deces)</li>
+              <li>✅ Datele notarului ales (dacă ai)</li>
+              <li>✅ Taxa 3€ RNNEPR</li>
+            </ul>
+            <p className="mt-2 text-xs text-blue-700">
+              Atât. Consulatul redactează procura și o eliberează în aceeași zi.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-2">📋 Ce cere notarul din România</p>
+            <ul className="space-y-1 text-sm text-green-800">
+              <li>✅ Procura ta (de la consulat)</li>
+              <li>✅ Certificatul de deces al defunctului</li>
+              <li>✅ Actele de proprietate ale bunurilor</li>
+              <li>✅ Certificate de naștere ale moștenitorilor</li>
+              <li>✅ Certificate de căsătorie (dacă e cazul)</li>
+              <li>✅ Dovada gradului de rudenie</li>
+            </ul>
+            <p className="mt-2 text-xs text-green-700">
+              Aceste documente le aduce mandatarul tău — nu tu, nu la consulat.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>⚠️ Certificatul de deces NU se aduce la consulat.</strong> Este documentul
+            principal pentru dosar succesoral — dar rolul lui este la notarul din România, nu la
+            consulatul din Germania.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'acceptare-vs-renuntare',
+    title: 'Procură de acceptare vs procură de renunțare — decizie ireversibilă',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-1">✅ Procură de acceptare</p>
+            <p className="text-sm text-green-800 mb-2">
+              Mandatarul acceptă moștenirea și finalizează procedura succesorală în numele tău.
+              Devii moștenitor cu toate drepturile și obligațiile aferente — inclusiv eventuale datorii.
+            </p>
+            <p className="text-xs text-green-700">
+              Cel mai frecvent tip de procură pentru succesiune.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-red-100 bg-red-50 p-4">
+            <p className="font-semibold text-red-900 mb-1">⚠️ Procură de renunțare</p>
+            <p className="text-sm text-red-800 mb-2">
+              Mandatarul renunță la moștenire în numele tău.{' '}
+              <strong>Decizie ireversibilă</strong> — nu poți reveni după ce procura este
+              folosită la notar.
+            </p>
+            <p className="text-xs text-red-700">
+              Consultă un avocat sau notar înainte de a decide renunțarea.
+            </p>
+          </div>
+        </div>
+
+        <p className="text-sm text-gray-700">
+          <strong>Dacă nu știi sigur ce vrei</strong>, discută cu un notar din România înainte de
+          a face programare la consulat. Odată procura folosită la notar, efectele juridice sunt
+          definitive.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'documente-consulat',
+    title: 'Documentele tale la consulat',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              req: true,
+              doc: 'Pașaport românesc valabil sau carte de identitate',
+              detaliu: 'Original — pentru identificarea ta ca mandant.',
+            },
+            {
+              req: true,
+              doc: 'Date complete ale mandatarului',
+              detaliu: 'CNP + seria și numărul CI al persoanei care te va reprezenta la notar. Nu trebuie să fie prezentă la consulat.',
+            },
+            {
+              req: true,
+              doc: 'Date ale defunctului',
+              detaliu: 'Numele complet, data decesului și, dacă îl ai, locul decesului — pentru identificarea moștenirii în procură.',
+            },
+            {
+              req: false,
+              label: 'dacă ai notar ales',
+              doc: 'Date birou notarial',
+              detaliu: 'Denumire birou, adresă, județ — pentru procură specifică. Dacă nu ai, procura se redactează cu formulare generală.',
+            },
+          ].map(({ req, doc, detaliu, label }) => (
+            <div key={doc} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+              <span className="text-base flex-shrink-0">{req ? '✅' : '⚪'}</span>
+              <div>
+                <p className="font-medium text-gray-800 text-sm">
+                  {doc}
+                  {label && (
+                    <span className="ml-2 text-xs text-gray-500 font-normal">— {label}</span>
+                  )}
+                </p>
+                <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-xs text-blue-800">
+            <strong>Nu ai nevoie de:</strong> certificatul de deces, actele de proprietate,
+            apostilă, traduceri, prezența mandatarului.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'rnnepr-plata',
+    title: 'Taxa 3€ RNNEPR — metoda per consulat',
+    content: (
+      <div className="space-y-3">
+        <p className="text-sm text-gray-700">
+          Orice procură notarială se înregistrează obligatoriu în RNNEPR — taxa este 3€.
+          Metoda de plată diferă semnificativ între consulate.
+        </p>
+
+        <div className="space-y-2">
+          {[
+            {
+              oras: 'Bonn',
+              metoda: 'EC-Karte (card debit bancă germană)',
+              timing: 'Ziua programării',
+              iban: null,
+              alert: null,
+              special: '⚠️ Documente scanate pe econsulat.ro ÎNAINTE de programare',
+            },
+            {
+              oras: 'München',
+              metoda: 'Numerar (cash)',
+              timing: 'Ziua programării',
+              iban: null,
+              alert: null,
+              special: null,
+            },
+            {
+              oras: 'Stuttgart',
+              metoda: 'POS (EC-Karte) SAU virament bancar',
+              timing: 'POS = ziua programării · Virament = min. 3 zile înainte',
+              iban: 'DE04 1007 0000 0976 1909 01 · BIC: DEUTDEBBXXX',
+              alert: null,
+              special: null,
+            },
+            {
+              oras: 'Berlin',
+              metoda: 'EXCLUSIV virament bancar',
+              timing: 'Min. 3-4 zile lucrătoare ÎNAINTE de programare',
+              iban: 'DE83 1007 0000 0435 4429 00 · BIC: DEUTDEBBXXX',
+              alert: '⚠️ Fără virament confirmat în avans = procura nu se eliberează',
+              special: null,
+            },
+          ].map(({ oras, metoda, timing, iban, alert, special }) => (
+            <div
+              key={oras}
+              className={`rounded-xl border p-4 ${alert ? 'border-red-200 bg-red-50' : 'border-gray-200 bg-white'}`}
+            >
+              <p className="font-bold text-gray-900 mb-2">{oras}</p>
+              <div className="space-y-1">
+                <p className="text-sm text-gray-700">
+                  <span className="font-semibold">💳 Metodă:</span> {metoda}
+                </p>
+                <p className="text-xs text-gray-600">
+                  <span className="font-semibold">⏱ Când:</span> {timing}
+                </p>
+                {iban && (
+                  <p className="text-xs text-gray-500 font-mono bg-gray-100 rounded px-2 py-1">
+                    IBAN: {iban}
+                  </p>
+                )}
+                {alert && (
+                  <p className="text-xs text-red-700 font-semibold mt-1">{alert}</p>
+                )}
+                {special && (
+                  <p className="text-xs text-amber-700 bg-amber-50 rounded px-2 py-1 mt-1">{special}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'dupa-consulat',
+    title: 'Ce face mandatarul cu procura la notarul din România',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+          <p className="font-semibold text-green-900 mb-1">
+            ✅ Procura de la consulat: direct recunoscută în România
+          </p>
+          <p className="text-sm text-green-800">
+            Fără apostilă. Fără traducere. Notarul din România o acceptă direct ca act autentic
+            emis de un consulat românesc.
+          </p>
+        </div>
+
+        <div className="space-y-2 text-sm text-gray-700">
+          <p>
+            <strong>Ce aduce mandatarul la notar:</strong> Procura ta (original) + CI propriu +
+            certificatul de deces al defunctului + actele de proprietate ale bunurilor din
+            succesiune + dovada gradului de rudenie (certificate de naștere, căsătorie etc.).
+          </p>
+          <p>
+            <strong>Procedura succesorală:</strong> Notarul deschide dosarul succesoral, inventariază
+            bunurile și emite certificatul de moștenitor. Dacă sunt mai mulți moștenitori, toți
+            trebuie să fie prezenți sau reprezentați prin procură.
+          </p>
+          <p>
+            <strong>Termen:</strong> Termenul de acceptare a moștenirii în România este de{' '}
+            <strong>1 an de la data decesului</strong> conform Codului Civil. Dacă termenul
+            a trecut, situația este mai complicată — consultați un avocat.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Mai mulți moștenitori?</strong> Dacă există mai mulți moștenitori, fiecare
+            care nu poate fi prezent la notar are nevoie de propria procură. O singură procură
+            nu acoperă mai mulți moștenitori.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente cu procura de moștenire',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Aduc certificatul de deces la consulat pentru redactarea procurii',
+            corect: 'Certificatul de deces nu este cerut de consulat. Îl va folosi mandatarul la notarul din România, nu tu la consulat.',
+          },
+          {
+            gresit: 'La Berlin nu trimit viramentul de 3€ cu 3-4 zile înainte',
+            corect: 'La Berlin plata RNNEPR se face exclusiv prin virament bancar, confirmat în avans. Fără virament: procura nu se eliberează în ziua programării.',
+          },
+          {
+            gresit: 'Fac o procură generală când am nevoie de una specifică pentru succesiune',
+            corect: 'Procura pentru succesiune trebuie să menționeze explicit tipul de împuternicire (acceptare sau renunțare) și datele defunctului. O procură prea generală poate fi refuzată de notar.',
+          },
+          {
+            gresit: 'Semnez procura de renunțare fără să știu că este ireversibilă',
+            corect: 'Renunțarea la moștenire prin procură este definitivă odată înregistrată la notar. Consultați situația cu un avocat înainte de a decide renunțarea.',
+          },
+          {
+            gresit: 'Cred că o singură procură acoperă toți moștenitorii',
+            corect: 'Fiecare moștenitor care nu poate fi prezent la notar are nevoie de propria procură separată.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="text-xs font-semibold text-red-700 mb-0.5">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Ai nevoie de alt tip de procură?',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Procură pentru vânzare sau cumpărare proprietate în România',
+            href: '/procura-vanzare-proprietate-germania',
+            label: 'Ghid procură vânzare →',
+          },
+          {
+            text: 'Procură pentru divorț, firmă sau cont bancar',
+            href: '/procura-notariala-germania',
+            label: 'Ghid procuri generale →',
+          },
+          {
+            text: 'Vreau să înțeleg toate tipurile de procuri la consulat',
+            href: '/procura-notariala-germania',
+            label: 'Ghid hub procuri →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function ProcuraMostenireGermaniaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="procura-mostenire-germania"
+      lpTopic="procura"
+      h1="Procură moștenire din Germania — ce cere consulatul și ce cere notarul"
+      intro="Ai o moștenire de rezolvat în România și nu poți fi prezent. Consulatul din Germania eliberează procura în aceeași zi. Dar înainte de programare, două lucruri trebuie clarificate: dacă vrei să accepți sau să renunți la moștenire — și ce documente sunt pentru consulat vs ce documente sunt pentru notarul din România."
+      tldr="Procura se face la consulat — aceeași zi, fără apostilă, fără traducere. Certificatul de deces NU se aduce la consulat — e pentru notar. Acceptare sau renunțare: decide înainte, renunțarea e ireversibilă. Taxa 3€ RNNEPR: Berlin → virament 3-4 zile înainte. Fiecare moștenitor absent are nevoie de procură separată."
+      ctaHref="/wizard?problem=procura"
+      ctaLabel="Verifică ce pregătești pentru consulatul tău →"
+      updatedAt="aprilie 2026"
+      sourceNote="Consulatele României din Germania, RNNEPR — date verificate live per consulat"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi exact ce tip de procură ai nevoie sau cum plătești?"
+      finalCtaText="Wizardul ActeRO combină situația ta — acceptare sau renunțare, cu sau fără notar ales — și îți dă lista exactă plus instrucțiunile pentru consulatul tău."
+    />
+  )
+}

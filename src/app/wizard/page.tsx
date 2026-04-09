@@ -16,32 +16,32 @@ import type { BundeslandCode, CreateSessionResponse, GuideId, ProblemType, Situa
 const STEP1_OPTIONS = [
   {
     icon: '🛂',
-    label: 'Nu pot ieși din Germania',
-    sublabel: 'Pașaport expirat sau nou',
+    label: 'Am nevoie de pașaport românesc din Germania',
+    sublabel: 'Adult sau copil · pașaport expirat, pierdut/furat sau primul pașaport',
     value: 'pasaport' as ProblemType,
   },
   {
     icon: '🪪',
-    label: 'N-am buletin valabil',
-    sublabel: 'Expirat, pierdut sau primul buletin',
+    label: 'Am nevoie de buletin românesc',
+    sublabel: 'Buletin expirat, pierdut/furat sau primul buletin',
     value: 'buletin' as ProblemType,
   },
   {
     icon: '⚡',
-    label: 'Trebuie să plec urgent și n-am timp de programare',
-    sublabel: 'Titlu de călătorie — fără programare',
+    label: 'Trebuie să plec urgent în România și n-am timp de programare',
+    sublabel: 'Titlu de călătorie gratuit, fără programare, de regulă în aceeași zi',
     value: 'titlu-calatorie' as ProblemType,
   },
   {
     icon: '📜',
-    label: 'Am ceva de rezolvat în România, dar nu pot merge acolo',
-    sublabel: 'Procură notarială',
+    label: 'Am nevoie de procură pentru România, dar nu pot merge acolo',
+    sublabel: 'Vânzare/cumpărare, moștenire, divorț, firmă, bancă',
     value: 'procura' as ProblemType,
   },
   {
     icon: '🧒',
-    label: 'Copilul meu s-a născut în Germania și nu are acte românești',
-    sublabel: 'Transcriere certificat de naștere german',
+    label: 'Copilul meu s-a născut în Germania și nu are încă acte românești',
+    sublabel: 'Transcrierea nașterii, apoi primul pașaport sau primul buletin',
     value: 'transcriere-nastere' as ProblemType,
   },
 ] as const
@@ -52,8 +52,8 @@ function Step1() {
   return (
     <div className="flex flex-col gap-4">
       <div className="mb-2">
-        <h2 className="text-xl font-bold text-gray-900">Ce act trebuie să rezolvi?</h2>
-        <p className="text-sm text-gray-500 mt-1">Selectează una din opțiuni</p>
+        <h2 className="text-xl font-bold text-gray-900">Ce problemă vrei să rezolvi?</h2>
+        <p className="text-sm text-gray-500 mt-1">Alege situația care seamănă cel mai mult cu a ta</p>
       </div>
       <div className="flex flex-col gap-3">
         {STEP1_OPTIONS.map((option) => (
@@ -107,8 +107,8 @@ function Step2() {
   return (
     <div className="flex flex-col gap-4">
       <div className="mb-2">
-        <h2 className="text-xl font-bold text-gray-900">În ce land locuiești?</h2>
-        <p className="text-sm text-gray-500 mt-1">🇩🇪 Germania · selectează landul tău</p>
+        <h2 className="text-xl font-bold text-gray-900">În ce land locuiești acum?</h2>
+        <p className="text-sm text-gray-500 mt-1">🇩🇪 Germania · de aici aflăm consulatul care te deservește</p>
       </div>
       <div className="grid grid-cols-2 gap-2">
         {bundeslandOptions.map((b) => (
@@ -209,27 +209,35 @@ function getQuestions(problemType: ProblemType): Question[] {
       return [
         {
           key: 'hasDomiciliuRO',
-          question: 'Unde ai domiciliul oficial înregistrat?',
+          question: 'Unde ai domiciliul oficial pe actele românești?',
           options: [
-            { value: false, label: '🇩🇪 În Germania', sublabel: 'Nu mai am adresă activă în România' },
-            { value: true, label: '🇷🇴 În România', sublabel: 'Mai am adresă înregistrată acolo' },
+            { value: false, label: '🇩🇪 Domiciliu în Germania (flux CRDS)', sublabel: 'Nu mai ai domiciliu activ în România și faci pașaportul prin consulatul din Germania' },
+            { value: true, label: '🇷🇴 Domiciliu activ în România', sublabel: 'Locuiești în Germania, dar în acte ai încă domiciliul oficial în România' },
           ],
         },
         {
           key: 'pasaportCrdsCase',
-          question: 'Ai mai avut pașaport românesc?',
+          question: 'Ce vrei să rezolvi legat de pașaportul românesc?',
           options: [
-            { value: 'expirat-deteriorat', label: 'Da (expirat sau deteriorat)', sublabel: 'Îl am sau îl pot prezenta la ghișeu' },
-            { value: 'pierdut-furat', label: 'Da (pierdut sau furat)', sublabel: 'Nu îl mai am la mine' },
-            { value: 'primul', label: 'Nu, primul meu', sublabel: 'Nu am avut niciodată pașaport românesc' },
+            { value: 'expirat-deteriorat', label: 'Am avut pașaport, dar acum este expirat sau deteriorat', sublabel: 'Primești ghidul pentru reînnoire / eliberare pașaport nou' },
+            { value: 'pierdut-furat', label: 'Am avut pașaport, dar este pierdut sau furat', sublabel: 'Primești ghidul pentru pașaport pierdut sau furat' },
+            { value: 'primul', label: 'Nu am avut niciodată pașaport românesc', sublabel: 'Primești ghidul pentru primul pașaport sau, dacă e cazul, transcriere înainte de pașaport' },
+          ],
+        },
+        {
+          key: 'isMinorPasaport',
+          question: 'Cererea este pentru un copil sub 18 ani?',
+          options: [
+            { value: true, label: 'Da, pașaportul este pentru un minor', sublabel: 'Primești ghidul pentru pașaport CRDS de minor, cu reguli speciale pentru părinți și prezența copilului la consulat' },
+            { value: false, label: 'Nu, pașaportul este pentru un adult', sublabel: 'Continuăm cu fluxul standard pentru pașaport de adult' },
           ],
         },
         {
           key: 'locuNastere',
           question: 'Unde te-ai născut?',
           options: [
-            { value: 'ro', label: '🇷🇴 În România', sublabel: 'Am CNP românesc' },
-            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Nu am CNP românesc' },
+            { value: 'ro', label: '🇷🇴 În România', sublabel: 'Ai deja certificat românesc și, de regulă, CNP românesc' },
+            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Este posibil să ai nevoie mai întâi de transcrierea nașterii' },
           ],
         },
       ]
@@ -237,35 +245,35 @@ function getQuestions(problemType: ProblemType): Question[] {
       return [
         {
           key: 'buletinStatus',
-          question: 'Care este situația ta cu buletinul?',
+          question: 'Ce vrei să rezolvi legat de buletin?',
           options: [
-            { value: 'expirat', label: 'A expirat', sublabel: 'Îl am încă la mine' },
-            { value: 'pierdut-furat-distrus', label: 'L-am pierdut, furat sau distrus', sublabel: 'Nu îl mai am' },
-            { value: 'niciodata', label: 'Nu am avut niciodată', sublabel: 'Ar fi primul meu buletin românesc' },
+            { value: 'expirat', label: 'Buletin expirat', sublabel: 'Îl ai încă la tine și vrei să-l reînnoiești' },
+            { value: 'pierdut-furat-distrus', label: 'Buletin pierdut, furat sau distrus', sublabel: 'Primești ghidul pentru înlocuire' },
+            { value: 'niciodata', label: 'Primul buletin românesc', sublabel: 'Nu ai avut niciodată carte de identitate românească' },
           ],
         },
         {
           key: 'hasDomiciliuRO',
-          question: 'Ai domiciliul oficial înregistrat în România?',
+          question: 'Mai ai domiciliul oficial înregistrat în România?',
           options: [
-            { value: false, label: 'Nu', sublabel: 'Locuiesc permanent în Germania' },
-            { value: true, label: 'Da', sublabel: 'Mai am adresă activă în România' },
+            { value: false, label: 'Nu, nu mai am domiciliu activ în România', sublabel: 'Locuiești în Germania și ai nevoie de ghidul pentru rezidență în străinătate' },
+            { value: true, label: 'Da, mai am domiciliu activ în România', sublabel: 'Primești ghidul pentru buletin cu domiciliu activ în România' },
           ],
         },
         {
           key: 'hasDomiciliuAnteriorRO',
-          question: 'Ai fost vreodată înregistrat la o primărie din România?',
+          question: 'Ai avut vreodată domiciliu sau înregistrare la o primărie din România?',
           options: [
-            { value: true, label: 'Da', sublabel: 'Am avut domiciliu în România la un moment dat' },
-            { value: false, label: 'Nu', sublabel: 'Nu am avut niciodată' },
+            { value: true, label: 'Da, am fost înregistrat în România', sublabel: 'Ai avut cândva domiciliu sau evidență oficială în România' },
+            { value: false, label: 'Nu, nu am fost niciodată înregistrat în România', sublabel: 'Este posibil să ai nevoie mai întâi de transcriere sau de fluxul pentru primul buletin' },
           ],
         },
         {
           key: 'locuNastere',
           question: 'Unde te-ai născut?',
           options: [
-            { value: 'ro', label: '🇷🇴 În România', sublabel: 'Am CNP românesc' },
-            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Nu am CNP românesc' },
+            { value: 'ro', label: '🇷🇴 În România', sublabel: 'Ai deja certificat românesc și, de regulă, CNP românesc' },
+            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Primești traseul care verifică dacă ai nevoie de transcriere înainte de primul buletin' },
           ],
         },
       ]
@@ -273,19 +281,19 @@ function getQuestions(problemType: ProblemType): Question[] {
       return [
         {
           key: 'tipDocumentLipsa',
-          question: 'Ce acte îți lipsesc acum?',
+          question: 'Ce document românesc îți lipsește pentru plecarea urgentă?',
           options: [
-            { value: 'pasaport', label: 'Pașaportul (expirat sau pierdut/furat)' },
-            { value: 'buletin', label: 'Buletinul (expirat sau pierdut/furat)' },
-            { value: 'ambele', label: 'Ambele (expirate sau pierdute/furate)' },
+            { value: 'pasaport', label: 'Pașaportul este expirat, pierdut sau furat', sublabel: 'Verificăm dacă titlul de călătorie este soluția corectă pentru tine' },
+            { value: 'buletin', label: 'Buletinul este expirat, pierdut sau furat', sublabel: 'Primești lista de documente pentru întoarcerea urgentă în România' },
+            { value: 'ambele', label: 'Îmi lipsesc și pașaportul, și buletinul', sublabel: 'Primești ghidul pentru situația în care nu mai ai niciun act valabil' },
           ],
         },
         {
           key: 'urgenta',
-          question: 'Când trebuie să pleci?',
+          question: 'Cât de repede trebuie să ajungi în România?',
           options: [
-            { value: 'sub-3-zile', label: 'În mai puțin de 3 zile', sublabel: 'Urgență maximă' },
-            { value: '1-2-saptamani', label: 'În 1–2 săptămâni', sublabel: 'Mai am puțin timp' },
+            { value: 'sub-3-zile', label: 'În mai puțin de 3 zile', sublabel: 'Primești varianta de ghid pentru urgență maximă' },
+            { value: '1-2-saptamani', label: 'În 1–2 săptămâni', sublabel: 'Primești ghidul standard pentru titlu de călătorie' },
           ],
         },
       ]
@@ -293,19 +301,19 @@ function getQuestions(problemType: ProblemType): Question[] {
       return [
         {
           key: 'scopProcura',
-          question: 'Pentru ce ai nevoie de procură?',
+          question: 'Pentru ce problemă din România ai nevoie de procură?',
           options: [
-            { value: 'vanzare', label: '🏠 Vând sau cumpăr o proprietate', sublabel: 'Tranzacție imobiliară în România' },
-            { value: 'mostenire', label: '📋 Moștenire', sublabel: 'Am rămas moștenitor' },
-            { value: 'altceva', label: '📂 Altceva', sublabel: 'Divorț, firmă, cont bancar' },
+            { value: 'vanzare', label: '🏠 Vânzare sau cumpărare de proprietate', sublabel: 'Primești ghidul pentru procura imobiliară' },
+            { value: 'mostenire', label: '📋 Succesiune / moștenire', sublabel: 'Primești ghidul pentru procura de moștenire' },
+            { value: 'altceva', label: '📂 Altă problemă: divorț, firmă, cont bancar, ridicare acte', sublabel: 'Primești ghidul pentru procură generală / alte situații' },
           ],
         },
         {
           key: 'areNotar',
-          question: 'Ai deja un notar ales în România?',
+          question: 'Ai deja notarul sau textul procurii pregătit în România?',
           options: [
-            { value: true, label: 'Da, am notar', sublabel: 'El îmi spune exact ce procură trebuie' },
-            { value: false, label: 'Nu, nu știu de unde să încep', sublabel: 'Ghidul mă ajută să găsesc unul' },
+            { value: true, label: 'Da, am deja notarul sau modelul de procură', sublabel: 'Ghidul te ajută cu programarea, actele și pașii de la consulat' },
+            { value: false, label: 'Nu, încă trebuie să clarific tipul exact de procură', sublabel: 'Ghidul te ajută să înțelegi de unde începi și ce ceri notarului' },
           ],
         },
       ]
@@ -321,8 +329,14 @@ function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags
     return all.filter((q, i) => {
       if (i === 0) return true
       if (i === 1) return situation.hasDomiciliuRO === false
-      if (i === 2) return situation.hasDomiciliuRO === false && situation.isPrimulPasaport === true
-      if (i === 3) return situation.hasDomiciliuRO === true
+      if (i === 2) return situation.hasDomiciliuRO === false
+      if (i === 3) {
+        return (
+          situation.hasDomiciliuRO === false &&
+          situation.isMinorPasaport !== true &&
+          situation.isPrimulPasaport === true
+        )
+      }
       return false
     })
   }

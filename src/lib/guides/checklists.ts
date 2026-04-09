@@ -80,6 +80,39 @@ function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags
   ]
 }
 
+function checklistPasaportMinorCrds(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'pm18_nastere', name: 'Certificat de naștere românesc al minorului', detail: 'Original · cu CNP · nu se acceptă plastifiat sau deteriorat' },
+        { id: 'pm18_pasaport', name: 'Pașaportul anterior al minorului', detail: 'Original · dacă există, chiar expirat' },
+        { id: 'pm18_domiciliu', name: 'Document de domiciliu în Germania', detail: 'Meldebescheinigung / Anmeldung / Personalausweis german · pe numele minorului sau al părinților · original · max 5 ani' },
+        { id: 'pm18_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu' },
+      ],
+    },
+    {
+      id: 'parinti',
+      title: 'Actele părinților',
+      items: [
+        { id: 'pm18_parinti_id', name: 'Actele de identitate valabile ale ambilor părinți', detail: 'Original · pașaport CRDS sau carte de identitate românească' },
+        { id: 'pm18_casatorie', name: 'Certificat de căsătorie românesc al părinților', detail: 'Original · dacă sunt căsătoriți sau există diferențe de nume' },
+        { id: 'pm18_crds_regula', name: 'Condiția CRDS pentru minor', detail: 'Cel puțin un părinte trebuie să aibă deja pașaport CRDS sau să depună cerere CRDS simultan cu minorul' },
+      ],
+    },
+    {
+      id: 'situatii_speciale',
+      title: 'Situații speciale',
+      items: [
+        { id: 'pm18_un_parinte', name: 'Dacă vine un singur părinte', detail: 'Procura specială sau acord scris autentificat în original, din partea părintelui absent' },
+        { id: 'pm18_divort', name: 'Dacă părinții sunt divorțați', detail: 'Sentință românească definitivă sau documentația completă pentru hotărâre judecătorească germană, după caz' },
+        { id: 'pm18_14plus', name: 'Pentru minorii 14–17 ani', detail: 'Cartea de identitate a minorului, dacă există · declarația de acord a părinților se completează la ghișeu' },
+      ],
+    },
+  ]
+}
+
 // ── Ghid #3 + #4 — pasaport domiciliu RO ─────────────────────────────────────
 
 function checklistPasaportDomiciliuRo(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -656,6 +689,7 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'pasaport-crds-de': checklistPasaportCrds,
   'pasaport-crds-de-pierdut': checklistPasaportCrdsPierdut,
   'pasaport-crds-nou-de': checklistPasaportCrds,
+  'pasaport-minor-crds-de': checklistPasaportMinorCrds,
   'pasaport-de-cu-domiciliu': checklistPasaportDomiciliuRo,
   'pasaport-de-cu-domiciliu-pierdut': checklistPasaportDomiciliuRo,
   'buletin-de-fara-domiciliu': checklistBuletinExpiratFaraDomRo,

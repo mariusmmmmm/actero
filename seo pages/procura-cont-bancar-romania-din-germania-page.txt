@@ -1,0 +1,489 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: foarte specifică — bancă România din Germania
+//   Utilizatorul are un cont bancar în România sau vrea să
+//   deschidă unul și nu poate fi prezent. Vrea să știe dacă
+//   se poate prin procură, ce operațiuni acoperă și dacă
+//   există bănci care refuză.
+//
+// Keyword principal: procură cont bancar romania din germania
+// Keyword-uri secundare:
+//   - procura banca romania germania
+//   - deschidere cont prin procura romania
+//   - ing procura cont romania
+//   - procura retragere bani romania din germania
+//   - procura operatiuni bancare romania germania
+//   - banca accepta procura notariala romania
+//   - procura consulat banca romania
+//   - imputernicire cont bancar romania din strainatate
+//   - procura banca consulat romania germania
+//   - ce banci accepta procura romania
+//
+// Unghi diferențiator:
+//   (1) Nu toate băncile acceptă orice operațiune prin procură —
+//       și unele (ING) au restricții cunoscute.
+//   (2) Ce operațiuni trebuie enumerate explicit în procură —
+//       o procură vagă poate fi refuzată la ghișeu.
+//   (3) Deschiderea unui cont NOU prin procură este limitată
+//       față de operațiunile pe cont existent.
+//   (4) Verificarea cu banca ÎNAINTE de programare la consulat
+//       este pasul critic pe care mulți îl sar.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci | ActeRO',
+  description:
+    'Procură pentru operațiuni bancare în România din Germania. Ce operațiuni specifici, ce bănci acceptă, excepția ING. Consulat, aceeași zi, taxa 3€ RNNEPR.',
+  keywords: [
+    'procura cont bancar romania din germania',
+    'procura banca romania germania',
+    'deschidere cont prin procura romania',
+    'ing procura cont romania',
+    'procura retragere bani romania din germania',
+    'procura operatiuni bancare romania germania',
+    'banca accepta procura notariala romania',
+    'procura consulat banca romania',
+    'imputernicire cont bancar romania din strainatate',
+    'ce banci accepta procura romania',
+  ],
+  openGraph: {
+    title: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci',
+    description:
+      'Nu toate băncile acceptă orice operațiune. ING are restricții. Verifică cu banca înainte de consulat ce clauze trebuie incluse.',
+    url: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Pot deschide un cont bancar nou în România prin procură?',
+    answer:
+      'Depinde de bancă. Unele bănci permit deschiderea unui cont prin procură notarială, altele cer prezența personală a titularului. Verifică cu banca din România ce permite înainte de a face programarea la consulat.',
+  },
+  {
+    question: 'Ce operațiuni bancare pot face prin procură?',
+    answer:
+      'Tipic: retrageri de numerar, depuneri, transferuri, modificarea datelor contului, închiderea contului. Operațiunile trebuie enumerate explicit în procură — o formulare vagă poate fi refuzată la ghișeul băncii.',
+  },
+  {
+    question: 'ING România acceptă procuri notariale?',
+    answer:
+      'ING România are politici mai restrictive față de alte bănci în privința operațiunilor prin procură. Înainte de a face procura la consulat, verifică direct cu ING România ce operațiuni acceptă și dacă au un formular propriu de împuternicire.',
+  },
+  {
+    question: 'Trebuie să știu numărul de cont înainte de a face procura?',
+    answer:
+      'Dacă contul există deja, da — numărul de cont face procura mai specifică și mai greu de contestat. Dacă deschizi un cont nou, nu poți include numărul de cont (nu există încă), dar specifici banca și tipul de cont.',
+  },
+  {
+    question: 'Banca îmi poate cere un formular propriu de procură?',
+    answer:
+      'Da. Unele bănci au formulare proprii de împuternicire pe care preferă să le folosească. În acest caz, poți aduce formularul la consulat și funcționarul îl poate autentifica în locul unui act standard.',
+  },
+  {
+    question: 'Cât costă procura bancară la consulat?',
+    answer:
+      'Taxa principală este 3€ pentru înscrierea în RNNEPR. La aceasta se pot adăuga taxe consulare pentru redactarea actului. Metoda de plată diferă per consulat.',
+  },
+  {
+    question: 'Procura bancară se eliberează în aceeași zi?',
+    answer:
+      'Da. Ca toate procurile notariale consulare, se eliberează în aceeași zi cu programarea.',
+  },
+  {
+    question: 'Procura trebuie legalizată sau tradusă pentru banca din România?',
+    answer:
+      'Nu. Procura emisă de consulatul românesc este direct recunoscută în România — fără apostilă și fără traducere. Banca o acceptă ca act autentic.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Verifici cu banca ce operațiuni acceptă prin procură',
+    text: 'Suni sau trimiți email băncii din România. Întrebi specific: ce operațiuni, ce clauze trebuie în procură, dacă au formular propriu de împuternicire.',
+  },
+  {
+    name: 'Pregătești datele pentru procură',
+    text: 'Denumirea băncii, sucursala (dacă e relevant), numărul de cont (dacă există), operațiunile acceptate de bancă. CNP + CI ale mandatarului.',
+  },
+  {
+    name: 'Verifici metoda de plată 3€ RNNEPR la consulatul tău',
+    text: 'Berlin: virament 3-4 zile înainte. Stuttgart: POS sau virament. Bonn: EC-Karte ziua programării + pre-scanning documente. München: cash.',
+  },
+  {
+    name: 'Faci programarea pe econsulat.ro și te prezinți la consulat',
+    text: 'Semnezi în fața funcționarului. Procura se eliberează în aceeași zi.',
+  },
+  {
+    name: 'Trimiți procura mandatarului — acesta merge la bancă',
+    text: 'Procura este direct recunoscută. Mandatarul prezintă procura + CI propriu la ghișeul băncii.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/procura-cont-bancar-romania-din-germania#article',
+  headline: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci 2026',
+  description:
+    'Ghid leaf pentru procura bancară din Germania: ce operațiuni specifici, excepția ING, verificare cu banca înainte, RNNEPR 3€.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Procură generală Germania',
+      item: 'https://actero.ro/procura-generala-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Procură cont bancar România',
+      item: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'pasul-critic',
+    title: 'Pasul critic înainte de consulat — verificarea cu banca',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="font-semibold text-red-900 mb-1">
+            ⚠️ Verifică cu banca ÎNAINTE de programarea la consulat
+          </p>
+          <p className="text-sm text-red-800">
+            Acesta este pasul pe care cei mai mulți oameni îl sar — și îl regretă. Faci
+            programarea, obții procura, mandatarul merge la bancă și descoperă că banca refuză
+            procura sau cere clauze specifice pe care nu le ai.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-sm font-semibold text-blue-900 mb-2">Ce întrebi banca:</p>
+          <ul className="space-y-1 text-sm text-blue-800">
+            <li>✓ Ce operațiuni acceptați prin procură notarială?</li>
+            <li>✓ Ce clauze specifice trebuie incluse în procură?</li>
+            <li>✓ Aveți un formular propriu de împuternicire?</li>
+            <li>✓ Putem deschide un cont nou prin procură sau doar pe conturi existente?</li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'operatiuni',
+    title: 'Ce operațiuni poți acoperi prin procură',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Operațiunile trebuie enumerate explicit în procură. O formulare vagă de tip
+          „orice operațiuni bancare" poate fi refuzată la ghișeu de unele bănci.
+        </p>
+
+        <div className="grid gap-2 sm:grid-cols-2">
+          {[
+            {
+              categorie: 'Operațiuni uzuale (de obicei acceptate)',
+              operatiuni: [
+                'Retrageri de numerar',
+                'Depuneri numerar sau viramente',
+                'Transferuri între conturi',
+                'Consultarea soldului și extraselor',
+                'Modificarea datelor contului',
+              ],
+              color: 'border-green-200 bg-green-50',
+              textColor: 'text-green-800',
+            },
+            {
+              categorie: 'Operațiuni cu restricții posibile',
+              operatiuni: [
+                'Deschiderea unui cont nou',
+                'Închiderea contului',
+                'Contractarea de credite',
+                'Modificarea produselor bancare',
+                'Operațiuni pe carduri de credit',
+              ],
+              color: 'border-amber-100 bg-amber-50',
+              textColor: 'text-amber-800',
+            },
+          ].map(({ categorie, operatiuni, color, textColor }) => (
+            <div key={categorie} className={`rounded-xl border p-4 ${color}`}>
+              <p className={`font-semibold mb-2 text-sm ${textColor}`}>{categorie}</p>
+              <ul className="space-y-1">
+                {operatiuni.map((op) => (
+                  <li key={op} className={`text-xs ${textColor}`}>• {op}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-xs text-gray-500">
+          Aceste categorii sunt orientative — fiecare bancă are propria politică. Verifică
+          întotdeauna cu banca specifică.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ing-exceptie',
+    title: 'Excepția ING — politică mai restrictivă',
+    content: (
+      <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 space-y-2">
+        <p className="font-semibold text-amber-900">⚠️ ING România — verificare obligatorie</p>
+        <p className="text-sm text-amber-800">
+          ING România are o politică mai restrictivă față de alte bănci în privința operațiunilor
+          prin procură notarială. Anumite operațiuni pot fi refuzate sau pot necesita proceduri
+          suplimentare față de o bancă tradițională.
+        </p>
+        <p className="text-sm text-amber-800">
+          Dacă contul tău este la ING, contactează direct ING România înainte de a face procura
+          la consulat. Întreabă explicit ce operațiuni acceptă și dacă au un formular propriu
+          de împuternicire care trebuie autentificat.
+        </p>
+        <p className="text-xs text-amber-700">
+          Această informație provine din experiența comunității românești din Germania —
+          verifică situația actuală direct cu ING, politicile se pot schimba.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ce-specifici',
+    title: 'Ce date incluzi în procură pentru bancă',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              req: true,
+              item: 'Denumirea completă a băncii',
+              detaliu: 'Ex: Banca Transilvania S.A., BCR S.A., BRD Groupe Société Générale S.A.',
+            },
+            {
+              req: false,
+              label: 'recomandat',
+              item: 'Numărul de cont / IBAN (dacă contul există)',
+              detaliu: 'Face procura specifică și mai greu de contestat.',
+            },
+            {
+              req: true,
+              item: 'Lista operațiunilor autorizate',
+              detaliu: 'Enumeră explicit: retrageri, depuneri, transferuri, modificare date, închidere cont — câte ai verificat că banca acceptă.',
+            },
+            {
+              req: false,
+              label: 'dacă banca are formular propriu',
+              item: 'Formularul de împuternicire al băncii',
+              detaliu: 'Unele bănci au formulare proprii. Poți aduce formularul la consulat pentru autentificare.',
+            },
+            {
+              req: true,
+              item: 'Date complete ale mandatarului',
+              detaliu: 'CNP + seria și numărul CI al persoanei care va merge la bancă.',
+            },
+          ].map(({ req, item, detaliu, label }) => (
+            <div key={item} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+              <span className="text-base flex-shrink-0">{req ? '✅' : '⚪'}</span>
+              <div>
+                <p className="font-medium text-gray-800 text-sm">
+                  {item}
+                  {label && (
+                    <span className="ml-2 text-xs text-gray-500 font-normal">— {label}</span>
+                  )}
+                </p>
+                <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'rnnepr-plata',
+    title: 'Taxa 3€ RNNEPR — metoda per consulat',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            oras: 'Bonn',
+            metoda: 'EC-Karte · ziua programării',
+            iban: null,
+            special: '⚠️ Documente scanate pe econsulat.ro ÎNAINTE de programare',
+            alert: false,
+          },
+          {
+            oras: 'München',
+            metoda: 'Numerar (cash) · ziua programării',
+            iban: null,
+            special: null,
+            alert: false,
+          },
+          {
+            oras: 'Stuttgart',
+            metoda: 'POS sau virament · IBAN: DE04 1007 0000 0976 1909 01',
+            iban: null,
+            special: 'Virament: min. 3 zile înainte',
+            alert: false,
+          },
+          {
+            oras: 'Berlin',
+            metoda: 'EXCLUSIV virament · IBAN: DE83 1007 0000 0435 4429 00',
+            iban: null,
+            special: 'Min. 3-4 zile lucrătoare ÎNAINTE · Fără virament = fără procură',
+            alert: true,
+          },
+        ].map(({ oras, metoda, special, alert }) => (
+          <div
+            key={oras}
+            className={`rounded-lg border p-3 ${alert ? 'border-red-200 bg-red-50' : 'border-gray-200 bg-white'}`}
+          >
+            <p className="font-semibold text-gray-900 text-sm">{oras}</p>
+            <p className="text-xs text-gray-700 mt-0.5">💳 {metoda}</p>
+            {special && (
+              <p className={`text-xs mt-0.5 ${alert ? 'text-red-700 font-semibold' : 'text-amber-700'}`}>
+                {special}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Fac procura fără să verific cu banca și mandatarul e refuzat la ghișeu',
+            corect: 'Verifică cu banca ÎNAINTE de programare ce operațiuni acceptă și ce clauze trebuie incluse. Este pasul critic care salvează un drum degeaba al mandatarului.',
+          },
+          {
+            gresit: 'Includ „orice operațiuni bancare" în procură — prea vag',
+            corect: 'Enumeră explicit operațiunile: retrageri, depuneri, transferuri, modificare date cont. Cu cât mai specific, cu atât mai puțin risc de refuz.',
+          },
+          {
+            gresit: 'Nu știu că ING poate refuza operațiunile prin procură standard',
+            corect: 'ING România are politici mai restrictive. Contactează ING direct înainte de consulat pentru a afla ce acceptă și dacă au formular propriu.',
+          },
+          {
+            gresit: 'La Berlin nu trimit viramentul de 3€ RNNEPR cu 3-4 zile înainte',
+            corect: 'La Berlin plata se face exclusiv prin virament bancar confirmat în avans. Fără virament: procura nu se eliberează.',
+          },
+          {
+            gresit: 'Cred că prin procură pot deschide un cont nou la orice bancă',
+            corect: 'Deschiderea unui cont nou prin procură este posibilă la unele bănci și imposibilă la altele. Verifică cu banca ta specifică.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="text-xs font-semibold text-red-700 mb-0.5">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Ai nevoie de alt tip de procură?',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Procură generală pentru mai multe situații',
+            href: '/procura-generala-germania',
+            label: 'Ghid procură generală →',
+          },
+          {
+            text: 'Procură pentru divorț notarial',
+            href: '/procura-divort-notarial-germania',
+            label: 'Ghid procură divorț →',
+          },
+          {
+            text: 'Procură pentru vânzare proprietate',
+            href: '/procura-vanzare-proprietate-germania',
+            label: 'Ghid procură vânzare →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function ProcuraContBancarRomaniaGermaniaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="procura-cont-bancar-romania-din-germania"
+      lpTopic="procura"
+      h1="Procură pentru cont bancar în România din Germania"
+      intro="Ai un cont bancar în România și nu poți fi prezent personal. Procura notarială de la consulat îl împuternicește pe mandatar să facă operațiunile în locul tău. Dar există un pas critic pe care mulți îl sar: verificarea cu banca ce operațiuni acceptă și ce clauze trebuie incluse — înainte de programarea la consulat."
+      tldr="Verifică cu banca ÎNAINTE — fiecare bancă are politici proprii. ING: politică mai restrictivă, verifică direct. Specifică operațiunile explicit (nu „orice operațiuni"). Taxa 3€ RNNEPR: Berlin = virament 3-4 zile înainte. Eliberare aceeași zi, direct recunoscută — fără apostilă."
+      ctaHref="/wizard?problem=procura"
+      ctaLabel="Verifică ce pregătești pentru consulatul tău →"
+      updatedAt="aprilie 2026"
+      sourceNote="Consulatele României din Germania, RNNEPR — date verificate live per consulat"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi ce clauze să ceri sau cum plătești la consulatul tău?"
+      finalCtaText="Wizardul ActeRO îți spune exact ce pregătești pentru procura bancară și instrucțiunile complete pentru consulatul tău."
+    />
+  )
+}

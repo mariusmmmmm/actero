@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 type Testimonial = {
   quote: string
   name: string
   city: string
-  initial: string
+  avatar: string
 }
 
 const testimonials: Testimonial[] = [
@@ -15,28 +16,28 @@ const testimonials: Testimonial[] = [
       '„Am stat luni întregi cu stresul că nu mai pot rezolva nimic. Cu ActeRO am înțeles exact ce acte îmi trebuie și, pentru prima dată, am simțit că am control.”',
     name: 'Sorin B.',
     city: 'München · verificat',
-    initial: 'S',
+    avatar: '/avatars/avatar-1.jpeg',
   },
   {
     quote:
       '„Cel mai greu era că nu știam dacă plec degeaba la consulat. Ghidul mi-a dat liniște și m-a ajutat să merg pregătită din prima.”',
     name: 'Andreea M.',
     city: 'Berlin · verificat',
-    initial: 'A',
+    avatar: '/avatars/avatar-2.jpeg',
   },
   {
     quote:
       '„Aveam impresia că trebuie să întreb zece oameni ca să aflu procedura corectă. Aici am găsit pașii clari, într-un singur loc, și am scăpat de panică.”',
     name: 'Radu C.',
     city: 'Stuttgart · verificat',
-    initial: 'R',
+    avatar: '/avatars/avatar-3.jpeg',
   },
   {
     quote:
       '„Pentru noi, partea valoroasă a fost că nu ne-am mai simțit singuri. Știam ce urmează, ce să pregătim și unde să mergem.”',
     name: 'Mihaela D.',
     city: 'Bonn · verificat',
-    initial: 'M',
+    avatar: '/avatars/avatar-4.jpeg',
   },
 ]
 
@@ -61,8 +62,14 @@ export default function TestimonialCarousel() {
         </p>
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center font-bold text-sm text-gray-600">
-              {testimonial.initial}
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-gray-200 bg-gray-200">
+              <Image
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                fill
+                sizes="32px"
+                className="object-cover"
+              />
             </div>
             <div>
               <div className="text-xs font-semibold text-gray-700">{testimonial.name}</div>

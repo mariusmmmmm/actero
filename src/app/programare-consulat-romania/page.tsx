@@ -105,7 +105,7 @@ export default function ProgramareConsulatRomaniaPage() {
                 pentru consulat și nu oferă niciun avantaj legitim. Dacă vrei să vezi pentru ce
                 acte ai nevoie de econsulat și pentru ce nu, vezi și{' '}
                 <Link href="/acte-romanesti-germania" className="underline text-blue-600 hover:text-blue-800">
-                  hub-ul cu toate actele românești din Germania
+                  pagina principală cu toate actele românești din Germania
                 </Link>.
               </p>
             </>
@@ -122,9 +122,29 @@ export default function ProgramareConsulatRomaniaPage() {
             </ol>
           ),
         },
+        {
+          id: 'pagini-conexe',
+          title: 'Ghiduri conexe',
+          content: (
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Link href="/pasaport-romania-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+                <p className="mb-1 font-semibold text-gray-900">Pașaport</p>
+                <p className="text-sm text-gray-600">Cel mai frecvent flux care trece prin econsulat.</p>
+              </Link>
+              <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+                <p className="mb-1 font-semibold text-gray-900">Procură</p>
+                <p className="text-sm text-gray-600">Serviciile notariale unde alegerea corectă a categoriei contează mult.</p>
+              </Link>
+              <Link href="/transcriere-certificat-nastere-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+                <p className="mb-1 font-semibold text-gray-900">Transcriere</p>
+                <p className="text-sm text-gray-600">Pentru copilul născut în Germania și pașii de după transcriere.</p>
+              </Link>
+            </div>
+          ),
+        },
       ]}
-      finalCtaTitle="Află exact ce serviciu trebuie să alegi"
-      finalCtaText="ActeRO îți spune ce formular completezi, ce documente încarci și la ce consulat trebuie să te programezi."
+      finalCtaTitle="După programare, trebuie să știi și pe ce ghid continui"
+      finalCtaText="Pagina asta explică mecanica econsulat. Pentru pașii concreți ai actului tău, continuă pe ghidul de pașaport, procură sau transcriere."
     />
   )
 }

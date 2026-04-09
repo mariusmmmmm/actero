@@ -389,6 +389,17 @@ const sections = [
             Sloturile apar pe măsură ce cererile sunt validate sau anulate. Verifică periodic. Programările sunt gratuite.
           </p>
         </div>
+
+        <p className="text-sm text-gray-600">
+          Dacă blocajul tău este chiar programarea, nu dosarul, vezi și{' '}
+          <Link
+            href="/programare-econsulat-germania"
+            className="font-medium text-blue-600 underline hover:text-blue-800"
+          >
+            ghidul complet pentru econsulat
+          </Link>
+          .
+        </p>
       </div>
     ),
   },
@@ -440,13 +451,13 @@ const sections = [
         {[
           {
             text: 'Pașaportul a fost pierdut sau furat',
-            href: '/wizard?problem=pasaport',
-            label: 'Vezi traseul în wizard →',
+            href: '/pasaport-pierdut-furat-germania',
+            label: 'Ghid pierdut/furat →',
           },
           {
             text: 'Este primul tău pașaport',
-            href: '/wizard?problem=pasaport',
-            label: 'Vezi traseul în wizard →',
+            href: '/pasaport-crds-germania',
+            label: 'Ghid primul pașaport CRDS →',
           },
           {
             text: 'Copilul tău nu are acte românești',
@@ -455,8 +466,13 @@ const sections = [
           },
           {
             text: 'Ai nevoie urgent și nu poți aștepta',
-            href: '/titlu-calatorie-germania',
-            label: 'Ghid titlu de călătorie →',
+            href: '/titlu-calatorie-urgenta-germania',
+            label: 'Ghid titlu de călătorie urgent →',
+          },
+          {
+            text: 'Nu înțelegi de ce nu apare programarea pe econsulat',
+            href: '/programare-econsulat-germania',
+            label: 'Ghid programare econsulat →',
           },
         ].map(({ text, href, label }) => (
           <div key={href + text} className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3">
@@ -479,8 +495,8 @@ export default function PasaportExpiratGermaniaPage() {
       h1="Pașaport expirat în Germania — ce faci, ce aduci, cât costă"
       intro="Pașaportul expirat se reînnoiește la consulatul din Germania, fără deplasare în România. Dar înainte de econsulat.ro, un singur lucru schimbă tot traseul: dacă domiciliul tău oficial este în Germania sau în România."
       tldr="Taxă: 53€ la toate consulatele. Termen: 45 zile lucrătoare. CRDS: fără fotografii, cu document de domiciliu în Germania. Domiciliu România: în general cu 2 fotografii, cu excepția München. Programare obligatorie pe econsulat.ro."
-      ctaHref="/wizard?problem=pasaport"
-      ctaLabel="Primești lista exactă pentru situația ta →"
+      ctaHref="/programare-econsulat-germania"
+      ctaLabel="Vezi mai întâi cum funcționează programarea pe econsulat →"
       updatedAt="aprilie 2026"
       sourceNote="MAE, econsulat.ro, consulatele României din Germania — date verificate live"
       faqItems={faqItems}
@@ -488,8 +504,8 @@ export default function PasaportExpiratGermaniaPage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
-      finalCtaTitle="Nu ești sigur ce documente aduci exact?"
-      finalCtaText="Wizardul ActeRO combină situația ta concretă cu consulatul tău și îți dă lista exactă de documente, metoda de plată și pașii în ordine."
+      finalCtaTitle="Nu știi dacă blocajul tău este dosarul, programarea sau urgența de a pleca?"
+      finalCtaText="Dacă problema este programarea, continuă pe ghidul econsulat. Dacă situația s-a transformat în urgență reală, sari direct la titlul de călătorie urgent."
     />
   )
 }

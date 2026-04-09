@@ -21,7 +21,7 @@ export default function TrackerPlaceholderPage() {
         </div>
 
         <div className="rounded-2xl border border-gray-100 bg-gray-50 p-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">Tracker dosar</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">Stadiul dosarului</h1>
           <p className="text-sm text-gray-600 leading-relaxed">
             Această funcționalitate va fi disponibilă în curând.
           </p>

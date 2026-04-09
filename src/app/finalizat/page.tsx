@@ -39,6 +39,10 @@ function FinalizatPageContent() {
         })
 
         if (!res.ok) {
+          if (res.status === 401 || res.status === 403) {
+            router.replace('/')
+            return
+          }
           if (!cancelled) setIsBootstrapping(false)
           return
         }

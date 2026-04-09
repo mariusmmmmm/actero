@@ -160,8 +160,8 @@ const sections = [
                 — proprietate, moștenire, bancă, divorț
               </li>
               <li>
-                <Link href="/wizard?problem=transcriere-nastere" className="underline hover:text-green-900">
-                  Transcriere naștere copil
+                <Link href="/transcriere-certificat-nastere-germania" className="underline hover:text-green-900">
+                  Transcriere certificat de naștere german
                 </Link>{' '}
                 — primul pas pentru actele copilului
               </li>
@@ -195,10 +195,10 @@ const sections = [
       <div className="space-y-3">
         {[
           {
-            href: '/pasaport-expirat-germania',
+            href: '/pasaport-romania-germania',
             emoji: '🛂',
-            titlu: 'Pașaport expirat sau pierdut',
-            text: 'Se rezolvă prin consulat. Diferența importantă este între CRDS, domiciliu în România și situațiile de pierdere sau furt.',
+            titlu: 'Pașaport românesc din Germania',
+            text: 'Alege rapid între CRDS, domiciliu în România, pașaport expirat, pierdut sau primul pașaport pentru copil.',
             anchor: 'Ghid pașaport →',
           },
           {
@@ -223,11 +223,11 @@ const sections = [
             anchor: 'Ghid procuri →',
           },
           {
-            href: '/wizard?problem=transcriere-nastere',
+            href: '/acte-copil-nascut-in-germania',
             emoji: '🧒',
             titlu: 'Copilul tău s-a născut în Germania și nu are acte românești',
             text: 'Primul pas este transcrierea certificatului de naștere. Abia apoi poți continua cu pașaportul sau buletinul.',
-            anchor: 'Începe cu transcrierea →',
+            anchor: 'Ghid acte copil →',
           },
         ].map(({ href, emoji, titlu, text, anchor }) => (
           <div
@@ -290,6 +290,55 @@ const sections = [
     ),
   },
   {
+    id: 'ghiduri-cheie',
+    title: 'Cele mai utile pagini din site — intrări directe',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            href: '/programare-econsulat-germania',
+            title: 'Programare pe econsulat',
+            text: 'Cum treci de la cerere depusă la programare validată, fără blocaje și fără intermediari.',
+          },
+          {
+            href: '/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+            title: 'CRDS vs pașaport cu domiciliu în România',
+            text: 'Pagina care te ajută să alegi corect tipul de pașaport înainte să intri pe econsulat.',
+          },
+          {
+            href: '/pasaport-pierdut-furat-germania',
+            title: 'Pașaport pierdut sau furat',
+            text: 'Flux separat pentru declarație de pierdere, poliție și traducere în funcție de consulat.',
+          },
+          {
+            href: '/procura-consulat-vs-notar-german',
+            title: 'Procura la consulat vs notar german',
+            text: 'Clarifică rapid când are sens consulatul și când te complici inutil cu notarul german.',
+          },
+          {
+            href: '/transcriere-certificat-nastere-germania',
+            title: 'Transcriere certificat de naștere',
+            text: 'Primul pas pentru copilul născut în Germania înainte de pașaport sau primul buletin.',
+          },
+          {
+            href: '/titlu-calatorie-vs-pasaport-temporar',
+            title: 'Titlu de călătorie vs pașaport temporar',
+            text: 'Explică ce iei din Germania și ce document îți faci după ce ajungi în România.',
+          },
+        ].map(({ href, title, text }) => (
+          <Link
+            key={href}
+            href={href}
+            className="rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue-200"
+          >
+            <p className="mb-1 font-semibold text-gray-900">{title}</p>
+            <p className="text-sm text-gray-600">{text}</p>
+          </Link>
+        ))}
+      </div>
+    ),
+  },
+  {
     id: 'econsulat',
     title: 'econsulat.ro — platforma de programări',
     content: (
@@ -309,7 +358,7 @@ const sections = [
         </div>
         <p className="text-sm text-gray-600">
           <Link
-            href="/programare-consulat-romania"
+            href="/programare-econsulat-germania"
             className="font-medium text-blue-600 hover:text-blue-800 underline"
           >
             Ghid complet despre programări și econsulat →
@@ -351,11 +400,11 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când merită să folosești wizardul ActeRO',
+    title: 'Când merită să folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă nu știi clar pe ce traseu intri sau ai mai multe acte expirate deodată, wizardul
+          Dacă nu știi clar pe ce traseu intri sau ai mai multe acte expirate deodată, ghidul rapid
           îți arată rapid varianta corectă și diferențele care contează.
         </p>
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2">
@@ -390,7 +439,7 @@ export default function ActeRomanestiGermaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi exact de unde să pornești?"
-      finalCtaText="Spune-i wizardului ActeRO ce act ai nevoie și din ce land ești. Primești lista exactă de documente, consulatul corect și pașii în ordine."
+      finalCtaText="Spune în ghidul rapid ActeRO ce act ai nevoie și din ce land ești. Primești lista exactă de documente, consulatul corect și pașii în ordine."
     />
   )
 }

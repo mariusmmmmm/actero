@@ -14,6 +14,7 @@ const GUIDE_TITLES: Record<string, string> = {
   'pasaport-crds-de': 'Reînnoire pașaport CRDS · Germania',
   'pasaport-crds-de-pierdut': 'Pașaport CRDS pierdut/furat · Germania',
   'pasaport-crds-nou-de': 'Primul pașaport CRDS · Germania',
+  'pasaport-minor-crds-de': 'Pașaport copil CRDS · Germania',
   'pasaport-de-cu-domiciliu': 'Pașaport · Domiciliu România · Germania',
   'pasaport-de-cu-domiciliu-pierdut': 'Pașaport pierdut/furat · Germania',
   'buletin-de-fara-domiciliu': 'Buletin expirat · Fără domiciliu RO',
@@ -131,7 +132,7 @@ function buildAccessEmailHtml({
             </div>
 
             <p style="margin:0 0 28px;font-size:15px;color:#555555;line-height:1.6;">
-              Ai acces complet la toți pașii, checklist-ul de documente și tracker-ul de progres. Linkul de acces este personal și valabil <strong>6 luni</strong>.
+              Ai acces complet la toți pașii, la lista de acte și la stadiul dosarului. Linkul de acces este personal și valabil <strong>6 luni</strong>.
             </p>
 
             <table width="100%" cellpadding="0" cellspacing="0">
@@ -170,7 +171,7 @@ function buildAccessEmailHtml({
               </tr>
               <tr>
                 <td style="padding:8px 0;vertical-align:top;width:28px;font-size:16px;">📋</td>
-                <td style="padding:8px 0;font-size:14px;color:#444444;">Folosește checklist-ul din tab-ul Checklist pentru a bifa fiecare document</td>
+                <td style="padding:8px 0;font-size:14px;color:#444444;">Folosește lista de acte din secțiunea Acte ca să bifezi fiecare document</td>
               </tr>
               <tr>
                 <td style="padding:8px 0;vertical-align:top;width:28px;font-size:16px;">🔔</td>
@@ -259,7 +260,7 @@ function buildFamilieEmailHtml({
 
             <div style="background:#fffbeb;border-radius:12px;padding:16px 20px;margin-bottom:28px;border-left:4px solid #f59e0b;">
               <div style="font-size:14px;color:#92400e;line-height:1.5;">
-                <strong>Cum funcționează:</strong> Fiecare persoană primește propriul link și își face wizard-ul separat pentru actul ei specific. Linkul #1 este deja configurat pentru actul pentru care ai plătit.
+                <strong>Cum funcționează:</strong> Fiecare persoană primește propriul link și răspunde separat la întrebările rapide pentru actul ei. Linkul #1 este deja configurat pentru actul pentru care ai plătit.
               </div>
             </div>
 
@@ -281,7 +282,7 @@ function buildFamilieEmailHtml({
               </tr>
               <tr>
                 <td style="padding:6px 0;vertical-align:top;width:28px;font-size:15px;">2️⃣</td>
-                <td style="padding:6px 0;font-size:14px;color:#444444;">Fiecare persoană deschide linkul și face wizard-ul pentru actul ei specific</td>
+                <td style="padding:6px 0;font-size:14px;color:#444444;">Fiecare persoană deschide linkul și răspunde la întrebările rapide pentru actul ei</td>
               </tr>
               <tr>
                 <td style="padding:6px 0;vertical-align:top;width:28px;font-size:15px;">3️⃣</td>

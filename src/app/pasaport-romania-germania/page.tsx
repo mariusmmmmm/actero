@@ -102,7 +102,7 @@ const articleSchema = {
   '@id': 'https://actero.ro/pasaport-romania-germania#article',
   headline: 'Pașaport românesc din Germania — Ghid complet 2026',
   description:
-    'Hub pentru toate situațiile de pașaport românesc din Germania: CRDS, domiciliu România, expirat, pierdut sau primul pașaport.',
+    'Ghidul principal pentru toate situațiile de pașaport românesc din Germania: CRDS, domiciliu România, expirat, pierdut sau primul pașaport.',
   datePublished: '2026-04-06',
   dateModified: '2026-04-06',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -167,10 +167,21 @@ const sections = [
 
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
           <p className="text-sm text-amber-800">
-            Dacă nu ești sigur în ce categorie intri, wizardul ActeRO îți confirmă traseul în 30
+            Dacă nu ești sigur în ce categorie intri, ghidul rapid ActeRO îți confirmă traseul în 30
             de secunde.
           </p>
         </div>
+
+        <p className="text-sm text-gray-600">
+          Dacă vrei răspunsul direct înainte de ghidul rapid, pornește cu{' '}
+          <Link
+            href="/pasaport-crds-vs-pasaport-cu-domiciliu-romania"
+            className="font-medium text-blue-600 underline hover:text-blue-800"
+          >
+            comparația CRDS vs domiciliu în România
+          </Link>
+          .
+        </p>
       </div>
     ),
   },
@@ -203,22 +214,22 @@ const sections = [
               {
                 situatie: 'Pașaport pierdut sau furat',
                 domiciliu: 'Germania (CRDS) sau România',
-                ghid: '/wizard?problem=pasaport',
-                label: 'Wizard pașaport →',
+                ghid: '/pasaport-pierdut-furat-germania',
+                label: 'Ghid pașaport pierdut/furat →',
                 blocare: 'Traducerea adeverinței de poliție diferă per consulat',
               },
               {
                 situatie: 'Primul pașaport ca adult, domiciliu în Germania',
                 domiciliu: 'Germania (CRDS)',
-                ghid: '/wizard?problem=pasaport',
-                label: 'Wizard pașaport →',
+                ghid: '/pasaport-crds-germania',
+                label: 'Ghid pașaport CRDS →',
                 blocare: 'Nu e clar dacă ai nevoie de transcriere sau nu',
               },
               {
                 situatie: 'Primul pașaport pentru copil născut în Germania',
                 domiciliu: 'Germania',
-                ghid: '/wizard?problem=transcriere-nastere',
-                label: 'Începe cu transcrierea →',
+                ghid: '/primul-pasaport-copil-germania',
+                label: 'Ghid primul pașaport copil →',
                 blocare: 'Se sare peste transcrierea certificatului de naștere',
               },
             ].map(({ situatie, domiciliu, ghid, label, blocare }, i) => (
@@ -260,6 +271,45 @@ const sections = [
               <span className="font-medium">Domiciliu RO:</span> {ro}
             </p>
           </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    id: 'ghiduri-conexe',
+    title: 'Ghiduri conexe după situația ta',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            href: '/pasaport-crds-germania',
+            title: 'Pașaport CRDS',
+            text: 'Pentru cine locuiește în Germania și nu mai are domiciliu activ în România.',
+          },
+          {
+            href: '/pasaport-cu-domiciliu-romania-din-germania',
+            title: 'Pașaport cu domiciliu în România',
+            text: 'Pentru cine locuiește în Germania, dar are încă buletin cu adresă activă în România.',
+          },
+          {
+            href: '/pasaport-pierdut-furat-germania',
+            title: 'Pașaport pierdut, furat sau deteriorat',
+            text: 'Ce se schimbă la declarații, poliție și traduceri în funcție de consulat.',
+          },
+          {
+            href: '/titlu-calatorie-vs-pasaport-temporar',
+            title: 'Titlu de călătorie vs pașaport temporar',
+            text: 'Ruta de urgență dacă nu mai ai timp să aștepți un pașaport nou din Germania.',
+          },
+        ].map(({ href, title, text }) => (
+          <Link
+            key={href}
+            href={href}
+            className="rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue-200"
+          >
+            <p className="mb-1 font-semibold text-gray-900">{title}</p>
+            <p className="text-sm text-gray-600">{text}</p>
+          </Link>
         ))}
       </div>
     ),
@@ -323,15 +373,15 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când folosești wizardul ActeRO',
+    title: 'Când folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă nu îți este clar ce flux ți se aplică sau ai o combinație mai puțin obișnuită,
-          wizardul îți arată rapid pașii potriviți.
+          Dacă nu îți este clar ce variantă ți se aplică sau ai o combinație mai puțin obișnuită,
+          ghidul rapid îți arată repede pașii potriviți.
         </p>
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2">
-          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid te ajută să afli:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>CRDS sau pașaport standard</li>
             <li>ce documente îți trebuie exact</li>
@@ -352,8 +402,8 @@ export default function PasaportRomaniaGermaniaPage() {
       h1="Pașaport românesc din Germania — toate situațiile"
       intro="Înainte de orice altceva, un singur lucru schimbă tot traseul: dacă domiciliul tău oficial este în Germania sau în România. Răspunsul la această întrebare determină ce selectezi pe econsulat.ro și ce documente pregătești."
       tldr="Domiciliu în Germania înseamnă de regulă flux CRDS. Domiciliu activ în România înseamnă flux standard. Taxa este 53€ la toate consulatele, iar termenul oficial de procesare este 45 de zile lucrătoare."
-      ctaHref="/wizard?problem=pasaport"
-      ctaLabel="Găsește traseul tău exact →"
+      ctaHref="/pasaport-crds-vs-pasaport-cu-domiciliu-romania"
+      ctaLabel="Vezi mai întâi dacă ești CRDS sau domiciliu în România →"
       updatedAt="aprilie 2026"
       sourceNote="MAE, econsulat.ro, consulatele României din Germania — date verificate live"
       faqItems={faqItems}
@@ -361,8 +411,8 @@ export default function PasaportRomaniaGermaniaPage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
-      finalCtaTitle="Nu ești sigur ce traseu ți se aplică?"
-      finalCtaText="Spune-i wizardului situația pașaportului, domiciliul tău și landul în care locuiești. Primești ghidul exact și pașii corecți."
+      finalCtaTitle="Încă nu e clar ce ghid ți se potrivește?"
+      finalCtaText="Compară mai întâi CRDS cu pașaportul pe domiciliu în România, apoi intră în ghidul rapid dacă ai un caz mai atipic. Așa ajungi mai repede la ghidul corect."
     />
   )
 }

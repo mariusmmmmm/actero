@@ -102,7 +102,7 @@ const articleSchema = {
   '@id': 'https://actero.ro/procura-notariala-germania#article',
   headline: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
   description:
-    'Hub pentru procuri notariale la consulatul României din Germania: vânzare, moștenire, generală, taxa RNNEPR de 3€ și diferența dintre consulat și notar german.',
+    'Ghidul principal pentru procuri notariale la consulatul României din Germania: vânzare, moștenire, generală, taxa RNNEPR de 3€ și diferența dintre consulat și notar german.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -190,22 +190,22 @@ const sections = [
                   scop: 'Vânzare sau cumpărare proprietate',
                   notar: 'Recomandat',
                   capcana: 'Procura generală poate fi refuzată de notarul imobiliar',
-                  href: '/wizard?problem=procura',
-                  label: 'Vezi traseul în wizard →',
+                  href: '/procura-vanzare-proprietate-germania',
+                  label: 'Ghid proprietate →',
                 },
                 {
                   scop: 'Moștenire sau succesiune',
                   notar: 'Recomandat',
                   capcana: 'Datele incomplete încetinesc dosarul',
-                  href: '/wizard?problem=procura',
-                  label: 'Vezi traseul în wizard →',
+                  href: '/procura-mostenire-germania',
+                  label: 'Ghid moștenire →',
                 },
                 {
                   scop: 'Divorț, firmă, cont bancar sau alt act',
                   notar: 'Opțional',
                   capcana: 'Procura prea generală poate fi refuzată',
-                  href: '/wizard?problem=procura',
-                  label: 'Vezi traseul în wizard →',
+                  href: '/procura-generala-germania',
+                  label: 'Ghid procură generală →',
                 },
               ].map(({ scop, notar, capcana, href, label }, i) => (
                 <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
@@ -222,6 +222,59 @@ const sections = [
             </tbody>
           </table>
         </div>
+      </div>
+    ),
+  },
+  {
+    id: 'ghiduri-specifice',
+    title: 'Ghiduri specifice pe tipuri de procură',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Consulat vs notar german pentru acte în România',
+            href: '/procura-consulat-vs-notar-german',
+            label: 'Comparație →',
+          },
+          {
+            text: 'Procură pentru vânzare sau cumpărare proprietate',
+            href: '/procura-vanzare-proprietate-germania',
+            label: 'Ghid proprietate →',
+          },
+          {
+            text: 'Procură pentru moștenire sau succesiune',
+            href: '/procura-mostenire-germania',
+            label: 'Ghid moștenire →',
+          },
+          {
+            text: 'Procură generală pentru bancă, firmă sau alte acte',
+            href: '/procura-generala-germania',
+            label: 'Ghid general →',
+          },
+          {
+            text: 'Procură pentru cont bancar în România',
+            href: '/procura-cont-bancar-romania-din-germania',
+            label: 'Ghid bancă →',
+          },
+          {
+            text: 'Procură pentru divorț notarial',
+            href: '/procura-divort-notarial-germania',
+            label: 'Ghid divorț →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="ml-3 flex-shrink-0 text-xs font-medium text-blue-600 underline hover:text-blue-800"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
       </div>
     ),
   },
@@ -342,14 +395,14 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când folosești wizardul ActeRO',
+    title: 'Când folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă nu știi exact ce tip de procură ai nevoie, dacă trebuie notar ales sau nu ori cum plătești taxa de 3€ la consulatul tău, wizardul îți dă traseul corect pentru situația ta.
+          Dacă nu știi exact ce tip de procură ai nevoie, dacă trebuie notar ales sau nu ori cum plătești taxa de 3€ la consulatul tău, ghidul rapid îți dă traseul corect pentru situația ta.
         </p>
         <div className="space-y-2 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid te ajută să afli:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>tipul corect de procură pentru cazul tău</li>
             <li>dacă ai nevoie de notar ales în România</li>
@@ -381,7 +434,7 @@ export default function ProcuraNotarialaGermaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi exact ce procură ai nevoie?"
-      finalCtaText="Spune-i wizardul pentru ce ai nevoie de procură și din ce land ești. Primești tipul corect de procură, lista de documente și instrucțiunile exacte pentru taxa de 3€ la consulatul tău."
+      finalCtaText="Spune în ghidul rapid pentru ce ai nevoie de procură și din ce land ești. Primești tipul corect de procură, lista de documente și instrucțiunile exacte pentru taxa de 3€ la consulatul tău."
     />
   )
 }

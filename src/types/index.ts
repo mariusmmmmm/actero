@@ -74,6 +74,7 @@ export type SituationFlags = {
   pasaportStatus?: 'expirat-distrus' | 'pierdut-furat'
   pasaportCrdsCase?: 'expirat-deteriorat' | 'pierdut-furat' | 'primul'
   pasaportPierdutFurat?: boolean
+  isMinorPasaport?: boolean
 
   // Path Buletin
   buletinStatus?: 'expirat' | 'pierdut-furat-distrus' | 'niciodata'
@@ -104,6 +105,7 @@ export type GuideId =
   | 'pasaport-crds-de'
   | 'pasaport-crds-de-pierdut'
   | 'pasaport-crds-nou-de'
+  | 'pasaport-minor-crds-de'
   | 'pasaport-de-cu-domiciliu'
   | 'pasaport-de-cu-domiciliu-pierdut'
   | 'buletin-de-fara-domiciliu'

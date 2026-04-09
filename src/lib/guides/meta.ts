@@ -24,6 +24,7 @@ const GUIDE_TITLES: Record<string, string> = {
   'pasaport-crds-de': 'pașaportul CRDS din Germania',
   'pasaport-crds-de-pierdut': 'pașaportul CRDS pierdut sau furat din Germania',
   'pasaport-crds-nou-de': 'primul pașaport CRDS din Germania',
+  'pasaport-minor-crds-de': 'pașaportul CRDS pentru copil din Germania',
   'pasaport-de-cu-domiciliu': 'pașaportul din Germania',
   'pasaport-de-cu-domiciliu-pierdut': 'pașaportul pierdut din Germania',
   'buletin-de-fara-domiciliu': 'buletinul din Germania',

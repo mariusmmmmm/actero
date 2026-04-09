@@ -27,7 +27,7 @@ export default function ChecklistTab() {
   const handleDownload = useCallback(() => {
     setDownloadLoading(true)
     const lines: string[] = [
-      'CHECKLIST DOCUMENTE — ActeRO',
+      'LISTA DE ACTE — ActeRO',
       `Ghid: ${guideId ?? ''} · Consulat: ${consulate?.toUpperCase() ?? ''}`,
       `Generat: ${new Date().toLocaleDateString('ro-RO')}`,
       '',
@@ -45,7 +45,7 @@ export default function ChecklistTab() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `actero-checklist-${guideId ?? 'ghid'}.txt`
+    a.download = `actero-lista-acte-${guideId ?? 'ghid'}.txt`
     a.click()
     URL.revokeObjectURL(url)
     setDownloadLoading(false)
@@ -54,7 +54,7 @@ export default function ChecklistTab() {
   if (!sections.length) {
     return (
       <div className="px-5 py-8 text-center text-sm text-gray-400">
-        Checklist indisponibil pentru ghidul selectat.
+        Lista de acte nu este disponibilă pentru ghidul selectat.
       </div>
     )
   }
@@ -62,7 +62,7 @@ export default function ChecklistTab() {
   return (
     <div className="pb-6">
       <div className="px-5 pt-5 pb-4 border-b border-gray-100">
-        <h2 className="text-base font-bold text-gray-900 mb-2">Checklist documente</h2>
+        <h2 className="text-base font-bold text-gray-900 mb-2">Lista de acte</h2>
         <div className="flex items-center gap-3 mb-1">
           <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
             <div

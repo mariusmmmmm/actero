@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         .update({
           is_paid: true,
           product_type: 'familie',
-          gumroad_sale_id: `stripe_test_${Date.now()}`,
+          payment_reference: `stripe_test_${Date.now()}`,
           paid_at: new Date().toISOString(),
           email,
           token_expires_at: tokenExpiry.toISOString(),
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       .update({
         is_paid: true,
         product_type: 'ghid',
-        gumroad_sale_id: `stripe_test_${Date.now()}`,
+        payment_reference: `stripe_test_${Date.now()}`,
         paid_at: new Date().toISOString(),
         email,
         token_expires_at: tokenExpiry.toISOString(),

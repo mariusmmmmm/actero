@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/server'
 export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Session) {
   const sessionId = session.metadata?.acteroSessionId?.trim()
   const offerType = session.metadata?.offerType === 'family' ? 'family' : 'single'
+  const gaClientId = session.metadata?.gaClientId?.trim()
   const email = session.customer_details?.email ?? session.customer_email ?? ''
   const paymentId = typeof session.payment_intent === 'string'
     ? session.payment_intent
@@ -23,11 +24,11 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
   const supabase = createClient()
   const { data: existingSession } = await supabase
     .from('user_sessions')
-    .select('id, is_paid, gumroad_sale_id')
+    .select('id, is_paid, payment_reference')
     .eq('id', sessionId)
     .single()
 
-  if (existingSession?.is_paid && existingSession.gumroad_sale_id === paymentId) {
+  if (existingSession?.is_paid && existingSession.payment_reference === paymentId) {
     return { ok: true as const, reason: 'already_processed' }
   }
 
@@ -36,7 +37,9 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
       supabase,
       email,
       paymentId,
+      checkoutSessionId: session.id,
       sessionId,
+      gaClientId,
       tokenExpiry,
     })
     return { ok: true as const, reason: 'family_processed' }
@@ -47,7 +50,7 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
     .update({
       is_paid: true,
       product_type: 'ghid',
-      gumroad_sale_id: paymentId,
+      payment_reference: paymentId,
       paid_at: new Date().toISOString(),
       email: email || null,
       token_expires_at: tokenExpiry.toISOString(),
@@ -65,17 +68,26 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
   const accessUrl = `${getBaseUrl()}/ghid/access?token=${paidSession.access_token}`
   await sendAccessEmail({ to: email, accessUrl, guideId: paidSession.guide_id })
   await sendGaMeasurementEvent({
-    clientId: `${paidSession.id}.stripe`,
-    eventName: 'paid_access_granted',
+    clientId: gaClientId || `${paidSession.id}.stripe`,
+    eventName: 'purchase',
     params: {
+      transaction_id: session.id,
       guide_id: paidSession.guide_id,
       problem_type: paidSession.document_type,
       offer_type: 'single',
       value: 9.99,
       currency: 'EUR',
       payment_provider: 'stripe',
-      transaction_id: paymentId,
       actero_session_id: paidSession.id,
+      items: [
+        {
+          item_id: 'actero_single',
+          item_name: 'Ghid complet ActeRO',
+          item_category: paidSession.document_type ?? 'default',
+          price: 9.99,
+          quantity: 1,
+        },
+      ],
     },
   })
 
@@ -86,13 +98,17 @@ async function handleFamiliePayment({
   supabase,
   email,
   paymentId,
+  checkoutSessionId,
   sessionId,
+  gaClientId,
   tokenExpiry,
 }: {
   supabase: ReturnType<typeof import('@/lib/supabase/server').createClient>
   email: string
   paymentId: string
+  checkoutSessionId: string
   sessionId: string
+  gaClientId?: string
   tokenExpiry: Date
 }) {
   const baseUrl = getBaseUrl()
@@ -102,7 +118,7 @@ async function handleFamiliePayment({
     .update({
       is_paid: true,
       product_type: 'familie',
-      gumroad_sale_id: paymentId,
+      payment_reference: paymentId,
       paid_at: new Date().toISOString(),
       email: email || null,
       token_expires_at: tokenExpiry.toISOString(),
@@ -159,17 +175,26 @@ async function handleFamiliePayment({
 
   await sendFamilieEmail({ to: email, accessLinks })
   await sendGaMeasurementEvent({
-    clientId: `${session1.id}.stripe`,
-    eventName: 'paid_access_granted',
+    clientId: gaClientId || `${session1.id}.stripe`,
+    eventName: 'purchase',
     params: {
+      transaction_id: checkoutSessionId,
       guide_id: session1.guide_id ?? undefined,
       problem_type: session1.document_type ?? undefined,
       offer_type: 'family',
       value: 24.99,
       currency: 'EUR',
       payment_provider: 'stripe',
-      transaction_id: paymentId,
       actero_session_id: session1.id,
+      items: [
+        {
+          item_id: 'actero_family',
+          item_name: 'Pachet familie ActeRO',
+          item_category: session1.document_type ?? 'default',
+          price: 24.99,
+          quantity: 1,
+        },
+      ],
     },
   })
 }

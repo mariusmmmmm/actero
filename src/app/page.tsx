@@ -78,7 +78,7 @@ function Hero() {
         <div className="flex items-center gap-3 mb-5">
           <SocialProofAvatars />
           <p className="text-xs text-gray-400">
-            <strong className="text-gray-200">1400+</strong> români din Germania au rezolvat cu ActeRO
+            <strong className="text-gray-200">120+</strong> români din Germania au rezolvat cu ActeRO — lansat în martie 2026
           </p>
         </div>
 
@@ -92,7 +92,7 @@ function Hero() {
           Ghid complet de la 9,99€ · plată o singură dată
         </p>
         <p className="text-xs text-gray-500 text-center mt-2">
-          Fără cont · Fără card · 30 secunde
+          Fără cont · Începi gratuit · 30 secunde
         </p>
       </div>
     </section>
@@ -177,7 +177,7 @@ function Services() {
       </p>
       <p className="text-sm text-gray-600 leading-relaxed mb-5">
         <Link href="/acte-romanesti-germania" className="font-medium text-blue-600 hover:text-blue-800 underline">
-          Vezi și pagina hub: toate actele românești pe care le poți porni din Germania →
+          Vezi și pagina principală: toate actele românești pe care le poți porni din Germania →
         </Link>
       </p>
       <div className="grid grid-cols-2 gap-3">
@@ -190,6 +190,66 @@ function Services() {
             <div className="text-2xl mb-2">{s.icon}</div>
             <div className="font-semibold text-sm text-gray-900 mb-0.5">{s.title}</div>
             <div className="text-xs text-gray-400">{s.desc}</div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SeoGuides() {
+  const guides = [
+    {
+      title: 'Toate actele românești din Germania',
+      desc: 'Pagina principală pentru pașaport, buletin, titlu de călătorie, procuri și acte pentru copil.',
+      href: '/acte-romanesti-germania',
+    },
+    {
+      title: 'Acte pentru copil născut în Germania',
+      desc: 'Transcriere, primul pașaport, primul buletin și schimbarea domiciliului copilului.',
+      href: '/acte-copil-nascut-in-germania',
+    },
+    {
+      title: 'Programare pe econsulat.ro',
+      desc: 'Cum trece cererea din „În așteptare” în „Validată” și când apar locurile.',
+      href: '/programare-econsulat-germania',
+    },
+    {
+      title: 'CRDS vs domiciliu în România',
+      desc: 'Comparator clar pentru a nu selecta tipul greșit de pașaport.',
+      href: '/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+    },
+    {
+      title: 'CEI vs CIS pentru diaspora',
+      desc: 'Diferențele care schimbă ce SPCLEP alegi și cum folosești buletinul.',
+      href: '/cei-vs-cis-diaspora',
+    },
+    {
+      title: 'Titlu de călătorie vs pașaport temporar',
+      desc: 'Ce rezolvi în Germania și ce rezolvi după ce ajungi în România.',
+      href: '/titlu-calatorie-vs-pasaport-temporar',
+    },
+  ]
+
+  return (
+    <div className="px-5 py-8 border-t border-gray-100">
+      <div className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4">
+        Ghiduri Utile
+      </div>
+      <h2 className="text-xl font-bold text-gray-900 mb-3">Intrări directe către ghidurile cele mai căutate</h2>
+      <p className="text-sm text-gray-600 leading-relaxed mb-5">
+        Dacă știi deja aproximativ problema, poți intra direct în paginile de orientare de mai jos
+        și apoi continua spre ghidul exact sau spre wizard.
+      </p>
+      <div className="space-y-3">
+        {guides.map((guide) => (
+          <Link
+            key={guide.href}
+            href={guide.href}
+            className="block rounded-xl border-2 border-gray-100 p-4 transition-all hover:border-gray-300"
+          >
+            <p className="text-sm font-semibold text-gray-900 mb-1">{guide.title}</p>
+            <p className="text-sm text-gray-500 leading-relaxed">{guide.desc}</p>
           </Link>
         ))}
       </div>
@@ -230,7 +290,7 @@ function Guidance() {
   const links = [
     {
       title: 'Cum obții programare',
-      desc: 'Dacă serviciul trece prin econsulat sau prin consulat, ordinea pașilor contează.',
+      desc: 'Dacă serviciul trece prin econsulat.ro sau prin consulat, ordinea pașilor contează.',
       href: '/programare-consulat-romania',
     },
     {
@@ -329,11 +389,11 @@ function Trust() {
         </p>
         <p>
           Folosim surse oficiale și verificări recurente, iar acolo unde regulile diferă între
-          autorități, explicăm explicit diferența în loc să o ascundem sub o listă generică.
+          autorități, arătăm explicit diferența în loc să o ascundem sub o listă generică.
         </p>
         <p>
-          Programările oficiale sunt gratuite, iar reminder-ele te ajută să nu descoperi din nou
-          actul expirat exact când ai nevoie urgent de el.
+          Programările oficiale sunt gratuite, iar notificările de expirare te ajută să nu
+          descoperi actul expirat exact când ai nevoie urgent de el.
         </p>
       </div>
     </div>
@@ -375,6 +435,7 @@ export default function HomePage() {
         <Features />
         <AudienceFit />
         <Services />
+        <SeoGuides />
         <HowItWorks />
         <Guidance />
         <TestimonialCarousel />

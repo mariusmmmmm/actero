@@ -101,7 +101,7 @@ const articleSchema = {
   '@id': 'https://actero.ro/titlu-calatorie-germania#article',
   headline: 'Titlu de călătorie din Germania — fără programare, aceeași zi',
   description:
-    'Hub pentru titlul de călătorie din Germania: urgentă sub 3 zile, 1–2 săptămâni, fotografii și traduceri per consulat.',
+    'Ghidul principal pentru titlul de călătorie din Germania: urgentă sub 3 zile, 1–2 săptămâni, fotografii și traduceri per consulat.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -160,8 +160,8 @@ const sections = [
               <li>vrei un document valabil pe termen lung</li>
             </ul>
             <p className="mt-2 text-xs text-blue-700">
-              <Link href="/pasaport-romania-germania" className="underline">
-                Ghid pașaport →
+              <Link href="/pasaport-crds-vs-pasaport-cu-domiciliu-romania" className="underline">
+                Alege mai întâi tipul corect de pașaport →
               </Link>
             </p>
           </div>
@@ -211,10 +211,10 @@ const sections = [
             </ul>
             <div className="mt-3">
               <Link
-                href="/wizard?problem=titlu-calatorie"
+                href="/titlu-calatorie-urgenta-germania"
                 className="text-sm font-medium text-blue-700 underline hover:text-blue-900"
               >
-                Vezi traseul standard →
+                Ghid complet titlu de călătorie →
               </Link>
             </div>
           </div>
@@ -223,6 +223,45 @@ const sections = [
         <p className="text-xs text-gray-500">
           Diferența practică dintre cele două variante este mică: același flux, aceleași documente, același rezultat.
         </p>
+      </div>
+    ),
+  },
+  {
+    id: 'ghiduri-conexe',
+    title: 'Ghiduri conexe dacă nu ești sigur ce document îți trebuie',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {[
+          {
+            href: '/titlu-calatorie-urgenta-germania',
+            title: 'Titlu de călătorie urgent',
+            text: 'Varianta cea mai directă pentru zbor iminent, aceeași zi și fără programare.',
+          },
+          {
+            href: '/titlu-calatorie-vs-pasaport-temporar',
+            title: 'Titlu de călătorie vs pașaport temporar',
+            text: 'Clarifică ce iei din Germania și ce document faci după ce intri în România.',
+          },
+          {
+            href: '/pasaport-expirat-germania',
+            title: 'Pașaport expirat din Germania',
+            text: 'Dacă nu ești încă în criză de timp și vrei să refaci pașaportul prin consulat.',
+          },
+          {
+            href: '/pasaport-pierdut-furat-germania',
+            title: 'Pașaport pierdut sau furat',
+            text: 'Pentru cazurile în care dispariția pașaportului schimbă documentele de urgență de care ai nevoie.',
+          },
+        ].map(({ href, title, text }) => (
+          <Link
+            key={href}
+            href={href}
+            className="rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-blue-200"
+          >
+            <p className="mb-1 font-semibold text-gray-900">{title}</p>
+            <p className="text-sm text-gray-600">{text}</p>
+          </Link>
+        ))}
       </div>
     ),
   },
@@ -381,14 +420,14 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când folosești wizardul ActeRO',
+    title: 'Când folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă nu ești sigur ce documente să aduci exact în funcție de consulat, dacă pașaportul este pierdut sau expirat și dacă sunt minori în dosar, wizardul îți dă lista completă pentru situația ta concretă.
+          Dacă nu ești sigur ce documente să aduci exact în funcție de consulat, dacă pașaportul este pierdut sau expirat și dacă sunt minori în dosar, ghidul rapid îți dă lista completă pentru situația ta concretă.
         </p>
         <div className="space-y-2 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid te ajută să afli:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>ce documente aduci la consulatul tău</li>
             <li>dacă ai nevoie de fotografii sau nu</li>
@@ -410,8 +449,8 @@ export default function TitluCalatoriePage() {
       h1="Titlu de călătorie din Germania — fără programare, gratuit, aceeași zi"
       intro="Pașaportul a expirat și ai un zbor în câteva zile sau nu există programări disponibile pe econsulat.ro. Titlul de călătorie este soluția de urgență: fără programare, gratuit și eliberat în aceeași zi la consulat."
       tldr="Titlul de călătorie este gratuit, nu cere programare și este valabil exclusiv pentru revenirea în România. München cere fotografii biometrice proprii, celelalte consulate nu. Documentul se predă la SPCP în România când depui cererea pentru noul pașaport."
-      ctaHref="/wizard?problem=titlu-calatorie"
-      ctaLabel="Găsește ce documente aduci la consulatul tău →"
+      ctaHref="/titlu-calatorie-urgenta-germania"
+      ctaLabel="Vezi ghidul complet pentru titlu de călătorie →"
       updatedAt="aprilie 2026"
       sourceNote="Consulatele României din Germania — date verificate live per consulat"
       faqItems={faqItems}
@@ -419,8 +458,8 @@ export default function TitluCalatoriePage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
-      finalCtaTitle="Zbor în curând și nu știi exact ce aduci?"
-      finalCtaText="Spune-i wizardul ce consulat ai, dacă pașaportul este pierdut sau expirat și dacă sunt minori în dosar. Primești lista exactă de documente și intervalul de prezentare."
+      finalCtaTitle="Pleci curând și vrei lista exactă pentru consulatul tău?"
+      finalCtaText="Pornește cu ghidul complet pentru titlu de călătorie, iar dacă ai un caz mai special legat de consulat, pierdere sau minori, ghidul rapid îți confirmă documentele finale."
     />
   )
 }

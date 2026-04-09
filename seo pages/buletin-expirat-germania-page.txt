@@ -1,0 +1,517 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: rezolvare concretă
+//   Utilizatorul știe că buletinul i-a expirat și vrea să știe
+//   exact ce face: unde merge, ce documente, cât costă, cât durează.
+//   Confuzia #1: crede că se rezolvă la consulat (ca pașaportul).
+//
+// Keyword principal: buletin expirat germania
+// Keyword-uri secundare:
+//   - carte identitate expirata germania
+//   - buletin romania din germania
+//   - reinnoire buletin din germania
+//   - buletin expirat ce fac germania
+//   - spclep buletin expirat diaspora
+//   - cei cis buletin expirat
+//   - prezenta fizica buletin romania 2025
+//   - buletin cu domiciliu romania din germania
+//   - buletin fara domiciliu romania din germania
+//   - primul buletin din germania
+//
+// Unghi diferențiator:
+//   Răspunde imediat la confuzia #1: buletinul NU se face la consulat.
+//   Separă rapid cele 3 sub-situații (cu domiciliu / fără domiciliu /
+//   primul buletin) și trimite pe traseul corect.
+//   CEI vs CIS cu consecințe concrete (valabilitate UE, SPCLEP, timp).
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP | ActeRO',
+  description:
+    'Buletinul expirat NU se reînnoiește la consulat. Din 2025, prezență fizică obligatorie la SPCLEP în România. CEI sau CIS, cu sau fără domiciliu — ghid complet.',
+  keywords: [
+    'buletin expirat germania',
+    'carte identitate expirata germania',
+    'buletin romania din germania',
+    'reinnoire buletin din germania',
+    'spclep buletin expirat diaspora',
+    'cei cis buletin expirat',
+    'prezenta fizica buletin romania 2025',
+    'buletin cu domiciliu romania din germania',
+    'buletin fara domiciliu romania din germania',
+    'primul buletin din germania',
+  ],
+  openGraph: {
+    title: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP',
+    description:
+      'Din 2025, prezență fizică obligatorie la SPCLEP. CEI sau CIS, cu sau fără domiciliu în România — traseul exact pentru situația ta.',
+    url: 'https://actero.ro/buletin-expirat-germania',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/buletin-expirat-germania',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Pot să-mi reînnoiesc buletinul la consulatul din Germania?',
+    answer:
+      'Nu. Buletinul (CEI sau CIS) necesită prezență fizică în România la SPCLEP — biometria (fotografie, amprente, semnătură) nu se poate face la consulat și nu se poate evita prin procură din septembrie 2025.',
+  },
+  {
+    question: 'La ce SPCLEP mă duc dacă am domiciliu activ în România?',
+    answer:
+      'La SPCLEP-ul din sectorul sau orașul unde ești înregistrat cu domiciliul. Dacă alegi CEI, din august 2025 poți merge la orice SPCLEP din țară.',
+  },
+  {
+    question: 'La ce SPCLEP mă duc dacă nu mai am domiciliu activ în România?',
+    answer:
+      'Dacă alegi CEI, poți merge la orice SPCLEP din România (din august 2025). Dacă alegi CIS, trebuie să mergi la SPCLEP-ul din orașul unde ai avut ultimul domiciliu înregistrat.',
+  },
+  {
+    question: 'Ce este CEI și ce este CIS? Care e mai bun pentru mine?',
+    answer:
+      'CEI (Cartea Electronică de Identitate): are cip, valabilă pentru călătorii în UE, orice SPCLEP, ~5 zile, 70 RON (gratuită prima dată până 30 iun. 2026). CIS (Cartea de Identitate Simplă): fără cip, NU valabilă UE, doar SPCLEP de domiciliu, ~30 zile, 40 RON. Dacă locuiești în Germania și călătorești, CEI este practic obligatorie.',
+  },
+  {
+    question: 'Mai funcționează procura pentru reînnoirea buletinului?',
+    answer:
+      'Nu pentru depunere și biometrie. Din septembrie 2025, prezența personală la SPCLEP este obligatorie. CEI se ridică obligatoriu personal (setup PIN). CIS poate fi ridicat prin procură specială notarială obținută la consulat.',
+  },
+  {
+    question: 'Trebuie să aduc fotografii la SPCLEP?',
+    answer:
+      'Nu. Fotografiile proprii nu sunt necesare — imaginea facială și amprentele se preiau biometric la ghișeul SPCLEP.',
+  },
+  {
+    question: 'Cât costă reînnoirea buletinului?',
+    answer:
+      'CEI: 70 RON (gratuită prima dată în cadrul programului PNRR până 30 iunie 2026). CIS: 40 RON. Taxa se plătește la CEC Bank sau SelfPay — nu la casieria SPCLEP.',
+  },
+  {
+    question: 'Pot ridica buletinul prin procură dacă nu pot veni personal a doua oară?',
+    answer:
+      'CEI: nu — ridicarea este obligatoriu personală (setup PIN la ghișeu). CIS: da — prin procură specială notarială. Procura se poate face la consulatul din Germania.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Stabilește sub-situația ta',
+    text: 'Ai domiciliu activ în România? Nu mai ai? Este primul tău buletin? Fiecare are un traseu ușor diferit la SPCLEP.',
+  },
+  {
+    name: 'Alege CEI sau CIS',
+    text: 'CEI: valabilă UE, orice SPCLEP, ~5 zile, 70 RON (gratuită prima). CIS: NU valabilă UE, SPCLEP de domiciliu, ~30 zile, 40 RON.',
+  },
+  {
+    name: 'Pregătește documentele',
+    text: 'Certificat de naștere, buletinul vechi (dacă îl mai ai), certificat de căsătorie dacă ți-ai schimbat numele. Fotografii proprii NU sunt necesare.',
+  },
+  {
+    name: 'Planifică deplasarea în România',
+    text: 'Verifică programul SPCLEP-ului, dacă există programare online și dacă ai document valabil pentru intrarea în România (pașaport valabil sau titlu de călătorie).',
+  },
+  {
+    name: 'Prezintă-te personal la SPCLEP și ridică buletinul',
+    text: 'Biometric la ghișeu. Plătești taxa la CEC Bank sau SelfPay. CEI: ridici obligatoriu personal. CIS: poți ridica prin procură specială.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/buletin-expirat-germania#article',
+  headline: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP 2026',
+  description:
+    'Ghid leaf pentru reînnoirea buletinului expirat din Germania: SPCLEP obligatoriu, CEI vs CIS, cu/fără domiciliu, primul buletin.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/buletin-expirat-germania',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Buletin România Germania',
+      item: 'https://actero.ro/buletin-romania-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Buletin expirat Germania',
+      item: 'https://actero.ro/buletin-expirat-germania',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'nu-la-consulat',
+    title: 'Buletinul NU se rezolvă la consulat — de ce contează',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="font-semibold text-red-900 mb-1">
+            ❌ Consulatul din Germania nu eliberează buletine
+          </p>
+          <p className="text-sm text-red-800">
+            Spre deosebire de pașaport, buletinul (CEI sau CIS) necesită prezență fizică în
+            România. Biometria — fotografia facială, amprentele și semnătura — se face exclusiv la
+            ghișeul SPCLEP. Nicio procură nu poate înlocui această prezență din septembrie 2025.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+          <p className="font-semibold text-green-900 mb-1">✅ Ce poți face din Germania înainte de drum</p>
+          <ul className="space-y-1 text-sm text-green-800">
+            <li>✓ Verifici ce documente trebuie să aduci în funcție de situația ta</li>
+            <li>✓ Decizi CEI sau CIS — înainte să pleci</li>
+            <li>✓ Obții extrasul de carte funciară online dacă ai nevoie (cazul pierdut cu domiciliu)</li>
+            <li>✓ Faci o procură specială la consulat dacă vrei să ridice altcineva CIS-ul</li>
+          </ul>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'situatia-ta',
+    title: 'Situația ta — ghidul potrivit',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            icon: '🏠',
+            titlu: 'Buletin expirat, am domiciliu activ în România',
+            descriere: 'Cel mai simplu caz. Mergi la SPCLEP-ul de domiciliu (sau orice SPCLEP dacă alegi CEI). Documente: buletinul vechi + certificat de naștere.',
+            href: null,
+            color: 'border-green-200 bg-green-50',
+            titleColor: 'text-green-900',
+          },
+          {
+            icon: '🌍',
+            titlu: 'Buletin expirat, nu mai am domiciliu activ în România',
+            descriere: 'CEI: orice SPCLEP. CIS: SPCLEP-ul ultimei adrese din RO. Documente identice, dar locul depunerii diferă.',
+            href: null,
+            color: 'border-blue-100 bg-blue-50',
+            titleColor: 'text-blue-900',
+          },
+          {
+            icon: '🆕',
+            titlu: 'Primul meu buletin — niciodată nu am avut',
+            descriere: 'Dacă te-ai născut în România și nu ai fost niciodată înregistrat: orice SPCLEP cu CEI. Dacă te-ai născut în Germania: mai întâi transcriere naștere la consulat (Route B).',
+            href: '/acte-copil-nascut-in-germania',
+            hrefLabel: 'Ghid acte copil →',
+            color: 'border-purple-100 bg-purple-50',
+            titleColor: 'text-purple-900',
+          },
+        ].map(({ icon, titlu, descriere, href, hrefLabel, color, titleColor }) => (
+          <div key={titlu} className={`rounded-xl border p-4 ${color}`}>
+            <p className={`font-semibold mb-1 ${titleColor}`}>{icon} {titlu}</p>
+            <p className="text-sm text-gray-700 mb-2">{descriere}</p>
+            {href && (
+              <Link href={href} className="text-xs font-medium text-purple-700 underline hover:text-purple-900">
+                {hrefLabel}
+              </Link>
+            )}
+          </div>
+        ))}
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Buletin pierdut sau furat</strong> (nu expirat)? Traseul este similar dar are
+            câteva diferențe — declarație la SPCLEP și, dacă a fost furat, sesizare la poliție.{' '}
+            <Link href="/buletin-pierdut-furat-cu-domiciliu-romania" className="underline font-medium">
+              Ghid buletin pierdut cu domiciliu →
+            </Link>{' '}
+            ·{' '}
+            <Link href="/buletin-pierdut-furat-fara-domiciliu-romania" className="underline font-medium">
+              Fără domiciliu →
+            </Link>
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'cei-cis',
+    title: 'CEI sau CIS — decizia care schimbă unde mergi și cât aștepți',
+    content: (
+      <div className="space-y-3">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Criteriu</th>
+                <th className="text-left p-2 font-semibold text-blue-700 border border-gray-200">CEI</th>
+                <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">CIS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { criteriu: 'Cip electronic', cei: '✅ Da', cis: '❌ Nu' },
+                { criteriu: 'Valabil pentru călătorii UE', cei: '✅ Da', cis: '❌ Nu' },
+                { criteriu: 'La ce SPCLEP mergi', cei: 'Orice SPCLEP din RO (din aug. 2025)', cis: 'Doar SPCLEP de domiciliu' },
+                { criteriu: 'Termen', cei: '~5 zile lucrătoare', cis: '~30 zile' },
+                { criteriu: 'Taxă', cei: '70 RON (gratuită prima, până 30 iun. 2026)', cis: '40 RON' },
+                { criteriu: 'Unde plătești taxa', cei: 'CEC Bank sau SelfPay', cis: 'CEC Bank sau SelfPay' },
+                { criteriu: 'Ridicare', cei: '⚠️ Obligatoriu personal (setup PIN)', cis: 'Personal SAU prin procură specială' },
+              ].map(({ criteriu, cei, cis }, i) => (
+                <tr key={criteriu} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                  <td className="p-2 border border-gray-200 font-medium text-gray-800 text-xs">{criteriu}</td>
+                  <td className="p-2 border border-gray-200 text-blue-700 text-xs">{cei}</td>
+                  <td className="p-2 border border-gray-200 text-gray-600 text-xs">{cis}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-sm text-blue-800">
+            <strong>Recomandare practică:</strong> Dacă locuiești în Germania și călătorești în
+            interiorul UE, CEI este practic obligatorie — fără ea, ai nevoie de pașaport valabil
+            pentru orice deplasare. CIS nu înlocuiește pașaportul la frontierele UE.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'documente',
+    title: 'Documentele necesare la SPCLEP',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              req: true,
+              doc: 'Buletinul expirat',
+              detaliu: 'Original. Dacă îl mai ai — îl aduci. Dacă nu, declari la ghișeu că nu îl ai.',
+            },
+            {
+              req: true,
+              doc: 'Certificat de naștere românesc',
+              detaliu: 'Original. ⚠️ Plastifiat, rupt sau corectat cu scotch → nul de drept. Solicită duplicat înainte de deplasare.',
+            },
+            {
+              req: false,
+              label: 'condiționat',
+              doc: 'Certificat de căsătorie românesc',
+              detaliu: 'Doar dacă ești căsătorit/ă ȘI ți-ai schimbat numele prin căsătorie.',
+            },
+            {
+              req: false,
+              label: 'extras CF — dacă ai pierdut buletinul și ai domiciliu activ',
+              doc: 'Extras de carte funciară',
+              detaliu: 'Max. 30 zile de la emitere. Îl obții online pe epay.ancpi.ro (~20 RON). PDF cu semnătură digitală ANCPI acceptat.',
+            },
+          ].map(({ req, doc, detaliu, label }) => (
+            <div key={doc} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+              <span className="text-base flex-shrink-0">{req ? '✅' : '⚪'}</span>
+              <div>
+                <p className="font-medium text-gray-800 text-sm">
+                  {doc}
+                  {label && <span className="ml-2 text-xs text-gray-500 font-normal">— {label}</span>}
+                </p>
+                <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3 space-y-1">
+          <p className="text-xs font-semibold text-blue-800">📷 Fotografii: NU sunt necesare</p>
+          <p className="text-xs text-blue-700">
+            Imaginea facială și amprentele se preiau biometric la ghișeul SPCLEP. Nu aduci
+            fotografii proprii.
+          </p>
+          <p className="text-xs text-blue-700">
+            <strong>Nu ai nevoie de:</strong> Anmeldung, Aufenthaltstitel, apostilă, traduceri.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'plata-taxa',
+    title: 'Cum și unde plătești taxa',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <p className="font-semibold text-amber-900 mb-1">⚠️ Taxa NU se plătește la casieria SPCLEP</p>
+          <p className="text-sm text-amber-800">
+            Taxa pentru CEI sau CIS se plătește la <strong>CEC Bank</strong> sau la un terminal{' '}
+            <strong>SelfPay</strong> — nu direct la ghișeul SPCLEP. Chitanța o aduci la depunerea
+            cererii.
+          </p>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+            <p className="font-semibold text-blue-900 text-sm mb-1">CEI</p>
+            <p className="text-sm text-blue-800">70 RON</p>
+            <p className="text-xs text-blue-700">Gratuită prima dată — program PNRR până 30 iun. 2026</p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+            <p className="font-semibold text-gray-900 text-sm mb-1">CIS</p>
+            <p className="text-sm text-gray-800">40 RON</p>
+            <p className="text-xs text-gray-600">Indiferent dacă e prima sau nu</p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ridicare',
+    title: 'Ridicarea buletinului — personal sau prin procură',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-red-100 bg-red-50 p-4">
+            <p className="font-semibold text-red-900 mb-1">CEI — obligatoriu personal</p>
+            <p className="text-sm text-red-800">
+              CEI se ridică exclusiv personal — PIN-ul se setează la ghișeu și nu poate fi delegat.
+              Planifică în România și ridicarea, nu doar depunerea.
+            </p>
+          </div>
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-1">CIS — posibil prin procură</p>
+            <p className="text-sm text-green-800">
+              CIS poate fi ridicat de o altă persoană cu procură specială notarială. Procura se
+              poate face la consulatul român din Germania — te identifici cu pașaportul.
+            </p>
+            <p className="text-xs text-green-700 mt-2">
+              Procura trebuie să menționeze explicit: „ridicarea actului de identitate".
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente cu buletinul expirat',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Mă duc la consulatul din Germania să-mi reînnoiesc buletinul',
+            corect: 'Buletinul (CEI sau CIS) nu se eliberează la consulat. Consultatul nu are această competență. Trebuie deplasare obligatorie în România la SPCLEP.',
+          },
+          {
+            gresit: 'Cred că pot evita deplasarea în România prin procură',
+            corect: 'Din septembrie 2025, depunerea și biometria necesită prezență personală. Procura nu mai funcționează pentru acești pași. CEI se ridică tot personal.',
+          },
+          {
+            gresit: 'Aleg CIS ca să fie mai ieftin și nu realizez că nu e valabil în UE',
+            corect: 'CIS (40 RON) NU este document de călătorie în UE. Dacă locuiești în Germania și călătorești, ai nevoie de CEI sau pașaport valabil pentru orice deplasare.',
+          },
+          {
+            gresit: 'Aduc fotografii biometrice la SPCLEP',
+            corect: 'Fotografiile proprii nu sunt necesare. Imaginea facială și amprentele se preiau biometric la ghișeul SPCLEP.',
+          },
+          {
+            gresit: 'Plătesc taxa la casieria SPCLEP',
+            corect: 'Taxa se plătește la CEC Bank sau SelfPay, nu la ghișeul SPCLEP. Chitanța se aduce la depunere.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="text-xs font-semibold text-red-700 mb-0.5">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Situația ta e diferită?',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Buletinul a fost pierdut sau furat (nu expirat) și ai domiciliu activ în RO',
+            href: '/buletin-pierdut-furat-cu-domiciliu-romania',
+            label: 'Ghid buletin pierdut cu domiciliu →',
+          },
+          {
+            text: 'Buletinul a fost pierdut sau furat și nu mai ai domiciliu în RO',
+            href: '/buletin-pierdut-furat-fara-domiciliu-romania',
+            label: 'Ghid buletin pierdut fără domiciliu →',
+          },
+          {
+            text: 'Copilul tău s-a născut în Germania și nu are niciun act românesc',
+            href: '/acte-copil-nascut-in-germania',
+            label: 'Ghid acte copil →',
+          },
+          {
+            text: 'Nu ai niciun act valabil și trebuie să pleci urgent în România',
+            href: '/titlu-calatorie-germania',
+            label: 'Ghid titlu de călătorie urgent →',
+          },
+        ].map(({ text, href, label }) => (
+          <div key={href} className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3">
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link href={href} className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0">
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function BuletinExpiratGermaniaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="buletin-expirat-germania"
+      lpTopic="buletin"
+      h1="Buletin expirat în Germania — nu la consulat, ci la SPCLEP în România"
+      intro="Buletinul expirat nu se rezolvă la consulatul din Germania. Spre deosebire de pașaport, reînnoirea buletinului necesită deplasare obligatorie în România — biometria nu se poate face la distanță și din septembrie 2025 procura nu mai funcționează."
+      tldr="Deplasare obligatorie în România la SPCLEP. CEI (recomandat): orice SPCLEP, ~5 zile, 70 RON (gratuită prima până iun. 2026), valabilă UE. CIS: SPCLEP de domiciliu, ~30 zile, 40 RON, NU valabilă UE. Fotografii proprii nu sunt necesare. Taxa la CEC Bank sau SelfPay."
+      ctaHref="/wizard?problem=buletin"
+      ctaLabel="Primește lista exactă pentru situația ta →"
+      updatedAt="aprilie 2026"
+      sourceNote="MAI, hub.mai.gov.ro, carteadeidentitate.gov.ro — date verificate live"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi la ce SPCLEP mergi sau ce documente pregătești?"
+      finalCtaText="Wizardul ActeRO combină situația ta exactă — cu sau fără domiciliu, CEI sau CIS — și îți dă lista completă de documente și traseul corect."
+    />
+  )
+}

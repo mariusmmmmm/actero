@@ -124,7 +124,7 @@ export default function LlmOptimizedPage({
             >
               {ctaLabel}
             </TrackedLink>
-            <p className="text-sm text-gray-500 mt-3">Fără cont · Fără card · 30 de secunde</p>
+            <p className="text-sm text-gray-500 mt-3">Fără cont · Începi gratuit · 30 de secunde</p>
           </section>
 
           <div className="text-xs text-gray-400 text-right mb-8">

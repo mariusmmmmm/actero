@@ -1,0 +1,577 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: comparație procedurală + decizie
+//   Părintele știe că trebuie un document german al copilului
+//   pentru transcriere și a auzit de ambele variante.
+//   Vrea să înțeleagă diferența și să o aleagă pe cea
+//   care nu îi complică procesul cu apostilă și traducere.
+//
+// Keyword principal: Formule A vs Geburtsurkunde
+// Keyword-uri secundare:
+//   - extras multilingv certificat nastere germania
+//   - formule a sau geburtsurkunde transcriere romania
+//   - apostila geburtsurkunde consulat roman
+//   - formule a fara apostila romania
+//   - internationaler auszug nastere copil romania
+//   - ce document german transcriere nastere romania
+//   - formule a standesamt germany
+//   - geburtsurkunde apostila haga romania
+//   - patronimic berlin formule a
+//   - ce cer consulatele romanesti nastere copil
+//
+// Unghi diferențiator:
+//   (1) Formule A = alegerea corectă în 95% din cazuri —
+//       elimină apostila și traducerea.
+//   (2) Excepția patronimic Berlin — cazul specific când
+//       Formule A nu e acceptat.
+//   (3) Cum obții Formule A la Standesamt — pas practic
+//       pe care mulți nu știu să îl facă.
+//   (4) Tabelul per consulat cu cerințele exacte.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România | ActeRO',
+  description:
+    'Formule A sau Geburtsurkunde pentru transcrierea nașterii copilului la consulatul din Germania? Formule A: fără apostilă. Excepție patronimic Berlin. Ghid 2026.',
+  keywords: [
+    'Formule A vs Geburtsurkunde',
+    'extras multilingv certificat nastere germania',
+    'formule a sau geburtsurkunde transcriere romania',
+    'apostila geburtsurkunde consulat roman',
+    'formule a fara apostila romania',
+    'internationaler auszug nastere copil romania',
+    'ce document german transcriere nastere romania',
+    'formule a standesamt germany',
+    'geburtsurkunde apostila haga romania',
+    'patronimic berlin formule a',
+  ],
+  openGraph: {
+    title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România',
+    description:
+      'Formule A: fără apostilă, fără traducere — recomandat. Geburtsurkunde: apostilă + traducere. Excepție Berlin cu patronimic.',
+    url: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Ce este Formule A?',
+    answer:
+      'Formule A este un extras de naștere multilingv, emis în baza Convenției de la Viena din 1976, semnat de numeroase state europene. Conține datele nașterii în mai multe limbi oficiale și este direct acceptat de autoritățile din țările semnatare — inclusiv România — fără apostilă și fără traducere.',
+  },
+  {
+    question: 'Ce este Geburtsurkunde?',
+    answer:
+      'Geburtsurkunde este certificatul standard de naștere german, emis de Standesamt. Este un document oficial valabil, dar pentru a fi recunoscut în România necesită apostilă Haga și traducere autorizată în română.',
+  },
+  {
+    question: 'Care este recomandarea generală — Formule A sau Geburtsurkunde?',
+    answer:
+      'Formule A în aproape toate cazurile. Elimină necesitatea apostilei Haga (1-2 săptămâni, ~15-30€) și a traducerii autorizate (câteva zile, 20-50€/pagină). Este mai rapid, mai ieftin și la fel de valid juridic.',
+  },
+  {
+    question: 'Cum obțin Formule A?',
+    answer:
+      'De la Standesamt-ul (Oficiul de Stare Civilă) din localitatea unde s-a născut copilul. Ceri explicit „internationaler Auszug nach dem Wiener Übereinkommen" sau „Formule A". Costă câțiva euro și se eliberează de obicei în aceeași zi sau prin corespondență.',
+  },
+  {
+    question: 'Există situații când trebuie obligatoriu Geburtsurkunde?',
+    answer:
+      'Da. Consulatul Berlin cere obligatoriu Geburtsurkunde + apostilă + traducere autorizată dacă oricare dintre părinți are nume patronimic în documentele românești (ex. Ion al lui Gheorghe). În toate celelalte cazuri, Formule A este acceptat la Berlin.',
+  },
+  {
+    question: 'Formule A este acceptat la toate consulatele românești din Germania?',
+    answer:
+      'Da, la Bonn, München și Stuttgart fără restricții. La Berlin, cu excepția cazului de patronimic al unui părinte — în acel caz se cere Geburtsurkunde.',
+  },
+  {
+    question: 'Apostila Haga pentru Geburtsurkunde se obține la consulat?',
+    answer:
+      'Nu. Apostila pentru documente germane se obține de la autoritatea competentă a landului german (de obicei Regierungspräsidium sau Justizministerium). Consulatul românesc nu are competență pentru apostilare.',
+  },
+  {
+    question: 'Traducerea Geburtsurkunde-ului trebuie să fie legalizată sau doar autorizată?',
+    answer:
+      'Traducerea autorizată (de un traducător autorizat de Ministerul Justiției din România) este suficientă pentru transcriere la consulat. Verifică cu consulatul tău specific dacă cere și legalizare suplimentară.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Verifici dacă un părinte are nume patronimic',
+    text: 'Dacă da și consulatul tău este Berlin → Geburtsurkunde + apostilă + traducere. În toate celelalte cazuri → Formule A.',
+  },
+  {
+    name: 'Mergi la Standesamt cu cererea de Formule A',
+    text: 'Ceri explicit „internationaler Auszug nach dem Wiener Übereinkommen" sau „Formule A". Prezinți documentele tale de identitate.',
+  },
+  {
+    name: 'Primești Formule A — verifici că e complet',
+    text: 'Formule A trebuie să conțină datele complete ale copilului și ale părinților, în mai multe limbi.',
+  },
+  {
+    name: 'Mergi la consulat cu Formule A pentru transcriere',
+    text: 'Fără apostilă, fără traducere. Direct recunoscut.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/formule-a-vs-geburtsurkunde#article',
+  headline: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere 2026',
+  description:
+    'Pagina comparativă Formule A vs Geburtsurkunde pentru transcrierea nașterii la consulatul din Germania: apostilă, traducere, excepție Berlin patronimic.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Transcriere naștere Germania',
+      item: 'https://actero.ro/transcriere-certificat-nastere-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Formule A vs Geburtsurkunde',
+      item: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'verdictul',
+    title: 'Verdictul rapid — în 95% din cazuri alegi Formule A',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border-2 border-green-300 bg-green-50 p-4 text-center">
+          <p className="text-lg font-black text-green-900 mb-2">
+            Alege Formule A — dacă niciunul din părinți nu are nume patronimic sau nu ești la Berlin
+          </p>
+          <p className="text-sm text-green-800">
+            Formule A elimină apostila Haga și traducerea autorizată. Este la fel de valid
+            juridic ca Geburtsurkunde — dar mai rapid și mai ieftin.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+          <p className="font-semibold text-red-900 mb-1">
+            ⚠️ Excepție — Consulatul Berlin + nume patronimic
+          </p>
+          <p className="text-sm text-red-800">
+            Dacă oricare din părinți are <strong>nume patronimic</strong> în documentele
+            românești (ex: „Ion al lui Gheorghe", „Maria a lui Vasile") și ești arondat
+            consulatului Berlin → Formule A nu este acceptat. Trebuie Geburtsurkunde +
+            apostilă + traducere autorizată.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ce-sunt',
+    title: 'Ce sunt cele două documente',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-1">Formule A</p>
+            <p className="text-xs text-green-700 mb-2 font-medium">
+              Internationaler Auszug nach dem Wiener Übereinkommen
+            </p>
+            <p className="text-sm text-green-800">
+              Extras multilingv emis în baza Convenției de la Viena (1976). Conține
+              datele nașterii în mai multe limbi oficiale europene. Semnat de Germania
+              și România — deci recunoscut reciproc fără formalități suplimentare.
+            </p>
+            <div className="mt-3 rounded-lg bg-green-100 p-2">
+              <p className="text-xs text-green-800 font-medium">Unde îl obții:</p>
+              <p className="text-xs text-green-700">
+                Standesamt-ul din localitatea nașterii copilului.<br />
+                Ceri: „Formule A" sau „internationaler Auszug".<br />
+                Cost: câțiva euro.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p className="font-semibold text-gray-900 mb-1">Geburtsurkunde</p>
+            <p className="text-xs text-gray-600 mb-2 font-medium">
+              Certificat standard de naștere german
+            </p>
+            <p className="text-sm text-gray-700">
+              Documentul standard german de naștere. Valid și oficial, dar pentru a fi
+              recunoscut în România necesită doi pași suplimentari: apostilă Haga și
+              traducere autorizată în română.
+            </p>
+            <div className="mt-3 rounded-lg bg-gray-100 p-2">
+              <p className="text-xs text-gray-700 font-medium">Unde obții apostila:</p>
+              <p className="text-xs text-gray-600">
+                Autoritatea competentă a landului german<br />
+                (Regierungspräsidium / Justizministerium).<br />
+                Durată: 1-2 săptămâni. Cost: ~15-30€.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'tabel-comparativ',
+    title: 'Tabel comparativ complet',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Criteriu</th>
+              <th className="text-left p-2 font-semibold text-green-700 border border-gray-200">Formule A</th>
+              <th className="text-left p-2 font-semibold text-gray-600 border border-gray-200">Geburtsurkunde</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                criteriu: 'Apostilă Haga necesară',
+                a: '❌ Nu',
+                g: '✅ Da (1-2 săptămâni, ~15-30€)',
+                highlight: true,
+              },
+              {
+                criteriu: 'Traducere autorizată română',
+                a: '❌ Nu',
+                g: '✅ Da (~20-50€/pagină)',
+                highlight: true,
+              },
+              {
+                criteriu: 'Acceptat la Bonn',
+                a: '✅ Da',
+                g: '✅ Da',
+                highlight: false,
+              },
+              {
+                criteriu: 'Acceptat la München',
+                a: '✅ Da',
+                g: '✅ Da',
+                highlight: false,
+              },
+              {
+                criteriu: 'Acceptat la Stuttgart',
+                a: '✅ Da',
+                g: '✅ Da',
+                highlight: false,
+              },
+              {
+                criteriu: 'Acceptat la Berlin',
+                a: '✅ Da — excepție patronimic',
+                g: '✅ Da (obligatoriu cu patronimic)',
+                highlight: false,
+              },
+              {
+                criteriu: 'Unde obții documentul',
+                a: 'Standesamt local (aceeași zi)',
+                g: 'Standesamt + apostilă (autoritate land) + traducere',
+                highlight: false,
+              },
+              {
+                criteriu: 'Cost estimativ total',
+                a: 'Câțiva euro',
+                g: 'Câțiva euro + ~15-30€ apostilă + traducere',
+                highlight: false,
+              },
+              {
+                criteriu: 'Timp total',
+                a: 'O zi (sau prin corespondență)',
+                g: '2-4 săptămâni',
+                highlight: false,
+              },
+              {
+                criteriu: 'Valabilitate juridică în România',
+                a: '✅ Identică cu Geburtsurkunde',
+                g: '✅ Completă',
+                highlight: false,
+              },
+            ].map(({ criteriu, a, g, highlight }, i) => (
+              <tr key={criteriu} className={highlight ? 'bg-green-50' : i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="p-2 border border-gray-200 font-medium text-gray-800 text-xs">{criteriu}</td>
+                <td className="p-2 border border-gray-200 text-green-700 text-xs">{a}</td>
+                <td className="p-2 border border-gray-200 text-gray-600 text-xs">{g}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="text-xs text-gray-400 mt-1">Rândurile verzi = avantajele decisive ale Formule A.</p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'patronimic-berlin',
+    title: 'Excepția patronimic — Berlin',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <p className="font-semibold text-amber-900 mb-2">
+            🔍 Ce este un nume patronimic?
+          </p>
+          <p className="text-sm text-amber-800">
+            Numele patronimic este un tip de nume specific unor regiuni din România (mai ales
+            din mediul rural tradițional) care include referința la tatăl sau mama persoanei.
+            Exemple: „Ion al lui Gheorghe", „Maria a Ioanei", „Vasile fiul lui Petre".
+          </p>
+          <p className="text-sm text-amber-800 mt-2">
+            Dacă oricare din părinți are un astfel de nume în documentele românești (certificat
+            de naștere, CI, pașaport), consulatul Berlin cere Geburtsurkunde + apostilă +
+            traducere autorizată în loc de Formule A.
+          </p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="font-semibold text-red-800 text-sm mb-1">Berlin + patronimic</p>
+            <p className="text-xs text-red-700">
+              → Obligatoriu Geburtsurkunde + apostilă Haga + traducere autorizată română
+            </p>
+          </div>
+          <div className="rounded-lg border border-green-100 bg-green-50 p-3">
+            <p className="font-semibold text-green-800 text-sm mb-1">Berlin fără patronimic</p>
+            <p className="text-xs text-green-700">
+              → Formule A acceptat fără apostilă și traducere
+            </p>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-500">
+          Bonn, München și Stuttgart nu au această restricție — Formule A este acceptat
+          indiferent de tipul numelui părinților.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'cerinte-per-consulat',
+    title: 'Cerințele pentru documentul copilului per consulat',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Consulat</th>
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Document recomandat</th>
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Excepție</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                consulat: 'Bonn',
+                doc: 'Formule A — fără apostilă, fără traducere',
+                exceptie: 'Geburtsurkunde acceptat cu apostilă + traducere',
+                highlight: false,
+              },
+              {
+                consulat: 'München',
+                doc: 'Formule A — fără apostilă, fără traducere',
+                exceptie: 'Geburtsurkunde acceptat cu apostilă + traducere',
+                highlight: false,
+              },
+              {
+                consulat: 'Stuttgart',
+                doc: 'Formule A — fără apostilă, fără traducere',
+                exceptie: 'Geburtsurkunde acceptat cu apostilă + traducere',
+                highlight: false,
+              },
+              {
+                consulat: 'Berlin',
+                doc: 'Formule A — fără apostilă, fără traducere',
+                exceptie: '⚠️ Dacă un părinte are patronimic → Geburtsurkunde + apostilă + traducere OBLIGATORIU',
+                highlight: true,
+              },
+            ].map(({ consulat, doc, exceptie, highlight }) => (
+              <tr key={consulat} className={highlight ? 'bg-amber-50' : 'bg-white even:bg-gray-50'}>
+                <td className="p-2 border border-gray-200 font-semibold text-gray-800">{consulat}</td>
+                <td className="p-2 border border-gray-200 text-green-700 text-xs">{doc}</td>
+                <td className={`p-2 border border-gray-200 text-xs ${highlight ? 'text-amber-800 font-medium' : 'text-gray-500'}`}>
+                  {exceptie}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ),
+  },
+
+  {
+    id: 'cum-obtii-formule-a',
+    title: 'Cum obții Formule A — pas cu pas',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              pas: '1. Identifici Standesamt-ul competent',
+              detaliu: 'Este Oficiul de Stare Civilă din localitatea unde s-a născut copilul (Geburtsort). Găsești adresa pe site-ul primăriei locale (Rathaus).',
+            },
+            {
+              pas: '2. Ceri explicit Formule A',
+              detaliu: 'Spui: „Ich möchte einen internationalen Auszug nach dem Wiener Übereinkommen" sau mai simplu „Formule A". Prezinți documentul de identitate al părintelui solicitant.',
+            },
+            {
+              pas: '3. Plătești taxa',
+              detaliu: 'De obicei câțiva euro (variază per Standesamt, între 10-20€). Poți face cererea în persoană, prin corespondență sau în unele cazuri online.',
+            },
+            {
+              pas: '4. Primești Formule A — verifici că datele sunt corecte',
+              detaliu: 'Documentul conține datele copilului în mai multe limbi. Verifică că numele, data nașterii și datele părinților sunt corecte.',
+            },
+          ].map(({ pas, detaliu }) => (
+            <div key={pas} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+              <div>
+                <p className="font-medium text-gray-800 text-sm">{pas}</p>
+                <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-sm text-blue-800">
+            <strong>Poți cere Formule A prin corespondență sau online</strong> la multe
+            Standesamt-uri — fără să te deplasezi. Verifică pe site-ul primăriei locale
+            dacă oferă această opțiune.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Obțin Geburtsurkunde standard când Formule A era suficient',
+            corect: 'Formule A este acceptat fără apostilă și traducere la toate consulatele (excepție Berlin+patronimic). Dacă nu ai patronimic, Formule A este alegerea corectă și economisești apostila și traducerea.',
+          },
+          {
+            gresit: 'Nu știu că la Berlin cu patronimic Formule A nu se acceptă',
+            corect: 'Dacă oricare din părinți are nume patronimic și ești arondat consulatului Berlin → Geburtsurkunde + apostilă + traducere autorizată este obligatoriu.',
+          },
+          {
+            gresit: 'Cer pur și simplu „certificatul de naștere" la Standesamt și primesc Geburtsurkunde',
+            corect: 'Trebuie să ceri explicit Formule A: „internationaler Auszug nach dem Wiener Übereinkommen". Dacă nu specifici, Standesamt-ul eliberează Geburtsurkunde-ul standard.',
+          },
+          {
+            gresit: 'Cred că Formule A are valabilitate juridică mai mică decât Geburtsurkunde',
+            corect: 'Formule A are exact aceeași valabilitate juridică în România ca Geburtsurkunde. Diferența este doar în formalitățile necesare pentru recunoaștere — apostilă și traducere.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="text-xs font-semibold text-red-700 mb-0.5">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Pagini conexe',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Transcriere certificat naștere — ghidul complet',
+            href: '/transcriere-certificat-nastere-germania',
+            label: 'Ghid transcriere →',
+          },
+          {
+            text: 'Tot traseul pentru copilul fără acte românești',
+            href: '/acte-copil-nascut-in-germania',
+            label: 'Ghid acte copil →',
+          },
+          {
+            text: 'Primul pașaport al copilului după transcriere',
+            href: '/primul-pasaport-copil-germania',
+            label: 'Ghid pașaport copil →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function FormuleAVsGeburtsurkudePage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="formule-a-vs-geburtsurkunde"
+      lpTopic="copil"
+      h1="Formule A vs Geburtsurkunde — ce alegi pentru transcrierea nașterii"
+      intro="Ai nevoie de un document german al copilului pentru transcrierea nașterii la consulat. Există două variante. Una elimină apostila și traducerea — cealaltă nu. Diferența practică: Formule A este mai simplu, mai rapid și mai ieftin, și este la fel de valid juridic."
+      tldr="Formule A (extras multilingv): fără apostilă, fără traducere, câțiva euro, aceeași zi. Recomandat în 95% din cazuri. Geburtsurkunde: necesită apostilă Haga (1-2 săptămâni, ~15-30€) + traducere autorizată. Excepție: Berlin + patronimic al unui părinte → obligatoriu Geburtsurkunde. Ceri Formule A explicit la Standesamt: „internationaler Auszug"."
+      ctaHref="/wizard?problem=copil"
+      ctaLabel="Găsește traseul exact pentru copilul tău →"
+      updatedAt="aprilie 2026"
+      sourceNote="MAE, consulatele României din Germania — date verificate live per consulat"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi ce document să ceri sau dacă excepția Berlin se aplică la tine?"
+      finalCtaText="Wizardul ActeRO clarifică ce document trebuie pentru consulatul tău și dacă excepția patronimic se aplică în cazul tău."
+    />
+  )
+}

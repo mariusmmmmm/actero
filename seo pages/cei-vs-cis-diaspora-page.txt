@@ -1,0 +1,477 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: comparație + decizie
+//   Utilizatorul trebuie să aleagă între CEI și CIS și
+//   nu înțelege diferența practică. Vrea să știe care
+//   îi convine MAI MULT pentru situația lui din diaspora.
+//
+// Keyword principal: CEI vs CIS diaspora
+// Keyword-uri secundare:
+//   - carte electronica identitate vs simpla
+//   - cei diaspora romania
+//   - diferenta cei cis romani strainatate
+//   - cis valabil ue
+//   - cei cip electronic romania
+//   - care e mai bun cei sau cis diaspora
+//   - cei orice spclep romania
+//   - cis spclep domiciliu
+//   - cis procura ridicare
+//   - cei gratuit pnrr diaspora
+//
+// Unghi diferențiator:
+//   Paginile de buletin explică diferența pe scurt.
+//   Această pagină merge adânc pe diferențele PRACTICE
+//   pentru un român din diaspora — nu juridice.
+//   Răspunde la întrebarea reală: „Care îmi convine MIE?"
+//   cu secțiune dedicată pe profiluri de utilizator.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine? | ActeRO',
+  description:
+    'CEI sau CIS pentru românii din Germania? Diferențele practice: UE, SPCLEP, ridicare, cost, termen. Ce convine diasporei în 2026.',
+  keywords: [
+    'CEI vs CIS diaspora',
+    'carte electronica identitate vs simpla',
+    'cei diaspora romania',
+    'diferenta cei cis romani strainatate',
+    'cis valabil ue',
+    'cei cip electronic romania',
+    'care e mai bun cei sau cis diaspora',
+    'cei orice spclep romania',
+    'cis spclep domiciliu',
+    'cei gratuit pnrr diaspora',
+  ],
+  openGraph: {
+    title: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine?',
+    description:
+      'CIS nu e valabil în UE. CEI la orice SPCLEP. CIS prin procură la ridicare. Tabel complet și recomandare pentru diaspora.',
+    url: 'https://actero.ro/cei-vs-cis-diaspora',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/cei-vs-cis-diaspora',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'CIS este valabil pentru călătorii în UE?',
+    answer:
+      'Nu. CIS (Cartea de Identitate Simplă) nu este document de călătorie în Uniunea Europeană. Dacă locuiești în Germania și vrei să călătorești cu buletinul în interiorul UE, ai nevoie de CEI sau de pașaport valabil.',
+  },
+  {
+    question: 'CEI este gratuită?',
+    answer:
+      'Prima CEI este gratuită în cadrul programului PNRR până la 30 iunie 2026. Ulterior, taxa este 70 RON. CIS costă 40 RON indiferent de perioadă.',
+  },
+  {
+    question: 'La ce SPCLEP pot merge cu CEI vs CIS?',
+    answer:
+      'CEI: la orice SPCLEP din România (din august 2025) — nu ești legat de cel de domiciliu. CIS: obligatoriu la SPCLEP-ul de domiciliu. Dacă nu ai domiciliu activ, CIS nu se poate face.',
+  },
+  {
+    question: 'Pot ridica CIS prin procură?',
+    answer:
+      'Da. CIS se poate ridica prin procură specială notarială obținută la consulatul din Germania. CEI nu se poate ridica prin procură — PIN-ul se setează obligatoriu personal la ghișeu.',
+  },
+  {
+    question: 'CEI are cip electronic — la ce folosește?',
+    answer:
+      'Cipul stochează datele biometrice și poate fi folosit pentru autentificare electronică (semnătură digitală, acces la servicii online ale statului român). Pentru diaspora, avantajul principal rămâne valabilitatea ca document de călătorie în UE.',
+  },
+  {
+    question: 'Dacă nu am domiciliu activ în România, pot face CIS?',
+    answer:
+      'Nu. CIS se emite doar la SPCLEP-ul de domiciliu. Fără domiciliu activ în România, singura opțiune este CEI — la orice SPCLEP.',
+  },
+  {
+    question: 'CEI este valabilă cât timp?',
+    answer:
+      'CEI are valabilitate de 10 ani pentru persoanele cu vârsta peste 14 ani și 5 ani pentru minori. CIS are aceleași termene de valabilitate.',
+  },
+  {
+    question: 'Pot face atât CEI cât și CIS?',
+    answer:
+      'Nu simultan — poți deține un singur act de identitate activ. Dacă vrei să schimbi tipul (de la CIS la CEI sau invers), soliciți un nou act care îl înlocuiește pe cel existent.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Verifici dacă ai domiciliu activ în România',
+    text: 'Fără domiciliu activ → singura opțiune este CEI. Cu domiciliu activ → poți alege CEI sau CIS.',
+  },
+  {
+    name: 'Verifici dacă poți ridica personal',
+    text: 'Dacă nu poți reveni în România pentru ridicare → CIS (poți ridica prin procură). Dacă poți → CEI este mai bună.',
+  },
+  {
+    name: 'Verifici dacă vrei să călătorești cu buletinul în UE',
+    text: 'Dacă da → CEI obligatoriu. CIS nu este document de călătorie în UE.',
+  },
+  {
+    name: 'Mergi la SPCLEP-ul ales',
+    text: 'CEI: orice SPCLEP. CIS: doar SPCLEP de domiciliu.',
+  },
+  {
+    name: 'Plătești taxa la CEC Bank sau SelfPay și te prezinți cu documentele',
+    text: 'CEI: 70 RON (gratuit prima dată). CIS: 40 RON.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/cei-vs-cis-diaspora#article',
+  headline: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine? 2026',
+  description:
+    'Pagina comparativă CEI vs CIS pentru românii din diaspora: UE, SPCLEP, ridicare, cost, termen, recomandare per profil.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/cei-vs-cis-diaspora',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Buletin România Germania',
+      item: 'https://actero.ro/buletin-romania-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'CEI vs CIS diaspora',
+      item: 'https://actero.ro/cei-vs-cis-diaspora',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'diferenta-esentiala',
+    title: 'Diferența esențială — ce contează pentru diaspora',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Există o singură diferență care contează cu adevărat pentru un român din Germania:
+        </p>
+
+        <div className="rounded-xl border-2 border-red-300 bg-red-50 p-4 text-center">
+          <p className="text-lg font-black text-red-900">
+            CIS nu este document de călătorie în UE
+          </p>
+          <p className="text-sm text-red-800 mt-1">
+            Cu CIS nu poți trece granița în spațiul Schengen. Ai nevoie de pașaport valabil
+            pentru orice deplasare din Germania.
+          </p>
+        </div>
+
+        <p className="text-sm text-gray-600">
+          Toate celelalte diferențe (cost, SPCLEP, termen) sunt secundare față de aceasta.
+          Dacă locuiești în Germania și nu vrei să depinzi mereu de pașaport, <strong>CEI
+          este singura opțiune practică.</strong>
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'tabel-comparativ',
+    title: 'Tabel comparativ complet',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Criteriu</th>
+              <th className="text-left p-2 font-semibold text-blue-700 border border-gray-200">CEI</th>
+              <th className="text-left p-2 font-semibold text-gray-600 border border-gray-200">CIS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                criteriu: 'Cip electronic',
+                cei: '✅ Da',
+                cis: '❌ Nu',
+                highlight: false,
+              },
+              {
+                criteriu: 'Valabil pentru călătorii în UE / Schengen',
+                cei: '✅ Da',
+                cis: '❌ Nu — nevoie de pașaport',
+                highlight: true,
+              },
+              {
+                criteriu: 'La ce SPCLEP depui',
+                cei: 'Orice SPCLEP din RO (aug. 2025)',
+                cis: 'Doar SPCLEP de domiciliu',
+                highlight: false,
+              },
+              {
+                criteriu: 'Dacă nu ai domiciliu activ',
+                cei: '✅ Posibil — orice SPCLEP',
+                cis: '❌ Nu se poate',
+                highlight: false,
+              },
+              {
+                criteriu: 'Termen emitere',
+                cei: '~5 zile lucrătoare',
+                cis: '~30 zile',
+                highlight: false,
+              },
+              {
+                criteriu: 'Cost',
+                cei: '70 RON (gratuit prima dată, până 30 iun. 2026)',
+                cis: '40 RON',
+                highlight: false,
+              },
+              {
+                criteriu: 'Unde plătești taxa',
+                cei: 'CEC Bank sau SelfPay',
+                cis: 'CEC Bank sau SelfPay',
+                highlight: false,
+              },
+              {
+                criteriu: 'Ridicare',
+                cei: '⚠️ Obligatoriu personal (setup PIN)',
+                cis: '✅ Personal SAU procură specială',
+                highlight: false,
+              },
+              {
+                criteriu: 'Valabilitate document',
+                cei: '10 ani (adulți 14+) · 5 ani (minori)',
+                cis: '10 ani (adulți 14+) · 5 ani (minori)',
+                highlight: false,
+              },
+            ].map(({ criteriu, cei, cis, highlight }, i) => (
+              <tr
+                key={criteriu}
+                className={highlight ? 'bg-red-50' : i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+              >
+                <td className={`p-2 border border-gray-200 font-medium text-xs ${highlight ? 'text-red-900' : 'text-gray-800'}`}>
+                  {criteriu}
+                </td>
+                <td className={`p-2 border border-gray-200 text-xs ${highlight ? 'text-blue-700 font-semibold' : 'text-blue-700'}`}>
+                  {cei}
+                </td>
+                <td className={`p-2 border border-gray-200 text-xs ${highlight ? 'text-red-700 font-semibold' : 'text-gray-600'}`}>
+                  {cis}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ),
+  },
+
+  {
+    id: 'pentru-cine',
+    title: 'Care îți convine — pe profilul tău',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              profil: 'Locuiești în Germania și călătorești în UE',
+              recomandare: 'CEI — obligatoriu',
+              motivul: 'CIS nu este document de călătorie în spațiul Schengen. Ai nevoie de CEI sau pașaport valabil pentru orice deplasare.',
+              color: 'border-blue-200 bg-blue-50',
+              badge: 'bg-blue-100 text-blue-800',
+            },
+            {
+              profil: 'Nu poți reveni personal în România pentru ridicare',
+              recomandare: 'CIS — dacă ai domiciliu activ',
+              motivul: 'CIS se poate ridica prin procură specială notarială obținută la consulatul din Germania. CEI nu se poate ridica prin procură.',
+              color: 'border-gray-200 bg-gray-50',
+              badge: 'bg-gray-100 text-gray-700',
+            },
+            {
+              profil: 'Nu ai domiciliu activ în România',
+              recomandare: 'CEI — singura opțiune',
+              motivul: 'CIS se emite doar la SPCLEP-ul de domiciliu. Fără domiciliu activ, singura opțiune este CEI la orice SPCLEP.',
+              color: 'border-blue-200 bg-blue-50',
+              badge: 'bg-blue-100 text-blue-800',
+            },
+            {
+              profil: 'Vrei să economisești — prima oară',
+              recomandare: 'CEI — gratuită prima dată',
+              motivul: 'Prima CEI este gratuită în programul PNRR până la 30 iunie 2026. CIS costă 40 RON indiferent de perioadă.',
+              color: 'border-green-200 bg-green-50',
+              badge: 'bg-green-100 text-green-800',
+            },
+            {
+              profil: 'Reînnoire rapidă — ai puțin timp în România',
+              recomandare: 'CEI — ~5 zile vs ~30 zile',
+              motivul: 'CEI se emite în ~5 zile lucrătoare. CIS durează ~30 zile. Dacă ești în România pentru o perioadă scurtă, CEI îți permite să ridici buletinul în aceeași vizită.',
+              color: 'border-blue-200 bg-blue-50',
+              badge: 'bg-blue-100 text-blue-800',
+            },
+          ].map(({ profil, recomandare, motivul, color, badge }) => (
+            <div key={profil} className={`rounded-xl border p-4 ${color}`}>
+              <p className="font-semibold text-gray-800 text-sm mb-1">{profil}</p>
+              <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-2 ${badge}`}>
+                → {recomandare}
+              </span>
+              <p className="text-xs text-gray-600">{motivul}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'procura-ridicare',
+    title: 'Ridicarea prin procură — doar la CIS',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-red-100 bg-red-50 p-4">
+            <p className="font-semibold text-red-900 mb-1">CEI — ridicare obligatoriu personală</p>
+            <p className="text-sm text-red-800">
+              PIN-ul se setează la ghișeu la ridicare — nu poate fi delegat. Dacă faci CEI,
+              planifică să rămâi în România sau să revii personal după ~5 zile.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-1">CIS — ridicare prin procură posibilă</p>
+            <p className="text-sm text-green-800">
+              O altă persoană poate ridica CIS-ul cu procură specială notarială obținută la
+              consulatul din Germania. Procura trebuie să menționeze explicit ridicarea actului
+              de identitate.
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Strategia pentru o singură deplasare în România:</strong> Dacă nu poți
+            reveni pentru ridicare, alegi CIS + faci procura la consulatul din Germania înainte
+            de plecare. Dacă poți rămâne ~5 zile sau reveni, alegi CEI.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'concluzie',
+    title: 'Concluzia pentru românii din Germania',
+    content: (
+      <div className="rounded-xl border-2 border-blue-200 bg-blue-50 p-4 space-y-3">
+        <p className="font-semibold text-blue-900">
+          În 9 din 10 cazuri, CEI este alegerea corectă pentru diaspora
+        </p>
+        <ul className="space-y-1 text-sm text-blue-800">
+          <li>✓ Este gratuită prima dată (până 30 iun. 2026)</li>
+          <li>✓ Este valabilă în UE — poți călători fără pașaport</li>
+          <li>✓ Poți merge la orice SPCLEP — fără să cauți SPCLEP-ul de domiciliu</li>
+          <li>✓ Se emite în ~5 zile — nu 30</li>
+        </ul>
+        <p className="text-sm text-blue-800">
+          Singura situație când CIS e preferabilă: nu poți reveni personal în România pentru
+          ridicare și ai domiciliu activ. Atunci CIS + procură specială = o singură deplasare.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Ghiduri pentru situația ta specifică',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Buletin expirat cu domiciliu activ în România',
+            href: '/buletin-expirat-cu-domiciliu-romania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Buletin expirat fără domiciliu activ în România',
+            href: '/buletin-expirat-fara-domiciliu-romania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Buletin pierdut cu domiciliu activ',
+            href: '/buletin-pierdut-furat-cu-domiciliu-romania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Buletin pierdut fără domiciliu activ',
+            href: '/buletin-pierdut-furat-fara-domiciliu-romania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Toate situațiile de buletin din Germania',
+            href: '/buletin-romania-germania',
+            label: 'Ghid hub →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function CeiVsCisDiasporaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="cei-vs-cis-diaspora"
+      lpTopic="buletin"
+      h1="CEI vs CIS pentru diaspora — care e mai bun pentru tine"
+      intro="CEI sau CIS? Există o diferență care contează mai mult decât toate celelalte: CIS nu este document de călătorie în UE. Dacă locuiești în Germania și vrei să poți călători cu buletinul, CEI este singura opțiune. Restul diferențelor — cost, SPCLEP, termen — sunt secundare față de aceasta."
+      tldr="CIS: NU valabil UE, ~30 zile, 40 RON, SPCLEP de domiciliu, poți ridica prin procură. CEI: valabil UE, ~5 zile, 70 RON (gratuit prima dată), orice SPCLEP, ridici obligatoriu personal. Pentru diaspora: CEI în 9 din 10 cazuri."
+      ctaHref="/wizard?problem=buletin"
+      ctaLabel="Găsește traseul exact pentru situația ta →"
+      updatedAt="aprilie 2026"
+      sourceNote="MAI, hub.mai.gov.ro, carteadeidentitate.gov.ro — date verificate live"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi sigur ce ți se aplică — CEI sau CIS?"
+      finalCtaText="Wizardul ActeRO îți confirmă alegerea corectă în funcție de situația ta și îți dă lista exactă de documente."
+    />
+  )
+}

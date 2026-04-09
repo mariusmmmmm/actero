@@ -6,17 +6,33 @@ import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { deriveGuideId } from '@/lib/utils/deriveGuideId'
 import type { CreateSessionPayload, CreateSessionResponse } from '@/types'
+import { hasTrustedOrigin, NO_STORE_HEADERS } from '@/lib/security'
+
+const ALLOWED_PROBLEM_TYPES = new Set(['pasaport', 'buletin', 'titlu-calatorie', 'procura', 'transcriere-nastere'])
+const ALLOWED_COUNTRIES = new Set(['de'])
 
 export async function POST(req: NextRequest) {
   try {
+    if (!hasTrustedOrigin(req)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
+    }
+
     const body: CreateSessionPayload = await req.json()
     const { problemType, country, situation, utmSource, utmMedium, utmCampaign } = body
 
     // Validare minimă
-    if (!problemType || !country || !situation) {
+    if (
+      !problemType ||
+      !country ||
+      !situation ||
+      typeof situation !== 'object' ||
+      Array.isArray(situation) ||
+      !ALLOWED_PROBLEM_TYPES.has(problemType) ||
+      !ALLOWED_COUNTRIES.has(country)
+    ) {
       return NextResponse.json(
         { error: 'problemType, country și situation sunt obligatorii' },
-        { status: 400 }
+        { status: 400, headers: NO_STORE_HEADERS }
       )
     }
 
@@ -25,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     // Dacă e waitlist — nu creăm sesiune, returnăm direct
     if (wizardResult.type === 'waitlist') {
-      return NextResponse.json({ wizardResult }, { status: 200 })
+      return NextResponse.json({ wizardResult }, { status: 200, headers: NO_STORE_HEADERS })
     }
 
     // Determină guideId — pentru route folosim ghidul A
@@ -55,7 +71,7 @@ export async function POST(req: NextRequest) {
       console.error('Supabase insert error:', error)
       return NextResponse.json(
         { error: 'Nu s-a putut crea sesiunea' },
-        { status: 500 }
+        { status: 500, headers: NO_STORE_HEADERS }
       )
     }
 
@@ -65,12 +81,12 @@ export async function POST(req: NextRequest) {
       wizardResult,
     }
 
-    return NextResponse.json(response, { status: 201 })
+    return NextResponse.json(response, { status: 201, headers: NO_STORE_HEADERS })
   } catch (err) {
     console.error('Session route error:', err)
     return NextResponse.json(
       { error: 'Eroare internă de server' },
-      { status: 500 }
+      { status: 500, headers: NO_STORE_HEADERS }
     )
   }
 }

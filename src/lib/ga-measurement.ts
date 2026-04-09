@@ -1,10 +1,15 @@
-type MeasurementPrimitive = string | number | boolean
-type MeasurementParams = Record<string, MeasurementPrimitive | null | undefined>
+type MeasurementValue =
+  | string
+  | number
+  | boolean
+  | MeasurementValue[]
+  | { [key: string]: MeasurementValue }
+type MeasurementParams = Record<string, MeasurementValue | null | undefined>
 
-function cleanParams(params: MeasurementParams): Record<string, MeasurementPrimitive> {
+function cleanParams(params: MeasurementParams): Record<string, MeasurementValue> {
   return Object.fromEntries(
     Object.entries(params).filter(([, value]) => value !== undefined && value !== null && value !== '')
-  ) as Record<string, MeasurementPrimitive>
+  ) as Record<string, MeasurementValue>
 }
 
 export async function sendGaMeasurementEvent({

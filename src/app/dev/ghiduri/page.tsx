@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/layout/SiteHeader'
 import type { GuideId } from '@/types'
@@ -8,6 +9,7 @@ const guides: { id: GuideId; title: string }[] = [
   { id: 'pasaport-crds-de', title: 'Reînnoire pașaport CRDS · Germania' },
   { id: 'pasaport-crds-de-pierdut', title: 'Pașaport CRDS pierdut/furat · Germania' },
   { id: 'pasaport-crds-nou-de', title: 'Primul pașaport CRDS · Germania' },
+  { id: 'pasaport-minor-crds-de', title: 'Pașaport copil CRDS · Germania' },
   { id: 'pasaport-de-cu-domiciliu', title: 'Pașaport · Domiciliu România · Germania' },
   { id: 'pasaport-de-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Germania' },
   { id: 'buletin-de-fara-domiciliu', title: 'Buletin expirat · Fără domiciliu RO' },
@@ -25,17 +27,39 @@ const guides: { id: GuideId; title: string }[] = [
 ]
 
 const seoPages = [
-  { title: 'Acte romanesti Germania', path: '/acte-romanesti-germania' },
-  { title: 'Pasaport Romania Germania', path: '/pasaport-romania-germania' },
-  { title: 'Pasaport CRDS Germania', path: '/pasaport-crds-germania' },
-  { title: 'Buletin Romania Germania', path: '/buletin-romania-germania' },
-  { title: 'Acte copil nascut in Germania', path: '/acte-copil-nascut-in-germania' },
-  { title: 'Titlu calatorie Germania', path: '/titlu-calatorie-germania' },
-  { title: 'Pasaport expirat Germania', path: '/pasaport-expirat-germania' },
-  { title: 'Buletin expirat Germania', path: '/buletin-expirat-germania' },
-  { title: 'Programare consulat Romania', path: '/programare-consulat-romania' },
-  { title: 'Procura notariala Germania', path: '/procura-notariala-germania' },
-  { title: 'Titlu calatorie urgenta Germania', path: '/titlu-calatorie-urgenta-germania' },
+  { title: 'Acte românești din Germania', path: '/acte-romanesti-germania' },
+  { title: 'Acte la consulatul României din Germania', path: '/acte-consulat-romania-germania' },
+  { title: 'Acte pentru copil născut în Germania', path: '/acte-copil-nascut-in-germania' },
+  { title: 'Pașaport românesc din Germania', path: '/pasaport-romania-germania' },
+  { title: 'Pașaport CRDS din Germania', path: '/pasaport-crds-germania' },
+  { title: 'Pașaport cu domiciliu în România din Germania', path: '/pasaport-cu-domiciliu-romania-din-germania' },
+  { title: 'CRDS vs pașaport cu domiciliu în România', path: '/pasaport-crds-vs-pasaport-cu-domiciliu-romania' },
+  { title: 'Pașaport expirat în Germania', path: '/pasaport-expirat-germania' },
+  { title: 'Pașaport pierdut sau furat în Germania', path: '/pasaport-pierdut-furat-germania' },
+  { title: 'Primul pașaport copil în Germania', path: '/primul-pasaport-copil-germania' },
+  { title: 'Buletin din Germania', path: '/buletin-romania-germania' },
+  { title: 'Buletin expirat în Germania', path: '/buletin-expirat-germania' },
+  { title: 'Buletin expirat cu domiciliu în România', path: '/buletin-expirat-cu-domiciliu-romania' },
+  { title: 'Buletin expirat fără domiciliu în România', path: '/buletin-expirat-fara-domiciliu-romania' },
+  { title: 'Buletin pierdut sau furat cu domiciliu în România', path: '/buletin-pierdut-furat-cu-domiciliu-romania' },
+  { title: 'Buletin pierdut sau furat fără domiciliu în România', path: '/buletin-pierdut-furat-fara-domiciliu-romania' },
+  { title: 'CEI vs CIS pentru diaspora', path: '/cei-vs-cis-diaspora' },
+  { title: 'Primul buletin copil născut în Germania', path: '/primul-buletin-copil-nascut-in-germania' },
+  { title: 'Schimbare domiciliu copil din Germania în România', path: '/schimbare-domiciliu-copil-din-germania-in-romania' },
+  { title: 'Titlu de călătorie din Germania', path: '/titlu-calatorie-germania' },
+  { title: 'Titlu de călătorie urgentă din Germania', path: '/titlu-calatorie-urgenta-germania' },
+  { title: 'Titlu de călătorie vs pașaport temporar', path: '/titlu-calatorie-vs-pasaport-temporar' },
+  { title: 'Programare la consulatul României', path: '/programare-consulat-romania' },
+  { title: 'Programare pe econsulat.ro', path: '/programare-econsulat-germania' },
+  { title: 'Procură notarială din Germania', path: '/procura-notariala-germania' },
+  { title: 'Consulat vs notar german pentru procură', path: '/procura-consulat-vs-notar-german' },
+  { title: 'Procură generală din Germania', path: '/procura-generala-germania' },
+  { title: 'Procură pentru moștenire din Germania', path: '/procura-mostenire-germania' },
+  { title: 'Procură pentru vânzare proprietate din Germania', path: '/procura-vanzare-proprietate-germania' },
+  { title: 'Procură pentru cont bancar în România', path: '/procura-cont-bancar-romania-din-germania' },
+  { title: 'Procură pentru divorț notarial din Germania', path: '/procura-divort-notarial-germania' },
+  { title: 'Transcriere certificat de naștere din Germania', path: '/transcriere-certificat-nastere-germania' },
+  { title: 'Formule A vs Geburtsurkunde', path: '/formule-a-vs-geburtsurkunde' },
 ]
 
 const routes = [
@@ -54,6 +78,26 @@ const routes = [
 ]
 
 export default function DevGhiduriPage() {
+  const [checkedSeoPages, setCheckedSeoPages] = useState<Set<string>>(new Set())
+
+  const checkedSeoCount = checkedSeoPages.size
+  const seoProgressLabel = useMemo(
+    () => `${checkedSeoCount} / ${seoPages.length} verificate în sesiunea curentă`,
+    [checkedSeoCount]
+  )
+
+  const toggleSeoPage = (path: string) => {
+    setCheckedSeoPages((current) => {
+      const next = new Set(current)
+      if (next.has(path)) {
+        next.delete(path)
+      } else {
+        next.add(path)
+      }
+      return next
+    })
+  }
+
   return (
     <main className="min-h-screen bg-white">
       <SiteHeader />
@@ -141,13 +185,17 @@ export default function DevGhiduriPage() {
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900">Landing pages SEO</h2>
           <p className="mt-2 text-sm text-gray-500">
-            Linkuri rapide pentru testarea paginilor SEO.
+            Linkuri rapide pentru testarea paginilor SEO. Bifările sunt doar locale pe pagină și nu se salvează nicăieri.
           </p>
+          <div className="mt-3 inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 text-sm font-medium text-green-800">
+            {seoProgressLabel}
+          </div>
 
           <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 bg-white">
             <table className="w-full text-left">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Check</th>
                   <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Pagină</th>
                   <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Path</th>
                   <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide text-gray-500">Test</th>
@@ -156,6 +204,17 @@ export default function DevGhiduriPage() {
               <tbody>
                 {seoPages.map((page) => (
                   <tr key={page.path} className="border-t border-gray-100">
+                    <td className="px-4 py-3">
+                      <label className="inline-flex cursor-pointer items-center justify-center">
+                        <input
+                          type="checkbox"
+                          checked={checkedSeoPages.has(page.path)}
+                          onChange={() => toggleSeoPage(page.path)}
+                          className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                          aria-label={`Marchează pagina ${page.title} ca verificată`}
+                        />
+                      </label>
+                    </td>
                     <td className="px-4 py-3 text-sm font-semibold text-gray-900">{page.title}</td>
                     <td className="px-4 py-3 text-sm text-gray-500">{page.path}</td>
                     <td className="px-4 py-3">

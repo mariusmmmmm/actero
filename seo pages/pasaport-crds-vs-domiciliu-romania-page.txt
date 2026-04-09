@@ -1,0 +1,471 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: comparație + calificare
+//   Utilizatorul a văzut cele două opțiuni pe econsulat.ro
+//   sau a auzit de CRDS și nu știe care i se aplică.
+//   Vrea să înțeleagă diferența și să selecteze corect.
+//
+// Keyword principal: pașaport CRDS vs pașaport cu domiciliu România
+// Keyword-uri secundare:
+//   - crds vs pasaport simplu electronic
+//   - pasaport domiciliu germania vs romania
+//   - ce inseamna crds pasaport econsulat
+//   - am domiciliu romania dar locuiesc germania pasaport
+//   - diferenta crds pasaport standard
+//   - pasaport simplu electronic vs crds
+//   - econsulat selectie gresita pasaport
+//   - cum stiu daca fac crds sau standard
+//   - ci anulata pasaport crds
+//   - fotografii pasaport crds vs standard
+//
+// Unghi diferențiator:
+//   Cea mai frecventă greșeală pe econsulat.ro vine din
+//   neînțelegerea acestei distincții. Pagina clarifică:
+//   (1) Criteriul unic de calificare: domiciliul oficial.
+//   (2) Consecința selectării greșite — cerere invalidată.
+//   (3) Diferența practică la fotografii și la CI.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi | ActeRO',
+  description:
+    'CRDS sau pașaport standard? Criteriul unic: unde e domiciliul oficial. Ce selectezi pe econsulat.ro, fotografii, CI anulată. Ghid 2026.',
+  keywords: [
+    'pasaport crds vs pasaport cu domiciliu romania',
+    'crds vs pasaport simplu electronic',
+    'pasaport domiciliu germania vs romania',
+    'ce inseamna crds pasaport econsulat',
+    'diferenta crds pasaport standard',
+    'pasaport simplu electronic vs crds',
+    'econsulat selectie gresita pasaport',
+    'cum stiu daca fac crds sau standard',
+    'ci anulata pasaport crds',
+    'fotografii pasaport crds vs standard',
+  ],
+  openGraph: {
+    title: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi',
+    description:
+      'Criteriul unic: domiciliul oficial. Fotografii, CI anulată, selecție econsulat.ro. Ce se întâmplă dacă selectezi greșit.',
+    url: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Cum știu dacă trebuie CRDS sau pașaport standard?',
+    answer:
+      'Un singur criteriu: unde este domiciliul tău oficial. Dacă ai carte de identitate valabilă cu adresă din România — pașaport standard. Dacă nu mai ai domiciliu activ în România — CRDS. Nu contează de câți ani locuiești în Germania.',
+  },
+  {
+    question: 'Am locuit 10 ani în Germania dar am domiciliu activ în România. CRDS sau standard?',
+    answer:
+      'Standard. Numărul de ani petrecuți în Germania nu contează. Dacă ai CI valabilă cu adresă din România, ești pe fluxul standard — indiferent de cât timp locuiești efectiv în Germania.',
+  },
+  {
+    question: 'Ce se întâmplă dacă selectez CRDS din greșeală când am domiciliu în România?',
+    answer:
+      'Cererea va fi procesată greșit sau respinsă. La ghișeu, funcționarul va constata că documentele nu corespund tipului selectat. Trebuie să anulezi cererea și să creezi una nouă cu selecția corectă.',
+  },
+  {
+    question: 'La CRDS trebuie fotografii biometrice proprii?',
+    answer:
+      'Nu. La toate cele 4 consulate din Germania, pentru pașaportul CRDS imaginea se preia biometric la ghișeu. Nu aduci fotografii proprii. Aceasta este una din diferențele practice importante față de pașaportul standard.',
+  },
+  {
+    question: 'La pașaportul standard trebuie fotografii?',
+    answer:
+      'Da — cu excepția consulatului din München. La Bonn, Stuttgart și Berlin aduci 2 fotografii color 3,5×4,5 cm, fond alb. La München fotografiile se fac la consulat.',
+  },
+  {
+    question: 'Cartea de identitate se anulează la ambele tipuri de pașaport?',
+    answer:
+      'Nu. La pașaportul CRDS, CI românească se anulează obligatoriu — domiciliul oficial este în Germania, deci CI cu adresă din România devine invalidă. La pașaportul standard, CI rămâne valabilă.',
+  },
+  {
+    question: 'Costul și termenul diferă între CRDS și standard?',
+    answer:
+      'Nu. Taxa este 53€ și termenul este 45 zile lucrătoare la ambele tipuri, la toate cele 4 consulate.',
+  },
+  {
+    question: 'Pot trece de la standard la CRDS sau invers?',
+    answer:
+      'Da, dacă situația ta se schimbă. Dacă îți stabilești domiciliu în Germania (renunți la domiciliu din România), la următoarea reînnoire faci CRDS. Dacă îți restabilești domiciliu în România, faci pașaport standard.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Răspunzi la o singură întrebare',
+    text: 'Ai carte de identitate valabilă cu adresă din România? Da → standard. Nu → CRDS.',
+  },
+  {
+    name: 'Selectezi corect pe econsulat.ro',
+    text: 'CRDS: „Pașaport simplu electronic CRDS". Standard: „Pașaport simplu electronic" (fără CRDS).',
+  },
+  {
+    name: 'Pregătești documentele corect',
+    text: 'CRDS: Meldebescheinigung/Anmeldung + fără fotografii. Standard: CI valabilă cu adresă RO + 2 fotografii (excepție München).',
+  },
+  {
+    name: 'Te prezinți la consulat',
+    text: 'Taxa: 53€. Termen: 45 zile lucrătoare. Identic pentru ambele tipuri.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania#article',
+  headline: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi 2026',
+  description:
+    'Pagina comparativă CRDS vs pașaport standard: criteriu unic de calificare, fotografii, CI, selecție econsulat.ro, consecința erorii.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Pașaport România Germania',
+      item: 'https://actero.ro/pasaport-romania-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'CRDS vs domiciliu România',
+      item: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'criteriu-unic',
+    title: 'Criteriul unic — un singur lucru contează',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Există o singură întrebare care decide totul:
+        </p>
+
+        <div className="rounded-xl border-2 border-blue-300 bg-blue-50 p-5 text-center">
+          <p className="text-lg font-black text-blue-900 mb-3">
+            Ai carte de identitate valabilă cu adresă din România?
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 text-left">
+            <div className="rounded-lg bg-green-100 p-3">
+              <p className="font-semibold text-green-800 mb-1">✅ Da</p>
+              <p className="text-sm text-green-800">
+                → Pașaport simplu electronic <strong>(fără CRDS)</strong>
+              </p>
+              <p className="text-xs text-green-700 mt-1">
+                Nu contează de câți ani locuiești în Germania.
+              </p>
+            </div>
+            <div className="rounded-lg bg-blue-100 p-3">
+              <p className="font-semibold text-blue-800 mb-1">❌ Nu</p>
+              <p className="text-sm text-blue-800">
+                → Pașaport simplu electronic <strong>CRDS</strong>
+              </p>
+              <p className="text-xs text-blue-700 mt-1">
+                Nu ai domiciliu activ în România.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Caz ambiguu:</strong> Ai CI românească dar e expirată. Dacă domiciliul
+            din acea CI este încă activ în evidențele statului român — ești pe fluxul standard.
+            Dacă domiciliul a fost radiat sau nu mai e activ — ești pe CRDS. În caz de dubiu,
+            wizardul ActeRO clarifică în 30 de secunde.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'tabel-comparativ',
+    title: 'Diferențele practice — tabel complet',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Aspect</th>
+              <th className="text-left p-2 font-semibold text-blue-700 border border-gray-200">CRDS</th>
+              <th className="text-left p-2 font-semibold text-green-700 border border-gray-200">Standard (domiciliu RO)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                aspect: 'Criteriu de calificare',
+                crds: 'Fără domiciliu activ în România',
+                std: 'CI valabilă cu adresă din România',
+                highlight: true,
+              },
+              {
+                aspect: 'Selectezi pe econsulat.ro',
+                crds: 'Pașaport simplu electronic CRDS',
+                std: 'Pașaport simplu electronic',
+                highlight: false,
+              },
+              {
+                aspect: 'Document adresă obligatoriu',
+                crds: 'Meldebescheinigung / Anmeldung / Personalausweis german (max. 5 ani)',
+                std: '— (adresa e pe CI românească)',
+                highlight: false,
+              },
+              {
+                aspect: 'Fotografii biometrice proprii',
+                crds: '❌ Nu — biometric la ghișeu (toate consulatele)',
+                std: '✅ Da — 2 buc. 3,5×4,5 cm (excepție München)',
+                highlight: true,
+              },
+              {
+                aspect: 'CI românească la eliberare',
+                crds: 'Se anulează obligatoriu',
+                std: 'Rămâne valabilă',
+                highlight: true,
+              },
+              {
+                aspect: 'Aufenthaltstitel necesar',
+                crds: '❌ Nu',
+                std: '❌ Nu',
+                highlight: false,
+              },
+              {
+                aspect: 'Taxă',
+                crds: '53€',
+                std: '53€',
+                highlight: false,
+              },
+              {
+                aspect: 'Termen procesare',
+                crds: '45 zile lucrătoare',
+                std: '45 zile lucrătoare',
+                highlight: false,
+              },
+            ].map(({ aspect, crds, std, highlight }, i) => (
+              <tr key={aspect} className={highlight ? 'bg-yellow-50' : i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="p-2 border border-gray-200 font-medium text-gray-800 text-xs">{aspect}</td>
+                <td className="p-2 border border-gray-200 text-blue-700 text-xs">{crds}</td>
+                <td className="p-2 border border-gray-200 text-green-700 text-xs">{std}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="text-xs text-gray-400 mt-1">Rândurile galbene = diferențe practice importante.</p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'selectie-gresita',
+    title: 'Ce se întâmplă dacă selectezi greșit pe econsulat.ro',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+            <p className="font-semibold text-red-900 mb-2">
+              ❌ Selectezi CRDS când ai domiciliu în România
+            </p>
+            <ul className="space-y-1 text-sm text-red-800">
+              <li>— Cererea poate fi respinsă la validare</li>
+              <li>— La ghișeu, documentele nu corespund tipului</li>
+              <li>— CI românească va fi anulată incorect</li>
+              <li>— Trebuie să refaci cererea din zero</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+            <p className="font-semibold text-orange-900 mb-2">
+              ❌ Selectezi standard când ești CRDS
+            </p>
+            <ul className="space-y-1 text-sm text-orange-800">
+              <li>— Nu poți completa adresa din România (nu ai)</li>
+              <li>— Cererea va fi incompletă sau invalidă</li>
+              <li>— La ghișeu, lipsește documentul de domiciliu german</li>
+              <li>— Trebuie să refaci cererea cu CRDS</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-sm text-blue-800">
+            <strong>Soluție dacă ai selectat greșit:</strong> Anulezi cererea existentă din
+            contul tău pe econsulat.ro și creezi una nouă cu selecția corectă. Programarea
+            existentă, dacă o ai, va trebui refăcută.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'fotografii-detaliat',
+    title: 'Fotografiile — diferența practică cea mai frecventă',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Aceasta este diferența pe care oamenii o descoperă cel mai frecvent la ghișeu —
+          după ce au venit cu sau fără fotografii.
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <p className="font-semibold text-blue-900 mb-2">CRDS — niciodată fotografii proprii</p>
+            <p className="text-sm text-blue-800">
+              La <strong>toate cele 4 consulate</strong>, imaginea facială se preia biometric
+              la ghișeu. Nu aduci fotografii proprii indiferent de consulat.
+            </p>
+            <p className="text-xs text-blue-700 mt-2">
+              Recomandare: îmbracă-te în culori închise.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-2">Standard — fotografii la 3 din 4 consulate</p>
+            <ul className="space-y-1 text-sm text-green-800">
+              <li>Bonn: ✅ 2 fotografii 3,5×4,5 cm fond alb</li>
+              <li>München: ❌ se fac la consulat — nu aduci</li>
+              <li>Stuttgart: ✅ 2 fotografii 3,5×4,5 cm fond alb</li>
+              <li>Berlin: ✅ 2 fotografii 3,5×4,5 cm fond alb</li>
+            </ul>
+            <p className="text-xs text-green-700 mt-2">
+              Automate Rossmann/DM (selectezi „biometric") acceptate.
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ci-anulata',
+    title: 'CI românească — anulată la CRDS, păstrată la standard',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+            <p className="font-semibold text-blue-900 mb-1">CRDS — CI se anulează</p>
+            <p className="text-sm text-blue-800">
+              La eliberarea pașaportului CRDS, CI românească va fi anulată de consulat.
+              Este un pas normal și obligatoriu — domiciliul oficial este în Germania, CI
+              cu adresă din România devine invalidă.
+            </p>
+            <p className="text-xs text-blue-700 mt-2">
+              Dacă o ai (chiar expirată) — adu-o la consulat. Va fi anulată fizic.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-1">Standard — CI rămâne valabilă</p>
+            <p className="text-sm text-green-800">
+              La pașaportul standard, CI românească nu se anulează. Menții domiciliu în
+              România și CI validă. Poți deține simultan CI valabilă și pașaport valabil.
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ghiduri',
+    title: 'Ghidul specific pentru situația ta',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Sunt CRDS — pașaport expirat, deteriorat sau primul pașaport',
+            href: '/pasaport-crds-germania',
+            label: 'Ghid CRDS →',
+          },
+          {
+            text: 'Am domiciliu în România — pașaport expirat sau reînnoire',
+            href: '/pasaport-cu-domiciliu-romania-din-germania',
+            label: 'Ghid standard →',
+          },
+          {
+            text: 'Pașaportul a fost pierdut sau furat',
+            href: '/pasaport-pierdut-furat-germania',
+            label: 'Ghid pierdut/furat →',
+          },
+          {
+            text: 'Nu știu dacă sunt CRDS sau standard — vreau să verific',
+            href: '/pasaport-romania-germania',
+            label: 'Ghid hub pașaport →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function PasaportCrdsVsDomiciliuRomaniaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="pasaport-crds-vs-pasaport-cu-domiciliu-romania"
+      lpTopic="pasaport"
+      h1="Pașaport CRDS vs pașaport cu domiciliu în România — cum alegi corect"
+      intro="Pe econsulat.ro există două opțiuni de pașaport și mulți selectează greșit. Diferența nu este despre cât timp locuiești în Germania — ci despre un singur lucru: dacă ai sau nu carte de identitate valabilă cu adresă din România."
+      tldr="Criteriu unic: CI valabilă cu adresă din RO → standard (fără CRDS). Fără domiciliu activ în RO → CRDS. Fotografii: CRDS niciodată, standard la 3 din 4 consulate (excepție München). CI: se anulează la CRDS, rămâne la standard. Taxă și termen: identice — 53€, 45 zile."
+      ctaHref="/wizard?problem=pasaport"
+      ctaLabel="Confirmă în 30 de secunde dacă ești CRDS sau standard →"
+      updatedAt="aprilie 2026"
+      sourceNote="MAE, econsulat.ro, consulatele României din Germania — date verificate live"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu ești sigur ce tip de pașaport ți se aplică?"
+      finalCtaText="Wizardul ActeRO îți răspunde în 3 click-uri și îți dă lista exactă de documente pentru tipul corect."
+    />
+  )
+}

@@ -43,6 +43,10 @@ function derivePasaport(s: SituationFlags): WizardResult {
   }
 
   // Domiciliu Germania
+  if (s.isMinorPasaport) {
+    return guide('pasaport-minor-crds-de')
+  }
+
   if (!s.isPrimulPasaport) {
     if (s.pasaportStatus === 'pierdut-furat') {
       return guide('pasaport-crds-de-pierdut')

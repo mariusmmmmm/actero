@@ -61,9 +61,9 @@ const faqItems = [
       'Nu. Pașaportul sau buletinul se poate solicita doar după ce transcrierea este finalizată și copilul apare în bazele de date românești.',
   },
   {
-    question: 'Care e diferența dintre Route A și Route B?',
+    question: 'Care e diferența dintre varianta pentru pașaport și varianta pentru buletin?',
     answer:
-      'Route A înseamnă transcrierea nașterii și apoi primul pașaport. Route B înseamnă transcrierea nașterii și apoi primul buletin. Ambele pornesc obligatoriu de la transcriere.',
+      'Varianta pentru pașaport înseamnă transcrierea nașterii și apoi primul pașaport. Varianta pentru buletin înseamnă transcrierea nașterii și apoi primul buletin. Ambele pornesc obligatoriu de la transcriere.',
   },
   {
     question: 'Trebuie să aduc certificatele de naștere românești ale părinților?',
@@ -86,11 +86,11 @@ const howToSteps = [
     text: 'După acest moment copilul apare în sistemele românești și poți continua cu pașaportul sau buletinul.',
   },
   {
-    name: 'Route A — primul pașaport',
+    name: 'Varianta pașaport — primul pașaport',
     text: 'După transcriere, poți continua cu cererea de pașaport prin consulat și econsulat.ro.',
   },
   {
-    name: 'Route B — primul buletin',
+    name: 'Varianta buletin — primul buletin',
     text: 'După transcriere, poți continua în România la SPCLEP pentru primul buletin al copilului.',
   },
 ]
@@ -101,7 +101,7 @@ const articleSchema = {
   '@id': 'https://actero.ro/acte-copil-nascut-in-germania#article',
   headline: 'Acte românești copil născut în Germania — de unde începi',
   description:
-    'Hub pentru actele românești ale copilului născut în Germania: transcrierea nașterii, primul pașaport și primul buletin.',
+    'Ghidul principal pentru actele românești ale copilului născut în Germania: transcrierea nașterii, primul pașaport și primul buletin.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
@@ -162,11 +162,11 @@ const sections = [
   },
   {
     id: 'rute',
-    title: 'Route A sau Route B',
+    title: 'După transcriere: pașaport sau buletin',
     content: (
       <div className="space-y-4">
         <p className="text-sm text-gray-600">
-          Ambele rute pornesc din același punct: transcrierea nașterii. Ce diferă este documentul final pe care vrei să îl obții.
+          Ambele variante pornesc din același punct: transcrierea nașterii. Ce diferă este documentul final pe care vrei să îl obții.
         </p>
 
         <div className="flex flex-col items-center gap-2">
@@ -182,14 +182,14 @@ const sections = [
             <div className="flex w-5/12 flex-col items-center gap-1">
               <div className="h-6 w-0.5 bg-blue-300" />
               <div className="w-full rounded-xl border-2 border-green-300 bg-green-50 p-3 text-center">
-                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-green-700">Route A</p>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-green-700">Varianta pașaport</p>
                 <p className="font-bold text-green-900">Primul pașaport</p>
                 <p className="mt-1 text-xs text-green-700">Consulat · econsulat.ro</p>
                 <Link
-                  href="/wizard?problem=pasaport"
+                  href="/primul-pasaport-copil-germania"
                   className="mt-2 inline-block text-xs text-green-700 underline hover:text-green-900"
                 >
-                  Continuă spre pașaport →
+                  Ghid primul pașaport →
                 </Link>
               </div>
             </div>
@@ -197,14 +197,14 @@ const sections = [
             <div className="flex w-5/12 flex-col items-center gap-1">
               <div className="h-6 w-0.5 bg-blue-300" />
               <div className="w-full rounded-xl border-2 border-purple-300 bg-purple-50 p-3 text-center">
-                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-purple-700">Route B</p>
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-purple-700">Varianta buletin</p>
                 <p className="font-bold text-purple-900">Primul buletin</p>
                 <p className="mt-1 text-xs text-purple-700">SPCLEP România · CEI</p>
                 <Link
-                  href="/buletin-romania-germania"
+                  href="/primul-buletin-copil-nascut-in-germania"
                   className="mt-2 inline-block text-xs text-purple-700 underline hover:text-purple-900"
                 >
-                  Ghid buletin →
+                  Ghid primul buletin →
                 </Link>
               </div>
             </div>
@@ -246,7 +246,14 @@ const sections = [
 
         <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
           <p className="text-sm text-blue-800">
-            Pentru traseul exact și diferențele per consulat, pornește din wizard pe fluxul de transcriere.
+            Pentru traseul exact și diferențele per consulat, vezi mai întâi{' '}
+            <Link
+              href="/transcriere-certificat-nastere-germania"
+              className="font-medium underline hover:text-blue-900"
+            >
+              ghidul complet de transcriere
+            </Link>{' '}
+            și apoi continui spre ruta potrivită.
           </p>
         </div>
       </div>
@@ -313,10 +320,10 @@ const sections = [
               <li>depunere și așteptare termen</li>
             </ol>
             <Link
-              href="/wizard?problem=pasaport"
+              href="/primul-pasaport-copil-germania"
               className="mt-3 inline-block text-xs font-medium text-green-700 underline hover:text-green-900"
             >
-              Continuă spre pașaport →
+              Ghid primul pașaport copil →
             </Link>
           </div>
 
@@ -387,14 +394,14 @@ const sections = [
   },
   {
     id: 'wizard',
-    title: 'Când folosești wizardul ActeRO',
+    title: 'Când folosești ghidul rapid ActeRO',
     content: (
       <div className="space-y-3">
         <p className="text-gray-700">
-          Dacă nu știi ce document german să obții pentru copil, ce cerințe are consulatul tău sau dacă vrei să continui ulterior cu pașaport sau buletin, wizardul îți ordonează traseul complet.
+          Dacă nu știi ce document german să obții pentru copil, ce cerințe are consulatul tău sau dacă vrei să continui ulterior cu pașaport sau buletin, ghidul rapid îți ordonează traseul complet.
         </p>
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-2">
-          <p className="text-sm font-medium text-gray-800">Wizardul te ajută să afli:</p>
+          <p className="text-sm font-medium text-gray-800">Ghidul rapid te ajută să afli:</p>
           <ul className="space-y-1 text-sm text-gray-700">
             <li>ce document german este mai potrivit</li>
             <li>ce acte ale părinților sunt necesare</li>
@@ -415,8 +422,8 @@ export default function ActeCopilNascutInGermaniaPage() {
       h1="Copilul s-a născut în Germania și nu are acte românești — de unde începi"
       intro="Dacă cel puțin unul dintre părinți este cetățean român, copilul are dreptul la cetățenie română. Dar pentru a obține documente românești există un pas obligatoriu pe care mulți părinți îl sar: transcrierea certificatului de naștere german în evidențele române."
       tldr="Pasul 1 obligatoriu: transcrierea nașterii la consulat. După aceea poți merge fie spre primul pașaport, fie spre primul buletin. Formule A este în general varianta recomandată pentru documentul german de pornire."
-      ctaHref="/wizard?problem=transcriere-nastere"
-      ctaLabel="Găsește traseul exact pentru copilul tău →"
+      ctaHref="/transcriere-certificat-nastere-germania"
+      ctaLabel="Începe cu ghidul complet de transcriere →"
       updatedAt="aprilie 2026"
       sourceNote="MAE, consulatele României din Germania — date verificate live per consulat"
       faqItems={faqItems}
@@ -424,8 +431,8 @@ export default function ActeCopilNascutInGermaniaPage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
-      finalCtaTitle="Nu știi cu ce document german să începi?"
-      finalCtaText="Spune-i wizardul în ce land ești și dacă vrei pașaport sau buletin pentru copil. Primești ordinea exactă a pașilor și documentele necesare pentru primul pas: transcrierea."
+      finalCtaTitle="Nu știi dacă blocajul tău este transcrierea sau alegerea dintre pașaport și buletin?"
+      finalCtaText="Pornește din transcriere, apoi sari direct pe primul pașaport sau primul buletin al copilului, în funcție de ce vrei să rezolvi după aceea."
     />
   )
 }

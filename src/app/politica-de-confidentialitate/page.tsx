@@ -81,7 +81,7 @@ export default function PoliticaPage() {
 
         <Section title="3. Cum colectăm datele">
           <ul className="list-disc pl-6 space-y-2">
-            <li>direct de la tine, când completezi wizardul, formularele de contact, ajutor sau waitlist;</li>
+            <li>direct de la tine, când completezi ghidul rapid, formularele de contact, ajutor sau lista de așteptare;</li>
             <li>automat, prin cookie-uri și tehnologii similare, atunci când navighezi pe site;</li>
             <li>de la furnizori terți implicați în furnizarea serviciului, de exemplu platforma de plată sau serviciile de analytics.</li>
           </ul>

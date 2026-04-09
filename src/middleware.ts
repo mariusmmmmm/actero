@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { TEST_MODE } from '@/lib/config'
+import { ACCESS_COOKIE_NAME } from '@/lib/security'
 
 const PAID_ROUTES = ['/ghid/', '/checklist/', '/tracker/', '/parteneri']
 const ADMIN_ROUTES = ['/admin']
@@ -18,8 +19,8 @@ export function middleware(req: NextRequest) {
 
   // ── Rute paid ────────────────────────────────────────────────────────────────
   if (!TEST_MODE && PAID_ROUTES.some((r) => pathname.startsWith(r))) {
-    const sessionCookie = req.cookies.get('actero_session')
-    if (!sessionCookie?.value) {
+    const accessCookie = req.cookies.get(ACCESS_COOKIE_NAME)
+    if (!accessCookie?.value) {
       return NextResponse.redirect(new URL('/', req.url))
     }
   }

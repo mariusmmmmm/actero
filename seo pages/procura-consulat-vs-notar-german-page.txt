@@ -1,0 +1,423 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: comparație + decizie
+//   Utilizatorul știe că are nevoie de o procură și se
+//   întreabă dacă e mai simplu să meargă la un notar
+//   german din cartier decât la consulatul românesc.
+//   Vrea să știe diferența practică: apostilă, traducere,
+//   cost, valabilitate în România.
+//
+// Keyword principal: procură consulat vs notar german
+// Keyword-uri secundare:
+//   - procura consulat sau notar german
+//   - apostila procura notar german romania
+//   - procura notar german valabila romania
+//   - procura consulat roman avantaje
+//   - notar german procura apostila haga
+//   - traducere legalizata procura notar german
+//   - procura fara apostila consulat romania
+//   - cost procura notar german vs consulat
+//   - procura din germania pentru romania
+//   - cand mergi la notar german pentru procura romania
+//
+// Unghi diferențiator:
+//   Explică clar de ce consulatul românesc câștigă în
+//   aproape toate cazurile: direct recunoscută, fără
+//   apostilă, fără traducere, mai ieftină.
+//   Dar identifică și cazurile REALE când notarul
+//   german poate fi necesar sau preferabil.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Procură la consulat vs notar german — Ce alegi pentru România | ActeRO',
+  description:
+    'Consulat sau notar german pentru procura valabilă în România? Apostilă, traducere, cost, timp. De ce consulatul câștigă în aproape toate cazurile.',
+  keywords: [
+    'procura consulat vs notar german',
+    'procura consulat sau notar german',
+    'apostila procura notar german romania',
+    'procura notar german valabila romania',
+    'procura consulat roman avantaje',
+    'notar german procura apostila haga',
+    'traducere legalizata procura notar german',
+    'procura fara apostila consulat romania',
+    'cost procura notar german vs consulat',
+    'procura din germania pentru romania',
+  ],
+  openGraph: {
+    title: 'Procură la consulat vs notar german — Ce alegi pentru România',
+    description:
+      'Consulat: fără apostilă, fără traducere, aceeași zi. Notar german: apostilă + traducere legalizată + timp suplimentar. Când mergi totuși la notar german.',
+    url: 'https://actero.ro/procura-consulat-vs-notar-german',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/procura-consulat-vs-notar-german',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'O procură de la notar german este valabilă în România?',
+    answer:
+      'Da, este valabilă — dar nu direct. Necesită apostilă Haga (certificarea autenticității notarului german) și traducere autorizată în română. Fără aceste două pași suplimentari, notarul sau instituția din România nu poate accepta documentul.',
+  },
+  {
+    question: 'O procură de la consulatul românesc din Germania necesită apostilă?',
+    answer:
+      'Nu. Procura emisă de consulatul românesc este direct recunoscută în România — fără apostilă și fără traducere. Este un act autentic al statului român, emis prin reprezentanța sa consulară.',
+  },
+  {
+    question: 'De ce ar alege cineva notarul german în loc de consulat?',
+    answer:
+      'Situații posibile: urgență extremă când consulatul nu are programări disponibile, situații care implică exclusiv legislația germană (acte care nu au niciun efect în România), sau dacă notarul german are un formular specific cerut de o instituție din Germania.',
+  },
+  {
+    question: 'Cât costă în plus procura la notar german față de consulat?',
+    answer:
+      'La notar german: onorariu notar (variabil, de obicei 50-200€ în funcție de act) + apostilă Haga (~15-30€) + traducere autorizată (20-50€/pagină) + eventuale legalizări suplimentare. La consulat: taxă consulară (câțiva euro) + 3€ RNNEPR.',
+  },
+  {
+    question: 'Cât durează mai mult procura prin notar german?',
+    answer:
+      'Apostila Haga poate dura 1-2 săptămâni în funcție de landul german. Traducerea autorizată mai adaugă câteva zile. Față de consulat, unde procura se eliberează în aceeași zi.',
+  },
+  {
+    question: 'Traducerea procurii de la notar german trebuie legalizată?',
+    answer:
+      'Depinde de instituția din România care o va accepta. Unele notari sau instituții cer traducere autorizată, altele cer traducere legalizată (cu legalizare suplimentară la notar român sau consul). Verifică cu destinatarul documentului înainte.',
+  },
+  {
+    question: 'Există situații când consulatul românesc nu poate face procura?',
+    answer:
+      'Consulatul are limitări de competență — nu poate autentifica orice tip de act. Pentru acte care implică exclusiv legislația germană sau care trebuie să producă efecte juridice exclusiv în Germania, notarul german este varianta corectă.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Identifici dacă procura produce efecte în România sau în Germania',
+    text: 'Efecte în România (vânzare, moștenire, bancă, firmă în RO) → consulat. Efecte exclusiv în Germania → notar german.',
+  },
+  {
+    name: 'Dacă alegi consulatul: programare pe econsulat.ro',
+    text: 'Aceeași zi. Fără apostilă, fără traducere. Taxă 3€ RNNEPR.',
+  },
+  {
+    name: 'Dacă alegi notarul german: obții apostila Haga + traducere autorizată',
+    text: 'Apostila de la autoritatea competentă a landului (1-2 săptămâni). Traducere autorizată în română. Verifici cu destinatarul dacă trebuie și legalizare.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/procura-consulat-vs-notar-german#article',
+  headline: 'Procură la consulat vs notar german — Ce alegi pentru România 2026',
+  description:
+    'Pagina comparativă consulat vs notar german pentru procuri: apostilă, traducere, cost, timp, când notarul german e necesar.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/procura-consulat-vs-notar-german',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Procură notarială Germania',
+      item: 'https://actero.ro/procura-notariala-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Consulat vs notar german',
+      item: 'https://actero.ro/procura-consulat-vs-notar-german',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'verdictul',
+    title: 'Verdictul rapid — pentru procuri cu efecte în România',
+    content: (
+      <div className="space-y-3">
+        <div className="rounded-xl border-2 border-green-300 bg-green-50 p-4 text-center">
+          <p className="text-lg font-black text-green-900 mb-2">
+            Consulatul românesc este aproape întotdeauna mai bun
+          </p>
+          <p className="text-sm text-green-800">
+            Procura de la consulat este direct recunoscută în România — fără apostilă,
+            fără traducere, în aceeași zi. Procura de la notar german necesită pași
+            suplimentari care costă timp și bani.
+          </p>
+        </div>
+
+        <p className="text-sm text-gray-600">
+          Există situații când notarul german este necesar sau preferabil — dar sunt excepții,
+          nu regula. Le găsești detaliat mai jos.
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'tabel-comparativ',
+    title: 'Comparativ complet — consulat vs notar german',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Criteriu</th>
+              <th className="text-left p-2 font-semibold text-green-700 border border-gray-200">Consulat românesc</th>
+              <th className="text-left p-2 font-semibold text-gray-600 border border-gray-200">Notar german</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                criteriu: 'Recunoaștere în România',
+                consulat: '✅ Directă — fără pași suplimentari',
+                notar: '⚠️ Necesită apostilă + traducere autorizată',
+                highlight: true,
+              },
+              {
+                criteriu: 'Apostilă Haga necesară',
+                consulat: '❌ Nu',
+                notar: '✅ Da (1-2 săptămâni, ~15-30€)',
+                highlight: true,
+              },
+              {
+                criteriu: 'Traducere autorizată română',
+                consulat: '❌ Nu',
+                notar: '✅ Da (~20-50€/pagină)',
+                highlight: true,
+              },
+              {
+                criteriu: 'Timp până la eliberare',
+                consulat: 'Aceeași zi',
+                notar: '2-4 săptămâni (apostilă + traducere)',
+                highlight: false,
+              },
+              {
+                criteriu: 'Cost estimativ total',
+                consulat: 'Taxă consulară + 3€ RNNEPR',
+                notar: 'Onorariu notar + apostilă + traducere (100-300€+)',
+                highlight: false,
+              },
+              {
+                criteriu: 'Programare necesară',
+                consulat: '✅ econsulat.ro (obligatoriu)',
+                notar: 'La notarul german (programare sau walk-in)',
+                highlight: false,
+              },
+              {
+                criteriu: 'Redactat în română',
+                consulat: '✅ Da — funcționarul redactează în română',
+                notar: 'În germană — necesită traducere',
+                highlight: false,
+              },
+              {
+                criteriu: 'Valabil în România pentru',
+                consulat: 'Orice act cu efecte juridice în România',
+                notar: 'Orice act — după apostilă și traducere',
+                highlight: false,
+              },
+            ].map(({ criteriu, consulat, notar, highlight }, i) => (
+              <tr key={criteriu} className={highlight ? 'bg-green-50' : i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="p-2 border border-gray-200 font-medium text-gray-800 text-xs">{criteriu}</td>
+                <td className="p-2 border border-gray-200 text-green-700 text-xs">{consulat}</td>
+                <td className="p-2 border border-gray-200 text-gray-600 text-xs">{notar}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="text-xs text-gray-400 mt-1">Rândurile verzi = avantajele decisive ale consulatului.</p>
+      </div>
+    ),
+  },
+
+  {
+    id: 'fluxul-notar-german',
+    title: 'Cum arată fluxul complet prin notar german',
+    content: (
+      <div className="space-y-2">
+        <p className="text-sm text-gray-700 mb-2">
+          Dacă totuși alegi notarul german, aceștia sunt pașii obligatorii pentru ca
+          documentul să fie acceptat în România:
+        </p>
+        {[
+          {
+            pas: '1. Mergi la notar german și autentifici procura',
+            detaliu: 'Notarul autentifică semnătura ta pe document. Documentul este în germană.',
+            timp: 'O zi',
+          },
+          {
+            pas: '2. Obții apostila Haga',
+            detaliu: 'Apostila se obține de la autoritatea competentă a landului german (de obicei Regierungspräsidium sau Justizministerium). Certifică autenticitatea notarului.',
+            timp: '1-2 săptămâni',
+          },
+          {
+            pas: '3. Obții traducerea autorizată în română',
+            detaliu: 'Traducătorul autorizat de Ministerul Justiției din România traduce documentul. Unele destinatare cer și legalizare suplimentară la notar.',
+            timp: '2-5 zile',
+          },
+          {
+            pas: '4. Trimiți pachetul complet în România',
+            detaliu: 'Procura originală + apostila + traducerea. Destinatarul (notar, bancă, ONRC) le verifică pe toate trei.',
+            timp: '—',
+          },
+        ].map(({ pas, detaliu, timp }) => (
+          <div key={pas} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+            <div className="flex-shrink-0 text-xs text-gray-400 w-12 text-right pt-0.5">{timp}</div>
+            <div>
+              <p className="font-medium text-gray-800 text-sm">{pas}</p>
+              <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+            </div>
+          </div>
+        ))}
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Total estimat:</strong> 2-4 săptămâni și 100-300€+ față de aceeași zi
+            și câțiva euro la consulat.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'cand-notar-german',
+    title: 'Când are sens totuși notarul german',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Există situații reale — puține — când notarul german este varianta corectă sau
+          singura disponibilă:
+        </p>
+
+        <div className="space-y-2">
+          {[
+            {
+              situatie: 'Procura produce efecte exclusiv în Germania',
+              detaliu: 'Dacă actul împuternicirii are efecte juridice doar în Germania (ex: acte la Finanzamt, înregistrări la autorități germane), notarul german este autoritatea competentă.',
+            },
+            {
+              situatie: 'Consulatul nu are programări disponibile și ai urgență extremă',
+              detaliu: 'Dacă nu poți obține programare la consulat și ai o urgență cu termen fix, notarul german + apostilă + traducere expeditivă poate fi o alternativă. Costă mai mult și durează mai mult, dar poate fi soluția în situații excepționale.',
+            },
+            {
+              situatie: 'Instituția din România cere formular propriu specific',
+              detaliu: 'Unele instituții (bănci, ONRC) pot accepta sau chiar cere un formular de împuternicire propriu, care poate fi autentificat și la notar german cu apostilă. Verifică întotdeauna cu instituția înainte.',
+            },
+          ].map(({ situatie, detaliu }) => (
+            <div key={situatie} className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+              <p className="font-semibold text-gray-800 text-sm mb-1">📌 {situatie}</p>
+              <p className="text-xs text-gray-600">{detaliu}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-sm text-blue-800">
+            <strong>Regula practică:</strong> Dacă procura produce efecte juridice în
+            România și nu există motive speciale — mergi la consulat. Este mai simplu,
+            mai rapid și mai ieftin.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'ghiduri',
+    title: 'Ghiduri pentru tipul tău de procură',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Procură vânzare proprietate din Germania',
+            href: '/procura-vanzare-proprietate-germania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Procură moștenire / succesiune din Germania',
+            href: '/procura-mostenire-germania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Procură generală (firmă, bancă, divorț)',
+            href: '/procura-generala-germania',
+            label: 'Ghid →',
+          },
+          {
+            text: 'Toate tipurile de procuri la consulat',
+            href: '/procura-notariala-germania',
+            label: 'Ghid hub →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function ProcuraConsulatVsNotarGermanPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="procura-consulat-vs-notar-german"
+      lpTopic="procura"
+      h1="Procură la consulat vs notar german — ce alegi pentru acte în România"
+      intro="Ai nevoie de o procură și te gândești dacă e mai simplu la notarul german din cartier. Răspunsul scurt: pentru acte cu efecte în România, consulatul românesc este aproape întotdeauna mai bun — fără apostilă, fără traducere, aceeași zi. Notarul german adaugă 2-4 săptămâni și 100-300€ în plus."
+      tldr="Consulat: direct recunoscut în România, fără apostilă, fără traducere, aceeași zi, câțiva euro. Notar german: necesită apostilă Haga + traducere autorizată, 2-4 săptămâni, 100-300€+. Notarul german are sens doar dacă procura produce efecte exclusiv în Germania sau în situații excepționale."
+      ctaHref="/wizard?problem=procura"
+      ctaLabel="Găsește ghidul pentru tipul tău de procură →"
+      updatedAt="aprilie 2026"
+      sourceNote="Consulatele României din Germania — date verificate live"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu știi ce tip de procură ai nevoie sau la ce consulat?"
+      finalCtaText="Wizardul ActeRO îți identifică tipul corect de procură și instrucțiunile exacte pentru consulatul tău."
+    />
+  )
+}

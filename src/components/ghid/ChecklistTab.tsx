@@ -39,7 +39,7 @@ export default function ChecklistTab({
     setDownloadLoading(true)
 
     const lines: string[] = []
-    lines.push('CHECKLIST DOCUMENTE - ActeRO')
+    lines.push('LISTA DE ACTE - ActeRO')
     lines.push(`Ghid: ${guideId ?? ''} · Consulat: ${consulate?.toUpperCase() ?? ''}`)
     lines.push(`Generat: ${new Date().toLocaleDateString('ro-RO')}`)
     lines.push('')
@@ -62,7 +62,7 @@ export default function ChecklistTab({
     const url = URL.createObjectURL(blob)
     const anchor = document.createElement('a')
     anchor.href = url
-    anchor.download = `actero-checklist-${guideId ?? 'ghid'}.txt`
+    anchor.download = `actero-lista-acte-${guideId ?? 'ghid'}.txt`
     anchor.click()
     URL.revokeObjectURL(url)
     setDownloadLoading(false)
@@ -71,7 +71,7 @@ export default function ChecklistTab({
   if (!sections.length) {
     return (
       <div className="px-5 py-8 text-center text-sm text-gray-400">
-        Checklist indisponibil pentru ghidul selectat.
+        Lista de acte nu este disponibilă pentru ghidul selectat.
       </div>
     )
   }
@@ -80,7 +80,7 @@ export default function ChecklistTab({
     <div className="pb-6">
       <div className="border-b border-gray-100 px-5 pb-4 pt-5">
         <h2 className="mb-2 text-base font-bold text-gray-900">
-          Checklist documente
+          Lista de acte
         </h2>
         <div className="mb-1 flex items-center gap-3">
           <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100">
@@ -167,10 +167,10 @@ export default function ChecklistTab({
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-gray-100 py-3 text-sm font-medium text-gray-700 transition-colors active:bg-gray-200 disabled:opacity-50"
         >
           <span>⬇</span>
-          {downloadLoading ? 'Se descarca...' : 'Descarca lista pentru ghiseu'}
+          {downloadLoading ? 'Se descarca...' : 'Descarca lista de acte'}
         </button>
         <p className="mt-2 text-center text-[11px] text-gray-400">
-          Format text · poti printa sau trimite pe telefon
+          Format text · o poți printa sau trimite pe telefon
         </p>
       </div>
     </div>

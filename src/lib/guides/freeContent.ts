@@ -58,7 +58,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum obții programarea — inclusiv trucuri reale din comunitate',
       'Card consulat complet: adresă, telefon, Maps, Waze, program',
       'Ce se întâmplă exact la ghișeu și cum reacționezi dacă ți se cere ceva neașteptat',
-      'Checklist downloadabil pentru ghișeu + Tracker dosar',
+      'Listă de acte pentru ghișeu + stadiul dosarului',
     ],
   },
   'pasaport-crds-de-pierdut': {
@@ -100,7 +100,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum completezi corect cererea CRDS când pașaportul este pierdut sau furat',
       'Ce se întâmplă la ghișeu cu declarația de pierdere sau adeverința de furt',
       'Card consulat complet: adresă, telefon, Maps, Waze, program',
-      'Checklist downloadabil pentru ghișeu + Tracker dosar',
+      'Listă de acte pentru ghișeu + stadiul dosarului',
     ],
   },
   'pasaport-crds-nou-de': {
@@ -141,7 +141,55 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum creezi cererea corect pe econsulat.ro',
       'Cum obții programarea rapid',
       'Card consulat complet cu adresă, telefon, Maps, Waze',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
+    ],
+  },
+  'pasaport-minor-crds-de': {
+    title: 'Pașaport copil CRDS — Germania',
+    meta: { free: '2 pași gratuiți', total: '7 pași total' },
+    totalSteps: 7,
+    steps: [
+      {
+        id: 1,
+        title: 'Documentele necesare',
+        blocks: [
+          { text: 'Minorul poate obține pașaport CRDS numai dacă cel puțin un părinte are deja pașaport CRDS sau depune cerere CRDS simultan cu minorul. Dacă ambii părinți au domiciliu în România, copilul nu poate obține pașaport CRDS.', type: 'warning' },
+          { text: 'Certificat de naștere românesc al minorului — original, cu CNP. Certificatele plastifiate, rupte sau corectate sunt nule de drept.', type: 'info' },
+          { text: 'Dacă minorul s-a născut în Germania și nu are certificat de naștere românesc, transcrierea trebuie finalizată mai întâi.', type: 'warning' },
+          { text: 'Pașaportul anterior al minorului, dacă există, chiar expirat — original. Dacă a fost pierdut sau furat, se aplică regulile pentru adeverință de poliție și traducere.', type: 'info' },
+          { text: 'Document de domiciliu în Germania — Meldebescheinigung, Anmeldung sau Personalausweis german, original, emis în ultimii 5 ani. Se acceptă pe numele minorului sau al părinților.', type: 'info' },
+          { text: 'Actele de identitate valabile ale ambilor părinți — pașaport CRDS sau carte de identitate românească, în original.', type: 'info' },
+          { text: 'Certificat de căsătorie românesc al părinților — original, dacă sunt căsătoriți sau există diferențe de nume.', type: 'info' },
+          { text: 'Dacă vine un singur părinte: procură specială sau acord scris autentificat, în original.', type: 'tip' },
+          { text: 'Pentru minorii de 14–17 ani: cartea de identitate a minorului, dacă există, și declarația de acord a părinților, completată la ghișeu.', type: 'info' },
+          { text: 'Fotografii: nu sunt necesare la niciun consulat pentru pașaport CRDS de minor — imaginea facială se preia biometric la ghișeu. Taxa: 53€.', type: 'info' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Pregătește documentele',
+        blocks: [
+          { text: 'Scanează toate documentele din lista de la Pasul 1 înainte să creezi cererea pe econsulat.ro. Format JPG sau PDF, sub 2 MB per fișier.', type: 'action' },
+          { text: 'Dacă vine un singur părinte, procura specială sau acordul scris trebuie autentificate înainte de ziua programării. Nu se fac pe loc în ziua cererii de pașaport.', type: 'warning' },
+          { text: 'Dacă ambii părinți au nevoie și ei de pașaport CRDS, pot depune cererile împreună cu cea a minorului în aceeași zi.', type: 'tip' },
+          { text: 'Declarația de acord pentru minorii de 14–17 ani nu se pregătește în avans — se completează direct la ghișeu.', type: 'info' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Cerere pe econsulat.ro' },
+      { id: 4, title: 'Obține programarea' },
+      { id: 5, title: 'Pregătire pentru ziua programării' },
+      { id: 6, title: 'Ziua consulatului' },
+      { id: 7, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum completezi corect cererea pe econsulat.ro pentru un minor',
+      'Ce faci dacă un singur părinte poate veni — pașii exacți pentru procura specială',
+      'Cum gestionezi hotărârea judecătorească germană de custodie, dacă există',
+      'Ziua consulatului cu copilul: ce se semnează, cât durează și cum plătești',
+      'Cine poate ridica pașaportul minorului și în ce condiții',
+      'Card consulat complet cu adresă, program și metodă de plată pentru consulatul tău',
     ],
   },
   'pasaport-de-cu-domiciliu': {
@@ -181,7 +229,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum selectezi corect serviciul pe econsulat.ro (nu CRDS)',
       'Cum obții programarea și cât durează',
       'Card consulat complet cu adresă, Maps, Waze, program',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'pasaport-de-cu-domiciliu-pierdut': {
@@ -222,7 +270,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum completezi cererea pe econsulat.ro pentru document lipsă',
       'Ce se întâmplă la ghișeu când declari pierderea',
       'Card consulat complet + program ridicare',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'buletin-de-fara-domiciliu': {
@@ -264,7 +312,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum găsești și contactezi SPCLEP-ul competent',
       'Cum faci programare online (acolo unde există)',
       'Ce se întâmplă la ghișeul SPCLEP — pas cu pas',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'buletin-de-cu-domiciliu': {
@@ -305,7 +353,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
     paywallTeaser: [
       'Cum găsești SPCLEP-ul tău și programarea online',
       'Ce se întâmplă la ghișeu — pas cu pas',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'buletin-de-fara-domiciliu-pierdut': {
@@ -345,7 +393,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
     paywallTeaser: [
       'Cum găsești SPCLEP-ul competent',
       'Procedura exactă pentru buletin pierdut/furat la SPCLEP',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'buletin-de-cu-domiciliu-pierdut': {
@@ -388,7 +436,7 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Cum găsești SPCLEP-ul exact de care aparții',
       'Ce declari la ghișeu dacă buletinul e pierdut sau furat',
       'Ce se întâmplă la depunere și la ridicare',
-      'Checklist downloadabil + Tracker dosar',
+      'Listă de acte + stadiul dosarului',
     ],
   },
   'titlu-calatorie-urgenta-de': {

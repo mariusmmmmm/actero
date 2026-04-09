@@ -189,6 +189,79 @@ const pasaportCrdsPierdutSteps: PaidStep[] = [
   pasaportCrdsSteps[4],
 ]
 
+const pasaportMinorCrdsSteps: PaidStep[] = [
+  {
+    id: 3,
+    title: 'Creează cererea pe econsulat.ro',
+    shortLabel: 'Cerere',
+    blocks: [
+      { text: 'Mergi pe econsulat.ro și intră în contul tău sau creează unul nou. Cererea pentru minor se face din contul părintelui.', type: 'action' },
+      { text: 'Selectează: Pașapoarte → Pașaport simplu electronic CRDS. Chiar dacă cererea este pentru copil, părintele este cel care o creează și o depune.', type: 'action' },
+      { text: 'Completezi datele minorului, nu datele tale. Adresa de domiciliu: Germania. Consulatul: cel arondat landului vostru.', type: 'warning' },
+      { text: 'Încarci documentele scanate: certificat de naștere al minorului, pașaport anterior dacă există, document de domiciliu în Germania, actele părinților și, dacă e cazul, procura specială sau acordul scris.', type: 'info' },
+      { text: 'Trimiți cererea. Starea inițială este „În așteptare”. Vei primi email de confirmare.', type: 'info' },
+    ],
+    actionItem: {
+      label: 'Creează cererea pe econsulat.ro',
+      href: 'https://www.econsulat.ro',
+    },
+  },
+  {
+    id: 4,
+    title: 'Obține programarea',
+    shortLabel: 'Programare',
+    blocks: [
+      { text: 'Programarea devine disponibilă după ce cererea trece în starea „Validată”. Intră pe econsulat.ro → „Programările mele” → „Programare nouă”.', type: 'info' },
+      { text: 'Alege consulatul și prima dată disponibilă la care pot veni copilul și părinții sau reprezentantul legal necesar.', type: 'action' },
+      { text: 'Din experiența comunității, sloturile noi apar pe măsură ce cererile sunt validate sau anulate. Verifică periodic, mai ales luni dimineața.', type: 'tip' },
+      { text: 'Programările sunt gratuite. Nu apela la intermediari.', type: 'warning' },
+    ],
+    actionItem: {
+      label: 'Programează-te pe econsulat.ro',
+      href: 'https://www.econsulat.ro',
+    },
+  },
+  {
+    id: 5,
+    title: 'Pregătire pentru ziua programării',
+    shortLabel: 'Pregătire',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Verifică înainte de plecare: toate documentele originale în geantă, inclusiv actele de identitate ale ambilor părinți, copii simple și programarea activă în cont.', type: 'action' },
+      { text: 'Dacă vine un singur părinte, procura specială sau acordul scris trebuie să fie în original. O poză sau o copie nu sunt suficiente.', type: 'warning' },
+      { text: 'Dacă există hotărâre judecătorească germană de custodie, verifică din timp procedura de recunoaștere și documentele suplimentare cerute.', type: 'warning' },
+      { text: 'Plata taxei de 53€ se face după regula consulatului tău — vezi cardul de mai jos.', type: 'info' },
+      { text: 'Pentru pașaportul CRDS de minor nu ai nevoie de fotografii proprii — imaginea facială se preia biometric la ghișeu.', type: 'tip' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ziua consulatului',
+    shortLabel: 'Consulat',
+    blocks: [
+      { text: 'Ajungeți cu 10 minute înainte de programare: tu, copilul și celălalt părinte sau înlocuitorul legal al acestuia.', type: 'action' },
+      { text: 'Funcționarul verifică documentele. Se preia imaginea facială a minorului biometric la ghișeu. Minorii de 12+ ani dau și amprente; cei sub 12 ani nu.', type: 'info' },
+      { text: 'Pentru minorii de 14–17 ani, declarația de acord a părinților se completează și se semnează direct la ghișeu.', type: 'info' },
+      { text: 'Plătești taxa de 53€ conform metodei consulatului tău și primești chitanța de depunere. Fă-i imediat o poză.', type: 'action' },
+      { text: 'Pașaportul se produce la București și se trimite la consulat. Termenul orientativ este de 45 de zile lucrătoare.', type: 'info' },
+      { text: 'Dacă ți se cere ceva neașteptat, notează calm ce ți s-a cerut și întreabă diplomatic de ce sau când s-a modificat procedura.', type: 'note' },
+    ],
+  },
+  {
+    id: 7,
+    title: 'Ridică pașaportul',
+    shortLabel: 'Ridicare',
+    hasConsulateCard: true,
+    blocks: [
+      { text: 'Verifică statusul pe site-ul consulatului tău înainte de a pleca și prezintă-te în programul de ridicare, fără programare.', type: 'action' },
+      { text: 'Minorii sub 14 ani: pașaportul poate fi ridicat de unul dintre părinții care au semnat cererea. Minorul nu trebuie să fie prezent la ridicare.', type: 'info' },
+      { text: 'Minorii de 14–17 ani: pașaportul se ridică personal de titular.', type: 'warning' },
+      { text: 'Stuttgart: la ridicare poate fi cerut și certificatul de naștere al minorului sub 14 ani, în original sau copie.', type: 'tip' },
+      { text: 'Ridicare prin poștă: disponibilă la München și Stuttgart — vezi detaliile din cardul consulatului.', type: 'info' },
+    ],
+  },
+]
+
 // Pași paid pentru pașaport cu domiciliu România (#3 și #4)
 const pasaportDomRoSteps: PaidStep[] = [
   {
@@ -808,6 +881,10 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
     title: 'Primul pașaport CRDS · Germania',
     steps: pasaportCrdsSteps,
   },
+  'pasaport-minor-crds-de': {
+    title: 'Pașaport copil CRDS · Germania',
+    steps: pasaportMinorCrdsSteps,
+  },
   'pasaport-de-cu-domiciliu': {
     title: 'Pașaport expirat · Domiciliu România',
     steps: pasaportDomRoSteps,
@@ -1368,6 +1445,10 @@ function GhidPaidPageContent() {
         })
 
         if (!res.ok) {
+          if (res.status === 401 || res.status === 403) {
+            router.replace('/token-expirat')
+            return
+          }
           if (!cancelled) setIsBootstrapping(false)
           return
         }
@@ -1521,8 +1602,8 @@ function GhidPaidPageContent() {
 
   const tabs: Array<{ id: GhidTab; label: string; icon: string }> = [
     { id: 'ghid', label: 'Ghid', icon: '📄' },
-    { id: 'checklist', label: 'Checklist', icon: '✓' },
-    { id: 'tracker', label: 'Tracker', icon: '📍' },
+    { id: 'checklist', label: 'Acte', icon: '✓' },
+    { id: 'tracker', label: 'Progres', icon: '📍' },
     { id: 'parteneri', label: 'Parteneri', icon: '🤝' },
   ]
 
@@ -1667,7 +1748,7 @@ function GhidPaidPageContent() {
                     </button>
                   </div>
                   <p className="mt-2 text-xs text-gray-500">
-                    Alegerea asta personalizează checklistul și explicațiile de ridicare.
+                    Alegerea asta personalizează lista de acte și explicațiile de ridicare.
                   </p>
                 </div>
               )}
@@ -1694,7 +1775,7 @@ function GhidPaidPageContent() {
                     ))}
                   </div>
                   <p className="mt-2 text-xs text-gray-500">
-                    Asta personalizează documentele utile din checklist și explicațiile pentru ghișeu.
+                    Asta personalizează actele utile din listă și explicațiile pentru ghișeu.
                   </p>
                 </div>
               )}

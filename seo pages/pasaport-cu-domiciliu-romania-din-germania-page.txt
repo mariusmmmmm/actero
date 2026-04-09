@@ -1,0 +1,571 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+// ─────────────────────────────────────────────
+// PRE-FINAL ANALYSIS
+// ─────────────────────────────────────────────
+// Search intent: informare specifică
+//   Utilizatorul locuiește în Germania dar mai are domiciliu
+//   activ în România. Vrea să știe exact cum diferă procedura
+//   față de CRDS și ce selectează pe econsulat.ro.
+//   Confuzia principală: „Locuiesc în Germania — trebuie CRDS?"
+//
+// Keyword principal: pașaport cu domiciliu românia din germania
+// Keyword-uri secundare:
+//   - pasaport domiciliu romania germania
+//   - pasaport simplu electronic germania domiciliu romania
+//   - pasaport fara crds germania
+//   - am domiciliu in romania dar locuiesc in germania pasaport
+//   - documente pasaport domiciliu romania consulat germania
+//   - fotografii pasaport domiciliu romania consulat
+//   - pasaport cu ci romania din germania
+//   - econsulat pasaport domiciliu romania
+//   - diferenta crds pasaport domiciliu romania
+//   - pasaport din germania fara sa schimb domiciliul
+//
+// Unghi diferențiator:
+//   Separă clar de CRDS — cine se califică, ce selectează diferit
+//   pe econsulat.ro, și în special diferența fotografiilor:
+//   München face fotografii la consulat (excepție față de alte consulate).
+//   Pagina nu duplică /pasaport-expirat-germania ci merge mai adânc
+//   pe specificul fluxului cu domiciliu în România.
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Pașaport cu domiciliu în România, depus din Germania — Ghid 2026 | ActeRO',
+  description:
+    'Locuiești în Germania dar domiciliul e în România? Pașaport simplu electronic (fără CRDS). Fotografii, documente, selecție econsulat.ro — diferențe față de CRDS.',
+  keywords: [
+    'pasaport cu domiciliu romania din germania',
+    'pasaport domiciliu romania germania',
+    'pasaport simplu electronic germania domiciliu romania',
+    'pasaport fara crds germania',
+    'am domiciliu in romania dar locuiesc in germania pasaport',
+    'documente pasaport domiciliu romania consulat germania',
+    'fotografii pasaport domiciliu romania consulat',
+    'pasaport cu ci romania din germania',
+    'diferenta crds pasaport domiciliu romania',
+    'pasaport din germania fara sa schimb domiciliul',
+  ],
+  openGraph: {
+    title: 'Pașaport cu domiciliu în România, depus din Germania',
+    description:
+      'Nu selectezi CRDS. Fotografii diferite per consulat. CI valabilă obligatorie. Diferențele complete față de pașaportul CRDS.',
+    url: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+    type: 'article',
+  },
+  alternates: {
+    canonical: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+  },
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqItems = [
+  {
+    question: 'Locuiesc în Germania de ani de zile dar am domiciliu activ în România. Ce pașaport fac?',
+    answer:
+      'Pașaport simplu electronic — fără CRDS. Atât timp cât ai carte de identitate valabilă cu adresă din România, ești pe fluxul standard, indiferent de câți ani locuiești în Germania.',
+  },
+  {
+    question: 'Ce selectez pe econsulat.ro dacă am domiciliu în România?',
+    answer:
+      'Selectezi „Pașapoarte → Pașaport simplu electronic" — fără mențiunea CRDS. Dacă selectezi CRDS din greșeală, cererea va fi procesată greșit și vei avea probleme la ghișeu.',
+  },
+  {
+    question: 'Trebuie să aduc fotografii pentru pașaportul cu domiciliu în România?',
+    answer:
+      'Depinde de consulat. München: fotografiile se fac la consulat — nu aduci proprii. Bonn, Stuttgart, Berlin: 2 fotografii color, 3,5×4,5 cm, fond alb. Automate Rossmann sau DM (selectezi „biometric") sunt acceptate.',
+  },
+  {
+    question: 'CI românească este obligatorie pentru pașaportul cu domiciliu în România?',
+    answer:
+      'Da. Cartea de identitate valabilă cu adresă din România este documentul principal de identificare pentru acest flux. Fără ea nu poți dovedi că domiciliul tău este în România.',
+  },
+  {
+    question: 'CI-ul meu românesc a expirat. Pot face totuși pașaportul din Germania?',
+    answer:
+      'Nu în mod direct. Dacă CI a expirat și nu mai menții domiciliu activ în România, ești de fapt pe fluxul CRDS. Dacă domiciliul în România este activ dar CI a expirat, ar trebui să reînnoiești CI-ul mai întâi sau să discuți cu consulatul situația specifică.',
+  },
+  {
+    question: 'Cât costă și cât durează?',
+    answer:
+      'Taxa este 53€ la toate consulatele. Termenul de procesare este 45 de zile lucrătoare de la depunere.',
+  },
+  {
+    question: 'Pot ridica pașaportul prin poștă?',
+    answer:
+      'La München și Stuttgart există opțiunea de ridicare prin poștă. La Bonn și Berlin ridicarea se face obligatoriu la ghișeu în programul de ridicare.',
+  },
+  {
+    question: 'Dacă fac pașaportul din Germania cu domiciliu în România, CI românească se anulează?',
+    answer:
+      'Nu. CI românească nu se anulează pentru pașaportul cu domiciliu în România — spre deosebire de pașaportul CRDS unde CI se anulează obligatoriu. Menții domiciliul și CI valabilă.',
+  },
+]
+
+// ─── HOW TO STEPS ────────────────────────────────────────────────────────────
+
+const howToSteps = [
+  {
+    name: 'Verifici că ai CI valabilă cu adresă din România',
+    text: 'CI valabilă = ești pe fluxul standard. CI expirată sau fără domiciliu activ = probabil ești pe fluxul CRDS.',
+  },
+  {
+    name: 'Pregătești fotografiile dacă consulatul tău le cere',
+    text: 'München: fără fotografii proprii — se fac la consulat. Bonn, Stuttgart, Berlin: 2 fotografii color 3,5×4,5 cm fond alb.',
+  },
+  {
+    name: 'Scanezi documentele și creezi cererea pe econsulat.ro',
+    text: 'Selectezi „Pașaport simplu electronic" — FĂRĂ CRDS. Completezi adresa din România.',
+  },
+  {
+    name: 'Obții programarea și te prezinți cu originalele',
+    text: 'Plătești 53€ conform metodei consulatului. CI rămâne valabilă — nu se anulează.',
+  },
+  {
+    name: 'Ridici pașaportul după 45 zile lucrătoare',
+    text: 'La ghișeu în programul de ridicare (fără programare) sau prin poștă la München și Stuttgart.',
+  },
+]
+
+// ─── SCHEMA ──────────────────────────────────────────────────────────────────
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania#article',
+  headline: 'Pașaport cu domiciliu în România, depus din Germania — Ghid 2026',
+  description:
+    'Ghid leaf pentru pașaportul cu domiciliu în România depus din Germania: selecție econsulat, fotografii per consulat, diferențe față de CRDS.',
+  datePublished: '2026-04-01',
+  dateModified: '2026-04-01',
+  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
+  mainEntityOfPage: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+  inLanguage: 'ro',
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Pașaport România Germania',
+      item: 'https://actero.ro/pasaport-romania-germania',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Pașaport domiciliu România din Germania',
+      item: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+    },
+  ],
+}
+
+// ─── SECTIONS ────────────────────────────────────────────────────────────────
+
+const sections = [
+  {
+    id: 'calificare',
+    title: 'Ești pe acest flux dacă...',
+    content: (
+      <div className="space-y-3">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+            <p className="font-semibold text-green-900 mb-2">
+              ✅ Ești pe fluxul cu domiciliu România dacă:
+            </p>
+            <ul className="space-y-1 text-sm text-green-800">
+              <li>Ai carte de identitate valabilă cu adresă din România</li>
+              <li>Domiciliul oficial este încă înregistrat în România</li>
+              <li>Locuiești în Germania dar nu ai renunțat la domiciliul din RO</li>
+            </ul>
+            <div className="mt-3 rounded-lg bg-green-100 p-2">
+              <p className="text-xs text-green-800 font-medium">Pe econsulat.ro selectezi:</p>
+              <p className="text-xs text-green-700">Pașapoarte → <strong>Pașaport simplu electronic</strong></p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+            <p className="font-semibold text-blue-900 mb-2">
+              🔵 Ești pe fluxul CRDS dacă:
+            </p>
+            <ul className="space-y-1 text-sm text-blue-800">
+              <li>Nu mai ai domiciliu activ în România</li>
+              <li>Nu ai CI valabilă cu adresă din RO</li>
+              <li>Ai deja un pașaport cu mențiunea CRDS</li>
+            </ul>
+            <div className="mt-3 rounded-lg bg-blue-100 p-2">
+              <p className="text-xs text-blue-800 font-medium">Pe econsulat.ro selectezi:</p>
+              <p className="text-xs text-blue-700">Pașapoarte → <strong>Pașaport simplu electronic CRDS</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
+          <p className="text-sm text-amber-800">
+            <strong>Nu ești sigur?</strong> Dacă ultimul tău pașaport nu conținea mențiunea
+            CRDS și ai CI valabilă cu adresă din RO — ești pe fluxul standard. Dacă ai dubii,
+            verifică pe{' '}
+            <Link href="/pasaport-crds-germania" className="underline font-medium">
+              pagina CRDS
+            </Link>
+            .
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'diferente-crds',
+    title: 'Diferențele față de pașaportul CRDS — ce se schimbă practic',
+    content: (
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="text-left p-2 font-semibold text-gray-700 border border-gray-200">Aspect</th>
+              <th className="text-left p-2 font-semibold text-green-700 border border-gray-200">
+                Domiciliu România
+              </th>
+              <th className="text-left p-2 font-semibold text-blue-700 border border-gray-200">
+                CRDS (domiciliu Germania)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                aspect: 'Selectezi pe econsulat.ro',
+                ro: 'Pașaport simplu electronic',
+                crds: 'Pașaport simplu electronic CRDS',
+              },
+              {
+                aspect: 'Document principal',
+                ro: 'CI valabilă cu adresă din RO — obligatorie',
+                crds: 'Meldebescheinigung / Anmeldung / Personalausweis german',
+              },
+              {
+                aspect: 'Fotografii biometrice',
+                ro: '2 buc. 3,5×4,5 cm (excepție München)',
+                crds: '❌ Nu — biometric la ghișeu',
+              },
+              {
+                aspect: 'CI românească după eliberare',
+                ro: 'Rămâne valabilă — nu se anulează',
+                crds: 'Se anulează obligatoriu la eliberare',
+              },
+              {
+                aspect: 'Document adresă german necesar',
+                ro: '❌ Nu — adresa e pe CI românească',
+                crds: 'Obligatoriu (max. 5 ani)',
+              },
+              {
+                aspect: 'Taxă',
+                ro: '53€',
+                crds: '53€',
+              },
+              {
+                aspect: 'Termen procesare',
+                ro: '45 zile lucrătoare',
+                crds: '45 zile lucrătoare',
+              },
+            ].map(({ aspect, ro, crds }, i) => (
+              <tr key={aspect} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="p-2 border border-gray-200 font-medium text-gray-800 text-xs">
+                  {aspect}
+                </td>
+                <td className="p-2 border border-gray-200 text-green-700 text-xs">{ro}</td>
+                <td className="p-2 border border-gray-200 text-blue-700 text-xs">{crds}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ),
+  },
+
+  {
+    id: 'fotografii',
+    title: 'Fotografiile — diferit față de CRDS și diferit per consulat',
+    content: (
+      <div className="space-y-3">
+        <p className="text-gray-700">
+          Aceasta este diferența practică cea mai importantă față de fluxul CRDS:{' '}
+          <strong>pentru pașaportul cu domiciliu în România trebuie fotografii proprii</strong>{' '}
+          — cu o excepție importantă.
+        </p>
+
+        <div className="grid gap-2 sm:grid-cols-2">
+          {[
+            {
+              oras: 'Bonn',
+              foto: '✅ 2 fotografii color, 3,5×4,5 cm, fond alb',
+              sursa: 'Automate Rossmann sau DM (selectezi „biometric")',
+              alert: null,
+            },
+            {
+              oras: 'München',
+              foto: '❌ Nu aduci fotografii proprii',
+              sursa: 'Fotografiile se fac electronic la consulat',
+              alert: '⚠️ Dacă aduci fotografii, nu sunt folosite',
+            },
+            {
+              oras: 'Stuttgart',
+              foto: '✅ 2 fotografii color, 3,5×4,5 cm, fond alb',
+              sursa: 'Automate Rossmann sau DM acceptate',
+              alert: null,
+            },
+            {
+              oras: 'Berlin',
+              foto: '✅ 2 fotografii color, 3,5×4,5 cm, fond alb',
+              sursa: 'Automate Rossmann sau DM acceptate',
+              alert: null,
+            },
+          ].map(({ oras, foto, sursa, alert }) => (
+            <div
+              key={oras}
+              className={`rounded-lg border p-3 ${alert ? 'border-amber-200 bg-amber-50' : 'border-gray-200 bg-white'}`}
+            >
+              <p className="font-semibold text-gray-900 mb-1">{oras}</p>
+              <p className="text-xs text-gray-800 mb-1">📷 {foto}</p>
+              <p className="text-xs text-gray-500">{sursa}</p>
+              {alert && (
+                <p className="text-xs text-amber-700 font-medium mt-1">{alert}</p>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-xs text-blue-800">
+            <strong>Comparativ cu CRDS:</strong> La pașaportul CRDS fotografiile proprii nu sunt
+            niciodată necesare — imaginea se preia biometric la ghișeu la toate cele 4 consulate.
+            Acesta este unul din motivele pentru care oamenii confundă cele două fluxuri.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'documente',
+    title: 'Lista completă de documente',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              req: true,
+              doc: 'Carte de identitate valabilă cu domiciliu în România',
+              detaliu: 'Original. Document principal — fără ea nu poți dovedi că ești pe fluxul standard și nu CRDS.',
+            },
+            {
+              req: true,
+              doc: 'Certificat de naștere românesc',
+              detaliu: 'Original. ⚠️ Plastifiat, rupt sau corectat cu scotch → nul de drept. Solicită duplicat înainte de programare.',
+            },
+            {
+              req: true,
+              doc: '2 fotografii color, 3,5×4,5 cm, fond alb',
+              detaliu: '⚠️ München: fotografiile se fac la consulat — NU aduci proprii. Bonn, Stuttgart, Berlin: automate Rossmann/DM acceptate.',
+            },
+            {
+              req: false,
+              label: 'dacă îl ai',
+              doc: 'Pașaportul anterior expirat',
+              detaliu: 'Original — ajută la identificare și se aduce și la ridicare pentru anulare.',
+            },
+            {
+              req: false,
+              label: 'condiționat',
+              doc: 'Certificat de căsătorie românesc',
+              detaliu: 'Doar dacă ești căsătorit/ă ȘI ți-ai schimbat numele prin căsătorie.',
+            },
+          ].map(({ req, doc, detaliu, label }) => (
+            <div key={doc} className="flex gap-3 rounded-lg border border-gray-200 bg-white p-3">
+              <span className="text-base flex-shrink-0">{req ? '✅' : '⚪'}</span>
+              <div>
+                <p className="font-medium text-gray-800 text-sm">
+                  {doc}
+                  {label && (
+                    <span className="ml-2 text-xs text-gray-500 font-normal">— {label}</span>
+                  )}
+                </p>
+                <p className="text-xs text-gray-600 mt-0.5">{detaliu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="rounded-lg border border-blue-100 bg-blue-50 p-3">
+          <p className="text-xs text-blue-800">
+            <strong>Nu ai nevoie de:</strong> Meldebescheinigung, Anmeldung, Aufenthaltstitel,
+            apostilă, traduceri pentru documente germane.
+          </p>
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'plata-ridicare',
+    title: 'Plata și ridicarea — per consulat',
+    content: (
+      <div className="space-y-3">
+        <div className="space-y-2">
+          {[
+            {
+              oras: 'Bonn',
+              plata: 'Exclusiv EC-Karte',
+              ridicare: 'Luni–Joi 14:00–15:00',
+              posta: '❌ Nu',
+            },
+            {
+              oras: 'München',
+              plata: 'Exclusiv numerar (cash)',
+              ridicare: 'Luni–Joi 14:00–16:00',
+              posta: '✅ Da',
+            },
+            {
+              oras: 'Stuttgart',
+              plata: 'POS sau virament IBAN: DE04 1007 0000 0976 1909 01',
+              ridicare: 'Luni–Vineri 10:00–14:00',
+              posta: '✅ Da',
+            },
+            {
+              oras: 'Berlin',
+              plata: 'POS (card debit) sau virament IBAN: DE83 1007 0000 0435 4429 00',
+              ridicare: 'Luni–Vineri 13:00–14:00',
+              posta: '❌ Nu',
+            },
+          ].map(({ oras, plata, ridicare, posta }) => (
+            <div key={oras} className="rounded-lg border border-gray-200 bg-white p-3">
+              <p className="font-semibold text-gray-900 mb-1">{oras}</p>
+              <div className="grid gap-1 sm:grid-cols-3 text-xs">
+                <div>
+                  <p className="text-gray-500 mb-0.5">💳 Plată 53€</p>
+                  <p className="text-gray-800">{plata}</p>
+                </div>
+                <div>
+                  <p className="text-gray-500 mb-0.5">🕐 Ridicare</p>
+                  <p className="text-gray-800">{ridicare}</p>
+                </div>
+                <div>
+                  <p className="text-gray-500 mb-0.5">✉️ Poștă</p>
+                  <p className="text-gray-800">{posta}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
+  },
+
+  {
+    id: 'greseli',
+    title: 'Greșeli frecvente pe acest flux',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            gresit: 'Selectez CRDS pe econsulat.ro pentru că locuiesc în Germania',
+            corect: 'CRDS se selectează doar dacă domiciliul oficial este în Germania. Dacă ai CI valabilă cu adresă din RO → Pașaport simplu electronic fără CRDS.',
+          },
+          {
+            gresit: 'Merg la München cu fotografii biometrice proprii',
+            corect: 'München face fotografiile la consulat — nu aduci proprii. La Bonn, Stuttgart și Berlin aduci 2 fotografii 3,5×4,5 cm fond alb.',
+          },
+          {
+            gresit: 'Cred că CI românească se anulează ca la CRDS',
+            corect: 'La pașaportul cu domiciliu în România, CI românească NU se anulează. Menții CI și domiciliu în România.',
+          },
+          {
+            gresit: 'Nu aduc CI valabilă pentru că „am și eu Anmeldung în Germania"',
+            corect: 'CI românească valabilă este documentul principal pentru acest flux. Fără ea, nu poți dovedi domiciliu în România și cererea poate fi respinsă.',
+          },
+          {
+            gresit: 'Aduc Anmeldung sau Meldebescheinigung ca document de adresă',
+            corect: 'Documentul de adresă german nu este necesar pe acest flux — adresa ta oficială este în România, dovedită prin CI românească.',
+          },
+        ].map(({ gresit, corect }, i) => (
+          <div key={i} className="rounded-lg border border-red-100 bg-red-50 p-3">
+            <p className="text-xs font-semibold text-red-700 mb-0.5">❌ {gresit}</p>
+            <p className="text-xs text-gray-700">✅ {corect}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+
+  {
+    id: 'alte-situatii',
+    title: 'Situația ta e diferită?',
+    content: (
+      <div className="space-y-2">
+        {[
+          {
+            text: 'Domiciliul meu e în Germania, nu în România (CRDS)',
+            href: '/pasaport-crds-germania',
+            label: 'Ghid pașaport CRDS →',
+          },
+          {
+            text: 'Pașaportul a fost pierdut sau furat',
+            href: '/pasaport-pierdut-furat-germania',
+            label: 'Ghid pașaport pierdut/furat →',
+          },
+          {
+            text: 'Nu știu dacă sunt CRDS sau domiciliu România',
+            href: '/pasaport-romania-germania',
+            label: 'Ghid hub pașaport →',
+          },
+        ].map(({ text, href, label }) => (
+          <div
+            key={href}
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+          >
+            <p className="text-sm text-gray-700">{text}</p>
+            <Link
+              href={href}
+              className="text-xs text-blue-600 underline hover:text-blue-800 font-medium ml-3 flex-shrink-0"
+            >
+              {label}
+            </Link>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+]
+
+// ─── PAGE COMPONENT ───────────────────────────────────────────────────────────
+
+export default function PasaportDomiciliuRomaniaGermaniaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="pasaport-cu-domiciliu-romania-din-germania"
+      lpTopic="pasaport"
+      h1="Pașaport cu domiciliu în România, depus din Germania"
+      intro="Locuiești în Germania dar domiciliul oficial este încă în România — ai CI valabilă cu adresă din RO. Nu ești pe fluxul CRDS. Procedura este similară dar cu două diferențe practice importante: ce selectezi pe econsulat.ro și dacă trebuie să aduci fotografii."
+      tldr="Selectezi „Pașaport simplu electronic" — fără CRDS. CI valabilă cu adresă din RO este documentul principal. Fotografii: München face la consulat, Bonn/Stuttgart/Berlin aduci 2 buc. 3,5×4,5 cm. CI NU se anulează. Taxă 53€, termen 45 zile."
+      ctaHref="/wizard?problem=pasaport"
+      ctaLabel="Confirmă traseul tău în 30 de secunde →"
+      updatedAt="aprilie 2026"
+      sourceNote="MAE, econsulat.ro, consulatele României din Germania — date verificate live"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={sections}
+      finalCtaTitle="Nu ești sigur dacă ești pe fluxul standard sau CRDS?"
+      finalCtaText="Wizardul ActeRO îți confirmă traseul în 3 click-uri și îți dă lista exactă de documente pentru consulatul tău."
+    />
+  )
+}
