@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'apostila geburtsurkunde consulat romania',
     'formule a extras multilingv nastere',
     'transcriere nastere bonn munchen stuttgart berlin',
-    'patronimic berlin transcriere nastere',
+    'nume de tata berlin transcriere nastere',
     'gratuit transcriere nastere consulat',
   ],
   openGraph: {
@@ -49,7 +49,7 @@ const faqItems = [
   {
     question: 'La Berlin nu se acceptă Formule A?',
     answer:
-      'În general se acceptă, dar există excepția importantă legată de patronimic. Dacă un părinte are nume patronimic în actele românești, Berlin poate cere varianta mai strictă cu Geburtsurkunde, apostilă și traducere.',
+      'În general se acceptă, dar există excepția importantă legată de cazurile în care apare și numele tatălui în actele românești. Dacă ești în situația asta, Berlin poate cere varianta mai strictă cu Geburtsurkunde, apostilă și traducere.',
   },
   {
     question: 'Trebuie să aduc certificatele de naștere românești ale părinților?',
@@ -168,7 +168,7 @@ const sections = [
 
         <div className="rounded-lg border border-red-200 bg-red-50 p-3">
           <p className="text-sm text-red-800">
-            <strong>Excepția importantă Berlin:</strong> dacă există patronimic în actele
+            <strong>Excepția importantă Berlin:</strong> dacă apare și numele tatălui în actele
             românești ale unui părinte, situația poate ieși din varianta simplă cu Formule A.
           </p>
         </div>
@@ -374,7 +374,7 @@ const sections = [
             corect: 'Verifici din timp dacă poți merge pe Formule A.',
           },
           {
-            gresit: 'Ignori excepția Berlin cu patronimic',
+            gresit: 'Ignori excepția Berlin legată de numele tatălui trecut în acte',
             corect: 'Verifici dacă situația ta intră în această excepție înainte de programare.',
           },
           {

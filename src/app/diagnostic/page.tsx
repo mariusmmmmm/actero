@@ -747,6 +747,82 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
   }
 }
 
+function getDiagnosticValueCopy(
+  guideId: GuideId | null,
+  problemType: ProblemType | null,
+  guideTitle: string
+) {
+  if (guideId === 'transcriere-nastere-de') {
+    return {
+      benefits: [
+        'lista exactă de acte pentru transcriere și excepțiile importante pe care să nu le ratezi',
+        'toți pașii în ordinea corectă pentru cerere, programare și ridicare',
+        'cum continui apoi cu pașaportul sau primul buletin al copilului',
+      ],
+      paidTitle: 'Deblochez ghidul complet pentru transcriere pentru 9,99€ →',
+      paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce urmează după certificatul românesc',
+    }
+  }
+
+  if (problemType === 'pasaport') {
+    return {
+      benefits: [
+        `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și consulatul tău`,
+        'toți pașii în ordine, fără să ghicești ce urmează după primii 2 pași',
+        'ce alegi pe econsulat și ce faci la ghișeu, în cazul tău exact',
+      ],
+      paidTitle: 'Deblochez ghidul complet pentru pașaport pentru 9,99€ →',
+      paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și accesul personal pe email',
+    }
+  }
+
+  if (problemType === 'buletin') {
+    return {
+      benefits: [
+        `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și tipul tău de domiciliu`,
+        'toți pașii în ordine, inclusiv deplasarea, depunerea și ridicarea',
+        'ce faci diferit dacă buletinul e expirat, pierdut sau este primul tău act românesc',
+      ],
+      paidTitle: 'Deblochez ghidul complet pentru buletin pentru 9,99€ →',
+      paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și planul complet pentru România',
+    }
+  }
+
+  if (problemType === 'titlu-calatorie') {
+    return {
+      benefits: [
+        `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și mersul la consulat`,
+        'toți pașii în ordine pentru urgență, fără să pierzi timpul cu acte inutile',
+        'ce faci imediat după întoarcerea în România ca să nu rămâi iar fără acte',
+      ],
+      paidTitle: 'Deblochez ghidul complet pentru titlul de călătorie pentru 9,99€ →',
+      paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce rezolvi după urgență',
+    }
+  }
+
+  if (problemType === 'procura') {
+    return {
+      benefits: [
+        `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și programarea la consulat`,
+        'toți pașii în ordine, de la pregătirea conținutului până la trimiterea procurii în România',
+        'ce verifici înainte cu notarul, banca sau autoritatea care va folosi procura',
+      ],
+      paidTitle: 'Deblochez ghidul complet pentru procură pentru 9,99€ →',
+      paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce trimiți mai departe în România',
+    }
+  }
+
+  return {
+    benefits: [
+      `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'}`,
+      'toți pașii în ordine, fără să ghicești ce urmează',
+      'ce alegi și ce faci mai departe în cazul tău exact',
+    ],
+    paidTitle: 'Deblochez ghidul complet pentru 9,99€ →',
+    paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și accesul personal pe email',
+  }
+}
+
 function getFeeInfo(
   guideId: GuideId | null,
   problemType: ProblemType | null,
@@ -1009,6 +1085,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
     wizardResult?.type === 'route' ? wizardResult.routeId : undefined
   )
   const resolvedWarnings = getDiagnosticWarnings(guideId, problemType, data.warnings)
+  const valueCopy = getDiagnosticValueCopy(guideId, problemType, data.guideTitle)
 
   // Reveal progresiv — câte o secțiune la 150ms
   useEffect(() => {
@@ -1094,6 +1171,22 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
         </div>
       )}
 
+      {visible >= 3 && !data.isRoute && (
+        <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 animate-fadeIn">
+          <div className="mb-2 text-xs font-bold uppercase tracking-wide text-gray-500">
+            Ce primești dacă mergi mai departe
+          </div>
+          <div className="space-y-2">
+            {valueCopy.benefits.map((benefit) => (
+              <div key={benefit} className="flex gap-2 text-sm text-gray-700">
+                <span className="text-green-500">✓</span>
+                <span>{benefit}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Route — 2 ghiduri */}
       {visible >= 4 && data.isRoute && data.routeSteps && (
         <div className="animate-fadeIn">
@@ -1126,10 +1219,10 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
             onClick={handleFree}
             className="w-full py-4 bg-gray-900 text-white font-semibold rounded-xl"
           >
-            Primesc primii 2 pași gratuit →
+            Văd primii 2 pași gratuit →
           </button>
           <p className="text-center text-xs text-gray-400 mt-2">
-            Fără cont · Începi gratuit · 30 de secunde
+            Vezi imediat cum începi · fără plată
           </p>
           <div className="flex items-center gap-3 my-3">
             <div className="flex-1 h-px bg-gray-100" />
@@ -1140,11 +1233,16 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
             onClick={handlePaid}
             className="w-full py-4 bg-white border-2 border-gray-300 text-gray-900 font-semibold rounded-xl text-sm hover:border-gray-400 transition-colors"
           >
-            Ghid complet  9,99€  →
+            {valueCopy.paidTitle}
           </button>
-          <p className="text-center text-xs text-gray-400 mt-1">
-            Ghid complet + listă de acte + parteneri verificați
-          </p>
+          <div className="rounded-xl border border-green-100 bg-green-50 px-4 py-3">
+            <p className="text-sm font-semibold text-green-900">
+              Primești imediat după plată
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-green-800">
+              {valueCopy.paidSubtitle}
+            </p>
+          </div>
         </div>
       )}
     </div>

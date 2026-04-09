@@ -423,7 +423,7 @@ export default function BuletinExpiratFaraDomiciliuRomaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi dacă e reînnoire sau primul buletin?"
-      finalCtaText="Wizardul ActeRO îți clarifică rapid situația și te ajută să nu pleci în România pe traseul greșit."
+      finalCtaText="Ghidul rapid ActeRO îți clarifică repede situația și te ajută să nu pleci în România pe traseul greșit."
     />
   )
 }

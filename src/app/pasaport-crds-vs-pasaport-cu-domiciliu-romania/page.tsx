@@ -297,9 +297,9 @@ const sections = [
             label: 'Ghid complet pașaport →',
           },
           {
-            text: 'Vreau să verific rapid prin wizard',
+            text: 'Vreau să verific rapid prin ghidul rapid',
             href: '/wizard?problem=pasaport',
-            label: 'Verifică în wizard →',
+            label: 'Verifică în ghidul rapid →',
           },
         ].map(({ text, href, label }) => (
           <div

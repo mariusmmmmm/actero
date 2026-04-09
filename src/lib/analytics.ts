@@ -1,3 +1,5 @@
+import { hasAnalyticsConsent } from '@/lib/consent'
+
 type AnalyticsValue =
   | string
   | number
@@ -33,15 +35,21 @@ function cleanParams(params: AnalyticsParams): Record<string, AnalyticsValue> {
 }
 
 export function trackEvent(eventName: string, params: AnalyticsParams = {}) {
-  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return
+  if (
+    typeof window === 'undefined' ||
+    typeof window.gtag !== 'function' ||
+    !hasAnalyticsConsent()
+  ) return false
   window.gtag('event', eventName, cleanParams(params))
+  return true
 }
 
 export function trackOnce(storageKey: string, eventName: string, params: AnalyticsParams = {}) {
   if (typeof window === 'undefined') return
   const key = `actero:ga:${storageKey}`
   if (window.sessionStorage.getItem(key)) return
-  trackEvent(eventName, params)
+  const wasTracked = trackEvent(eventName, params)
+  if (!wasTracked) return
   window.sessionStorage.setItem(key, '1')
 }
 
@@ -94,7 +102,7 @@ export function withAttribution(
 }
 
 export function getGaClientId(): string | null {
-  if (typeof document === 'undefined') return null
+  if (typeof document === 'undefined' || !hasAnalyticsConsent()) return null
 
   const gaCookie = document.cookie
     .split('; ')

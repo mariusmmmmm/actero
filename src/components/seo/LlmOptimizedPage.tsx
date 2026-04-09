@@ -2,6 +2,7 @@ import SeoAnalytics from '@/components/analytics/SeoAnalytics'
 import TrackedLink from '@/components/analytics/TrackedLink'
 import SiteFooter from '@/components/layout/SiteFooter'
 import SiteHeader from '@/components/layout/SiteHeader'
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 type FaqItem = {
@@ -18,6 +19,13 @@ type SectionItem = {
   id: string
   title: string
   content: ReactNode
+}
+
+type BreadcrumbItem = {
+  '@type'?: string
+  position?: number
+  name?: string
+  item?: string
 }
 
 type LlmOptimizedPageProps = {
@@ -59,6 +67,12 @@ export default function LlmOptimizedPage({
   finalCtaTitle,
   finalCtaText,
 }: LlmOptimizedPageProps) {
+  const breadcrumbItems = Array.isArray((breadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement)
+    ? ((breadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement ?? []).filter(
+        (item) => item?.name && item?.item
+      )
+    : []
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -75,6 +89,8 @@ export default function LlmOptimizedPage({
   const howToSchema = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
+    name: h1,
+    description: tldr,
     step: howToSteps.map((step, index) => ({
       '@type': 'HowToStep',
       position: index + 1,
@@ -83,7 +99,34 @@ export default function LlmOptimizedPage({
     })),
   }
 
-  const schemas = [faqSchema, howToSchema, articleSchema, breadcrumbSchema, ...extraSchemas]
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `https://actero.ro/${lpSlug}#webpage`,
+    url: `https://actero.ro/${lpSlug}`,
+    name: h1,
+    description: tldr,
+    inLanguage: 'ro',
+    breadcrumb: {
+      '@id': `https://actero.ro/${lpSlug}#breadcrumb`,
+    },
+    isPartOf: {
+      '@id': 'https://actero.ro/#website',
+    },
+  }
+
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: sections.map((section, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: section.title,
+      url: `https://actero.ro/${lpSlug}#${section.id}`,
+    })),
+  }
+
+  const schemas = [webPageSchema, itemListSchema, faqSchema, howToSchema, articleSchema, breadcrumbSchema, ...extraSchemas]
 
   return (
     <>
@@ -99,6 +142,29 @@ export default function LlmOptimizedPage({
         <SeoAnalytics lpSlug={lpSlug} lpTopic={lpTopic} />
         <SiteHeader />
         <div className="max-w-3xl mx-auto px-5 py-8">
+          {breadcrumbItems.length > 0 && (
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-gray-500">
+              <ol className="flex flex-wrap items-center gap-2">
+                {breadcrumbItems.map((item, index) => {
+                  const isLast = index === breadcrumbItems.length - 1
+
+                  return (
+                    <li key={`${item.name}-${index}`} className="flex items-center gap-2">
+                      {isLast ? (
+                        <span className="font-medium text-gray-700">{item.name}</span>
+                      ) : (
+                        <Link href={item.item!} className="hover:text-gray-800 hover:underline">
+                          {item.name}
+                        </Link>
+                      )}
+                      {!isLast && <span aria-hidden="true" className="text-gray-300">/</span>}
+                    </li>
+                  )
+                })}
+              </ol>
+            </nav>
+          )}
+
           <section data-llm-section="hero" className="mb-8">
             <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">{h1}</h1>
 

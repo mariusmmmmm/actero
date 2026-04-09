@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Termeni & Conditii',
   description:
     'Termenii și condițiile ActeRO explică modul în care poți folosi site-ul, cum funcționează accesul la conținutul digital, plățile, limitările și drepturile tale ca utilizator.',
+  alternates: {
+    canonical: 'https://actero.ro/termeni-si-conditii',
+  },
 }
 
 function Section({

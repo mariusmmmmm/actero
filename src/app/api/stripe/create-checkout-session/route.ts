@@ -28,11 +28,13 @@ export async function POST(req: NextRequest) {
       offerType?: OfferType
       guideId?: string | null
       gaClientId?: string | null
+      analyticsConsent?: boolean
     }
 
     const sessionId = body.sessionId?.trim()
     const offerType = body.offerType
     const gaClientId = body.gaClientId?.trim()
+    const analyticsConsentGranted = body.analyticsConsent === true
 
     if (!isValidSessionId(sessionId) || (offerType !== 'single' && offerType !== 'family')) {
       return NextResponse.json({ error: 'Missing sessionId or invalid offerType' }, { status: 400, headers: NO_STORE_HEADERS })
@@ -83,7 +85,8 @@ export async function POST(req: NextRequest) {
         offerType,
         guideId: userSession.guide_id ?? '',
         problemType: userSession.document_type ?? '',
-        gaClientId: gaClientId ?? '',
+        gaClientId: analyticsConsentGranted ? gaClientId ?? '' : '',
+        analyticsConsent: analyticsConsentGranted ? 'granted' : 'denied',
       },
     })
 

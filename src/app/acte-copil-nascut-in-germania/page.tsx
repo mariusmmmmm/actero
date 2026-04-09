@@ -369,7 +369,7 @@ const sections = [
               'Formule A este de obicei varianta mai simplă. Geburtsurkunde presupune pași suplimentari.',
           },
           {
-            gresit: 'Nu știu că la Berlin pot exista cerințe suplimentare legate de numele patronimic',
+            gresit: 'Nu știu că la Berlin pot exista cerințe suplimentare dacă în acte apare și numele tatălui',
             corect:
               'La Berlin există excepții importante, de aceea merită verificat traseul exact înainte de depunere.',
           },

@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     'ce document german transcriere nastere romania',
     'formule a standesamt germany',
     'geburtsurkunde apostila haga romania',
-    'patronimic berlin formule a',
+    'nume de tata berlin formule a',
   ],
   openGraph: {
     title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România',
     description:
-      'Formule A elimină de obicei apostila și traducerea. Există însă o excepție importantă pentru Berlin și patronimic.',
+      'Formule A elimină de obicei apostila și traducerea. Există însă o excepție importantă pentru Berlin și cazurile în care apare și numele tatălui în actele românești.',
     url: 'https://actero.ro/formule-a-vs-geburtsurkunde',
     type: 'article',
   },
@@ -54,12 +54,12 @@ const faqItems = [
   {
     question: 'Există situații când trebuie obligatoriu Geburtsurkunde?',
     answer:
-      'Da, există o excepție importantă legată de Berlin și de cazurile în care unul dintre părinți are nume patronimic în actele românești.',
+      'Da, există o excepție importantă legată de Berlin și de cazurile în care unul dintre părinți are trecut și numele tatălui în actele românești.',
   },
   {
     question: 'Formule A este acceptat la toate consulatele românești din Germania?',
     answer:
-      'În linii mari, da, cu excepția practică importantă pe care o verifici separat pentru Berlin și patronimic.',
+      'În linii mari, da, cu excepția practică importantă pe care o verifici separat pentru Berlin și cazurile în care apare și numele tatălui în acte.',
   },
   {
     question: 'Apostila Haga pentru Geburtsurkunde se obține la consulat?',
@@ -75,7 +75,7 @@ const faqItems = [
 
 const howToSteps = [
   {
-    name: 'Verifici dacă există excepția de patronimic',
+    name: 'Verifici dacă apare și numele tatălui în acte',
     text: 'Dacă da și ești în aria Berlinului, trebuie să fii atent la varianta de document acceptată.',
   },
   {
@@ -135,7 +135,7 @@ const sections = [
       <div className="space-y-3">
         <div className="rounded-xl border-2 border-green-300 bg-green-50 p-4 text-center">
           <p className="mb-2 text-lg font-black text-green-900">
-            Dacă nu intri pe excepția Berlin + patronimic, Formule A este de regulă alegerea corectă
+            Dacă nu intri pe excepția Berlin + numele tatălui trecut în acte, Formule A este de regulă alegerea corectă
           </p>
           <p className="text-sm text-green-800">
             Scutește pași, timp și costuri suplimentare și este, în practică, documentul pe care vrei să îl ai primul în mână.
@@ -143,9 +143,9 @@ const sections = [
         </div>
 
         <div className="rounded-xl border border-red-200 bg-red-50 p-4">
-          <p className="mb-1 font-semibold text-red-900">Excepție importantă — Berlin și patronimic</p>
+          <p className="mb-1 font-semibold text-red-900">Excepție importantă — Berlin și numele tatălui trecut în acte</p>
           <p className="text-sm text-red-800">
-            Dacă unul dintre părinți are nume patronimic în actele românești și ești în aria consulatului Berlin, regulile practice se schimbă și trebuie verificată varianta standard cu formalitățile ei suplimentare.
+            Dacă unul dintre părinți are trecut și numele tatălui în actele românești și ești în aria consulatului Berlin, regulile practice se schimbă și trebuie verificată varianta standard cu formalitățile ei suplimentare.
           </p>
         </div>
       </div>
@@ -202,7 +202,7 @@ const sections = [
               { criteriu: 'Formalități suplimentare', a: 'Mai puține', g: 'Mai multe', highlight: true },
               { criteriu: 'Timp total până ești gata de consulat', a: 'Mai scurt', g: 'Mai lung', highlight: true },
               { criteriu: 'Cost total', a: 'Mai mic', g: 'Mai mare', highlight: true },
-              { criteriu: 'Acceptare practică la consulate', a: 'Bună, cu excepția relevantă de Berlin + patronimic', g: 'Acceptat, dar mai încărcat procedural', highlight: false },
+              { criteriu: 'Acceptare practică la consulate', a: 'Bună, cu excepția relevantă de Berlin + numele tatălui trecut în acte', g: 'Acceptat, dar mai încărcat procedural', highlight: false },
               { criteriu: 'Valabilitate juridică', a: 'Utilă pentru transcriere', g: 'Utilă pentru transcriere', highlight: false },
             ].map(({ criteriu, a, g, highlight }, index) => (
               <tr key={criteriu} className={highlight ? 'bg-green-50' : index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
@@ -218,24 +218,24 @@ const sections = [
     ),
   },
   {
-    id: 'patronimic-berlin',
-    title: 'Excepția patronimic — Berlin',
+    id: 'nume-tata-berlin',
+    title: 'Excepția cu numele tatălui — Berlin',
     content: (
       <div className="space-y-3">
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
-          <p className="mb-2 font-semibold text-amber-900">Ce este numele patronimic</p>
+          <p className="mb-2 font-semibold text-amber-900">La ce ne referim aici</p>
           <p className="text-sm text-amber-800">
-            Este acel tip de formulare din actele românești care introduce explicit filiația în nume. În practică, exact aici apare excepția importantă pentru Berlin.
+            Ne referim la cazurile în care în actele românești apare și numele tatălui, nu doar numele și prenumele obișnuite. În practică, exact aici apare excepția importantă pentru Berlin.
           </p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-lg border border-red-100 bg-red-50 p-3">
-            <p className="mb-1 text-sm font-semibold text-red-800">Berlin + patronimic</p>
+            <p className="mb-1 text-sm font-semibold text-red-800">Berlin + numele tatălui trecut în acte</p>
             <p className="text-xs text-red-700">Aici nu te mai bazezi pe scenariul simplu cu Formule A.</p>
           </div>
           <div className="rounded-lg border border-green-100 bg-green-50 p-3">
-            <p className="mb-1 text-sm font-semibold text-green-800">Berlin fără patronimic</p>
+            <p className="mb-1 text-sm font-semibold text-green-800">Berlin fără această situație</p>
             <p className="text-xs text-green-700">În mod normal rămâi pe varianta simplificată, cu Formule A.</p>
           </div>
         </div>
@@ -282,7 +282,7 @@ const sections = [
               {
                 consulat: 'Berlin',
                 doc: 'Formule A',
-                exceptie: 'Dacă există patronimic la un părinte, verifici excepția și traseul se schimbă',
+                exceptie: 'Dacă la un părinte apare și numele tatălui în acte, verifici excepția și traseul se schimbă',
                 highlight: true,
               },
             ].map(({ consulat, doc, exceptie, highlight }) => (
@@ -355,7 +355,7 @@ const sections = [
             corect: 'Diferența practică ține de formalități, nu de ideea că unul ar fi „serios” și celălalt nu.',
           },
           {
-            gresit: 'Nu verific excepția Berlin + patronimic',
+            gresit: 'Nu verific excepția Berlin legată de numele tatălui trecut în acte',
             corect: 'Exact acolo se poate strica planul dacă pornești din presupunerea greșită.',
           },
           {
@@ -418,7 +418,7 @@ export default function FormuleAVsGeburtsurkundePage() {
       lpTopic="copil"
       h1="Formule A vs Geburtsurkunde — ce alegi pentru transcrierea nașterii"
       intro="Când începi transcrierea nașterii copilului, alegerea documentului german potrivit îți poate scurta mult drumul. Una dintre variante îți simplifică masiv procesul, cealaltă îl poate încărca inutil, cu excepția unui caz foarte specific."
-      tldr="În cele mai multe situații, Formule A este varianta logică pentru transcriere. Excepția importantă apare la Berlin când unul dintre părinți are nume patronimic în actele românești. Acolo trebuie verificat traseul special."
+      tldr="În cele mai multe situații, Formule A este varianta logică pentru transcriere. Excepția importantă apare la Berlin când unul dintre părinți are trecut și numele tatălui în actele românești. Acolo trebuie verificat traseul special."
       ctaHref="/wizard?problem=transcriere-nastere"
       ctaLabel="Găsește traseul exact pentru copilul tău →"
       updatedAt="aprilie 2026"

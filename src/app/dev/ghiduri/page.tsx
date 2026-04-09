@@ -111,7 +111,7 @@ export default function DevGhiduriPage() {
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Ghiduri pentru testing</h1>
           <p className="mt-2 text-sm text-gray-500">
-            Linkurile de mai jos merg direct pe ghidurile free si paid, fara wizard, cat timp TEST MODE este activ.
+            Linkurile de mai jos merg direct pe ghidurile free si paid, fara ghidul rapid, cat timp TEST MODE este activ.
           </p>
         </div>
 
@@ -141,7 +141,7 @@ export default function DevGhiduriPage() {
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-gray-900">Route-uri compuse</h2>
           <p className="mt-2 text-sm text-gray-500">
-            Cazuri din wizard care nu duc direct intr-un singur ghid, ci intr-o succesiune de doua ghiduri.
+            Cazuri din ghidul rapid care nu duc direct intr-un singur ghid, ci intr-o succesiune de doua ghiduri.
           </p>
 
           <div className="mt-5 overflow-hidden rounded-2xl border border-gray-200 bg-white">

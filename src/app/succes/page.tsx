@@ -6,7 +6,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
-import { persistAttribution, trackOnce, withAttribution } from '@/lib/analytics'
+import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { useAppStore } from '@/store/appStore'
 
 const POLL_INTERVAL_MS = 2000
@@ -126,9 +126,21 @@ function SuccesPageContent() {
         payment_provider: 'stripe',
       }, searchParams)
     )
+
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('actero:pending_open_guide_session', sessionId)
+    }
   }, [isPaid, problemType, searchParams, sessionId])
 
   const handleOpenGuide = () => {
+    trackEvent('paid_success_open_guide_click', withAttribution({
+      guide_id: useAppStore.getState().guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      offer_type:
+        typeof window !== 'undefined'
+          ? window.sessionStorage.getItem('actero:last_offer_type') ?? 'single'
+          : 'single',
+    }, searchParams))
     router.push(`/ghid/${sessionId}`)
   }
 
@@ -138,15 +150,30 @@ function SuccesPageContent() {
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shareText)
+    trackEvent('paid_success_share_click', withAttribution({
+      guide_id: useAppStore.getState().guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      share_target: 'copy',
+    }, searchParams))
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
 
   const handleWhatsApp = () => {
+    trackEvent('paid_success_share_click', withAttribution({
+      guide_id: useAppStore.getState().guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      share_target: 'whatsapp',
+    }, searchParams))
     window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank')
   }
 
   const handleFacebook = () => {
+    trackEvent('paid_success_share_click', withAttribution({
+      guide_id: useAppStore.getState().guideId ?? undefined,
+      problem_type: problemType ?? undefined,
+      share_target: 'facebook',
+    }, searchParams))
     window.open(`https://www.facebook.com/sharer/sharer.php?u=https://actero.ro&quote=${encodeURIComponent(shareText)}`, '_blank')
   }
 

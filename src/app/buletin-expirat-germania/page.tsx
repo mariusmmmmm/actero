@@ -206,7 +206,7 @@ const sections = [
 
         <div className="rounded-lg border border-amber-100 bg-amber-50 p-3">
           <p className="text-sm text-amber-800">
-            Dacă nu e vorba de buletin expirat, ci de pierdut sau furat, traseul se schimbă puțin. Wizardul te duce mai sigur pe varianta corectă.
+            Dacă nu e vorba de buletin expirat, ci de pierdut sau furat, traseul se schimbă puțin. Ghidul rapid te duce mai sigur pe varianta corectă.
           </p>
         </div>
       </div>
@@ -441,7 +441,7 @@ export default function BuletinExpiratGermaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi la ce SPCLEP mergi sau ce documente pregătești?"
-      finalCtaText="Wizardul ActeRO combină situația ta exactă și îți dă traseul corect, fără să te lase să pleci în România pe varianta greșită."
+      finalCtaText="Ghidul rapid ActeRO combină situația ta exactă și îți dă traseul corect, fără să te lase să pleci în România pe varianta greșită."
     />
   )
 }

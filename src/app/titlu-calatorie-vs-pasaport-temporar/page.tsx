@@ -401,7 +401,7 @@ export default function TitluCalatorieVsPasaportTemporarPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Ești în Germania fără niciun document valabil?"
-      finalCtaText="Wizardul ActeRO îți arată ce faci acum la consulat și ce faci după ce ajungi în România."
+      finalCtaText="Ghidul rapid ActeRO îți arată ce faci acum la consulat și ce faci după ce ajungi în România."
     />
   )
 }

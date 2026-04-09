@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Politica de confidențialitate',
   description:
     'Află ce date personale colectează ActeRO, în ce scopuri le folosim, cât timp le păstrăm și ce drepturi ai conform GDPR.',
+  alternates: {
+    canonical: 'https://actero.ro/politica-de-confidentialitate',
+  },
 }
 
 function Section({
@@ -72,9 +75,9 @@ export default function PoliticaPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>date de contact, cum ar fi nume, prenume, email sau număr de telefon;</li>
             <li>date introduse în formularele de contact, ajutor sau waitlist;</li>
-            <li>răspunsurile din wizard și informațiile despre situația ta administrativă, în măsura în care le introduci tu;</li>
+            <li>răspunsurile din ghidul rapid și informațiile despre situația ta administrativă, în măsura în care le introduci tu;</li>
             <li>identificatori tehnici ai sesiunii, inclusiv `sessionId`, token-uri de acces și starea informațiilor deblocate;</li>
-            <li>date despre utilizarea site-ului, inclusiv pagini vizitate, evenimente și interacțiuni, prin instrumente de analiză precum Google Analytics;</li>
+            <li>date despre utilizarea site-ului, inclusiv pagini vizitate, evenimente și interacțiuni, prin Google Analytics, doar dacă accepți cookie-urile de analiză;</li>
             <li>date legate de plată și acces, transmise de furnizorii noștri de servicii de plată, fără a stoca la noi date complete de card.</li>
           </ul>
         </Section>
@@ -83,7 +86,7 @@ export default function PoliticaPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>direct de la tine, când completezi ghidul rapid, formularele de contact, ajutor sau lista de așteptare;</li>
             <li>automat, prin cookie-uri și tehnologii similare, atunci când navighezi pe site;</li>
-            <li>de la furnizori terți implicați în furnizarea serviciului, de exemplu platforma de plată sau serviciile de analytics.</li>
+            <li>de la furnizori terți implicați în furnizarea serviciului, de exemplu platforma de plată sau serviciile de analiză, atunci când acestea sunt activate pe baza consimțământului tău.</li>
           </ul>
         </Section>
 
@@ -123,9 +126,9 @@ export default function PoliticaPage() {
 
         <Section title="6. Cookie-uri și Google Analytics">
           <p>
-            ActeRO folosește cookie-uri și tehnologii similare pentru funcționarea site-ului și,
-            pe măsură ce implementăm Google Analytics, pentru a măsura traficul și a înțelege
-            cum folosesc utilizatorii paginile noastre.
+            ActeRO folosește cookie-uri și tehnologii similare pentru funcționarea site-ului.
+            În plus, folosim Google Analytics doar dacă alegi explicit să accepți cookie-urile
+            de analiză din bannerul de consimțământ.
           </p>
           <p>
             În cazul Google Analytics, putem colecta informații precum paginile vizitate,
@@ -135,12 +138,14 @@ export default function PoliticaPage() {
             iar pentru traficul din UE prelucrarea inițială are loc prin infrastructură din UE.
           </p>
           <p>
-            Dacă implementarea Google Analytics se face în mod care necesită consimțământ conform
-            legislației aplicabile, analytics-ul va fi activat doar după exprimarea consimțământului
-            tău prin mecanismul de cookie banner sau de gestionare a consimțământului.
+            Cookie-urile esențiale rămân active pentru securitate, sesiuni, plată și accesul la
+            ghiduri. Cookie-urile de analiză sunt opționale și nu sunt necesare pentru folosirea
+            site-ului.
           </p>
           <p>
-            Poți bloca sau șterge cookie-urile din setările browserului. Totuși, anumite funcționalități
+            Poți accepta sau refuza cookie-urile de analiză din bannerul afișat pe site și poți
+            schimba alegerea oricând din footer, prin linkul „Preferințe cookie-uri”. Poți bloca
+            sau șterge cookie-urile și din setările browserului. Totuși, anumite funcționalități
             ale site-ului pot să nu mai funcționeze corect dacă dezactivezi cookie-urile esențiale.
           </p>
         </Section>

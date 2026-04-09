@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Script from 'next/script'
+import ConsentManager from '@/components/analytics/ConsentManager'
 import './globals.css'
 
 const geistSans = localFont({
@@ -80,6 +81,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID ?? 'G-YT5RBX61RR'
+  const webSiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://actero.ro/#website',
+    url: 'https://actero.ro',
+    name: 'ActeRO',
+    inLanguage: 'ro',
+    publisher: {
+      '@id': 'https://actero.ro/#organization',
+    },
+  }
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -108,18 +120,19 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="ro">
       <head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-consent-default" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${gaId}');
+            window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+            window.gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied'
+            });
+            window['ga-disable-${gaId}'] = true;
           `}
         </Script>
         <script
@@ -128,10 +141,17 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(webSiteSchema),
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ConsentManager gaId={gaId} />
         {children}
       </body>
     </html>

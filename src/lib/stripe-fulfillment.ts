@@ -8,6 +8,7 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
   const sessionId = session.metadata?.acteroSessionId?.trim()
   const offerType = session.metadata?.offerType === 'family' ? 'family' : 'single'
   const gaClientId = session.metadata?.gaClientId?.trim()
+  const analyticsConsentGranted = session.metadata?.analyticsConsent === 'granted'
   const email = session.customer_details?.email ?? session.customer_email ?? ''
   const paymentId = typeof session.payment_intent === 'string'
     ? session.payment_intent
@@ -40,6 +41,7 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
       checkoutSessionId: session.id,
       sessionId,
       gaClientId,
+      analyticsConsentGranted,
       tokenExpiry,
     })
     return { ok: true as const, reason: 'family_processed' }
@@ -67,29 +69,31 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
 
   const accessUrl = `${getBaseUrl()}/ghid/access?token=${paidSession.access_token}`
   await sendAccessEmail({ to: email, accessUrl, guideId: paidSession.guide_id })
-  await sendGaMeasurementEvent({
-    clientId: gaClientId || `${paidSession.id}.stripe`,
-    eventName: 'purchase',
-    params: {
-      transaction_id: session.id,
-      guide_id: paidSession.guide_id,
-      problem_type: paidSession.document_type,
-      offer_type: 'single',
-      value: 9.99,
-      currency: 'EUR',
-      payment_provider: 'stripe',
-      actero_session_id: paidSession.id,
-      items: [
-        {
-          item_id: 'actero_single',
-          item_name: 'Ghid complet ActeRO',
-          item_category: paidSession.document_type ?? 'default',
-          price: 9.99,
-          quantity: 1,
-        },
-      ],
-    },
-  })
+  if (analyticsConsentGranted && gaClientId) {
+    await sendGaMeasurementEvent({
+      clientId: gaClientId,
+      eventName: 'purchase',
+      params: {
+        transaction_id: session.id,
+        guide_id: paidSession.guide_id,
+        problem_type: paidSession.document_type,
+        offer_type: 'single',
+        value: 9.99,
+        currency: 'EUR',
+        payment_provider: 'stripe',
+        actero_session_id: paidSession.id,
+        items: [
+          {
+            item_id: 'actero_single',
+            item_name: 'Ghid complet ActeRO',
+            item_category: paidSession.document_type ?? 'default',
+            price: 9.99,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+  }
 
   return { ok: true as const, reason: 'single_processed' }
 }
@@ -101,6 +105,7 @@ async function handleFamiliePayment({
   checkoutSessionId,
   sessionId,
   gaClientId,
+  analyticsConsentGranted,
   tokenExpiry,
 }: {
   supabase: ReturnType<typeof import('@/lib/supabase/server').createClient>
@@ -109,6 +114,7 @@ async function handleFamiliePayment({
   checkoutSessionId: string
   sessionId: string
   gaClientId?: string
+  analyticsConsentGranted: boolean
   tokenExpiry: Date
 }) {
   const baseUrl = getBaseUrl()
@@ -174,27 +180,29 @@ async function handleFamiliePayment({
   ]
 
   await sendFamilieEmail({ to: email, accessLinks })
-  await sendGaMeasurementEvent({
-    clientId: gaClientId || `${session1.id}.stripe`,
-    eventName: 'purchase',
-    params: {
-      transaction_id: checkoutSessionId,
-      guide_id: session1.guide_id ?? undefined,
-      problem_type: session1.document_type ?? undefined,
-      offer_type: 'family',
-      value: 24.99,
-      currency: 'EUR',
-      payment_provider: 'stripe',
-      actero_session_id: session1.id,
-      items: [
-        {
-          item_id: 'actero_family',
-          item_name: 'Pachet familie ActeRO',
-          item_category: session1.document_type ?? 'default',
-          price: 24.99,
-          quantity: 1,
-        },
-      ],
-    },
-  })
+  if (analyticsConsentGranted && gaClientId) {
+    await sendGaMeasurementEvent({
+      clientId: gaClientId,
+      eventName: 'purchase',
+      params: {
+        transaction_id: checkoutSessionId,
+        guide_id: session1.guide_id ?? undefined,
+        problem_type: session1.document_type ?? undefined,
+        offer_type: 'family',
+        value: 24.99,
+        currency: 'EUR',
+        payment_provider: 'stripe',
+        actero_session_id: session1.id,
+        items: [
+          {
+            item_id: 'actero_family',
+            item_name: 'Pachet familie ActeRO',
+            item_category: session1.document_type ?? 'default',
+            price: 24.99,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+  }
 }

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'Despre noi',
   description:
     'ActeRO s-a născut dintr-o frustrare reală: românii din diaspora merită informații corecte, clare și gratuite despre actele lor.',
+  alternates: {
+    canonical: 'https://actero.ro/despre',
+  },
 }
 
 export default function DesprePage() {

@@ -342,7 +342,7 @@ const sections = [
   },
   {
     id: 'greseli',
-    title: 'Greșeli frecvente — ce trimite oamenii degeaba la consulat',
+    title: 'Greșeli frecvente care îi trimit pe oameni degeaba la consulat',
     content: (
       <div className="space-y-2">
         {[

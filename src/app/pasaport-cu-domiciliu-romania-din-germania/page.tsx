@@ -171,7 +171,7 @@ const sections = [
             <Link href="/pasaport-crds-germania" className="mx-1 underline font-medium">
               pagina CRDS
             </Link>
-            sau verifică rapid în wizard.
+            sau verifică rapid în ghidul rapid.
           </p>
         </div>
       </div>
@@ -408,9 +408,9 @@ const sections = [
             label: 'Ghid complet pașaport →',
           },
           {
-            text: 'Vreau să verific rapid în wizard',
+            text: 'Vreau să verific rapid în ghidul rapid',
             href: '/wizard?problem=pasaport',
-            label: 'Verifică în wizard →',
+            label: 'Verifică în ghidul rapid →',
           },
         ].map(({ text, href, label }) => (
           <div

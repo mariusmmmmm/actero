@@ -331,17 +331,17 @@ const sections = [
           {
             text: 'Am nevoie de procură pentru proprietate în România',
             href: '/wizard?problem=procura',
-            label: 'Aleg tipul în wizard →',
+            label: 'Aleg tipul în ghidul rapid →',
           },
           {
             text: 'Am nevoie de procură pentru moștenire / succesiune',
             href: '/wizard?problem=procura',
-            label: 'Aleg tipul în wizard →',
+            label: 'Aleg tipul în ghidul rapid →',
           },
           {
             text: 'Am nevoie de procură generală pentru bancă, firmă sau altceva',
             href: '/wizard?problem=procura',
-            label: 'Aleg tipul în wizard →',
+            label: 'Aleg tipul în ghidul rapid →',
           },
           {
             text: 'Vreau ghidul complet pentru toate tipurile de procuri',
@@ -385,7 +385,7 @@ export default function ProcuraConsulatVsNotarGermanPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi ce tip de procură ai nevoie?"
-      finalCtaText="Wizardul ActeRO îți identifică rapid tipul corect de procură și te trimite spre ghidul potrivit pentru problema ta."
+      finalCtaText="Ghidul rapid ActeRO îți identifică repede tipul corect de procură și te trimite spre ghidul potrivit pentru problema ta."
     />
   )
 }

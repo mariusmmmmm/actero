@@ -51,8 +51,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     { url: 'https://actero.ro/despre', changeFrequency: 'monthly', priority: 0.45 },
     { url: 'https://actero.ro/contact', changeFrequency: 'monthly', priority: 0.45 },
-    { url: 'https://actero.ro/ajutor', changeFrequency: 'monthly', priority: 0.42 },
-    { url: 'https://actero.ro/parteneri', changeFrequency: 'monthly', priority: 0.35 },
     { url: 'https://actero.ro/termeni-si-conditii', changeFrequency: 'yearly', priority: 0.2 },
     { url: 'https://actero.ro/politica-de-confidentialitate', changeFrequency: 'yearly', priority: 0.2 },
   ]

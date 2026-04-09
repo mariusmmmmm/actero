@@ -239,7 +239,7 @@ function SeoGuides() {
       <h2 className="text-xl font-bold text-gray-900 mb-3">Intrări directe către ghidurile cele mai căutate</h2>
       <p className="text-sm text-gray-600 leading-relaxed mb-5">
         Dacă știi deja aproximativ problema, poți intra direct în paginile de orientare de mai jos
-        și apoi continua spre ghidul exact sau spre wizard.
+        și apoi continua spre ghidul exact sau spre ghidul rapid.
       </p>
       <div className="space-y-3">
         {guides.map((guide) => (

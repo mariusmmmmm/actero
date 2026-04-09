@@ -69,7 +69,7 @@ const faqItems = [
   {
     question: 'Pot rezolva mai multe acte odată la consulat?',
     answer:
-      'În unele situații da, dar depinde de act și de disponibilitatea consulatului. Wizardul ActeRO te ajută să vezi ce poți combina și ce rămâne separat.',
+      'În unele situații da, dar depinde de act și de disponibilitatea consulatului. Ghidul rapid ActeRO te ajută să vezi ce poți combina și ce rămâne separat.',
   },
 ]
 
@@ -369,7 +369,7 @@ const sections = [
   },
   {
     id: 'greseli',
-    title: 'Greșeli frecvente — ce îi trimite pe oameni degeaba la ghișeu',
+    title: 'Greșeli frecvente care îi trimit pe oameni degeaba la ghișeu',
     content: (
       <div className="space-y-2">
         {[

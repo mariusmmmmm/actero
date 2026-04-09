@@ -359,7 +359,7 @@ const sections = [
   },
   {
     id: 'greseli',
-    title: 'Greșeli frecvente — ce blochează oamenii',
+    title: 'Greșeli frecvente care îi blochează pe oameni',
     content: (
       <div className="space-y-2">
         {[

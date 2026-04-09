@@ -1284,7 +1284,7 @@ function ConsulateCard({
                   ]
                 : [
                     'La Berlin, certificatele de naștere românești ale părinților sunt obligatorii fără excepție.',
-                    'Dacă un părinte are nume patronimic, Formule A nu este acceptat — ai nevoie de Geburtsurkunde + apostilă + traducere.',
+                    'Dacă la un părinte apare și numele tatălui în acte, Formule A nu este acceptat — ai nevoie de Geburtsurkunde + apostilă + traducere.',
                   ]),
         ]
     : isGeneralPoaGuide
@@ -1532,6 +1532,26 @@ function GhidPaidPageContent() {
         problem_type: useAppStore.getState().problemType ?? undefined,
       })
     )
+
+    if (typeof window !== 'undefined') {
+      const pendingSession = window.sessionStorage.getItem('actero:pending_open_guide_session')
+      if (pendingSession === sessionId) {
+        const rawValue = window.sessionStorage.getItem('actero:last_offer_value') ?? '9.99'
+        const parsedValue = Number(rawValue)
+        trackOnce(
+          `open_guide_after_purchase:${sessionId}:${activeGuideId}`,
+          'open_guide_after_purchase',
+          withAttribution({
+            guide_id: activeGuideId,
+            problem_type: useAppStore.getState().problemType ?? undefined,
+            offer_type: window.sessionStorage.getItem('actero:last_offer_type') ?? 'single',
+            value: Number.isFinite(parsedValue) ? parsedValue : 9.99,
+            currency: 'EUR',
+          })
+        )
+        window.sessionStorage.removeItem('actero:pending_open_guide_session')
+      }
+    }
   }, [activeGuideId, sessionId])
 
   const step = content?.steps[currentStepIndex]

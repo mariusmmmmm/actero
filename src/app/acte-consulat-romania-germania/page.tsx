@@ -278,7 +278,7 @@ const sections = [
         </div>
 
         <p className="text-xs text-gray-500">
-          Rândurile roșii sunt acte care nu se rezolvă la consulat. Coloana „Programare?” apare pe ecrane mai mari.
+          Rândurile roșii sunt acte care nu se rezolvă la consulat. Dacă ești pe telefon, coloana „Programare?” poate fi ascunsă ca tabelul să se citească mai ușor.
         </p>
       </div>
     ),
@@ -419,7 +419,7 @@ const sections = [
         </div>
 
         <p className="text-xs text-gray-500">
-          Frankfurt nu are consulat operațional pentru fluxurile uzuale din proiect; pentru Hessen te uiți la arondarea spre Bonn.
+          Frankfurt nu are un consulat care preia actele obișnuite de pe această pagină. Dacă locuiești în Hessen, uită-te la arondarea către Bonn.
         </p>
       </div>
     ),
@@ -450,7 +450,7 @@ const sections = [
             categorie: 'Procuri notariale',
             items: [
               { text: 'Procură pentru proprietate, moștenire sau altă situație', href: '/procura-notariala-germania' },
-              { text: 'Wizard procură pe tipul exact de problemă', href: '/wizard?problem=procura' },
+              { text: 'Ghid rapid pentru tipul exact de procură', href: '/wizard?problem=procura' },
             ],
           },
           {
@@ -498,7 +498,7 @@ export default function ActeConsulatRomaniaGermaniaPage() {
       breadcrumbSchema={breadcrumbSchema}
       sections={sections}
       finalCtaTitle="Nu știi sigur unde se rezolvă actul tău?"
-      finalCtaText="Wizardul ActeRO îți spune în 30 de secunde dacă actul tău se face la consulat sau în România și îți dă traseul potrivit."
+      finalCtaText="Ghidul rapid ActeRO îți spune în 30 de secunde dacă actul tău se face la consulat sau în România și îți dă traseul potrivit."
     />
   )
 }
