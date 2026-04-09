@@ -19,9 +19,10 @@ export default function ConsentManager({ gaId }: { gaId: string }) {
     () => false
   )
 
-  const storedConsent = !isHydrated
-    ? null
-    : (consentVersion, getStoredConsentPreferences())
+  const storedConsent = useMemo(() => {
+    if (!isHydrated) return null
+    return getStoredConsentPreferences()
+  }, [consentVersion, isHydrated])
 
   const hasDecision = storedConsent !== null
   const analyticsEnabled = storedConsent?.analytics ?? false
