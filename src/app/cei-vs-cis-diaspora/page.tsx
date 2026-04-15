@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine?',
     description:
       'CIS nu este valabil în UE. CEI oferă mai multă flexibilitate pentru diaspora. Tabel complet și recomandări practice.',
-    url: 'https://actero.ro/cei-vs-cis-diaspora',
+    url: 'https://www.actero.ro/cei-vs-cis-diaspora',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/cei-vs-cis-diaspora',
+    canonical: 'https://www.actero.ro/cei-vs-cis-diaspora',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/cei-vs-cis-diaspora#article',
+  '@id': 'https://www.actero.ro/cei-vs-cis-diaspora#article',
   headline: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine? 2026',
   description:
     'Comparație practică între CEI și CIS pentru românii din diaspora: UE, SPCLEP, ridicare, cost și recomandări pe profil.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/cei-vs-cis-diaspora',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/cei-vs-cis-diaspora',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Buletin România Germania',
-      item: 'https://actero.ro/buletin-romania-germania',
+      item: 'https://www.actero.ro/buletin-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'CEI vs CIS diaspora',
-      item: 'https://actero.ro/cei-vs-cis-diaspora',
+      item: 'https://www.actero.ro/cei-vs-cis-diaspora',
     },
   ],
 }

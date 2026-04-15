@@ -16,7 +16,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://actero.ro'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.actero.ro'),
   title: {
     default: 'ActeRO — Acte românești din Germania, pas cu pas',
     template: '%s · ActeRO',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ro_RO',
-    url: 'https://actero.ro',
+    url: 'https://www.actero.ro',
     siteName: 'ActeRO',
     title: 'ActeRO — Acte românești din Germania, pas cu pas',
     description:
@@ -84,21 +84,21 @@ export default function RootLayout({
   const webSiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://actero.ro/#website',
-    url: 'https://actero.ro',
+    '@id': 'https://www.actero.ro/#website',
+    url: 'https://www.actero.ro',
     name: 'ActeRO',
     inLanguage: 'ro',
     publisher: {
-      '@id': 'https://actero.ro/#organization',
+      '@id': 'https://www.actero.ro/#organization',
     },
   }
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://actero.ro/#organization',
+    '@id': 'https://www.actero.ro/#organization',
     name: 'ActeRO',
-    url: 'https://actero.ro',
-    logo: 'https://actero.ro/logo.png',
+    url: 'https://www.actero.ro',
+    logo: 'https://www.actero.ro/logo.png',
     description: 'Navigator digital pentru acte românești din diaspora — pașaport, buletin, procuri, titlu de călătorie din Germania.',
     areaServed: {
       '@type': 'Country',

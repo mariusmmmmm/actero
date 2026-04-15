@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Transcriere certificat de naștere Germania — Formule A, fără apostilă',
     description:
       'Formule A este varianta simplă, fără apostilă și fără traducere. Gratuit la toate consulatele, cu diferențe practice per consulat.',
-    url: 'https://actero.ro/transcriere-certificat-nastere-germania',
+    url: 'https://www.actero.ro/transcriere-certificat-nastere-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/transcriere-certificat-nastere-germania',
+    canonical: 'https://www.actero.ro/transcriere-certificat-nastere-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/transcriere-certificat-nastere-germania#article',
+  '@id': 'https://www.actero.ro/transcriere-certificat-nastere-germania#article',
   headline: 'Transcriere certificat de naștere Germania — Formule A, fără apostilă 2026',
   description:
     'Ghid pentru transcrierea certificatului de naștere german: Formule A vs Geburtsurkunde, diferențele per consulat și pașii după transcriere.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/transcriere-certificat-nastere-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/transcriere-certificat-nastere-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Transcriere certificat naștere Germania',
-      item: 'https://actero.ro/transcriere-certificat-nastere-germania',
+      item: 'https://www.actero.ro/transcriere-certificat-nastere-germania',
     },
   ],
 }

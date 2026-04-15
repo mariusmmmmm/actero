@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Primul buletin (CEI) copil născut în Germania — după transcriere',
     description:
       'După transcriere, primul buletin al copilului se face în România, la SPCLEP. Ghid practic 2026.',
-    url: 'https://actero.ro/primul-buletin-copil-nascut-in-germania',
+    url: 'https://www.actero.ro/primul-buletin-copil-nascut-in-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/primul-buletin-copil-nascut-in-germania',
+    canonical: 'https://www.actero.ro/primul-buletin-copil-nascut-in-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/primul-buletin-copil-nascut-in-germania#article',
+  '@id': 'https://www.actero.ro/primul-buletin-copil-nascut-in-germania#article',
   headline: 'Primul buletin (CEI) copil născut în Germania — după transcriere 2026',
   description:
     'Ghid pentru primul buletin CEI al copilului născut în Germania, după transcriere: SPCLEP, prezența copilului și domiciliul în România.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/primul-buletin-copil-nascut-in-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/primul-buletin-copil-nascut-in-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Primul buletin copil Germania',
-      item: 'https://actero.ro/primul-buletin-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/primul-buletin-copil-nascut-in-germania',
     },
   ],
 }

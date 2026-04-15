@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
     description:
       'Procuri pentru vânzare, moștenire, divorț sau firmă la consulatul României. Aceeași zi, taxa 3€ RNNEPR și diferențele per consulat.',
-    url: 'https://actero.ro/procura-notariala-germania',
+    url: 'https://www.actero.ro/procura-notariala-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-notariala-germania',
+    canonical: 'https://www.actero.ro/procura-notariala-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-notariala-germania#article',
+  '@id': 'https://www.actero.ro/procura-notariala-germania#article',
   headline: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
   description:
     'Ghidul principal pentru procuri notariale la consulatul României din Germania: vânzare, moștenire, generală, taxa RNNEPR de 3€ și diferența dintre consulat și notar german.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-notariala-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-notariala-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură notarială Germania',
-      item: 'https://actero.ro/procura-notariala-germania',
+      item: 'https://www.actero.ro/procura-notariala-germania',
     },
   ],
 }

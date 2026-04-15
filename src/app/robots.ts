@@ -23,7 +23,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://actero.ro/sitemap.xml',
-    host: 'https://actero.ro',
+    sitemap: 'https://www.actero.ro/sitemap.xml',
+    host: 'https://www.actero.ro',
   }
 }

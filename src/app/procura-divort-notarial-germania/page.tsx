@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură divorț notarial din Germania — Ce acoperă și ce nu',
     description:
       'Procura acoperă depunerea, nu garantează pronunțarea fără prezență. Cu copii minori nu se merge pe notar.',
-    url: 'https://actero.ro/procura-divort-notarial-germania',
+    url: 'https://www.actero.ro/procura-divort-notarial-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-divort-notarial-germania',
+    canonical: 'https://www.actero.ro/procura-divort-notarial-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-divort-notarial-germania#article',
+  '@id': 'https://www.actero.ro/procura-divort-notarial-germania#article',
   headline: 'Procură divorț notarial din Germania — Ce acoperă și ce nu 2026',
   description:
     'Ghid pentru procura de divorț notarial din Germania: limitele ei, situațiile cu copii minori și cum funcționează reprezentarea soților.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-divort-notarial-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-divort-notarial-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură generală Germania',
-      item: 'https://actero.ro/procura-generala-germania',
+      item: 'https://www.actero.ro/procura-generala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură divorț notarial Germania',
-      item: 'https://actero.ro/procura-divort-notarial-germania',
+      item: 'https://www.actero.ro/procura-divort-notarial-germania',
     },
   ],
 }

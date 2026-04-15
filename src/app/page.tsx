@@ -24,20 +24,20 @@ export const metadata: Metadata = {
     title: 'ActeRO | Ghiduri pentru acte românești în diaspora',
     description:
       'Ghiduri clare pentru pașaport, buletin, titlu de călătorie, procuri și actele copilului născut în străinătate.',
-    url: 'https://actero.ro',
+    url: 'https://www.actero.ro',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://actero.ro',
+    canonical: 'https://www.actero.ro',
   },
 }
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  '@id': 'https://actero.ro/#organization',
+  '@id': 'https://www.actero.ro/#organization',
   name: 'ActeRO',
-  url: 'https://actero.ro',
+  url: 'https://www.actero.ro',
   email: 'contact@actero.ro',
   description:
     'ActeRO oferă ghiduri clare pentru acte românești în diaspora: pașaport, buletin, titlu de călătorie, procuri și acte pentru copii născuți în străinătate.',
@@ -46,8 +46,8 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  '@id': 'https://actero.ro/#website',
-  url: 'https://actero.ro',
+  '@id': 'https://www.actero.ro/#website',
+  url: 'https://www.actero.ro',
   name: 'ActeRO',
   inLanguage: 'ro',
   description:

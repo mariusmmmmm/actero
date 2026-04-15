@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură moștenire din Germania — Ce cere consulatul vs notarul',
     description:
       'Certificatul de deces nu este pentru consulat, ci pentru notar. Acceptare vs renunțare, taxa RNNEPR și pașii practici.',
-    url: 'https://actero.ro/procura-mostenire-germania',
+    url: 'https://www.actero.ro/procura-mostenire-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-mostenire-germania',
+    canonical: 'https://www.actero.ro/procura-mostenire-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-mostenire-germania#article',
+  '@id': 'https://www.actero.ro/procura-mostenire-germania#article',
   headline: 'Procură moștenire din Germania — Ce cere consulatul vs notarul 2026',
   description:
     'Ghid pentru procura de moștenire din Germania: consulat vs notar, acceptare vs renunțare și documentele corecte pentru fiecare etapă.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-mostenire-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-mostenire-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură notarială Germania',
-      item: 'https://actero.ro/procura-notariala-germania',
+      item: 'https://www.actero.ro/procura-notariala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură moștenire Germania',
-      item: 'https://actero.ro/procura-mostenire-germania',
+      item: 'https://www.actero.ro/procura-mostenire-germania',
     },
   ],
 }

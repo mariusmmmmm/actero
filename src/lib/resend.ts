@@ -187,7 +187,7 @@ function buildAccessEmailHtml({
               Ai plătit 9,99€ o singură dată · Satisfacție garantată
             </p>
             <p style="margin:0;font-size:12px;color:#aaaaaa;">
-              ActeRO · <a href="https://actero.ro" style="color:#aaaaaa;">actero.ro</a> ·
+              ActeRO · <a href="https://www.actero.ro" style="color:#aaaaaa;">actero.ro</a> ·
               <a href="mailto:contact@actero.ro" style="color:#aaaaaa;">contact@actero.ro</a>
             </p>
           </td>
@@ -301,7 +301,7 @@ function buildFamilieEmailHtml({
               Probleme? Scrie-ne la <a href="mailto:contact@actero.ro" style="color:#22c55e;">contact@actero.ro</a>
             </p>
             <p style="margin:0;font-size:12px;color:#aaaaaa;">
-              ActeRO · <a href="https://actero.ro" style="color:#aaaaaa;">actero.ro</a>
+              ActeRO · <a href="https://www.actero.ro" style="color:#aaaaaa;">actero.ro</a>
             </p>
           </td>
         </tr>

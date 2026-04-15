@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     'Află ce date personale colectează ActeRO, în ce scopuri le folosim, cât timp le păstrăm și ce drepturi ai conform GDPR.',
   alternates: {
-    canonical: 'https://actero.ro/politica-de-confidentialitate',
+    canonical: 'https://www.actero.ro/politica-de-confidentialitate',
   },
 }
 

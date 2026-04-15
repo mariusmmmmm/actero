@@ -12,7 +12,7 @@ import type { ConsulateId, GuideId } from '@/types'
 const SHARE_TEXT = (ghidLabel: string) =>
   `Am rezolvat ${ghidLabel} cu ActeRO. Dacă și tu ești blocat, încearcă — primii pași sunt gratuiți.`
 
-const SHARE_URL = 'https://actero.ro'
+const SHARE_URL = 'https://www.actero.ro'
 
 function FinalizatPageContent() {
   const router = useRouter()

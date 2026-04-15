@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Ce acte rezolvi la consulatul României din Germania — Listă completă 2026',
     description:
       'Tabel complet: ce se face la consulat și ce NU se face. Pașaport, procuri, transcriere, stare civilă, titlu de călătorie.',
-    url: 'https://actero.ro/acte-consulat-romania-germania',
+    url: 'https://www.actero.ro/acte-consulat-romania-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/acte-consulat-romania-germania',
+    canonical: 'https://www.actero.ro/acte-consulat-romania-germania',
   },
 }
 
@@ -90,15 +90,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/acte-consulat-romania-germania#article',
+  '@id': 'https://www.actero.ro/acte-consulat-romania-germania#article',
   headline: 'Ce acte rezolvi la consulatul României din Germania — Listă completă 2026',
   description:
     'Pagina broad despre serviciile consulare din Germania: tabel ce se face și ce nu, programare și ghiduri specifice.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/acte-consulat-romania-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/acte-consulat-romania-germania',
   inLanguage: 'ro',
 }
 
@@ -106,18 +106,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Acte consulat România Germania',
-      item: 'https://actero.ro/acte-consulat-romania-germania',
+      item: 'https://www.actero.ro/acte-consulat-romania-germania',
     },
   ],
 }

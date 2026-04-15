@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Buletin expirat cu domiciliu activ în România — Cel mai simplu caz',
     description:
       'Fără extras CF. CEI la orice SPCLEP. Fotografii nu. Cel mai simplu traseu pentru buletin din Germania.',
-    url: 'https://actero.ro/buletin-expirat-cu-domiciliu-romania',
+    url: 'https://www.actero.ro/buletin-expirat-cu-domiciliu-romania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/buletin-expirat-cu-domiciliu-romania',
+    canonical: 'https://www.actero.ro/buletin-expirat-cu-domiciliu-romania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/buletin-expirat-cu-domiciliu-romania#article',
+  '@id': 'https://www.actero.ro/buletin-expirat-cu-domiciliu-romania#article',
   headline: 'Buletin expirat cu domiciliu activ în România — Cel mai simplu caz 2026',
   description:
     'Ghid leaf pentru buletinul expirat cu domiciliu activ în România: fără extras CF, CEI la orice SPCLEP, fotografii nu, prezență fizică obligatorie.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/buletin-expirat-cu-domiciliu-romania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/buletin-expirat-cu-domiciliu-romania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Buletin România Germania',
-      item: 'https://actero.ro/buletin-romania-germania',
+      item: 'https://www.actero.ro/buletin-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Buletin expirat domiciliu România',
-      item: 'https://actero.ro/buletin-expirat-cu-domiciliu-romania',
+      item: 'https://www.actero.ro/buletin-expirat-cu-domiciliu-romania',
     },
   ],
 }

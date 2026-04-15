@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP',
     description:
       'Din 2025, prezență fizică obligatorie la SPCLEP. CEI sau CIS, cu sau fără domiciliu în România — traseul exact pentru situația ta.',
-    url: 'https://actero.ro/buletin-expirat-germania',
+    url: 'https://www.actero.ro/buletin-expirat-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/buletin-expirat-germania',
+    canonical: 'https://www.actero.ro/buletin-expirat-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/buletin-expirat-germania#article',
+  '@id': 'https://www.actero.ro/buletin-expirat-germania#article',
   headline: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP 2026',
   description:
     'Ghid pentru reînnoirea buletinului expirat din Germania: SPCLEP obligatoriu, CEI vs CIS, cu sau fără domiciliu și orientare spre situația corectă.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/buletin-expirat-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/buletin-expirat-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Buletin România Germania',
-      item: 'https://actero.ro/buletin-romania-germania',
+      item: 'https://www.actero.ro/buletin-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Buletin expirat Germania',
-      item: 'https://actero.ro/buletin-expirat-germania',
+      item: 'https://www.actero.ro/buletin-expirat-germania',
     },
   ],
 }

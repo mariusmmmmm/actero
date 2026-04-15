@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Schimbare domiciliu copil din Germania în România',
     description:
       'Acordul ambilor părinți, extrasul CF și impactul asupra traseului pentru buletinul copilului.',
-    url: 'https://actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
+    url: 'https://www.actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
+    canonical: 'https://www.actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
   },
 }
 
@@ -94,15 +94,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/schimbare-domiciliu-copil-din-germania-in-romania#article',
+  '@id': 'https://www.actero.ro/schimbare-domiciliu-copil-din-germania-in-romania#article',
   headline: 'Schimbare domiciliu copil din Germania în România — SPCLEP 2026',
   description:
     'Ghid pentru înregistrarea domiciliului copilului născut în Germania în România: acordul părinților, extras CF și legătura cu primul buletin.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
   inLanguage: 'ro',
 }
 
@@ -110,18 +110,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Schimbare domiciliu copil Germania-Romania',
-      item: 'https://actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
+      item: 'https://www.actero.ro/schimbare-domiciliu-copil-din-germania-in-romania',
     },
   ],
 }

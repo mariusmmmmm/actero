@@ -17,7 +17,7 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
 Disallow: /ghid/access
-Sitemap: https://actero.ro/sitemap.xml
+Sitemap: https://www.actero.ro/sitemap.xml
 
 
 # ============================================================
@@ -447,4 +447,4 @@ Disallow: /api/
 # SITEMAP
 # ============================================================
 
-Sitemap: https://actero.ro/sitemap.xml
+Sitemap: https://www.actero.ro/sitemap.xml

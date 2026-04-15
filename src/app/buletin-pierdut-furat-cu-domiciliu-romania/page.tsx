@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Buletin pierdut sau furat — cu domiciliu activ în România',
     description:
       'Termen legal de 15 zile, extras CF online și pașii practici pentru CEI sau CIS.',
-    url: 'https://actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
+    url: 'https://www.actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
+    canonical: 'https://www.actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/buletin-pierdut-furat-cu-domiciliu-romania#article',
+  '@id': 'https://www.actero.ro/buletin-pierdut-furat-cu-domiciliu-romania#article',
   headline: 'Buletin pierdut sau furat — cu domiciliu activ în România — Ghid 2026',
   description:
     'Ghid pentru buletin pierdut sau furat, cu domiciliu activ în România: termen de reacție, extras CF, CEI vs CIS și pași la SPCLEP.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Buletin România Germania',
-      item: 'https://actero.ro/buletin-romania-germania',
+      item: 'https://www.actero.ro/buletin-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Buletin pierdut cu domiciliu',
-      item: 'https://actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
+      item: 'https://www.actero.ro/buletin-pierdut-furat-cu-domiciliu-romania',
     },
   ],
 }

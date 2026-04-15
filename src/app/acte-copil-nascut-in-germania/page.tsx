@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Acte românești copil născut în Germania — de unde începi',
     description:
       'Transcrierea nașterii vine prima. Fără ea nu poți obține pașaport sau buletin românesc. Ordinea corectă și ce document alegi.',
-    url: 'https://actero.ro/acte-copil-nascut-in-germania',
+    url: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/acte-copil-nascut-in-germania',
+    canonical: 'https://www.actero.ro/acte-copil-nascut-in-germania',
   },
 }
 
@@ -98,15 +98,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/acte-copil-nascut-in-germania#article',
+  '@id': 'https://www.actero.ro/acte-copil-nascut-in-germania#article',
   headline: 'Acte românești copil născut în Germania — de unde începi',
   description:
     'Ghidul principal pentru actele românești ale copilului născut în Germania: transcrierea nașterii, primul pașaport și primul buletin.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/acte-copil-nascut-in-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/acte-copil-nascut-in-germania',
   inLanguage: 'ro',
 }
 
@@ -114,18 +114,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
   ],
 }

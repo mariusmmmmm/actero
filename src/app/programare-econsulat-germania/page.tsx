@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Programare econsulat.ro din Germania — Cum funcționează, când apar locuri',
     description:
       'Fluxul complet cerere → validată → programare, când apar locuri noi și care sunt greșelile frecvente pe econsulat.',
-    url: 'https://actero.ro/programare-econsulat-germania',
+    url: 'https://www.actero.ro/programare-econsulat-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/programare-econsulat-germania',
+    canonical: 'https://www.actero.ro/programare-econsulat-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/programare-econsulat-germania#article',
+  '@id': 'https://www.actero.ro/programare-econsulat-germania#article',
   headline: 'Programare econsulat.ro din Germania — Cum funcționează, când apar locuri 2026',
   description:
     'Ghid despre fluxul econsulat.ro: stările cererii, validarea, alegerea serviciului și momentele în care apar locuri noi.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/programare-econsulat-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/programare-econsulat-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Programare econsulat Germania',
-      item: 'https://actero.ro/programare-econsulat-germania',
+      item: 'https://www.actero.ro/programare-econsulat-germania',
     },
   ],
 }

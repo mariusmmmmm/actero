@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Buletin românesc din Germania — Ghid complet 2026',
     description:
       'Din 2025 buletinul nu se mai rezolvă la consulat. CEI sau CIS, cu sau fără domiciliu — traseul exact pentru situația ta.',
-    url: 'https://actero.ro/buletin-romania-germania',
+    url: 'https://www.actero.ro/buletin-romania-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/buletin-romania-germania',
+    canonical: 'https://www.actero.ro/buletin-romania-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/buletin-romania-germania#article',
+  '@id': 'https://www.actero.ro/buletin-romania-germania#article',
   headline: 'Buletin românesc din Germania — Ghid complet 2026',
   description:
     'Ghidul principal pentru toate situațiile de buletin pentru românii din Germania: expirat, pierdut, cu sau fără domiciliu, CEI și CIS.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/buletin-romania-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/buletin-romania-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Buletin România Germania',
-      item: 'https://actero.ro/buletin-romania-germania',
+      item: 'https://www.actero.ro/buletin-romania-germania',
     },
   ],
 }

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Titlu de călătorie din Germania — fără programare, aceeași zi',
     description:
       'Pașaportul expirat și zbor în câteva zile? Titlul de călătorie e gratuit, fără programare, aceeași zi. Află exact ce aduci la consulat.',
-    url: 'https://actero.ro/titlu-calatorie-germania',
+    url: 'https://www.actero.ro/titlu-calatorie-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/titlu-calatorie-germania',
+    canonical: 'https://www.actero.ro/titlu-calatorie-germania',
   },
 }
 
@@ -98,15 +98,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/titlu-calatorie-germania#article',
+  '@id': 'https://www.actero.ro/titlu-calatorie-germania#article',
   headline: 'Titlu de călătorie din Germania — fără programare, aceeași zi',
   description:
     'Ghidul principal pentru titlul de călătorie din Germania: urgentă sub 3 zile, 1–2 săptămâni, fotografii și traduceri per consulat.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/titlu-calatorie-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/titlu-calatorie-germania',
   inLanguage: 'ro',
 }
 
@@ -114,18 +114,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Titlu de călătorie Germania',
-      item: 'https://actero.ro/titlu-calatorie-germania',
+      item: 'https://www.actero.ro/titlu-calatorie-germania',
     },
   ],
 }

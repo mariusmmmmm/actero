@@ -26,7 +26,7 @@ if (!secretKey) {
   process.exit(1)
 }
 
-const baseUrl = (process.env.STRIPE_WEBHOOK_BASE_URL?.trim() || 'https://actero.ro').replace(/\/$/, '')
+const baseUrl = (process.env.STRIPE_WEBHOOK_BASE_URL?.trim() || 'https://www.actero.ro').replace(/\/$/, '')
 const webhookUrl = `${baseUrl}/api/stripe/webhook`
 const stripe = new Stripe(secretKey)
 

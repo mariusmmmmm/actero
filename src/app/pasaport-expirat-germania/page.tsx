@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport expirat în Germania — Ce faci, ce aduci, cât costă 2026',
     description:
       'CRDS sau domiciliu România? Documente, taxă 53€, 45 zile, tabel complet per consulat cu plată, ridicare și poștă.',
-    url: 'https://actero.ro/pasaport-expirat-germania',
+    url: 'https://www.actero.ro/pasaport-expirat-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-expirat-germania',
+    canonical: 'https://www.actero.ro/pasaport-expirat-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-expirat-germania#article',
+  '@id': 'https://www.actero.ro/pasaport-expirat-germania#article',
   headline: 'Pașaport expirat în Germania — Ce faci, ce aduci, cât costă 2026',
   description:
     'Ghid pentru reînnoirea pașaportului expirat din Germania: CRDS vs domiciliu România, documente, 53€, 45 zile și diferențe per consulat.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-expirat-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-expirat-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Pașaport expirat Germania',
-      item: 'https://actero.ro/pasaport-expirat-germania',
+      item: 'https://www.actero.ro/pasaport-expirat-germania',
     },
   ],
 }

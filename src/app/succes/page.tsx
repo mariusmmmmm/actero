@@ -174,7 +174,7 @@ function SuccesPageContent() {
       problem_type: problemType ?? undefined,
       share_target: 'facebook',
     }, searchParams))
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=https://actero.ro&quote=${encodeURIComponent(shareText)}`, '_blank')
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=https://www.actero.ro&quote=${encodeURIComponent(shareText)}`, '_blank')
   }
 
   const crossSellItems = crossSell[problemType ?? 'default'] ?? crossSell.default

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România',
     description:
       'Formule A elimină de obicei apostila și traducerea. Există însă o excepție importantă pentru Berlin și cazurile în care apare și numele tatălui în actele românești.',
-    url: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+    url: 'https://www.actero.ro/formule-a-vs-geburtsurkunde',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+    canonical: 'https://www.actero.ro/formule-a-vs-geburtsurkunde',
   },
 }
 
@@ -95,15 +95,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/formule-a-vs-geburtsurkunde#article',
+  '@id': 'https://www.actero.ro/formule-a-vs-geburtsurkunde#article',
   headline: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere 2026',
   description:
     'Comparație între Formule A și Geburtsurkunde pentru transcrierea nașterii la consulatul din Germania.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/formule-a-vs-geburtsurkunde',
   inLanguage: 'ro',
 }
 
@@ -111,18 +111,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Formule A vs Geburtsurkunde',
-      item: 'https://actero.ro/formule-a-vs-geburtsurkunde',
+      item: 'https://www.actero.ro/formule-a-vs-geburtsurkunde',
     },
   ],
 }

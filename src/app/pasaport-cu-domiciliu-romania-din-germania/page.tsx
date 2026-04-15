@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport cu domiciliu în România, depus din Germania',
     description:
       'Nu selectezi CRDS. CI valabilă este cheia, iar regula fotografiilor diferă pe consulat.',
-    url: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+    url: 'https://www.actero.ro/pasaport-cu-domiciliu-romania-din-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+    canonical: 'https://www.actero.ro/pasaport-cu-domiciliu-romania-din-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania#article',
+  '@id': 'https://www.actero.ro/pasaport-cu-domiciliu-romania-din-germania#article',
   headline: 'Pașaport cu domiciliu în România, depus din Germania — Ghid 2026',
   description:
     'Ghid pentru pașaportul standard depus din Germania de cine are domiciliu oficial în România.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-cu-domiciliu-romania-din-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Pașaport domiciliu România din Germania',
-      item: 'https://actero.ro/pasaport-cu-domiciliu-romania-din-germania',
+      item: 'https://www.actero.ro/pasaport-cu-domiciliu-romania-din-germania',
     },
   ],
 }

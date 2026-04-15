@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport CRDS din Germania — Ce este, cine îl face, ce documente',
     description:
       'CRDS înseamnă domiciliu oficial în Germania. Fără fotografii proprii, CI se anulează și ai nevoie de document de domiciliu german.',
-    url: 'https://actero.ro/pasaport-crds-germania',
+    url: 'https://www.actero.ro/pasaport-crds-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-crds-germania',
+    canonical: 'https://www.actero.ro/pasaport-crds-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-crds-germania#article',
+  '@id': 'https://www.actero.ro/pasaport-crds-germania#article',
   headline: 'Pașaport CRDS din Germania — Ce este, cine îl face, ce documente 2026',
   description:
     'Ghid despre pașaportul CRDS pentru românii cu domiciliu în Germania: ce înseamnă, cine se califică și ce diferă față de pașaportul standard.',
   datePublished: '2026-04-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-crds-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-crds-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Pașaport CRDS Germania',
-      item: 'https://actero.ro/pasaport-crds-germania',
+      item: 'https://www.actero.ro/pasaport-crds-germania',
     },
   ],
 }

@@ -102,16 +102,16 @@ export default function LlmOptimizedPage({
   const webPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    '@id': `https://actero.ro/${lpSlug}#webpage`,
-    url: `https://actero.ro/${lpSlug}`,
+    '@id': `https://www.actero.ro/${lpSlug}#webpage`,
+    url: `https://www.actero.ro/${lpSlug}`,
     name: h1,
     description: tldr,
     inLanguage: 'ro',
     breadcrumb: {
-      '@id': `https://actero.ro/${lpSlug}#breadcrumb`,
+      '@id': `https://www.actero.ro/${lpSlug}#breadcrumb`,
     },
     isPartOf: {
-      '@id': 'https://actero.ro/#website',
+      '@id': 'https://www.actero.ro/#website',
     },
   }
 
@@ -122,7 +122,7 @@ export default function LlmOptimizedPage({
       '@type': 'ListItem',
       position: index + 1,
       name: section.title,
-      url: `https://actero.ro/${lpSlug}#${section.id}`,
+      url: `https://www.actero.ro/${lpSlug}#${section.id}`,
     })),
   }
 

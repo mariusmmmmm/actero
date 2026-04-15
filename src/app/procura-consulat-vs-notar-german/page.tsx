@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură la consulat vs notar german — Ce alegi pentru România',
     description:
       'Consulat: fără apostilă, fără traducere, aceeași zi. Notar german: apostilă + traducere legalizată + timp suplimentar. Când mergi totuși la notar german.',
-    url: 'https://actero.ro/procura-consulat-vs-notar-german',
+    url: 'https://www.actero.ro/procura-consulat-vs-notar-german',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-consulat-vs-notar-german',
+    canonical: 'https://www.actero.ro/procura-consulat-vs-notar-german',
   },
 }
 
@@ -86,15 +86,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-consulat-vs-notar-german#article',
+  '@id': 'https://www.actero.ro/procura-consulat-vs-notar-german#article',
   headline: 'Procură la consulat vs notar german — Ce alegi pentru România 2026',
   description:
     'Pagina comparativă consulat vs notar german pentru procuri: apostilă, traducere, cost, timp și cazurile rare în care notarul german are sens.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-consulat-vs-notar-german',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-consulat-vs-notar-german',
   inLanguage: 'ro',
 }
 
@@ -102,18 +102,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură notarială Germania',
-      item: 'https://actero.ro/procura-notariala-germania',
+      item: 'https://www.actero.ro/procura-notariala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Consulat vs notar german',
-      item: 'https://actero.ro/procura-consulat-vs-notar-german',
+      item: 'https://www.actero.ro/procura-consulat-vs-notar-german',
     },
   ],
 }

@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Programare consulat România în Germania — Ghid complet',
     description: 'Cum obții programare pe econsulat.ro și ce greșeli să eviți.',
-    url: 'https://actero.ro/programare-consulat-romania',
+    url: 'https://www.actero.ro/programare-consulat-romania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/programare-consulat-romania',
+    canonical: 'https://www.actero.ro/programare-consulat-romania',
   },
 }
 
@@ -57,14 +57,14 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/programare-consulat-romania#article',
+  '@id': 'https://www.actero.ro/programare-consulat-romania#article',
   headline: 'Programare consulat România în Germania — Ghid 2026',
   description: 'Cum obții programare pe econsulat.ro, când apar locurile și ce greșeli să eviți.',
   datePublished: '2026-01-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/programare-consulat-romania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/programare-consulat-romania',
   inLanguage: 'ro',
 }
 
@@ -72,8 +72,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
-    { '@type': 'ListItem', position: 2, name: 'Programare consulat România', item: 'https://actero.ro/programare-consulat-romania' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
+    { '@type': 'ListItem', position: 2, name: 'Programare consulat România', item: 'https://www.actero.ro/programare-consulat-romania' },
   ],
 }
 

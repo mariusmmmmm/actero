@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Titlu de călătorie URGENT din Germania — fără programare, aceeași zi',
     description:
       'Gratuit, fără programare, aceeași zi. Intervale exacte per consulat și pașii de urgență până ajungi în România.',
-    url: 'https://actero.ro/titlu-calatorie-urgenta-germania',
+    url: 'https://www.actero.ro/titlu-calatorie-urgenta-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/titlu-calatorie-urgenta-germania',
+    canonical: 'https://www.actero.ro/titlu-calatorie-urgenta-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/titlu-calatorie-urgenta-germania#article',
+  '@id': 'https://www.actero.ro/titlu-calatorie-urgenta-germania#article',
   headline: 'Titlu de călătorie urgent din Germania — fără programare, aceeași zi',
   description:
     'Ghid complet pentru titlul de călătorie urgent din Germania: intervale per consulat, acte, fotografii și pașii de după intrarea în România.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/titlu-calatorie-urgenta-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/titlu-calatorie-urgenta-germania',
   inLanguage: 'ro',
 }
 
@@ -115,12 +115,12 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Titlu de călătorie urgent',
-      item: 'https://actero.ro/titlu-calatorie-urgenta-germania',
+      item: 'https://www.actero.ro/titlu-calatorie-urgenta-germania',
     },
   ],
 }

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură vânzare proprietate din Germania — Consulat, aceeași zi',
     description:
       'Notar ales sau nu, taxa RNNEPR per consulat și datele imobilului care contează într-o procură imobiliară.',
-    url: 'https://actero.ro/procura-vanzare-proprietate-germania',
+    url: 'https://www.actero.ro/procura-vanzare-proprietate-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-vanzare-proprietate-germania',
+    canonical: 'https://www.actero.ro/procura-vanzare-proprietate-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-vanzare-proprietate-germania#article',
+  '@id': 'https://www.actero.ro/procura-vanzare-proprietate-germania#article',
   headline: 'Procură vânzare proprietate din Germania — Consulat, aceeași zi 2026',
   description:
     'Ghid pentru procura de vânzare sau cumpărare proprietate din Germania: notar ales, datele imobilului și regulile practice pe consulat.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-vanzare-proprietate-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-vanzare-proprietate-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură notarială Germania',
-      item: 'https://actero.ro/procura-notariala-germania',
+      item: 'https://www.actero.ro/procura-notariala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură vânzare proprietate',
-      item: 'https://actero.ro/procura-vanzare-proprietate-germania',
+      item: 'https://www.actero.ro/procura-vanzare-proprietate-germania',
     },
   ],
 }

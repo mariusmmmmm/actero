@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură generală din Germania — Divorț, firmă, bancă, acte diverse',
     description:
       'Taxa 3€ RNNEPR la toate procurile. Ce specifici pentru bancă, firmă sau divorț și când procura generală e prea generală.',
-    url: 'https://actero.ro/procura-generala-germania',
+    url: 'https://www.actero.ro/procura-generala-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-generala-germania',
+    canonical: 'https://www.actero.ro/procura-generala-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-generala-germania#article',
+  '@id': 'https://www.actero.ro/procura-generala-germania#article',
   headline: 'Procură generală din Germania — Divorț, firmă, bancă, acte diverse 2026',
   description:
     'Ghid pentru procura generală la consulatul din Germania: bancă, firmă, divorț și acte diverse, plus taxa RNNEPR și limitele unei procuri prea generale.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-generala-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-generala-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură notarială Germania',
-      item: 'https://actero.ro/procura-notariala-germania',
+      item: 'https://www.actero.ro/procura-notariala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură generală Germania',
-      item: 'https://actero.ro/procura-generala-germania',
+      item: 'https://www.actero.ro/procura-generala-germania',
     },
   ],
 }

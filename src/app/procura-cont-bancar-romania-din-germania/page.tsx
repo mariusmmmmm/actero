@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci',
     description:
       'Verifică banca înainte de consulat, specifică operațiunile clar și tratează separat cazurile restrictive precum ING.',
-    url: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+    url: 'https://www.actero.ro/procura-cont-bancar-romania-din-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+    canonical: 'https://www.actero.ro/procura-cont-bancar-romania-din-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/procura-cont-bancar-romania-din-germania#article',
+  '@id': 'https://www.actero.ro/procura-cont-bancar-romania-din-germania#article',
   headline: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci 2026',
   description:
     'Ghid pentru procura bancară din Germania: verificarea cu banca, operațiunile ce trebuie enumerate explicit și excepțiile practice.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/procura-cont-bancar-romania-din-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Procură generală Germania',
-      item: 'https://actero.ro/procura-generala-germania',
+      item: 'https://www.actero.ro/procura-generala-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Procură cont bancar România',
-      item: 'https://actero.ro/procura-cont-bancar-romania-din-germania',
+      item: 'https://www.actero.ro/procura-cont-bancar-romania-din-germania',
     },
   ],
 }

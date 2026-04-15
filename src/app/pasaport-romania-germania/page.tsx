@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport românesc din Germania — Ghid complet 2026',
     description:
       'CRDS sau domiciliu în România? Expirat, pierdut sau primul pașaport? Traseul exact în funcție de situația ta.',
-    url: 'https://actero.ro/pasaport-romania-germania',
+    url: 'https://www.actero.ro/pasaport-romania-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-romania-germania',
+    canonical: 'https://www.actero.ro/pasaport-romania-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-romania-germania#article',
+  '@id': 'https://www.actero.ro/pasaport-romania-germania#article',
   headline: 'Pașaport românesc din Germania — Ghid complet 2026',
   description:
     'Ghidul principal pentru toate situațiile de pașaport românesc din Germania: CRDS, domiciliu România, expirat, pierdut sau primul pașaport.',
   datePublished: '2026-04-06',
   dateModified: '2026-04-06',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-romania-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-romania-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
   ],
 }

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi',
     description:
       'Criteriul unic: domiciliul oficial. Fotografii, CI, selecție econsulat.ro și diferențele practice care contează.',
-    url: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+    url: 'https://www.actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+    canonical: 'https://www.actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
   },
 }
 
@@ -95,15 +95,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania#article',
+  '@id': 'https://www.actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania#article',
   headline: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi 2026',
   description:
     'Comparație între pașaportul CRDS și pașaportul cu domiciliu în România: criteriul de calificare, fotografii, CI și selecția corectă pe econsulat.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
   inLanguage: 'ro',
 }
 
@@ -111,18 +111,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'CRDS vs domiciliu România',
-      item: 'https://actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
+      item: 'https://www.actero.ro/pasaport-crds-vs-pasaport-cu-domiciliu-romania',
     },
   ],
 }

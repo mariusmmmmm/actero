@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Acte românești din Germania — Ghid complet 2026',
     description:
       'Ce rezolvi la consulat, ce necesită drum în România și cum găsești traseul exact în 30 de secunde.',
-    url: 'https://actero.ro/acte-romanesti-germania',
+    url: 'https://www.actero.ro/acte-romanesti-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/acte-romanesti-germania',
+    canonical: 'https://www.actero.ro/acte-romanesti-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/acte-romanesti-germania#article',
+  '@id': 'https://www.actero.ro/acte-romanesti-germania#article',
   headline: 'Acte românești din Germania — Ghid complet 2026',
   description:
     'Pagina hub pentru actele românești rezolvate din Germania: pașaport, buletin, titlu de călătorie, procuri și acte pentru copil.',
   datePublished: '2026-04-06',
   dateModified: '2026-04-06',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/acte-romanesti-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/acte-romanesti-germania',
   inLanguage: 'ro',
 }
 
@@ -115,12 +115,12 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte românești Germania',
-      item: 'https://actero.ro/acte-romanesti-germania',
+      item: 'https://www.actero.ro/acte-romanesti-germania',
     },
   ],
 }

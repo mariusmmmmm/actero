@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Pașaport pierdut sau furat în Germania — Ce faci imediat',
     description:
       'Ordinea pașilor pentru pierdere sau furt, plus ce se schimbă la dosar și la consulat.',
-    url: 'https://actero.ro/pasaport-pierdut-furat-germania',
+    url: 'https://www.actero.ro/pasaport-pierdut-furat-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/pasaport-pierdut-furat-germania',
+    canonical: 'https://www.actero.ro/pasaport-pierdut-furat-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/pasaport-pierdut-furat-germania#article',
+  '@id': 'https://www.actero.ro/pasaport-pierdut-furat-germania#article',
   headline: 'Pașaport pierdut sau furat în Germania — Ce faci imediat 2026',
   description:
     'Ghid pentru pașaport românesc pierdut sau furat în Germania: ordine de pași, diferențe între pierdere și furt și orientare pe consulat.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/pasaport-pierdut-furat-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/pasaport-pierdut-furat-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Pașaport România Germania',
-      item: 'https://actero.ro/pasaport-romania-germania',
+      item: 'https://www.actero.ro/pasaport-romania-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Pașaport pierdut / furat Germania',
-      item: 'https://actero.ro/pasaport-pierdut-furat-germania',
+      item: 'https://www.actero.ro/pasaport-pierdut-furat-germania',
     },
   ],
 }

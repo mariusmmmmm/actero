@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Primul pașaport copil născut în Germania — după transcriere',
     description:
       'După transcriere, urmează primul pașaport: acordul părinților, prezența copilului și logica pașilor la consulat.',
-    url: 'https://actero.ro/primul-pasaport-copil-germania',
+    url: 'https://www.actero.ro/primul-pasaport-copil-germania',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://actero.ro/primul-pasaport-copil-germania',
+    canonical: 'https://www.actero.ro/primul-pasaport-copil-germania',
   },
 }
 
@@ -99,15 +99,15 @@ const howToSteps = [
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  '@id': 'https://actero.ro/primul-pasaport-copil-germania#article',
+  '@id': 'https://www.actero.ro/primul-pasaport-copil-germania#article',
   headline: 'Primul pașaport copil născut în Germania — după transcriere 2026',
   description:
     'Ghid pentru primul pașaport al copilului născut în Germania după transcriere: acordul părinților, prezența copilului și pașii practici.',
   datePublished: '2026-04-09',
   dateModified: '2026-04-09',
-  author: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  publisher: { '@type': 'Organization', '@id': 'https://actero.ro/#organization' },
-  mainEntityOfPage: 'https://actero.ro/primul-pasaport-copil-germania',
+  author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
+  mainEntityOfPage: 'https://www.actero.ro/primul-pasaport-copil-germania',
   inLanguage: 'ro',
 }
 
@@ -115,18 +115,18 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://actero.ro' },
+    { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Acte copil născut în Germania',
-      item: 'https://actero.ro/acte-copil-nascut-in-germania',
+      item: 'https://www.actero.ro/acte-copil-nascut-in-germania',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Primul pașaport copil Germania',
-      item: 'https://actero.ro/primul-pasaport-copil-germania',
+      item: 'https://www.actero.ro/primul-pasaport-copil-germania',
     },
   ],
 }
