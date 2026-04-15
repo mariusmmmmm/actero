@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Procură vânzare proprietate din Italia — Ghid complet 2026 | ActeRO',
   description: 'Procură pentru vânzare sau cumpărare proprietate în România, făcută la consulatul din Italia. Gratuit, aceeași zi, valabilă fără apostilă. RNNEPR virament bancar.',
   keywords: ['procura vanzare proprietate italia','procura imobiliara italia romania','procura notariala vanzare din italia','imobil romania procura consulat italia'],
-  openGraph: { title: 'Procură vânzare proprietate din Italia — Ghid 2026', description: 'Gratuită, gată în aceeași zi, valabilă în România fără apostilă. Plată RNNEPR virament.', url: 'https://www.actero.ro/procura-vanzare-proprietate-italia', type: 'article' },
+  openGraph: { title: 'Procură vânzare proprietate din Italia — Ghid 2026', description: 'Gratuită, gata în aceeași zi, valabilă în România fără apostilă. Plată RNNEPR prin virament.', url: 'https://www.actero.ro/procura-vanzare-proprietate-italia', type: 'article' },
   alternates: { canonical: 'https://www.actero.ro/procura-vanzare-proprietate-italia' },
 }
 const faqItems = [

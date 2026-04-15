@@ -1,35 +1,191 @@
 import type { ConsulateId } from '@/types'
 import { getConsulateById, getConsulateCountry } from '@/lib/utils/deriveConsulate'
 
+type RuleSet = {
+  shortName?: string
+  passportLostTranslationRule?: string
+  travelTranslationRule?: string
+  travelPhotoRule?: string
+  travelIssuanceRule?: string
+  travelPickupTeaser?: string
+  travelBookingRule?: string
+  travelBookingUrgentRule?: string
+  travelBadgeSummary?: string
+  travelBadgeSummaryUrgent?: string
+  rnneprPaymentRule?: string
+  procuraSalePrescanRule?: string | null
+  mostenireDeathCertificateRule?: string
+  birthParentCertificatesRule?: string
+  birthBerlinNameRule?: string | null
+  birthProcessingRule?: string
+  birthPickupRule?: string
+  birthPostalRule?: string | null
+  birthSameDayPassportRule?: string | null
+  travelBonnFridayRule?: string | null
+}
+
+const COUNTRY_DEFAULT_RULES: Record<'de' | 'it', RuleSet> = {
+  de: {
+    passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere autorizată în română.',
+    travelTranslationRule: 'Dacă documentul a fost furat, ai nevoie de adeverința poliției + traducere autorizată în română.',
+    travelPhotoRule: 'Fotografia se preia la ghișeu — nu trebuie să aduci fotografii proprii.',
+    travelIssuanceRule: 'Titlul se eliberează, de regulă, în aceeași zi.',
+    travelBookingRule: 'Titlul de călătorie se obține, de regulă, fără programare, direct la consulat.',
+    travelBookingUrgentRule: 'Nu ai nevoie de econsulat.ro și nu există programare online pentru titlul de călătorie. Te prezinți direct la consulat în intervalul dedicat.',
+    travelBadgeSummary: 'fără programare · aceeași zi în majoritatea cazurilor',
+    travelBadgeSummaryUrgent: 'fără programare · aceeași zi',
+    mostenireDeathCertificateRule: 'Verifică înainte dacă trebuie să ai și copia certificatului de deces la ghișeu.',
+    birthParentCertificatesRule: 'Adu certificatele de naștere românești ale părinților dacă nu ești sigur de regula consulatului tău.',
+  },
+  it: {
+    passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere autorizată în română, făcută de un traducător autorizat de Ministerul Justiției.',
+    travelTranslationRule: 'Dacă documentul a fost furat, ai nevoie de adeverința poliției. În Italia, pentru titlul de călătorie nu se cere de regulă traducere în română.',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, verifică regula exactă în cardul consulatului.',
+    travelIssuanceRule: 'Titlul se eliberează, de regulă, în aceeași zi după verificarea identității și a documentelor de călătorie.',
+    travelPickupTeaser: 'Vezi regula exactă de preluare și eliberare pentru consulatul tău.',
+    travelBookingRule: 'Verifică direct dacă titlul de călătorie se face cu programare sau în interval walk-in la consulatul tău.',
+    travelBookingUrgentRule: 'Pentru urgențe, verifică direct dacă poți merge fără programare la consulatul tău.',
+    travelBadgeSummary: 'verifică regula consulatului înainte de drum',
+    travelBadgeSummaryUrgent: 'verifică regula consulatului · posibil aceeași zi',
+    rnneprPaymentRule: 'Taxa RNNEPR pentru procuri se plătește, de regulă, prin virament bancar în avans.',
+    mostenireDeathCertificateRule: 'Verifică înainte dacă trebuie să ai și copia certificatului de deces la ghișeu.',
+    birthParentCertificatesRule: 'Confirmă direct cu consulatul și, dacă poți, du certificatele de naștere ale părinților.',
+  },
+}
+
+const CONSULATE_RULES: Record<ConsulateId, RuleSet> = {
+  bonn: {
+    shortName: 'Bonn',
+    passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției. Dacă vrei să fii complet acoperit, poți veni și cu traducerea în română.',
+    travelTranslationRule: 'Dacă documentul a fost furat, ai nevoie de adeverința poliției. Dacă vrei să fii complet acoperit, poți veni și cu traducerea în română.',
+    travelIssuanceRule: 'De regulă ridici titlul în aceeași zi dacă te prezinți dimineața, de luni până joi. Dacă depui vineri, de obicei revii luni la ridicare.',
+    travelPickupTeaser: 'Bonn: de regulă în aceeași zi dacă mergi dimineața, de luni până joi; vineri ridicarea poate rămâne pentru luni.',
+    travelBonnFridayRule: 'Dacă te prezinți vineri dimineața, de regulă ridici titlul luni după-amiaza.',
+    rnneprPaymentRule: 'Taxa de 3€ RNNEPR se plătește astfel la Bonn: virament bancar în avans pentru taxa de 3€ RNNEPR.',
+    procuraSalePrescanRule: 'La Bonn, pentru eliberare în aceeași zi, încarci din timp pe econsulat copia actului de proprietate și copia actului mandatarului.',
+    mostenireDeathCertificateRule: 'Ia la tine și copia certificatului de deces. Actele de rudenie rămân utile pentru notarul din România.',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt necesare dacă actele lor nu conțin locul nașterii.',
+  },
+  muenchen: {
+    shortName: 'München',
+    travelPhotoRule: 'Ai nevoie de 2 fotografii biometrice color, tipărite.',
+    travelIssuanceRule: 'Titlul se eliberează în aceeași zi, în programul normal al consulatului.',
+    travelPickupTeaser: 'München: de regulă în aceeași zi, în programul normal al consulatului.',
+    mostenireDeathCertificateRule: 'Verifică înainte cu notarul și cu consulatul dacă vor și copia certificatului de deces la ghișeu.',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt necesare dacă ambii părinți sunt cetățeni români.',
+    birthSameDayPassportRule: 'La München, dacă certificatul transcris era ultimul act lipsă, poți continua în aceeași zi cu pașaportul copilului.',
+  },
+  stuttgart: {
+    shortName: 'Stuttgart',
+    passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere legalizată în română.',
+    travelTranslationRule: 'Dacă documentul a fost furat, ai nevoie de adeverința poliției + traducere în română.',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 1 fotografie color 3,5 × 4,5 cm pe hârtie.',
+    travelIssuanceRule: 'Depunerea și eliberarea se fac în același interval, de regulă în aceeași zi.',
+    travelPickupTeaser: 'Stuttgart: de regulă în aceeași zi, după depunerea cererii.',
+    rnneprPaymentRule: 'Taxa de 3€ RNNEPR se plătește astfel la Stuttgart: POS (EC-Karte) la ghișeu sau virament bancar în avans pentru taxa de 3€ RNNEPR.',
+    mostenireDeathCertificateRule: 'Ia la tine și copia certificatului de deces. Actele de rudenie rămân utile pentru notarul din România.',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt necesare dacă părinții nu sunt căsătoriți.',
+    birthPostalRule: 'Dacă vrei certificatul prin poștă, adu la depunere plic DIN C5 autoadresat, timbrat 6,65 EUR.',
+  },
+  berlin: {
+    shortName: 'Berlin',
+    travelIssuanceRule: 'Depunerea și eliberarea se fac în același interval, de regulă în aceeași zi.',
+    travelPickupTeaser: 'Berlin: de regulă în aceeași zi, în intervalul dedicat.',
+    mostenireDeathCertificateRule: 'Ia la tine și copia certificatului de deces. Actele de rudenie rămân utile pentru notarul din România.',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt obligatorii fără excepție.',
+    birthBerlinNameRule: 'Dacă la un părinte apare și numele tatălui în acte, Formule A nu este acceptat. Ai nevoie de Geburtsurkunde + apostilă + traducere autorizată.',
+  },
+  roma: {
+    shortName: 'Roma',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 2 fotografii tip pașaport.',
+    travelBookingRule: 'La Roma, urgențele se preiau fără programare între 11:00 și 13:00. În rest, mergi cu programare pe econsulat.ro.',
+    travelBookingUrgentRule: 'La Roma, urgențele se preiau fără programare, de luni până vineri, între 11:00 și 13:00.',
+    travelBadgeSummary: 'cu programare · urgențe 11:00–13:00',
+    travelBadgeSummaryUrgent: 'walk-in urgențe 11:00–13:00 · de regulă aceeași zi',
+  },
+  milano: {
+    shortName: 'Milano',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 1 fotografie tip pașaport.',
+    travelBookingRule: 'La Milano, titlul urgent se poate rezolva fără programare după apel pe linia de urgență. Pentru cazurile non-urgente mergi cu programare.',
+    travelBookingUrgentRule: 'La Milano, titlul urgent se poate rezolva fără programare, după apel pe linia de urgență a consulatului.',
+    travelBadgeSummary: 'urgent fără programare după apel · altfel cu programare',
+    travelBadgeSummaryUrgent: 'apel urgență · fără programare · de regulă aceeași zi',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt de regulă cerute și merită pregătite din start.',
+    birthSameDayPassportRule: 'La Milano, dacă transcrierea se rezolvă în aceeași zi și acesta era ultimul act lipsă, întreabă direct dacă poți continua imediat cu pașaportul copilului.',
+  },
+  bologna: {
+    shortName: 'Bologna',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, prezența copilului este obligatorie și fotografia se face biometric la ghișeu.',
+    travelBookingRule: 'La Bologna, pentru fluxul uzual programarea nu este obligatorie. Pentru urgențe poți merge walk-in dacă ai documente justificative.',
+    travelBookingUrgentRule: 'La Bologna, poți merge walk-in pentru urgențe dacă ai documente justificative. Biletul de avion singur nu este suficient.',
+    travelBadgeSummary: 'de regulă fără programare · urgențele cer dovezi',
+    travelBadgeSummaryUrgent: 'walk-in cu dovezi · de regulă aceeași zi',
+    birthParentCertificatesRule: 'Regula nu este foarte clară pe site. Dacă le ai, du-le cu tine ca să eviți un drum în plus.',
+  },
+  torino: {
+    shortName: 'Torino',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 2 fotografii tip pașaport.',
+    travelIssuanceRule: 'Titlul se eliberează după depunerea cererii conform programării și verificării făcute de consulat.',
+    travelBookingRule: 'La Torino, titlul de călătorie se face exclusiv cu programare pe econsulat.ro. Nu există walk-in nici pentru urgențe.',
+    travelBookingUrgentRule: 'La Torino, titlul de călătorie se face exclusiv cu programare pe econsulat.ro. Nu există walk-in nici pentru urgențe.',
+    travelBadgeSummary: 'numai cu programare · fără walk-in',
+    travelBadgeSummaryUrgent: 'numai cu programare · fără walk-in',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt de regulă cerute și merită pregătite din start.',
+    birthPostalRule: 'Dacă vrei certificatul prin poștă, întreabă direct la depunere cum se folosește plicul preplătit sau metoda acceptată de consulat.',
+  },
+  trieste: {
+    shortName: 'Trieste',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 1 fotografie tip pașaport.',
+    travelIssuanceRule: 'Titlul se eliberează după depunerea cererii conform programării și verificării făcute de consulat.',
+    travelBookingRule: 'La Trieste, tratează titlul de călătorie ca flux cu programare. Nu există interval walk-in confirmat.',
+    travelBookingUrgentRule: 'La Trieste, tratează titlul de călătorie ca flux cu programare. Nu există interval walk-in confirmat.',
+    travelBadgeSummary: 'cu programare · fără walk-in confirmat',
+    travelBadgeSummaryUrgent: 'cu programare · fără walk-in confirmat',
+    rnneprPaymentRule: 'Taxa RNNEPR pentru procuri se plătește astfel la Trieste: virament bancar în avans pentru 3€ RNNEPR + 5€ verificare registru.',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt de regulă cerute și merită pregătite din start.',
+  },
+  bari: {
+    shortName: 'Bari',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 2 fotografii tip pașaport.',
+    travelIssuanceRule: 'Titlul se eliberează după depunerea cererii conform programării și verificării făcute de consulat.',
+    travelBookingRule: 'La Bari, tratează titlul de călătorie ca flux cu programare. Nu există walk-in confirmat.',
+    travelBookingUrgentRule: 'La Bari, tratează titlul de călătorie ca flux cu programare. Nu există walk-in confirmat.',
+    travelBadgeSummary: 'cu programare · fără walk-in confirmat',
+    travelBadgeSummaryUrgent: 'cu programare · fără walk-in confirmat',
+    birthParentCertificatesRule: 'Certificatele de naștere românești ale părinților sunt de regulă cerute și merită pregătite din start.',
+    birthPostalRule: 'La Bari, întreabă direct dacă poți primi documentul prin DHL după depunere.',
+  },
+  catania: {
+    shortName: 'Catania',
+    travelPhotoRule: 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 2 fotografii tip pașaport.',
+    travelIssuanceRule: 'Titlul se eliberează după depunerea cererii conform programării și verificării făcute de consulat.',
+    travelBookingRule: 'La Catania, mergi doar cu programare și confirmă direct înainte de drum. Nu există urgențe walk-in confirmate.',
+    travelBookingUrgentRule: 'La Catania, mergi doar cu programare și confirmă direct înainte de drum. Nu există urgențe walk-in confirmate.',
+    travelBadgeSummary: 'cu programare · confirmare directă obligatorie',
+    travelBadgeSummaryUrgent: 'cu programare · confirmare directă obligatorie',
+    birthParentCertificatesRule: 'Regula nu este confirmată online. Confirmă direct cu consulatul și, dacă poți, du certificatele părinților.',
+  },
+}
+
+function getResolvedRules(consulate: ConsulateId | null): RuleSet {
+  if (!consulate) return {}
+  const country = getConsulateCountry(consulate)
+  if (!country) return {}
+  return {
+    ...COUNTRY_DEFAULT_RULES[country],
+    ...CONSULATE_RULES[consulate],
+  }
+}
+
 export function getShortConsulateName(consulate: ConsulateId | null): string {
-  if (consulate === 'bonn') return 'Bonn'
-  if (consulate === 'muenchen') return 'München'
-  if (consulate === 'stuttgart') return 'Stuttgart'
-  if (consulate === 'berlin') return 'Berlin'
-  if (consulate === 'roma') return 'Roma'
-  if (consulate === 'milano') return 'Milano'
-  if (consulate === 'bologna') return 'Bologna'
-  if (consulate === 'torino') return 'Torino'
-  if (consulate === 'trieste') return 'Trieste'
-  if (consulate === 'bari') return 'Bari'
-  if (consulate === 'catania') return 'Catania'
+  const shortName = getResolvedRules(consulate).shortName
+  if (shortName) return shortName
   return 'consulatul tău'
 }
 
 export function getPassportLostTranslationRule(consulate: ConsulateId | null): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    return 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere autorizată în română, făcută de un traducător autorizat de Ministerul Justiției.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere legalizată în română.'
-  }
-  if (consulate === 'bonn') {
-    return 'Pentru pașaport furat · ai nevoie de adeverința poliției. Dacă vrei să fii complet acoperit, poți veni și cu traducerea în română.'
-  }
-  if (consulate) {
-    return 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere autorizată în română.'
-  }
+  const rule = getResolvedRules(consulate).passportLostTranslationRule
+  if (rule) return rule
   return 'Pentru pașaport furat · ai nevoie de adeverința poliției și, după caz, de traducerea cerută de consulatul tău.'
 }
 
@@ -58,68 +214,20 @@ export function getPostalPickupRule(consulate: ConsulateId | null): string | nul
 }
 
 export function getTravelTranslationRule(consulate: ConsulateId | null): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    return 'Dacă documentul a fost furat, ai nevoie de adeverința poliției. În Italia, pentru titlul de călătorie nu se cere de regulă traducere în română.'
-  }
-  if (consulate === 'bonn') {
-    return 'Dacă documentul a fost furat, ai nevoie de adeverința poliției. Dacă vrei să fii complet acoperit, poți veni și cu traducerea în română.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Dacă documentul a fost furat, ai nevoie de adeverința poliției + traducere în română.'
-  }
-  if (consulate) {
-    return 'Dacă documentul a fost furat, ai nevoie de adeverința poliției + traducere autorizată în română.'
-  }
+  const rule = getResolvedRules(consulate).travelTranslationRule
+  if (rule) return rule
   return 'Dacă documentul a fost furat, ai nevoie de adeverința poliției și de traducerea cerută de consulatul tău.'
 }
 
 export function getTravelPhotoRule(consulate: ConsulateId | null): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    if (consulate === 'bologna') {
-      return 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, prezența copilului este obligatorie și fotografia se face biometric la ghișeu.'
-    }
-    if (consulate === 'milano' || consulate === 'trieste') {
-      return 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 1 fotografie tip pașaport.'
-    }
-    if (consulate === 'torino' || consulate === 'bari' || consulate === 'catania' || consulate === 'roma') {
-      return 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 2 fotografii tip pașaport.'
-    }
-    return 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, verifică regula exactă în cardul consulatului.'
-  }
-  if (consulate === 'muenchen') {
-    return 'Ai nevoie de 2 fotografii biometrice color, tipărite.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Adulții fac fotografia la ghișeu. Pentru minorii sub 14 ani, adu 1 fotografie color 3,5 × 4,5 cm pe hârtie.'
-  }
-  if (consulate) {
-    return 'Fotografia se preia la ghișeu — nu trebuie să aduci fotografii proprii.'
-  }
+  const rule = getResolvedRules(consulate).travelPhotoRule
+  if (rule) return rule
   return 'Regula fotografiei depinde de consulatul tău.'
 }
 
 export function getTravelIssuanceRule(consulate: ConsulateId | null): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    if (consulate === 'torino' || consulate === 'trieste' || consulate === 'bari' || consulate === 'catania') {
-      return 'Titlul se eliberează după depunerea cererii conform programării și verificării făcute de consulat.'
-    }
-    return 'Titlul se eliberează, de regulă, în aceeași zi după verificarea identității și a documentelor de călătorie.'
-  }
-  if (consulate === 'bonn') {
-    return 'De regulă ridici titlul în aceeași zi dacă te prezinți dimineața, de luni până joi. Dacă depui vineri, de obicei revii luni la ridicare.'
-  }
-  if (consulate === 'muenchen') {
-    return 'Titlul se eliberează în aceeași zi, în programul normal al consulatului.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Depunerea și eliberarea se fac în același interval, de regulă în aceeași zi.'
-  }
-  if (consulate === 'berlin') {
-    return 'Depunerea și eliberarea se fac în același interval, de regulă în aceeași zi.'
-  }
+  const rule = getResolvedRules(consulate).travelIssuanceRule
+  if (rule) return rule
   return 'Titlul se eliberează, de regulă, în aceeași zi.'
 }
 
@@ -133,208 +241,86 @@ export function getTravelPickupTeaser(consulate: ConsulateId | null): string {
     return 'Când ridici titlul depinde de regula consulatului tău și de momentul în care depui cererea.'
   }
 
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    return `${getShortConsulateName(consulate)}: vezi regula exactă de preluare și eliberare pentru consulatul tău.`
-  }
-
-  if (consulate === 'bonn') {
-    return 'Bonn: de regulă în aceeași zi dacă mergi dimineața, de luni până joi; vineri ridicarea poate rămâne pentru luni.'
-  }
-  if (consulate === 'muenchen') {
-    return 'München: de regulă în aceeași zi, în programul normal al consulatului.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Stuttgart: de regulă în aceeași zi, după depunerea cererii.'
-  }
-  if (consulate === 'berlin') {
-    return 'Berlin: de regulă în aceeași zi, în intervalul dedicat.'
+  const rule = getResolvedRules(consulate).travelPickupTeaser
+  if (rule) {
+    return getConsulateCountry(consulate) === 'it'
+      ? `${getShortConsulateName(consulate)}: ${rule}`
+      : rule
   }
 
   return 'Când ridici titlul depinde de regula consulatului tău.'
 }
 
 export function getTravelBookingRule(consulate: ConsulateId | null, urgent = false): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    if (consulate === 'milano') {
-      return urgent
-        ? 'La Milano, titlul urgent se poate rezolva fără programare, după apel pe linia de urgență a consulatului.'
-        : 'La Milano, titlul urgent se poate rezolva fără programare după apel pe linia de urgență. Pentru cazurile non-urgente mergi cu programare.'
-    }
-    if (consulate === 'bologna') {
-      return urgent
-        ? 'La Bologna, poți merge walk-in pentru urgențe dacă ai documente justificative. Biletul de avion singur nu este suficient.'
-        : 'La Bologna, pentru fluxul uzual programarea nu este obligatorie. Pentru urgențe poți merge walk-in dacă ai documente justificative.'
-    }
-    if (consulate === 'roma') {
-      return urgent
-        ? 'La Roma, urgențele se preiau fără programare, de luni până vineri, între 11:00 și 13:00.'
-        : 'La Roma, urgențele se preiau fără programare între 11:00 și 13:00. În rest, mergi cu programare pe econsulat.ro.'
-    }
-    if (consulate === 'torino') {
-      return 'La Torino, titlul de călătorie se face exclusiv cu programare pe econsulat.ro. Nu există walk-in nici pentru urgențe.'
-    }
-    if (consulate === 'trieste') {
-      return 'La Trieste, tratează titlul de călătorie ca flux cu programare. Nu există interval walk-in confirmat.'
-    }
-    if (consulate === 'bari') {
-      return 'La Bari, tratează titlul de călătorie ca flux cu programare. Nu există walk-in confirmat.'
-    }
-    if (consulate === 'catania') {
-      return 'La Catania, mergi doar cu programare și confirmă direct înainte de drum. Nu există urgențe walk-in confirmate.'
-    }
-    return urgent
-      ? 'Pentru urgențe, verifică direct dacă poți merge fără programare la consulatul tău.'
-      : 'Verifică direct dacă titlul de călătorie se face cu programare sau în interval walk-in la consulatul tău.'
-  }
-
-  if (urgent) {
-    return 'Nu ai nevoie de econsulat.ro și nu există programare online pentru titlul de călătorie. Te prezinți direct la consulat în intervalul dedicat.'
-  }
-  return 'Titlul de călătorie se obține, de regulă, fără programare, direct la consulat.'
+  const rules = getResolvedRules(consulate)
+  const rule = urgent ? rules.travelBookingUrgentRule : rules.travelBookingRule
+  if (rule) return rule
+  return urgent
+    ? 'Pentru urgențe, verifică direct dacă poți merge fără programare la consulatul tău.'
+    : 'Titlul de călătorie se obține, de regulă, fără programare, direct la consulat.'
 }
 
 export function getTravelBadgeSummary(consulate: ConsulateId | null, urgent = false): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    if (consulate === 'milano') {
-      return urgent
-        ? 'apel urgență · fără programare · de regulă aceeași zi'
-        : 'urgent fără programare după apel · altfel cu programare'
-    }
-    if (consulate === 'bologna') {
-      return urgent
-        ? 'walk-in cu dovezi · de regulă aceeași zi'
-        : 'de regulă fără programare · urgențele cer dovezi'
-    }
-    if (consulate === 'roma') {
-      return urgent
-        ? 'walk-in urgențe 11:00–13:00 · de regulă aceeași zi'
-        : 'cu programare · urgențe 11:00–13:00'
-    }
-    if (consulate === 'torino') {
-      return 'numai cu programare · fără walk-in'
-    }
-    if (consulate === 'trieste' || consulate === 'bari') {
-      return 'cu programare · fără walk-in confirmat'
-    }
-    if (consulate === 'catania') {
-      return 'cu programare · confirmare directă obligatorie'
-    }
-    return urgent
-      ? 'verifică regula consulatului · posibil aceeași zi'
-      : 'verifică regula consulatului înainte de drum'
-  }
-
-  return urgent
-    ? 'fără programare · aceeași zi'
-    : 'fără programare · aceeași zi în majoritatea cazurilor'
+  const rules = getResolvedRules(consulate)
+  const rule = urgent ? rules.travelBadgeSummaryUrgent : rules.travelBadgeSummary
+  if (rule) return rule
+  return urgent ? 'fără programare · aceeași zi' : 'fără programare · aceeași zi în majoritatea cazurilor'
 }
 
 export function getTravelBonnFridayRule(consulate: ConsulateId | null): string | null {
-  if (consulate !== 'bonn') return null
-  return 'Dacă te prezinți vineri dimineața, de regulă ridici titlul luni după-amiaza.'
+  return getResolvedRules(consulate).travelBonnFridayRule ?? null
 }
 
 export function getRnneprPaymentRule(consulate: ConsulateId | null): string {
-  if (!consulate) {
-    return 'Taxa de 3€ RNNEPR se plătește după regula consulatului tău.'
-  }
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    return `Taxa RNNEPR pentru procuri se plătește astfel la ${getShortConsulateName(consulate)}: ${getConsulateById(consulate).paymentNotarial ?? 'virament bancar în avans'}.`
-  }
+  const rule = getResolvedRules(consulate).rnneprPaymentRule
+  if (rule) return rule
+  if (!consulate) return 'Taxa de 3€ RNNEPR se plătește după regula consulatului tău.'
   return `Taxa de 3€ RNNEPR se plătește astfel la ${getShortConsulateName(consulate)}: ${getConsulateById(consulate).paymentNotarial ?? 'verifică direct la ghișeu'}.`
 }
 
 export function getProcuraSalePrescanRule(consulate: ConsulateId | null): string | null {
-  if (consulate !== 'bonn') return null
-  return 'La Bonn, pentru eliberare în aceeași zi, încarci din timp pe econsulat copia actului de proprietate și copia actului mandatarului.'
+  return getResolvedRules(consulate).procuraSalePrescanRule ?? null
 }
 
 export function getMostenireDeathCertificateRule(consulate: ConsulateId | null): string {
-  if (consulate === 'bonn' || consulate === 'stuttgart' || consulate === 'berlin') {
-    return 'Ia la tine și copia certificatului de deces. Actele de rudenie rămân utile pentru notarul din România.'
-  }
-  if (consulate === 'muenchen') {
-    return 'Verifică înainte cu notarul și cu consulatul dacă vor și copia certificatului de deces la ghișeu.'
-  }
+  const rule = getResolvedRules(consulate).mostenireDeathCertificateRule
+  if (rule) return rule
   return 'Verifică înainte dacă trebuie să ai și copia certificatului de deces la ghișeu.'
 }
 
 export function getBirthParentCertificatesRule(consulate: ConsulateId | null): string {
-  const country = getConsulateCountry(consulate)
-  if (country === 'it') {
-    if (consulate === 'milano' || consulate === 'torino' || consulate === 'trieste' || consulate === 'bari') {
-      return 'Certificatele de naștere românești ale părinților sunt de regulă cerute și merită pregătite din start.'
-    }
-    if (consulate === 'roma' || consulate === 'bologna') {
-      return 'Regula nu este foarte clară pe site. Dacă le ai, du-le cu tine ca să eviți un drum în plus.'
-    }
-    if (consulate === 'catania') {
-      return 'Regula nu este confirmată online. Confirmă direct cu consulatul și, dacă poți, du certificatele părinților.'
-    }
-  }
-  if (consulate === 'bonn') {
-    return 'Certificatele de naștere românești ale părinților sunt necesare dacă actele lor nu conțin locul nașterii.'
-  }
-  if (consulate === 'muenchen') {
-    return 'Certificatele de naștere românești ale părinților sunt necesare dacă ambii părinți sunt cetățeni români.'
-  }
-  if (consulate === 'stuttgart') {
-    return 'Certificatele de naștere românești ale părinților sunt necesare dacă părinții nu sunt căsătoriți.'
-  }
-  if (consulate === 'berlin') {
-    return 'Certificatele de naștere românești ale părinților sunt obligatorii fără excepție.'
-  }
+  const rule = getResolvedRules(consulate).birthParentCertificatesRule
+  if (rule) return rule
   return 'Adu certificatele de naștere românești ale părinților dacă nu ești sigur de regula consulatului tău.'
 }
 
 export function getBirthBerlinNameRule(consulate: ConsulateId | null): string | null {
-  if (consulate !== 'berlin') return null
-  return 'Dacă la un părinte apare și numele tatălui în acte, Formule A nu este acceptat. Ai nevoie de Geburtsurkunde + apostilă + traducere autorizată.'
+  return getResolvedRules(consulate).birthBerlinNameRule ?? null
 }
 
 export function getBirthProcessingRule(consulate: ConsulateId | null): string {
-  if (!consulate) {
-    return 'Primești recipisa de depunere și verifici apoi programul de ridicare sau opțiunea prin poștă, după regula consulatului tău.'
-  }
-
+  const rule = getResolvedRules(consulate).birthProcessingRule
+  if (rule) return rule
+  if (!consulate) return 'Primești recipisa de depunere și verifici apoi programul de ridicare sau opțiunea prin poștă, după regula consulatului tău.'
   const term = getConsulateById(consulate).starecivilaTermen
-  if (term) {
-    return `Primești recipisa de depunere. Termen orientativ la ${getShortConsulateName(consulate)}: ${term}.`
-  }
-
-  return `Primești recipisa de depunere și verifici apoi direct cu ${getShortConsulateName(consulate)} când este gata certificatul.`
+  return term
+    ? `Primești recipisa de depunere. Termen orientativ la ${getShortConsulateName(consulate)}: ${term}.`
+    : `Primești recipisa de depunere și verifici apoi direct cu ${getShortConsulateName(consulate)} când este gata certificatul.`
 }
 
 export function getBirthPickupRule(consulate: ConsulateId | null): string {
-  if (!consulate) {
-    return 'Când certificatul este gata, îl ridici în programul de ridicare al consulatului tău sau folosești opțiunea de poștă, dacă există.'
-  }
+  const rule = getResolvedRules(consulate).birthPickupRule
+  if (rule) return rule
+  if (!consulate) return 'Când certificatul este gata, îl ridici în programul de ridicare al consulatului tău sau folosești opțiunea de poștă, dacă există.'
   return `Când certificatul este gata, îl ridici în programul de ridicare al consulatului tău: ${getConsulateById(consulate).starecivilaProgramRidicare ?? 'verifică direct la consulat'}.`
 }
 
 export function getBirthPostalRule(consulate: ConsulateId | null): string | null {
-  if (consulate === 'torino') {
-    return 'Dacă vrei certificatul prin poștă, întreabă direct la depunere cum se folosește plicul preplătit sau metoda acceptată de consulat.'
-  }
-  if (consulate === 'bari') {
-    return 'La Bari, întreabă direct dacă poți primi documentul prin DHL după depunere.'
-  }
-  if (consulate !== 'stuttgart') return null
-  return 'Dacă vrei certificatul prin poștă, adu la depunere plic DIN C5 autoadresat, timbrat 6,65 EUR.'
+  return getResolvedRules(consulate).birthPostalRule ?? null
 }
 
 export function getBirthMunichPassportRule(consulate: ConsulateId | null): string | null {
-  if (consulate === 'muenchen') {
-    return 'La München, dacă certificatul transcris era ultimul act lipsă, poți continua în aceeași zi cu pașaportul copilului.'
-  }
-  if (consulate === 'milano') {
-    return 'La Milano, dacă transcrierea se rezolvă în aceeași zi și acesta era ultimul act lipsă, întreabă direct dacă poți continua imediat cu pașaportul copilului.'
-  }
-  return null
+  return getResolvedRules(consulate).birthSameDayPassportRule ?? null
 }
 
 export function personalizeGuideText(

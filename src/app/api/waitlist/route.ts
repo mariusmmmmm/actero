@@ -11,11 +11,31 @@ import {
   normalizeString,
   NO_STORE_HEADERS,
 } from '@/lib/security'
+import { enforceRateLimit } from '@/lib/rate-limit'
 
 export async function POST(req: NextRequest) {
   try {
     if (!hasTrustedOrigin(req)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
+    }
+
+    const rateLimit = enforceRateLimit(req, {
+      key: 'waitlist',
+      limit: 5,
+      windowMs: 10 * 60 * 1000,
+    })
+
+    if (!rateLimit.ok) {
+      return NextResponse.json(
+        { error: 'Prea multe înscrieri. Reîncearcă în câteva minute.' },
+        {
+          status: 429,
+          headers: {
+            ...NO_STORE_HEADERS,
+            'Retry-After': String(rateLimit.retryAfterSeconds),
+          },
+        }
+      )
     }
 
     const body: WaitlistPayload = await req.json()

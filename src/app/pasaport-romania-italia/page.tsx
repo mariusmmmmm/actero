@@ -17,7 +17,7 @@ const faqItems = [
   { question: 'Cât durează procesarea?', answer: '45 zile lucrătoare standard. Excepție: Trieste și Bari procesează pașapoartele pentru minori în 2–3 luni.' },
   { question: 'Pot ridica pașaportul prin DHL?', answer: 'Da, la Milano (DHL WhatsApp), Bari și Trieste (DHL contra cost), Torino (plic preplătit), Roma și Bologna (curierat ales de titular).' },
   { question: 'Am nevoie de permesso di soggiorno?', answer: 'Nu. Nu apare în lista de documente obligatorii la niciunul din cele 7 consulate italiene.' },
-  { question: 'Trebuie programare?', answer: 'Da, la 6 din 7 consulate prin econsulat.ro. Excepție: Bologna — fără programare obligatorie.' },
+  { question: 'Trebuie programare?', answer: 'În general, da, prin econsulat.ro. Bologna are excepții pentru multe fluxuri uzuale, dar regula exactă trebuie verificată în funcție de serviciu.' },
   { question: 'Pașaportul vechi trebuie adus?', answer: 'Da — originalul. La ridicare, dacă ai un pașaport anterior neanulat, trebuie prezentat pentru anulare.' },
 ]
 
@@ -26,7 +26,7 @@ const howToSteps = [
   { name: 'Identifică consulatul arondat', text: 'Lombardia → Milano · Emilia-Romagna/Toscana → Bologna · Lazio/Campania → Roma · Piemonte → Torino · Veneto → Trieste · Puglia/Calabria → Bari · Sicilia → Catania.' },
   { name: 'Pregătește documentele', text: 'CRDS: pașaport expirat + certificat naștere + CI italiană/certificato di residenza. Domiciliu RO: CI românească valabilă + pașaport anterior + certificat naștere.' },
   { name: 'Cerere pe econsulat.ro', text: 'Cont → Cerere nouă → tipul corect (CRDS sau simplu electronic) → încarci scanuri → trimiți. Stare: "În așteptare" → "Validată".' },
-  { name: 'Obține programarea', text: 'După validare: econsulat.ro → Programările mele → Programare nouă. Bologna: mergi direct fără programare L-V 09:00–14:00.' },
+  { name: 'Obține programarea', text: 'După validare: econsulat.ro → Programările mele → Programare nouă. La Bologna există excepții pentru multe fluxuri uzuale, dar verifică regula exactă pentru serviciul tău.' },
   { name: 'Ziua consulatului', text: 'Originalele + câte o copie. Fotografii NU. Plătești 53€. Primești chitanța. Termen: 45 zile luc.' },
   { name: 'Ridică pașaportul', text: 'Verifici pe [consulat].mae.ro/cauta-pasaport. Vii în programul de ridicare sau ceri livrare DHL/curierat.' },
 ]
@@ -41,7 +41,7 @@ export default function PasaportRomaniaItaliaPage() {
       lpTopic="pasaport-hub-italia"
       h1="Pașaport românesc în Italia — ghid complet 2026"
       intro="Locuiești în Italia și ai nevoie de pașaport românesc? Procedura depinde de unde ai domiciliul oficial — în Italia sau în România. Informații verificate live din toate cele 7 consulate, aprilie 2026."
-      tldr="Taxa: 53€ (Torino/Trieste/Bari confirmat; Roma/Milano/Bologna afișează 59€ — probabil neactualizat). Fotografii: NU — biometrie la ghișeu. Termen: 45 zile luc. (Trieste/Bari minori: 2–3 luni). Programare: econsulat.ro (excepție: Bologna fără programare)."
+      tldr="Taxa: 53€ (Torino/Trieste/Bari confirmat; Roma/Milano/Bologna afișează 59€ — probabil neactualizat). Fotografii: NU — biometrie la ghișeu. Termen: 45 zile luc. (Trieste/Bari minori: 2–3 luni). Programarea se face în general prin econsulat.ro, cu excepții locale de verificat în special la Bologna."
       ctaHref="/wizard?problem=pasaport&country=it"
       ctaLabel="Arată-mi pașii exacți pentru situația mea →"
       updatedAt="aprilie 2026"

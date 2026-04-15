@@ -2,8 +2,10 @@
   "name": "actero",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
+    "test": "node --import ./tests/register-alias.mjs --test tests/*.test.mjs",
     "typecheck": "next typegen && tsc --noEmit",
     "preflight": "npm run lint && npm run typecheck && next build --webpack",
     "build": "next build --webpack",

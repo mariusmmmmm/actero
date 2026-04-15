@@ -7,6 +7,7 @@ import {
   normalizeString,
   NO_STORE_HEADERS,
 } from '@/lib/security'
+import { enforceRateLimit } from '@/lib/rate-limit'
 
 type ContactPayload = {
   name?: string
@@ -19,6 +20,25 @@ export async function POST(req: NextRequest) {
   try {
     if (!hasTrustedOrigin(req)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
+    }
+
+    const rateLimit = enforceRateLimit(req, {
+      key: 'contact',
+      limit: 5,
+      windowMs: 10 * 60 * 1000,
+    })
+
+    if (!rateLimit.ok) {
+      return NextResponse.json(
+        { error: 'Prea multe mesaje. Reîncearcă în câteva minute.' },
+        {
+          status: 429,
+          headers: {
+            ...NO_STORE_HEADERS,
+            'Retry-After': String(rateLimit.retryAfterSeconds),
+          },
+        }
+      )
     }
 
     const body: ContactPayload = await req.json()

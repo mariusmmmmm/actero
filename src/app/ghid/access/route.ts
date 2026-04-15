@@ -4,7 +4,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { NO_STORE_HEADERS, setAccessCookie } from '@/lib/security'
+import {
+  generateOpaqueToken,
+  NO_STORE_HEADERS,
+  setAccessCookie,
+} from '@/lib/security'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
@@ -48,18 +52,30 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Actualizează last_accessed_at
-  await supabase
-    .from('user_sessions')
-    .update({ last_accessed_at: new Date().toISOString() })
-    .eq('id', session.id)
+  const rotatedAccessToken = generateOpaqueToken()
 
-  // Setează cookie httpOnly + redirect spre ghidul paid
+  const { data: rotatedSession, error: rotateError } = await supabase
+    .from('user_sessions')
+    .update({
+      access_token: rotatedAccessToken,
+      last_accessed_at: new Date().toISOString(),
+    })
+    .eq('id', session.id)
+    .eq('access_token', token)
+    .select('id')
+    .single()
+
+  if (rotateError || !rotatedSession) {
+    const response = NextResponse.redirect(new URL('/token-expirat', req.url))
+    response.headers.set('Cache-Control', NO_STORE_HEADERS['Cache-Control'])
+    return response
+  }
+
   const response = NextResponse.redirect(
     new URL(`/ghid/${session.id}`, req.url)
   )
 
-  setAccessCookie(response, token)
+  setAccessCookie(response, rotatedAccessToken)
   response.headers.set('Cache-Control', NO_STORE_HEADERS['Cache-Control'])
 
   return response

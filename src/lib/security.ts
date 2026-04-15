@@ -1,7 +1,9 @@
+import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto'
 import type { NextRequest, NextResponse } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
 
 export const ACCESS_COOKIE_NAME = 'actero_access_token'
+export const CHECKOUT_CONFIRM_COOKIE_NAME = 'actero_checkout_confirm'
 export const NO_STORE_HEADERS = {
   'Cache-Control': 'no-store, max-age=0',
 } as const
@@ -30,7 +32,7 @@ export function normalizeString(value: unknown, maxLength: number): string | nul
 export function hasTrustedOrigin(req: NextRequest): boolean {
   const origin = req.headers.get('origin')
 
-  if (!origin) return true
+  if (!origin) return false
 
   try {
     const requestOrigin = new URL(req.url).origin
@@ -48,6 +50,55 @@ export function getAccessTokenFromRequest(req: NextRequest): string | null {
   return token || null
 }
 
+export function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): string | null {
+  const rawValue = req.cookies.get(CHECKOUT_CONFIRM_COOKIE_NAME)?.value?.trim()
+
+  if (!rawValue) return null
+
+  const [sessionId, nonce, signature] = rawValue.split(':')
+
+  if (!isValidSessionId(sessionId) || !nonce || !signature) {
+    return null
+  }
+
+  const expectedSignature = signOpaqueValue(`${sessionId}:${nonce}`)
+  if (!expectedSignature) return null
+
+  const providedBuffer = Buffer.from(signature)
+  const expectedBuffer = Buffer.from(expectedSignature)
+
+  if (
+    providedBuffer.length !== expectedBuffer.length ||
+    !timingSafeEqual(providedBuffer, expectedBuffer)
+  ) {
+    return null
+  }
+
+  return sessionId
+}
+
+export function generateOpaqueToken(): string {
+  return randomBytes(32).toString('hex')
+}
+
+function signOpaqueValue(value: string): string | null {
+  const secret =
+    process.env.ACTERO_COOKIE_SECRET?.trim() ||
+    process.env.STRIPE_SECRET_KEY?.trim() ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
+
+  if (!secret) return null
+
+  return createHmac('sha256', secret).update(value).digest('hex')
+}
+
+export function getClientAddress(req: NextRequest): string {
+  const forwardedFor = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+  const realIp = req.headers.get('x-real-ip')?.trim()
+
+  return forwardedFor || realIp || 'unknown'
+}
+
 export function setAccessCookie(response: NextResponse, accessToken: string) {
   response.cookies.set(ACCESS_COOKIE_NAME, accessToken, {
     httpOnly: true,
@@ -58,6 +109,33 @@ export function setAccessCookie(response: NextResponse, accessToken: string) {
   })
 
   response.cookies.set('actero_session', '', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 0,
+    path: '/',
+  })
+}
+
+export function setCheckoutConfirmCookie(response: NextResponse, sessionId: string) {
+  const nonce = generateOpaqueToken()
+  const signature = signOpaqueValue(`${sessionId}:${nonce}`)
+
+  if (!signature) {
+    throw new Error('Missing ACTERO_COOKIE_SECRET or equivalent server secret')
+  }
+
+  response.cookies.set(CHECKOUT_CONFIRM_COOKIE_NAME, `${sessionId}:${nonce}:${signature}`, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 2,
+    path: '/',
+  })
+}
+
+export function clearCheckoutConfirmCookie(response: NextResponse) {
+  response.cookies.set(CHECKOUT_CONFIRM_COOKIE_NAME, '', {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

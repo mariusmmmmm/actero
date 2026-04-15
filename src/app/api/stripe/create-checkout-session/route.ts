@@ -8,7 +8,9 @@ import {
   hasTrustedOrigin,
   isValidSessionId,
   NO_STORE_HEADERS,
+  setCheckoutConfirmCookie,
 } from '@/lib/security'
+import { enforceRateLimit } from '@/lib/rate-limit'
 
 type OfferType = 'single' | 'family'
 
@@ -21,6 +23,25 @@ export async function POST(req: NextRequest) {
   try {
     if (!hasTrustedOrigin(req)) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
+    }
+
+    const rateLimit = enforceRateLimit(req, {
+      key: 'stripe-create-checkout-session',
+      limit: 10,
+      windowMs: 10 * 60 * 1000,
+    })
+
+    if (!rateLimit.ok) {
+      return NextResponse.json(
+        { error: 'Prea multe încercări. Reîncearcă în câteva minute.' },
+        {
+          status: 429,
+          headers: {
+            ...NO_STORE_HEADERS,
+            'Retry-After': String(rateLimit.retryAfterSeconds),
+          },
+        }
+      )
     }
 
     const body = await req.json() as {
@@ -90,7 +111,12 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    return NextResponse.json({ url: checkoutSession.url, checkoutSessionId: checkoutSession.id }, { headers: NO_STORE_HEADERS })
+    const response = NextResponse.json(
+      { url: checkoutSession.url, checkoutSessionId: checkoutSession.id },
+      { headers: NO_STORE_HEADERS }
+    )
+    setCheckoutConfirmCookie(response, userSession.id)
+    return response
   } catch (error) {
     console.error('Stripe create checkout session error:', error)
     return NextResponse.json({ error: 'Checkout init failed' }, { status: 500, headers: NO_STORE_HEADERS })
