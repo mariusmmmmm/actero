@@ -14,8 +14,9 @@ export function getGuideTitle(guideId: string | null): string | null {
 
 export function getCrossSellGuides(
   guideId: string | null,
-  _consulate: ConsulateId | null
+  consulate: ConsulateId | null
 ): CrossSellGuide[] {
+  void consulate
   if (!guideId) return []
   return CROSS_SELL[guideId] ?? []
 }
@@ -39,6 +40,24 @@ const GUIDE_TITLES: Record<string, string> = {
   'procura-mostenire-de': 'procura pentru moștenire din Germania',
   'procura-generala-de': 'procura notarială generală din Germania',
   'transcriere-nastere-de': 'transcrierea certificatului de naștere din Germania',
+  'pasaport-crds-it': 'pașaportul CRDS din Italia',
+  'pasaport-crds-it-pierdut': 'pașaportul CRDS pierdut sau furat din Italia',
+  'pasaport-crds-nou-it': 'primul pașaport CRDS din Italia',
+  'pasaport-minor-crds-it': 'pașaportul CRDS pentru copil din Italia',
+  'pasaport-it-cu-domiciliu': 'pașaportul din Italia',
+  'pasaport-it-cu-domiciliu-pierdut': 'pașaportul pierdut din Italia',
+  'buletin-it-fara-domiciliu': 'buletinul din Italia',
+  'buletin-it-cu-domiciliu': 'buletinul din Italia',
+  'buletin-it-fara-domiciliu-pierdut': 'buletinul pierdut din Italia',
+  'buletin-it-cu-domiciliu-pierdut': 'buletinul pierdut din Italia',
+  'buletin-it-primul-it': 'primul buletin românesc',
+  'buletin-it-primul-it-b': 'primul buletin românesc din Italia',
+  'titlu-calatorie-urgenta-it': 'titlul de călătorie de urgență din Italia',
+  'titlu-calatorie-it': 'titlul de călătorie din Italia',
+  'procura-vanzare-it': 'procura de vânzare/cumpărare proprietate din Italia',
+  'procura-mostenire-it': 'procura pentru moștenire din Italia',
+  'procura-generala-it': 'procura notarială generală din Italia',
+  'transcriere-nastere-it': 'transcrierea certificatului de naștere din Italia',
 }
 
 const CROSS_SELL: Record<string, CrossSellGuide[]> = {
@@ -73,5 +92,17 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'transcriere-nastere-de': [
     { guideId: 'pasaport-crds-nou-de', title: 'Continuă cu primul pașaport', subtitle: 'După ce copilul primește certificatul românesc și CNP', icon: '📕' },
     { guideId: 'buletin-de-primul-de-b', title: 'Continuă cu primul buletin', subtitle: 'Pentru primul act de identitate românesc după transcriere', icon: '🪪' },
+  ],
+  'transcriere-nastere-it': [
+    { guideId: 'pasaport-crds-nou-it', title: 'Continuă cu primul pașaport', subtitle: 'După ce copilul primește certificatul românesc și CNP', icon: '📕' },
+    { guideId: 'buletin-it-primul-it-b', title: 'Continuă cu primul buletin', subtitle: 'Pentru primul act de identitate românesc după transcriere', icon: '🪪' },
+  ],
+  'pasaport-crds-it': [
+    { guideId: 'buletin-it-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă ai buletin expirat sau lipsă', icon: '🪪' },
+    { guideId: 'procura-vanzare-it', title: 'Procură notarială', subtitle: 'Vânzare, moștenire sau altceva în România', icon: '📜' },
+  ],
+  'titlu-calatorie-urgenta-it': [
+    { guideId: 'pasaport-crds-it', title: 'Rezolvă și pașaportul', subtitle: 'Documentul permanent după urgență', icon: '📕' },
+    { guideId: 'buletin-it-fara-domiciliu', title: 'Rezolvă și buletinul', subtitle: 'Dacă trebuie să revii și în România', icon: '🪪' },
   ],
 }

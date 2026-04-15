@@ -1,11 +1,11 @@
 // ActeRO — lib/content/consulates/de.ts
 // Date consulate Germania — verificate live pe site-urile oficiale MAE, Aprilie 2026
 
-import type { BundeslandCode, ConsulateId, ConsulateInfo } from '@/types'
+import type { BundeslandCode, ConsulateInfo, GermanyConsulateId } from '@/types'
 
 // ─── MAPARE BUNDESLAND → CONSULAT ────────────────────────────────────────────
 
-export const bundeslandToConsulate: Record<BundeslandCode, ConsulateId> = {
+export const bundeslandToConsulate: Record<BundeslandCode, GermanyConsulateId> = {
   BW: 'stuttgart',
   BY: 'muenchen',
   BE: 'berlin',
@@ -26,8 +26,9 @@ export const bundeslandToConsulate: Record<BundeslandCode, ConsulateId> = {
 
 // ─── DATE CONSULATE ───────────────────────────────────────────────────────────
 
-export const consulates: Record<ConsulateId, ConsulateInfo> = {
+export const consulates: Record<GermanyConsulateId, ConsulateInfo> = {
   bonn: {
+    countryCode: 'de',
     id: 'bonn',
     name: 'Consulatul General al României la Bonn',
     address: 'Legionsweg 14, 53117 Bonn',
@@ -58,6 +59,7 @@ export const consulates: Record<ConsulateId, ConsulateInfo> = {
   },
 
   muenchen: {
+    countryCode: 'de',
     id: 'muenchen',
     name: 'Consulatul General al României în München',
     address: 'Richard-Strauss-Strasse 149, 81679 München',
@@ -90,6 +92,7 @@ export const consulates: Record<ConsulateId, ConsulateInfo> = {
   },
 
   stuttgart: {
+    countryCode: 'de',
     id: 'stuttgart',
     name: 'Consulatul General al României la Stuttgart',
     address: 'Hauptstätter Str. 70, 70178 Stuttgart',
@@ -125,6 +128,7 @@ export const consulates: Record<ConsulateId, ConsulateInfo> = {
   },
 
   berlin: {
+    countryCode: 'de',
     id: 'berlin',
     name: 'Ambasada României în R.F. Germania — Secție Consulară',
     address: 'Dorotheenstrasse 62-66, 10117 Berlin',
@@ -165,7 +169,7 @@ export function getConsulateByBundesland(bundesland: BundeslandCode): ConsulateI
   return consulates[id]
 }
 
-export function getConsulateById(id: ConsulateId): ConsulateInfo {
+export function getConsulateById(id: GermanyConsulateId): ConsulateInfo {
   return consulates[id]
 }
 

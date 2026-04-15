@@ -9,6 +9,7 @@ import SiteHeader from '@/components/layout/SiteHeader'
 import { getGaClientId, persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
 import { hasAnalyticsConsent } from '@/lib/consent'
+import { getCountryLabel, getGuideCountryCode } from '@/lib/guides/countryCopy'
 import { getGuideTitle } from '@/lib/guides/meta'
 import { useAppStore } from '@/store/appStore'
 
@@ -23,7 +24,7 @@ const includes: Record<string, string[]> = {
     'Ce se întâmplă la ghișeu și cum reacționezi la surprize',
     'Listă de acte pe care o poți descărca',
     'Stadiul dosarului, pas cu pas',
-    'Parteneri verificați în Germania',
+    'Parteneri verificați',
     'Suport prin email dacă rămâi blocat',
   ],
   buletin: [
@@ -56,7 +57,7 @@ const includes: Record<string, string[]> = {
     'Toți pașii cu instrucțiuni detaliate',
     'Listă de acte pe care o poți descărca',
     'Stadiul dosarului, pas cu pas',
-    'Parteneri verificați în Germania',
+    'Parteneri verificați',
     'Suport prin email dacă rămâi blocat',
   ],
 }
@@ -67,21 +68,23 @@ function getIncludes(problemType: string | null): string[] {
 }
 
 function getPaywallCopy(guideId: string | null, problemType: string | null) {
-  if (guideId === 'pasaport-minor-crds-de') {
+  const countryLabel = getCountryLabel(getGuideCountryCode(guideId))
+
+  if (guideId === 'pasaport-minor-crds-de' || guideId === 'pasaport-minor-crds-it') {
     return {
       title: 'Deblochezi ghidul pentru pașaportul copilului.',
       subtitle: 'Vezi exact ce pregătesc părinții, ce trebuie pentru minor și ce se întâmplă la consulat.',
       bullets: [
         'lista exactă de acte pentru minor și pentru părinți',
         'toți pașii în ordinea corectă pentru cerere, programare și depunere',
-        'ce faci diferit dacă lipsește un părinte sau copilul e născut în Germania',
+        `ce faci diferit dacă lipsește un părinte sau copilul e născut în ${countryLabel}`,
       ],
       cardTitle: 'Ghid complet pentru pașaportul copilului',
       cardSubtitle: 'Pași clari pentru minor + părinți + consulat, fără să ghicești ce lipsește.',
     }
   }
 
-  if (guideId === 'transcriere-nastere-de') {
+  if (guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') {
     return {
       title: 'Deblochezi ghidul pentru transcrierea certificatului de naștere.',
       subtitle: 'Vezi ordinea exactă a pașilor, actele corecte și ce urmează după ce copilul primește CNP-ul.',

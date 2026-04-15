@@ -11,7 +11,9 @@ import type {
   ChecklistItemState,
   TrackerStepState,
   BundeslandCode,
+  CountryCode,
   ConsulateId,
+  RegionCode,
 } from '@/types'
 import { deriveConsulateId } from '@/lib/utils/deriveConsulate'
 
@@ -22,8 +24,9 @@ type WizardStep = 1 | 2 | 3
 type AppStore = {
   // ── WIZARD ──────────────────────────────────────────────────────────────────
   problemType: ProblemType | null
-  country: string | null
+  country: CountryCode | null
   bundesland: BundeslandCode | null
+  region: RegionCode | null
   consulate: ConsulateId | null
   situation: SituationFlags
   currentWizardStep: WizardStep
@@ -32,7 +35,8 @@ type AppStore = {
   wizardDirection: 'forward' | 'backward'
 
   setProblemType: (p: ProblemType) => void
-  setCountry: (c: string) => void
+  setCountry: (c: CountryCode) => void
+  setRegion: (r: RegionCode) => void
   setBundesland: (b: BundeslandCode) => void
   setSituationFlag: (key: keyof SituationFlags, value: SituationFlags[keyof SituationFlags]) => void
   nextWizardStep: () => void
@@ -91,8 +95,9 @@ type AppStore = {
 
 const initialWizard = {
   problemType: null as ProblemType | null,
-  country: null as string | null,
+  country: null as CountryCode | null,
   bundesland: null as BundeslandCode | null,
+  region: null as RegionCode | null,
   consulate: null as ConsulateId | null,
   situation: {} as SituationFlags,
   currentWizardStep: 1 as WizardStep,
@@ -136,12 +141,29 @@ export const useAppStore = create<AppStore>()(
 
       setCountry: (c) => set({ country: c }),
 
+      setRegion: (r) => {
+        const country = get().country ?? 'de'
+        const consulate = deriveConsulateId(country, r)
+        set({
+          region: r,
+          bundesland: country === 'de' ? (r as BundeslandCode) : null,
+          consulate,
+          situation: {
+            ...get().situation,
+            region: r,
+            bundesland: country === 'de' ? (r as BundeslandCode) : undefined,
+            consulate,
+          },
+        })
+      },
+
       setBundesland: (b) => {
-        const consulate = deriveConsulateId(b)
+        const consulate = deriveConsulateId('de', b)
         set({
           bundesland: b,
+          region: b,
           consulate,
-          situation: { ...get().situation, bundesland: b, consulate },
+          situation: { ...get().situation, bundesland: b, region: b, consulate },
         })
       },
 

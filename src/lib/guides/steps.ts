@@ -1,3 +1,12 @@
+import type { ConsulateId } from '@/types'
+import { getGuideCountryCode, localizeGuideTextForCountry } from '@/lib/guides/countryCopy'
+import {
+  getBirthPostalRule,
+  getRnneprPaymentRule,
+  getTravelBookingRule,
+  getTravelIssuanceRule,
+} from '@/lib/guides/consulateRules'
+
 export interface TrackerStep {
   id: string
   title: string
@@ -5,9 +14,18 @@ export interface TrackerStep {
   todoNote?: string
 }
 
-export function getGuideSteps(guideId: string | null): TrackerStep[] {
+export function getGuideSteps(
+  guideId: string | null,
+  consulate: ConsulateId | null = null
+): TrackerStep[] {
   if (!guideId) return []
-  return STEPS[guideId] ?? STEPS_GENERIC
+  const country = getGuideCountryCode(guideId)
+  return personalizeTrackerSteps(STEPS[guideId] ?? STEPS_GENERIC, guideId, consulate).map((step) => ({
+    ...step,
+    title: localizeGuideTextForCountry(step.title, country),
+    shortLabel: step.shortLabel ? localizeGuideTextForCountry(step.shortLabel, country) : step.shortLabel,
+    todoNote: step.todoNote ? localizeGuideTextForCountry(step.todoNote, country) : step.todoNote,
+  }))
 }
 
 const STEPS_PASAPORT: TrackerStep[] = [
@@ -82,8 +100,8 @@ const STEPS_PROCURA: TrackerStep[] = [
 const STEPS_PROCURA_VANZARE: TrackerStep[] = [
   { id: 'documente', title: 'Adună documentele necesare', shortLabel: 'Documente', todoNote: 'Act identitate, act de proprietate și datele mandatarului' },
   { id: 'continut', title: 'Pregătește conținutul procurii', shortLabel: 'Conținut', todoNote: 'Clarifică puterile exacte cu notarul din România' },
-  { id: 'cerere', title: 'Creează cererea pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'La Bonn încarcă și copiile cerute înainte de programare' },
-  { id: 'programare', title: 'Obține programarea la consulat', shortLabel: 'Programare', todoNote: 'La Berlin plătești 3€ prin virament înainte de prezentare' },
+  { id: 'cerere', title: 'Creează cererea pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'Încarcă actele cerute și verifică dacă există pași suplimentari înainte de programare' },
+  { id: 'programare', title: 'Obține programarea la consulat', shortLabel: 'Programare', todoNote: 'Verifică din timp dacă ai de plătit taxa de 3€ înainte de prezentare' },
   { id: 'pregatire', title: 'Pregătire pentru ziua programării', shortLabel: 'Pregătire', todoNote: 'Verifică metoda de plată a consulatului tău' },
   { id: 'consulat', title: 'Ziua consulatului — semnezi procura', shortLabel: 'Consulat', todoNote: 'Verifică atent datele imobilului și ale mandatarului înainte să semnezi' },
   { id: 'trimitere', title: 'Trimite procura și coordonează cu notarul', shortLabel: 'Trimitere', todoNote: 'Trimite duplicatul cu tracking și o scanare către notar' },
@@ -104,9 +122,9 @@ const STEPS_TRANSCRIERE_NASTERE: TrackerStep[] = [
   { id: 'pregatire', title: 'Pregătește documentele', shortLabel: 'Pregătire', todoNote: 'Scanează actele și verifică particularitățile consulatului tău' },
   { id: 'cerere', title: 'Creează cererea pe econsulat.ro', shortLabel: 'Cerere', todoNote: 'Selectează serviciul de transcriere naștere din Acte de stare civilă' },
   { id: 'programare', title: 'Obține programarea', shortLabel: 'Programare', todoNote: 'Disponibilă după validarea cererii în econsulat' },
-  { id: 'consulat', title: 'Pregătire pentru ziua programării', shortLabel: 'Consulat', todoNote: 'Originale + copii, iar la Stuttgart și plicul dacă vrei poștă' },
+  { id: 'consulat', title: 'Pregătire pentru ziua programării', shortLabel: 'Consulat', todoNote: 'Originale + copii și, dacă vrei poștă unde este disponibilă, pregătești tot ce cere consulatul tău' },
   { id: 'depunere', title: 'Ziua consulatului', shortLabel: 'Depunere', todoNote: 'Semnezi declarația că nașterea nu a mai fost înscrisă în registrele românești' },
-  { id: 'ridicare', title: 'Ridică certificatul românesc', shortLabel: 'Ridicare', todoNote: 'Verifică programul de ridicare sau opțiunea prin poștă la Stuttgart' },
+  { id: 'ridicare', title: 'Ridică certificatul românesc', shortLabel: 'Ridicare', todoNote: 'Verifică programul de ridicare și dacă există opțiune prin poștă la consulatul tău' },
 ]
 
 const STEPS_GENERIC: TrackerStep[] = [
@@ -135,4 +153,92 @@ const STEPS: Record<string, TrackerStep[]> = {
   'procura-mostenire-de': STEPS_PROCURA,
   'procura-generala-de': STEPS_PROCURA_GENERALA,
   'transcriere-nastere-de': STEPS_TRANSCRIERE_NASTERE,
+  'pasaport-crds-it': STEPS_PASAPORT,
+  'pasaport-crds-it-pierdut': STEPS_PASAPORT,
+  'pasaport-crds-nou-it': STEPS_PASAPORT,
+  'pasaport-minor-crds-it': STEPS_PASAPORT,
+  'pasaport-it-cu-domiciliu': STEPS_PASAPORT,
+  'pasaport-it-cu-domiciliu-pierdut': STEPS_PASAPORT,
+  'buletin-it-fara-domiciliu': STEPS_BULETIN,
+  'buletin-it-cu-domiciliu': STEPS_BULETIN,
+  'buletin-it-fara-domiciliu-pierdut': STEPS_BULETIN_LIPSA,
+  'buletin-it-cu-domiciliu-pierdut': STEPS_BULETIN_LIPSA,
+  'buletin-it-primul-it': STEPS_BULETIN_PRIMUL,
+  'buletin-it-primul-it-b': STEPS_BULETIN_PRIMUL_B,
+  'titlu-calatorie-urgenta-it': STEPS_TITLU_URGENTA,
+  'titlu-calatorie-it': STEPS_TITLU_STANDARD,
+  'procura-vanzare-it': STEPS_PROCURA_VANZARE,
+  'procura-mostenire-it': STEPS_PROCURA,
+  'procura-generala-it': STEPS_PROCURA_GENERALA,
+  'transcriere-nastere-it': STEPS_TRANSCRIERE_NASTERE,
+}
+
+function personalizeTrackerSteps(
+  steps: TrackerStep[],
+  guideId: string | null,
+  consulate: ConsulateId | null
+): TrackerStep[] {
+  return steps.map((step) => {
+    if ((guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it') && step.id === 'cerere' && consulate === 'bonn') {
+      return {
+        ...step,
+        todoNote: 'La Bonn, încarci din timp copiile cerute înainte de programare.',
+      }
+    }
+
+    if ((guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it') && step.id === 'programare') {
+      return {
+        ...step,
+        todoNote: getRnneprPaymentRule(consulate),
+      }
+    }
+
+    if ((guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') && step.id === 'consulat') {
+      return {
+        ...step,
+        todoNote: getBirthPostalRule(consulate)
+          ? 'Originale + copii, iar pentru poștă pregătești și plicul cerut de consulatul tău.'
+          : 'Originale + copii, pregătite pentru consulatul tău.',
+      }
+    }
+
+    if ((guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') && step.id === 'ridicare') {
+      return {
+        ...step,
+        todoNote: getBirthPostalRule(consulate)
+          ? 'Verifică programul de ridicare sau folosește opțiunea prin poștă, dacă ai pregătit-o la depunere.'
+          : 'Verifică programul de ridicare al consulatului tău.',
+      }
+    }
+
+    if (guideId === 'titlu-calatorie-urgenta-it' && step.id === 'consulat') {
+      return {
+        ...step,
+        todoNote: getTravelBookingRule(consulate, true),
+      }
+    }
+
+    if (guideId === 'titlu-calatorie-urgenta-it' && step.id === 'ghiseu') {
+      return {
+        ...step,
+        todoNote: getTravelIssuanceRule(consulate),
+      }
+    }
+
+    if (guideId === 'titlu-calatorie-it' && step.id === 'consulat') {
+      return {
+        ...step,
+        todoNote: getTravelBookingRule(consulate, false),
+      }
+    }
+
+    if (guideId === 'titlu-calatorie-it' && step.id === 'ridicare') {
+      return {
+        ...step,
+        todoNote: getTravelIssuanceRule(consulate),
+      }
+    }
+
+    return step
+  })
 }

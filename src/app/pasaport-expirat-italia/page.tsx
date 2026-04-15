@@ -1,0 +1,64 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
+
+export const metadata: Metadata = {
+  title: 'Pașaport expirat în Italia? Ghid complet 2026 | ActeRO',
+  description: 'Pașaport românesc expirat în Italia: documente exacte, programare econsulat.ro, taxă 53€, termen 45 zile. CRDS sau domiciliu România — pași verificați per consulat.',
+  keywords: ['pasaport expirat italia','reinnoire pasaport romanesc italia','pasaport crds expirat italia','documente pasaport expirat italia','programare pasaport expirat consulat'],
+  openGraph: { title: 'Pașaport expirat în Italia — Ghid complet 2026', description: 'Ce acte trebuie, unde mergi, cât costă și cât durează — verificat live pentru toate cele 7 consulate.', url: 'https://www.actero.ro/pasaport-expirat-italia', type: 'article' },
+  alternates: { canonical: 'https://www.actero.ro/pasaport-expirat-italia' },
+}
+
+const faqItems = [
+  { question: 'Pot circula cu pașaportul expirat?', answer: 'Nu. Dacă ai urgență, solicită titlu de călătorie — gratuit, eliberat în aceeași zi, fără programare la Roma, Milano și Bologna.' },
+  { question: 'Ce documente am nevoie (CRDS)?', answer: 'Pașaport expirat, certificat naștere original, CI italiană sau certificato di residenza, certificat căsătorie dacă ți-ai schimbat numele.' },
+  { question: 'Ce documente am nevoie (domiciliu România)?', answer: 'CI românească valabilă, pașaport expirat, certificat naștere original, certificat căsătorie dacă ți-ai schimbat numele.' },
+  { question: 'Trebuie fotografii?', answer: 'Nu. Biometrie la ghișeu la toate cele 7 consulate italiene.' },
+  { question: 'Cât costă?', answer: 'Taxa legală 53€. Torino/Trieste/Bari: 53€ confirmat. Roma/Milano/Bologna afișează 59€ (probabil neactualizat). Catania: 100€ afișat incorect — confirmă direct.' },
+  { question: 'Cât durează?', answer: '45 zile lucrătoare pentru adulți. Poți verifica statusul pe [consulat].mae.ro/cauta-pasaport.' },
+  { question: 'Bologna nu cere programare — pot merge oricând?', answer: 'Da. Bologna nu cere programare. Program depunere: L-V 09:00–14:00.' },
+  { question: 'Pot ridica prin curier?', answer: 'Da: Milano (DHL WhatsApp), Bari și Trieste (DHL), Torino (plic preplătit), Roma și Bologna (curierat ales de titular).' },
+]
+
+const howToSteps = [
+  { name: 'Clarifică: CRDS sau domiciliu România?', text: 'Dacă domiciliul oficial e în Italia → CRDS. Dacă ai CI cu adresă RO → domiciliu România. Determină formularul corect pe econsulat.ro.' },
+  { name: 'Pregătește documentele', text: 'CRDS: pașaport expirat + certificat naștere + CI italiană/certificato di residenza. Domiciliu RO: CI românească + pașaport expirat + certificat naștere.' },
+  { name: 'Scanează documentele', text: 'JPG sau PDF, sub 2 MB per fișier. Comprimă pe ilovepdf.com dacă e nevoie.' },
+  { name: 'Cerere pe econsulat.ro', text: 'Login → Cerere nouă → tipul corect → încarci documentele → trimiți. Stare: "În așteptare" → "Validată".' },
+  { name: 'Obține programarea', text: 'Cererea validată → econsulat.ro → Programările mele → Programare nouă. Bologna: prezentare directă fără programare.' },
+  { name: 'Ziua consulatului', text: 'Originalele + copii. Fotografii NU. Plătești 53€. Chitanță → fotografiaz-o. Termen: 45 zile luc.' },
+  { name: 'Ridică pașaportul', text: 'Verifici statusul pe site-ul consulatului. Vii în programul de ridicare sau ceri DHL/curierat.' },
+]
+
+const articleSchema = { '@context': 'https://schema.org', '@type': 'Article', '@id': 'https://www.actero.ro/pasaport-expirat-italia#article', headline: 'Pașaport expirat în Italia — Ghid 2026', datePublished: '2026-04-01', dateModified: '2026-04-10', author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' }, publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' }, mainEntityOfPage: 'https://www.actero.ro/pasaport-expirat-italia', inLanguage: 'ro' }
+const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' }, { '@type': 'ListItem', position: 2, name: 'Acte românești Italia', item: 'https://www.actero.ro/acte-romanesti-italia' }, { '@type': 'ListItem', position: 3, name: 'Pașaport România Italia', item: 'https://www.actero.ro/pasaport-romania-italia' }, { '@type': 'ListItem', position: 4, name: 'Pașaport expirat Italia', item: 'https://www.actero.ro/pasaport-expirat-italia' } ] }
+
+export default function PasaportExpiratItaliaPage() {
+  return (
+    <LlmOptimizedPage
+      lpSlug="pasaport-expirat-italia"
+      lpTopic="pasaport-leaf-italia"
+      h1="Pașaport expirat în Italia — ce faci în 2026"
+      intro="Pașaportul tău românesc a expirat și locuiești în Italia? Procedura e clară și rezolvabilă fără drumuri degeaba — dacă știi exact ce documente aduci și la ce consulat mergi."
+      tldr="Depui pe econsulat.ro (Bologna: fără programare). Aduci pașaport expirat + certificat naștere + document domiciliu. Fotografii NU. Taxa: 53€. Termen: 45 zile luc. Ridicare prin DHL la Milano, Bari, Trieste."
+      ctaHref="/wizard?problem=pasaport&country=it"
+      ctaLabel="Arată-mi documentele exacte pentru consulatul meu →"
+      updatedAt="aprilie 2026"
+      sourceNote="Verificat live: cgroma.mae.ro · milano.mae.ro · bologna.mae.ro · torino.mae.ro · trieste.mae.ro · bari.mae.ro · econsulat.ro"
+      faqItems={faqItems}
+      howToSteps={howToSteps}
+      articleSchema={articleSchema}
+      breadcrumbSchema={breadcrumbSchema}
+      sections={[
+        { id: 'documente-crds', title: 'Documente necesare — CRDS (domiciliu Italia)', content: (<div className="rounded-lg border border-gray-200 p-3 space-y-1.5 text-sm"><ul className="space-y-1 text-gray-700"><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Pașaport expirat</strong> — original</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Certificat naștere românesc</strong> — original (nu plastifiat/deteriorat)</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Document domiciliu Italia</strong> — CI italiană / certificato di residenza. Fără apostilă, fără traducere.</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>CI românească</strong> — dacă o ai, chiar expirată. Va fi anulată la eliberare.</span></li><li className="flex gap-2"><span className="text-orange-500 font-bold">±</span><span><strong>Certificat căsătorie</strong> — DOAR dacă ți-ai schimbat numele</span></li></ul><div className="mt-2 rounded bg-blue-50 border border-blue-100 p-2"><p className="text-xs text-blue-800"><strong>Fotografii: NU aduci.</strong> Biometrie la ghișeu la toate cele 7 consulate.</p></div></div>) },
+        { id: 'documente-ro', title: 'Documente necesare — domiciliu România', content: (<div className="rounded-lg border border-gray-200 p-3 space-y-1.5 text-sm"><ul className="space-y-1 text-gray-700"><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>CI românească valabilă</strong> — cu domiciliu în România</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Pașaport expirat</strong> — original</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Certificat naștere românesc</strong> — original</span></li><li className="flex gap-2"><span className="text-orange-500 font-bold">±</span><span><strong>Certificat căsătorie</strong> — DOAR dacă ți-ai schimbat numele</span></li></ul><div className="mt-2 rounded bg-orange-50 border border-orange-100 p-2"><p className="text-xs text-orange-800">⚠️ Pe econsulat.ro selectezi <strong>Pașaport simplu electronic</strong> (fără CRDS).</p></div></div>) },
+        { id: 'program-consulate', title: 'Programare și program depunere per consulat', content: (<div className="overflow-x-auto"><table className="w-full text-sm border-collapse"><thead><tr className="bg-gray-50"><th className="p-2 border border-gray-200">Consulat</th><th className="p-2 border border-gray-200">Programare</th><th className="p-2 border border-gray-200">Program depunere</th><th className="p-2 border border-gray-200">Atenție</th></tr></thead><tbody><tr><td className="p-2 border border-gray-200 font-medium">Roma</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-J 09:00–15:00</td><td className="p-2 border border-gray-200 text-orange-700 text-xs">Vineri NU pașapoarte</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Milano</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-V 09:00–12:30 și 13:30–16:00</td><td className="p-2 border border-gray-200 text-xs">—</td></tr><tr><td className="p-2 border border-gray-200 font-medium text-green-700">Bologna</td><td className="p-2 border border-gray-200 text-green-700 font-medium">Fără programare ✓</td><td className="p-2 border border-gray-200">L-V 09:00–14:00</td><td className="p-2 border border-gray-200 text-xs">—</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Torino</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-V cu programare</td><td className="p-2 border border-gray-200 text-orange-700 text-xs">Exclusiv prog.</td></tr><tr><td className="p-2 border border-gray-200 font-medium">Trieste</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-V 09:00–14:00</td><td className="p-2 border border-gray-200 text-xs">—</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Bari</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-V 09:00–15:00</td><td className="p-2 border border-gray-200 text-xs">Email alternativ</td></tr><tr><td className="p-2 border border-gray-200 font-medium">Catania</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200">L-J 09:00–15:00</td><td className="p-2 border border-gray-200 text-red-600 text-xs">⚠️ Sună înainte</td></tr></tbody></table></div>) },
+        { id: 'urgenta', title: 'Trebuie să pleci urgent?', content: (<div className="rounded-xl border border-orange-200 bg-orange-50 p-4"><p className="font-semibold text-orange-900">⚡ Titlu de călătorie — gratuit, aceeași zi</p><ul className="text-sm text-orange-800 space-y-1 mt-2"><li>• <strong>Roma:</strong> walk-in L-V 11:00–13:00 cu dovadă plecare</li><li>• <strong>Milano:</strong> linia de urgență +39 366.108.1444</li><li>• <strong>Bologna:</strong> direct în program cu documente</li><li>• <strong>Torino:</strong> NU — necesită programare</li></ul><a href="/titlu-calatorie-urgenta-italia" className="mt-2 inline-block text-sm font-medium text-orange-900 underline">Ghid titlu de călătorie urgent →</a></div>) },
+        { id: 'pagini-conexe', title: 'Pagini conexe pentru reînnoire', content: (<div className="grid gap-3 text-sm md:grid-cols-2"><Link href="/pasaport-romania-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50"><p className="font-medium text-gray-900">Hub pașaport Italia</p><p className="mt-1 text-gray-600">Vezi rapid toate situațiile și diferențele dintre consulate.</p></Link><Link href="/programare-consulat-romania-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50"><p className="font-medium text-gray-900">Programare consulat</p><p className="mt-1 text-gray-600">Pașii exacți în econsulat.ro și unde poți merge fără programare.</p></Link><Link href="/pasaport-crds-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50"><p className="font-medium text-gray-900">Primul pașaport CRDS</p><p className="mt-1 text-gray-600">Dacă ai domiciliul stabilit în Italia și intri pe procedura CRDS.</p></Link><Link href="/pasaport-pierdut-furat-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50"><p className="font-medium text-gray-900">Pașaport pierdut sau furat</p><p className="mt-1 text-gray-600">Cazul separat în care ai nevoie de denuncia sau declarație la ghișeu.</p></Link></div>) },
+      ]}
+      finalCtaTitle="Ce documente aduci exact la consulatul tău?"
+      finalCtaText="Wizardul ActeRO identifică în 30 de secunde dacă ești CRDS sau domiciliu România și îți dă lista exactă verificată în aprilie 2026."
+    />
+  )
+}

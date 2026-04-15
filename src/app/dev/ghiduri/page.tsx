@@ -24,6 +24,24 @@ const guides: { id: GuideId; title: string }[] = [
   { id: 'procura-mostenire-de', title: 'Procură notarială · Moștenire / succesiune' },
   { id: 'procura-generala-de', title: 'Procură notarială generală · Germania' },
   { id: 'transcriere-nastere-de', title: 'Transcriere certificat de naștere · Germania' },
+  { id: 'pasaport-crds-it', title: 'Reînnoire pașaport CRDS · Italia' },
+  { id: 'pasaport-crds-it-pierdut', title: 'Pașaport CRDS pierdut/furat · Italia' },
+  { id: 'pasaport-crds-nou-it', title: 'Primul pașaport CRDS · Italia' },
+  { id: 'pasaport-minor-crds-it', title: 'Pașaport copil CRDS · Italia' },
+  { id: 'pasaport-it-cu-domiciliu', title: 'Pașaport · Domiciliu România · Italia' },
+  { id: 'pasaport-it-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Italia' },
+  { id: 'buletin-it-fara-domiciliu', title: 'Buletin expirat · Italia' },
+  { id: 'buletin-it-cu-domiciliu', title: 'Buletin expirat · Domiciliu activ RO · Italia' },
+  { id: 'buletin-it-fara-domiciliu-pierdut', title: 'Buletin pierdut/furat · Italia' },
+  { id: 'buletin-it-cu-domiciliu-pierdut', title: 'Buletin pierdut/furat · Domiciliu activ RO · Italia' },
+  { id: 'buletin-it-primul-it', title: 'Primul buletin românesc · Italia' },
+  { id: 'buletin-it-primul-it-b', title: 'Primul buletin românesc · Născut în Italia' },
+  { id: 'titlu-calatorie-urgenta-it', title: 'Titlu de călătorie · Urgență · Italia' },
+  { id: 'titlu-calatorie-it', title: 'Titlu de călătorie · Italia · 1–2 săptămâni' },
+  { id: 'procura-vanzare-it', title: 'Procură notarială · Vânzare / cumpărare proprietate · Italia' },
+  { id: 'procura-mostenire-it', title: 'Procură notarială · Moștenire / succesiune · Italia' },
+  { id: 'procura-generala-it', title: 'Procură notarială generală · Italia' },
+  { id: 'transcriere-nastere-it', title: 'Transcriere certificat de naștere · Italia' },
 ]
 
 const seoPages = [
@@ -74,6 +92,18 @@ const routes = [
     when: 'Primul buletin, fara domiciliu anterior in Romania, nascut in Germania/strainatate',
     guideA: 'transcriere-nastere-de',
     guideB: 'buletin-de-primul-de-b',
+  },
+  {
+    id: 'route-a-it',
+    when: 'Primul pasaport, domiciliu în Italia, născut în Italia/străinătate',
+    guideA: 'transcriere-nastere-it',
+    guideB: 'pasaport-crds-nou-it',
+  },
+  {
+    id: 'route-b-it',
+    when: 'Primul buletin, fără domiciliu anterior în România, născut în Italia/străinătate',
+    guideA: 'transcriere-nastere-it',
+    guideB: 'buletin-it-primul-it-b',
   },
 ]
 

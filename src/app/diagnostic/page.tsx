@@ -7,9 +7,21 @@ import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
-import { bundeslandOptions, consulates } from '@/lib/content/consulates/de'
+import {
+  convertGuideIdToItaly,
+  getCountryLabel,
+  getGuideCountryCode,
+  localizeGuideTextForCountry,
+} from '@/lib/guides/countryCopy'
+import {
+  getBirthPostalRule,
+  getTravelBadgeSummary,
+  getTravelPhotoRule,
+  personalizeGuideText,
+} from '@/lib/guides/consulateRules'
+import { getConsulateById, getRegionOptionsByCountry } from '@/lib/utils/deriveConsulate'
 import { useAppStore } from '@/store/appStore'
-import type { GuideId, ProblemType } from '@/types'
+import type { ConsulateId, CountryCode, GuideId, ProblemType } from '@/types'
 
 // ─── TIPURI ───────────────────────────────────────────────────────────────────
 
@@ -395,6 +407,58 @@ const diagnosticMap: Record<string, DiagnosticData> = {
   },
 }
 
+function cloneDiagnosticForCountry(base: DiagnosticData, country: CountryCode): DiagnosticData {
+  return {
+    ...base,
+    title: localizeGuideTextForCountry(base.title, country),
+    subtitle: localizeGuideTextForCountry(base.subtitle, country),
+    guideTitle: localizeGuideTextForCountry(base.guideTitle, country),
+    warnings: base.warnings.map((warning) => localizeGuideTextForCountry(warning, country)),
+    routeSteps: base.routeSteps?.map((step) => ({
+      ...step,
+      guideId: country === 'it' ? convertGuideIdToItaly(step.guideId as GuideId) : step.guideId,
+      title: localizeGuideTextForCountry(step.title, country),
+      weeks: localizeGuideTextForCountry(step.weeks, country),
+    })),
+    previewSteps: base.previewSteps.map((step) => ({
+      ...step,
+      label: localizeGuideTextForCountry(step.label, country),
+    })),
+  }
+}
+
+Object.assign(diagnosticMap, {
+  'pasaport-crds-it': cloneDiagnosticForCountry(diagnosticMap['pasaport-crds-de'], 'it'),
+  'pasaport-crds-it-pierdut': cloneDiagnosticForCountry(diagnosticMap['pasaport-crds-de-pierdut'], 'it'),
+  'pasaport-crds-nou-it': cloneDiagnosticForCountry(diagnosticMap['pasaport-crds-nou-de'], 'it'),
+  'pasaport-minor-crds-it': {
+    ...cloneDiagnosticForCountry(diagnosticMap['pasaport-minor-crds-de'], 'it'),
+    warnings: [
+      'Prezența minorului și a ambilor părinți este obligatorie la depunere. Dacă vine un singur părinte, ai nevoie de procură specială sau acord scris autentificat înainte de programare.',
+      'Minorul poate obține pașaport CRDS numai dacă cel puțin un părinte are deja pașaport CRDS sau depune cerere simultan.',
+      'Dacă minorul s-a născut în Italia și nu are certificat de naștere românesc, transcrierea trebuie făcută mai întâi.',
+      'Trieste și Bari: termenul pentru pașapoarte minori este 2–3 luni.',
+    ],
+    estimatedWeeks: '7–10 săptămâni standard · 10–14 săptămâni Trieste și Bari',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Pașaport copil CRDS — Italia',
+  },
+  'pasaport-it-cu-domiciliu': cloneDiagnosticForCountry(diagnosticMap['pasaport-de-cu-domiciliu'], 'it'),
+  'pasaport-it-cu-domiciliu-pierdut': cloneDiagnosticForCountry(diagnosticMap['pasaport-de-cu-domiciliu-pierdut'], 'it'),
+  'buletin-it-fara-domiciliu': cloneDiagnosticForCountry(diagnosticMap['buletin-de-fara-domiciliu'], 'it'),
+  'buletin-it-cu-domiciliu': cloneDiagnosticForCountry(diagnosticMap['buletin-de-cu-domiciliu'], 'it'),
+  'buletin-it-fara-domiciliu-pierdut': cloneDiagnosticForCountry(diagnosticMap['buletin-de-fara-domiciliu-pierdut'], 'it'),
+  'buletin-it-cu-domiciliu-pierdut': cloneDiagnosticForCountry(diagnosticMap['buletin-de-cu-domiciliu-pierdut'], 'it'),
+  'buletin-it-primul-it': cloneDiagnosticForCountry(diagnosticMap['buletin-de-primul-de'], 'it'),
+  'buletin-it-primul-it-b': cloneDiagnosticForCountry(diagnosticMap['buletin-de-primul-de-b'], 'it'),
+  'titlu-calatorie-urgenta-it': cloneDiagnosticForCountry(diagnosticMap['titlu-calatorie-urgenta-de'], 'it'),
+  'titlu-calatorie-it': cloneDiagnosticForCountry(diagnosticMap['titlu-calatorie-de'], 'it'),
+  'procura-vanzare-it': cloneDiagnosticForCountry(diagnosticMap['procura-vanzare-de'], 'it'),
+  'procura-mostenire-it': cloneDiagnosticForCountry(diagnosticMap['procura-mostenire-de'], 'it'),
+  'procura-generala-it': cloneDiagnosticForCountry(diagnosticMap['procura-generala-de'], 'it'),
+  'transcriere-nastere-it': cloneDiagnosticForCountry(diagnosticMap['transcriere-nastere-de'], 'it'),
+} satisfies Partial<Record<string, DiagnosticData>>)
+
 // Date pentru Route-uri
 const routeMap: Record<string, DiagnosticData> = {
   'route-a': {
@@ -427,6 +491,23 @@ const routeMap: Record<string, DiagnosticData> = {
   },
 }
 
+Object.assign(routeMap, {
+  'route-a-it': cloneDiagnosticForCountry({
+    ...routeMap['route-a'],
+    routeSteps: routeMap['route-a'].routeSteps?.map((step) => ({
+      ...step,
+      guideId: convertGuideIdToItaly(step.guideId as GuideId),
+    })),
+  }, 'it'),
+  'route-b-it': cloneDiagnosticForCountry({
+    ...routeMap['route-b'],
+    routeSteps: routeMap['route-b'].routeSteps?.map((step) => ({
+      ...step,
+      guideId: convertGuideIdToItaly(step.guideId as GuideId),
+    })),
+  }, 'it'),
+} satisfies Partial<Record<string, DiagnosticData>>)
+
 const BULETIN_COMMON_WARNING_RIDICARE =
   'Regulă comună pentru ghidurile de buletin: la CEI ridicarea este personală și activezi PIN-urile la ridicare; la CIS poți organiza ridicarea prin procură specială notarială.'
 
@@ -436,19 +517,33 @@ const BULETIN_COMMON_WARNING_REZIDENTA_DE =
 function getDiagnosticWarnings(
   guideId: GuideId | null,
   problemType: ProblemType | null,
-  baseWarnings: string[]
+  baseWarnings: string[],
+  consulate: ConsulateId | null | undefined
 ) {
   const extra: string[] = []
+  const country = getGuideCountryCode(guideId)
 
   if (problemType === 'buletin') {
     extra.push(BULETIN_COMMON_WARNING_RIDICARE)
   }
 
-  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
-    extra.push(BULETIN_COMMON_WARNING_REZIDENTA_DE)
+  if (
+    guideId === 'buletin-de-primul-de' ||
+    guideId === 'buletin-de-primul-de-b' ||
+    guideId === 'buletin-it-primul-it' ||
+    guideId === 'buletin-it-primul-it-b'
+  ) {
+    extra.push(country === 'it'
+      ? 'Când ghidul cere dovada rezidenței în Italia, certificato di residenza, carta d’identità italiană sau permesso di soggiorno se acceptă în original, fără apostilă și fără traducere autorizată în română.'
+      : BULETIN_COMMON_WARNING_REZIDENTA_DE)
   }
 
-  return [...baseWarnings, ...extra.filter((item) => !baseWarnings.includes(item))]
+  const rawWarnings = [...baseWarnings, ...extra.filter((item) => !baseWarnings.includes(item))]
+
+  return rawWarnings.flatMap((warning) => {
+    const personalized = personalizeGuideText(warning, consulate ?? null)
+    return personalized ? [personalized] : []
+  })
 }
 
 // ─── LOADER ───────────────────────────────────────────────────────────────────
@@ -512,46 +607,40 @@ function getEmotionalCopy(
   problemType: ProblemType | null,
   routeId?: string
 ): { title: string; subtitle: string } {
-  if (routeId === 'route-a') {
-    return {
-      title: 'Primul pașaport românesc vine în 2 pași — îți arătăm ordinea corectă.',
-      subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi pașaportul. Ai mai jos ambele ghiduri, în ordinea corectă.',
-    }
+  const country = getGuideCountryCode(guideId)
+  const localize = (title: string, subtitle: string) => ({
+    title: localizeGuideTextForCountry(title, country),
+    subtitle: localizeGuideTextForCountry(subtitle, country),
+  })
+
+  if (routeId === 'route-a' || routeId === 'route-a-it') {
+    return localize(
+      'Primul pașaport românesc vine în 2 pași — îți arătăm ordinea corectă.',
+      'Mai întâi transcrierea certificatului de naștere, apoi pașaportul. Ai mai jos ambele ghiduri, în ordinea corectă.'
+    )
   }
 
-  if (routeId === 'route-b') {
-    return {
-      title: 'Primul tău buletin românesc vine în 2 pași — îți arătăm ordinea corectă.',
-      subtitle: 'Mai întâi transcrierea certificatului de naștere, apoi ghidul pentru primul buletin. Ai mai jos ambele ghiduri, în ordinea corectă.',
-    }
+  if (routeId === 'route-b' || routeId === 'route-b-it') {
+    return localize(
+      'Primul tău buletin românesc vine în 2 pași — îți arătăm ordinea corectă.',
+      'Mai întâi transcrierea certificatului de naștere, apoi ghidul pentru primul buletin. Ai mai jos ambele ghiduri, în ordinea corectă.'
+    )
   }
 
-  if (guideId === 'pasaport-crds-nou-de') {
-    return {
-      title: 'Primul tău pașaport din Germania — iată exact ce trebuie să faci.',
-      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-    }
+  if (guideId === 'pasaport-crds-nou-de' || guideId === 'pasaport-crds-nou-it') {
+    return localize('Primul tău pașaport din Germania — iată exact ce trebuie să faci.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
   }
 
-  if (guideId === 'pasaport-minor-crds-de') {
-    return {
-      title: 'Pașaportul copilului se rezolvă — iată pașii corecți pentru consulat.',
-      subtitle: 'Îți arătăm exact ce pregătești pentru minor, pentru părinți și pentru ziua programării.',
-    }
+  if (guideId === 'pasaport-minor-crds-de' || guideId === 'pasaport-minor-crds-it') {
+    return localize('Pașaportul copilului se rezolvă — iată pașii corecți pentru consulat.', 'Îți arătăm exact ce pregătești pentru minor, pentru părinți și pentru ziua programării.')
   }
 
-  if (guideId === 'pasaport-crds-de-pierdut') {
-    return {
-      title: 'Pașaportul CRDS pierdut sau furat se rezolvă — iată exact pașii.',
-      subtitle: 'Îți arătăm exact ce pregătești pentru consulat și ce se completează direct la ghișeu.',
-    }
+  if (guideId === 'pasaport-crds-de-pierdut' || guideId === 'pasaport-crds-it-pierdut') {
+    return localize('Pașaportul CRDS pierdut sau furat se rezolvă — iată exact pașii.', 'Îți arătăm exact ce pregătești pentru consulat și ce se completează direct la ghișeu.')
   }
 
-  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
-    return {
-      title: 'Primul tău buletin românesc se rezolvă — ghid exact pentru situația ta.',
-      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-    }
+  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b' || guideId === 'buletin-it-primul-it' || guideId === 'buletin-it-primul-it-b') {
+    return localize('Primul tău buletin românesc se rezolvă — ghid exact pentru situația ta.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
   }
 
   if (
@@ -564,35 +653,35 @@ function getEmotionalCopy(
     }
   }
 
-  if (guideId === 'titlu-calatorie-de') {
-    return {
-      title: 'Te întorci în România cu titlul de călătorie — iată pașii corecți.',
-      subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-    }
+  if (guideId === 'titlu-calatorie-de' || guideId === 'titlu-calatorie-it') {
+    return localize(
+      'Te întorci în România cu titlul de călătorie — iată pașii corecți.',
+      'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.'
+    )
   }
 
-  if (guideId === 'procura-mostenire-de') {
-    return {
-      title: 'Moștenirea se poate mișca și din Germania — iată procura corectă.',
-      subtitle: 'Îți arătăm exact ce pregătești înainte de consulat și ce trimiți notarului din România.',
-    }
+  if (guideId === 'procura-mostenire-de' || guideId === 'procura-mostenire-it') {
+    return localize(
+      'Moștenirea se poate mișca și din străinătate — iată procura corectă.',
+      'Îți arătăm exact ce pregătești înainte de consulat și ce trimiți notarului din România.'
+    )
   }
 
-  if (guideId === 'procura-vanzare-de') {
-    return {
-      title: 'Tranzacția se poate face și din Germania — iată procura corectă.',
-      subtitle: 'Îți arătăm exact ce pregătești, ce trebuie să conțină procura și ce verifici cu notarul din România.',
-    }
+  if (guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it') {
+    return localize(
+      'Tranzacția se poate face și din străinătate — iată procura corectă.',
+      'Îți arătăm exact ce pregătești, ce trebuie să conțină procura și ce verifici cu notarul din România.'
+    )
   }
 
-  if (guideId === 'procura-generala-de') {
-    return {
-      title: 'Procura se face din Germania — important e să fie redactată corect.',
-      subtitle: 'Îți arătăm exact ce pregătești, când se aplică taxa de 3 euro și ce limite ai pentru divorț, firmă sau bancă.',
-    }
+  if (guideId === 'procura-generala-de' || guideId === 'procura-generala-it') {
+    return localize(
+      'Procura se face din străinătate — important e să fie redactată corect.',
+      'Îți arătăm exact ce pregătești, când se aplică taxa de registru și ce limite ai pentru divorț, firmă sau bancă.'
+    )
   }
 
-  if (guideId === 'transcriere-nastere-de') {
+  if (guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') {
     return {
       title: 'Transcrierea nașterii se face prin consulat — iată ordinea corectă.',
       subtitle: 'Îți arătăm exact ce documente pregătești, cum faci cererea și când ridici certificatul românesc cu CNP.',
@@ -601,87 +690,101 @@ function getEmotionalCopy(
 
   switch (problemType) {
     case 'pasaport':
-      return {
-        title: 'Pașaportul expirat te ține pe loc — rezolvăm corect, din prima.',
-        subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-      }
+      return localize('Pașaportul expirat te ține pe loc — rezolvăm corect, din prima.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
     case 'buletin':
-      return {
-        title: 'Buletinul expirat se rezolvă — ghid exact pentru situația ta.',
-        subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-      }
+      return localize('Buletinul expirat se rezolvă — ghid exact pentru situația ta.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
     case 'titlu-calatorie':
-      return {
-        title: 'Titlul de călătorie te aduce acasă — îți arătăm exact pașii.',
-        subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-      }
+      return localize('Titlul de călătorie te aduce acasă — îți arătăm exact pașii.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
     case 'procura':
-      return {
-        title: 'Procura notarială din Germania — fără drumuri în România.',
-        subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-      }
+      return localize('Procura notarială din Germania — fără drumuri în România.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
     case 'transcriere-nastere':
-      return {
-        title: 'Transcrierea certificatului de naștere este primul pas corect.',
-        subtitle: 'Îți arătăm exact cum obții certificatul românesc și CNP-ul copilului.',
-      }
+      return localize('Transcrierea certificatului de naștere este primul pas corect.', 'Îți arătăm exact cum obții certificatul românesc și CNP-ul copilului.')
     default:
-      return {
-        title: 'Am înțeles. Îți arătăm exact ce ai de făcut.',
-        subtitle: 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.',
-      }
+      return localize('Am înțeles. Îți arătăm exact ce ai de făcut.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
   }
 }
 
-function getBadgeText(guideId: GuideId | null, estimatedWeeks: string, estimatedAppointments: number | string) {
+function getBadgeText(
+  guideId: GuideId | null,
+  estimatedWeeks: string,
+  estimatedAppointments: number | string,
+  consulate: ConsulateId | null | undefined
+) {
   if (typeof estimatedAppointments === 'string') {
     return `⏱ ${estimatedAppointments} · ${estimatedWeeks}`
   }
 
   switch (guideId) {
     case 'pasaport-crds-de':
+    case 'pasaport-crds-it':
       return '⏱ o singură vizită la consulat · 6–8 săptămâni'
     case 'pasaport-crds-de-pierdut':
+    case 'pasaport-crds-it-pierdut':
       return '⏱ o singură vizită la consulat · 6–10 săptămâni'
     case 'pasaport-crds-nou-de':
+    case 'pasaport-crds-nou-it':
       return '⏱ o singură vizită la consulat · 8–10 săptămâni'
     case 'pasaport-minor-crds-de':
+    case 'pasaport-minor-crds-it':
       return '⏱ o singură vizită la consulat · 8–12 săptămâni'
     case 'pasaport-de-cu-domiciliu':
     case 'pasaport-de-cu-domiciliu-pierdut':
+    case 'pasaport-it-cu-domiciliu':
+    case 'pasaport-it-cu-domiciliu-pierdut':
       return '⏱ o singură vizită la consulat · 4–6 săptămâni'
     case 'buletin-de-fara-domiciliu':
     case 'buletin-de-fara-domiciliu-pierdut':
+    case 'buletin-it-fara-domiciliu':
+    case 'buletin-it-fara-domiciliu-pierdut':
       return '⏱ o singură deplasare în România · 3–5 săptămâni'
     case 'buletin-de-cu-domiciliu':
     case 'buletin-de-cu-domiciliu-pierdut':
+    case 'buletin-it-cu-domiciliu':
+    case 'buletin-it-cu-domiciliu-pierdut':
       return '⏱ o singură deplasare în România · 2–4 săptămâni'
     case 'procura-vanzare-de':
+    case 'procura-vanzare-it':
       return '⏱ 1 programare · o singură vizită la consulat · procura în aceeași zi'
     case 'procura-mostenire-de':
     case 'procura-generala-de':
+    case 'procura-mostenire-it':
+    case 'procura-generala-it':
       return '⏱ o singură vizită la consulat · 1–2 săptămâni'
     case 'titlu-calatorie-urgenta-de':
       return '⏱ o vizită la consulat · fără programare · aceeași zi'
+    case 'titlu-calatorie-urgenta-it':
+      return `⏱ o vizită la consulat · ${getTravelBadgeSummary(consulate ?? null, true)}`
     case 'titlu-calatorie-de':
       return '⏱ o vizită la consulat · fără programare · aceeași zi în majoritatea cazurilor'
+    case 'titlu-calatorie-it':
+      return `⏱ o vizită la consulat · ${getTravelBadgeSummary(consulate ?? null, false)}`
     case 'transcriere-nastere-de':
-      return '⏱ 1 programare pentru depunere · 1 ridicare sau poștă la Stuttgart · ~3–6 luni total'
+    case 'transcriere-nastere-it':
+      return getBirthPostalRule(consulate ?? null)
+        ? '⏱ 1 programare pentru depunere · 1 ridicare sau poștă · ~3–6 luni total'
+        : '⏱ 1 programare pentru depunere · 1 ridicare · ~3–6 luni total'
     default:
       return `⏱ ${estimatedAppointments === 1 ? 'o singură vizită' : `${estimatedAppointments} deplasări`} · ${estimatedWeeks}`
   }
 }
 
 function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isPrimulPasaport?: boolean) {
-  if (guideId === 'transcriere-nastere-de') {
+  if (guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') {
     return {
       icon: '🍼',
       title: 'Stare civilă românească',
-      subtitle: 'Transcriere naștere Germania → România',
+      subtitle: guideId === 'transcriere-nastere-it'
+        ? 'Transcriere naștere Italia → România'
+        : 'Transcriere naștere Germania → România',
     }
   }
 
-  if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-de-primul-de-b') {
+  if (
+    guideId === 'buletin-de-primul-de' ||
+    guideId === 'buletin-de-primul-de-b' ||
+    guideId === 'buletin-it-primul-it' ||
+    guideId === 'buletin-it-primul-it-b'
+  ) {
     return {
       icon: '🪪',
       title: 'Carte de identitate',
@@ -690,11 +793,13 @@ function getActRow(guideId: GuideId | null, problemType: ProblemType | null, isP
   }
 
   if (problemType === 'pasaport') {
-    if (guideId === 'pasaport-minor-crds-de') {
+    if (guideId === 'pasaport-minor-crds-de' || guideId === 'pasaport-minor-crds-it') {
       return {
         icon: '🧒',
         title: 'Pașaport CRDS pentru minor',
-        subtitle: 'Prim pașaport sau reînnoire pentru copil cu domiciliu în Germania',
+        subtitle: guideId === 'pasaport-minor-crds-it'
+          ? 'Prim pașaport sau reînnoire pentru copil cu domiciliu în Italia'
+          : 'Prim pașaport sau reînnoire pentru copil cu domiciliu în Germania',
       }
     }
 
@@ -752,8 +857,15 @@ function getDiagnosticValueCopy(
   problemType: ProblemType | null,
   guideTitle: string
 ) {
-  if (guideId === 'transcriere-nastere-de') {
-    return {
+  const country = getGuideCountryCode(guideId)
+  const localizeValue = (value: { benefits: string[]; paidTitle: string; paidSubtitle: string }) => ({
+    benefits: value.benefits.map((item) => localizeGuideTextForCountry(item, country)),
+    paidTitle: localizeGuideTextForCountry(value.paidTitle, country),
+    paidSubtitle: localizeGuideTextForCountry(value.paidSubtitle, country),
+  })
+
+  if (guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') {
+    return localizeValue({
       benefits: [
         'lista exactă de acte pentru transcriere și excepțiile importante pe care să nu le ratezi',
         'toți pașii în ordinea corectă pentru cerere, programare și ridicare',
@@ -761,11 +873,11 @@ function getDiagnosticValueCopy(
       ],
       paidTitle: 'Deblochez ghidul complet pentru transcriere pentru 9,99€ →',
       paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce urmează după certificatul românesc',
-    }
+    })
   }
 
   if (problemType === 'pasaport') {
-    return {
+    return localizeValue({
       benefits: [
         `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și consulatul tău`,
         'toți pașii în ordine, fără să ghicești ce urmează după primii 2 pași',
@@ -773,11 +885,11 @@ function getDiagnosticValueCopy(
       ],
       paidTitle: 'Deblochez ghidul complet pentru pașaport pentru 9,99€ →',
       paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și accesul personal pe email',
-    }
+    })
   }
 
   if (problemType === 'buletin') {
-    return {
+    return localizeValue({
       benefits: [
         `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și tipul tău de domiciliu`,
         'toți pașii în ordine, inclusiv deplasarea, depunerea și ridicarea',
@@ -785,11 +897,11 @@ function getDiagnosticValueCopy(
       ],
       paidTitle: 'Deblochez ghidul complet pentru buletin pentru 9,99€ →',
       paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și planul complet pentru România',
-    }
+    })
   }
 
   if (problemType === 'titlu-calatorie') {
-    return {
+    return localizeValue({
       benefits: [
         `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și mersul la consulat`,
         'toți pașii în ordine pentru urgență, fără să pierzi timpul cu acte inutile',
@@ -797,11 +909,11 @@ function getDiagnosticValueCopy(
       ],
       paidTitle: 'Deblochez ghidul complet pentru titlul de călătorie pentru 9,99€ →',
       paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce rezolvi după urgență',
-    }
+    })
   }
 
   if (problemType === 'procura') {
-    return {
+    return localizeValue({
       benefits: [
         `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'} și programarea la consulat`,
         'toți pașii în ordine, de la pregătirea conținutului până la trimiterea procurii în România',
@@ -809,10 +921,10 @@ function getDiagnosticValueCopy(
       ],
       paidTitle: 'Deblochez ghidul complet pentru procură pentru 9,99€ →',
       paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și ce trimiți mai departe în România',
-    }
+    })
   }
 
-  return {
+  return localizeValue({
     benefits: [
       `lista exactă de acte pentru ${guideTitle.toLowerCase() || 'situația ta'}`,
       'toți pașii în ordine, fără să ghicești ce urmează',
@@ -820,7 +932,7 @@ function getDiagnosticValueCopy(
     ],
     paidTitle: 'Deblochez ghidul complet pentru 9,99€ →',
     paidSubtitle: 'ghidul complet, lista de acte, progresul pe pași și accesul personal pe email',
-  }
+  })
 }
 
 function getFeeInfo(
@@ -838,10 +950,12 @@ function getFeeInfo(
     }
   }
 
-  if (guideId === 'transcriere-nastere-de') {
+  if (guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it') {
     return {
       title: 'Taxă: gratuit',
-      subtitle: 'Transcrierea certificatului de naștere este gratuită la toate consulatele din Germania',
+      subtitle: guideId === 'transcriere-nastere-it'
+        ? 'Transcrierea certificatului de naștere este, de regulă, gratuită în Italia, dar unele consulate cer confirmare directă.'
+        : 'Transcrierea certificatului de naștere este gratuită la toate consulatele din Germania',
     }
   }
 
@@ -858,20 +972,26 @@ function getFeeInfo(
 function getPhotoInfo(
   guideId: GuideId | null,
   problemType: ProblemType | null,
-  consulate?: (typeof consulates)[keyof typeof consulates] | null
+  consulate?: ReturnType<typeof getConsulateById> | null
 ): { title: string; subtitle: string } | null {
   if (!guideId || !problemType || !consulate) return null
 
   if (problemType === 'pasaport') {
     if (
       guideId === 'pasaport-crds-de' ||
+      guideId === 'pasaport-crds-it' ||
       guideId === 'pasaport-crds-de-pierdut' ||
+      guideId === 'pasaport-crds-it-pierdut' ||
       guideId === 'pasaport-crds-nou-de' ||
-      guideId === 'pasaport-minor-crds-de'
+      guideId === 'pasaport-crds-nou-it' ||
+      guideId === 'pasaport-minor-crds-de' ||
+      guideId === 'pasaport-minor-crds-it'
     ) {
       return {
         title: 'Fotografia se preia la ghișeu',
-        subtitle: 'Pentru pașapoartele CRDS nu trebuie să aduci fotografii proprii la niciunul dintre cele 4 consulate',
+        subtitle: guideId === 'pasaport-minor-crds-it'
+          ? 'Pentru pașapoartele CRDS din Italia, fotografia se preia la ghișeu la toate consulatele'
+          : 'Pentru pașapoartele CRDS nu trebuie să aduci fotografii proprii la niciunul dintre cele 4 consulate',
       }
     }
 
@@ -884,6 +1004,12 @@ function getPhotoInfo(
   }
 
   if (problemType === 'titlu-calatorie') {
+    if (consulate.id === 'roma' || consulate.id === 'torino' || consulate.id === 'trieste' || consulate.id === 'bari' || consulate.id === 'catania' || consulate.id === 'milano' || consulate.id === 'bologna') {
+      return {
+        title: 'Fotografia depinde de consulat și de vârsta minorului',
+        subtitle: localizeGuideTextForCountry(getTravelPhotoRule(consulate.id), 'it'),
+      }
+    }
     if (consulate.id === 'muenchen') {
       return {
         title: 'Fotografii biometrice necesare',
@@ -915,25 +1041,25 @@ function getContextRow(
   if (!guideId || !problemType) return null
 
   if (problemType === 'buletin') {
-    if (guideId === 'buletin-de-primul-de') {
+    if (guideId === 'buletin-de-primul-de' || guideId === 'buletin-it-primul-it') {
       return {
         icon: '🏠',
-        title: 'Domiciliu în Germania → România',
+        title: guideId === 'buletin-it-primul-it' ? 'Domiciliu în Italia → România' : 'Domiciliu în Germania → România',
         subtitle: 'Depui doar la SPCLEP-ul competent pentru adresa pe care o alegi ca domiciliu',
       }
     }
 
-    if (guideId === 'buletin-de-primul-de-b') {
+    if (guideId === 'buletin-de-primul-de-b' || guideId === 'buletin-it-primul-it-b') {
       return {
         icon: '🏠',
-        title: 'Rezidență Germania · CEI în România',
+        title: guideId === 'buletin-it-primul-it-b' ? 'Rezidență Italia · CEI în România' : 'Rezidență Germania · CEI în România',
         subtitle: 'Poți depune la orice SPCLEP din România, cu programare activă pe hub.mai.gov.ro',
       }
     }
 
     return {
       icon: '🏠',
-      title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
+      title: hasDomiciliuRO ? 'Domiciliu în România' : `Domiciliu în ${getCountryLabel(getGuideCountryCode(guideId))}`,
       subtitle: hasDomiciliuRO
         ? 'Cererea se depune personal la SPCLEP-ul competent'
         : 'Trebuie să te prezinți personal în România pentru depunere',
@@ -943,7 +1069,7 @@ function getContextRow(
   if (problemType === 'pasaport') {
     return {
       icon: '🏠',
-      title: hasDomiciliuRO ? 'Domiciliu în România' : 'Domiciliu în Germania',
+      title: hasDomiciliuRO ? 'Domiciliu în România' : `Domiciliu în ${getCountryLabel(getGuideCountryCode(guideId))}`,
       subtitle: hasDomiciliuRO ? 'Ai adresă activă în România' : 'Fără adresă activă în România',
     }
   }
@@ -990,19 +1116,31 @@ function SituationCard({
   hasDomiciliuRO?: boolean
   isPrimulPasaport?: boolean
   bundesland?: string
-  consulateId?: keyof typeof consulates
+  consulateId?: ConsulateId
 }) {
   const actRow = getActRow(guideId, problemType, isPrimulPasaport)
-  const bundeslandName = bundeslandOptions.find((item) => item.code === bundesland)?.name ?? 'Land nespecificat'
-  const consulate = consulateId ? consulates[consulateId] : null
+  const country = getGuideCountryCode(guideId)
+  const regionName = bundesland
+    ? getRegionOptionsByCountry(country).find((item) => item.code === bundesland)?.name ?? 'Regiune nespecificată'
+    : 'Regiune nespecificată'
+  const consulate = consulateId ? getConsulateById(consulateId) : null
   const consulateShortName = consulateId
     ? {
         muenchen: 'München',
         bonn: 'Bonn',
         stuttgart: 'Stuttgart',
         berlin: 'Berlin',
+        roma: 'Roma',
+        milano: 'Milano',
+        bologna: 'Bologna',
+        torino: 'Torino',
+        trieste: 'Trieste',
+        bari: 'Bari',
+        catania: 'Catania',
       }[consulateId]
     : 'Consulat nespecificat'
+  const feeInfo = getFeeInfo(guideId, problemType, consulateShortName ?? 'Consulat', consulate?.paymentMethod)
+  const photoInfo = getPhotoInfo(guideId, problemType, consulate)
 
   return (
     <div className="animate-fadeIn bg-white border border-gray-200 rounded-2xl p-4 flex flex-col gap-3">
@@ -1037,36 +1175,36 @@ function SituationCard({
           <span className="text-xl">📍</span>
           <div>
             <p className="text-sm font-semibold text-gray-900">
-              {bundeslandName} → {consulateShortName}
+              {regionName} → {consulateShortName}
             </p>
             <p className="text-xs text-gray-500">{consulate?.address ?? 'Adresa consulatului va fi confirmată în ghid'}</p>
           </div>
         </div>
       )}
 
-      {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod) && (
+      {feeInfo && (
         <div className="flex items-center gap-3">
           <span className="text-xl">💶</span>
           <div>
             <p className="text-sm font-semibold text-gray-900">
-              {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod)?.title}
+              {feeInfo.title}
             </p>
             <p className="text-xs text-gray-500">
-              {getFeeInfo(guideId, problemType, consulateShortName, consulate?.paymentMethod)?.subtitle}
+              {feeInfo.subtitle}
             </p>
           </div>
         </div>
       )}
 
-      {getPhotoInfo(guideId, problemType, consulate) && (
+      {photoInfo && (
         <div className="flex items-center gap-3">
           <span className="text-xl">📸</span>
           <div>
             <p className="text-sm font-semibold text-gray-900">
-              {getPhotoInfo(guideId, problemType, consulate)?.title}
+              {photoInfo.title}
             </p>
             <p className="text-xs text-gray-500">
-              {getPhotoInfo(guideId, problemType, consulate)?.subtitle}
+              {photoInfo.subtitle}
             </p>
           </div>
         </div>
@@ -1084,7 +1222,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
     problemType,
     wizardResult?.type === 'route' ? wizardResult.routeId : undefined
   )
-  const resolvedWarnings = getDiagnosticWarnings(guideId, problemType, data.warnings)
+  const resolvedWarnings = getDiagnosticWarnings(guideId, problemType, data.warnings, situation.consulate)
   const valueCopy = getDiagnosticValueCopy(guideId, problemType, data.guideTitle)
 
   // Reveal progresiv — câte o secțiune la 150ms
@@ -1166,7 +1304,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
       {visible >= 3 && (
         <div className="flex items-center gap-2 bg-blue-50 rounded-xl px-4 py-3 animate-fadeIn">
           <span className="text-sm text-blue-700 font-medium">
-            {getBadgeText(guideId, data.estimatedWeeks, data.estimatedAppointments)}
+            {getBadgeText(guideId, data.estimatedWeeks, data.estimatedAppointments, situation.consulate)}
           </span>
         </div>
       )}

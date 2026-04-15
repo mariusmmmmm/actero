@@ -4,9 +4,10 @@
 // ─── ȚĂRI ────────────────────────────────────────────────────────────────────
 
 export type CountryStatus = 'available' | 'coming_soon' | 'date_announced'
+export type CountryCode = 'de' | 'it'
 
 export type Country = {
-  code: string
+  code: CountryCode | string
   name: string
   flag: string
   status: CountryStatus
@@ -20,9 +21,37 @@ export type BundeslandCode =
   | 'HE' | 'MV' | 'NI' | 'NW' | 'RP' | 'SL'
   | 'SN' | 'ST' | 'SH' | 'TH'
 
-export type ConsulateId = 'muenchen' | 'bonn' | 'stuttgart' | 'berlin'
+export type ItalyRegionCode =
+  | 'Lazio'
+  | 'Abruzzo'
+  | 'Campania'
+  | 'Molise'
+  | 'Sardegna'
+  | 'Umbria'
+  | 'Lombardia'
+  | 'Trentino-Alto Adige'
+  | 'Emilia-Romagna'
+  | 'Marche'
+  | 'Toscana'
+  | 'San Marino'
+  | 'Piemonte'
+  | 'Liguria'
+  | "Valle d'Aosta"
+  | 'Veneto'
+  | 'Friuli-Venezia Giulia'
+  | 'Basilicata'
+  | 'Calabria'
+  | 'Puglia'
+  | 'Sicilia'
+
+export type RegionCode = BundeslandCode | ItalyRegionCode
+
+export type GermanyConsulateId = 'muenchen' | 'bonn' | 'stuttgart' | 'berlin'
+export type ItalyConsulateId = 'roma' | 'milano' | 'bologna' | 'torino' | 'trieste' | 'bari' | 'catania'
+export type ConsulateId = GermanyConsulateId | ItalyConsulateId
 
 export type ConsulateInfo = {
+  countryCode: CountryCode
   id: ConsulateId
   name: string
   address: string
@@ -36,6 +65,8 @@ export type ConsulateInfo = {
   scheduleDeponere: string   // ex: 'Luni–Joi 08:00–14:00, Vineri 08:00–12:00'
   scheduleRidicare: string   // ex: 'Luni–Joi 14:00–16:00 (fără programare)'
   schedulePassportPickup?: string
+  schedulePassportPickupCrds?: string
+  schedulePassportPickupStandard?: string
   scheduleTitluCalatorie: string
   scheduleTravelDoc?: string
   paymentMethod: string      // ex: 'exclusiv EC-Karte' | 'exclusiv numerar'
@@ -65,6 +96,7 @@ export type ProblemType = 'pasaport' | 'buletin' | 'titlu-calatorie' | 'procura'
 export type SituationFlags = {
   // Wizard Step 2
   bundesland?: BundeslandCode
+  region?: RegionCode
   consulate?: ConsulateId       // derivat automat din bundesland
 
   // Path Pașaport
@@ -120,8 +152,26 @@ export type GuideId =
   | 'procura-mostenire-de'
   | 'procura-generala-de'
   | 'transcriere-nastere-de'
+  | 'pasaport-crds-it'
+  | 'pasaport-crds-it-pierdut'
+  | 'pasaport-crds-nou-it'
+  | 'pasaport-minor-crds-it'
+  | 'pasaport-it-cu-domiciliu'
+  | 'pasaport-it-cu-domiciliu-pierdut'
+  | 'buletin-it-fara-domiciliu'
+  | 'buletin-it-cu-domiciliu'
+  | 'buletin-it-fara-domiciliu-pierdut'
+  | 'buletin-it-cu-domiciliu-pierdut'
+  | 'buletin-it-primul-it'
+  | 'buletin-it-primul-it-b'
+  | 'titlu-calatorie-urgenta-it'
+  | 'titlu-calatorie-it'
+  | 'procura-vanzare-it'
+  | 'procura-mostenire-it'
+  | 'procura-generala-it'
+  | 'transcriere-nastere-it'
 
-export type RouteId = 'route-a' | 'route-b'
+export type RouteId = 'route-a' | 'route-b' | 'route-a-it' | 'route-b-it'
 
 export type WizardResult =
   | { type: 'guide'; guideId: GuideId }

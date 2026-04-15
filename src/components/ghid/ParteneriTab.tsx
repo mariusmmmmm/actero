@@ -27,7 +27,7 @@ export default function ParteneriTab() {
           Parteneri verificati
         </h2>
         <p className="text-xs text-gray-400">
-          Selectati de ActeRO · recenzii reale de la romani din Germania
+          Selectati de ActeRO · recenzii reale de la romani din diaspora
         </p>
       </div>
 

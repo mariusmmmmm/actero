@@ -78,12 +78,12 @@ function Hero() {
         <div className="flex items-center gap-3 mb-5">
           <SocialProofAvatars />
           <p className="text-xs text-gray-400">
-            <strong className="text-gray-200">120+</strong> români din Germania au rezolvat cu ActeRO — lansat în martie 2026
+            <strong className="text-gray-200">120+</strong> români din diaspora au rezolvat cu ActeRO — lansat în martie 2026
           </p>
         </div>
 
         <Link
-          href="/wizard"
+          href="/wizard?country=de"
           className="block w-full py-4 bg-green-500 text-white font-bold text-center rounded-xl text-base"
         >
           Începe — primii pași gratuit →
@@ -334,8 +334,8 @@ function Guidance() {
 
 function Countries() {
   const countries = [
-    { flag: '🇩🇪', name: 'Germania', status: 'Disponibil', href: '/wizard', available: true },
-    { flag: '🇮🇹', name: 'Italia', status: 'Mai 2026', href: '/in-curand?country=it', available: false },
+    { flag: '🇩🇪', name: 'Germania', status: 'Disponibil', href: '/wizard?country=de', available: true },
+    { flag: '🇮🇹', name: 'Italia', status: 'Disponibil', href: '/wizard?country=it', available: true },
     { flag: '🇪🇸', name: 'Spania', status: 'Mai 2026', href: '/in-curand?country=es', available: false },
     { flag: '🇬🇧', name: 'UK', status: 'Iun. 2026', href: '/in-curand?country=gb', available: false },
     { flag: '🇫🇷', name: 'Franța', status: 'În curând', href: '/in-curand?country=fr', available: false },
@@ -348,9 +348,8 @@ function Countries() {
         Țări disponibile
       </div>
       <p className="text-sm text-gray-600 leading-relaxed mb-5">
-        Începem cu Germania și extindem treptat ghidurile pentru alte țări și alte tipuri de
-        nevoi. Homepage-ul rămâne punctul de intrare general, iar ghidurile se adaptează în
-        funcție de ce adăugăm mai departe.
+        Poți intra acum direct pe Germania sau Italia. Homepage-ul rămâne punctul de intrare
+        general, iar ghidurile se adaptează în funcție de țara și consulatul tău.
       </p>
       <div className="grid grid-cols-3 gap-2">
         {countries.map((c) => (
@@ -407,7 +406,7 @@ function BottomCTA() {
         <div className="text-sm text-gray-500 mb-1">Informație gratuită · fără publicitate</div>
       </div>
       <Link
-        href="/wizard"
+        href="/wizard?country=de"
         className="block w-full py-4 bg-gray-900 text-white font-bold text-center rounded-xl text-base"
       >
         Rezolvă acum — primii pași gratuit →

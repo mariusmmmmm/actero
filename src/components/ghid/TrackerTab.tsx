@@ -17,8 +17,9 @@ export default function TrackerTab({
   const setTrackerStep = useAppStore((s) => s.setTrackerStep)
   const checklistState = useAppStore((s) => s.checklistState)
   const sessionId = useAppStore((s) => s.sessionId)
+  const consulate = useAppStore((s) => s.consulate)
 
-  const steps = getGuideSteps(guideId)
+  const steps = getGuideSteps(guideId, consulate)
 
   const checklistTotal = Object.keys(checklistState).length
   const checklistDone = Object.values(checklistState).filter(

@@ -9,7 +9,7 @@ import type { CreateSessionPayload, CreateSessionResponse } from '@/types'
 import { hasTrustedOrigin, NO_STORE_HEADERS } from '@/lib/security'
 
 const ALLOWED_PROBLEM_TYPES = new Set(['pasaport', 'buletin', 'titlu-calatorie', 'procura', 'transcriere-nastere'])
-const ALLOWED_COUNTRIES = new Set(['de'])
+const ALLOWED_COUNTRIES = new Set(['de', 'it'])
 
 export async function POST(req: NextRequest) {
   try {

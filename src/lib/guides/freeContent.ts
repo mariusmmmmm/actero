@@ -1,4 +1,5 @@
-import type { GuideId } from '@/types'
+import { localizeGuideTextForCountry, localizeGuideTitleForCountry } from '@/lib/guides/countryCopy'
+import type { CountryCode, GuideId } from '@/types'
 
 export type FreeBlockType = 'info' | 'warning' | 'tip' | 'action' | 'note'
 
@@ -17,7 +18,7 @@ export type GhidFreeContent = {
   lockedSteps: { id: number; title: string }[]
 }
 
-export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
+export const ghidFreeMap = {
   'pasaport-crds-de': {
     title: 'Ghid reînnoire pașaport CRDS · Germania',
     meta: { free: '2 pași gratuiți', total: '7 pași total' },
@@ -803,4 +804,45 @@ export const ghidFreeMap: Record<GuideId, GhidFreeContent> = {
       'Ce faci dacă funcționarul cere ceva care nu e în lista ta',
     ],
   },
+} as Record<GuideId, GhidFreeContent>
+
+function cloneFreeGuideForCountry(base: GhidFreeContent, country: CountryCode, title?: string): GhidFreeContent {
+  return {
+    ...base,
+    title: title ?? localizeGuideTitleForCountry(base.title, country),
+    steps: base.steps.map((step) => ({
+      ...step,
+      title: localizeGuideTextForCountry(step.title, country),
+      blocks: step.blocks.map((block) => ({
+        ...block,
+        text: localizeGuideTextForCountry(block.text, country),
+      })),
+    })),
+    lockedSteps: base.lockedSteps.map((step) => ({
+      ...step,
+      title: localizeGuideTextForCountry(step.title, country),
+    })),
+    paywallTeaser: base.paywallTeaser.map((item) => localizeGuideTextForCountry(item, country)),
+  }
 }
+
+Object.assign(ghidFreeMap, {
+  'pasaport-crds-it': cloneFreeGuideForCountry(ghidFreeMap['pasaport-crds-de'], 'it', 'Ghid reînnoire pașaport CRDS · Italia'),
+  'pasaport-crds-it-pierdut': cloneFreeGuideForCountry(ghidFreeMap['pasaport-crds-de-pierdut'], 'it', 'Ghid pașaport CRDS pierdut/furat · Italia'),
+  'pasaport-crds-nou-it': cloneFreeGuideForCountry(ghidFreeMap['pasaport-crds-nou-de'], 'it', 'Ghid primul pașaport CRDS · Italia'),
+  'pasaport-minor-crds-it': cloneFreeGuideForCountry(ghidFreeMap['pasaport-minor-crds-de'], 'it', 'Pașaport copil CRDS — Italia'),
+  'pasaport-it-cu-domiciliu': cloneFreeGuideForCountry(ghidFreeMap['pasaport-de-cu-domiciliu'], 'it', 'Ghid pașaport · Domiciliu România · Italia'),
+  'pasaport-it-cu-domiciliu-pierdut': cloneFreeGuideForCountry(ghidFreeMap['pasaport-de-cu-domiciliu-pierdut'], 'it', 'Ghid pașaport pierdut/furat · Italia'),
+  'buletin-it-fara-domiciliu': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-fara-domiciliu'], 'it', 'Ghid buletin expirat · Italia'),
+  'buletin-it-cu-domiciliu': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-cu-domiciliu'], 'it', 'Ghid buletin expirat · Domiciliu activ RO · Italia'),
+  'buletin-it-fara-domiciliu-pierdut': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-fara-domiciliu-pierdut'], 'it', 'Ghid buletin pierdut/furat · Italia'),
+  'buletin-it-cu-domiciliu-pierdut': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-cu-domiciliu-pierdut'], 'it', 'Ghid buletin pierdut/furat · Domiciliu activ RO · Italia'),
+  'buletin-it-primul-it': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-primul-de'], 'it', 'Primul buletin românesc · Italia'),
+  'buletin-it-primul-it-b': cloneFreeGuideForCountry(ghidFreeMap['buletin-de-primul-de-b'], 'it', 'Primul buletin românesc · Născut în Italia'),
+  'titlu-calatorie-urgenta-it': cloneFreeGuideForCountry(ghidFreeMap['titlu-calatorie-urgenta-de'], 'it', 'Titlu de călătorie · Urgență · Italia'),
+  'titlu-calatorie-it': cloneFreeGuideForCountry(ghidFreeMap['titlu-calatorie-de'], 'it', 'Titlu de călătorie · Italia · 1–2 săptămâni'),
+  'procura-vanzare-it': cloneFreeGuideForCountry(ghidFreeMap['procura-vanzare-de'], 'it', 'Procură de vânzare/cumpărare proprietate · Italia'),
+  'procura-mostenire-it': cloneFreeGuideForCountry(ghidFreeMap['procura-mostenire-de'], 'it', 'Procură · Moștenire · Italia'),
+  'procura-generala-it': cloneFreeGuideForCountry(ghidFreeMap['procura-generala-de'], 'it', 'Procură notarială generală · Italia'),
+  'transcriere-nastere-it': cloneFreeGuideForCountry(ghidFreeMap['transcriere-nastere-de'], 'it', 'Transcriere certificat de naștere · Italia'),
+} satisfies Partial<Record<GuideId, GhidFreeContent>>)

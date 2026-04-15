@@ -1,119 +1,96 @@
-// ActeRO — lib/utils/deriveConsulate.ts
-// Derivă consulatul din Bundesland și expune datele pentru card dinamic
-
-import type { BundeslandCode, ConsulateId, ConsulateInfo } from '@/types'
 import {
+  bundeslandOptions,
   bundeslandToConsulate,
-  consulates,
-  getConsulateByBundesland,
-  getConsulateById,
+  consulates as germanConsulates,
+  getConsulateByBundesland as getGermanConsulateByBundesland,
 } from '@/lib/content/consulates/de'
+import {
+  italyConsulates,
+  italyRegionOptions,
+  italyRegionToConsulate,
+} from '@/lib/content/consulates/it'
+import type {
+  BundeslandCode,
+  ConsulateId,
+  ConsulateInfo,
+  CountryCode,
+  GermanyConsulateId,
+  ItalyConsulateId,
+  ItalyRegionCode,
+  RegionCode,
+} from '@/types'
 
-export { getConsulateByBundesland, getConsulateById }
+export { bundeslandOptions, italyRegionOptions }
 
-// Derivă ConsulateId din Bundesland
-export function deriveConsulateId(bundesland: BundeslandCode): ConsulateId {
-  return bundeslandToConsulate[bundesland]
+export function getRegionOptionsByCountry(country: CountryCode): { code: RegionCode; name: string }[] {
+  return country === 'it'
+    ? italyRegionOptions.map((item) => ({ code: item.code, name: item.name }))
+    : bundeslandOptions.map((item) => ({ code: item.code, name: item.name }))
 }
 
-// Returnează ConsulateInfo complet din Bundesland
-export function deriveConsulateInfo(bundesland: BundeslandCode): ConsulateInfo {
-  return getConsulateByBundesland(bundesland)
+export function getConsulateCountry(consulateId: ConsulateId | null): CountryCode | null {
+  if (!consulateId) return null
+  return consulateId === 'bonn' || consulateId === 'muenchen' || consulateId === 'stuttgart' || consulateId === 'berlin'
+    ? 'de'
+    : 'it'
 }
 
-// Confirmarea afișată în wizard după selecția Bundesland-ului
-export function getConsulateConfirmation(bundesland: BundeslandCode): {
+export function deriveConsulateId(country: CountryCode, region: RegionCode): ConsulateId {
+  if (country === 'it') {
+    return italyRegionToConsulate[region as ItalyRegionCode]
+  }
+  return bundeslandToConsulate[region as BundeslandCode]
+}
+
+export function deriveConsulateInfo(country: CountryCode, region: RegionCode): ConsulateInfo {
+  const consulateId = deriveConsulateId(country, region)
+  return getConsulateById(consulateId)
+}
+
+export function getConsulateConfirmation(country: CountryCode, region: RegionCode): {
   consulateName: string
   shortNote: string
 } {
-  const c = deriveConsulateInfo(bundesland)
+  const c = deriveConsulateInfo(country, region)
   return {
     consulateName: c.name,
     shortNote: 'Adresa, programul și informațiile de contact le găsești în ghidul tău.',
   }
 }
 
-// Date pentru cardul dinamic din Pas 5 al ghidului
-export function getConsulateCard(consulateId: ConsulateId): {
-  name: string
-  address: string
-  addressNote?: string
-  phone: string
-  phoneNote: string
-  googleMapsUrl: string
-  wazeUrl: string
-  scheduleDeponere: string
-  scheduleRidicare: string
-  schedulePassportPickup?: string
-  scheduleTitluCalatorie: string
-  scheduleTravelDoc?: string
-  paymentMethod: string
-  paymentPassport?: string
-  paymentNotarial?: string
-  paymentNote?: string
-  paymentPassportNote?: string
-  paymentNotarialNote?: string
-  postalPickup: boolean
-  postalPickupUrl?: string
-  pasaportSearchUrl: string
-  staffShortageNotice: boolean
-  fotografiiLaGhiseu: boolean
-  starecivilaProgramRidicare?: string
-  starecivilaPosta?: boolean
-  starecivilaTermen?: string | null
-  certNastereParintiRegula?: 'if_ci_lacks_birthplace' | 'if_both_romanian' | 'if_unmarried' | 'always_required'
-  patronimicWarning?: boolean
-  formularPrintLaConsulat?: boolean
-  munchenAcelasiZiBonusPasaport?: boolean
-  warnings: string[]
-} {
+export function getConsulateById(id: ConsulateId): ConsulateInfo {
+  if (getConsulateCountry(id) === 'it') {
+    return italyConsulates[id as ItalyConsulateId]
+  }
+  return germanConsulates[id as GermanyConsulateId]
+}
+
+export function getConsulateByBundesland(bundesland: BundeslandCode): ConsulateInfo {
+  return getGermanConsulateByBundesland(bundesland)
+}
+
+export function getConsulateCard(consulateId: ConsulateId): ConsulateInfo & { warnings: string[] } {
   const c = getConsulateById(consulateId)
 
   const warnings: string[] = []
   if (c.staffShortageNotice) {
-    warnings.push('Deficit de personal anunțat — programările pot fi mai rare decât la alte consulate.')
+    warnings.push('Capacitate redusă sau date neclare pe site — verifică direct la consulat înainte de drum.')
   }
   if (c.addressNote) {
     warnings.push(c.addressNote)
   }
   if (c.fotografiiLaGhiseu) {
-    warnings.push('Fotografiile se fac la consulat — nu veniți cu fotografii proprii.')
+    warnings.push('Fotografiile se fac la ghișeu — nu veni cu fotografii proprii pentru pașaport.')
   }
-  if (c.paymentMethod.includes('⚠️')) {
-    warnings.push('Metoda de plată nu este specificată pe site — verificați direct la ghișeu.')
+  if (c.paymentMethod.includes('verifică') || c.paymentMethod.includes('⚠️')) {
+    warnings.push('Metoda de plată nu este clară pe site — confirmă direct la ghișeu.')
+  }
+  if (consulateId === 'bologna') {
+    warnings.push('La Bologna, programarea nu este obligatorie pentru toate fluxurile uzuale.')
+  }
+  if (consulateId === 'catania') {
+    warnings.push('La Catania, site-ul este neîntreținut. Confirmarea directă este obligatorie înainte de deplasare.')
   }
 
-  return {
-    name: c.name,
-    address: c.address,
-    addressNote: c.addressNote,
-    phone: c.phone,
-    phoneNote: c.phoneNote,
-    googleMapsUrl: c.googleMapsUrl,
-    wazeUrl: c.wazeUrl,
-    scheduleDeponere: c.scheduleDeponere,
-    scheduleRidicare: c.scheduleRidicare,
-    schedulePassportPickup: c.schedulePassportPickup,
-    scheduleTitluCalatorie: c.scheduleTitluCalatorie,
-    scheduleTravelDoc: c.scheduleTravelDoc,
-    paymentMethod: c.paymentMethod,
-    paymentPassport: c.paymentPassport,
-    paymentNotarial: c.paymentNotarial,
-    paymentNote: c.paymentNote,
-    paymentPassportNote: c.paymentPassportNote,
-    paymentNotarialNote: c.paymentNotarialNote,
-    postalPickup: c.postalPickup,
-    postalPickupUrl: c.postalPickupUrl,
-    pasaportSearchUrl: c.pasaportSearchUrl,
-    staffShortageNotice: c.staffShortageNotice ?? false,
-    fotografiiLaGhiseu: c.fotografiiLaGhiseu,
-    starecivilaProgramRidicare: c.starecivilaProgramRidicare,
-    starecivilaPosta: c.starecivilaPosta,
-    starecivilaTermen: c.starecivilaTermen,
-    certNastereParintiRegula: c.certNastereParintiRegula,
-    patronimicWarning: c.patronimicWarning,
-    formularPrintLaConsulat: c.formularPrintLaConsulat,
-    munchenAcelasiZiBonusPasaport: c.munchenAcelasiZiBonusPasaport,
-    warnings,
-  }
+  return { ...c, warnings }
 }

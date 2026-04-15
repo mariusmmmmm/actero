@@ -11,10 +11,15 @@ import ChecklistTab from '@/components/ghid/ChecklistTab'
 import TrackerTab from '@/components/ghid/TrackerTab'
 import ParteneriTab from '@/components/ghid/ParteneriTab'
 import { trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
+import {
+  localizeGuideTextForCountry,
+  localizeGuideTitleForCountry,
+} from '@/lib/guides/countryCopy'
 import { ghidFreeMap, type FreeStep } from '@/lib/guides/freeContent'
+import { personalizeStepsForConsulate } from '@/lib/guides/consulateRules'
 import { useAppStore } from '@/store/appStore'
 import { deriveConsulateId, getConsulateCard } from '@/lib/utils/deriveConsulate'
-import type { BundeslandCode, GuideId, ConsulateId, ProblemType, SituationFlags } from '@/types'
+import type { BundeslandCode, CountryCode, GuideId, ConsulateId, ProblemType, RegionCode, SituationFlags } from '@/types'
 
 // ─── CONȚINUT PAȘI PAID per ghid ─────────────────────────────────────────────
 
@@ -613,61 +618,6 @@ const travelReturnToRomaniaBlocks: PaidStep['blocks'] = [
   { text: 'Opțiuni carte de identitate în România: CEI — programare pe hub.mai.gov.ro/cei/programari, termen orientativ ~10 zile lucrătoare, fără posibilitate de urgentare. Dacă ai deja domiciliu activ în România și alegi alt tip de document, verifică SPCLEP-ul competent pentru situația ta concretă.', type: 'info' },
 ]
 
-// Pași paid procură
-const procuraSteps: PaidStep[] = [
-  {
-    id: 2,
-    title: 'Pregătește documentele',
-    shortLabel: 'Pregătire docs',
-    blocks: [
-      { text: 'Scanează actul de identitate valabil (pașaport CRDS sau buletin).', type: 'info' },
-      { text: 'Pregătește datele complete ale notarului, proprietății și/sau mandatarului.', type: 'action' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Obține programarea',
-    shortLabel: 'Programare',
-    blocks: [
-      { text: 'Intră pe econsulat.ro → „Cerere nouă" → „Acte notariale" → tipul de procură.', type: 'action' },
-      { text: 'Timpii de așteptare pentru acte notariale sunt în general mai scurți decât pentru pașapoarte.', type: 'tip' },
-      { text: 'Programările sunt GRATUITE.', type: 'info' },
-    ],
-  },
-  {
-    id: 4,
-    title: 'Pregătire pentru ziua programării',
-    shortLabel: 'Pregătire',
-    hasConsulateCard: true,
-    blocks: [
-      { text: 'Ai actul de identitate valabil (pașaport sau buletin).', type: 'info' },
-      { text: 'Ai datele complete ale notarului, proprietății, cumpărătorului/vânzătorului.', type: 'info' },
-      { text: 'Dacă nu ai notar ales: caută pe unnpr.ro (Uniunea Națională a Notarilor Publici).', type: 'tip' },
-    ],
-  },
-  {
-    id: 5,
-    title: 'Ziua consulatului',
-    shortLabel: 'Consulat',
-    blocks: [
-      { text: 'Te prezinți la programare cu documentele.', type: 'info' },
-      { text: 'Funcționarul consular redactează sau autentifică procura. Semnezi în fața funcționarului.', type: 'info' },
-      { text: 'Plătești taxa consulară. Primești procura autentificată.', type: 'action' },
-      { text: 'Fă o poză procurii imediat după semnare — înainte de a trimite originalul.', type: 'note' },
-    ],
-  },
-  {
-    id: 6,
-    title: 'Trimite procura în România',
-    shortLabel: 'Trimitere',
-    blocks: [
-      { text: 'Trimiți procura originală notarului din România prin curier (DHL, DPD, FedEx).', type: 'action' },
-      { text: 'Folosește curier cu confirmare de livrare și tracking — nu trimite prin poștă normală.', type: 'warning' },
-      { text: 'Notarul din România poate instrumenta tranzacția după primirea procurii.', type: 'info' },
-    ],
-  },
-]
-
 const procuraVanzareSteps: PaidStep[] = [
   {
     id: 3,
@@ -868,7 +818,7 @@ const procuraMostenireSteps: PaidStep[] = [
   },
 ]
 
-const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
+const ghidPaidMap = {
   'pasaport-crds-de': {
     title: 'Reînnoire pașaport CRDS · Germania',
     steps: pasaportCrdsSteps,
@@ -1086,7 +1036,50 @@ const ghidPaidMap: Record<GuideId, GhidPaidContent> = {
       },
     ],
   },
+} as Record<GuideId, GhidPaidContent>
+
+function clonePaidGuideForCountry(base: GhidPaidContent, country: 'de' | 'it', title?: string): GhidPaidContent {
+  return {
+    ...base,
+    title: title ?? localizeGuideTitleForCountry(base.title, country),
+    steps: base.steps.map((step) => ({
+      ...step,
+      title: localizeGuideTextForCountry(step.title, country),
+      shortLabel: localizeGuideTextForCountry(step.shortLabel, country),
+      blocks: step.blocks.map((block) => ({
+        ...block,
+        text: localizeGuideTextForCountry(block.text, country),
+      })),
+      actionItem: step.actionItem
+        ? {
+            ...step.actionItem,
+            label: localizeGuideTextForCountry(step.actionItem.label, country),
+          }
+        : step.actionItem,
+    })),
+  }
 }
+
+Object.assign(ghidPaidMap, {
+  'pasaport-crds-it': clonePaidGuideForCountry(ghidPaidMap['pasaport-crds-de'], 'it', 'Reînnoire pașaport CRDS · Italia'),
+  'pasaport-crds-it-pierdut': clonePaidGuideForCountry(ghidPaidMap['pasaport-crds-de-pierdut'], 'it', 'Pașaport CRDS pierdut/furat · Italia'),
+  'pasaport-crds-nou-it': clonePaidGuideForCountry(ghidPaidMap['pasaport-crds-nou-de'], 'it', 'Primul pașaport CRDS · Italia'),
+  'pasaport-minor-crds-it': clonePaidGuideForCountry(ghidPaidMap['pasaport-minor-crds-de'], 'it', 'Pașaport copil CRDS · Italia'),
+  'pasaport-it-cu-domiciliu': clonePaidGuideForCountry(ghidPaidMap['pasaport-de-cu-domiciliu'], 'it', 'Pașaport expirat · Domiciliu România · Italia'),
+  'pasaport-it-cu-domiciliu-pierdut': clonePaidGuideForCountry(ghidPaidMap['pasaport-de-cu-domiciliu-pierdut'], 'it', 'Pașaport pierdut/furat · Domiciliu România · Italia'),
+  'buletin-it-fara-domiciliu': clonePaidGuideForCountry(ghidPaidMap['buletin-de-fara-domiciliu'], 'it', 'Buletin expirat · Fără domiciliu RO · Italia'),
+  'buletin-it-cu-domiciliu': clonePaidGuideForCountry(ghidPaidMap['buletin-de-cu-domiciliu'], 'it', 'Buletin expirat · Domiciliu activ RO · Italia'),
+  'buletin-it-fara-domiciliu-pierdut': clonePaidGuideForCountry(ghidPaidMap['buletin-de-fara-domiciliu-pierdut'], 'it', 'Buletin pierdut/furat · Fără domiciliu RO · Italia'),
+  'buletin-it-cu-domiciliu-pierdut': clonePaidGuideForCountry(ghidPaidMap['buletin-de-cu-domiciliu-pierdut'], 'it', 'Buletin pierdut/furat · Domiciliu activ RO · Italia'),
+  'buletin-it-primul-it': clonePaidGuideForCountry(ghidPaidMap['buletin-de-primul-de'], 'it', 'Primul buletin românesc · Italia'),
+  'buletin-it-primul-it-b': clonePaidGuideForCountry(ghidPaidMap['buletin-de-primul-de-b'], 'it', 'Primul buletin românesc · Italia'),
+  'titlu-calatorie-urgenta-it': clonePaidGuideForCountry(ghidPaidMap['titlu-calatorie-urgenta-de'], 'it', 'Titlu de călătorie urgență · Italia — Ghid complet'),
+  'titlu-calatorie-it': clonePaidGuideForCountry(ghidPaidMap['titlu-calatorie-de'], 'it', 'Ghid complet — Titlu de călătorie · Italia'),
+  'procura-vanzare-it': clonePaidGuideForCountry(ghidPaidMap['procura-vanzare-de'], 'it', 'Procură de vânzare/cumpărare proprietate · Italia'),
+  'procura-mostenire-it': clonePaidGuideForCountry(ghidPaidMap['procura-mostenire-de'], 'it', 'Procură moștenire · Italia'),
+  'procura-generala-it': clonePaidGuideForCountry(ghidPaidMap['procura-generala-de'], 'it', 'Procură notarială generală · Italia'),
+  'transcriere-nastere-it': clonePaidGuideForCountry(ghidPaidMap['transcriere-nastere-de'], 'it', 'Transcriere naștere Italia → România'),
+} satisfies Partial<Record<GuideId, GhidPaidContent>>)
 
 function getFullPaidGuideContent(guideId: GuideId): GhidPaidContent | null {
   const paidContent = ghidPaidMap[guideId]
@@ -1104,12 +1097,18 @@ function getFullPaidGuideContent(guideId: GuideId): GhidPaidContent | null {
 function personalizeGuideContent(
   content: GhidPaidContent,
   guideId: GuideId,
-  situation: SituationFlags
+  situation: SituationFlags,
+  consulate: ConsulateId | null
 ): GhidPaidContent {
-  if (guideId === 'buletin-de-fara-domiciliu' && situation.primulBuletin) {
+  const basePersonalized: GhidPaidContent = {
+    ...content,
+    steps: personalizeStepsForConsulate(content.steps, consulate),
+  }
+
+  if ((guideId === 'buletin-de-fara-domiciliu' || guideId === 'buletin-it-fara-domiciliu') && situation.primulBuletin) {
     return {
-      ...content,
-      steps: content.steps.map((step) => {
+      ...basePersonalized,
+      steps: basePersonalized.steps.map((step) => {
         if (step.id === 4) {
           return {
             ...step,
@@ -1133,10 +1132,10 @@ function personalizeGuideContent(
     }
   }
 
-  if (guideId === 'buletin-de-cu-domiciliu' && situation.primulBuletin) {
+  if ((guideId === 'buletin-de-cu-domiciliu' || guideId === 'buletin-it-cu-domiciliu') && situation.primulBuletin) {
     return {
-      ...content,
-      steps: content.steps.map((step) => {
+      ...basePersonalized,
+      steps: basePersonalized.steps.map((step) => {
         if (step.id === 4) {
           return {
             ...step,
@@ -1160,10 +1159,10 @@ function personalizeGuideContent(
     }
   }
 
-  if (guideId === 'procura-vanzare-de') {
+  if (guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it') {
     return {
-      ...content,
-      steps: content.steps.map((step) => {
+      ...basePersonalized,
+      steps: basePersonalized.steps.map((step) => {
         if (step.id !== 5) return step
         const notarBlock: Block = situation.notarAles
           ? { text: 'Ai notar ales: păstrează la tine numele, localitatea și instrucțiunile exacte primite de la notarul din România. Cel mai sigur e să le ai și într-un email sau PDF deschis pe telefon.', type: 'tip' }
@@ -1177,10 +1176,10 @@ function personalizeGuideContent(
     }
   }
 
-  if (guideId === 'procura-mostenire-de') {
+  if (guideId === 'procura-mostenire-de' || guideId === 'procura-mostenire-it') {
     return {
-      ...content,
-      steps: content.steps.map((step) => {
+      ...basePersonalized,
+      steps: basePersonalized.steps.map((step) => {
         if (step.id !== 4) return step
         const notarBlock: Block = situation.notarAles
           ? { text: 'Ai notar ales: verifică înainte să pleci că ai toate datele biroului notarial și cerințele exacte pentru procura de succesiune, ideal într-un email sau PDF primit de la notar.', type: 'tip' }
@@ -1194,7 +1193,7 @@ function personalizeGuideContent(
     }
   }
 
-  return content
+  return basePersonalized
 }
 
 // ─── CARD CONSULAT ────────────────────────────────────────────────────────────
@@ -1207,16 +1206,32 @@ function ConsulateCard({
   guideId?: GuideId | null
 }) {
   const card = getConsulateCard(consulateId)
-  const isTravelTitleGuide = guideId === 'titlu-calatorie-de' || guideId === 'titlu-calatorie-urgenta-de'
-  const isGeneralPoaGuide = guideId === 'procura-generala-de'
-  const isBirthTranscriptionGuide = guideId === 'transcriere-nastere-de'
+  const isItaly = card.countryCode === 'it'
+  const isTravelTitleGuide =
+    guideId === 'titlu-calatorie-de' ||
+    guideId === 'titlu-calatorie-urgenta-de' ||
+    guideId === 'titlu-calatorie-it' ||
+    guideId === 'titlu-calatorie-urgenta-it'
+  const isGeneralPoaGuide = guideId === 'procura-generala-de' || guideId === 'procura-generala-it'
+  const isBirthTranscriptionGuide = guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it'
+  const isCrdsPassportGuide =
+    guideId === 'pasaport-crds-de' ||
+    guideId === 'pasaport-crds-de-pierdut' ||
+    guideId === 'pasaport-crds-nou-de' ||
+    guideId === 'pasaport-minor-crds-de' ||
+    guideId === 'pasaport-crds-it' ||
+    guideId === 'pasaport-crds-it-pierdut' ||
+    guideId === 'pasaport-crds-nou-it' ||
+    guideId === 'pasaport-minor-crds-it'
   const displaySchedule = isBirthTranscriptionGuide
     ? card.scheduleDeponere
     : isTravelTitleGuide
       ? card.scheduleTravelDoc ?? card.scheduleTitluCalatorie
       : card.scheduleDeponere
   const displayPickup = isTravelTitleGuide
-    ? consulateId === 'bonn'
+    ? isItaly
+      ? card.scheduleTravelDoc ?? card.scheduleTitluCalatorie
+      : consulateId === 'bonn'
       ? 'Luni–Joi 14:00–15:00 · vinerea nu se ridică, dacă depui vineri revii luni'
       : consulateId === 'muenchen'
         ? 'În aceeași zi, în programul normal al consulatului'
@@ -1225,7 +1240,9 @@ function ConsulateCard({
           : 'În aceeași zi, în intervalul 08:00–10:00'
     : isBirthTranscriptionGuide
       ? card.starecivilaProgramRidicare ?? 'Verifică direct programul de ridicare al actelor de stare civilă'
-    : card.schedulePassportPickup ?? card.scheduleRidicare
+    : isCrdsPassportGuide
+      ? card.schedulePassportPickupCrds ?? card.schedulePassportPickup ?? card.scheduleRidicare
+      : card.schedulePassportPickupStandard ?? card.scheduleRidicare
   const displayPaymentMethod = isTravelTitleGuide
     ? 'gratuit'
     : isBirthTranscriptionGuide
@@ -1238,12 +1255,14 @@ function ConsulateCard({
     : isBirthTranscriptionGuide
       ? card.starecivilaTermen
         ? `Termen orientativ confirmat: ${card.starecivilaTermen}.`
-        : 'Termenul exact nu este publicat oficial la acest consulat; ia în calcul un interval similar cu Bonn.'
+        : 'Termenul exact nu este publicat oficial la acest consulat; verifică direct înainte de drum și ia în calcul un interval orientativ apropiat de practicile obișnuite ale misiunii.'
     : isGeneralPoaGuide
       ? card.paymentNotarialNote ?? 'Dacă se aplică taxa de 3€ RNNEPR, verifică IBAN-ul și momentul plății înainte de programare.'
     : card.paymentPassportNote ?? card.paymentNote
   const displayWarnings = isTravelTitleGuide
-    ? [
+    ? isItaly
+      ? [...card.warnings]
+      : [
         ...(consulateId === 'bonn'
           ? [
               'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii.',
@@ -1266,7 +1285,9 @@ function ConsulateCard({
                 ]),
       ]
     : isBirthTranscriptionGuide
-      ? [
+      ? isItaly
+        ? [...card.warnings]
+        : [
           ...(consulateId === 'bonn'
             ? [
                 'Certificatul de naștere românesc al părinților este necesar dacă actele lor nu conțin locul nașterii.',
@@ -1288,7 +1309,13 @@ function ConsulateCard({
                   ]),
         ]
     : isGeneralPoaGuide
-      ? [
+      ? isItaly
+        ? [
+            'Mandatarul nu trebuie să fie prezent la consulat.',
+            'Pentru procurile folosite la notar în România, verifică din timp plata RNNEPR și eventualul cost de verificare de registru.',
+            ...card.warnings,
+          ]
+        : [
           ...(consulateId === 'berlin'
             ? ['Taxa de 3€ RNNEPR se plătește exclusiv prin virament bancar cu 3–4 zile lucrătoare înainte, dacă procura va fi folosită la notar în România.']
             : []),
@@ -1427,7 +1454,7 @@ function GhidPaidPageContent() {
 
   const baseContent = activeGuideId ? getFullPaidGuideContent(activeGuideId) : null
   const content = activeGuideId && baseContent
-    ? personalizeGuideContent(baseContent, activeGuideId, situation)
+    ? personalizeGuideContent(baseContent, activeGuideId, situation, consulate)
     : null
 
   useEffect(() => {
@@ -1456,15 +1483,16 @@ function GhidPaidPageContent() {
         const data = await res.json() as {
           sessionId: string
           problemType: ProblemType | null
-          country: string | null
+          country: CountryCode | null
           situation: SituationFlags
           guideId: GuideId | null
           isPaid: boolean
         }
 
         const bundesland = data.situation?.bundesland as BundeslandCode | undefined
+        const region = (data.situation?.region ?? data.situation?.bundesland ?? null) as RegionCode | null
         const consulateFromSituation = data.situation?.consulate as ConsulateId | undefined
-        const consulate = consulateFromSituation ?? (bundesland ? deriveConsulateId(bundesland) : null)
+        const consulate = consulateFromSituation ?? (data.country && region ? deriveConsulateId(data.country, region) : null)
 
         useAppStore.setState({
           sessionId: data.sessionId,
@@ -1474,6 +1502,7 @@ function GhidPaidPageContent() {
           guideId: data.guideId,
           isPaid: data.isPaid,
           bundesland: bundesland ?? null,
+          region,
           consulate,
         })
 

@@ -1,5 +1,5 @@
 // ActeRO — app/wizard/page.tsx
-// Wizard 3 pași: Problema → Țara + Bundesland → Situația
+// Wizard 3 pași: Problema → Țara + regiune → Situația
 
 'use client'
 
@@ -7,16 +7,21 @@ import { Suspense, useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
-import { bundeslandOptions } from '@/lib/content/consulates/de'
+import { getCountryLabel } from '@/lib/guides/countryCopy'
 import { useAppStore } from '@/store/appStore'
-import type { BundeslandCode, CreateSessionResponse, GuideId, ProblemType, SituationFlags, WizardResult } from '@/types'
+import { getRegionOptionsByCountry } from '@/lib/utils/deriveConsulate'
+import type { CountryCode, CreateSessionResponse, GuideId, ProblemType, SituationFlags, WizardResult } from '@/types'
 
 // ─── STEP 1 — PROBLEMA ───────────────────────────────────────────────────────
 
-const STEP1_OPTIONS = [
+function getStep1Options(country: CountryCode) {
+  const countryLabel = getCountryLabel(country)
+  const bornInCountry = country === 'it' ? 'Italia' : 'Germania'
+
+  return [
   {
     icon: '🛂',
-    label: 'Am nevoie de pașaport românesc din Germania',
+    label: `Am nevoie de pașaport românesc din ${countryLabel}`,
     sublabel: 'Adult sau copil · pașaport expirat, pierdut/furat sau primul pașaport',
     value: 'pasaport' as ProblemType,
   },
@@ -29,7 +34,7 @@ const STEP1_OPTIONS = [
   {
     icon: '⚡',
     label: 'Trebuie să plec urgent în România și n-am timp de programare',
-    sublabel: 'Titlu de călătorie gratuit, fără programare, de regulă în aceeași zi',
+    sublabel: 'Titlu de călătorie gratuit, cu sau fără programare în funcție de consulat',
     value: 'titlu-calatorie' as ProblemType,
   },
   {
@@ -40,14 +45,20 @@ const STEP1_OPTIONS = [
   },
   {
     icon: '🧒',
-    label: 'Copilul meu s-a născut în Germania și nu are încă acte românești',
+    label: `Copilul meu s-a născut în ${bornInCountry} și nu are încă acte românești`,
     sublabel: 'Transcrierea nașterii, apoi primul pașaport sau primul buletin',
     value: 'transcriere-nastere' as ProblemType,
   },
-] as const
+]
+}
+
+function getResidenceCountryCopy(country: CountryCode) {
+  return country === 'it' ? 'Italia' : 'Germania'
+}
 
 function Step1() {
-  const { problemType, setProblemType, nextWizardStep } = useAppStore()
+  const { country, problemType, setProblemType, nextWizardStep } = useAppStore()
+  const options = getStep1Options(country ?? 'de')
 
   return (
     <div className="flex flex-col gap-4">
@@ -56,7 +67,7 @@ function Step1() {
         <p className="text-sm text-gray-500 mt-1">Alege situația care seamănă cel mai mult cu a ta</p>
       </div>
       <div className="flex flex-col gap-3">
-        {STEP1_OPTIONS.map((option) => (
+        {options.map((option) => (
           <button
             key={option.value}
             type="button"
@@ -98,31 +109,59 @@ function Step1() {
 // ─── STEP 2 — ȚARA + BUNDESLAND ──────────────────────────────────────────────
 
 function Step2() {
-  const { bundesland, setBundesland, consulate, nextWizardStep, prevWizardStep, problemType } = useAppStore()
+  const {
+    country,
+    region,
+    setRegion,
+    consulate,
+    nextWizardStep,
+    prevWizardStep,
+    problemType,
+  } = useAppStore()
+
+  const activeCountry = country ?? 'de'
+  const regionOptions = getRegionOptionsByCountry(activeCountry)
+  const countryFlag = activeCountry === 'it' ? '🇮🇹' : '🇩🇪'
 
   const consulateName = consulate
-    ? { muenchen: 'München', bonn: 'Bonn', stuttgart: 'Stuttgart', berlin: 'Berlin' }[consulate]
+    ? {
+        muenchen: 'München',
+        bonn: 'Bonn',
+        stuttgart: 'Stuttgart',
+        berlin: 'Berlin',
+        roma: 'Roma',
+        milano: 'Milano',
+        bologna: 'Bologna',
+        torino: 'Torino',
+        trieste: 'Trieste',
+        bari: 'Bari',
+        catania: 'Catania',
+      }[consulate]
     : null
 
   return (
     <div className="flex flex-col gap-4">
       <div className="mb-2">
-        <h2 className="text-xl font-bold text-gray-900">În ce land locuiești acum?</h2>
-        <p className="text-sm text-gray-500 mt-1">🇩🇪 Germania · de aici aflăm consulatul care te deservește</p>
+        <h2 className="text-xl font-bold text-gray-900">
+          {activeCountry === 'it' ? 'În ce regiune locuiești acum?' : 'În ce land locuiești acum?'}
+        </h2>
+        <p className="text-sm text-gray-500 mt-1">
+          {countryFlag} {getCountryLabel(activeCountry)} · de aici aflăm consulatul care te deservește
+        </p>
       </div>
       <div className="grid grid-cols-2 gap-2">
-        {bundeslandOptions.map((b) => (
+        {regionOptions.map((option) => (
           <button
-            key={b.code}
+            key={option.code}
             type="button"
-            onClick={() => setBundesland(b.code as BundeslandCode)}
+            onClick={() => setRegion(option.code)}
             className={`py-3 px-3 rounded-xl border-2 text-sm font-medium text-left transition-all ${
-              bundesland === b.code
+              region === option.code
                 ? 'border-gray-900 bg-gray-900 text-white'
                 : 'border-gray-200 bg-white text-gray-700 hover:border-gray-400'
             }`}
           >
-            {b.name}
+            {option.name}
           </button>
         ))}
       </div>
@@ -139,15 +178,16 @@ function Step2() {
         <button
           type="button"
           onClick={() => {
-            if (!bundesland) return
+            if (!region) return
             trackEvent('wizard_step_2_complete', withAttribution({
               problem_type: problemType ?? undefined,
-              bundesland,
+              country: activeCountry,
+              region,
               consulate: consulate ?? undefined,
             }))
             nextWizardStep()
           }}
-          disabled={!bundesland}
+          disabled={!region}
           className="flex-[2] py-4 bg-gray-900 text-white font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Continuă →
@@ -171,13 +211,14 @@ function getProblemTypeFromHint(hint: string | null): ProblemType | null {
   if (hint.startsWith('buletin-')) return 'buletin'
   if (hint.startsWith('titlu-calatorie-')) return 'titlu-calatorie'
   if (hint.startsWith('procura-')) return 'procura'
-  if (hint === 'transcriere-nastere-de') return 'transcriere-nastere'
+  if (hint === 'transcriere-nastere-de' || hint === 'transcriere-nastere-it') return 'transcriere-nastere'
   return null
 }
 
 function getExactSituationFromHint(hint: string | null): { problemType: ProblemType; situation: Partial<SituationFlags> } | null {
   switch (hint as GuideId | null) {
     case 'pasaport-crds-nou-de':
+    case 'pasaport-crds-nou-it':
       return {
         problemType: 'pasaport',
         situation: {
@@ -188,6 +229,7 @@ function getExactSituationFromHint(hint: string | null): { problemType: ProblemT
         },
       }
     case 'buletin-de-primul-de-b':
+    case 'buletin-it-primul-it-b':
       return {
         problemType: 'buletin',
         situation: {
@@ -203,7 +245,9 @@ function getExactSituationFromHint(hint: string | null): { problemType: ProblemT
   }
 }
 
-function getQuestions(problemType: ProblemType): Question[] {
+function getQuestions(problemType: ProblemType, country: CountryCode): Question[] {
+  const residenceCountry = getResidenceCountryCopy(country)
+
   switch (problemType) {
     case 'pasaport':
       return [
@@ -211,8 +255,8 @@ function getQuestions(problemType: ProblemType): Question[] {
           key: 'hasDomiciliuRO',
           question: 'Unde ai domiciliul oficial pe actele românești?',
           options: [
-            { value: false, label: '🇩🇪 Domiciliu în Germania (flux CRDS)', sublabel: 'Nu mai ai domiciliu activ în România și faci pașaportul prin consulatul din Germania' },
-            { value: true, label: '🇷🇴 Domiciliu activ în România', sublabel: 'Locuiești în Germania, dar în acte ai încă domiciliul oficial în România' },
+            { value: false, label: '🇪🇺 Domiciliu în țara unde locuiești acum', sublabel: 'Nu mai ai domiciliu activ în România și faci pașaportul prin consulatul care te deservește' },
+            { value: true, label: '🇷🇴 Domiciliu activ în România', sublabel: `Locuiești în ${residenceCountry}, dar în acte ai încă domiciliul oficial în România` },
           ],
         },
         {
@@ -237,7 +281,7 @@ function getQuestions(problemType: ProblemType): Question[] {
           question: 'Unde te-ai născut?',
           options: [
             { value: 'ro', label: '🇷🇴 În România', sublabel: 'Ai deja certificat românesc și, de regulă, CNP românesc' },
-            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Este posibil să ai nevoie mai întâi de transcrierea nașterii' },
+            { value: 'de-strainatate', label: '🌍 În străinătate', sublabel: 'Este posibil să ai nevoie mai întâi de transcrierea nașterii' },
           ],
         },
       ]
@@ -256,7 +300,7 @@ function getQuestions(problemType: ProblemType): Question[] {
           key: 'hasDomiciliuRO',
           question: 'Mai ai domiciliul oficial înregistrat în România?',
           options: [
-            { value: false, label: 'Nu, nu mai am domiciliu activ în România', sublabel: 'Locuiești în Germania și ai nevoie de ghidul pentru rezidență în străinătate' },
+            { value: false, label: 'Nu, nu mai am domiciliu activ în România', sublabel: 'Locuiești în străinătate și ai nevoie de ghidul pentru rezidență în afara României' },
             { value: true, label: 'Da, mai am domiciliu activ în România', sublabel: 'Primești ghidul pentru buletin cu domiciliu activ în România' },
           ],
         },
@@ -273,7 +317,7 @@ function getQuestions(problemType: ProblemType): Question[] {
           question: 'Unde te-ai născut?',
           options: [
             { value: 'ro', label: '🇷🇴 În România', sublabel: 'Ai deja certificat românesc și, de regulă, CNP românesc' },
-            { value: 'de-strainatate', label: '🌍 În Germania sau altă țară', sublabel: 'Primești traseul care verifică dacă ai nevoie de transcriere înainte de primul buletin' },
+            { value: 'de-strainatate', label: '🌍 În străinătate', sublabel: 'Primești traseul care verifică dacă ai nevoie de transcriere înainte de primul buletin' },
           ],
         },
       ]
@@ -322,8 +366,8 @@ function getQuestions(problemType: ProblemType): Question[] {
   }
 }
 
-function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags): Question[] {
-  const all = getQuestions(problemType)
+function getVisibleQuestions(problemType: ProblemType, country: CountryCode, situation: SituationFlags): Question[] {
+  const all = getQuestions(problemType, country)
 
   if (problemType === 'pasaport') {
     return all.filter((q, i) => {
@@ -361,6 +405,7 @@ function getVisibleQuestions(problemType: ProblemType, situation: SituationFlags
 function Step3() {
   const {
     country,
+    region,
     currentSubStep,
     currentWizardStep,
     nextSubStep,
@@ -380,7 +425,8 @@ function Step3() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const hasAutoSubmittedRef = useRef(false)
-  const questions = problemType ? getVisibleQuestions(problemType, situation) : []
+  const activeCountry = country ?? 'de'
+  const questions = problemType ? getVisibleQuestions(problemType, activeCountry, situation) : []
   const currentQuestion = questions[currentSubStep]
   const currentValue = currentQuestion ? situation[currentQuestion.key] : undefined
   const isLast = currentSubStep >= questions.length - 1
@@ -479,7 +525,7 @@ function Step3() {
       }))
       await handleFinalSubmit()
     } else {
-      const updatedQuestions = getVisibleQuestions(problemType, situation)
+      const updatedQuestions = getVisibleQuestions(problemType, activeCountry, situation)
       setTotalSubSteps(updatedQuestions.length)
       nextSubStep()
     }
@@ -517,6 +563,8 @@ function Step3() {
             guide_id: data.guideId,
             route_id: data.wizardResult.type === 'route' ? data.wizardResult.routeId : undefined,
             result_type: data.wizardResult.type,
+            country: country ?? 'de',
+            region: situation.region ?? region ?? undefined,
             bundesland: situation.bundesland ?? undefined,
             consulate: situation.consulate ?? undefined,
           }, searchParams)
@@ -532,6 +580,8 @@ function Step3() {
         trackEvent('wizard_submit_success', withAttribution({
           problem_type: problemType,
           result_type: data.wizardResult.type,
+          country: country ?? 'de',
+          region: situation.region ?? region ?? undefined,
           bundesland: situation.bundesland ?? undefined,
           consulate: situation.consulate ?? undefined,
         }, searchParams))
@@ -707,6 +757,7 @@ function WizardPageContent() {
   const hintedProblemType = getProblemTypeFromHint(searchParams.get('hint'))
   const exactHintPrefill = getExactSituationFromHint(searchParams.get('hint'))
   const explicitProblemType = searchParams.get('problem') as ProblemType | null
+  const explicitCountry = ((searchParams.get('country') as CountryCode | null) ?? 'de')
 
   useEffect(() => {
     persistAttribution(searchParams)
@@ -716,29 +767,54 @@ function WizardPageContent() {
       withAttribution(
         {
           problem_prefill: searchParams.get('problem') ?? undefined,
+          country: explicitCountry,
         },
         searchParams
       )
     )
-  }, [searchParams])
+  }, [explicitCountry, searchParams])
+
+  useEffect(() => {
+    const state = useAppStore.getState()
+    if (state.country === explicitCountry) return
+
+    useAppStore.setState({
+      country: explicitCountry,
+      bundesland: null,
+      region: null,
+      consulate: null,
+      situation: {},
+      currentWizardStep: 1,
+      currentSubStep: 0,
+      totalSubSteps: 1,
+      wizardDirection: 'forward',
+    })
+  }, [explicitCountry])
 
   useEffect(() => {
     const targetProblemType = explicitProblemType ?? exactHintPrefill?.problemType ?? hintedProblemType
     if (!targetProblemType) return
 
     const state = useAppStore.getState()
-    const preservedSituation = {
-      bundesland: state.situation.bundesland,
-      consulate: state.situation.consulate,
-    }
+    const sameCountry = state.country === explicitCountry
+    const preservedSituation = sameCountry
+      ? {
+          bundesland: state.situation.bundesland,
+          region: state.situation.region,
+          consulate: state.situation.consulate,
+        }
+      : {}
     const nextSituation = exactHintPrefill
       ? { ...preservedSituation, ...exactHintPrefill.situation }
-      : state.situation
+      : sameCountry
+      ? state.situation
+      : {}
 
-    const nextWizardStep = state.bundesland ? 3 : 2
+    const nextWizardStep = sameCountry && state.region ? 3 : 2
 
     if (
       state.problemType === targetProblemType &&
+      state.country === explicitCountry &&
       state.currentWizardStep === nextWizardStep &&
       (!exactHintPrefill || Object.entries(exactHintPrefill.situation).every(([key, value]) => nextSituation[key as keyof SituationFlags] === value))
     ) {
@@ -747,14 +823,14 @@ function WizardPageContent() {
 
     useAppStore.setState({
       problemType: targetProblemType,
-      country: 'de',
+      country: explicitCountry,
       situation: nextSituation,
       currentWizardStep: nextWizardStep,
       currentSubStep: 0,
       totalSubSteps: 1,
       wizardDirection: 'forward',
     })
-  }, [exactHintPrefill, explicitProblemType, hintedProblemType])
+  }, [exactHintPrefill, explicitCountry, explicitProblemType, hintedProblemType])
 
   return (
     <main className="min-h-screen bg-white flex flex-col">

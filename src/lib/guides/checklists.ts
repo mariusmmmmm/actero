@@ -1,4 +1,15 @@
 import type { ConsulateId, SituationFlags } from '@/types'
+import { getGuideCountryCode, localizeGuideTextForCountry } from '@/lib/guides/countryCopy'
+import {
+  getBirthBerlinNameRule,
+  getBirthParentCertificatesRule,
+  getBirthPostalRule,
+  getMostenireDeathCertificateRule,
+  getPassportLostTranslationRule,
+  getRnneprPaymentRule,
+  getTravelPhotoRule,
+  getTravelTranslationRule,
+} from '@/lib/guides/consulateRules'
 
 export interface ChecklistItem {
   id: string
@@ -20,7 +31,16 @@ export function getGuideChecklist(
   if (!guideId) return []
   const fn = CHECKLISTS[guideId]
   if (!fn) return []
-  return fn(consulate, situation)
+  const country = getGuideCountryCode(guideId)
+  return fn(consulate, situation).map((section) => ({
+    ...section,
+    title: localizeGuideTextForCountry(section.title, country),
+    items: section.items.map((item) => ({
+      ...item,
+      name: localizeGuideTextForCountry(item.name, country),
+      detail: item.detail ? localizeGuideTextForCountry(item.detail, country) : item.detail,
+    })),
+  }))
 }
 
 type ChecklistFn = (c: ConsulateId | null, s: SituationFlags) => ChecklistSection[]
@@ -28,6 +48,8 @@ type ChecklistFn = (c: ConsulateId | null, s: SituationFlags) => ChecklistSectio
 // ── Ghid #1 + #2 — pasaport CRDS ─────────────────────────────────────────────
 
 function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void consulate
+  void _s
   return [
     {
       id: 'obligatorii',
@@ -37,7 +59,7 @@ function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags
         { id: 'p1_ci', name: 'Cartea de identitate românească', detail: 'Original · chiar expirată · va fi anulată la ridicare' },
         { id: 'p1_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat, rupt sau corectat' },
         { id: 'p1_domiciliu', name: 'Document domiciliu Germania', detail: 'Meldebescheinigung / Anmeldung / Personalausweis german · original · max 5 ani' },
-        { id: 'p1_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate' },
+        { id: 'p1_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la consulatul tău' },
       ],
     },
     {
@@ -51,6 +73,7 @@ function checklistPasaportCrds(consulate: ConsulateId | null, _s: SituationFlags
 }
 
 function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _s
   return [
     {
       id: 'obligatorii',
@@ -59,7 +82,7 @@ function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags
         { id: 'p17_ci', name: 'Cartea de identitate românească', detail: 'Original · dacă o ai, chiar expirată · nu este blocant dacă lipsește' },
         { id: 'p17_nastere', name: 'Certificat de naștere românesc', detail: 'Original · nu se acceptă plastifiat, rupt sau corectat' },
         { id: 'p17_domiciliu', name: 'Document domiciliu Germania', detail: 'Meldebescheinigung / Anmeldung / Personalausweis german · original · max 5 ani' },
-        { id: 'p17_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la toate cele 4 consulate' },
+        { id: 'p17_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — imaginea facială se preia biometric la ghișeu la consulatul tău' },
       ],
     },
     {
@@ -67,7 +90,7 @@ function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags
       title: 'Dacă pașaportul a fost pierdut sau furat',
       items: [
         { id: 'p17_pierdut', name: 'Declarație pe proprie răspundere', detail: 'Pentru pașaport pierdut · se completează exclusiv la ghișeul consulatului' },
-        { id: 'p17_furat', name: 'Adeverință poliție + traducere', detail: 'Pentru pașaport furat · Bonn/München/Berlin = traducere autorizată, Stuttgart = traducere legalizată' },
+        { id: 'p17_furat', name: 'Adeverință poliție + traducere', detail: getPassportLostTranslationRule(_c) },
       ],
     },
     {
@@ -81,6 +104,8 @@ function checklistPasaportCrdsPierdut(_c: ConsulateId | null, _s: SituationFlags
 }
 
 function checklistPasaportMinorCrds(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
   return [
     {
       id: 'minor',
@@ -116,6 +141,7 @@ function checklistPasaportMinorCrds(_c: ConsulateId | null, _s: SituationFlags):
 // ── Ghid #3 + #4 — pasaport domiciliu RO ─────────────────────────────────────
 
 function checklistPasaportDomiciliuRo(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _s
   const fotoDetail = consulate === 'muenchen'
     ? 'Fotografiile se fac la ghișeul consulatului — nu le aduce proprii'
     : '2 foto color 3,5×4,5 cm, fond alb · Rossmann/DM (biometric) acceptate'
@@ -143,6 +169,7 @@ function checklistPasaportDomiciliuRo(consulate: ConsulateId | null, _s: Situati
 // ── Ghid #8 — buletin pierdut domiciliu RO ───────────────────────────────────
 
 function checklistBuletinPierdutDomRo(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
   const tipActSolicitat = _s.tipActSolicitat
   const documentPierdut = _s.documentPierdut
   return [
@@ -286,6 +313,8 @@ function checklistBuletinPierdutFaraDomRo(_c: ConsulateId | null, s: SituationFl
 }
 
 function checklistBuletinPrimulDe(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
   return [
     {
       id: 'obligatorii',
@@ -322,6 +351,8 @@ function checklistBuletinPrimulDe(_c: ConsulateId | null, _s: SituationFlags): C
 }
 
 function checklistBuletinPrimulDeB(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
   return [
     {
       id: 'obligatorii',
@@ -440,8 +471,8 @@ function getTravelDocumentSections(
       items: [
         {
           id: `${prefix}_foto_default`,
-          name: 'Fotografia se preia la ghișeu',
-          detail: 'La Bonn și Berlin nu aduci fotografii proprii.',
+          name: 'Regula pentru fotografie',
+          detail: getTravelPhotoRule(consulate),
         },
       ],
     })
@@ -451,17 +482,13 @@ function getTravelDocumentSections(
 }
 
 function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, situation: SituationFlags): ChecklistSection[] {
-  const fotoDetail = consulate === 'muenchen'
-    ? '2 fotografii biometrice color 3,5 × 4,5 cm · tipărite, nu pe telefon'
-    : 'La Bonn, Stuttgart și Berlin fotografia se preia la ghișeu; dacă nu ești sigur, adu 2 fotografii biometrice de rezervă'
-
   return [
     {
       id: 'identitate',
       title: 'Documente de identificare',
       items: [
         { id: 'tc11_doc_romanesc', name: 'Un document românesc de identificare', detail: 'Original · CI/buletin expirat, pașaport românesc expirat, permis românesc sau certificat de naștere românesc cu CNP' },
-        { id: 'tc11_foto', name: 'Fotografii biometrice', detail: fotoDetail },
+        { id: 'tc11_foto', name: 'Fotografii biometrice', detail: getTravelPhotoRule(consulate) },
       ],
     },
     ...getTravelDocumentSections(consulate, situation, 'tc11'),
@@ -470,32 +497,20 @@ function checklistTitluCalatorieUrgenta(consulate: ConsulateId | null, situation
       title: 'Dacă documentul a fost furat',
       items: [
         { id: 'tc11_politie', name: 'Diebstahlsanzeige de la poliția locală', detail: 'Obligatorie înainte de consulat' },
-        { id: 'tc11_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; la Bonn nu este cerută' },
+        { id: 'tc11_traducere', name: 'Traducere în română', detail: getTravelTranslationRule(consulate) },
       ],
     },
   ]
 }
 
 function checklistTitluCalatorie(consulate: ConsulateId | null, situation: SituationFlags): ChecklistSection[] {
-  let fotoDetail = 'Verifică regulile consulatului tău pentru fotografie'
-
-  if (consulate === 'bonn') {
-    fotoDetail = 'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii'
-  } else if (consulate === 'muenchen') {
-    fotoDetail = '2 fotografii biometrice color 3,5 × 4,5 cm · tipărite, nu pe telefon'
-  } else if (consulate === 'stuttgart') {
-    fotoDetail = 'Adulți: foto la ghișeu; minori sub 14 ani: 1 fotografie color 3,5 × 4,5 cm pe hârtie'
-  } else if (consulate === 'berlin') {
-    fotoDetail = 'Fotografia se preia electronic la ghișeu — nu aduci fotografii proprii'
-  }
-
   return [
     {
       id: 'identitate',
       title: 'Documente de identificare',
       items: [
         { id: 'tc12_doc_romanesc', name: 'Un document românesc de identificare', detail: 'Original + 1 copie · pașaport expirat, CI/buletin expirat sau permis de conducere românesc' },
-        { id: 'tc12_foto', name: 'Fotografie / reguli foto', detail: fotoDetail },
+        { id: 'tc12_foto', name: 'Fotografie / reguli foto', detail: getTravelPhotoRule(consulate) },
       ],
     },
     ...getTravelDocumentSections(consulate, situation, 'tc12'),
@@ -511,13 +526,14 @@ function checklistTitluCalatorie(consulate: ConsulateId | null, situation: Situa
       title: 'Dacă documentul a fost furat',
       items: [
         { id: 'tc12_politie', name: 'Adeverință de la poliția locală', detail: 'Verlustanzeige / Diebstahlsanzeige' },
-        { id: 'tc12_traducere', name: 'Traducere autorizată în română', detail: 'Obligatorie la München, Stuttgart și Berlin; la Bonn nu este cerută' },
+        { id: 'tc12_traducere', name: 'Traducere în română', detail: getTravelTranslationRule(consulate) },
       ],
     },
   ]
 }
 
-function checklistProcuraMostenire(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+function checklistProcuraMostenire(c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _s
   return [
     {
       id: 'identitate',
@@ -532,7 +548,7 @@ function checklistProcuraMostenire(_c: ConsulateId | null, _s: SituationFlags): 
       id: 'succesiune',
       title: 'Documente utile pentru dosarul de succesiune',
       items: [
-        { id: 'pm14_deces', name: 'Certificatul de deces', detail: 'Original sau copie · verifică înainte cu notarul dacă trebuie și la consulat' },
+        { id: 'pm14_deces', name: 'Certificatul de deces', detail: getMostenireDeathCertificateRule(c) },
         { id: 'pm14_rudenie', name: 'Acte care dovedesc calitatea de moștenitor', detail: 'Certificat de naștere / căsătorie, după caz · verifică exact lista cu notarul' },
       ],
     },
@@ -540,6 +556,7 @@ function checklistProcuraMostenire(_c: ConsulateId | null, _s: SituationFlags): 
 }
 
 function checklistProcuraVanzare(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _s
   let plataDetail = '3€ RNNEPR, conform regulilor consulatului tău'
 
   if (consulate === 'bonn') {
@@ -577,25 +594,16 @@ function checklistProcuraVanzare(consulate: ConsulateId | null, _s: SituationFla
       title: 'Plata și programarea',
       items: [
         { id: 'pv13_plata', name: 'Tarif publicitate notarială (RNNEPR)', detail: plataDetail },
-        { id: 'pv13_bonn', name: 'Regulă specială Bonn', detail: 'Încarcă din timp pe econsulat copia actului de proprietate și copia CI a mandatarului pentru eliberare în aceeași zi' },
+        ...(consulate === 'bonn'
+          ? [{ id: 'pv13_bonn', name: 'Regulă specială pentru Bonn', detail: 'Încarcă din timp pe econsulat copia actului de proprietate și copia actului mandatarului pentru eliberare în aceeași zi' }]
+          : []),
       ],
     },
   ]
 }
 
 function checklistProcuraGenerala(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
-  let plataDetail = 'Procură obișnuită = gratuită · dacă se aplică taxa RNNEPR de 3€, metoda depinde de consulatul tău'
-
-  if (consulate === 'bonn') {
-    plataDetail = 'Bonn: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește cu EC-Karte la ghișeu'
-  } else if (consulate === 'muenchen') {
-    plataDetail = 'München: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește numerar la ghișeu'
-  } else if (consulate === 'stuttgart') {
-    plataDetail = 'Stuttgart: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește la POS sau prin virament bancar cu cel puțin 3 zile înainte'
-  } else if (consulate === 'berlin') {
-    plataDetail = 'Berlin: procură obișnuită = gratuită · taxa RNNEPR de 3€ se plătește numai prin virament bancar, cu 3–4 zile înainte'
-  }
-
+  void _s
   return [
     {
       id: 'identitate',
@@ -619,7 +627,7 @@ function checklistProcuraGenerala(consulate: ConsulateId | null, _s: SituationFl
       id: 'plata',
       title: 'Plata și trimiterea în România',
       items: [
-        { id: 'pg15_plata', name: 'Regula de plată', detail: plataDetail },
+        { id: 'pg15_plata', name: 'Regula de plată', detail: `Procură obișnuită = gratuită. ${getRnneprPaymentRule(consulate)}` },
         { id: 'pg15_original', name: 'Originalul procurii', detail: 'Trebuie trimis prin curier mandatarului; fără original, procura nu produce efecte' },
         { id: 'pg15_apostila', name: 'Apostilă', detail: 'Nu este necesară dacă procura e făcută la consulatul României' },
       ],
@@ -628,25 +636,16 @@ function checklistProcuraGenerala(consulate: ConsulateId | null, _s: SituationFl
 }
 
 function checklistTranscriereNastere(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
-  let regulaParinti = 'Adu certificatele de naștere românești ale ambilor părinți — cel mai sigur este să le ai indiferent de consulat.'
-
-  if (consulate === 'bonn') {
-    regulaParinti = 'Certificatele de naștere românești ale părinților sunt necesare dacă CI/pașaport nu conțin locul nașterii.'
-  } else if (consulate === 'muenchen') {
-    regulaParinti = 'Certificatele de naștere românești ale părinților sunt obligatorii dacă ambii părinți sunt cetățeni români.'
-  } else if (consulate === 'stuttgart') {
-    regulaParinti = 'Certificatele de naștere românești ale părinților sunt necesare dacă părinții nu sunt căsătoriți.'
-  } else if (consulate === 'berlin') {
-    regulaParinti = 'Certificatele de naștere românești ale părinților sunt obligatorii fără excepție.'
-  }
-
+  void _s
   return [
     {
       id: 'copil',
       title: 'Documentele copilului',
       items: [
         { id: 'tn16_formulea', name: 'Formule A sau Geburtsurkunde', detail: 'Formule A = fără apostilă și fără traducere · Geburtsurkunde = apostilă + traducere autorizată' },
-        { id: 'tn16_patronimic', name: 'Excepție Berlin pentru patronimice', detail: 'Dacă un părinte are nume patronimic, la Berlin nu merge Formule A — ai nevoie de Geburtsurkunde + apostilă + traducere' },
+        ...(getBirthBerlinNameRule(consulate)
+          ? [{ id: 'tn16_patronimic', name: 'Dacă apare și numele tatălui în acte', detail: getBirthBerlinNameRule(consulate)! }]
+          : []),
       ],
     },
     {
@@ -655,7 +654,7 @@ function checklistTranscriereNastere(consulate: ConsulateId | null, _s: Situatio
       items: [
         { id: 'tn16_id', name: 'Acte de identitate valabile ale ambilor părinți', detail: 'Original · CI sau pașaport românesc' },
         { id: 'tn16_crds', name: 'Dovada domiciliului în Germania', detail: 'Necesară dacă un părinte are pașaport CRDS: Meldebescheinigung / Anmeldung / Personalausweis german' },
-        { id: 'tn16_nastere_parinti', name: 'Certificatele de naștere românești ale părinților', detail: regulaParinti },
+        { id: 'tn16_nastere_parinti', name: 'Certificatele de naștere românești ale părinților', detail: getBirthParentCertificatesRule(consulate) },
         { id: 'tn16_casatorie', name: 'Certificat de căsătorie românesc sau act de divorț', detail: 'Original · dacă părinții sunt căsătoriți sau divorțați' },
       ],
     },
@@ -664,26 +663,15 @@ function checklistTranscriereNastere(consulate: ConsulateId | null, _s: Situatio
       title: 'Particularități importante',
       items: [
         { id: 'tn16_casatorie_neinregistrata', name: 'Căsătorie germană netranscrisă', detail: 'Dacă părinții s-au căsătorit în Germania și căsătoria nu este înregistrată în România, trebuie transcrisă mai întâi' },
-        { id: 'tn16_stuttgart', name: 'Opțiune poștă la Stuttgart', detail: 'Dacă vrei certificatul prin poștă, aduci la depunere plic DIN C5 autoadresat, timbrat 6,65 EUR' },
+        ...(getBirthPostalRule(consulate)
+          ? [{ id: 'tn16_stuttgart', name: 'Opțiune de poștă', detail: getBirthPostalRule(consulate)! }]
+          : []),
       ],
     },
   ]
 }
 
 // ── Generic fallback ──────────────────────────────────────────────────────────
-
-function checklistGeneric(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
-  return [
-    {
-      id: 'obligatorii',
-      title: 'Documente necesare',
-      items: [
-        { id: 'g_nastere', name: 'Certificat de naștere românesc', detail: 'Original' },
-        { id: 'g_identitate', name: 'Act de identitate', detail: 'Original' },
-      ],
-    },
-  ]
-}
 
 const CHECKLISTS: Record<string, ChecklistFn> = {
   'pasaport-crds-de': checklistPasaportCrds,
@@ -704,4 +692,22 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'procura-mostenire-de': checklistProcuraMostenire,
   'procura-generala-de': checklistProcuraGenerala,
   'transcriere-nastere-de': checklistTranscriereNastere,
+  'pasaport-crds-it': checklistPasaportCrds,
+  'pasaport-crds-it-pierdut': checklistPasaportCrdsPierdut,
+  'pasaport-crds-nou-it': checklistPasaportCrds,
+  'pasaport-minor-crds-it': checklistPasaportMinorCrds,
+  'pasaport-it-cu-domiciliu': checklistPasaportDomiciliuRo,
+  'pasaport-it-cu-domiciliu-pierdut': checklistPasaportDomiciliuRo,
+  'buletin-it-fara-domiciliu': checklistBuletinExpiratFaraDomRo,
+  'buletin-it-cu-domiciliu': checklistBuletinExpiratDomRo,
+  'buletin-it-fara-domiciliu-pierdut': checklistBuletinPierdutFaraDomRo,
+  'buletin-it-cu-domiciliu-pierdut': checklistBuletinPierdutDomRo,
+  'buletin-it-primul-it': checklistBuletinPrimulDe,
+  'buletin-it-primul-it-b': checklistBuletinPrimulDeB,
+  'titlu-calatorie-urgenta-it': checklistTitluCalatorieUrgenta,
+  'titlu-calatorie-it': checklistTitluCalatorie,
+  'procura-vanzare-it': checklistProcuraVanzare,
+  'procura-mostenire-it': checklistProcuraMostenire,
+  'procura-generala-it': checklistProcuraGenerala,
+  'transcriere-nastere-it': checklistTranscriereNastere,
 }

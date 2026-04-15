@@ -10,6 +10,7 @@ import SiteHeader from '@/components/layout/SiteHeader'
 import { persistAttribution, trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import { TEST_MODE } from '@/lib/config'
 import { ghidFreeMap, type FreeStep } from '@/lib/guides/freeContent'
+import { personalizeGuideTeaserForConsulate, personalizeStepsForConsulate } from '@/lib/guides/consulateRules'
 import { useAppStore } from '@/store/appStore'
 import type { GuideId } from '@/types'
 
@@ -226,8 +227,15 @@ function GhidPageContent() {
 
   const guideId = useAppStore(s => s.guideId)
   const problemType = useAppStore(s => s.problemType)
+  const consulate = useAppStore(s => s.consulate)
   const activeGuideId = TEST_MODE && testGuideId ? testGuideId : guideId
-  const content = activeGuideId ? ghidFreeMap[activeGuideId] : null
+  const content = activeGuideId
+    ? {
+        ...ghidFreeMap[activeGuideId],
+        steps: personalizeStepsForConsulate(ghidFreeMap[activeGuideId].steps, consulate),
+        paywallTeaser: personalizeGuideTeaserForConsulate(ghidFreeMap[activeGuideId].paywallTeaser, consulate),
+      }
+    : null
 
   useEffect(() => {
     persistAttribution(searchParams)
