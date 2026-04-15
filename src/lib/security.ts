@@ -1,4 +1,3 @@
-import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto'
 import type { NextRequest, NextResponse } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
 
@@ -50,7 +49,7 @@ export function getAccessTokenFromRequest(req: NextRequest): string | null {
   return token || null
 }
 
-export function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): string | null {
+export async function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): Promise<string | null> {
   const rawValue = req.cookies.get(CHECKOUT_CONFIRM_COOKIE_NAME)?.value?.trim()
 
   if (!rawValue) return null
@@ -61,16 +60,10 @@ export function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): string
     return null
   }
 
-  const expectedSignature = signOpaqueValue(`${sessionId}:${nonce}`)
+  const expectedSignature = await signOpaqueValue(`${sessionId}:${nonce}`)
   if (!expectedSignature) return null
 
-  const providedBuffer = Buffer.from(signature)
-  const expectedBuffer = Buffer.from(expectedSignature)
-
-  if (
-    providedBuffer.length !== expectedBuffer.length ||
-    !timingSafeEqual(providedBuffer, expectedBuffer)
-  ) {
+  if (signature !== expectedSignature) {
     return null
   }
 
@@ -78,10 +71,11 @@ export function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): string
 }
 
 export function generateOpaqueToken(): string {
-  return randomBytes(32).toString('hex')
+  const bytes = crypto.getRandomValues(new Uint8Array(32))
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
-function signOpaqueValue(value: string): string | null {
+async function signOpaqueValue(value: string): Promise<string | null> {
   const secret =
     process.env.ACTERO_COOKIE_SECRET?.trim() ||
     process.env.STRIPE_SECRET_KEY?.trim() ||
@@ -89,7 +83,17 @@ function signOpaqueValue(value: string): string | null {
 
   if (!secret) return null
 
-  return createHmac('sha256', secret).update(value).digest('hex')
+  const encodedSecret = new TextEncoder().encode(secret)
+  const encodedValue = new TextEncoder().encode(value)
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encodedSecret,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  )
+  const signature = await crypto.subtle.sign('HMAC', key, encodedValue)
+  return Array.from(new Uint8Array(signature), (byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
 export function getClientAddress(req: NextRequest): string {
@@ -117,9 +121,9 @@ export function setAccessCookie(response: NextResponse, accessToken: string) {
   })
 }
 
-export function setCheckoutConfirmCookie(response: NextResponse, sessionId: string) {
+export async function setCheckoutConfirmCookie(response: NextResponse, sessionId: string) {
   const nonce = generateOpaqueToken()
-  const signature = signOpaqueValue(`${sessionId}:${nonce}`)
+  const signature = await signOpaqueValue(`${sessionId}:${nonce}`)
 
   if (!signature) {
     throw new Error('Missing ACTERO_COOKIE_SECRET or equivalent server secret')

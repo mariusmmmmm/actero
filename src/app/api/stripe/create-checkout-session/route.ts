@@ -115,7 +115,7 @@ export async function POST(req: NextRequest) {
       { url: checkoutSession.url, checkoutSessionId: checkoutSession.id },
       { headers: NO_STORE_HEADERS }
     )
-    setCheckoutConfirmCookie(response, userSession.id)
+    await setCheckoutConfirmCookie(response, userSession.id)
     return response
   } catch (error) {
     console.error('Stripe create checkout session error:', error)

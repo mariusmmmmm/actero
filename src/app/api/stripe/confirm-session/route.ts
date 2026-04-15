@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing checkoutSessionId or sessionId' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
-    const checkoutConfirmSessionId = getCheckoutConfirmSessionIdFromRequest(req)
+    const checkoutConfirmSessionId = await getCheckoutConfirmSessionIdFromRequest(req)
 
     if (checkoutConfirmSessionId !== sessionId) {
       return NextResponse.json({ error: 'Missing checkout confirmation context' }, { status: 403, headers: NO_STORE_HEADERS })
