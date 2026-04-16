@@ -26,7 +26,7 @@ const howToSteps = [
   { name: 'Ridică', text: 'Verifici pe [consulat].mae.ro/cauta-pasaport. ATENȚIE Roma CRDS: L-V 14:30–16:00.' },
 ]
 const articleSchema = { '@context': 'https://schema.org', '@type': 'Article', '@id': 'https://www.actero.ro/pasaport-crds-italia#article', headline: 'Pașaport CRDS din Italia — Ghid 2026', datePublished: '2026-04-01', dateModified: '2026-04-10', author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' }, publisher: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' }, mainEntityOfPage: 'https://www.actero.ro/pasaport-crds-italia', inLanguage: 'ro' }
-const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' }, { '@type': 'ListItem', position: 2, name: 'Pașaport România Italia', item: 'https://www.actero.ro/pasaport-romania-italia' }, { '@type': 'ListItem', position: 3, name: 'Pașaport CRDS Italia', item: 'https://www.actero.ro/pasaport-crds-italia' } ] }
+const breadcrumbSchema = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [ { '@type': 'ListItem', position: 1, name: 'ActeRO', item: 'https://www.actero.ro' }, { '@type': 'ListItem', position: 2, name: 'Acte românești Italia', item: 'https://www.actero.ro/acte-romanesti-italia' }, { '@type': 'ListItem', position: 3, name: 'Pașaport România Italia', item: 'https://www.actero.ro/pasaport-romania-italia' }, { '@type': 'ListItem', position: 4, name: 'Pașaport CRDS Italia', item: 'https://www.actero.ro/pasaport-crds-italia' } ] }
 export default function PasaportCrdsItaliaPage() {
   return (
     <LlmOptimizedPage

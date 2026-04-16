@@ -18,11 +18,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.actero.ro'),
   title: {
-    default: 'ActeRO — Acte românești din Germania, pas cu pas',
+    default: 'ActeRO — Acte românești în diaspora, pas cu pas',
     template: '%s · ActeRO',
   },
   description:
-    'Ghid personalizat pentru pașaport, buletin și procuri din Germania. Fără drumuri degeaba la consulat.',
+    'Ghid personalizat pentru pașaport, buletin, procuri și alte acte românești în diaspora. Fără drumuri degeaba la consulat.',
   keywords: [
     'pașaport expirat Germania',
     'buletin expirat Germania',
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     locale: 'ro_RO',
     url: 'https://www.actero.ro',
     siteName: 'ActeRO',
-    title: 'ActeRO — Acte românești din Germania, pas cu pas',
+    title: 'ActeRO — Acte românești în diaspora, pas cu pas',
     description:
-      'Ghid personalizat pentru pașaport, buletin și procuri din Germania. Fără drumuri degeaba la consulat.',
+      'Ghid personalizat pentru pașaport, buletin, procuri și alte acte românești în diaspora. Fără drumuri degeaba la consulat.',
     images: [
       {
         url: '/logo.png',
@@ -52,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'ActeRO — Acte românești din Germania',
-    description: 'Ghid personalizat. Fără drumuri degeaba la consulat.',
+    title: 'ActeRO — Acte românești în diaspora',
+    description: 'Ghid personalizat pentru acte românești în diaspora.',
     images: ['/logo.png'],
   },
   icons: {
@@ -99,14 +99,14 @@ export default function RootLayout({
     name: 'ActeRO',
     url: 'https://www.actero.ro',
     logo: 'https://www.actero.ro/logo.png',
-    description: 'Navigator digital pentru acte românești din diaspora — pașaport, buletin, procuri, titlu de călătorie din Germania.',
+    description: 'Navigator digital pentru acte românești în diaspora — pașaport, buletin, procuri, titlu de călătorie și acte pentru copii.',
     areaServed: {
-      '@type': 'Country',
-      name: 'Germany'
+      '@type': 'Place',
+      name: 'Europe'
     },
     audience: {
       '@type': 'Audience',
-      audienceType: 'Românii din Germania'
+      audienceType: 'Românii din diaspora'
     },
     sameAs: [
       'https://www.facebook.com/actero.ro'

@@ -67,8 +67,20 @@ export default function LlmOptimizedPage({
   finalCtaTitle,
   finalCtaText,
 }: LlmOptimizedPageProps) {
-  const breadcrumbItems = Array.isArray((breadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement)
-    ? ((breadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement ?? []).filter(
+  const normalizedBreadcrumbSchema =
+    (breadcrumbSchema as { '@type'?: string })['@type'] === 'BreadcrumbList'
+      ? {
+          ...breadcrumbSchema,
+          '@id':
+            (breadcrumbSchema as { '@id'?: string })['@id'] ??
+            `https://www.actero.ro/${lpSlug}#breadcrumb`,
+        }
+      : breadcrumbSchema
+
+  const breadcrumbItems = Array.isArray(
+    (normalizedBreadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement
+  )
+    ? ((normalizedBreadcrumbSchema as { itemListElement?: BreadcrumbItem[] }).itemListElement ?? []).filter(
         (item) => item?.name && item?.item
       )
     : []
@@ -108,7 +120,9 @@ export default function LlmOptimizedPage({
     description: tldr,
     inLanguage: 'ro',
     breadcrumb: {
-      '@id': `https://www.actero.ro/${lpSlug}#breadcrumb`,
+      '@id':
+        (normalizedBreadcrumbSchema as { '@id'?: string })['@id'] ??
+        `https://www.actero.ro/${lpSlug}#breadcrumb`,
     },
     isPartOf: {
       '@id': 'https://www.actero.ro/#website',
@@ -126,7 +140,15 @@ export default function LlmOptimizedPage({
     })),
   }
 
-  const schemas = [webPageSchema, itemListSchema, faqSchema, howToSchema, articleSchema, breadcrumbSchema, ...extraSchemas]
+  const schemas = [
+    webPageSchema,
+    itemListSchema,
+    faqSchema,
+    howToSchema,
+    articleSchema,
+    normalizedBreadcrumbSchema,
+    ...extraSchemas,
+  ]
 
   return (
     <>
