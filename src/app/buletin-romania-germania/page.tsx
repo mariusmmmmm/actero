@@ -417,6 +417,30 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'ghiduri-conexe',
+    title: 'Ghiduri conexe pentru buletin și identitate',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/buletin-expirat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Buletin expirat în Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Pagina de orientare rapidă pentru reînnoire, CEI și CIS.</p>
+        </Link>
+        <Link href="/buletin-pierdut-furat-cu-domiciliu-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Buletin pierdut sau furat</p>
+          <p className="mt-1 text-sm text-gray-600">Vezi traseul separat pentru pierdere sau furt și termenul legal de 15 zile.</p>
+        </Link>
+        <Link href="/cei-vs-cis-diaspora" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">CEI vs CIS pentru diaspora</p>
+          <p className="mt-1 text-sm text-gray-600">Comparația care îți schimbă alegerea SPCLEP-ului și planul de drum.</p>
+        </Link>
+        <Link href="/acte-copil-nascut-in-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Primul buletin pentru copil</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă este vorba despre primul act după transcriere, traseul pornește din ghidul copilului.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function BuletinRomaniaGermaniaPage() {

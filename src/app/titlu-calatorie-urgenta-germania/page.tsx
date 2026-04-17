@@ -462,6 +462,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe utile după urgență',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/titlu-calatorie-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Titlu de călătorie din Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Varianta completă, nu doar scenariul urgent.</p>
+        </Link>
+        <Link href="/pasaport-pierdut-furat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pașaport pierdut sau furat</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă urgența a pornit din furt sau pierdere, aici continui corect.</p>
+        </Link>
+        <Link href="/pasaport-expirat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pașaport expirat</p>
+          <p className="mt-1 text-sm text-gray-600">După întoarcerea în România sau pentru reînnoirea completă a documentului.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function TitluCalatorieUrgentaPage() {

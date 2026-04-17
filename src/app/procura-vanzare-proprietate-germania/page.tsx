@@ -434,6 +434,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pentru procuri imobiliare',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub procuri Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Pagina mamă pentru toate procurile notariale din Germania.</p>
+        </Link>
+        <Link href="/procura-consulat-vs-notar-german" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Consulat vs notar german</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă încă eziți între procura consulară și varianta de notar local cu apostilă.</p>
+        </Link>
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare pe econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Pentru întrebările tactice despre validare, pre-scanning și rezervarea slotului.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProcuraVanzareProprietateGermaniaPage() {

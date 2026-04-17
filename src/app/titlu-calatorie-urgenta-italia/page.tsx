@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
   title: 'Titlu de călătorie urgent din Italia — cine poate merge fără programare | ActeRO',
@@ -44,6 +45,26 @@ export default function TitluCalatorieUrgentItaliaPage() {
       sections={[
         { id: 'tabel-consulate', title: 'Walk-in sau programare — per consulat', content: (<div className="overflow-x-auto"><table className="w-full text-sm border-collapse"><thead><tr className="bg-gray-50"><th className="p-2 border border-gray-200">Consulat</th><th className="p-2 border border-gray-200">Walk-in urgent?</th><th className="p-2 border border-gray-200">Interval / condiție</th></tr></thead><tbody><tr><td className="p-2 border border-gray-200 font-medium">Roma</td><td className="p-2 border border-gray-200 text-green-700 font-medium">✅ Da</td><td className="p-2 border border-gray-200">L-V 11:00–13:00 · urgențe cu documente justificative</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Milano</td><td className="p-2 border border-gray-200 text-green-700 font-medium">✅ Da</td><td className="p-2 border border-gray-200">Anunți pe linia urgențe: +39 366.108.1444</td></tr><tr><td className="p-2 border border-gray-200 font-medium text-green-700">Bologna</td><td className="p-2 border border-gray-200 text-green-700 font-medium">✅ Condiționat</td><td className="p-2 border border-gray-200">Walk-in doar cu documente justificative · biletul de avion singur NU e suficient</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Torino</td><td className="p-2 border border-gray-200 text-red-600 font-medium">❌ Nu</td><td className="p-2 border border-gray-200 text-orange-700">Exclusiv cu programare — chiar și urgențele</td></tr><tr><td className="p-2 border border-gray-200 font-medium">Trieste</td><td className="p-2 border border-gray-200 text-orange-600">⚠️ Nu e confirmat</td><td className="p-2 border border-gray-200">Tratează fluxul ca programare</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200 font-medium">Bari</td><td className="p-2 border border-gray-200 text-orange-600">⚠️ Nu e confirmat</td><td className="p-2 border border-gray-200">Tratează fluxul ca programare · +39 334.604.2299</td></tr><tr><td className="p-2 border border-gray-200 font-medium">Catania</td><td className="p-2 border border-gray-200 text-orange-600">⚠️ Nu e confirmat</td><td className="p-2 border border-gray-200">Mergi doar cu programare și confirmă direct înainte de drum</td></tr></tbody></table></div>) },
         { id: 'documente', title: 'Documente necesare pentru titlu de călătorie', content: (<div className="rounded-lg border border-gray-200 p-3 text-sm space-y-1.5"><ul className="space-y-1"><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Orice act românesc disponibil</strong> — pașaport expirat, buletin expirat, certificat de naștere cu CNP sau alt document relevant pentru identificare</span></li><li className="flex gap-2"><span className="text-green-600 font-bold">✓</span><span><strong>Dovadă de urgență</strong> — document medical, bilet de avion, convocare sau alt document justificativ, după caz</span></li><li className="flex gap-2"><span className="text-orange-500 font-bold">±</span><span><strong>Dacă pașaportul a fost furat:</strong> adeverință poliție (Denuncia di furto). <strong>Traducere NU este necesară în Italia.</strong></span></li></ul></div>) },
+        {
+          id: 'pagini-conexe',
+          title: 'Pagini conexe utile',
+          content: (
+            <div className="grid gap-3 text-sm md:grid-cols-3">
+              <Link href="/titlu-calatorie-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Titlu de călătorie în Italia</p>
+                <p className="mt-1 text-gray-600">Pagina principală pentru cazul standard, nu doar pentru urgențe.</p>
+              </Link>
+              <Link href="/programare-consulat-romania-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Programare la consulat în Italia</p>
+                <p className="mt-1 text-gray-600">Important mai ales pentru Torino, Trieste, Bari și Catania, unde tratezi fluxul conservator.</p>
+              </Link>
+              <Link href="/acte-romanesti-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Acte românești din Italia</p>
+                <p className="mt-1 text-gray-600">Hubul mare dacă trebuie să continui apoi cu pașaportul sau alte acte.</p>
+              </Link>
+            </div>
+          ),
+        },
       ]}
       finalCtaTitle="Află pașii exacți pentru consulatul tău"
       finalCtaText="Wizardul ActeRO identifică consulatul tău și îți dă documentele exacte pentru titlul de călătorie urgent."

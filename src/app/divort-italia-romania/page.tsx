@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
   title: 'Divorț pronunțat în Italia — ce trebuie să faci în România | ActeRO',
@@ -38,8 +39,32 @@ export default function DivortItaliaRomaniaPage() {
       articleSchema={articleSchema}
       breadcrumbSchema={breadcrumbSchema}
       sections={[
-        { id: 'recunoastere-ue', title: 'De ce nu ai nevoie de exequatur', content: (<div className="rounded-lg border border-green-100 bg-green-50 p-4 text-sm"><p className="font-semibold text-green-900">Regulamentul UE: hotărârile judecătorești circulă liber</p><p className="text-green-800 mt-2">Conform regulamentului european, o hotărâre judecătorească definitivă dintr-un stat UE este recunoscută automat în toate celelalte state membre. Nu există o procedură separată de "recunoaștere" în România pentru un divorț italian — hotărârea este direct valabilă.</p></div>) },
-        { id: 'ce-trebuie-inregistrat', title: 'Ce trebuie totuși făcut în România', content: (<div className="rounded-lg border border-orange-100 bg-orange-50 p-4 text-sm space-y-2"><p className="font-semibold text-orange-900">Menționarea în Registrul de Stare Civilă</p><p className="text-orange-800">Dacă căsătoria a fost înregistrată în România, divorțul trebuie menționat în marginea actului de căsătorie. Asta nu înseamnă "recunoașterea" divorțului — acesta e deja valid — ci actualizarea evidențelor civile.</p><p className="text-orange-800 mt-1">Documentele necesare: hotărârea cu mențiunea de definitivitate (passata in giudicato) + traducere autorizată MJ.</p></div>) },
+        { id: 'recunoastere-ue', title: 'De ce nu ai nevoie de exequatur', content: (<div className="rounded-lg border border-green-100 bg-green-50 p-4 text-sm"><p className="font-semibold text-green-900">Regulamentul UE: hotărârile judecătorești circulă liber</p><p className="text-green-800 mt-2">Conform regulamentului european, o hotărâre judecătorească definitivă dintr-un stat UE este recunoscută automat în toate celelalte state membre. Nu există o procedură separată de &quot;recunoaștere&quot; în România pentru un divorț italian — hotărârea este direct valabilă.</p></div>) },
+        { id: 'ce-trebuie-inregistrat', title: 'Ce trebuie totuși făcut în România', content: (<div className="rounded-lg border border-orange-100 bg-orange-50 p-4 text-sm space-y-2"><p className="font-semibold text-orange-900">Menționarea în Registrul de Stare Civilă</p><p className="text-orange-800">Dacă căsătoria a fost înregistrată în România, divorțul trebuie menționat în marginea actului de căsătorie. Asta nu înseamnă &quot;recunoașterea&quot; divorțului — acesta e deja valid — ci actualizarea evidențelor civile.</p><p className="text-orange-800 mt-1">Documentele necesare: hotărârea cu mențiunea de definitivitate (passata in giudicato) + traducere autorizată MJ.</p></div>) },
+        {
+          id: 'pagini-conexe',
+          title: 'Pagini conexe pentru Italia',
+          content: (
+            <div className="grid gap-3 text-sm md:grid-cols-2">
+              <Link href="/acte-romanesti-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Hub acte românești Italia</p>
+                <p className="mt-1 text-gray-600">Pagina principală pentru pașaport, buletin, procuri și acte de stare civilă.</p>
+              </Link>
+              <Link href="/procura-notariala-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Procură notarială din Italia</p>
+                <p className="mt-1 text-gray-600">Utilă doar dacă vrei să împuternicești pe cineva să depună sau să ridice acte în locul tău.</p>
+              </Link>
+              <Link href="/programare-consulat-romania-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Programare la consulat în Italia</p>
+                <p className="mt-1 text-gray-600">Vezi când e nevoie de econsulat și ce excepții locale apar la consulatele italiene.</p>
+              </Link>
+              <Link href="/transcriere-certificat-nastere-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Transcriere certificat de naștere italian</p>
+                <p className="mt-1 text-gray-600">Altă procedură de stare civilă care folosește aceeași logică de acte românești pentru Italia.</p>
+              </Link>
+            </div>
+          ),
+        },
       ]}
       finalCtaTitle="Ai nevoie de altceva de rezolvat în România?"
       finalCtaText="ActeRO acoperă procuri, pașapoarte și acte de stare civilă — ghiduri verificate pentru românii din Italia."

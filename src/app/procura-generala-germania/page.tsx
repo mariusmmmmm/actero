@@ -421,6 +421,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pentru procuri speciale',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/procura-cont-bancar-romania-din-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Procură pentru bancă</p>
+          <p className="mt-1 text-sm text-gray-600">Când operațiunile bancare trebuie descrise mai precis decât într-o procură generală.</p>
+        </Link>
+        <Link href="/procura-divort-notarial-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Procură pentru divorț</p>
+          <p className="mt-1 text-sm text-gray-600">Vezi limitele procedurii și când procura nu acoperă tot traseul.</p>
+        </Link>
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub procuri Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Pagina mamă pentru toate tipurile de procuri notariale.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProcuraGeneralaGermaniaPage() {

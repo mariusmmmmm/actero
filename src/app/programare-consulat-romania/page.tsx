@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: 'Cum obții programare pe econsulat.ro: validare, luni la 08:00, greșeli frecvente și reguli importante pentru consulatele României din Germania.',
   keywords: ['programare consulat romania germania', 'econsulat luni 08:00', 'programare pașaport germania', 'econsulat validata', 'intermediari programări consulat'],
   openGraph: {
-    title: 'Programare consulat România în Germania — Ghid complet',
-    description: 'Cum obții programare pe econsulat.ro și ce greșeli să eviți.',
+    title: 'Programare consulat România în Germania — reguli și capcane',
+    description: 'Pagina de orientare pentru programare la consulat: când ai nevoie de econsulat, ce servicii au excepții și ce greșeli să eviți.',
     url: 'https://www.actero.ro/programare-consulat-romania',
     type: 'article',
   },
@@ -59,7 +59,7 @@ const articleSchema = {
   '@type': 'Article',
   '@id': 'https://www.actero.ro/programare-consulat-romania#article',
   headline: 'Programare consulat România în Germania — Ghid 2026',
-  description: 'Cum obții programare pe econsulat.ro, când apar locurile și ce greșeli să eviți.',
+  description: 'Pagina de orientare pentru programare la consulatele României din Germania: ce servicii trec prin econsulat și când ai nevoie de ghidul tactic despre platformă.',
   datePublished: '2026-01-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', '@id': 'https://www.actero.ro/#organization' },
@@ -83,8 +83,8 @@ export default function ProgramareConsulatRomaniaPage() {
       lpSlug="programare-consulat-romania"
       lpTopic="programare-consulat"
       h1="Cum obții programare la consulatul României?"
-      intro="Dacă ai cererea pregătită corect, momentul și ordinea pașilor fac toată diferența pe econsulat.ro."
-      tldr="Programările la consulatele din Germania se obțin pe econsulat.ro. Sunt disponibile de obicei luni la 08:00. Cererea trebuie mai întâi să fie Validată (1-3 zile). Programările sunt GRATUITE — nu plătiți intermediari."
+      intro="Aici găsești pagina de orientare pentru programările la consulatele României din Germania: când intri pe econsulat, ce servicii au excepții și cum alegi corect traseul înainte să depui cererea."
+      tldr="Programările la consulatele din Germania trec, de regulă, prin econsulat.ro, dar nu toate întrebările despre programare sunt întrebări despre platformă. Pagina aceasta te ajută să alegi corect serviciul și consulatul; ghidul econsulat intră mai adânc în stările cererii și disponibilitatea sloturilor."
       ctaHref="/wizard"
       ctaLabel="Rezolvă gratuit în 30 de secunde →"
       updatedAt="aprilie 2026"
@@ -120,6 +120,33 @@ export default function ProgramareConsulatRomaniaPage() {
                 <li key={step.name}><strong>{step.name}:</strong> {step.text}</li>
               ))}
             </ol>
+          ),
+        },
+        {
+          id: 'ce-pagina-citesti',
+          title: 'Când citești pagina asta și când intri în ghidul despre econsulat',
+          content: (
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                <p className="mb-2 font-semibold text-blue-900">Pagina aceasta te ajută dacă:</p>
+                <ul className="space-y-1 text-sm text-blue-800">
+                  <li>nu e clar dacă serviciul tău necesită programare</li>
+                  <li>vrei să alegi corect actul și consulatul înainte de cerere</li>
+                  <li>cauți regulile generale despre programare în Germania</li>
+                </ul>
+              </div>
+              <div className="rounded-xl border border-gray-200 bg-white p-4">
+                <p className="mb-2 font-semibold text-gray-900">Intră în ghidul econsulat dacă:</p>
+                <ul className="space-y-1 text-sm text-gray-700">
+                  <li>cererea ta este deja „În așteptare” sau „Validată”</li>
+                  <li>nu găsești sloturi și vrei tactici concrete</li>
+                  <li>ai ales greșit serviciul și vrei să înțelegi fluxul platformei</li>
+                </ul>
+                <Link href="/programare-econsulat-germania" className="mt-3 inline-block text-sm font-medium text-blue-700 underline hover:text-blue-900">
+                  Vezi ghidul tactic despre econsulat.ro →
+                </Link>
+              </div>
+            </div>
           ),
         },
         {

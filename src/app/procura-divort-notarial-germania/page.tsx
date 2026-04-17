@@ -376,6 +376,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pentru divorț și procuri',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/procura-generala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Procură generală</p>
+          <p className="mt-1 text-sm text-gray-600">Contextul mare pentru divorț, firmă, bancă și alte acte administrative.</p>
+        </Link>
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub procuri Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă vrei să compari rapid toate tipurile de procuri și regulile lor.</p>
+        </Link>
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare pe econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Pentru partea practică de validare, documente și alegerea serviciului corect.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProcuraDivortNotarialGermaniaPage() {

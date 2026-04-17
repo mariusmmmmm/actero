@@ -403,6 +403,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe utile',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/buletin-romania-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub buletin Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Vezi toate situațiile de buletin pentru românii din Germania.</p>
+        </Link>
+        <Link href="/cei-vs-cis-diaspora" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">CEI vs CIS</p>
+          <p className="mt-1 text-sm text-gray-600">Comparatorul care decide flexibilitatea traseului și a ridicării.</p>
+        </Link>
+        <Link href="/buletin-expirat-cu-domiciliu-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Expirat cu domiciliu activ</p>
+          <p className="mt-1 text-sm text-gray-600">Varianta complementară, mai simplă, fără documentele suplimentare legate de adresă.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function BuletinExpiratFaraDomiciliuRomaniaPage() {

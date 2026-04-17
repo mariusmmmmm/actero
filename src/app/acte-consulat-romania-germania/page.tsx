@@ -478,6 +478,30 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'ghiduri-cheie',
+    title: 'Ghidurile cheie care pornesc de la consulat',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/pasaport-romania-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pașaport</p>
+          <p className="mt-1 text-sm text-gray-600">CRDS, domiciliu în România, expirat, pierdut sau primul pașaport.</p>
+        </Link>
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Procuri notariale</p>
+          <p className="mt-1 text-sm text-gray-600">Vânzare, moștenire, bancă, divorț sau alte acte administrative.</p>
+        </Link>
+        <Link href="/titlu-calatorie-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Titlu de călătorie</p>
+          <p className="mt-1 text-sm text-gray-600">Pentru revenirea rapidă în România când nu mai ai act valabil.</p>
+        </Link>
+        <Link href="/programare-consulat-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare la consulat</p>
+          <p className="mt-1 text-sm text-gray-600">Regulile generale despre programare și legătura cu econsulat.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ActeConsulatRomaniaGermaniaPage() {

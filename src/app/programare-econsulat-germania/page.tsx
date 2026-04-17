@@ -501,6 +501,53 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'cand-citesti-aceasta-pagina',
+    title: 'Când ai nevoie de această pagină și când de pagina generică de programare',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+          <p className="mb-2 font-semibold text-blue-900">Această pagină e pentru tine dacă:</p>
+          <ul className="space-y-1 text-sm text-blue-800">
+            <li>cererea e deja depusă și vrei să înțelegi stările din platformă</li>
+            <li>nu găsești locuri sau nu știi când apar sloturi noi</li>
+            <li>ai dubii legate de validare, respingere sau serviciul selectat</li>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-gray-200 bg-white p-4">
+          <p className="mb-2 font-semibold text-gray-900">Pagina generică de programare te ajută dacă:</p>
+          <ul className="space-y-1 text-sm text-gray-700">
+            <li>încă nu știi dacă serviciul tău necesită programare</li>
+            <li>vrei să alegi corect consulatul sau categoria de serviciu</li>
+            <li>cauți regulile generale înainte de a intra în platformă</li>
+          </ul>
+          <Link href="/programare-consulat-romania" className="mt-3 inline-block text-sm font-medium text-blue-700 underline hover:text-blue-900">
+            Vezi pagina generică despre programare →
+          </Link>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pe care merită să le deschizi după econsulat',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/pasaport-romania-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+          <p className="mb-1 font-semibold text-gray-900">Pașaport</p>
+          <p className="text-sm text-gray-600">Fluxul cel mai sensibil la alegerea corectă a serviciului.</p>
+        </Link>
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+          <p className="mb-1 font-semibold text-gray-900">Procură notarială</p>
+          <p className="text-sm text-gray-600">Programarea există, dar documentele și taxele diferă clar față de pașaport.</p>
+        </Link>
+        <Link href="/acte-romanesti-germania" className="rounded-xl border border-gray-200 bg-white p-4 hover:border-blue-200">
+          <p className="mb-1 font-semibold text-gray-900">Hub Germania</p>
+          <p className="text-sm text-gray-600">Dacă încă nu e clar ce document trebuie să rezolvi, pornește de aici.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProgramareEconsulatGermaniaPage() {

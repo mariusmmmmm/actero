@@ -213,6 +213,30 @@ const sections = [
     ),
   },
   {
+    id: 'pagini-utile',
+    title: 'Pagini utile înainte să pleci spre România',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/buletin-romania-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub buletin din Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Toate situațiile de buletin, într-un singur loc.</p>
+        </Link>
+        <Link href="/buletin-expirat-fara-domiciliu-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Expirat fără domiciliu activ</p>
+          <p className="mt-1 text-sm text-gray-600">Aici intră extrasul CF și legătura cu ultima adresă din România.</p>
+        </Link>
+        <Link href="/cei-vs-cis-diaspora" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">CEI vs CIS</p>
+          <p className="mt-1 text-sm text-gray-600">Comparatorul care te ajută să alegi forma de carte de identitate potrivită.</p>
+        </Link>
+        <Link href="/acte-romanesti-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Toate actele din Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă buletinul nu e singura problemă, pornește de la hubul mare Germania.</p>
+        </Link>
+      </div>
+    ),
+  },
+  {
     id: 'cei-cis',
     title: 'CEI sau CIS — decizia care schimbă traseul',
     content: (

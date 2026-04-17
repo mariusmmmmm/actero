@@ -462,6 +462,30 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe din clusterul pașaport Germania',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/pasaport-romania-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub pașaport Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Vezi toate variantele: CRDS, domiciliu în România, expirat, pierdut sau copil.</p>
+        </Link>
+        <Link href="/pasaport-crds-vs-pasaport-cu-domiciliu-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">CRDS vs domiciliu în România</p>
+          <p className="mt-1 text-sm text-gray-600">Comparatorul care te ajută să alegi serviciul corect pe econsulat.</p>
+        </Link>
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare pe econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Pașii platformei, validarea și greșelile frecvente la alegerea serviciului.</p>
+        </Link>
+        <Link href="/transcriere-certificat-nastere-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Transcriere pentru copil născut în Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Obligatorie înainte de primul pașaport CRDS pentru copil fără CNP.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function PasaportCRDSGermaniaPage() {

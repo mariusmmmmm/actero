@@ -401,6 +401,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pentru succesiune și procuri',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/procura-notariala-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub procuri Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Intrarea principală dacă încă nu e clar ce tip de procură ți se aplică.</p>
+        </Link>
+        <Link href="/procura-consulat-vs-notar-german" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Consulat vs notar german</p>
+          <p className="mt-1 text-sm text-gray-600">Comparația care explică de ce consulatul e, de regulă, varianta mai simplă.</p>
+        </Link>
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare pe econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă întrebarea ta reală este despre validare, sloturi sau categoria serviciului.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProcuraMostenireGermaniaPage() {

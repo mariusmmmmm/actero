@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
   title: 'Cum obții programare la consulat în Italia — Ghid 2026 | ActeRO',
@@ -42,6 +43,30 @@ export default function ProgramareConsulatItalia() {
       breadcrumbSchema={breadcrumbSchema}
       sections={[
         { id: 'per-consulat', title: 'Programare per consulat — rezumat', content: (<div className="overflow-x-auto"><table className="w-full text-sm border-collapse"><thead><tr className="bg-gray-50"><th className="p-2 border border-gray-200">Consulat</th><th className="p-2 border border-gray-200">Metodă</th><th className="p-2 border border-gray-200">Particularitate</th></tr></thead><tbody><tr><td className="p-2 border border-gray-200">Roma</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200 text-xs text-orange-700">Vineri NU pașapoarte obișnuite</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200">Milano</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200 text-xs">Urgențe titlu: linia de urgențe</td></tr><tr><td className="p-2 border border-gray-200 text-green-700 font-medium">Bologna</td><td className="p-2 border border-gray-200 text-green-700 font-medium">Excepție locală</td><td className="p-2 border border-gray-200 text-xs">Pentru multe fluxuri uzuale nu cere programare obligatorie</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200">Torino</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200 text-xs text-orange-700">Exclusiv programare — inclusiv urgențe</td></tr><tr><td className="p-2 border border-gray-200">Trieste</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200 text-xs">Toate serviciile cu programare</td></tr><tr className="bg-gray-50"><td className="p-2 border border-gray-200">Bari</td><td className="p-2 border border-gray-200">econsulat.ro sau email</td><td className="p-2 border border-gray-200 text-xs text-blue-700">bari.programari@mae.ro poate fi alternativă</td></tr><tr><td className="p-2 border border-gray-200">Catania</td><td className="p-2 border border-gray-200">econsulat.ro</td><td className="p-2 border border-gray-200 text-xs text-orange-600">⚠️ Sună înainte — site neîntreținut</td></tr></tbody></table></div>) },
+        {
+          id: 'pagini-conexe',
+          title: 'Pagini conexe pentru Italia',
+          content: (
+            <div className="grid gap-3 text-sm md:grid-cols-2">
+              <Link href="/acte-romanesti-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Hub acte românești Italia</p>
+                <p className="mt-1 text-gray-600">Intrarea principală în clusterul Italia pentru pașaport, buletin, procuri și acte de copil.</p>
+              </Link>
+              <Link href="/pasaport-romania-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Pașaport românesc în Italia</p>
+                <p className="mt-1 text-gray-600">Vezi diferența dintre CRDS, domiciliu în România, expirat, pierdut și pașaport minor.</p>
+              </Link>
+              <Link href="/titlu-calatorie-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Titlu de călătorie în Italia</p>
+                <p className="mt-1 text-gray-600">Flux separat față de programarea clasică, mai ales la urgențe și excepțiile locale.</p>
+              </Link>
+              <Link href="/procura-notariala-italia" className="rounded-lg border border-gray-200 p-4 transition hover:border-gray-300 hover:bg-gray-50">
+                <p className="font-medium text-gray-900">Procură notarială din Italia</p>
+                <p className="mt-1 text-gray-600">Programarea contează, dar taxele și actele diferă față de pașaport.</p>
+              </Link>
+            </div>
+          ),
+        },
         { id: 'intermediari', title: '⚠️ Programările sunt gratuite — nu plăti intermediari', content: (<div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm"><p className="font-semibold text-red-900">Programările pe econsulat.ro sunt gratuite</p><p className="text-red-800 mt-1">Există intermediari privați care vând &quot;programări&quot; la prețuri între 50–300€. Aceste servicii sunt ilegale. Programările sunt gratuite și se fac direct pe econsulat.ro de orice utilizator înregistrat.</p></div>) },
       ]}
       finalCtaTitle="Ghidul complet pentru documentul tău"

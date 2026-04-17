@@ -414,6 +414,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe utile',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/buletin-romania-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Hub buletin Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Pagina mamă pentru toate variantele de buletin din Germania.</p>
+        </Link>
+        <Link href="/cei-vs-cis-diaspora" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">CEI vs CIS</p>
+          <p className="mt-1 text-sm text-gray-600">Te ajută să alegi varianta de act și să planifici ridicarea corectă.</p>
+        </Link>
+        <Link href="/buletin-pierdut-furat-fara-domiciliu-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pierdut sau furat fără domiciliu activ</p>
+          <p className="mt-1 text-sm text-gray-600">Varianta complementară, dacă situația ta reală nu mai include domiciliu activ în România.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function BuletinPierdutFuratCuDomiciliuPage() {

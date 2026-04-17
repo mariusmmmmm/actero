@@ -392,6 +392,26 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe din clusterul pașaport',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Link href="/pasaport-expirat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pașaport expirat</p>
+          <p className="mt-1 text-sm text-gray-600">Cel mai frecvent caz de reînnoire, cu reguli diferite pe flux.</p>
+        </Link>
+        <Link href="/pasaport-pierdut-furat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Pașaport pierdut sau furat</p>
+          <p className="mt-1 text-sm text-gray-600">Traseu separat, cu declarație la ghișeu sau adeverință de poliție.</p>
+        </Link>
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare pe econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Dacă problema ta este validarea cererii sau alegerea serviciului.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function PasaportRomaniaGermaniaPage() {

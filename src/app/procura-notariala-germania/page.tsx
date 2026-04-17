@@ -414,6 +414,30 @@ const sections = [
       </div>
     ),
   },
+  {
+    id: 'pagini-conexe',
+    title: 'Pagini conexe pentru programare și cazuri speciale',
+    content: (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link href="/programare-econsulat-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Cum funcționează econsulat.ro</p>
+          <p className="mt-1 text-sm text-gray-600">Urmărește validarea, categoria corectă și momentul potrivit pentru programare.</p>
+        </Link>
+        <Link href="/programare-consulat-romania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Programare la consulat în Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Pagina generică pentru programare, reguli și capcane înainte de depunere.</p>
+        </Link>
+        <Link href="/procura-consulat-vs-notar-german" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Consulat vs notar german</p>
+          <p className="mt-1 text-sm text-gray-600">Comparația completă dacă încă eziți între cele două variante.</p>
+        </Link>
+        <Link href="/acte-romanesti-germania" className="rounded-xl border border-gray-200 p-4 hover:bg-gray-50">
+          <p className="font-semibold text-gray-900">Toate actele din Germania</p>
+          <p className="mt-1 text-sm text-gray-600">Hubul principal pentru pașaport, buletin, titlu de călătorie și procuri.</p>
+        </Link>
+      </div>
+    ),
+  },
 ]
 
 export default function ProcuraNotarialaGermaniaPage() {
