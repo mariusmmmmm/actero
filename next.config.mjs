@@ -7,6 +7,11 @@ const nextConfig = {
         destination: '/titlu-calatorie-urgenta-spania',
         permanent: true,
       },
+      {
+        source: '/transcriere-certificat-nastere-spania',
+        destination: '/transcriere-nastere-spania',
+        permanent: true,
+      },
     ];
   },
 };
