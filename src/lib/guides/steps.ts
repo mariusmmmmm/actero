@@ -134,6 +134,14 @@ const STEPS_GENERIC: TrackerStep[] = [
   { id: 'ridicare', title: 'Ridică documentul', shortLabel: 'Ridicare' },
 ]
 
+const STEPS_BULETIN_CONSULAT_ES: TrackerStep[] = [
+  { id: 'documente', title: 'Verifică documentele necesare', shortLabel: 'Documente', todoNote: 'Confirmă regula exactă cu consulatul tău' },
+  { id: 'programare', title: 'Fă programarea', shortLabel: 'Programare', todoNote: 'Programarea pe econsulat.ro este obligatorie' },
+  { id: 'fotografii', title: 'Pregătește fotografiile', shortLabel: 'Fotografii', todoNote: '6 fotografii 3×4 cm, fond alb' },
+  { id: 'consulat', title: 'Prezintă-te la consulat', shortLabel: 'Consulat', todoNote: 'Mergi cu originalele și fotografiile' },
+  { id: 'ridicare', title: 'Ridică cartea de identitate', shortLabel: 'Ridicare', todoNote: 'Verifică intervalul de ridicare la consulatul tău' },
+]
+
 const STEPS: Record<string, TrackerStep[]> = {
   'pasaport-crds-de': STEPS_PASAPORT,
   'pasaport-crds-de-pierdut': STEPS_PASAPORT,
@@ -171,6 +179,23 @@ const STEPS: Record<string, TrackerStep[]> = {
   'procura-mostenire-it': STEPS_PROCURA,
   'procura-generala-it': STEPS_PROCURA_GENERALA,
   'transcriere-nastere-it': STEPS_TRANSCRIERE_NASTERE,
+  'pasaport-crds-es': STEPS_PASAPORT,
+  'pasaport-es-cu-domiciliu': STEPS_PASAPORT,
+  'pasaport-crds-es-pierdut': STEPS_PASAPORT,
+  'pasaport-es-cu-domiciliu-pierdut': STEPS_PASAPORT,
+  'pasaport-crds-pierdut-combinat-es': STEPS_PASAPORT,
+  'buletin-es-cu-domiciliu': STEPS_BULETIN,
+  'buletin-es-cu-domiciliu-minor': STEPS_BULETIN_PRIMUL,
+  'buletin-es-majorat': STEPS_BULETIN_PRIMUL,
+  'buletin-es-fara-domiciliu-minor': STEPS_BULETIN_CONSULAT_ES,
+  'buletin-es-fara-domiciliu': STEPS_BULETIN_CONSULAT_ES,
+  'buletin-es-pierdut': STEPS_BULETIN_CONSULAT_ES,
+  'titlu-calatorie-es': STEPS_TITLU_STANDARD,
+  'titlu-calatorie-urgenta-es': STEPS_TITLU_URGENTA,
+  'procura-generala-es': STEPS_PROCURA_GENERALA,
+  'procura-pensie-es': STEPS_PROCURA,
+  'procura-vanzare-es': STEPS_PROCURA_VANZARE,
+  'transcriere-nastere-es': STEPS_TRANSCRIERE_NASTERE,
 }
 
 function personalizeTrackerSteps(

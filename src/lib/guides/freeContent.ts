@@ -845,4 +845,652 @@ Object.assign(ghidFreeMap, {
   'procura-mostenire-it': cloneFreeGuideForCountry(ghidFreeMap['procura-mostenire-de'], 'it', 'Procură · Moștenire · Italia'),
   'procura-generala-it': cloneFreeGuideForCountry(ghidFreeMap['procura-generala-de'], 'it', 'Procură notarială generală · Italia'),
   'transcriere-nastere-it': cloneFreeGuideForCountry(ghidFreeMap['transcriere-nastere-de'], 'it', 'Transcriere certificat de naștere · Italia'),
+  'pasaport-crds-es': {
+    title: 'Pașaport românesc din Spania — cu domiciliu înregistrat (CRDS)',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce este CRDS și de ce contează',
+        blocks: [
+          { type: 'info', text: 'CRDS înseamnă că domiciliul tău oficial românesc este înregistrat în Spania. Dacă ai solicitat vreodată pașaport la consulatul din Spania cu un document de ședere spaniol, cel mai probabil ești deja CRDS.' },
+          { type: 'info', text: 'Dacă nu ești sigur, verifică prima pagină a pașaportului actual: dacă scrie o adresă din Spania sau „domiciliat în străinătate”, ești CRDS.' },
+          { type: 'tip', text: 'Dacă domiciliul tău este în continuare în România (buletin cu adresă din RO), folosește ghidul pentru pașaportul din Spania cu domiciliu în România.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'info', text: 'Pregătește aceste documente înainte de programare:' },
+          { type: 'action', text: '1. Pașaportul actual (expirat sau în curs de expirare) — original.' },
+          { type: 'action', text: '2. Document de domiciliu spaniol — unul din: certificado de empadronamiento sau certificado de residencia / NIE / tarjeta de extranjero, în original.' },
+          { type: 'action', text: '3. Certificat de naștere românesc — original (și copie).' },
+          { type: 'action', text: '4. Certificat de căsătorie românesc — dacă ești căsătorit/ă, original (și copie).' },
+          { type: 'tip', text: 'Fotografiile nu sunt necesare — imaginea facială se face biometric la ghișeu. Îmbracă-te cu culori închise în partea superioară.' },
+          { type: 'warning', text: 'Certificatele de naștere sau căsătorie plastifiate sau deteriorate nu sunt acceptate.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește taxa' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea corect pe econsulat.ro și ce greșeli să eviți',
+      'Taxa exactă pentru consulatul tău și cum plătești',
+      'Ce se întâmplă la ghișeu pas cu pas',
+      'Când și cum ridici pașaportul pentru consulatul tău',
+      'Regulile speciale pentru Madrid, Bilbao și Barcelona',
+    ],
+  },
+  'pasaport-es-cu-domiciliu': {
+    title: 'Pașaport românesc din Spania — cu domiciliu în România',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Acest ghid este pentru tine?',
+        blocks: [
+          { type: 'info', text: 'Acest ghid este pentru românii care au domiciliul oficial în România și vor să-și reînnoiască pașaportul de la consulatul din Spania.' },
+          { type: 'tip', text: 'Dacă domiciliul tău este înregistrat în Spania și ai CRDS activ, folosește ghidul pentru pașaportul CRDS din Spania.' },
+          { type: 'info', text: 'Diferența principală față de CRDS: nu ai nevoie de documente de domiciliu spaniol, iar pașaportul se ridică direct la ghișeu.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'info', text: 'Pregătește aceste documente înainte de programare:' },
+          { type: 'action', text: '1. Pașaportul actual (expirat sau în curs de expirare) — original.' },
+          { type: 'action', text: '2. Cartea de identitate românească valabilă — original.' },
+          { type: 'action', text: '3. Certificat de naștere românesc — original (și copie).' },
+          { type: 'action', text: '4. Certificat de căsătorie românesc — dacă ești căsătorit/ă, original (și copie).' },
+          { type: 'tip', text: 'Fotografiile nu sunt necesare — imaginea facială se face biometric la ghișeu. Îmbracă-te cu culori închise în partea superioară.' },
+          { type: 'warning', text: 'Certificatele de naștere sau căsătorie plastifiate sau deteriorate nu sunt acceptate.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește taxa' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul la ghișeu' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea corect pe econsulat.ro',
+      'Taxa exactă și metoda de plată pentru consulatul tău',
+      'Ce se întâmplă la ghișeu pas cu pas',
+      'Intervalul exact de ridicare pentru consulatul tău',
+      'Warning-uri specifice pentru Madrid, Bilbao și Barcelona',
+    ],
+  },
+  'pasaport-crds-es-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — cu domiciliu înregistrat (CRDS)',
+    meta: { free: '2 pași gratuiți', total: '7 pași total' },
+    totalSteps: 7,
+    steps: [
+      {
+        id: 1,
+        title: 'Primul lucru: ai nevoie să călătorești urgent?',
+        blocks: [
+          { type: 'warning', text: 'Dacă trebuie să călătorești în România sau în altă țară în mai puțin de 30 de zile, nu poți aștepta pașaportul nou. Ai nevoie mai întâi de un titlu de călătorie.' },
+          { type: 'action', text: 'Dacă ai urgență de deplasare: mergi la consulat fără programare cu dovada urgenței și cere un titlu de călătorie. Este gratuit și, de regulă, se eliberează în aceeași zi.' },
+          { type: 'tip', text: 'Titlul de călătorie este valabil maximum 30 de zile și se predă în România când depui pentru documentul permanent.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele diferă în funcție de cum ai pierdut pașaportul',
+        blocks: [
+          { type: 'action', text: 'FURAT: ai nevoie de denuncia de la poliția spaniolă și de traducerea ei autorizată în română, făcută de un traducător MJ înregistrat la consulatul tău.' },
+          { type: 'action', text: 'PIERDUT: nu ai nevoie de traducere. Declarația de pierdere se completează direct la ghișeul consulatului.' },
+          { type: 'action', text: 'DISTRUS: aduci documentul fizic deteriorat la ghișeu.' },
+          { type: 'action', text: 'În toate cazurile: document de domiciliu în Spania, certificat de naștere românesc și certificat de căsătorie dacă e cazul.' },
+          { type: 'warning', text: 'Pentru pașaport furat, traducătorul autorizat MJ trebuie să fie acceptat exact de consulatul tău. Lista se cere direct consulatului.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Obține traducerea (dacă a fost furat)' },
+      { id: 4, title: 'Fă programarea pe econsulat.ro' },
+      { id: 5, title: 'Pregătește taxa' },
+      { id: 6, title: 'Prezintă-te la consulat' },
+      { id: 7, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum obții lista traducătorilor acceptați de consulatul tău',
+      'Cum selectezi serviciul corect pe econsulat.ro',
+      'Taxa exactă și metoda de plată pentru consulatul tău',
+      'Cum gestionezi situația de pierdere vs furt la ghișeu',
+      'Regula specială de ridicare pentru Madrid CRDS',
+    ],
+  },
+  'pasaport-es-cu-domiciliu-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — cu domiciliu în România',
+    meta: { free: '2 pași gratuiți', total: '7 pași total' },
+    totalSteps: 7,
+    steps: [
+      {
+        id: 1,
+        title: 'Ai nevoie să călătorești urgent?',
+        blocks: [
+          { type: 'warning', text: 'Dacă trebuie să revii urgent în România, nu aștepta pașaportul nou. Ai nevoie mai întâi de un titlu de călătorie.' },
+          { type: 'action', text: 'Pentru urgență, mergi la consulat fără programare cu dovada călătoriei și cere titlul de călătorie. Este gratuit.' },
+          { type: 'tip', text: 'Pașaportul nou este documentul permanent și se rezolvă separat, cu programare.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente pregătești',
+        blocks: [
+          { type: 'action', text: 'FURAT: denuncia de la poliția spaniolă + traducere autorizată MJ acceptată de consulatul tău.' },
+          { type: 'action', text: 'PIERDUT: declarația de pierdere se completează la ghișeu.' },
+          { type: 'action', text: 'DISTRUS: aduci pașaportul deteriorat.' },
+          { type: 'action', text: 'În toate cazurile: carte de identitate românească valabilă, certificat de naștere românesc și certificat de căsătorie dacă e cazul.' },
+          { type: 'tip', text: 'Spre deosebire de varianta CRDS, nu ai nevoie de document de domiciliu spaniol.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Obține traducerea (dacă a fost furat)' },
+      { id: 4, title: 'Fă programarea pe econsulat.ro' },
+      { id: 5, title: 'Pregătește taxa' },
+      { id: 6, title: 'Prezintă-te la consulat' },
+      { id: 7, title: 'Ridică pașaportul la ghișeu' },
+    ],
+    paywallTeaser: [
+      'Cum obții traducerea corectă pentru consulatul tău',
+      'Cum selectezi serviciul de pașaport cu domiciliul în România',
+      'Taxa exactă și metoda de plată la consulatul tău',
+      'Cum decurge depunerea pentru pierdut vs furat',
+      'Intervalul exact de ridicare la ghișeu',
+    ],
+  },
+  'buletin-es-cu-domiciliu': {
+    title: 'Carte de identitate românească — adult cu domiciliu în România',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Unde se rezolvă cartea de identitate',
+        blocks: [
+          { type: 'info', text: 'Dacă domiciliul tău oficial este în România, cartea de identitate se reînnoiește în România, la SPCLEP-ul competent pentru adresa ta.' },
+          { type: 'warning', text: 'Consulatul din Spania NU poate emite carte de identitate cu domiciliu în România.' },
+          { type: 'tip', text: 'Dacă vrei să-ți înregistrezi domiciliul în Spania, vei intra mai târziu pe ghidul dedicat CRDS.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie la SPCLEP',
+        blocks: [
+          { type: 'action', text: 'Cartea de identitate expirată sau, dacă a fost pierdută/furată, declarația corespunzătoare cerută de SPCLEP.' },
+          { type: 'action', text: 'Certificat de naștere românesc, certificat de căsătorie/divorț dacă e cazul și document pentru adresa de domiciliu din România.' },
+          { type: 'action', text: 'Taxa națională pentru CI: 7 lei.' },
+          { type: 'tip', text: 'Verifică pe site-ul SPCLEP-ului dacă se face programare online înainte să pleci din Spania.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Identifică SPCLEP-ul competent' },
+      { id: 4, title: 'Fă programarea și pregătește documentele' },
+      { id: 5, title: 'Prezintă-te la SPCLEP și ridică CI' },
+    ],
+    paywallTeaser: [
+      'Cum găsești SPCLEP-ul competent pentru adresa ta',
+      'Cum pregătești vizita în România și programarea',
+      'Ce se întâmplă dacă CI a expirat de mult sau este pierdută',
+      'Ce opțiuni ai pentru urgență și ridicare',
+    ],
+  },
+  'buletin-es-cu-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în România',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce trebuie să știi înainte de drum',
+        blocks: [
+          { type: 'info', text: 'Cartea de identitate pentru minor cu domiciliu în România se rezolvă exclusiv la SPCLEP în România, nu la consulatul din Spania.' },
+          { type: 'info', text: 'Minorul trebuie să fie prezent fizic la ghișeu, împreună cu cel puțin un părinte sau reprezentantul legal.' },
+          { type: 'tip', text: 'Prima carte de identitate se eliberează după împlinirea vârstei de 14 ani.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'Certificatul de naștere al minorului, actele de identitate valabile ale părinților și, dacă este cazul, hotărârea de custodie sau acordul autentificat al celuilalt părinte.' },
+          { type: 'action', text: 'CI expirată a minorului, dacă este reînnoire, plus documentul pentru adresa de domiciliu dacă este necesar.' },
+          { type: 'action', text: 'Taxa pentru CI: 7 lei.' },
+          { type: 'warning', text: 'Fără prezența minorului la ghișeu, cererea nu poate fi depusă.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Identifică SPCLEP-ul competent' },
+      { id: 4, title: 'Pregătește documentele și programarea' },
+      { id: 5, title: 'Prezintă-te la SPCLEP cu minorul' },
+    ],
+    paywallTeaser: [
+      'Cum stabilești SPCLEP-ul corect pentru minor',
+      'Ce documente suplimentare ai nevoie dacă vine un singur părinte',
+      'Cum pregătești prima CI vs reînnoirea CI',
+      'Ce termene și opțiuni de urgență există',
+    ],
+  },
+  'pasaport-crds-pierdut-combinat-es': {
+    title: 'Pașaport pierdut sau furat în Spania — CRDS — cale combinată',
+    meta: { free: '2 pași gratuiți', total: '8 pași total' },
+    totalSteps: 8,
+    steps: [
+      {
+        id: 1,
+        title: 'Două proceduri, o singură deplasare dacă se poate',
+        blocks: [
+          { type: 'info', text: 'În situația CRDS + pașaport pierdut sau furat, poți avea nevoie de două proceduri: titlu de călătorie pentru urgență și pașaport nou ca document permanent.' },
+          { type: 'action', text: 'Înainte de drum, întreabă consulatul dacă poți depune și titlul de călătorie, și pașaportul în aceeași vizită.' },
+          { type: 'tip', text: 'Dacă nu ai urgență, poți urma fluxul standard cu programare pentru pașaport.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente pregătești',
+        blocks: [
+          { type: 'action', text: 'Pentru pașaport furat: denuncia + traducere MJ acceptată de consulatul tău.' },
+          { type: 'action', text: 'Pentru pașaport pierdut: declarația se completează la ghișeu.' },
+          { type: 'action', text: 'Pentru CRDS: document de domiciliu spaniol, certificat de naștere românesc și dovada urgenței dacă mergi pentru titlu de călătorie.' },
+          { type: 'warning', text: 'Posibilitatea de depunere combinată este neconfirmată uniform. Verifică direct cu consulatul tău înainte de deplasare.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Confirmă cu consulatul procedura combinată' },
+      { id: 4, title: 'Obține traducerile necesare' },
+      { id: 5, title: 'Fă programarea dacă este necesară' },
+      { id: 6, title: 'Pregătește taxa pentru pașaport' },
+      { id: 7, title: 'Mergi la consulat' },
+      { id: 8, title: 'Ridică pașaportul și închide cazul' },
+    ],
+    paywallTeaser: [
+      'Cum verifici dacă poți depune ambele cereri în aceeași vizită',
+      'Ce traduceri sunt necesare pentru pașaport și pentru titlul de călătorie',
+      'Când ai nevoie de programare separată',
+      'Taxa exactă și metoda de plată pentru consulatul tău',
+      'Ce faci după ce te întorci în România cu titlul de călătorie',
+    ],
+  },
+  'buletin-es-majorat': {
+    title: 'Carte de identitate la 18 ani — domiciliu în România',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce se întâmplă cu buletinul la 18 ani',
+        blocks: [
+          { type: 'info', text: 'Buletinul de minor expiră automat la împlinirea vârstei de 18 ani, iar de atunci ai termen legal 15 zile să îți faci prima carte de identitate de adult.' },
+          { type: 'warning', text: 'Procedura se rezolvă în România, la SPCLEP, nu la consulatul din Spania.' },
+          { type: 'tip', text: 'Nu mai este necesară prezența părinților; mergi personal la ghișeu.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'Buletinul de minor expirat, certificatul de naștere și documentul de adresă dacă s-a schimbat domiciliul.' },
+          { type: 'action', text: 'Fotografie 3×4 cm, fond alb, dacă SPCLEP-ul tău nu o face la ghișeu.' },
+          { type: 'action', text: 'Taxa pentru CI: 7 lei.' },
+          { type: 'tip', text: 'Pașaportul rămâne valabil după 18 ani până la data înscrisă pe el.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Identifică SPCLEP-ul competent' },
+      { id: 4, title: 'Fă programarea și pregătește documentele' },
+      { id: 5, title: 'Prezintă-te la SPCLEP și ridică CI' },
+    ],
+    paywallTeaser: [
+      'Cum găsești SPCLEP-ul competent pentru adresa ta',
+      'Ce faci dacă ai nevoie de CI rapid după majorat',
+      'Cum actualizezi adresa dacă s-a schimbat',
+      'Cum combini vizita pentru CI cu alte acte de la majorat',
+    ],
+  },
+  'buletin-es-fara-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în Spania (CRDS)',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Când se rezolvă la consulatul din Spania',
+        blocks: [
+          { type: 'info', text: 'Dacă minorul are domiciliul înregistrat în Spania (CRDS), cartea de identitate se cere la consulatul competent, nu la SPCLEP.' },
+          { type: 'warning', text: 'Pentru cartea de identitate sunt necesare 6 fotografii aduse de acasă; nu se face biometric la ghișeu.' },
+          { type: 'tip', text: 'Dacă minorul are domiciliu în România, folosește ghidul pentru minor cu domiciliu în România.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'Certificatul de naștere românesc al minorului și documentul de domiciliu spaniol al minorului.' },
+          { type: 'action', text: 'Actul de identitate al părintelui prezent și acordul sau actul de custodie dacă vine un singur părinte.' },
+          { type: 'action', text: '6 fotografii 3×4 cm, fond alb, plus CI expirată dacă este reînnoire.' },
+          { type: 'warning', text: 'Dacă minorul nu poate merge în România, pregătește și dovada motivului întemeiat, dacă consulatul o cere.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Confirmă documentele cu consulatul' },
+      { id: 4, title: 'Fă programarea pe econsulat.ro' },
+      { id: 5, title: 'Pregătește fotografiile minorului' },
+      { id: 6, title: 'Prezintă-te la consulat cu minorul' },
+    ],
+    paywallTeaser: [
+      'Lista completă de documente pentru consulatul tău',
+      'Cum faci programarea pe econsulat.ro pentru CI minor',
+      'Ce fotografii sunt acceptate și ce se semnează la ghișeu',
+      'Cum se ridică CI și cât durează',
+    ],
+  },
+  'buletin-es-fara-domiciliu': {
+    title: 'Carte de identitate românească cu domiciliu în Spania — CRDS',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce înseamnă CRDS și când ai nevoie de el',
+        blocks: [
+          { type: 'info', text: 'CRDS înseamnă domiciliu înregistrat în Spania la consulat. Dacă vrei carte de identitate cu adresă spaniolă, acesta este ghidul tău.' },
+          { type: 'tip', text: 'Se aplică atât pentru prima înregistrare CRDS, cât și pentru reînnoirea unei CI CRDS expirate.' },
+          { type: 'warning', text: 'Pentru CI sunt necesare 6 fotografii aduse de acasă; nu se face biometric la ghișeu.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'CI actuală sau, dacă e prima înregistrare CRDS, pașaportul valabil, plus documentul de domiciliu spaniol.' },
+          { type: 'action', text: 'Certificat de naștere românesc și certificat de căsătorie dacă numele s-a schimbat.' },
+          { type: 'action', text: '6 fotografii 3×4 cm, fond alb.' },
+          { type: 'tip', text: 'Empadronamiento-ul este suficient și se obține gratuit de la ayuntamiento.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Obține empadronamiento-ul' },
+      { id: 4, title: 'Confirmă documentele cu consulatul' },
+      { id: 5, title: 'Pregătește fotografiile și fă programarea' },
+      { id: 6, title: 'Prezintă-te la consulat și ridică CI' },
+    ],
+    paywallTeaser: [
+      'Cum obții empadronamiento-ul rapid',
+      'Ce documente confirmi cu consulatul tău',
+      'Cum faci programarea pe econsulat.ro',
+      'Ce se întâmplă la ghișeu și cât durează CI',
+    ],
+  },
+  'buletin-es-pierdut': {
+    title: 'Carte de identitate pierdută sau furată — din Spania',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Primul lucru: identifică unde îți este domiciliul',
+        blocks: [
+          { type: 'info', text: 'Dacă ai domiciliu în România, noua carte de identitate se face la SPCLEP. Dacă ai CRDS activ, procedura se face la consulatul din Spania.' },
+          { type: 'action', text: 'Folosește ultimul act avut pentru a verifica dacă adresa oficială era în România sau în Spania.' },
+          { type: 'tip', text: 'Dacă ai pașaport valabil, îl poți folosi în continuare pentru identificare până primești noua CI.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'În ambele cazuri: certificat de naștere românesc, pașaport sau alt document cu fotografie și 6 fotografii 3×4 cm, fond alb.' },
+          { type: 'action', text: 'Dacă a fost furată: denuncia de la poliția spaniolă. Dacă a fost pierdută: declarația se completează la ghișeul competent.' },
+          { type: 'action', text: 'Dacă ai CRDS activ, adaugi și documentul de domiciliu spaniol.' },
+          { type: 'warning', text: 'Fotografiile pentru CI se aduc de acasă și la SPCLEP, și la consulat.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Declară pierderea sau furtul' },
+      { id: 4, title: 'Fă programarea — SPCLEP sau consulat' },
+      { id: 5, title: 'Pregătește fotografiile' },
+      { id: 6, title: 'Prezintă-te și ridică noua CI' },
+    ],
+    paywallTeaser: [
+      'Pașii exacți pentru SPCLEP vs consulat',
+      'Cum declari corect pierderea sau furtul',
+      'Cum faci programarea potrivită pentru cazul tău',
+      'Cum și de unde ridici noua CI',
+    ],
+  },
+  'titlu-calatorie-es': {
+    title: 'Titlu de călătorie din Spania — pentru întoarcerea în România',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce este titlul de călătorie și pentru ce este valabil',
+        blocks: [
+          { type: 'info', text: 'Titlul de călătorie este documentul de urgență cu care te întorci în România sau călătorești în UE când nu mai ai pașaport valabil.' },
+          { type: 'info', text: 'Este gratuit, se eliberează în aceeași zi și este valabil maximum 30 de zile.' },
+          { type: 'warning', text: 'La intrarea în România valabilitatea încetează și ulterior trebuie să soliciți documentul permanent.' },
+          { type: 'tip', text: 'Dacă ai zbor iminent sau urgență maximă, folosește varianta urgentă a ghidului.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Documentele de care ai nevoie',
+        blocks: [
+          { type: 'action', text: 'Pașaportul expirat sau documentul vechi, dacă îl mai ai.' },
+          { type: 'action', text: 'Certificat de naștere românesc sau Certificado Plurilingüe spaniol.' },
+          { type: 'action', text: 'Dacă pașaportul a fost furat: denuncia de la poliția spaniolă și, după consulat, traducerea cerută.' },
+          { type: 'tip', text: 'Pentru adulți, fotografia se face biometric la ghișeu; pentru minori regulile diferă per consulat.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Traducere (dacă e cazul)' },
+      { id: 4, title: 'Fă programarea pe econsulat.ro' },
+      { id: 5, title: 'Prezintă-te la consulat și ridică titlul' },
+    ],
+    paywallTeaser: [
+      'Când consulatul tău cere traducere pentru furt',
+      'Regulile exacte pentru minori',
+      'Cum faci programarea corectă pe econsulat.ro',
+      'Ce faci după ce primești titlul',
+    ],
+  },
+  'titlu-calatorie-urgenta-es': {
+    title: 'Titlu de călătorie urgent din Spania — zbor iminent sau urgență',
+    meta: { free: '2 pași gratuiți', total: '4 pași total' },
+    totalSteps: 4,
+    steps: [
+      {
+        id: 1,
+        title: 'Mergi fără programare — dar sună înainte dacă poți',
+        blocks: [
+          { type: 'info', text: 'Dacă ai zbor sau urgență în 24–72h, mergi direct la consulat cu dovada urgenței, fără să mai aștepți programare pe econsulat.ro.' },
+          { type: 'action', text: 'Dacă ai timp, sună consulatul înainte să pleci și anunță că vii cu o urgență pentru titlu de călătorie.' },
+          { type: 'warning', text: 'Bilbao: nu te prezenta vineri; urgențele se tratează în programul local al consulatului.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente aduci cu tine',
+        blocks: [
+          { type: 'action', text: 'Dovada urgenței: bilet de avion, document medical, certificat de deces sau alt act justificativ.' },
+          { type: 'action', text: 'Pașaportul expirat sau documentele românești pe care le mai ai.' },
+          { type: 'action', text: 'Dacă a fost furat: denuncia și, dacă acel consulat cere, traducerea aferentă.' },
+          { type: 'tip', text: 'Pentru adulți nu ai nevoie de fotografii; pentru minori regulile diferă per consulat.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Prezintă-te la consulat cu documentele de urgență' },
+      { id: 4, title: 'Ce faci cu titlul după ce îl primești' },
+    ],
+    paywallTeaser: [
+      'Cum tratezi refuzul fără programare dacă urgența rămâne reală',
+      'Regulile pentru minori și pentru furt la consulatul tău',
+      'Ce faci imediat după ce intri în România',
+      'Cum programezi documentul permanent după urgență',
+    ],
+  },
+  'procura-generala-es': {
+    title: 'Procură notarială din Spania — generală sau specială',
+    meta: { free: '2 pași gratuiți', total: '4 pași total' },
+    totalSteps: 4,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce trebuie să știi despre procurile din Spania',
+        blocks: [
+          { type: 'info', text: 'Procura consulară din Spania este gratuită și este valabilă direct în România, fără apostilă suplimentară.' },
+          { type: 'info', text: 'Dacă nu indici alt termen în text, procura este valabilă 3 ani.' },
+          { type: 'warning', text: 'Consulatul nu poate autentifica contracte, donații, testamente sau acte din tranzacții judiciare.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce pregătești înainte de programare',
+        blocks: [
+          { type: 'action', text: 'Textul procurii sau modelul de procură, dacă îl ceri de la consulat.' },
+          { type: 'action', text: 'Datele complete ale mandatarului: nume, CNP, adresă și act de identitate.' },
+          { type: 'action', text: 'Pașaport sau CI românească valabilă. Pentru unele situații se acceptă și CI expirată, dacă procura este chiar pentru obținerea noii CI.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Prezintă-te la consulat și autentifică procura' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea pe econsulat.ro',
+      'Ce se întâmplă la ghișeu și cum semnezi procura',
+      'Cum trimiți procura în România după autentificare',
+      'Când ai nevoie de traducător înregistrat la consulat',
+    ],
+  },
+  'procura-pensie-es': {
+    title: 'Procură pentru pensie din Spania',
+    meta: { free: '2 pași gratuiți', total: '4 pași total' },
+    totalSteps: 4,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce este procura pentru pensie și cât este valabilă',
+        blocks: [
+          { type: 'info', text: 'Procura pentru pensie se face la consulat, este gratuită și îți permite să împuternicești pe cineva să ridice pensia din România.' },
+          { type: 'info', text: 'Are valabilitate de 18 luni, nu 3 ani ca o procură generală.' },
+          { type: 'tip', text: 'Consulatul are, de regulă, model standard pentru acest tip de procură.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce pregătești',
+        blocks: [
+          { type: 'action', text: 'Datele complete ale mandatarului și actul tău de identitate românesc valabil.' },
+          { type: 'action', text: 'Opțional, numărul dosarului sau al deciziei de pensionare dacă îl ai la îndemână.' },
+          { type: 'tip', text: 'În Spania, procura pentru pensie este gratuită; RNNEPR nu se aplică.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Prezintă-te și autentifică procura' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea pe econsulat.ro',
+      'Cum primești procura în aceeași zi',
+      'Cum o trimiți mandatarului din România',
+    ],
+  },
+  'procura-vanzare-es': {
+    title: 'Procură pentru vânzarea unui imobil din România — din Spania',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce trebuie să știi înainte de a face procura',
+        blocks: [
+          { type: 'info', text: 'Procura pentru vânzare imobil este valabilă direct la notarul din România și nu are nevoie de apostilă.' },
+          { type: 'info', text: 'În Spania este gratuită; RNNEPR nu se aplică.' },
+          { type: 'warning', text: 'Textul procurii trebuie să conțină exact datele imobilului și ale tranzacției. Greșelile pot bloca vânzarea la notar.' },
+          { type: 'tip', text: 'Cel mai sigur este să lucrezi cu notarul din România înainte de programare și să vii cu textul deja pregătit.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce pregătești',
+        blocks: [
+          { type: 'action', text: 'Textul procurii pentru vânzare și datele exacte ale imobilului: adresă, număr cadastral, carte funciară.' },
+          { type: 'action', text: 'Datele complete ale mandatarului și actul tău de identitate românesc valabil.' },
+          { type: 'warning', text: 'Unele consulate pot cere și acte imobiliare suplimentare, cum ar fi extrasul de carte funciară.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Confirmă documentele cu consulatul' },
+      { id: 4, title: 'Fă programarea pe econsulat.ro' },
+      { id: 5, title: 'Prezintă-te la consulat și autentifică procura' },
+    ],
+    paywallTeaser: [
+      'Ce documente confirmi în avans cu consulatul',
+      'Cum faci programarea pentru procura imobiliară',
+      'Ce se întâmplă la ghișeu și cum trimiți procura notarului',
+      'Când ai nevoie de traducător autorizat pentru acte imobiliare',
+    ],
+  },
+  'transcriere-nastere-es': {
+    title: 'Transcriere certificat de naștere din Spania — copil născut în Spania',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'De ce ai nevoie de transcrierea nașterii',
+        blocks: [
+          { type: 'info', text: 'Pentru a obține acte românești pentru copilul născut în Spania, nașterea trebuie înregistrată și în România.' },
+          { type: 'tip', text: 'Cu cât faci transcrierea mai repede, cu atât poți obține mai ușor pașaportul sau CI-ul copilului.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce tip de certificat spaniol ai — și ce implică fiecare',
+        blocks: [
+          { type: 'action', text: 'Certificado Plurilingüe: se depune direct, fără apostilă și fără traducere.' },
+          { type: 'action', text: 'Certificado Literal: necesită apostila Haga de la TSJ și traducere autorizată în română.' },
+          { type: 'warning', text: 'Pentru apostilă la actele de naștere nu mergi la notar; competența este la Tribunalul Superior de Justiție.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Obține apostila Haga (dacă ai Literal)' },
+      { id: 4, title: 'Obține traducerea autorizată (dacă ai Literal)' },
+      { id: 5, title: 'Confirmă documentele cu consulatul și fă programarea' },
+      { id: 6, title: 'Prezintă-te la consulat și ridică certificatul' },
+    ],
+    paywallTeaser: [
+      'Cum obții apostila Haga gratuită de la TSJ',
+      'Când ai nevoie de traducere autorizată',
+      'Ce documente confirmi cu consulatul înainte de programare',
+      'Care este pasul următor după transcriere',
+    ],
+  },
 } satisfies Partial<Record<GuideId, GhidFreeContent>>)

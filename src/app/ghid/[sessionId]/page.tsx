@@ -1038,7 +1038,7 @@ const ghidPaidMap = {
   },
 } as Record<GuideId, GhidPaidContent>
 
-function clonePaidGuideForCountry(base: GhidPaidContent, country: 'de' | 'it', title?: string): GhidPaidContent {
+function clonePaidGuideForCountry(base: GhidPaidContent, country: 'de' | 'it' | 'es', title?: string): GhidPaidContent {
   return {
     ...base,
     title: title ?? localizeGuideTitleForCountry(base.title, country),
@@ -1079,6 +1079,590 @@ Object.assign(ghidPaidMap, {
   'procura-mostenire-it': clonePaidGuideForCountry(ghidPaidMap['procura-mostenire-de'], 'it', 'Procură moștenire · Italia'),
   'procura-generala-it': clonePaidGuideForCountry(ghidPaidMap['procura-generala-de'], 'it', 'Procură notarială generală · Italia'),
   'transcriere-nastere-it': clonePaidGuideForCountry(ghidPaidMap['transcriere-nastere-de'], 'it', 'Transcriere naștere Italia → România'),
+  'pasaport-crds-es': {
+    title: 'Pașaport românesc din Spania — cu domiciliu înregistrat (CRDS)',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Accesează econsulat.ro și alege consulatul care deservește comunitatea autonomă sau provincia ta.', type: 'action' },
+          { text: 'Selectează serviciul pentru pașaport cu domiciliul în străinătate / CRDS — nu varianta cu domiciliu în România.', type: 'action' },
+          { text: 'Programarea este obligatorie la toate cele 8 consulate din Spania.', type: 'info' },
+          { text: 'Verifică disponibilitatea din timp. Dacă pașaportul expiră curând, nu lăsa programarea pe ultima sută de metri.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește taxa',
+        shortLabel: 'Taxă',
+        blocks: [
+          { text: 'Taxa legală reală pentru pașaport este 53€, chiar dacă unele pagini MAE afișează încă 59€.', type: 'info' },
+          { text: 'Madrid CRDS: taxa totală este 60€ (53€ + 7€ taxă poștală obligatorie). Plata se face exclusiv cu card bancar.', type: 'warning' },
+          { text: 'Zaragoza: 53€ confirmat explicit și se poate plăti numerar sau POS. Ciudad Real: 53€ numerar. La celelalte consulate, metoda de plată trebuie confirmată direct dacă nu este publicată clar.', type: 'info' },
+          { text: 'Verifică în cardul consulatului tău metoda de plată și regula locală înainte de deplasare.', type: 'action' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te la data și ora programate cu toate documentele originale și, dacă poți, cu câte o copie simplă.', type: 'action' },
+          { text: 'La ghișeu vei depune cererea, vei face fotografia biometrică și vei confirma datele de domiciliu înregistrat în Spania.', type: 'info' },
+          { text: 'Barcelona: verifică adresa nouă înainte să pleci. Bilbao: vineri nu se depun pașapoarte obișnuite. Zaragoza: intrarea pentru public este prin spatele clădirii.', type: 'warning' },
+          { text: 'Termenul orientativ de procesare este în jur de 30–45 de zile lucrătoare, dar poate varia după consulat.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică în cardul consulatului tău programul exact de ridicare și regula locală pentru CRDS.', type: 'action' },
+          { text: 'Madrid: pașaportul CRDS se trimite obligatoriu prin poștă la adresa ta de domiciliu — nu mergi la ghișeu pentru ridicare.', type: 'warning' },
+          { text: 'La restul consulatelor, ridicarea se face după regula locală publicată de consulat. Unele au și opțiune de curierat, dar nu este confirmată peste tot.', type: 'info' },
+          { text: 'La ridicare sau la primirea prin poștă, verifică imediat datele înscrise în pașaport.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-es-cu-domiciliu': {
+    title: 'Pașaport românesc din Spania — cu domiciliu în România',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Accesează econsulat.ro și alege consulatul care deservește comunitatea autonomă sau provincia ta.', type: 'action' },
+          { text: 'Selectează serviciul pentru pașaport cu domiciliul în România — nu varianta CRDS.', type: 'action' },
+          { text: 'Programarea este obligatorie la toate cele 8 consulate din Spania.', type: 'info' },
+          { text: 'Verifică disponibilitatea din timp, mai ales dacă pașaportul expiră curând.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește taxa',
+        shortLabel: 'Taxă',
+        blocks: [
+          { text: 'Taxa legală reală este 53€, chiar dacă unele pagini MAE afișează încă 59€.', type: 'info' },
+          { text: 'Madrid: plata se face exclusiv cu card bancar. Zaragoza: numerar sau POS. Ciudad Real: exclusiv numerar.', type: 'info' },
+          { text: 'La Barcelona, Sevilla, Bilbao, Valencia și Almería, metoda de plată nu este publicată suficient de clar și trebuie confirmată direct.', type: 'warning' },
+          { text: 'Verifică în cardul consulatului tău metoda de plată înainte de deplasare.', type: 'action' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te la data și ora programate cu toate documentele originale și, dacă poți, cu câte o copie simplă.', type: 'action' },
+          { text: 'La ghișeu vei depune cererea, vei face fotografia biometrică și vei confirma datele tale de identitate.', type: 'info' },
+          { text: 'Barcelona: verifică adresa nouă înainte să pleci. Bilbao: vineri nu se depun pașapoarte obișnuite. Zaragoza: intrarea pentru public este prin spatele clădirii.', type: 'warning' },
+          { text: 'Termenul orientativ de procesare este în jur de 30–45 de zile lucrătoare, dar poate varia după consulat.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul la ghișeu',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică în cardul consulatului tău intervalul exact de ridicare.', type: 'action' },
+          { text: 'Madrid: ridicarea se face exclusiv luni, marți și miercuri între 08:00 și 15:00. Joi și vineri nu se ridică pașapoarte.', type: 'warning' },
+          { text: 'La majoritatea consulatelor ridicarea se face fără programare, în intervalul separat publicat de consulat.', type: 'info' },
+          { text: 'La ridicare prezintă un act de identitate valabil și verifică imediat datele din pașaport.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-crds-es-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — cu domiciliu înregistrat (CRDS)',
+    steps: [
+      {
+        id: 3,
+        title: 'Obține traducerea adeverinței de furt (doar dacă a fost FURAT)',
+        shortLabel: 'Traducere',
+        blocks: [
+          { text: 'Dacă pașaportul a fost pierdut sau distrus, sari direct la pasul următor.', type: 'info' },
+          { text: 'Contactează consulatul și cere lista traducătorilor autorizați MJ înregistrați la ei. Este singura listă sigură pentru consulatul tău.', type: 'action' },
+          { text: 'Predă denuncia traducătorului acceptat și obține traducerea autorizată în română.', type: 'action' },
+          { text: 'Nu orice traducător autorizat MJ este acceptat automat. Contează să fie înregistrat la consulatul tău.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Alege consulatul competent pentru comunitatea autonomă sau provincia ta.', type: 'action' },
+          { text: 'Selectează serviciul pentru pașaport cu domiciliul în străinătate (CRDS).', type: 'action' },
+          { text: 'Dacă ai urgență de deplasare, titlul de călătorie se rezolvă separat și fără programare.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pregătește taxa',
+        shortLabel: 'Taxă',
+        blocks: [
+          { text: 'Taxa standard este 53€. La Madrid CRDS taxa totală este 60€ deoarece se adaugă taxa poștală obligatorie.', type: 'info' },
+          { text: 'Madrid: exclusiv card bancar. Zaragoza: numerar sau POS. Ciudad Real: numerar. Pentru celelalte consulate, verifică regula locală.', type: 'warning' },
+          { text: 'Verifică în cardul consulatului tău metoda de plată și programul exact înainte de plecare.', type: 'action' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te la data programării cu toate documentele originale.', type: 'action' },
+          { text: 'Dacă pașaportul a fost pierdut, declarația se completează la ghișeu. Dacă a fost furat, predai denuncia și traducerea autorizată.', type: 'info' },
+          { text: 'Fotografia biometrică și amprentele se preiau la ghișeu.', type: 'info' },
+          { text: 'Barcelona: verifică adresa nouă. Bilbao: vineri nu se depun pașapoarte obișnuite. Zaragoza: intrarea este prin spatele clădirii.', type: 'warning' },
+        ],
+      },
+      {
+        id: 7,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică în cardul consulatului tău programul de ridicare și modul de livrare.', type: 'action' },
+          { text: 'Madrid CRDS: pașaportul se trimite prin poștă. La celelalte consulate, ridicarea se face după regula locală.', type: 'warning' },
+          { text: 'Verifică imediat datele din pașaport când îl primești.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-es-cu-domiciliu-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — cu domiciliu în România',
+    steps: [
+      {
+        id: 3,
+        title: 'Obține traducerea adeverinței de furt (doar dacă a fost FURAT)',
+        shortLabel: 'Traducere',
+        blocks: [
+          { text: 'Dacă pașaportul a fost pierdut sau distrus, sari la pasul următor.', type: 'info' },
+          { text: 'Cere consulatului lista traducătorilor autorizați MJ acceptați local și obține traducerea denunciei.', type: 'action' },
+          { text: 'Traducerea trebuie să fie făcută de un traducător acceptat de consulatul tău.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Alege consulatul competent și selectează serviciul pentru pașaport cu domiciliul în România.', type: 'action' },
+          { text: 'Pentru titlul de călătorie de urgență nu aștepți programare, dacă trebuie să pleci imediat.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pregătește taxa',
+        shortLabel: 'Taxă',
+        blocks: [
+          { text: 'Taxa este 53€, fără suprataxă poștală, pentru că nu ești pe flux CRDS.', type: 'info' },
+          { text: 'Madrid: exclusiv card. Zaragoza: numerar sau POS. Ciudad Real: numerar. Pentru celelalte consulate, confirmă metoda de plată.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te cu actele originale și cu copia traducerii, dacă este cazul.', type: 'action' },
+          { text: 'Declarația de pierdere se completează la ghișeu; pentru furt predai denuncia tradusă.', type: 'info' },
+          { text: 'Fotografia biometrică se face la ghișeu.', type: 'info' },
+        ],
+      },
+      {
+        id: 7,
+        title: 'Ridică pașaportul la ghișeu',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică în cardul consulatului intervalul de ridicare.', type: 'action' },
+          { text: 'La acest flux ridicarea se face la ghișeu, nu prin poștă.', type: 'info' },
+          { text: 'Verifică imediat datele din pașaport.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-cu-domiciliu': {
+    title: 'Carte de identitate românească — adult cu domiciliu în România',
+    steps: [
+      {
+        id: 3,
+        title: 'Identifică SPCLEP-ul competent',
+        shortLabel: 'SPCLEP',
+        blocks: [
+          { text: 'SPCLEP-ul competent este cel din localitatea și județul adresei tale de domiciliu din România.', type: 'action' },
+          { text: 'Dacă domiciliul este în București, competența este la nivel de sector, nu la nivelul întregului oraș.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea și pregătește documentele',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică dacă SPCLEP-ul tău permite programare online și rezervă un slot înainte să călătorești din Spania.', type: 'action' },
+          { text: 'Pregătește documentele originale și taxa de 7 lei.', type: 'info' },
+          { text: 'Dacă CI a expirat de mult sau a fost pierdută, sună în avans la SPCLEP dacă ai dubii privind actele suplimentare.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la SPCLEP și ridică CI',
+        shortLabel: 'La SPCLEP',
+        blocks: [
+          { text: 'Mergi personal la SPCLEP cu toate documentele în original.', type: 'action' },
+          { text: 'La ghișeu completezi cererea, plătești taxa și primești termenul de ridicare.', type: 'info' },
+          { text: 'Ridicarea se face de regulă personal de la același SPCLEP.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-cu-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în România',
+    steps: [
+      {
+        id: 3,
+        title: 'Identifică SPCLEP-ul competent',
+        shortLabel: 'SPCLEP',
+        blocks: [
+          { text: 'SPCLEP-ul competent este cel corespunzător adresei de domiciliu a minorului din România.', type: 'action' },
+          { text: 'Dacă adresa minorului diferă de a părintelui, competența se raportează la adresa minorului.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește documentele și programarea',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică dacă există programare online la SPCLEP și rezervă înainte de deplasare.', type: 'action' },
+          { text: 'Pregătește certificatul de naștere, actele părintelui prezent și acordul sau actul de custodie dacă vine un singur părinte.', type: 'info' },
+          { text: 'Minorul trebuie să fie prezent fizic la ghișeu.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la SPCLEP cu minorul',
+        shortLabel: 'La SPCLEP',
+        blocks: [
+          { text: 'Mergi la SPCLEP cu minorul și cu toate documentele originale.', type: 'action' },
+          { text: 'La ghișeu se completează cererea și se plătește taxa de 7 lei.', type: 'info' },
+          { text: 'Ridicarea se face după termenul comunicat de SPCLEP.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-crds-pierdut-combinat-es': {
+    title: 'Pașaport pierdut sau furat în Spania — CRDS — cale combinată',
+    steps: [
+      {
+        id: 3,
+        title: 'Confirmă cu consulatul dacă poți depune ambele cereri în aceeași vizită',
+        shortLabel: 'Confirmare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Sună sau scrie consulatului tău și întreabă explicit dacă poți depune și titlul de călătorie, și pașaportul fără programare separată.', type: 'action' },
+          { text: 'Dacă răspunsul este nu, pregătește două vizite: una pentru titlu, alta pentru pașaport.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Obține traducerile necesare',
+        shortLabel: 'Traduceri',
+        blocks: [
+          { text: 'Pentru pașaportul furat, ai nevoie de traducerea autorizată MJ acceptată de consulatul tău.', type: 'action' },
+          { text: 'Verifică separat dacă acel consulat cere traducere și pentru titlul de călătorie sau nu.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Fă programarea dacă este necesară',
+        shortLabel: 'Programare',
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Dacă ți s-a cerut programare separată pentru pașaport, intră pe econsulat.ro și selectează serviciul CRDS.', type: 'action' },
+          { text: 'Titlul de călătorie de urgență rămâne fluxul fără programare.', type: 'tip' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Pregătește taxa pentru pașaport',
+        shortLabel: 'Taxă',
+        blocks: [
+          { text: 'Titlul de călătorie este gratuit. Taxa este doar pentru pașaport: 53€, respectiv 60€ la Madrid CRDS.', type: 'info' },
+          { text: 'Confirmă metoda de plată în cardul consulatului tău.', type: 'action' },
+        ],
+      },
+      {
+        id: 7,
+        title: 'Mergi la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Mergi cu toate documentele pregătite pentru ambele proceduri, dacă ți s-a confirmat depunerea combinată.', type: 'action' },
+          { text: 'Dacă nu, rezolvă titlul la urgență și revino separat la programarea de pașaport.', type: 'info' },
+        ],
+      },
+      {
+        id: 8,
+        title: 'Ridică pașaportul și închide cazul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'După emiterea pașaportului, verifică programul de ridicare sau regula de livrare pentru consulatul tău.', type: 'action' },
+          { text: 'Dacă ai folosit titlul de călătorie, urmează instrucțiunile din România pentru documentul temporar.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-majorat': {
+    title: 'Carte de identitate la 18 ani — domiciliu în România',
+    steps: [
+      {
+        id: 3,
+        title: 'Identifică SPCLEP-ul competent',
+        shortLabel: 'SPCLEP',
+        blocks: [
+          { text: 'SPCLEP-ul competent este cel din localitatea adresei înscrise în buletinul de minor.', type: 'action' },
+          { text: 'Dacă adresa s-a schimbat, poți actualiza adresa în același dosar dacă aduci dovada noii adrese.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea și pregătește documentele',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică dacă SPCLEP-ul tău are programare online și rezervă înainte să pleci din Spania.', type: 'action' },
+          { text: 'Pregătește documentele originale și taxa de 7 lei.', type: 'info' },
+          { text: 'Dacă ai nevoie urgent de CI pentru examene, angajare sau călătorie, întreabă despre opțiunea de urgență.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la SPCLEP și ridică CI',
+        shortLabel: 'La SPCLEP',
+        blocks: [
+          { text: 'Mergi singur la SPCLEP cu documentele originale. Nu mai ai nevoie de prezența părinților.', type: 'action' },
+          { text: 'La ghișeu predai buletinul de minor, completezi cererea și plătești taxa.', type: 'info' },
+          { text: 'Ridici personal cartea de identitate de adult după termenul comunicat.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-fara-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în Spania (CRDS)',
+    steps: [
+      {
+        id: 3,
+        title: 'Confirmă documentele necesare cu consulatul',
+        shortLabel: 'Confirmare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Înainte de programare, cere consulatului confirmarea listei exacte de documente pentru CI minor CRDS.', type: 'action' },
+          { text: 'Întreabă și dacă există vreo taxă consulară suplimentară față de taxa standard de 7 lei.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Alege consulatul competent pentru comunitatea autonomă unde locuiește minorul.', type: 'action' },
+          { text: 'Selectează serviciul pentru carte de identitate minor.', type: 'action' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pregătește fotografiile minorului',
+        shortLabel: 'Fotografii',
+        blocks: [
+          { text: 'Pregătește 6 fotografii 3×4 cm, fond alb, recente, cu fața descoperită și haine închise la culoare.', type: 'action' },
+          { text: 'Pentru CI nu se face biometric la ghișeu. Dacă fotografiile nu sunt bune, riști o nouă deplasare.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Prezintă-te la consulat cu minorul',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Mergi la consulat cu minorul și cu toate documentele originale.', type: 'action' },
+          { text: 'La ghișeu predai documentele și fotografiile; dacă minorul are 14 ani împliniți, semnează cererea personal.', type: 'info' },
+          { text: 'Verifică în cardul consulatului tău programul de ridicare și regulile locale.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-fara-domiciliu': {
+    title: 'Carte de identitate românească cu domiciliu în Spania — înregistrare CRDS',
+    steps: [
+      {
+        id: 3,
+        title: 'Obține empadronamiento-ul (dacă nu îl ai)',
+        shortLabel: 'Empadronamiento',
+        blocks: [
+          { text: 'Dacă ai deja empadronamiento sau alt document de domiciliu spaniol valabil, sari la pasul următor.', type: 'info' },
+          { text: 'Mergi la ayuntamiento-ul local și cere empadronamiento-ul. De regulă este gratuit și se eliberează rapid.', type: 'action' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Confirmă documentele cu consulatul',
+        shortLabel: 'Confirmare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Contactează consulatul tău și confirmă lista exactă de documente pentru CI adult CRDS.', type: 'action' },
+          { text: 'Întreabă și despre eventuale taxe consulare suplimentare.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pregătește fotografiile și fă programarea',
+        shortLabel: 'Foto + Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Pregătește 6 fotografii 3×4 cm, fond alb. Pentru CI, fotografiile se aduc de acasă.', type: 'action' },
+          { text: 'Intră pe econsulat.ro și fă programarea la consulatul competent.', type: 'action' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Prezintă-te la consulat și ridică CI',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te cu toate documentele originale și cu fotografiile.', type: 'action' },
+          { text: 'La ghișeu depui dosarul și plătești taxa aplicabilă.', type: 'info' },
+          { text: 'Verifică în cardul consulatului tău programul de ridicare după emitere.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'buletin-es-pierdut': {
+    title: 'Carte de identitate pierdută sau furată — din Spania',
+    steps: [
+      {
+        id: 3,
+        title: 'Declară pierderea sau furtul',
+        shortLabel: 'Declarație',
+        blocks: [
+          { text: 'Dacă documentul a fost furat, mergi la poliția spaniolă și obține denuncia.', type: 'action' },
+          { text: 'Dacă documentul a fost pierdut, declarația se completează direct la ghișeul SPCLEP-ului sau al consulatului competent.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Fă programarea — SPCLEP sau consulat',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Dacă domiciliul tău este în România, identifică SPCLEP-ul competent și verifică programarea.', type: 'action' },
+          { text: 'Dacă ai CRDS activ, intră pe econsulat.ro și fă programarea la consulatul competent.', type: 'action' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pregătește fotografiile',
+        shortLabel: 'Fotografii',
+        blocks: [
+          { text: 'Pregătește 6 fotografii 3×4 cm, fond alb. Pentru CI se aduc de acasă în ambele variante.', type: 'action' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Prezintă-te și ridică noua CI',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Mergi la autoritatea competentă cu documentele originale și cu fotografiile.', type: 'action' },
+          { text: 'Dacă ai CRDS activ, verifică în cardul consulatului programul de ridicare după emitere.', type: 'info' },
+          { text: 'Dacă ai pașaport valabil, îl poți folosi între timp ca act de identitate.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'titlu-calatorie-es': clonePaidGuideForCountry(ghidPaidMap['titlu-calatorie-de'], 'es', 'Titlu de călătorie · Spania'),
+  'titlu-calatorie-urgenta-es': clonePaidGuideForCountry(ghidPaidMap['titlu-calatorie-urgenta-de'], 'es', 'Titlu de călătorie urgent · Spania'),
+  'procura-generala-es': clonePaidGuideForCountry(ghidPaidMap['procura-generala-de'], 'es', 'Procură notarială generală · Spania'),
+  'procura-pensie-es': {
+    title: 'Procură pentru pensie din Spania',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: {
+          label: 'Deschide econsulat.ro',
+          href: 'https://econsulat.ro',
+        },
+        blocks: [
+          { text: 'Accesează econsulat.ro și selectează consulatul competent. Alege serviciul pentru acte notariale sau procură.', type: 'action' },
+          { text: 'Pregătește din timp datele complete ale mandatarului; consulatul are de regulă model pentru procura de pensie.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Prezintă-te și autentifică procura',
+        shortLabel: 'La ghișeu',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Prezintă-te cu documentul de identitate și datele mandatarului.', type: 'action' },
+          { text: 'Procura se autentifică în aceeași zi și este gratuită.', type: 'info' },
+          { text: 'Valabilitatea este de 18 luni și nu necesită apostilă pentru România.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'procura-vanzare-es': clonePaidGuideForCountry(ghidPaidMap['procura-vanzare-de'], 'es', 'Procură pentru vânzarea unui imobil · Spania'),
+  'transcriere-nastere-es': clonePaidGuideForCountry(ghidPaidMap['transcriere-nastere-de'], 'es', 'Transcriere certificat de naștere · Spania'),
 } satisfies Partial<Record<GuideId, GhidPaidContent>>)
 
 function getFullPaidGuideContent(guideId: GuideId): GhidPaidContent | null {
@@ -1159,7 +1743,7 @@ function personalizeGuideContent(
     }
   }
 
-  if (guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it') {
+  if (guideId === 'procura-vanzare-de' || guideId === 'procura-vanzare-it' || guideId === 'procura-vanzare-es') {
     return {
       ...basePersonalized,
       steps: basePersonalized.steps.map((step) => {
@@ -1211,9 +1795,18 @@ function ConsulateCard({
     guideId === 'titlu-calatorie-de' ||
     guideId === 'titlu-calatorie-urgenta-de' ||
     guideId === 'titlu-calatorie-it' ||
-    guideId === 'titlu-calatorie-urgenta-it'
-  const isGeneralPoaGuide = guideId === 'procura-generala-de' || guideId === 'procura-generala-it'
-  const isBirthTranscriptionGuide = guideId === 'transcriere-nastere-de' || guideId === 'transcriere-nastere-it'
+    guideId === 'titlu-calatorie-urgenta-it' ||
+    guideId === 'titlu-calatorie-es' ||
+    guideId === 'titlu-calatorie-urgenta-es'
+  const isGeneralPoaGuide =
+    guideId === 'procura-generala-de' ||
+    guideId === 'procura-generala-it' ||
+    guideId === 'procura-generala-es' ||
+    guideId === 'procura-pensie-es'
+  const isBirthTranscriptionGuide =
+    guideId === 'transcriere-nastere-de' ||
+    guideId === 'transcriere-nastere-it' ||
+    guideId === 'transcriere-nastere-es'
   const isCrdsPassportGuide =
     guideId === 'pasaport-crds-de' ||
     guideId === 'pasaport-crds-de-pierdut' ||
@@ -1222,7 +1815,10 @@ function ConsulateCard({
     guideId === 'pasaport-crds-it' ||
     guideId === 'pasaport-crds-it-pierdut' ||
     guideId === 'pasaport-crds-nou-it' ||
-    guideId === 'pasaport-minor-crds-it'
+    guideId === 'pasaport-minor-crds-it' ||
+    guideId === 'pasaport-crds-es' ||
+    guideId === 'pasaport-crds-es-pierdut' ||
+    guideId === 'pasaport-crds-pierdut-combinat-es'
   const displaySchedule = isBirthTranscriptionGuide
     ? card.scheduleDeponere
     : isTravelTitleGuide

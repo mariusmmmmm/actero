@@ -91,12 +91,168 @@ test('routes inheritance procura flow to the Italy inheritance guide', () => {
   })
 })
 
-test('sends unsupported countries to waitlist', () => {
-  const result = deriveGuideId('pasaport', 'es', {})
+test('routes Spain passport renewal with Romanian domicile to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    hasDomiciliuRO: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-es-cu-domiciliu',
+  })
+})
+
+test('routes Spain CRDS passport renewal to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    hasDomiciliuRO: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-crds-es',
+  })
+})
+
+test('routes Spain CRDS lost passport flow to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    hasDomiciliuRO: false,
+    pasaportStatus: 'pierdut-furat',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-crds-es-pierdut',
+  })
+})
+
+test('routes Spain CRDS lost passport with urgent travel need to the combined guide', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    hasDomiciliuRO: false,
+    pasaportStatus: 'pierdut-furat',
+    urgenta: 'sub-3-zile',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-crds-pierdut-combinat-es',
+  })
+})
+
+test('routes Spain passport with Romanian domicile and lost passport to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    hasDomiciliuRO: true,
+    pasaportStatus: 'pierdut-furat',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-es-cu-domiciliu-pierdut',
+  })
+})
+
+test('routes Spain adult buletin with domicile in Romania to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    hasDomiciliuRO: true,
+    isMinorBuletin: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-cu-domiciliu',
+  })
+})
+
+test('routes Spain majorat buletin flow to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    hasDomiciliuRO: true,
+    isMinorBuletin: false,
+    isMajoratBuletin: true,
+    buletinStatus: 'expirat',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-majorat',
+  })
+})
+
+test('routes Spain minor buletin with domicile in Romania to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    hasDomiciliuRO: true,
+    isMinorBuletin: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-cu-domiciliu-minor',
+  })
+})
+
+test('routes Spain adult buletin with domicile in Spain to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    hasDomiciliuRO: false,
+    isMinorBuletin: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-fara-domiciliu',
+  })
+})
+
+test('routes Spain minor buletin with domicile in Spain to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    hasDomiciliuRO: false,
+    isMinorBuletin: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-fara-domiciliu-minor',
+  })
+})
+
+test('routes Spain lost/furat buletin flow to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'es', {
+    buletinStatus: 'pierdut-furat-distrus',
+    hasDomiciliuRO: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'buletin-es-pierdut',
+  })
+})
+
+test('routes Spain pension procura flow to the dedicated guide', () => {
+  const result = deriveGuideId('procura', 'es', {
+    scopProcura: 'pensie',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'procura-pensie-es',
+  })
+})
+
+test('sends unsupported Spain passport flows to waitlist', () => {
+  const result = deriveGuideId('pasaport', 'es', {
+    isPrimulPasaport: true,
+  })
 
   assert.deepEqual(result, {
     type: 'waitlist',
     country: 'es',
+    service: 'pasaport',
+  })
+})
+
+test('sends unsupported countries to waitlist', () => {
+  const result = deriveGuideId('pasaport', 'fr', {})
+
+  assert.deepEqual(result, {
+    type: 'waitlist',
+    country: 'fr',
     service: 'pasaport',
   })
 })

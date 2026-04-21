@@ -46,6 +46,7 @@ type LlmOptimizedPageProps = {
   sections: SectionItem[]
   finalCtaTitle: string
   finalCtaText: string
+  updatedAtIso?: string
 }
 
 export default function LlmOptimizedPage({
@@ -66,6 +67,7 @@ export default function LlmOptimizedPage({
   sections,
   finalCtaTitle,
   finalCtaText,
+  updatedAtIso,
 }: LlmOptimizedPageProps) {
   const normalizedBreadcrumbSchema =
     (breadcrumbSchema as { '@type'?: string })['@type'] === 'BreadcrumbList'
@@ -216,7 +218,7 @@ export default function LlmOptimizedPage({
           </section>
 
           <div className="text-xs text-gray-400 text-right mb-8">
-            Actualizat: <time dateTime="2026-04-01">{updatedAt}</time> · Surse: {sourceNote}
+            Actualizat: <time dateTime={updatedAtIso ?? '2026-04-01'}>{updatedAt}</time> · Surse: {sourceNote}
           </div>
 
           {sections.map((section) => (

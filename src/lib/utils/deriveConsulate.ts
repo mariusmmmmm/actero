@@ -9,6 +9,11 @@ import {
   italyRegionOptions,
   italyRegionToConsulate,
 } from '@/lib/content/consulates/it'
+import {
+  spainConsulates,
+  spainRegionOptions,
+  spainRegionToConsulate,
+} from '@/lib/content/consulates/es'
 import type {
   BundeslandCode,
   ConsulateId,
@@ -18,26 +23,39 @@ import type {
   ItalyConsulateId,
   ItalyRegionCode,
   RegionCode,
+  SpainConsulateId,
+  SpainRegionCode,
 } from '@/types'
 
-export { bundeslandOptions, italyRegionOptions }
+export { bundeslandOptions, italyRegionOptions, spainRegionOptions }
 
 export function getRegionOptionsByCountry(country: CountryCode): { code: RegionCode; name: string }[] {
-  return country === 'it'
-    ? italyRegionOptions.map((item) => ({ code: item.code, name: item.name }))
-    : bundeslandOptions.map((item) => ({ code: item.code, name: item.name }))
+  if (country === 'it') {
+    return italyRegionOptions.map((item) => ({ code: item.code, name: item.name }))
+  }
+  if (country === 'es') {
+    return spainRegionOptions.map((item) => ({ code: item.code, name: item.name }))
+  }
+  return bundeslandOptions.map((item) => ({ code: item.code, name: item.name }))
 }
 
 export function getConsulateCountry(consulateId: ConsulateId | null): CountryCode | null {
   if (!consulateId) return null
-  return consulateId === 'bonn' || consulateId === 'muenchen' || consulateId === 'stuttgart' || consulateId === 'berlin'
-    ? 'de'
-    : 'it'
+  if (consulateId === 'bonn' || consulateId === 'muenchen' || consulateId === 'stuttgart' || consulateId === 'berlin') {
+    return 'de'
+  }
+  if (consulateId === 'roma' || consulateId === 'milano' || consulateId === 'bologna' || consulateId === 'torino' || consulateId === 'trieste' || consulateId === 'bari' || consulateId === 'catania') {
+    return 'it'
+  }
+  return 'es'
 }
 
 export function deriveConsulateId(country: CountryCode, region: RegionCode): ConsulateId {
   if (country === 'it') {
     return italyRegionToConsulate[region as ItalyRegionCode]
+  }
+  if (country === 'es') {
+    return spainRegionToConsulate[region as SpainRegionCode]
   }
   return bundeslandToConsulate[region as BundeslandCode]
 }
@@ -59,8 +77,12 @@ export function getConsulateConfirmation(country: CountryCode, region: RegionCod
 }
 
 export function getConsulateById(id: ConsulateId): ConsulateInfo {
-  if (getConsulateCountry(id) === 'it') {
+  const country = getConsulateCountry(id)
+  if (country === 'it') {
     return italyConsulates[id as ItalyConsulateId]
+  }
+  if (country === 'es') {
+    return spainConsulates[id as SpainConsulateId]
   }
   return germanConsulates[id as GermanyConsulateId]
 }

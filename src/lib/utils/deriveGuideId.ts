@@ -9,7 +9,7 @@ export function deriveGuideId(
   country: string,
   situation: SituationFlags
 ): WizardResult {
-  if (country !== 'de' && country !== 'it') {
+  if (country !== 'de' && country !== 'it' && country !== 'es') {
     return { type: 'waitlist', country, service: problemType }
   }
 
@@ -31,7 +31,10 @@ function deriveGuideIdByCountry(
     case 'procura':
       return deriveProcura(country, situation)
     case 'transcriere-nastere':
-      return guide(country === 'it' ? 'transcriere-nastere-it' : 'transcriere-nastere-de')
+      if (country === 'it') return guide('transcriere-nastere-it')
+      if (country === 'de') return guide('transcriere-nastere-de')
+      if (country === 'es') return guide('transcriere-nastere-es')
+      return { type: 'waitlist', country, service: problemType }
     default:
       return { type: 'waitlist', country, service: problemType }
   }
@@ -40,6 +43,25 @@ function deriveGuideIdByCountry(
 // ─── PATH 1 — PAȘAPORT ───────────────────────────────────────────────────────
 
 function derivePasaport(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'es') {
+    if (s.pasaportStatus === 'pierdut-furat') {
+      if (s.hasDomiciliuRO) {
+        return guide('pasaport-es-cu-domiciliu-pierdut')
+      }
+      if (s.urgenta === 'sub-3-zile') {
+        return guide('pasaport-crds-pierdut-combinat-es')
+      }
+      return guide('pasaport-crds-es-pierdut')
+    }
+    if (s.isPrimulPasaport || s.isMinorPasaport) {
+      return { type: 'waitlist', country, service: 'pasaport' }
+    }
+    if (s.hasDomiciliuRO) {
+      return guide('pasaport-es-cu-domiciliu')
+    }
+    return guide('pasaport-crds-es')
+  }
+
   const isItaly = country === 'it'
   // Domiciliu România
   if (s.hasDomiciliuRO) {
@@ -75,6 +97,19 @@ function derivePasaport(country: CountryCode, s: SituationFlags): WizardResult {
 // ─── PATH 2 — BULETIN ────────────────────────────────────────────────────────
 
 function deriveBuletin(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'es') {
+    if (s.buletinStatus === 'pierdut-furat-distrus') {
+      return guide('buletin-es-pierdut')
+    }
+    if (s.hasDomiciliuRO) {
+      if (s.isMajoratBuletin) {
+        return guide('buletin-es-majorat')
+      }
+      return guide(s.isMinorBuletin ? 'buletin-es-cu-domiciliu-minor' : 'buletin-es-cu-domiciliu')
+    }
+    return guide(s.isMinorBuletin ? 'buletin-es-fara-domiciliu-minor' : 'buletin-es-fara-domiciliu')
+  }
+
   const isItaly = country === 'it'
   // Domiciliu activ în România
   if (s.hasDomiciliuRO) {
@@ -105,6 +140,10 @@ function deriveBuletin(country: CountryCode, s: SituationFlags): WizardResult {
 // ─── PATH 3 — TITLU DE CĂLĂTORIE ─────────────────────────────────────────────
 
 function deriveTitluCalatorie(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'es') {
+    if (s.urgenta === 'sub-3-zile') return guide('titlu-calatorie-urgenta-es')
+    return guide('titlu-calatorie-es')
+  }
   if (s.urgenta === 'sub-3-zile') {
     return guide(country === 'it' ? 'titlu-calatorie-urgenta-it' : 'titlu-calatorie-urgenta-de')
   }
@@ -114,6 +153,18 @@ function deriveTitluCalatorie(country: CountryCode, s: SituationFlags): WizardRe
 // ─── PATH 4 — PROCURĂ ────────────────────────────────────────────────────────
 
 function deriveProcura(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'es') {
+    switch (s.scopProcura) {
+      case 'vanzare':
+        return guide('procura-vanzare-es')
+      case 'pensie':
+        return guide('procura-pensie-es')
+      case 'mostenire':
+        return { type: 'waitlist', country, service: 'procura' }
+      default:
+        return guide('procura-generala-es')
+    }
+  }
   switch (s.scopProcura) {
     case 'vanzare':
       return guide(country === 'it' ? 'procura-vanzare-it' : 'procura-vanzare-de')

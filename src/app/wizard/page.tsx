@@ -16,7 +16,7 @@ import type { CountryCode, CreateSessionResponse, GuideId, ProblemType, Situatio
 
 function getStep1Options(country: CountryCode) {
   const countryLabel = getCountryLabel(country)
-  const bornInCountry = country === 'it' ? 'Italia' : 'Germania'
+  const bornInCountry = getCountryLabel(country)
 
   return [
   {
@@ -53,7 +53,19 @@ function getStep1Options(country: CountryCode) {
 }
 
 function getResidenceCountryCopy(country: CountryCode) {
-  return country === 'it' ? 'Italia' : 'Germania'
+  return getCountryLabel(country)
+}
+
+function getCountryFlag(country: CountryCode) {
+  if (country === 'it') return '🇮🇹'
+  if (country === 'es') return '🇪🇸'
+  return '🇩🇪'
+}
+
+function getRegionPrompt(country: CountryCode) {
+  if (country === 'de') return 'În ce land locuiești acum?'
+  if (country === 'es') return 'În ce comunitate autonomă sau provincie locuiești acum?'
+  return 'În ce regiune locuiești acum?'
 }
 
 function Step1() {
@@ -121,7 +133,7 @@ function Step2() {
 
   const activeCountry = country ?? 'de'
   const regionOptions = getRegionOptionsByCountry(activeCountry)
-  const countryFlag = activeCountry === 'it' ? '🇮🇹' : '🇩🇪'
+  const countryFlag = getCountryFlag(activeCountry)
 
   const consulateName = consulate
     ? {
@@ -129,6 +141,14 @@ function Step2() {
         bonn: 'Bonn',
         stuttgart: 'Stuttgart',
         berlin: 'Berlin',
+        madrid: 'Madrid',
+        barcelona: 'Barcelona',
+        valencia: 'Valencia',
+        sevilla: 'Sevilla',
+        bilbao: 'Bilbao',
+        zaragoza: 'Zaragoza',
+        ciudadreal: 'Ciudad Real',
+        almeria: 'Almería',
         roma: 'Roma',
         milano: 'Milano',
         bologna: 'Bologna',
@@ -142,9 +162,7 @@ function Step2() {
   return (
     <div className="flex flex-col gap-4">
       <div className="mb-2">
-        <h2 className="text-xl font-bold text-gray-900">
-          {activeCountry === 'it' ? 'În ce regiune locuiești acum?' : 'În ce land locuiești acum?'}
-        </h2>
+        <h2 className="text-xl font-bold text-gray-900">{getRegionPrompt(activeCountry)}</h2>
         <p className="text-sm text-gray-500 mt-1">
           {countryFlag} {getCountryLabel(activeCountry)} · de aici aflăm consulatul care te deservește
         </p>
@@ -284,6 +302,14 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
             { value: 'de-strainatate', label: '🌍 În străinătate', sublabel: 'Este posibil să ai nevoie mai întâi de transcrierea nașterii' },
           ],
         },
+        {
+          key: 'urgenta',
+          question: 'Trebuie să ajungi urgent în România după pierderea sau furtul pașaportului?',
+          options: [
+            { value: 'sub-3-zile', label: 'Da, am nevoie de o soluție urgentă', sublabel: 'Primești varianta combinată: titlu de călătorie pentru plecare rapidă și apoi pașaportul CRDS' },
+            { value: '1-2-saptamani', label: 'Nu, pot urma fluxul normal de pașaport', sublabel: 'Primești ghidul standard pentru pașaport CRDS pierdut sau furat' },
+          ],
+        },
       ]
     case 'buletin':
       return [
@@ -302,6 +328,22 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
           options: [
             { value: false, label: 'Nu, nu mai am domiciliu activ în România', sublabel: 'Locuiești în străinătate și ai nevoie de ghidul pentru rezidență în afara României' },
             { value: true, label: 'Da, mai am domiciliu activ în România', sublabel: 'Primești ghidul pentru buletin cu domiciliu activ în România' },
+          ],
+        },
+        {
+          key: 'isMinorBuletin',
+          question: 'Cererea este pentru un minor sub 18 ani?',
+          options: [
+            { value: true, label: 'Da, este pentru un minor', sublabel: 'Primești ghidul pentru cartea de identitate a minorului, cu reguli pentru părinți și prezența copilului' },
+            { value: false, label: 'Nu, este pentru un adult', sublabel: 'Continuăm cu ghidul standard pentru adult' },
+          ],
+        },
+        {
+          key: 'isMajoratBuletin',
+          question: 'Este situația în care titularul a avut buletin de minor și a împlinit 18 ani?',
+          options: [
+            { value: true, label: 'Da, este primul buletin după împlinirea vârstei de 18 ani', sublabel: 'Primești ghidul special pentru majorat' },
+            { value: false, label: 'Nu, este un flux standard de adult', sublabel: 'Continuăm cu ghidul obișnuit pentru adult' },
           ],
         },
         {
@@ -342,6 +384,27 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
         },
       ]
     case 'procura':
+      if (country === 'es') {
+        return [
+          {
+            key: 'scopProcura',
+            question: 'Pentru ce problemă din România ai nevoie de procură?',
+            options: [
+              { value: 'vanzare', label: '🏠 Vânzare sau cumpărare de proprietate', sublabel: 'Primești ghidul pentru procura imobiliară' },
+              { value: 'pensie', label: '💶 Pensie / Casa de Pensii', sublabel: 'Primești ghidul pentru procura folosită la pensie și reprezentare în fața autorităților' },
+              { value: 'altceva', label: '📂 Altă problemă: divorț, firmă, cont bancar, ridicare acte', sublabel: 'Primești ghidul pentru procură generală / alte situații' },
+            ],
+          },
+          {
+            key: 'areNotar',
+            question: 'Ai deja notarul sau textul procurii pregătit în România?',
+            options: [
+              { value: true, label: 'Da, am deja notarul sau modelul de procură', sublabel: 'Ghidul te ajută cu programarea, actele și pașii de la consulat' },
+              { value: false, label: 'Nu, încă trebuie să clarific tipul exact de procură', sublabel: 'Ghidul te ajută să înțelegi de unde începi și ce ceri notarului' },
+            ],
+          },
+        ]
+      }
       return [
         {
           key: 'scopProcura',
@@ -372,13 +435,21 @@ function getVisibleQuestions(problemType: ProblemType, country: CountryCode, sit
   if (problemType === 'pasaport') {
     return all.filter((q, i) => {
       if (i === 0) return true
-      if (i === 1) return situation.hasDomiciliuRO === false
+      if (i === 1) return true
       if (i === 2) return situation.hasDomiciliuRO === false
       if (i === 3) {
         return (
           situation.hasDomiciliuRO === false &&
           situation.isMinorPasaport !== true &&
           situation.isPrimulPasaport === true
+        )
+      }
+      if (i === 4) {
+        return (
+          country === 'es' &&
+          situation.hasDomiciliuRO === false &&
+          situation.pasaportStatus === 'pierdut-furat' &&
+          situation.isMinorPasaport !== true
         )
       }
       return false
@@ -388,8 +459,17 @@ function getVisibleQuestions(problemType: ProblemType, country: CountryCode, sit
   if (problemType === 'buletin') {
     return all.filter((_, i) => {
       if (i === 0 || i === 1) return true
-      if (i === 2) return situation.hasDomiciliuRO === false
+      if (i === 2) return country === 'es' && situation.buletinStatus !== 'pierdut-furat-distrus'
       if (i === 3) {
+        return (
+          country === 'es' &&
+          situation.buletinStatus === 'expirat' &&
+          situation.hasDomiciliuRO === true &&
+          situation.isMinorBuletin === false
+        )
+      }
+      if (i === 4) return situation.hasDomiciliuRO === false
+      if (i === 5) {
         return (
           situation.hasDomiciliuRO === false &&
           situation.hasDomiciliuAnteriorRO === false
@@ -473,6 +553,24 @@ function Step3() {
   const handleSelect = (value: string | boolean) => {
     if (!currentQuestion) return
 
+    if (currentQuestion.key === 'hasDomiciliuRO') {
+      const hasDomiciliuRO = value as SituationFlags['hasDomiciliuRO']
+      setSituationFlag('hasDomiciliuRO', hasDomiciliuRO)
+
+      if (problemType === 'pasaport' && hasDomiciliuRO) {
+        if (situation.pasaportCrdsCase === 'primul') {
+          setSituationFlag('pasaportCrdsCase', undefined)
+          setSituationFlag('isPrimulPasaport', false)
+        }
+      }
+
+      if (problemType === 'buletin' && !hasDomiciliuRO) {
+        setSituationFlag('isMajoratBuletin', false)
+      }
+
+      return
+    }
+
     if (problemType === 'pasaport' && currentQuestion.key === 'pasaportCrdsCase') {
       if (value === 'expirat-deteriorat') {
         setSituationFlag('pasaportCrdsCase', value)
@@ -504,6 +602,22 @@ function Step3() {
     if (problemType === 'buletin' && currentQuestion.key === 'buletinStatus') {
       setSituationFlag('buletinStatus', value as SituationFlags['buletinStatus'])
       setSituationFlag('primulBuletin', value === 'niciodata')
+      if (value !== 'expirat') {
+        setSituationFlag('isMajoratBuletin', false)
+      }
+      return
+    }
+
+    if (problemType === 'buletin' && currentQuestion.key === 'isMinorBuletin') {
+      setSituationFlag('isMinorBuletin', value as SituationFlags['isMinorBuletin'])
+      if (value === true) {
+        setSituationFlag('isMajoratBuletin', false)
+      }
+      return
+    }
+
+    if (problemType === 'buletin' && currentQuestion.key === 'isMajoratBuletin') {
+      setSituationFlag('isMajoratBuletin', value as SituationFlags['isMajoratBuletin'])
       return
     }
 
@@ -633,7 +747,12 @@ function Step3() {
           </p>
         </div>
         <div className="flex flex-col gap-3">
-          {currentQuestion.options.map((opt) => {
+          {(problemType === 'pasaport' &&
+          currentQuestion.key === 'pasaportCrdsCase' &&
+          situation.hasDomiciliuRO === true
+            ? currentQuestion.options.filter((opt) => opt.value !== 'primul')
+            : currentQuestion.options
+          ).map((opt) => {
             const isSelected = currentValue === opt.value
             const isUrgentOption = opt.value === 'sub-3-zile'
 
@@ -757,7 +876,7 @@ function WizardPageContent() {
   const hintedProblemType = getProblemTypeFromHint(searchParams.get('hint'))
   const exactHintPrefill = getExactSituationFromHint(searchParams.get('hint'))
   const explicitProblemType = searchParams.get('problem') as ProblemType | null
-  const explicitCountry = ((searchParams.get('country') as CountryCode | null) ?? 'de')
+  const explicitCountry = (((searchParams.get('country') ?? searchParams.get('tara')) as CountryCode | null) ?? 'de')
 
   useEffect(() => {
     persistAttribution(searchParams)

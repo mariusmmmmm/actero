@@ -1,4 +1,4 @@
-import type { ConsulateId } from '@/types'
+import type { ConsulateId, CountryCode } from '@/types'
 import { getConsulateById, getConsulateCountry } from '@/lib/utils/deriveConsulate'
 
 type RuleSet = {
@@ -24,7 +24,7 @@ type RuleSet = {
   travelBonnFridayRule?: string | null
 }
 
-const COUNTRY_DEFAULT_RULES: Record<'de' | 'it', RuleSet> = {
+const COUNTRY_DEFAULT_RULES: Record<CountryCode, RuleSet> = {
   de: {
     passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției + traducere autorizată în română.',
     travelTranslationRule: 'Dacă documentul a fost furat, ai nevoie de adeverința poliției + traducere autorizată în română.',
@@ -51,9 +51,20 @@ const COUNTRY_DEFAULT_RULES: Record<'de' | 'it', RuleSet> = {
     mostenireDeathCertificateRule: 'Verifică înainte dacă trebuie să ai și copia certificatului de deces la ghișeu.',
     birthParentCertificatesRule: 'Confirmă direct cu consulatul și, dacă poți, du certificatele de naștere ale părinților.',
   },
+  es: {
+    passportLostTranslationRule: 'Pentru pașaport furat în Spania, regula de traducere diferă după tipul documentului și după consulat. Verifică direct în cardul consulatului tău.',
+    travelTranslationRule: 'Pentru titlul de călătorie din Spania, regula traducerii diferă în funcție de consulat și de tipul cazului.',
+    travelPhotoRule: 'În Spania, regulile pentru fotografiile minorilor la titlul de călătorie diferă per consulat.',
+    travelIssuanceRule: 'Titlul se eliberează după verificarea identității și a regulii aplicabile la consulatul tău.',
+    travelBookingRule: 'În Spania, programarea pentru titlul de călătorie diferă per consulat și per nivelul de urgență.',
+    travelBookingUrgentRule: 'În Spania, verifică direct dacă titlul urgent se rezolvă cu programare sau în regim special la consulatul tău.',
+    travelBadgeSummary: 'verifică regula exactă a consulatului',
+    travelBadgeSummaryUrgent: 'verifică regula exactă a consulatului',
+    rnneprPaymentRule: 'În Spania, RNNEPR nu se aplică. Procura consulară este gratuită.',
+  },
 }
 
-const CONSULATE_RULES: Record<ConsulateId, RuleSet> = {
+const CONSULATE_RULES: Partial<Record<ConsulateId, RuleSet>> = {
   bonn: {
     shortName: 'Bonn',
     passportLostTranslationRule: 'Pentru pașaport furat · ai nevoie de adeverința poliției. Dacă vrei să fii complet acoperit, poți veni și cu traducerea în română.',
@@ -173,7 +184,7 @@ function getResolvedRules(consulate: ConsulateId | null): RuleSet {
   if (!country) return {}
   return {
     ...COUNTRY_DEFAULT_RULES[country],
-    ...CONSULATE_RULES[consulate],
+    ...(CONSULATE_RULES[consulate] ?? {}),
   }
 }
 

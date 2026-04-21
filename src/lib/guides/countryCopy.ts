@@ -1,6 +1,7 @@
 import type { CountryCode, GuideId, RouteId } from '@/types'
 
 export function getGuideCountryCode(guideId: string | null): CountryCode {
+  if (guideId?.endsWith('-es')) return 'es'
   if (guideId?.endsWith('-it')) return 'it'
   return 'de'
 }
@@ -11,18 +12,39 @@ export function getRouteCountryCode(routeId: string | null): CountryCode {
 }
 
 export function getCountryLabel(country: CountryCode): string {
-  return country === 'it' ? 'Italia' : 'Germania'
+  if (country === 'it') return 'Italia'
+  if (country === 'es') return 'Spania'
+  return 'Germania'
 }
 
 export function getCountryResidenceDocs(country: CountryCode): string {
   if (country === 'it') {
     return 'carta d’identità italiană, certificato di residenza sau permesso di soggiorno'
   }
+  if (country === 'es') {
+    return 'certificado de empadronamiento, certificado de residencia, NIE sau tarjeta de extranjero'
+  }
   return 'Meldebescheinigung, Anmeldung sau Personalausweis german'
 }
 
 export function localizeGuideTextForCountry(text: string, country: CountryCode): string {
   if (country === 'de') return text
+  if (country === 'es') {
+    return text
+      .replaceAll('Germania', 'Spania')
+      .replaceAll('germană', 'spaniolă')
+      .replaceAll('german', 'spaniol')
+      .replaceAll('Document domiciliu Germania', 'Document domiciliu Spania')
+      .replaceAll('Document de domiciliu în Germania', 'Document de domiciliu în Spania')
+      .replaceAll('Dovada rezidenței în Germania', 'Dovada rezidenței în Spania')
+      .replaceAll('Meldebescheinigung / Anmeldung / Personalausweis german', 'certificado de empadronamiento / certificado de residencia / NIE sau tarjeta de extranjero')
+      .replaceAll('Meldebescheinigung, Anmeldung sau Personalausweis german', 'certificado de empadronamiento, certificado de residencia, NIE sau tarjeta de extranjero')
+      .replaceAll('Anmeldung / Meldebescheinigung', 'certificado de empadronamiento / certificado de residencia')
+      .replaceAll('Anmeldung sau Meldebescheinigung', 'certificado de empadronamiento sau certificado de residencia')
+      .replaceAll('Personalausweis german', 'NIE sau tarjeta de extranjero')
+      .replaceAll('Rossmann/DM', 'un studio foto local')
+      .replaceAll('bancă germană', 'banca ta')
+  }
 
   return text
     .replaceAll('Germania', 'Italia')
@@ -63,7 +85,8 @@ export function localizeGuideTextForCountry(text: string, country: CountryCode):
 
 export function localizeGuideTitleForCountry(title: string, country: CountryCode): string {
   if (country === 'de') return title
-  return title.replaceAll('Germania', 'Italia')
+  if (country === 'it') return title.replaceAll('Germania', 'Italia')
+  return title.replaceAll('Germania', 'Spania')
 }
 
 export function convertGuideIdToItaly(guideId: GuideId): GuideId {

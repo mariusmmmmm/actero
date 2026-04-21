@@ -138,6 +138,332 @@ function checklistPasaportMinorCrds(_c: ConsulateId | null, _s: SituationFlags):
   ]
 }
 
+function checklistPasaportCrdsSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'pes1_pasaport', name: 'Pașaportul actual', detail: 'Original · expirat sau în curs de expirare' },
+        { id: 'pes1_domiciliu', name: 'Document de domiciliu în Spania', detail: 'Certificado de empadronamiento sau certificado de residencia / NIE / tarjeta de extranjero · original' },
+        { id: 'pes1_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'pes1_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — se fac biometric la ghișeu' },
+      ],
+    },
+    {
+      id: 'casatorie',
+      title: 'Dacă ți-ai schimbat numele prin căsătorie',
+      items: [
+        { id: 'pes1_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original + copie · dacă ești căsătorit/ă' },
+      ],
+    },
+    {
+      id: 'programare',
+      title: 'Înainte de drum',
+      items: [
+        { id: 'pes1_econsulat', name: 'Programare făcută pe econsulat.ro', detail: 'Obligatorie la toate cele 8 consulate din Spania' },
+        { id: 'pes1_taxa', name: 'Taxa pregătită', detail: '53€ standard · Madrid CRDS = 60€ total (53€ + 7€ taxă poștală obligatorie)' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportDomiciliuRoSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'pes2_pasaport', name: 'Pașaportul actual', detail: 'Original · expirat sau în curs de expirare' },
+        { id: 'pes2_ci', name: 'Cartea de identitate românească valabilă', detail: 'Original' },
+        { id: 'pes2_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'pes2_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — se fac biometric la ghișeu' },
+      ],
+    },
+    {
+      id: 'casatorie',
+      title: 'Dacă ți-ai schimbat numele prin căsătorie',
+      items: [
+        { id: 'pes2_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original + copie · dacă ești căsătorit/ă' },
+      ],
+    },
+    {
+      id: 'programare',
+      title: 'Înainte de drum',
+      items: [
+        { id: 'pes2_econsulat', name: 'Programare făcută pe econsulat.ro', detail: 'Obligatorie la toate cele 8 consulate din Spania' },
+        { id: 'pes2_taxa', name: 'Taxa pregătită', detail: '53€ · metoda de plată depinde de consulatul tău' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportCrdsPierdutSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'pes3_domiciliu', name: 'Document de domiciliu în Spania', detail: 'Empadronamiento sau certificado de residencia / NIE · original' },
+        { id: 'pes3_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'pes3_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original + copie · dacă ți-ai schimbat numele' },
+        { id: 'pes3_econsulat', name: 'Programare pe econsulat.ro', detail: 'Obligatorie pentru pașaport' },
+      ],
+    },
+    {
+      id: 'pierdere_furt',
+      title: 'În funcție de situație',
+      items: [
+        { id: 'pes3_pierdut', name: 'Pașaport pierdut', detail: 'Declarația de pierdere se completează direct la ghișeu' },
+        { id: 'pes3_furat', name: 'Pașaport furat', detail: 'Denuncia + traducere autorizată MJ acceptată de consulatul tău' },
+        { id: 'pes3_distrus', name: 'Pașaport distrus', detail: 'Adu documentul fizic deteriorat la ghișeu' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportDomiciliuRoPierdutSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'pes4_ci', name: 'Carte de identitate românească valabilă', detail: 'Original' },
+        { id: 'pes4_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'pes4_casatorie', name: 'Certificat de căsătorie românesc', detail: 'Original + copie · dacă ți-ai schimbat numele' },
+        { id: 'pes4_econsulat', name: 'Programare pe econsulat.ro', detail: 'Obligatorie pentru pașaportul cu domiciliul în România' },
+      ],
+    },
+    {
+      id: 'pierdere_furt',
+      title: 'În funcție de situație',
+      items: [
+        { id: 'pes4_pierdut', name: 'Pașaport pierdut', detail: 'Declarația de pierdere se completează la ghișeu' },
+        { id: 'pes4_furat', name: 'Pașaport furat', detail: 'Denuncia + traducere autorizată MJ acceptată de consulatul tău' },
+        { id: 'pes4_distrus', name: 'Pașaport distrus', detail: 'Adu documentul fizic deteriorat' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinAdultSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'spclep',
+      title: 'Documente pentru SPCLEP',
+      items: [
+        { id: 'bes5_ci', name: 'CI expirată sau documentul privind pierderea/furtul', detail: 'După situația ta concretă' },
+        { id: 'bes5_nastere', name: 'Certificat de naștere românesc', detail: 'Original' },
+        { id: 'bes5_stare', name: 'Certificat de căsătorie / divorț', detail: 'Original · dacă e cazul' },
+        { id: 'bes5_adresa', name: 'Document pentru adresa de domiciliu din România', detail: 'Contract, extras sau adeverință, după caz' },
+        { id: 'bes5_taxa', name: 'Taxa CI', detail: '7 lei' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinMinorSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'bes6_nastere', name: 'Certificatul de naștere al minorului', detail: 'Original' },
+        { id: 'bes6_parinte', name: 'Actul de identitate al părintelui prezent', detail: 'Original' },
+        { id: 'bes6_acord', name: 'Acordul celuilalt părinte sau hotărârea de custodie', detail: 'Dacă vine un singur părinte' },
+        { id: 'bes6_ci', name: 'CI expirată a minorului', detail: 'Doar dacă este reînnoire, nu prima CI' },
+        { id: 'bes6_taxa', name: 'Taxa CI', detail: '7 lei' },
+        { id: 'bes6_prezenta', name: 'Prezența minorului la ghișeu', detail: 'Obligatorie' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinMajoratSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'majorat',
+      title: 'Documente pentru prima CI de adult',
+      items: [
+        { id: 'bes7_minor_ci', name: 'Buletinul de minor expirat', detail: 'Original · se predă la SPCLEP' },
+        { id: 'bes7_nastere', name: 'Certificatul de naștere', detail: 'Original' },
+        { id: 'bes7_adresa', name: 'Document de domiciliu', detail: 'Doar dacă adresa s-a schimbat față de buletinul de minor' },
+        { id: 'bes7_foto', name: 'Fotografie 3×4 cm', detail: 'Dacă SPCLEP-ul nu face fotografia la ghișeu' },
+        { id: 'bes7_taxa', name: 'Taxa CI', detail: '7 lei' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinMinorCrdsSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'minor_crds',
+      title: 'Documente pentru CI minor CRDS',
+      items: [
+        { id: 'bes8_nastere', name: 'Certificatul de naștere românesc al minorului', detail: 'Original + copie' },
+        { id: 'bes8_domiciliu', name: 'Document de domiciliu spaniol al minorului', detail: 'Empadronamiento sau certificado de residencia / NIE' },
+        { id: 'bes8_parinte', name: 'Actul de identitate al părintelui prezent', detail: 'Original' },
+        { id: 'bes8_acord', name: 'Acordul celuilalt părinte / actul de custodie', detail: 'Dacă vine un singur părinte' },
+        { id: 'bes8_foto', name: '6 fotografii 3×4 cm, fond alb', detail: 'Se aduc de acasă' },
+        { id: 'bes8_ci', name: 'CI expirată a minorului', detail: 'Doar dacă este reînnoire' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinCrdsSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'adult_crds',
+      title: 'Documente pentru CI adult CRDS',
+      items: [
+        { id: 'bes9_ci', name: 'CI actuală sau pașaportul valabil', detail: 'CI dacă reînnoiești · pașaport dacă este prima înregistrare CRDS' },
+        { id: 'bes9_domiciliu', name: 'Document de domiciliu spaniol', detail: 'Empadronamiento sau certificado de residencia / NIE' },
+        { id: 'bes9_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'bes9_casatorie', name: 'Certificat de căsătorie', detail: 'Dacă numele s-a schimbat' },
+        { id: 'bes9_foto', name: '6 fotografii 3×4 cm, fond alb', detail: 'Se aduc de acasă' },
+        { id: 'bes9_programare', name: 'Programare pe econsulat.ro', detail: 'Obligatorie' },
+      ],
+    },
+  ]
+}
+
+function checklistBuletinPierdutSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'pierdere',
+      title: 'Documente și dovezi utile',
+      items: [
+        { id: 'bes10_furt', name: 'Denuncia de la poliția spaniolă', detail: 'Necesară dacă documentul a fost furat' },
+        { id: 'bes10_nastere', name: 'Certificat de naștere românesc', detail: 'Original + copie' },
+        { id: 'bes10_pasaport', name: 'Pașaport valabil sau alt document cu fotografie', detail: 'Pentru identificare' },
+        { id: 'bes10_foto', name: '6 fotografii 3×4 cm, fond alb', detail: 'În ambele căi: SPCLEP sau consulat' },
+        { id: 'bes10_domiciliu', name: 'Document de domiciliu spaniol', detail: 'Doar dacă ai CRDS activ și mergi pe calea consulatului' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluCalatorieSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'titlu_es',
+      title: 'Documente pentru titlul de călătorie',
+      items: [
+        { id: 'tes11_pasaport', name: 'Pașaportul expirat sau documentul vechi', detail: 'Original, dacă îl mai ai' },
+        { id: 'tes11_nastere', name: 'Certificat de naștere românesc sau Certificado Plurilingüe', detail: 'Original' },
+        { id: 'tes11_furt', name: 'Denuncia de la poliția spaniolă', detail: 'Dacă documentul a fost furat' },
+        { id: 'tes11_trad', name: 'Traducere pentru furt', detail: 'Depinde de consulatul tău; verifică regula locală' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluCalatorieUrgentaSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'titlu_urgent_es',
+      title: 'Documente pentru urgență',
+      items: [
+        { id: 'tes12_urgenta', name: 'Dovada urgenței', detail: 'Bilet de avion, document medical, certificat de deces sau alt act justificativ' },
+        { id: 'tes12_pasaport', name: 'Pașaportul expirat sau documentele românești disponibile', detail: 'Orice ajută la identificare' },
+        { id: 'tes12_furt', name: 'Denuncia + traducere dacă se cere', detail: 'Doar în caz de furt și după regula consulatului' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraGeneralaSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'procura_es',
+      title: 'Date și documente necesare',
+      items: [
+        { id: 'pes13_text', name: 'Textul procurii sau modelul procurii', detail: 'Dacă nu ai textul, cere un model standard de la consulat' },
+        { id: 'pes13_mandatar', name: 'Datele complete ale mandatarului', detail: 'Nume, CNP, adresă, act de identitate' },
+        { id: 'pes13_id', name: 'Pașaport sau CI românească valabilă', detail: 'Original' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraPensieSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'procura_pensie_es',
+      title: 'Date și documente pentru pensie',
+      items: [
+        { id: 'pes14_mandatar', name: 'Datele complete ale mandatarului', detail: 'Nume, CNP, adresă, serie CI' },
+        { id: 'pes14_id', name: 'Pașaport sau CI românească valabilă', detail: 'Original' },
+        { id: 'pes14_dosar', name: 'Număr dosar / decizie de pensionare', detail: 'Util dar nu obligatoriu' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraVanzareSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'procura_vanzare_es',
+      title: 'Date și documente pentru procura imobiliară',
+      items: [
+        { id: 'pes15_text', name: 'Textul procurii de vânzare', detail: 'Ideal pregătit cu notarul din România' },
+        { id: 'pes15_imobil', name: 'Datele exacte ale imobilului', detail: 'Adresă, număr cadastral, carte funciară' },
+        { id: 'pes15_mandatar', name: 'Datele complete ale mandatarului', detail: 'Nume, CNP, adresă, CI' },
+        { id: 'pes15_id', name: 'Pașaport sau CI românească valabilă', detail: 'Original' },
+      ],
+    },
+  ]
+}
+
+function checklistTranscriereSpania(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'transcriere_es',
+      title: 'Documente pentru transcriere',
+      items: [
+        { id: 'pes16_pluri', name: 'Certificado Plurilingüe', detail: 'Se depune direct, fără apostilă și fără traducere' },
+        { id: 'pes16_literal', name: 'Certificado Literal', detail: 'Necesită apostila Haga de la TSJ și traducere autorizată în română' },
+        { id: 'pes16_parinti', name: 'Actele de identitate ale părinților', detail: 'Originale' },
+        { id: 'pes16_casatorie', name: 'Certificatul de căsătorie', detail: 'Dacă este cazul' },
+      ],
+    },
+  ]
+}
+
 // ── Ghid #3 + #4 — pasaport domiciliu RO ─────────────────────────────────────
 
 function checklistPasaportDomiciliuRo(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
@@ -710,4 +1036,21 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'procura-mostenire-it': checklistProcuraMostenire,
   'procura-generala-it': checklistProcuraGenerala,
   'transcriere-nastere-it': checklistTranscriereNastere,
+  'pasaport-crds-es': checklistPasaportCrdsSpania,
+  'pasaport-es-cu-domiciliu': checklistPasaportDomiciliuRoSpania,
+  'pasaport-crds-es-pierdut': checklistPasaportCrdsPierdutSpania,
+  'pasaport-es-cu-domiciliu-pierdut': checklistPasaportDomiciliuRoPierdutSpania,
+  'pasaport-crds-pierdut-combinat-es': checklistPasaportCrdsPierdutSpania,
+  'buletin-es-cu-domiciliu': checklistBuletinAdultSpania,
+  'buletin-es-cu-domiciliu-minor': checklistBuletinMinorSpania,
+  'buletin-es-majorat': checklistBuletinMajoratSpania,
+  'buletin-es-fara-domiciliu-minor': checklistBuletinMinorCrdsSpania,
+  'buletin-es-fara-domiciliu': checklistBuletinCrdsSpania,
+  'buletin-es-pierdut': checklistBuletinPierdutSpania,
+  'titlu-calatorie-es': checklistTitluCalatorieSpania,
+  'titlu-calatorie-urgenta-es': checklistTitluCalatorieUrgentaSpania,
+  'procura-generala-es': checklistProcuraGeneralaSpania,
+  'procura-pensie-es': checklistProcuraPensieSpania,
+  'procura-vanzare-es': checklistProcuraVanzareSpania,
+  'transcriere-nastere-es': checklistTranscriereSpania,
 }

@@ -336,7 +336,7 @@ function Countries() {
   const countries = [
     { flag: '🇩🇪', name: 'Germania', status: 'Disponibil', href: '/wizard?country=de', available: true },
     { flag: '🇮🇹', name: 'Italia', status: 'Disponibil', href: '/wizard?country=it', available: true },
-    { flag: '🇪🇸', name: 'Spania', status: 'Mai 2026', href: '/in-curand?country=es', available: false },
+    { flag: '🇪🇸', name: 'Spania', status: 'Disponibil', href: '/wizard?country=es', available: true },
     { flag: '🇬🇧', name: 'UK', status: 'Iun. 2026', href: '/in-curand?country=gb', available: false },
     { flag: '🇫🇷', name: 'Franța', status: 'În curând', href: '/in-curand?country=fr', available: false },
     { flag: '🇦🇹', name: 'Austria', status: 'În curând', href: '/in-curand?country=at', available: false },
@@ -348,7 +348,7 @@ function Countries() {
         Țări disponibile
       </div>
       <p className="text-sm text-gray-600 leading-relaxed mb-5">
-        Poți intra acum direct pe Germania sau Italia. Homepage-ul rămâne punctul de intrare
+        Poți intra acum direct pe Germania, Italia sau Spania. Homepage-ul rămâne punctul de intrare
         general, iar ghidurile se adaptează în funcție de țara și consulatul tău.
       </p>
       <div className="grid grid-cols-3 gap-2">

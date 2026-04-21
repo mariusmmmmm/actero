@@ -457,6 +457,344 @@ Object.assign(diagnosticMap, {
   'procura-mostenire-it': cloneDiagnosticForCountry(diagnosticMap['procura-mostenire-de'], 'it'),
   'procura-generala-it': cloneDiagnosticForCountry(diagnosticMap['procura-generala-de'], 'it'),
   'transcriere-nastere-it': cloneDiagnosticForCountry(diagnosticMap['transcriere-nastere-de'], 'it'),
+  'pasaport-crds-es': {
+    title: 'Pașaport românesc din Spania — CRDS',
+    subtitle: 'Pașaport expirat sau în curs de expirare · consulat derivat din comunitatea autonomă sau provincia ta',
+    warnings: [
+      'Madrid CRDS: taxa totală este 60€ (53€ + 7€ taxă poștală obligatorie), iar pașaportul se trimite obligatoriu prin poștă.',
+      'Bilbao: vineri sunt doar servicii speciale — nu se depun pașapoarte obișnuite.',
+      'Barcelona: verifică adresa nouă din iunie 2025 înainte de deplasare.',
+    ],
+    estimatedWeeks: '6–10 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport CRDS · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce este CRDS și de ce contează', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește taxa', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-es-cu-domiciliu': {
+    title: 'Pașaport românesc din Spania — domiciliu în România',
+    subtitle: 'Pașaport expirat sau în curs de expirare · ridicare la ghișeu, după regula consulatului tău',
+    warnings: [
+      'Madrid: plata se face exclusiv cu card bancar.',
+      'Bilbao: vineri sunt doar servicii speciale — nu se depun pașapoarte obișnuite.',
+      'Barcelona: verifică adresa nouă din iunie 2025 înainte de deplasare.',
+    ],
+    estimatedWeeks: '4–8 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport · Domiciliu România · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Acest ghid este pentru tine?', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește taxa', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul la ghișeu', locked: true },
+    ],
+  },
+  'pasaport-crds-es-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — CRDS',
+    subtitle: 'Ai CRDS activ și pașaportul este pierdut, furat sau distrus',
+    warnings: [
+      'Dacă ai urgență de deplasare, rezolvi mai întâi titlul de călătorie; pașaportul nou rămâne procedura separată cu programare.',
+      'Pentru furt ai nevoie de denuncia + traducere autorizată MJ acceptată de consulatul tău.',
+      'Madrid CRDS: taxa totală este 60€, iar ridicarea se face prin poștă.',
+    ],
+    estimatedWeeks: '6–10 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport CRDS pierdut/furat · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Primul lucru: ai nevoie să călătorești urgent?', locked: false },
+      { id: 2, label: 'Documentele diferă în funcție de situație', locked: false },
+      { id: 3, label: 'Obține traducerea (dacă a fost furat)', locked: true },
+      { id: 4, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 5, label: 'Pregătește taxa', locked: true },
+      { id: 6, label: 'Prezintă-te la consulat', locked: true },
+      { id: 7, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-es-cu-domiciliu-pierdut': {
+    title: 'Pașaport pierdut sau furat în Spania — domiciliu în România',
+    subtitle: 'Ai domiciliul activ în România și pașaportul este pierdut, furat sau distrus',
+    warnings: [
+      'Dacă ai urgență de deplasare, rezolvi mai întâi titlul de călătorie, apoi pașaportul nou.',
+      'Pentru furt ai nevoie de denuncia + traducere autorizată MJ acceptată de consulatul tău.',
+      'Ridicarea pașaportului se face la ghișeu, după regula consulatului tău.',
+    ],
+    estimatedWeeks: '4–8 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport pierdut/furat · Domiciliu România · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ai nevoie să călătorești urgent?', locked: false },
+      { id: 2, label: 'Ce documente pregătești', locked: false },
+      { id: 3, label: 'Obține traducerea (dacă a fost furat)', locked: true },
+      { id: 4, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 5, label: 'Pregătește taxa', locked: true },
+      { id: 6, label: 'Prezintă-te la consulat', locked: true },
+      { id: 7, label: 'Ridică pașaportul la ghișeu', locked: true },
+    ],
+  },
+  'buletin-es-cu-domiciliu': {
+    title: 'Carte de identitate românească — adult cu domiciliu în România',
+    subtitle: 'Procedura se rezolvă în România, la SPCLEP, nu la consulatul din Spania',
+    warnings: [
+      'Trebuie să mergi personal la SPCLEP-ul competent pentru adresa ta din România.',
+      'Consulatul din Spania nu emite carte de identitate cu domiciliu în România.',
+    ],
+    estimatedWeeks: '2–4 săptămâni',
+    estimatedAppointments: '1 deplasare în România · 1 vizită la SPCLEP',
+    guideTitle: 'Carte de identitate adult · Spania → România',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Unde se rezolvă cartea de identitate', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie la SPCLEP', locked: false },
+      { id: 3, label: 'Identifică SPCLEP-ul competent', locked: true },
+      { id: 4, label: 'Fă programarea și pregătește documentele', locked: true },
+      { id: 5, label: 'Prezintă-te la SPCLEP și ridică CI', locked: true },
+    ],
+  },
+  'buletin-es-cu-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în România',
+    subtitle: 'Procedura se rezolvă în România, la SPCLEP, cu prezența minorului',
+    warnings: [
+      'Minorul trebuie să fie prezent fizic la ghișeu.',
+      'Dacă vine un singur părinte, ai nevoie de acordul autentificat al celuilalt părinte sau de actul de custodie.',
+    ],
+    estimatedWeeks: '2–4 săptămâni',
+    estimatedAppointments: '1 deplasare în România · 1 vizită la SPCLEP',
+    guideTitle: 'Carte de identitate minor · Spania → România',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce trebuie să știi înainte de drum', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Identifică SPCLEP-ul competent', locked: true },
+      { id: 4, label: 'Pregătește documentele și programarea', locked: true },
+      { id: 5, label: 'Prezintă-te la SPCLEP cu minorul', locked: true },
+    ],
+  },
+  'pasaport-crds-pierdut-combinat-es': {
+    title: 'Pașaport pierdut sau furat în Spania — CRDS — cale combinată',
+    subtitle: 'Flux pentru situațiile în care gestionezi titlu de călătorie și pașaport nou în paralel',
+    warnings: [
+      'Depunerea combinată titlu + pașaport nu este confirmată uniform la toate consulatele — verifică direct la consulatul tău.',
+      'Dacă pașaportul a fost furat, traducerile necesare pot diferi între pașaport și titlul de călătorie.',
+    ],
+    estimatedWeeks: 'titlu în aceeași zi · pașaport 6–10 săptămâni',
+    estimatedAppointments: '1 sau 2 vizite, în funcție de regula consulatului',
+    guideTitle: 'Cale combinată titlu + pașaport · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Două proceduri, o singură deplasare dacă se poate', locked: false },
+      { id: 2, label: 'Ce documente pregătești', locked: false },
+      { id: 3, label: 'Confirmă cu consulatul procedura combinată', locked: true },
+      { id: 4, label: 'Obține traducerile necesare', locked: true },
+      { id: 5, label: 'Fă programarea dacă este necesară', locked: true },
+      { id: 6, label: 'Pregătește taxa pentru pașaport', locked: true },
+      { id: 7, label: 'Mergi la consulat', locked: true },
+      { id: 8, label: 'Ridică pașaportul și închide cazul', locked: true },
+    ],
+  },
+  'buletin-es-majorat': {
+    title: 'Carte de identitate la 18 ani — domiciliu în România',
+    subtitle: 'Fluxul special pentru trecerea de la buletinul de minor la prima CI de adult',
+    warnings: [
+      'Procedura se rezolvă în România, la SPCLEP, nu la consulatul din Spania.',
+      'Există termen legal de 15 zile de la împlinirea vârstei de 18 ani.',
+    ],
+    estimatedWeeks: '2–4 săptămâni',
+    estimatedAppointments: '1 deplasare în România · 1 vizită la SPCLEP',
+    guideTitle: 'Carte de identitate la 18 ani · Spania → România',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce se întâmplă cu buletinul la 18 ani', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Identifică SPCLEP-ul competent', locked: true },
+      { id: 4, label: 'Fă programarea și pregătește documentele', locked: true },
+      { id: 5, label: 'Prezintă-te la SPCLEP și ridică CI', locked: true },
+    ],
+  },
+  'buletin-es-fara-domiciliu-minor': {
+    title: 'Carte de identitate românească — minor cu domiciliu în Spania (CRDS)',
+    subtitle: 'Flux consular pentru minori cu domiciliu înregistrat în Spania',
+    warnings: [
+      'Programarea pe econsulat.ro este obligatorie.',
+      'Minorul trebuie să fie prezent la ghișeu și ai nevoie de 6 fotografii aduse de acasă.',
+    ],
+    estimatedWeeks: '4–8 săptămâni',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Carte de identitate minor CRDS · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Când se rezolvă la consulatul din Spania', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Confirmă documentele cu consulatul', locked: true },
+      { id: 4, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 5, label: 'Pregătește fotografiile minorului', locked: true },
+      { id: 6, label: 'Prezintă-te la consulat cu minorul', locked: true },
+    ],
+  },
+  'buletin-es-fara-domiciliu': {
+    title: 'Carte de identitate românească cu domiciliu în Spania (CRDS)',
+    subtitle: 'Flux consular pentru adulți care vor CI cu adresă spaniolă',
+    warnings: [
+      'Programarea pe econsulat.ro este obligatorie.',
+      'Ai nevoie de document de domiciliu spaniol și 6 fotografii aduse de acasă.',
+    ],
+    estimatedWeeks: '4–8 săptămâni',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Carte de identitate CRDS · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce înseamnă CRDS și când ai nevoie de el', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Obține empadronamiento-ul', locked: true },
+      { id: 4, label: 'Confirmă documentele cu consulatul', locked: true },
+      { id: 5, label: 'Pregătește fotografiile și fă programarea', locked: true },
+      { id: 6, label: 'Prezintă-te la consulat și ridică CI', locked: true },
+    ],
+  },
+  'buletin-es-pierdut': {
+    title: 'Carte de identitate pierdută sau furată — din Spania',
+    subtitle: 'Flux bifurcat: SPCLEP dacă domiciliul este în România, consulat dacă ai CRDS activ',
+    warnings: [
+      'Procedura diferă complet după domiciliu: România sau Spania (CRDS).',
+      'Pentru CI, fotografiile se aduc de acasă atât la SPCLEP, cât și la consulat.',
+    ],
+    estimatedWeeks: '2–8 săptămâni, în funcție de calea urmată',
+    estimatedAppointments: '1 vizită la autoritatea competentă',
+    guideTitle: 'Carte de identitate pierdută sau furată · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Primul lucru: identifică unde îți este domiciliul', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Declară pierderea sau furtul', locked: true },
+      { id: 4, label: 'Fă programarea — SPCLEP sau consulat', locked: true },
+      { id: 5, label: 'Pregătește fotografiile', locked: true },
+      { id: 6, label: 'Prezintă-te și ridică noua CI', locked: true },
+    ],
+  },
+  'titlu-calatorie-es': {
+    title: 'Titlu de călătorie din Spania',
+    subtitle: 'Pentru întoarcerea în România sau deplasare în UE când nu mai ai pașaport valid',
+    warnings: [
+      'Titlul de călătorie este gratuit și, de regulă, se eliberează în aceeași zi.',
+      'Dacă pașaportul a fost furat, regula de traducere diferă între consulatele din Spania.',
+      'Pentru minori, pragul de prezență și regulile de fotografie diferă per consulat.',
+    ],
+    estimatedWeeks: 'în aceeași zi',
+    estimatedAppointments: '1 programare la consulat',
+    guideTitle: 'Titlu de călătorie · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce este titlul de călătorie și pentru ce este valabil', locked: false },
+      { id: 2, label: 'Documentele de care ai nevoie', locked: false },
+      { id: 3, label: 'Traducere (dacă e cazul)', locked: true },
+      { id: 4, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat și ridică titlul', locked: true },
+    ],
+  },
+  'titlu-calatorie-urgenta-es': {
+    title: 'Titlu de călătorie urgent din Spania',
+    subtitle: 'Pentru zbor iminent, urgență medicală sau alt motiv justificat în 24–72h',
+    warnings: [
+      'Flow-ul fără programare este confirmat explicit la Zaragoza; la celelalte consulate este prudent să suni înainte.',
+      'Ai nevoie de documente justificative clare pentru urgență.',
+    ],
+    estimatedWeeks: 'în aceeași zi',
+    estimatedAppointments: '1 prezentare directă la consulat',
+    guideTitle: 'Titlu de călătorie urgent · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Mergi fără programare — dar sună înainte dacă poți', locked: false },
+      { id: 2, label: 'Ce documente aduci cu tine', locked: false },
+      { id: 3, label: 'Prezintă-te la consulat cu documentele de urgență', locked: true },
+      { id: 4, label: 'Ce faci cu titlul după ce îl primești', locked: true },
+    ],
+  },
+  'procura-generala-es': {
+    title: 'Procură notarială din Spania — generală sau specială',
+    subtitle: 'Mandatezi pe cineva din România pentru acte, reprezentare sau operațiuni notariale uzuale',
+    warnings: [
+      'Procura consulară este gratuită în Spania; RNNEPR nu se aplică.',
+      'Este valabilă direct în România, fără apostilă.',
+    ],
+    estimatedWeeks: 'în aceeași zi',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Procură generală · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce trebuie să știi despre procurile din Spania', locked: false },
+      { id: 2, label: 'Ce pregătești înainte de programare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Prezintă-te la consulat și autentifică procura', locked: true },
+    ],
+  },
+  'procura-pensie-es': {
+    title: 'Procură pentru pensie din Spania',
+    subtitle: 'Mandatezi pe cineva să ridice pensia din România în locul tău',
+    warnings: [
+      'Procura pentru pensie este gratuită și are valabilitate de 18 luni.',
+      'Consulatul are de regulă model standard pentru acest tip de procură.',
+    ],
+    estimatedWeeks: 'în aceeași zi',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Procură pentru pensie · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce este procura pentru pensie și cât este valabilă', locked: false },
+      { id: 2, label: 'Ce pregătești', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Prezintă-te și autentifică procura', locked: true },
+    ],
+  },
+  'procura-vanzare-es': {
+    title: 'Procură pentru vânzarea unui imobil din România — din Spania',
+    subtitle: 'Procura specială pentru notarul din România, când proprietarul este în Spania',
+    warnings: [
+      'Textul procurii trebuie să conțină exact datele imobilului și ale tranzacției.',
+      'Procura este gratuită și valabilă direct în România.',
+    ],
+    estimatedWeeks: 'în aceeași zi',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Procură vânzare imobil · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce trebuie să știi înainte de a face procura', locked: false },
+      { id: 2, label: 'Ce pregătești', locked: false },
+      { id: 3, label: 'Confirmă documentele cu consulatul', locked: true },
+      { id: 4, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat și autentifică procura', locked: true },
+    ],
+  },
+  'transcriere-nastere-es': {
+    title: 'Transcriere certificat de naștere din Spania',
+    subtitle: 'Înregistrezi în România nașterea copilului născut în Spania pentru a putea obține acte românești',
+    warnings: [
+      'Certificado Plurilingüe este varianta simplă: fără apostilă și fără traducere.',
+      'Pentru Certificado Literal ai nevoie de apostilă Haga de la TSJ și de traducere autorizată.',
+    ],
+    estimatedWeeks: 'variabil per consulat',
+    estimatedAppointments: '1 programare · 1 vizită la consulat',
+    guideTitle: 'Transcriere naștere · Spania',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'De ce ai nevoie de transcrierea nașterii', locked: false },
+      { id: 2, label: 'Ce tip de certificat spaniol ai — și ce implică fiecare', locked: false },
+      { id: 3, label: 'Obține apostila Haga (dacă ai Literal)', locked: true },
+      { id: 4, label: 'Obține traducerea autorizată (dacă ai Literal)', locked: true },
+      { id: 5, label: 'Confirmă documentele cu consulatul și fă programarea', locked: true },
+      { id: 6, label: 'Prezintă-te la consulat și ridică certificatul', locked: true },
+    ],
+  },
 } satisfies Partial<Record<string, DiagnosticData>>)
 
 // Date pentru Route-uri
@@ -732,6 +1070,15 @@ function getBadgeText(
     case 'pasaport-it-cu-domiciliu':
     case 'pasaport-it-cu-domiciliu-pierdut':
       return '⏱ o singură vizită la consulat · 4–6 săptămâni'
+    case 'pasaport-crds-es':
+      return '⏱ o singură vizită la consulat · 6–10 săptămâni'
+    case 'pasaport-crds-es-pierdut':
+      return '⏱ o singură vizită la consulat · 6–10 săptămâni'
+    case 'pasaport-es-cu-domiciliu':
+    case 'pasaport-es-cu-domiciliu-pierdut':
+      return '⏱ o singură vizită la consulat · 4–8 săptămâni'
+    case 'pasaport-crds-pierdut-combinat-es':
+      return '⏱ titlu în aceeași zi · pașaport 6–10 săptămâni'
     case 'buletin-de-fara-domiciliu':
     case 'buletin-de-fara-domiciliu-pierdut':
     case 'buletin-it-fara-domiciliu':
@@ -741,7 +1088,24 @@ function getBadgeText(
     case 'buletin-de-cu-domiciliu-pierdut':
     case 'buletin-it-cu-domiciliu':
     case 'buletin-it-cu-domiciliu-pierdut':
+    case 'buletin-es-cu-domiciliu':
+    case 'buletin-es-cu-domiciliu-minor':
+    case 'buletin-es-majorat':
       return '⏱ o singură deplasare în România · 2–4 săptămâni'
+    case 'buletin-es-fara-domiciliu':
+    case 'buletin-es-fara-domiciliu-minor':
+      return '⏱ o singură vizită la consulat · 4–8 săptămâni'
+    case 'buletin-es-pierdut':
+      return '⏱ SPCLEP sau consulat · depinde de domiciliu'
+    case 'titlu-calatorie-es':
+    case 'titlu-calatorie-urgenta-es':
+      return '⏱ în aceeași zi la consulat'
+    case 'procura-generala-es':
+    case 'procura-pensie-es':
+    case 'procura-vanzare-es':
+      return '⏱ o singură vizită la consulat · în aceeași zi'
+    case 'transcriere-nastere-es':
+      return '⏱ 1 programare · termen variabil per consulat'
     case 'procura-vanzare-de':
     case 'procura-vanzare-it':
       return '⏱ 1 programare · o singură vizită la consulat · procura în aceeași zi'
@@ -939,7 +1303,8 @@ function getFeeInfo(
   guideId: GuideId | null,
   problemType: ProblemType | null,
   consulateName: string,
-  paymentMethod?: string
+  consulate?: ReturnType<typeof getConsulateById> | null,
+  hasDomiciliuRO?: boolean
 ): { title: string; subtitle: string } | null {
   if (!guideId || !problemType) return null
 
@@ -959,10 +1324,22 @@ function getFeeInfo(
     }
   }
 
-  if (problemType === 'pasaport' && paymentMethod) {
+  if (
+    problemType === 'pasaport' &&
+    consulate?.id === 'madrid' &&
+    hasDomiciliuRO === false &&
+    consulate.paymentPassportCrds
+  ) {
     return {
-      title: `Taxă: 53€ — ${getPaymentLabel(paymentMethod)}`,
-      subtitle: getPaymentSubtitle(consulateName, paymentMethod),
+      title: `Taxă: 60€ — ${getPaymentLabel(consulate.paymentMethod)}`,
+      subtitle: consulate.paymentPassportCrdsNote ?? consulate.paymentPassportNote ?? getPaymentSubtitle(consulateName, consulate.paymentMethod),
+    }
+  }
+
+  if (problemType === 'pasaport' && consulate?.paymentMethod) {
+    return {
+      title: `Taxă: 53€ — ${getPaymentLabel(consulate.paymentMethod)}`,
+      subtitle: getPaymentSubtitle(consulateName, consulate.paymentMethod),
     }
   }
 
@@ -1109,6 +1486,7 @@ function SituationCard({
   hasDomiciliuRO,
   isPrimulPasaport,
   bundesland,
+  region,
   consulateId,
 }: {
   guideId: GuideId | null
@@ -1116,12 +1494,14 @@ function SituationCard({
   hasDomiciliuRO?: boolean
   isPrimulPasaport?: boolean
   bundesland?: string
+  region?: string
   consulateId?: ConsulateId
 }) {
   const actRow = getActRow(guideId, problemType, isPrimulPasaport)
   const country = getGuideCountryCode(guideId)
-  const regionName = bundesland
-    ? getRegionOptionsByCountry(country).find((item) => item.code === bundesland)?.name ?? 'Regiune nespecificată'
+  const selectedRegion = region ?? bundesland
+  const regionName = selectedRegion
+    ? getRegionOptionsByCountry(country).find((item) => item.code === selectedRegion)?.name ?? selectedRegion
     : 'Regiune nespecificată'
   const consulate = consulateId ? getConsulateById(consulateId) : null
   const consulateShortName = consulateId
@@ -1137,9 +1517,17 @@ function SituationCard({
         trieste: 'Trieste',
         bari: 'Bari',
         catania: 'Catania',
+        madrid: 'Madrid',
+        barcelona: 'Barcelona',
+        valencia: 'Valencia',
+        sevilla: 'Sevilla',
+        bilbao: 'Bilbao',
+        zaragoza: 'Zaragoza',
+        ciudadreal: 'Ciudad Real',
+        almeria: 'Almeria',
       }[consulateId]
     : 'Consulat nespecificat'
-  const feeInfo = getFeeInfo(guideId, problemType, consulateShortName ?? 'Consulat', consulate?.paymentMethod)
+  const feeInfo = getFeeInfo(guideId, problemType, consulateShortName ?? 'Consulat', consulate, hasDomiciliuRO)
   const photoInfo = getPhotoInfo(guideId, problemType, consulate)
 
   return (
@@ -1296,6 +1684,7 @@ function DiagnosticResult({ data, sessionId }: { data: DiagnosticData; sessionId
           hasDomiciliuRO={situation.hasDomiciliuRO}
           isPrimulPasaport={situation.isPrimulPasaport}
           bundesland={situation.bundesland}
+          region={situation.region}
           consulateId={situation.consulate}
         />
       )}

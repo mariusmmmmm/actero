@@ -4,7 +4,7 @@
 // ─── ȚĂRI ────────────────────────────────────────────────────────────────────
 
 export type CountryStatus = 'available' | 'coming_soon' | 'date_announced'
-export type CountryCode = 'de' | 'it'
+export type CountryCode = 'de' | 'it' | 'es'
 
 export type Country = {
   code: CountryCode | string
@@ -44,11 +44,52 @@ export type ItalyRegionCode =
   | 'Puglia'
   | 'Sicilia'
 
-export type RegionCode = BundeslandCode | ItalyRegionCode
+export type SpainRegionCode =
+  | 'Comunidad de Madrid'
+  | 'Islas Canarias'
+  | 'Castilla y León - Ávila'
+  | 'Castilla y León - León'
+  | 'Castilla y León - Palencia'
+  | 'Castilla y León - Salamanca'
+  | 'Castilla y León - Segovia'
+  | 'Castilla y León - Soria'
+  | 'Castilla y León - Valladolid'
+  | 'Castilla y León - Zamora'
+  | 'Castilla y León - Burgos'
+  | 'Castilla-La Mancha - Guadalajara'
+  | 'Castilla-La Mancha - Toledo'
+  | 'Castilla-La Mancha - Ciudad Real'
+  | 'Castilla-La Mancha - Albacete'
+  | 'Castilla-La Mancha - Cuenca'
+  | 'Cataluña'
+  | 'Islas Baleares'
+  | 'Comunidad Valenciana'
+  | 'Andalucía - Huelva'
+  | 'Andalucía - Cádiz'
+  | 'Andalucía - Málaga'
+  | 'Andalucía - Sevilla'
+  | 'Andalucía - Córdoba'
+  | 'Extremadura'
+  | 'Ceuta'
+  | 'Melilla'
+  | 'Galicia'
+  | 'Principado de Asturias'
+  | 'Cantabria'
+  | 'País Vasco'
+  | 'Comunidad Foral de Navarra'
+  | 'La Rioja'
+  | 'Aragón'
+  | 'Andalucía - Almería'
+  | 'Andalucía - Granada'
+  | 'Andalucía - Jaén'
+  | 'Región de Murcia'
+
+export type RegionCode = BundeslandCode | ItalyRegionCode | SpainRegionCode
 
 export type GermanyConsulateId = 'muenchen' | 'bonn' | 'stuttgart' | 'berlin'
 export type ItalyConsulateId = 'roma' | 'milano' | 'bologna' | 'torino' | 'trieste' | 'bari' | 'catania'
-export type ConsulateId = GermanyConsulateId | ItalyConsulateId
+export type SpainConsulateId = 'madrid' | 'barcelona' | 'valencia' | 'sevilla' | 'bilbao' | 'zaragoza' | 'ciudadreal' | 'almeria'
+export type ConsulateId = GermanyConsulateId | ItalyConsulateId | SpainConsulateId
 
 export type ConsulateInfo = {
   countryCode: CountryCode
@@ -71,9 +112,11 @@ export type ConsulateInfo = {
   scheduleTravelDoc?: string
   paymentMethod: string      // ex: 'exclusiv EC-Karte' | 'exclusiv numerar'
   paymentPassport?: string
+  paymentPassportCrds?: string
   paymentNotarial?: string
   paymentNote?: string       // ex: IBAN pentru Stuttgart
   paymentPassportNote?: string
+  paymentPassportCrdsNote?: string
   paymentNotarialNote?: string
   postalPickup: boolean
   postalPickupUrl?: string
@@ -114,6 +157,8 @@ export type SituationFlags = {
   primulBuletin?: boolean
   documentPierdut?: 'pierdut' | 'furat' | 'distrus'
   tipActSolicitat?: 'CEI' | 'CIS'
+  isMinorBuletin?: boolean
+  isMajoratBuletin?: boolean
 
   // Path Titlu de călătorie
   actDisponibil?: 'pasaport-expirat' | 'buletin-expirat' | 'ambele'
@@ -121,7 +166,7 @@ export type SituationFlags = {
   tipDocumentLipsa?: 'pasaport' | 'buletin' | 'ambele'
 
   // Path Procură
-  scopProcura?: 'vanzare' | 'mostenire' | 'altceva'
+  scopProcura?: 'vanzare' | 'mostenire' | 'pensie' | 'altceva'
   areNotar?: boolean
   notarAles?: boolean
 
@@ -170,6 +215,23 @@ export type GuideId =
   | 'procura-mostenire-it'
   | 'procura-generala-it'
   | 'transcriere-nastere-it'
+  | 'pasaport-crds-es'
+  | 'pasaport-es-cu-domiciliu'
+  | 'pasaport-crds-es-pierdut'
+  | 'pasaport-es-cu-domiciliu-pierdut'
+  | 'pasaport-crds-pierdut-combinat-es'
+  | 'buletin-es-cu-domiciliu'
+  | 'buletin-es-cu-domiciliu-minor'
+  | 'buletin-es-majorat'
+  | 'buletin-es-fara-domiciliu-minor'
+  | 'buletin-es-fara-domiciliu'
+  | 'buletin-es-pierdut'
+  | 'titlu-calatorie-es'
+  | 'titlu-calatorie-urgenta-es'
+  | 'procura-generala-es'
+  | 'procura-pensie-es'
+  | 'procura-vanzare-es'
+  | 'transcriere-nastere-es'
 
 export type RouteId = 'route-a' | 'route-b' | 'route-a-it' | 'route-b-it'
 
