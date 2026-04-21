@@ -44,9 +44,25 @@ export function hasTrustedOrigin(req: NextRequest): boolean {
   }
 }
 
-export function getAccessTokenFromRequest(req: NextRequest): string | null {
-  const token = req.cookies.get(ACCESS_COOKIE_NAME)?.value?.trim()
-  return token || null
+export async function getAccessSessionIdFromRequest(req: NextRequest): Promise<string | null> {
+  const rawValue = req.cookies.get(ACCESS_COOKIE_NAME)?.value?.trim()
+
+  if (!rawValue) return null
+
+  const [sessionId, nonce, signature] = rawValue.split(':')
+
+  if (!isValidSessionId(sessionId) || !nonce || !signature) {
+    return null
+  }
+
+  const expectedSignature = await signOpaqueValue(`${sessionId}:${nonce}`)
+  if (!expectedSignature) return null
+
+  if (signature !== expectedSignature) {
+    return null
+  }
+
+  return sessionId
 }
 
 export async function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): Promise<string | null> {
@@ -73,6 +89,11 @@ export async function getCheckoutConfirmSessionIdFromRequest(req: NextRequest): 
 export function generateOpaqueToken(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(32))
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
+export async function hashAccessToken(token: string): Promise<string | null> {
+  if (!token) return null
+  return signOpaqueValue(`access:${token}`)
 }
 
 async function signOpaqueValue(value: string): Promise<string | null> {
@@ -103,8 +124,15 @@ export function getClientAddress(req: NextRequest): string {
   return forwardedFor || realIp || 'unknown'
 }
 
-export function setAccessCookie(response: NextResponse, accessToken: string) {
-  response.cookies.set(ACCESS_COOKIE_NAME, accessToken, {
+export async function setAccessCookie(response: NextResponse, sessionId: string) {
+  const nonce = generateOpaqueToken()
+  const signature = await signOpaqueValue(`${sessionId}:${nonce}`)
+
+  if (!signature) {
+    throw new Error('Missing ACTERO_COOKIE_SECRET or equivalent server secret')
+  }
+
+  response.cookies.set(ACCESS_COOKIE_NAME, `${sessionId}:${nonce}:${signature}`, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

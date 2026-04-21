@@ -2,6 +2,7 @@ import type Stripe from 'stripe'
 import { getBaseUrl } from '@/lib/base-url'
 import { sendGaMeasurementEvent } from '@/lib/ga-measurement'
 import { sendAccessEmail, sendFamilieEmail } from '@/lib/resend'
+import { generateOpaqueToken, hashAccessToken } from '@/lib/security'
 import { createClient } from '@/lib/supabase/server'
 
 export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Session) {
@@ -47,9 +48,18 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
     return { ok: true as const, reason: 'family_processed' }
   }
 
+  const accessToken = generateOpaqueToken()
+  const accessTokenHash = await hashAccessToken(accessToken)
+
+  if (!accessTokenHash) {
+    console.error('Stripe fulfillment: failed to hash access token')
+    return { ok: false as const, reason: 'token_hash_failed' }
+  }
+
   const { data: paidSession, error } = await supabase
     .from('user_sessions')
     .update({
+      access_token: accessTokenHash,
       is_paid: true,
       product_type: 'ghid',
       payment_reference: paymentId,
@@ -59,7 +69,7 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
       last_accessed_at: new Date().toISOString(),
     })
     .eq('id', sessionId)
-    .select('id, access_token, guide_id, document_type')
+    .select('id, guide_id, document_type')
     .single()
 
   if (error || !paidSession) {
@@ -67,7 +77,7 @@ export async function fulfillStripeCheckoutSession(session: Stripe.Checkout.Sess
     return { ok: false as const, reason: 'session_update_failed' }
   }
 
-  const accessUrl = `${getBaseUrl()}/ghid/access?token=${paidSession.access_token}`
+  const accessUrl = `${getBaseUrl()}/ghid/access?token=${accessToken}`
   await sendAccessEmail({ to: email, accessUrl, guideId: paidSession.guide_id })
   if (analyticsConsentGranted && gaClientId) {
     await sendGaMeasurementEvent({
@@ -118,10 +128,18 @@ async function handleFamiliePayment({
   tokenExpiry: Date
 }) {
   const baseUrl = getBaseUrl()
+  const primaryAccessToken = generateOpaqueToken()
+  const primaryAccessTokenHash = await hashAccessToken(primaryAccessToken)
+
+  if (!primaryAccessTokenHash) {
+    console.error('Stripe family fulfillment: failed to hash primary access token')
+    return
+  }
 
   const { data: session1, error: session1Error } = await supabase
     .from('user_sessions')
     .update({
+      access_token: primaryAccessTokenHash,
       is_paid: true,
       product_type: 'familie',
       payment_reference: paymentId,
@@ -131,7 +149,7 @@ async function handleFamiliePayment({
       last_accessed_at: new Date().toISOString(),
     })
     .eq('id', sessionId)
-    .select('id, access_token, guide_id, document_type')
+    .select('id, guide_id, document_type')
     .single()
 
   if (session1Error || !session1) {
@@ -141,15 +159,51 @@ async function handleFamiliePayment({
 
   const { data: existingFamilySessions } = await supabase
     .from('user_sessions')
-    .select('id, access_token')
+    .select('id')
     .eq('family_parent_id', session1.id)
 
-  const extraSessions: { id: string; access_token: string }[] = existingFamilySessions ?? []
+  const extraSessions: { id: string; accessToken: string }[] = []
+
+  for (const existingSession of existingFamilySessions ?? []) {
+    const nextAccessToken = generateOpaqueToken()
+    const nextAccessTokenHash = await hashAccessToken(nextAccessToken)
+
+    if (!nextAccessTokenHash) {
+      console.error('Stripe family fulfillment: failed to hash existing family access token')
+      continue
+    }
+
+    const { error: updateError } = await supabase
+      .from('user_sessions')
+      .update({
+        access_token: nextAccessTokenHash,
+        token_expires_at: tokenExpiry.toISOString(),
+        email: email || null,
+        last_accessed_at: new Date().toISOString(),
+      })
+      .eq('id', existingSession.id)
+
+    if (updateError) {
+      console.error('Stripe family fulfillment: existing session token update failed', updateError)
+      continue
+    }
+
+    extraSessions.push({ id: existingSession.id, accessToken: nextAccessToken })
+  }
 
   for (let i = extraSessions.length; i < 3; i++) {
+    const nextAccessToken = generateOpaqueToken()
+    const nextAccessTokenHash = await hashAccessToken(nextAccessToken)
+
+    if (!nextAccessTokenHash) {
+      console.error('Stripe family fulfillment: failed to hash extra family access token')
+      continue
+    }
+
     const { data, error } = await supabase
       .from('user_sessions')
       .insert({
+        access_token: nextAccessTokenHash,
         document_type: 'pasaport',
         country: 'de',
         situation: {},
@@ -160,7 +214,7 @@ async function handleFamiliePayment({
         email: email || null,
         token_expires_at: tokenExpiry.toISOString(),
       })
-      .select('id, access_token')
+      .select('id')
       .single()
 
     if (error || !data) {
@@ -168,14 +222,14 @@ async function handleFamiliePayment({
       continue
     }
 
-    extraSessions.push(data)
+    extraSessions.push({ id: data.id, accessToken: nextAccessToken })
   }
 
   const accessLinks = [
-    { nr: 1, url: `${baseUrl}/ghid/access?token=${session1.access_token}` },
+    { nr: 1, url: `${baseUrl}/ghid/access?token=${primaryAccessToken}` },
     ...extraSessions.slice(0, 3).map((s, i) => ({
       nr: i + 2,
-      url: `${baseUrl}/ghid/access?token=${s.access_token}`,
+      url: `${baseUrl}/ghid/access?token=${s.accessToken}`,
     })),
   ]
 

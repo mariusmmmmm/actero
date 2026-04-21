@@ -5,6 +5,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
+import { generateOpaqueToken, hashAccessToken } from '@/lib/security'
 import { createClient } from '@/lib/supabase/server'
 import { sendAccessEmail, sendFamilieEmail } from '@/lib/resend'
 
@@ -33,9 +34,17 @@ export async function POST(req: NextRequest) {
     tokenExpiry.setMonth(tokenExpiry.getMonth() + 6)
 
     if (type === 'familie') {
+      const primaryAccessToken = generateOpaqueToken()
+      const primaryAccessTokenHash = await hashAccessToken(primaryAccessToken)
+
+      if (!primaryAccessTokenHash) {
+        return NextResponse.json({ error: 'Primary token hash failed' }, { status: 500 })
+      }
+
       const { data: s1, error: e1 } = await supabase
         .from('user_sessions')
         .update({
+          access_token: primaryAccessTokenHash,
           is_paid: true,
           product_type: 'familie',
           payment_reference: `stripe_test_${Date.now()}`,
@@ -44,18 +53,26 @@ export async function POST(req: NextRequest) {
           token_expires_at: tokenExpiry.toISOString(),
         })
         .eq('id', sessionId)
-        .select('id, access_token, guide_id')
+        .select('id, guide_id')
         .single()
 
       if (e1 || !s1) {
         return NextResponse.json({ error: 'Session update failed', detail: e1 }, { status: 500 })
       }
 
-      const extraSessions: { id: string; access_token: string }[] = []
+      const extraSessions: { id: string; accessToken: string }[] = []
       for (let i = 0; i < 3; i++) {
+        const extraAccessToken = generateOpaqueToken()
+        const extraAccessTokenHash = await hashAccessToken(extraAccessToken)
+
+        if (!extraAccessTokenHash) {
+          continue
+        }
+
         const { data, error } = await supabase
           .from('user_sessions')
           .insert({
+            access_token: extraAccessTokenHash,
             document_type: 'pasaport',
             country: 'de',
             situation: {},
@@ -66,16 +83,16 @@ export async function POST(req: NextRequest) {
             email,
             token_expires_at: tokenExpiry.toISOString(),
           })
-          .select('id, access_token')
+          .select('id')
           .single()
-        if (!error && data) extraSessions.push(data)
+        if (!error && data) extraSessions.push({ id: data.id, accessToken: extraAccessToken })
       }
 
       const accessLinks = [
-        { nr: 1, url: `${baseUrl}/ghid/access?token=${s1.access_token}` },
+        { nr: 1, url: `${baseUrl}/ghid/access?token=${primaryAccessToken}` },
         ...extraSessions.map((s, i) => ({
           nr: i + 2,
-          url: `${baseUrl}/ghid/access?token=${s.access_token}`,
+          url: `${baseUrl}/ghid/access?token=${s.accessToken}`,
         })),
       ]
 
@@ -89,9 +106,17 @@ export async function POST(req: NextRequest) {
       })
     }
 
+    const singleAccessToken = generateOpaqueToken()
+    const singleAccessTokenHash = await hashAccessToken(singleAccessToken)
+
+    if (!singleAccessTokenHash) {
+      return NextResponse.json({ error: 'Token hash failed' }, { status: 500 })
+    }
+
     const { data: session, error } = await supabase
       .from('user_sessions')
       .update({
+        access_token: singleAccessTokenHash,
         is_paid: true,
         product_type: 'ghid',
         payment_reference: `stripe_test_${Date.now()}`,
@@ -100,14 +125,14 @@ export async function POST(req: NextRequest) {
         token_expires_at: tokenExpiry.toISOString(),
       })
       .eq('id', sessionId)
-      .select('id, access_token, guide_id')
+      .select('id, guide_id')
       .single()
 
     if (error || !session) {
       return NextResponse.json({ error: 'Session update failed', detail: error }, { status: 500 })
     }
 
-    const accessUrl = `${baseUrl}/ghid/access?token=${session.access_token}`
+    const accessUrl = `${baseUrl}/ghid/access?token=${singleAccessToken}`
     await sendAccessEmail({ to: email, accessUrl, guideId: session.guide_id })
 
     return NextResponse.json({

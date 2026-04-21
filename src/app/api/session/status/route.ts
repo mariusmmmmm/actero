@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import {
-  getAccessTokenFromRequest,
+  getAccessSessionIdFromRequest,
   isValidSessionId,
   NO_STORE_HEADERS,
 } from '@/lib/security'
@@ -13,13 +13,13 @@ import {
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const sessionId = searchParams.get('session')
-  const accessToken = getAccessTokenFromRequest(req)
+  const accessSessionId = await getAccessSessionIdFromRequest(req)
 
   if (!isValidSessionId(sessionId)) {
     return NextResponse.json({ isPaid: false }, { status: 400 })
   }
 
-  if (!accessToken) {
+  if (!accessSessionId) {
     return NextResponse.json({ isPaid: false }, { status: 401, headers: NO_STORE_HEADERS })
   }
 
@@ -27,12 +27,15 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await supabase
     .from('user_sessions')
-    .select('is_paid')
+    .select('id, is_paid')
     .eq('id', sessionId)
-    .eq('access_token', accessToken)
     .single()
 
   if (error || !data) {
+    return NextResponse.json({ isPaid: false }, { status: 404, headers: NO_STORE_HEADERS })
+  }
+
+  if (accessSessionId !== data.id) {
     return NextResponse.json({ isPaid: false }, { status: 404, headers: NO_STORE_HEADERS })
   }
 

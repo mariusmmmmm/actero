@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
     }
 
-    const rateLimit = enforceRateLimit(req, {
+    const rateLimit = await enforceRateLimit(req, {
       key: 'stripe-confirm-session',
       limit: 20,
       windowMs: 10 * 60 * 1000,
@@ -72,16 +72,16 @@ export async function POST(req: NextRequest) {
     const supabase = createClient()
     const { data: userSession, error } = await supabase
       .from('user_sessions')
-      .select('access_token, is_paid')
+      .select('id, is_paid')
       .eq('id', sessionId)
       .single()
 
-    if (error || !userSession?.is_paid || !userSession.access_token) {
+    if (error || !userSession?.is_paid) {
       return NextResponse.json({ error: 'Confirmation failed' }, { status: 500, headers: NO_STORE_HEADERS })
     }
 
     const response = NextResponse.json({ isPaid: true }, { headers: NO_STORE_HEADERS })
-    setAccessCookie(response, userSession.access_token)
+    await setAccessCookie(response, userSession.id)
     clearCheckoutConfirmCookie(response)
     return response
   } catch (error) {

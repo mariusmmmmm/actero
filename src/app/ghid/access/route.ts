@@ -6,6 +6,7 @@ import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import {
   generateOpaqueToken,
+  hashAccessToken,
   NO_STORE_HEADERS,
   setAccessCookie,
 } from '@/lib/security'
@@ -21,12 +22,19 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = createClient()
+  const hashedToken = await hashAccessToken(token)
+
+  if (!hashedToken) {
+    const response = NextResponse.redirect(new URL('/token-expirat', req.url))
+    response.headers.set('Cache-Control', NO_STORE_HEADERS['Cache-Control'])
+    return response
+  }
 
   // Caută sesiunea după token
   const { data: session, error } = await supabase
     .from('user_sessions')
-    .select('id, is_paid, token_expires_at, guide_id')
-    .eq('access_token', token)
+    .select('id, is_paid, token_expires_at, guide_id, access_token')
+    .eq('access_token', hashedToken)
     .single()
 
   if (error || !session) {
@@ -53,15 +61,22 @@ export async function GET(req: NextRequest) {
   }
 
   const rotatedAccessToken = generateOpaqueToken()
+  const rotatedAccessTokenHash = await hashAccessToken(rotatedAccessToken)
+
+  if (!rotatedAccessTokenHash) {
+    const response = NextResponse.redirect(new URL('/token-expirat', req.url))
+    response.headers.set('Cache-Control', NO_STORE_HEADERS['Cache-Control'])
+    return response
+  }
 
   const { data: rotatedSession, error: rotateError } = await supabase
     .from('user_sessions')
     .update({
-      access_token: rotatedAccessToken,
+      access_token: rotatedAccessTokenHash,
       last_accessed_at: new Date().toISOString(),
     })
     .eq('id', session.id)
-    .eq('access_token', token)
+    .eq('access_token', session.access_token)
     .select('id')
     .single()
 
@@ -75,7 +90,7 @@ export async function GET(req: NextRequest) {
     new URL(`/ghid/${session.id}`, req.url)
   )
 
-  setAccessCookie(response, rotatedAccessToken)
+  await setAccessCookie(response, session.id)
   response.headers.set('Cache-Control', NO_STORE_HEADERS['Cache-Control'])
 
   return response

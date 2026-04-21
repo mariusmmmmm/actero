@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
     }
 
-    const rateLimit = enforceRateLimit(req, {
+    const rateLimit = await enforceRateLimit(req, {
       key: 'ajutor',
       limit: 5,
       windowMs: 10 * 60 * 1000,

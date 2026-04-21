@@ -10,7 +10,7 @@ import { hasTrustedOrigin, NO_STORE_HEADERS } from '@/lib/security'
 import { enforceRateLimit } from '@/lib/rate-limit'
 
 const ALLOWED_PROBLEM_TYPES = new Set(['pasaport', 'buletin', 'titlu-calatorie', 'procura', 'transcriere-nastere'])
-const ALLOWED_COUNTRIES = new Set(['de', 'it'])
+const ALLOWED_COUNTRIES = new Set(['de', 'it', 'es'])
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
     }
 
-    const rateLimit = enforceRateLimit(req, {
+    const rateLimit = await enforceRateLimit(req, {
       key: 'create-session',
       limit: 20,
       windowMs: 10 * 60 * 1000,

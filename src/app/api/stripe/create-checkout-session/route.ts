@@ -4,7 +4,7 @@ import { getBaseUrl } from '@/lib/base-url'
 import { getStripe } from '@/lib/stripe'
 import { createClient } from '@/lib/supabase/server'
 import {
-  getAccessTokenFromRequest,
+  getAccessSessionIdFromRequest,
   hasTrustedOrigin,
   isValidSessionId,
   NO_STORE_HEADERS,
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: NO_STORE_HEADERS })
     }
 
-    const rateLimit = enforceRateLimit(req, {
+    const rateLimit = await enforceRateLimit(req, {
       key: 'stripe-create-checkout-session',
       limit: 10,
       windowMs: 10 * 60 * 1000,
@@ -67,11 +67,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Stripe price is not configured' }, { status: 500, headers: NO_STORE_HEADERS })
     }
 
-    const accessToken = getAccessTokenFromRequest(req)
+    const accessSessionId = await getAccessSessionIdFromRequest(req)
     const supabase = createClient()
     const { data: userSession, error } = await supabase
       .from('user_sessions')
-      .select('id, guide_id, document_type, email, is_paid, access_token')
+      .select('id, guide_id, document_type, email, is_paid')
       .eq('id', sessionId)
       .single()
 
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (userSession.is_paid) {
-      if (accessToken && userSession.access_token === accessToken) {
+      if (accessSessionId === userSession.id) {
         return NextResponse.json({
           url: `${getBaseUrl()}/ghid/${userSession.id}`,
         }, { headers: NO_STORE_HEADERS })
