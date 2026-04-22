@@ -254,7 +254,7 @@ export default function LlmOptimizedPage({
                 }}
                 className="inline-flex rounded-xl bg-gray-900 px-6 py-4 text-base font-bold text-white"
               >
-                Rezolvă gratuit →
+                {ctaLabel}
               </TrackedLink>
             </div>
           </section>
