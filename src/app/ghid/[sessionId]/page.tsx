@@ -10,6 +10,7 @@ import SiteHeader from '@/components/layout/SiteHeader'
 import ChecklistTab from '@/components/ghid/ChecklistTab'
 import TrackerTab from '@/components/ghid/TrackerTab'
 import ParteneriTab from '@/components/ghid/ParteneriTab'
+import StepFeedback from '@/components/ghid/StepFeedback'
 import { trackEvent, trackOnce, withAttribution } from '@/lib/analytics'
 import {
   localizeGuideTextForCountry,
@@ -46,6 +47,7 @@ type GhidPaidContent = {
 }
 
 type GhidTab = 'ghid' | 'checklist' | 'tracker' | 'parteneri'
+type StepFeedbackType = 'like' | 'dislike'
 
 const blockStyles: Record<string, string> = {
   info: 'bg-gray-50 border border-gray-200 text-gray-700',
@@ -2041,6 +2043,9 @@ function GhidPaidPageContent() {
   const [noteSaved, setNoteSaved] = useState(false)
   const [activeTab, setActiveTab] = useState<GhidTab>('ghid')
   const [isBootstrapping, setIsBootstrapping] = useState(true)
+  const [feedbackByStep, setFeedbackByStep] = useState<Record<number, StepFeedbackType>>({})
+  const [feedbackSubmittingStepId, setFeedbackSubmittingStepId] = useState<number | null>(null)
+  const [feedbackSavedStepId, setFeedbackSavedStepId] = useState<number | null>(null)
   const testGuideId = searchParams.get('guide') as GuideId | null
   const isDevGuidePreview =
     process.env.NODE_ENV !== 'production' &&
@@ -2119,6 +2124,42 @@ function GhidPaidPageContent() {
       cancelled = true
     }
   }, [isDevGuidePreview, router, sessionId, testGuideId])
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadStepFeedback() {
+      if (!sessionId || isDevGuidePreview) return
+
+      try {
+        const res = await fetch(`/api/guide-feedback?session=${sessionId}`, {
+          cache: 'no-store',
+        })
+
+        if (!res.ok) return
+
+        const data = await res.json() as {
+          items?: Array<{ stepId: number; feedbackType: StepFeedbackType }>
+        }
+
+        if (cancelled || !Array.isArray(data.items)) return
+
+        const nextState = Object.fromEntries(
+          data.items.map((item) => [item.stepId, item.feedbackType])
+        ) as Record<number, StepFeedbackType>
+
+        setFeedbackByStep(nextState)
+      } catch (error) {
+        console.error('Guide feedback load error:', error)
+      }
+    }
+
+    void loadStepFeedback()
+
+    return () => {
+      cancelled = true
+    }
+  }, [isDevGuidePreview, sessionId])
 
   useEffect(() => {
     if (content) setTotalSteps(content.steps.length)
@@ -2268,6 +2309,50 @@ function GhidPaidPageContent() {
       setNote(currentStepIndex, val)
       setNoteSaved(true)
     }, 800)
+  }
+
+  const handleStepFeedback = async (value: StepFeedbackType) => {
+    if (!sessionId || !activeGuideId || !stepSafe || isDevGuidePreview) return
+
+    setFeedbackSubmittingStepId(stepSafe.id)
+    setFeedbackSavedStepId(null)
+
+    try {
+      const res = await fetch('/api/guide-feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId,
+          stepId: stepSafe.id,
+          stepTitle: stepSafe.title,
+          feedbackType: value,
+        }),
+      })
+
+      if (!res.ok) {
+        throw new Error('Guide feedback save failed')
+      }
+
+      setFeedbackByStep((current) => ({
+        ...current,
+        [stepSafe.id]: value,
+      }))
+      setFeedbackSavedStepId(stepSafe.id)
+
+      trackEvent('paid_guide_step_feedback_submitted', withAttribution({
+        guide_id: activeGuideId,
+        problem_type: useAppStore.getState().problemType ?? undefined,
+        step_id: stepSafe.id,
+        step_title: stepSafe.shortLabel,
+        feedback_type: value,
+      }))
+    } catch (error) {
+      console.error('Guide feedback submit error:', error)
+    } finally {
+      setFeedbackSubmittingStepId(null)
+    }
   }
 
   return (
@@ -2468,6 +2553,15 @@ function GhidPaidPageContent() {
                     className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 placeholder-gray-300 resize-none focus:outline-none focus:border-gray-400"
                   />
                 </div>
+              )}
+
+              {!isDevGuidePreview && (
+                <StepFeedback
+                  selected={feedbackByStep[stepSafe.id] ?? null}
+                  isSubmitting={feedbackSubmittingStepId === stepSafe.id}
+                  isSaved={feedbackSavedStepId === stepSafe.id}
+                  onSelect={handleStepFeedback}
+                />
               )}
 
               {isLast && (
