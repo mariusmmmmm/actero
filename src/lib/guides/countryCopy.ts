@@ -1,6 +1,7 @@
 import type { CountryCode, GuideId, RouteId } from '@/types'
 
 export function getGuideCountryCode(guideId: string | null): CountryCode {
+  if (guideId?.endsWith('-uk')) return 'uk'
   if (guideId?.endsWith('-es')) return 'es'
   if (guideId?.endsWith('-it')) return 'it'
   return 'de'
@@ -12,12 +13,16 @@ export function getRouteCountryCode(routeId: string | null): CountryCode {
 }
 
 export function getCountryLabel(country: CountryCode): string {
+  if (country === 'uk') return 'Marea Britanie'
   if (country === 'it') return 'Italia'
   if (country === 'es') return 'Spania'
   return 'Germania'
 }
 
 export function getCountryResidenceDocs(country: CountryCode): string {
+  if (country === 'uk') {
+    return 'share code, pașaport britanic, ILR, NINo, council tax, P60, P45 sau alte dovezi acceptate de consulatul tău'
+  }
   if (country === 'it') {
     return 'carta d’identità italiană, certificato di residenza sau permesso di soggiorno'
   }
@@ -29,6 +34,7 @@ export function getCountryResidenceDocs(country: CountryCode): string {
 
 export function localizeGuideTextForCountry(text: string, country: CountryCode): string {
   if (country === 'de') return text
+  if (country === 'uk') return text
   if (country === 'es') {
     return text
       .replaceAll('Germania', 'Spania')
@@ -85,6 +91,7 @@ export function localizeGuideTextForCountry(text: string, country: CountryCode):
 
 export function localizeGuideTitleForCountry(title: string, country: CountryCode): string {
   if (country === 'de') return title
+  if (country === 'uk') return title.replaceAll('Germania', 'Marea Britanie')
   if (country === 'it') return title.replaceAll('Germania', 'Italia')
   return title.replaceAll('Germania', 'Spania')
 }

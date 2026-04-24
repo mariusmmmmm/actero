@@ -795,6 +795,370 @@ Object.assign(diagnosticMap, {
       { id: 6, label: 'Prezintă-te la consulat și ridică certificatul', locked: true },
     ],
   },
+  'pasaport-crds-uk': {
+    title: 'Pașaport românesc în Marea Britanie',
+    subtitle: 'Domiciliu înregistrat în UK (CRDS) — reînnoire sau prim pașaport cu domiciliu în UK',
+    warnings: [
+      'Taxa de pașaport este în GBP și se actualizează lunar — verifică suma exactă pe site-ul consulatului înainte de programare.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar (cash only).',
+      'Edinburgh: vineri programul se încheie la 12:00, iar ridicarea pașapoartelor se face Luni–Joi 15:00–17:00.',
+      'Termenul legal este de aproximativ 60 de zile lucrătoare; în practică poate varia după consulat.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport cu domiciliu în UK (CRDS)',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce documente îți trebuie', locked: false },
+      { id: 2, label: 'Dovada că locuiești în UK', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-uk-cu-domiciliu': {
+    title: 'Pașaport românesc în Marea Britanie',
+    subtitle: 'Domiciliu în România — reînnoire din UK',
+    warnings: [
+      'Cartea de identitate română trebuie să fie valabilă și la depunere, și la ridicarea pașaportului.',
+      'Taxa de pașaport este în GBP și se actualizează lunar — verifică suma exactă pe site-ul consulatului.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar.',
+      'Edinburgh: vineri programul se încheie la 12:00.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport cu domiciliu în România (reînnoire din UK)',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce documente îți trebuie', locked: false },
+      { id: 2, label: 'Verifică valabilitatea cărții de identitate', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-crds-uk-pierdut': {
+    title: 'Pașaport românesc pierdut sau furat în Marea Britanie',
+    subtitle: 'Domiciliu înregistrat în UK (CRDS) — pașaport dispărut',
+    warnings: [
+      'Dacă pașaportul a fost furat, ai nevoie de raportul poliției britanice în original + traducere autorizată în română.',
+      'Edinburgh: confirmă direct dacă se cere și apostila FCDO pe raportul de poliție.',
+      'Taxa de pașaport este în GBP și se actualizează lunar.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport CRDS pierdut sau furat în UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Pierdut sau furat — ce trebuie să faci imediat', locked: false },
+      { id: 2, label: 'Ce documente îți trebuie', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-uk-cu-domiciliu-pierdut': {
+    title: 'Pașaport românesc pierdut sau furat în Marea Britanie',
+    subtitle: 'Domiciliu în România — pașaport dispărut',
+    warnings: [
+      'Cartea de identitate română trebuie să fie valabilă și la depunere, și la ridicarea pașaportului.',
+      'Dacă pașaportul a fost furat, ai nevoie de raportul poliției britanice în original + traducere autorizată în română.',
+      'Edinburgh: confirmă direct dacă se cere și apostila FCDO pe raportul de poliție.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport domiciliu România pierdut sau furat din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Pierdut sau furat — ce trebuie să faci imediat', locked: false },
+      { id: 2, label: 'Verifică valabilitatea cărții de identitate', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-minor-crds-uk': {
+    title: 'Pașaport românesc pentru minor în Marea Britanie',
+    subtitle: 'Domiciliu înregistrat în UK (CRDS) — minor sub sau peste 14 ani',
+    warnings: [
+      'Cel puțin unul dintre părinți trebuie să aibă deja pașaport CRDS sau să solicite simultan unul cu minorul.',
+      'Minorul trebuie să aibă certificat de naștere românesc înainte de depunere.',
+      'Minorul trebuie să fie prezent personal la consulat pentru biometrie.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: '1 programare · minor + ambii părinți',
+    guideTitle: 'Pașaport minor cu domiciliu în UK (CRDS)',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Condiții obligatorii înainte de programare', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat cu minorul', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-minor-ro-uk': {
+    title: 'Pașaport românesc pentru minor în Marea Britanie',
+    subtitle: 'Domiciliu în România — minor aflat în UK',
+    warnings: [
+      'Certificatul de naștere britanic nu este acceptat direct — trebuie transcris mai întâi în registrele române.',
+      'Pentru minorii 14+, CI-ul trebuie să fie valabil și la depunere, și la ridicarea pașaportului.',
+      'Manchester: plata pentru pașaport se face exclusiv în numerar.',
+      'Edinburgh: vineri programul se încheie la 12:00.',
+    ],
+    estimatedWeeks: '10–14 săptămâni',
+    estimatedAppointments: '1 programare · minor + ambii părinți',
+    guideTitle: 'Pașaport minor cu domiciliu în România (din UK)',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică documentele necesare', locked: false },
+      { id: 2, label: 'Ce trebuie să știi în plus pentru minori 14+', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat cu minorul', locked: true },
+      { id: 6, label: 'Ridică pașaportul', locked: true },
+    ],
+  },
+  'pasaport-temporar-uk': {
+    title: 'Pașaport temporar românesc în Marea Britanie',
+    subtitle: 'Valabil 12 luni · pentru situații urgente justificate',
+    warnings: [
+      'Pașaportul temporar se eliberează numai în situații justificate legal, cu documente doveditoare.',
+      'Dacă nu există urgență, termenul poate fi același ca la pașaportul electronic.',
+      'Manchester: cererile se depun Luni–Joi 09:30–13:30 și plata este exclusiv numerar.',
+      'Edinburgh are taxă semnificativ mai mică pentru pașaport temporar decât Londra/Manchester.',
+    ],
+    estimatedWeeks: '~1 săptămână',
+    estimatedAppointments: 1,
+    guideTitle: 'Pașaport temporar în UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică dacă ești eligibil pentru pașaport temporar', locked: false },
+      { id: 2, label: 'Pregătește documentele justificative', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Ridică pașaportul temporar', locked: true },
+    ],
+  },
+  'titlu-calatorie-uk': {
+    title: 'Titlu de călătorie — adult în Marea Britanie',
+    subtitle: 'Fără document de călătorie valabil · gratuit · pentru întoarcerea în România',
+    warnings: [
+      'Titlul de călătorie este valabil 30 de zile și se folosește exclusiv pentru România.',
+      'La intrarea în România își pierde valabilitatea.',
+      'Manchester: programarea este obligatorie; pentru urgențe în 48h se trimite email.',
+      'Edinburgh: dacă pașaportul a fost furat, raportul de poliție cere apostilă FCDO + traducere.',
+    ],
+    estimatedWeeks: 'Aceeași zi',
+    estimatedAppointments: 1,
+    guideTitle: 'Titlu de călătorie adult în UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică dacă ai nevoie de titlu de călătorie', locked: false },
+      { id: 2, label: 'Ce documente trebuie să aduci', locked: false },
+      { id: 3, label: 'Programare sau prezentare directă', locked: true },
+      { id: 4, label: 'Ziua la consulat', locked: true },
+      { id: 5, label: 'Pleci în România cu titlul de călătorie', locked: true },
+    ],
+  },
+  'titlu-calatorie-minor-sub14-uk': {
+    title: 'Titlu de călătorie pentru minor sub 14 ani în Marea Britanie',
+    subtitle: 'Fără document valabil · gratuit · pentru întoarcerea în România',
+    warnings: [
+      'La Edinburgh toți minorii trebuie prezenți personal, inclusiv sub 14 ani.',
+      'La Londra și Manchester minorul sub 14 ani nu trebuie să fie prezent, dar ambii părinți trebuie să fie prezenți.',
+      'Certificatul de naștere britanic trebuie să fie forma lungă cu ambii părinți + apostilă FCDO.',
+      'Manchester: programare obligatorie.',
+    ],
+    estimatedWeeks: 'Aceeași zi',
+    estimatedAppointments: '1 programare · ambii părinți; Edinburgh: + minor',
+    guideTitle: 'Titlu de călătorie minor sub 14 ani în UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce documente sunt necesare pentru minor și părinți', locked: false },
+      { id: 2, label: 'Programare sau prezentare directă', locked: false },
+      { id: 3, label: 'Ziua la consulat', locked: true },
+      { id: 4, label: 'Plecați în România cu titlul de călătorie', locked: true },
+    ],
+  },
+  'titlu-calatorie-minor-14-18-uk': {
+    title: 'Titlu de călătorie pentru minor 14–18 ani în Marea Britanie',
+    subtitle: 'Minor prezent personal · gratuit · pentru întoarcerea în România',
+    warnings: [
+      'Minorul 14–18 ani trebuie să fie prezent personal la consulat la toate cele 3 consulate UK.',
+      'Certificatul de naștere britanic trebuie să fie forma lungă cu ambii părinți + apostilă FCDO.',
+      'Edinburgh: dacă pașaportul a fost furat, raportul de poliție cere apostilă FCDO + traducere.',
+      'Manchester: programare obligatorie.',
+    ],
+    estimatedWeeks: 'Aceeași zi',
+    estimatedAppointments: '1 programare · minor 14+ + ambii părinți',
+    guideTitle: 'Titlu de călătorie minor 14–18 ani în UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Ce documente sunt necesare', locked: false },
+      { id: 2, label: 'Programare sau prezentare directă', locked: false },
+      { id: 3, label: 'Ziua la consulat', locked: true },
+      { id: 4, label: 'Plecați în România cu titlul de călătorie', locked: true },
+    ],
+  },
+  'procura-ci-uk': {
+    title: 'Procura pentru reînnoirea cărții de identitate din UK',
+    subtitle: 'Adult care a avut deja CI sau buletin · autentificare la consulat · apoi depunere prin mandatar în România',
+    warnings: [
+      'Procura pentru CI poate fi autentificată doar la consulatul României; procurile făcute la notar britanic sau solicitor nu sunt acceptate la SPCLEP.',
+      'Ai nevoie de un act de identitate românesc valabil pentru autentificare. Dacă nu ai nici CI, nici pașaport valabil, consulatul poate elibera mai întâi titlul de călătorie la aceeași programare.',
+      'Numărul de fotografii diferă: Londra cere 6, iar Manchester și Edinburgh 5.',
+    ],
+    estimatedWeeks: '1–2 săptămâni pentru procură + termenele din România',
+    estimatedAppointments: 1,
+    guideTitle: 'Procura CI din Marea Britanie',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică dacă poți folosi procura CI', locked: false },
+      { id: 2, label: 'Ce documente și fotografii pregătești', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Autentifică procura la consulat', locked: true },
+      { id: 6, label: 'Persoana împuternicită depune actele în România', locked: true },
+    ],
+  },
+  'procura-generala-uk': {
+    title: 'Procură notarială și acte notariale în Marea Britanie',
+    subtitle: 'Autentificare procuri · declarații · legalizări · alternativă notar britanic',
+    warnings: [
+      'Consulatele nu autentifică direct contracte de vânzare-cumpărare, donații, divorțuri sau proceduri succesorale.',
+      'Prezența personală este obligatorie. Procurile nu se autentifică prin corespondență, fax sau email.',
+      'Manchester: actele notariale se trimit prin poștă, cu plic Royal Mail Special Delivery preplătit și cerere de expediere.',
+      'Cetățenii străini trebuie să fie însoțiți de traducător autorizat de Ministerul Justiției din România.',
+    ],
+    estimatedWeeks: 'Aceeași zi',
+    estimatedAppointments: 1,
+    guideTitle: 'Procura notarială din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Alege tipul de act notarial de care ai nevoie', locked: false },
+      { id: 2, label: 'Ce documente și date trebuie să ai pregătite', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Autentifică actul la consulat', locked: true },
+      { id: 6, label: 'Folosește procura în România', locked: true },
+    ],
+  },
+  'prima-ci-minor-uk': {
+    title: 'Prima carte de identitate pentru minor 14–18 ani în Marea Britanie',
+    subtitle: 'Depunere la consulat · act emis în România · termen de la 3 luni la 9 luni, după consulat',
+    warnings: [
+      'Prima carte de identitate nu se poate obține prin procură — minorul trebuie să se prezinte personal la consulat.',
+      'La Edinburgh, consulatul cere document justificativ britanic + 2 traduceri autorizate și, de regulă, prezența ambilor părinți.',
+      'Taxele pentru CI se achită în România, nu la consulat.',
+    ],
+    estimatedWeeks: '12–26 săptămâni',
+    estimatedAppointments: '1 prezență la consulat · minor + părinte/părinți',
+    guideTitle: 'Prima CI minor 14+ din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică dacă poți depune la consulat', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Achită taxele în România și primești CI prin poștă', locked: true },
+    ],
+  },
+  'prima-ci-adult-uk': {
+    title: 'Prima carte de identitate pentru adult 18+ în Marea Britanie',
+    subtitle: 'Nicio CI anterioară · depunere personală la consulat cu însoțitor',
+    warnings: [
+      'Prima carte de identitate nu se obține prin procură. Solicitantul trebuie să se prezinte personal, însoțit de un părinte sau de o altă persoană care îi certifică identitatea.',
+      'Termenul poate ajunge până la 6 luni, fiind necesară clarificarea cetățeniei în România.',
+      'Taxele pentru CI se achită în România, nu la consulat.',
+    ],
+    estimatedWeeks: 'până la 26 săptămâni (~6 luni)',
+    estimatedAppointments: '1 prezență la consulat · solicitant + 1 însoțitor',
+    guideTitle: 'Prima CI adult 18+ din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică dacă ești pe fluxul corect', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat cu însoțitorul', locked: true },
+      { id: 6, label: 'Achită taxele în România și primești CI', locked: true },
+    ],
+  },
+  'transcriere-nastere-minor-uk': {
+    title: 'Transcriere certificat de naștere britanic pentru minor',
+    subtitle: 'Formă lungă + apostilă FCDO · serviciu gratuit · certificatul românesc poate ieși în aceeași zi',
+    warnings: [
+      'Forma scurtă a certificatului britanic nu este acceptată; trebuie forma lungă, cu datele părinților.',
+      'Manchester și Edinburgh cer 2 exemplare originale ale traducerii autorizate; Londra cere 1.',
+      'Dacă părinții s-au căsătorit în UK înainte de naștere și căsătoria nu este transcrisă în România, transcrii întâi căsătoria.',
+    ],
+    estimatedWeeks: 'aceeași zi, dacă dosarul este complet',
+    estimatedAppointments: '1 prezență la consulat',
+    guideTitle: 'Transcriere naștere minor din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică ordinea corectă a transcrierilor', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Primești certificatul de naștere românesc', locked: true },
+    ],
+  },
+  'transcriere-nastere-adult-uk': {
+    title: 'Transcriere certificat de naștere britanic pentru adult 18+',
+    subtitle: 'Formă lungă + apostilă FCDO · serviciu gratuit · termen până la 6 luni',
+    warnings: [
+      'Pentru adulți, termenul poate fi până la 6 luni și nu este aceeași zi ca la minori.',
+      'Forma scurtă a certificatului britanic nu este acceptată; trebuie forma lungă, cu datele părinților.',
+      'Manchester și Edinburgh cer 2 exemplare originale ale traducerii autorizate; Londra cere 1.',
+    ],
+    estimatedWeeks: 'până la 26 săptămâni (~6 luni)',
+    estimatedAppointments: '1 prezență la consulat',
+    guideTitle: 'Transcriere naștere adult din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică situația ta înainte de programare', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Primești certificatul de naștere românesc', locked: true },
+    ],
+  },
+  'transcriere-casatorie-uk': {
+    title: 'Transcriere certificat de căsătorie britanic în Marea Britanie',
+    subtitle: 'Eliberat în aceeași zi · gratuit · ambii soți prezenți dacă ambii sunt români',
+    warnings: [
+      'Actele de stare civilă se transcriu în ordine cronologică. Pentru copii născuți după căsătorie, transcrieți întâi căsătoria.',
+      'Manchester și Edinburgh cer 2 exemplare ale traducerii; Londra cere 1.',
+      'Edinburgh cere original + 2 fotocopii pentru fiecare document.',
+      'Dacă ambii soți sunt cetățeni români, prezența ambilor este obligatorie.',
+    ],
+    estimatedWeeks: 'Aceeași zi',
+    estimatedAppointments: '1 prezență la consulat',
+    guideTitle: 'Transcriere căsătorie britanică din UK',
+    isRoute: false,
+    previewSteps: [
+      { id: 1, label: 'Verifică ordinea transcrierilor și situația anterioară', locked: false },
+      { id: 2, label: 'Ce documente sunt necesare', locked: false },
+      { id: 3, label: 'Fă programarea pe econsulat.ro', locked: true },
+      { id: 4, label: 'Pregătește-te pentru ziua programării', locked: true },
+      { id: 5, label: 'Prezintă-te la consulat', locked: true },
+      { id: 6, label: 'Primești certificatul de căsătorie românesc', locked: true },
+    ],
+  },
 } satisfies Partial<Record<string, DiagnosticData>>)
 
 // Date pentru Route-uri
@@ -969,11 +1333,11 @@ function getEmotionalCopy(
     return localize('Primul tău pașaport din Germania — iată exact ce trebuie să faci.', 'Ghidul tău e personalizat pentru situația ta exactă — nu o listă generică.')
   }
 
-  if (guideId === 'pasaport-minor-crds-de' || guideId === 'pasaport-minor-crds-it') {
+  if (guideId === 'pasaport-minor-crds-de' || guideId === 'pasaport-minor-crds-it' || guideId === 'pasaport-minor-crds-uk' || guideId === 'pasaport-minor-ro-uk') {
     return localize('Pașaportul copilului se rezolvă — iată pașii corecți pentru consulat.', 'Îți arătăm exact ce pregătești pentru minor, pentru părinți și pentru ziua programării.')
   }
 
-  if (guideId === 'pasaport-crds-de-pierdut' || guideId === 'pasaport-crds-it-pierdut') {
+  if (guideId === 'pasaport-crds-de-pierdut' || guideId === 'pasaport-crds-it-pierdut' || guideId === 'pasaport-crds-uk-pierdut') {
     return localize('Pașaportul CRDS pierdut sau furat se rezolvă — iată exact pașii.', 'Îți arătăm exact ce pregătești pentru consulat și ce se completează direct la ghișeu.')
   }
 
@@ -1074,6 +1438,18 @@ function getBadgeText(
       return '⏱ o singură vizită la consulat · 6–10 săptămâni'
     case 'pasaport-crds-es-pierdut':
       return '⏱ o singură vizită la consulat · 6–10 săptămâni'
+    case 'pasaport-crds-uk':
+      return '⏱ o singură vizită la consulat · 10–14 săptămâni'
+    case 'pasaport-crds-uk-pierdut':
+      return '⏱ o singură vizită la consulat · 10–14 săptămâni'
+    case 'pasaport-minor-crds-uk':
+    case 'pasaport-minor-ro-uk':
+      return '⏱ minor + părinți · 10–14 săptămâni'
+    case 'pasaport-temporar-uk':
+      return '⏱ o vizită la consulat · ~3 zile lucrătoare dacă urgența este acceptată'
+    case 'pasaport-uk-cu-domiciliu':
+    case 'pasaport-uk-cu-domiciliu-pierdut':
+      return '⏱ o singură vizită la consulat · 10–14 săptămâni'
     case 'pasaport-es-cu-domiciliu':
     case 'pasaport-es-cu-domiciliu-pierdut':
       return '⏱ o singură vizită la consulat · 4–8 săptămâni'
@@ -1099,13 +1475,30 @@ function getBadgeText(
       return '⏱ SPCLEP sau consulat · depinde de domiciliu'
     case 'titlu-calatorie-es':
     case 'titlu-calatorie-urgenta-es':
+    case 'titlu-calatorie-uk':
+    case 'titlu-calatorie-minor-sub14-uk':
+    case 'titlu-calatorie-minor-14-18-uk':
       return '⏱ în aceeași zi la consulat'
     case 'procura-generala-es':
     case 'procura-pensie-es':
     case 'procura-vanzare-es':
       return '⏱ o singură vizită la consulat · în aceeași zi'
+    case 'procura-ci-uk':
+      return '⏱ o singură vizită la consulat · procura în aceeași zi'
+    case 'procura-generala-uk':
+      return '⏱ o singură vizită la consulat · actul notarial în aceeași zi'
     case 'transcriere-nastere-es':
       return '⏱ 1 programare · termen variabil per consulat'
+    case 'transcriere-nastere-minor-uk':
+      return '⏱ 1 programare · certificatul se poate elibera în aceeași zi'
+    case 'transcriere-nastere-adult-uk':
+      return '⏱ 1 programare · termen până la 6 luni'
+    case 'transcriere-casatorie-uk':
+      return '⏱ 1 programare · gratuit · de regulă în aceeași zi'
+    case 'prima-ci-minor-uk':
+      return '⏱ 1 programare · 3–9 luni până la emitere'
+    case 'prima-ci-adult-uk':
+      return '⏱ 1 programare · până la 6 luni'
     case 'procura-vanzare-de':
     case 'procura-vanzare-it':
       return '⏱ 1 programare · o singură vizită la consulat · procura în aceeași zi'
@@ -1525,6 +1918,9 @@ function SituationCard({
         zaragoza: 'Zaragoza',
         ciudadreal: 'Ciudad Real',
         almeria: 'Almeria',
+        londra: 'Londra',
+        manchester: 'Manchester',
+        edinburgh: 'Edinburgh',
       }[consulateId]
     : 'Consulat nespecificat'
   const feeInfo = getFeeInfo(guideId, problemType, consulateShortName ?? 'Consulat', consulate, hasDomiciliuRO)

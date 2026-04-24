@@ -997,6 +997,404 @@ function checklistTranscriereNastere(consulate: ConsulateId | null, _s: Situatio
   ]
 }
 
+function checklistPasaportCrdsUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk1_pasaport', name: 'Pașaportul vechi', detail: 'Original · dacă există' },
+        { id: 'uk1_nastere', name: 'Certificat de naștere românesc', detail: 'Original' },
+        { id: 'uk1_rezidenta', name: 'Dovada rezidenței în UK', detail: 'Share code, pașaport britanic, ILR, NINo, council tax, P60/P45 sau alt document acceptat de consulatul tău' },
+        { id: 'uk1_ci', name: 'Carte de identitate românească', detail: 'Original · obligatorie dacă este primul pașaport cu domiciliu în UK' },
+        { id: 'uk1_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — fotografia se face biometric la ghișeu' },
+      ],
+    },
+    {
+      id: 'speciale',
+      title: 'Situații speciale',
+      items: [
+        { id: 'uk1_nume', name: 'Dacă ți-ai schimbat numele', detail: 'Certificat de căsătorie românesc sau sentință de divorț românească, după caz' },
+        { id: 'uk1_manchester', name: 'Dacă mergi la Manchester', detail: 'Pregătește și câte o xerocopie simplă din fiecare document și numerar în GBP' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportDomiciliuUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  void _c
+  void _s
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk2_ci', name: 'Carte de identitate românească valabilă', detail: 'Original · trebuie să fie valabilă și la depunere, și la ridicare' },
+        { id: 'uk2_pasaport', name: 'Pașaportul anterior', detail: 'Original · dacă există' },
+        { id: 'uk2_ci_prov', name: 'Dacă ai CI provizoriu', detail: 'Adu și certificatul de naștere românesc în original' },
+        { id: 'uk2_foto', name: 'Fotografii', detail: 'Nu sunt necesare separat — fotografia se face biometric la ghișeu' },
+      ],
+    },
+    {
+      id: 'speciale',
+      title: 'Înainte de programare',
+      items: [
+        { id: 'uk2_validitate', name: 'Verifică valabilitatea CI', detail: 'CI-ul trebuie să fie valabilă și la ridicarea pașaportului, peste ~60 de zile' },
+        { id: 'uk2_manchester', name: 'Dacă mergi la Manchester', detail: 'Pregătește și xerocopii din fiecare document + numerar în GBP' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportCrdsPierdutUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk3_nastere', name: 'Certificat de naștere românesc', detail: 'Original' },
+        { id: 'uk3_rezidenta', name: 'Dovada rezidenței în UK', detail: 'Document acceptat de consulatul tău' },
+        { id: 'uk3_id', name: 'Carte de identitate sau alt document de identificare', detail: 'Original · dacă îl mai ai' },
+      ],
+    },
+    {
+      id: 'pierdere_furt',
+      title: 'În funcție de situație',
+      items: [
+        { id: 'uk3_pierdut', name: 'Pașaport pierdut', detail: 'Declarația se completează direct la ghișeu' },
+        { id: 'uk3_furat', name: 'Pașaport furat', detail: 'Raport poliție britanică în original + traducere autorizată în română' },
+        { id: 'uk3_edinburgh', name: 'Dacă mergi la Edinburgh', detail: 'Confirmă direct dacă se cere și apostilarea raportului de poliție' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportDomiciliuPierdutUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk4_ci', name: 'Carte de identitate românească valabilă', detail: 'Original · trebuie să fie valabilă și la ridicare' },
+        { id: 'uk4_ci_prov', name: 'Dacă ai CI provizoriu', detail: 'Adu și certificatul de naștere românesc în original' },
+        { id: 'uk4_programare', name: 'Programare pe econsulat.ro', detail: 'Obligatorie pentru pașaport' },
+      ],
+    },
+    {
+      id: 'pierdere_furt',
+      title: 'În funcție de situație',
+      items: [
+        { id: 'uk4_pierdut', name: 'Pașaport pierdut', detail: 'Declarația se completează la ghișeu' },
+        { id: 'uk4_furat', name: 'Pașaport furat', detail: 'Raport poliție britanică în original + traducere autorizată în română' },
+        { id: 'uk4_edinburgh', name: 'Dacă mergi la Edinburgh', detail: 'Confirmă direct dacă se cere și apostilarea raportului de poliție' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportMinorCrdsUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'uk5_nastere', name: 'Certificat de naștere românesc al minorului', detail: 'Original · dacă are doar certificat britanic, faci întâi transcrierea' },
+        { id: 'uk5_pasaport', name: 'Pașaportul anterior al minorului', detail: 'Original · dacă există' },
+        { id: 'uk5_minor_prezenta', name: 'Prezența minorului', detail: 'Obligatorie la consulat pentru biometrie' },
+      ],
+    },
+    {
+      id: 'parinti',
+      title: 'Actele părinților',
+      items: [
+        { id: 'uk5_parinti_id', name: 'Actele de identitate ale ambilor părinți', detail: 'Original' },
+        { id: 'uk5_parinte_crds', name: 'Condiția CRDS parental', detail: 'Cel puțin un părinte are deja pașaport CRDS sau depune simultan cu minorul' },
+        { id: 'uk5_acord', name: 'Dacă vine un singur părinte', detail: 'Acord notarial, hotărâre de custodie recunoscută în România sau certificat de deces, după caz' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportMinorRoUk(_c: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk6_minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'uk6_nastere', name: 'Certificat de naștere românesc al minorului', detail: 'Original · certificatul britanic trebuie transcris mai întâi' },
+        { id: 'uk6_pasaport', name: 'Pașaportul anterior al minorului', detail: 'Original · dacă există' },
+        { id: 'uk6_ci_14', name: 'CI sau CI provizoriu pentru minor 14+', detail: 'Trebuie să fie valabil și la depunere, și la ridicare' },
+      ],
+    },
+    {
+      id: 'uk6_parinti',
+      title: 'Actele părinților',
+      items: [
+        { id: 'uk6_parinti_id', name: 'CI/pașapoarte valabile ale ambilor părinți', detail: 'Originale' },
+        { id: 'uk6_acord', name: 'Dacă vine un singur părinte', detail: 'Acord notarial, hotărâre recunoscută în România sau certificat de deces, după caz' },
+        { id: 'uk6_programare', name: 'Programare pe econsulat.ro', detail: 'Pașaport simplu electronic pentru minor cu domiciliul în România' },
+      ],
+    },
+  ]
+}
+
+function checklistPasaportTemporarUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk7_eligibilitate',
+      title: 'Eligibilitate și urgență',
+      items: [
+        { id: 'uk7_urgenta', name: 'Document justificativ pentru urgență', detail: 'Medical, familial, profesional, bilet iminent, dovadă viză sau file epuizate' },
+        { id: 'uk7_identitate', name: 'Act de identitate românesc disponibil', detail: 'CI, pașaport expirat sau alt document românesc cu fotografie' },
+        { id: 'uk7_cnp', name: 'CNP cunoscut', detail: 'Necesar dacă nu mai ai niciun document românesc disponibil' },
+      ],
+    },
+    {
+      id: 'uk7_consulat',
+      title: 'Reguli de consulat',
+      items: [
+        { id: 'uk7_manchester', name: consulate === 'manchester' ? 'Manchester: depunere Luni–Joi 09:30–13:30' : 'Programul consulatului ales', detail: consulate === 'manchester' ? 'Numerar obligatoriu și fără ridicare prin poștă' : 'Verifică taxa lunară și metoda de plată înainte de programare' },
+        { id: 'uk7_minor', name: 'Dacă solicitarea este pentru minor', detail: 'Se aplică și regulile de pașaport minor: minor + ambii părinți, acte și acorduri' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluCalatorieUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk8_identificare',
+      title: 'Identificare',
+      items: [
+        { id: 'uk8_doc', name: 'CI sau pașaport expirat', detail: 'Original, dacă îl ai' },
+        { id: 'uk8_alt', name: 'Alt document românesc cu fotografie sau CNP', detail: 'Permis românesc, livret militar sau CNP cunoscut' },
+        { id: 'uk8_furt', name: 'Dacă pașaportul a fost furat', detail: consulate === 'edinburgh' ? 'Raport poliție + apostilă FCDO + traducere autorizată' : 'Raport poliție britanică + traducere autorizată în română' },
+      ],
+    },
+    {
+      id: 'uk8_programare',
+      title: 'Programare / prezentare',
+      items: [
+        { id: 'uk8_manchester', name: consulate === 'manchester' ? 'Manchester: programare obligatorie' : 'Bilet pentru plecare în România', detail: consulate === 'manchester' ? 'Pentru plecare în 48h scrie la manchester.consul@mae.ro' : 'Londra/Edinburgh permit prezentare directă cu bilet în max 7 zile lucrătoare' },
+        { id: 'uk8_titlu', name: 'Titlul este gratuit', detail: 'Valabil 30 de zile și doar pentru călătoria în România' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluMinorSub14Uk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk9_minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'uk9_nastere', name: 'Certificat de naștere românesc sau britanic forma lungă', detail: 'Certificatul britanic trebuie să aibă ambii părinți + apostilă FCDO' },
+        { id: 'uk9_poze', name: consulate === 'edinburgh' ? 'Minor prezent personal la Edinburgh' : '2 fotografii tip pașaport ale minorului', detail: consulate === 'edinburgh' ? 'Fotografia se face biometric la consulat' : 'La Londra/Manchester minorul sub 14 ani nu trebuie prezent' },
+        { id: 'uk9_furt', name: 'Dacă documentul a fost furat', detail: consulate === 'edinburgh' ? 'Raport poliție + apostilă FCDO + traducere' : 'Raport poliție + traducere autorizată în română' },
+      ],
+    },
+    {
+      id: 'uk9_parinti',
+      title: 'Actele părinților',
+      items: [
+        { id: 'uk9_parinti_id', name: 'CI/pașapoarte valabile ale ambilor părinți', detail: 'Originale' },
+        { id: 'uk9_un_parinte', name: 'Dacă vine un singur părinte', detail: 'HJ recunoscută în România, acord notarial sau certificat de deces' },
+      ],
+    },
+  ]
+}
+
+function checklistTitluMinor1418Uk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk10_minor',
+      title: 'Documente pentru minor 14–18 ani',
+      items: [
+        { id: 'uk10_prezenta', name: 'Minorul este prezent personal', detail: 'Obligatoriu la toate cele 3 consulate UK' },
+        { id: 'uk10_nastere', name: 'Certificat de naștere românesc sau britanic forma lungă', detail: 'Certificatul britanic necesită apostilă FCDO' },
+        { id: 'uk10_foto', name: consulate === 'manchester' ? '2 fotografii tip pașaport' : 'Fotografie biometrică la consulat', detail: consulate === 'manchester' ? 'Fundal alb' : 'Nu este nevoie să aduci fotografii pentru Londra/Edinburgh' },
+      ],
+    },
+    {
+      id: 'uk10_parinti',
+      title: 'Părinți și situații speciale',
+      items: [
+        { id: 'uk10_parinti_id', name: 'Actele ambilor părinți', detail: 'CI și/sau pașapoarte valabile, în original' },
+        { id: 'uk10_furt', name: 'Dacă pașaportul minorului a fost furat', detail: consulate === 'edinburgh' ? 'Raport poliție + apostilă FCDO + traducere' : 'Raport poliție + traducere autorizată' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraCiUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  const photoCount = consulate === 'londra' ? '6 fotografii' : '5 fotografii'
+  return [
+    {
+      id: 'uk11_eligibilitate',
+      title: 'Condiții de bază',
+      items: [
+        { id: 'uk11_avut_ci', name: 'Ai avut anterior buletin sau carte de identitate', detail: 'Ghidul este pentru reînnoire / înlocuire, nu pentru prima CI' },
+        { id: 'uk11_act_valid', name: 'Act de identitate valabil', detail: 'CI românească sau pașaport românesc valabil, în original' },
+        { id: 'uk11_titlu', name: 'Fără act valabil?', detail: 'La aceeași programare poți primi mai întâi titlu de călătorie, apoi se autentifică procura' },
+      ],
+    },
+    {
+      id: 'uk11_documente',
+      title: 'Documente și fotografii',
+      items: [
+        { id: 'uk11_id', name: 'Actul tău de identitate valabil', detail: 'Original' },
+        { id: 'uk11_mandatar', name: 'Datele complete ale persoanei împuternicite', detail: 'Nume, CNP, seria și numărul CI, adresă, emitent' },
+        { id: 'uk11_foto', name: `${photoCount} tip buletin`, detail: '3×4 cm, fundal alb, bandă albă jos 7 mm, numele pe verso' },
+      ],
+    },
+  ]
+}
+
+function checklistProcuraGeneralaUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk16_identitate',
+      title: 'Identitate și date procură',
+      items: [
+        { id: 'uk16_id', name: 'CI sau pașaport românesc valabil', detail: 'Original · permisul de conducere și certificatul de naștere nu sunt acte de identitate pentru autentificare' },
+        { id: 'uk16_mandatar', name: 'Datele complete ale persoanei împuternicite', detail: 'Nume, CNP, serie/număr CI, emitent, adresă domiciliu' },
+        { id: 'uk16_obiect', name: 'Obiectul exact al procurii', detail: 'Pentru imobil: adresă, carte funciară, cadastru și scopul tranzacției' },
+      ],
+    },
+    {
+      id: 'uk16_consulat',
+      title: 'Reguli speciale',
+      items: [
+        { id: 'uk16_strain', name: 'Cetățean străin prezent la autentificare', detail: 'Traducător autorizat de Ministerul Justiției din România obligatoriu' },
+        { id: 'uk16_manchester', name: consulate === 'manchester' ? 'Manchester: plic Royal Mail Special Delivery' : 'Livrare / ridicare act notarial', detail: consulate === 'manchester' ? 'Plic preplătit + cerere de expediere prin poștă obligatorii' : 'Londra/Edinburgh pot elibera la ghișeu sau prin poștă dacă soliciți' },
+        { id: 'uk16_model', name: 'Model de procură de la notarul din România', detail: 'Opțional, dar recomandat pentru imobil sau operațiuni complexe' },
+      ],
+    },
+  ]
+}
+
+function checklistPrimaCiMinorUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk12_minor',
+      title: 'Documente pentru minor',
+      items: [
+        { id: 'uk12_nastere', name: 'Certificatul de naștere românesc al minorului', detail: 'Original' },
+        { id: 'uk12_foto', name: consulate === 'edinburgh' ? '4 fotografii 3×4 cm' : '2 fotografii 3×4 cm', detail: 'Fundal alb, bandă albă jos 7 mm' },
+        { id: 'uk12_domiciliu', name: 'Dovada adresei de domiciliu din România', detail: 'Titlu locativ sau documentele alternative acceptate de SPCLEP' },
+      ],
+    },
+    {
+      id: 'uk12_parinti',
+      title: 'Actele părinților / reprezentantului legal',
+      items: [
+        { id: 'uk12_parent_id', name: consulate === 'edinburgh' ? 'Actele de identitate ale ambilor părinți' : 'Actul de identitate al unui părinte sau al reprezentantului legal', detail: 'Original' },
+        { id: 'uk12_stare', name: 'Documente de stare civilă', detail: 'Certificat de căsătorie sau sentință de divorț / acord parental, după caz' },
+        { id: 'uk12_extra_edi', name: 'Edinburgh: document justificativ + 2 traduceri autorizate', detail: 'Document britanic care explică de ce minorul nu se poate deplasa în România' },
+      ],
+    },
+  ]
+}
+
+function checklistPrimaCiAdultUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk13_adult',
+      title: 'Documentele solicitantului',
+      items: [
+        { id: 'uk13_nastere', name: 'Certificatul de naștere românesc', detail: 'Original' },
+        { id: 'uk13_domiciliu', name: 'Dovada adresei de domiciliu din România', detail: 'Titlu locativ sau documentele alternative acceptate de SPCLEP' },
+        { id: 'uk13_foto', name: consulate === 'edinburgh' ? 'Fotografii 3×4 cm — verifică direct numărul exact' : '2 fotografii 3×4 cm', detail: 'Fundal alb, bandă albă jos 7 mm' },
+      ],
+    },
+    {
+      id: 'uk13_insotitor',
+      title: 'Însoțitorul obligatoriu',
+      items: [
+        { id: 'uk13_prezenta', name: 'Un părinte sau o terță persoană care îți certifică identitatea', detail: 'Trebuie să fie prezent/ă fizic la ghișeu' },
+        { id: 'uk13_decl', name: 'Declarația însoțitorului', detail: 'Se dă la ghișeu, în fața funcționarului consular' },
+      ],
+    },
+  ]
+}
+
+function checklistTranscriereMinorUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk14_obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk14_long', name: 'Certificat britanic de naștere forma lungă + apostilă FCDO', detail: 'Original · forma scurtă nu este acceptată' },
+        { id: 'uk14_trad', name: 'Traducere autorizată în română', detail: consulate === 'londra' ? '1 exemplar original' : '2 exemplare originale · certificatul și apostila trebuie traduse' },
+        { id: 'uk14_parent', name: 'Actul de identitate valabil al părintelui care depune', detail: 'Original' },
+      ],
+    },
+    {
+      id: 'uk14_speciale',
+      title: 'Situații speciale',
+      items: [
+        { id: 'uk14_casatorie', name: 'Căsătoria părinților transcrisă?', detail: 'Dacă părinții s-au căsătorit în UK înainte de naștere, transcrie mai întâi căsătoria' },
+        { id: 'uk14_14plus', name: 'Minor de 14+ ani', detail: consulate === 'edinburgh' ? 'Dacă nu are document românesc valabil, poate fi necesar titlul de călătorie înainte de transcriere' : 'Se prezintă personal, asistat de un părinte' },
+      ],
+    },
+  ]
+}
+
+function checklistTranscriereAdultUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  return [
+    {
+      id: 'uk15_obligatorii',
+      title: 'Documente obligatorii',
+      items: [
+        { id: 'uk15_long', name: 'Certificat britanic de naștere forma lungă + apostilă FCDO', detail: 'Original' },
+        { id: 'uk15_trad', name: 'Traducere autorizată în română', detail: consulate === 'londra' ? '1 exemplar original' : '2 exemplare originale · certificatul și apostila trebuie traduse' },
+        { id: 'uk15_id', name: 'Act de identitate valabil propriu', detail: 'CI sau pașaport în original' },
+      ],
+    },
+    {
+      id: 'uk15_complementar',
+      title: 'Documente complementare',
+      items: [
+        { id: 'uk15_parinti', name: 'Actele părinților și documentele de stare civilă relevante', detail: 'Certificat de căsătorie, certificate de naștere ale părinților sau sentință de divorț, după caz' },
+        { id: 'uk15_prenume', name: 'Dacă ai mai mult de 3 prenume', detail: 'Poate fi necesară o declarație scrisă a părinților privind prenumele care rămân în actul românesc' },
+      ],
+    },
+  ]
+}
+
+function checklistTranscriereCasatorieUk(consulate: ConsulateId | null, _s: SituationFlags): ChecklistSection[] {
+  const translationDetail = consulate === 'londra'
+    ? '1 exemplar original'
+    : '2 exemplare originale pentru Manchester / Edinburgh'
+  const copyDetail = consulate === 'edinburgh'
+    ? 'Original + 2 fotocopii per document'
+    : consulate === 'manchester'
+      ? 'Original + xerocopie per document'
+      : 'Originalele sunt baza dosarului'
+
+  return [
+    {
+      id: 'uk17_casatorie',
+      title: 'Certificat britanic și traducere',
+      items: [
+        { id: 'uk17_cert', name: 'Certificat de căsătorie britanic + apostilă FCDO', detail: `Original · ${copyDetail}` },
+        { id: 'uk17_trad', name: 'Traducere autorizată în română a certificatului și apostilei', detail: translationDetail },
+        { id: 'uk17_programare', name: 'Programare pe econsulat.ro', detail: 'Acte de stare civilă → Transcriere certificat de căsătorie' },
+      ],
+    },
+    {
+      id: 'uk17_soti',
+      title: 'Actele soților',
+      items: [
+        { id: 'uk17_id', name: 'CI/pașaport valabil al fiecărui soț prezent', detail: copyDetail },
+        { id: 'uk17_nastere', name: 'Certificatele de naștere ale soților', detail: 'Cetățean britanic: forma lungă, cu datele părinților' },
+        { id: 'uk17_anterior', name: 'Dacă a existat căsătorie anterioară', detail: 'Dovada divorțului / mențiunile înscrise în registrele române' },
+      ],
+    },
+  ]
+}
+
 // ── Generic fallback ──────────────────────────────────────────────────────────
 
 const CHECKLISTS: Record<string, ChecklistFn> = {
@@ -1041,6 +1439,23 @@ const CHECKLISTS: Record<string, ChecklistFn> = {
   'pasaport-crds-es-pierdut': checklistPasaportCrdsPierdutSpania,
   'pasaport-es-cu-domiciliu-pierdut': checklistPasaportDomiciliuRoPierdutSpania,
   'pasaport-crds-pierdut-combinat-es': checklistPasaportCrdsPierdutSpania,
+  'pasaport-crds-uk': checklistPasaportCrdsUk,
+  'pasaport-uk-cu-domiciliu': checklistPasaportDomiciliuUk,
+  'pasaport-crds-uk-pierdut': checklistPasaportCrdsPierdutUk,
+  'pasaport-uk-cu-domiciliu-pierdut': checklistPasaportDomiciliuPierdutUk,
+  'pasaport-minor-crds-uk': checklistPasaportMinorCrdsUk,
+  'pasaport-minor-ro-uk': checklistPasaportMinorRoUk,
+  'pasaport-temporar-uk': checklistPasaportTemporarUk,
+  'titlu-calatorie-uk': checklistTitluCalatorieUk,
+  'titlu-calatorie-minor-sub14-uk': checklistTitluMinorSub14Uk,
+  'titlu-calatorie-minor-14-18-uk': checklistTitluMinor1418Uk,
+  'procura-ci-uk': checklistProcuraCiUk,
+  'procura-generala-uk': checklistProcuraGeneralaUk,
+  'prima-ci-minor-uk': checklistPrimaCiMinorUk,
+  'prima-ci-adult-uk': checklistPrimaCiAdultUk,
+  'transcriere-nastere-minor-uk': checklistTranscriereMinorUk,
+  'transcriere-nastere-adult-uk': checklistTranscriereAdultUk,
+  'transcriere-casatorie-uk': checklistTranscriereCasatorieUk,
   'buletin-es-cu-domiciliu': checklistBuletinAdultSpania,
   'buletin-es-cu-domiciliu-minor': checklistBuletinMinorSpania,
   'buletin-es-majorat': checklistBuletinMajoratSpania,

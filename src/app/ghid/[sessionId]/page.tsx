@@ -1665,6 +1665,734 @@ Object.assign(ghidPaidMap, {
   },
   'procura-vanzare-es': clonePaidGuideForCountry(ghidPaidMap['procura-vanzare-de'], 'es', 'Procură pentru vânzarea unui imobil · Spania'),
   'transcriere-nastere-es': clonePaidGuideForCountry(ghidPaidMap['transcriere-nastere-de'], 'es', 'Transcriere certificat de naștere · Spania'),
+  'pasaport-crds-uk': {
+    title: 'Pașaport cu domiciliu în UK (CRDS) — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Intră pe econsulat.ro, alege serviciul pentru pașaport cu domiciliu în străinătate (CRDS) și selectează consulatul competent pentru regiunea ta.', type: 'action' },
+          { text: 'Încarcă documentele scanate și trimite cererea. După validare apare slotul de programare.', type: 'info' },
+          { text: 'Programările sunt gratuite. Nu apela la intermediari.', type: 'warning' },
+          { text: 'Dacă nu te poți programa online, consulatul tău poate avea și linie telefonică pentru asistență.', type: 'tip' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică originalele și, dacă mergi la Manchester, pregătește și câte o xerocopie simplă din fiecare document.', type: 'action' },
+          { text: 'Manchester: taxa de pașaport se plătește exclusiv în numerar. Londra acceptă în principal card. Edinburgh acceptă numerar sau card.', type: 'warning' },
+          { text: 'Fotografia se face biometric la ghișeu. Îmbracă-te în culori închise și evită ochelarii.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Mergi la data și ora programate cu toate documentele în original.', type: 'action' },
+          { text: 'La ghișeu depui cererea, confirmi datele și plătești taxa în GBP după regula consulatului tău.', type: 'info' },
+          { text: 'Edinburgh: vineri programul se încheie la 12:00, iar ridicarea pașapoartelor se face separat Luni–Joi 15:00–17:00.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică online sau direct la consulat când pașaportul a sosit.', type: 'action' },
+          { text: 'Londra și Manchester permit, în anumite condiții, primirea prin poștă dacă ai pregătit plicul preplătit la depunere.', type: 'info' },
+          { text: 'La Edinburgh, tratează ridicarea ca flux la ghișeu până când opțiunea prin poștă este confirmată explicit.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'pasaport-uk-cu-domiciliu': {
+    title: 'Pașaport cu domiciliu în România — reînnoire din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru pașaport simplu electronic — cetățeni adulți cu domiciliul în România.', type: 'action' },
+          { text: 'Încarcă actele scanate și trimite cererea. Programarea apare după validare.', type: 'info' },
+          { text: 'Nu selecta varianta CRDS dacă domiciliul tău oficial este încă în România.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică din nou data de expirare a CI și asigură-te că rămâne valabilă până la ridicarea pașaportului.', type: 'warning' },
+          { text: 'Manchester: pregătește numerar și xerocopii. Londra: card preferat. Edinburgh: numerar sau card.', type: 'info' },
+          { text: 'Dacă ai CI provizoriu, ia și certificatul de naștere românesc în original.', type: 'tip' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Mergi la data programată cu CI valabilă și cu pașaportul anterior, dacă îl mai ai.', type: 'action' },
+          { text: 'La ghișeu depui cererea, faci fotografia biometrică și plătești taxa în GBP.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Ridicarea se face după regula consulatului tău și doar cu un act de identitate încă valabil.', type: 'action' },
+          { text: 'Dacă CI-ul expiră înainte de ridicare, consulatul poate refuza predarea pașaportului nou.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'pasaport-crds-uk-pierdut': {
+    title: 'Pașaport CRDS pierdut sau furat în UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru pașaport CRDS și menționează că documentul anterior este pierdut sau furat.', type: 'action' },
+          { text: 'Dacă a fost furat, încarcă și raportul poliției + traducerea autorizată, dacă sistemul îți permite.', type: 'info' },
+          { text: 'Programările sunt gratuite și apar după validarea cererii.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Pentru furt: ia raportul poliției în original și traducerea autorizată în română.', type: 'action' },
+          { text: 'La Edinburgh, verifică direct dacă se cere și apostila FCDO pe raport.', type: 'warning' },
+          { text: 'Manchester: pregătește numerar și xerocopii din toate documentele.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Pentru pierdere semnezi declarația direct la ghișeu. Pentru furt predai și raportul poliției cu traducerea.', type: 'action' },
+          { text: 'La ghișeu depui cererea nouă de pașaport și plătești taxa în GBP după regula consulatului.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Urmărește statusul pașaportului și revino la ridicare după regula consulatului tău.', type: 'action' },
+          { text: 'Dacă ai nevoie urgentă de întoarcere în România, titlul de călătorie rămâne o procedură separată.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-uk-cu-domiciliu-pierdut': {
+    title: 'Pașaport domiciliu România pierdut sau furat din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru pașaport simplu electronic — cetățeni adulți cu domiciliul în România.', type: 'action' },
+          { text: 'Dacă documentul a fost furat, pregătește din start și raportul poliției cu traducerea autorizată.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Asigură-te că CI-ul tău rămâne valabil până la ridicarea pașaportului nou.', type: 'warning' },
+          { text: 'Pentru furt: raport poliție în original + traducere autorizată în română. La Edinburgh, confirmă dacă se cere și apostila.', type: 'warning' },
+          { text: 'Manchester: numerar + xerocopii din toate documentele.', type: 'info' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Pentru pierdere completezi declarația la ghișeu. Pentru furt predai și raportul tradus.', type: 'action' },
+          { text: 'La ghișeu depui cererea și plătești taxa în GBP după regula consulatului tău.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Revino la ridicare cu actul de identitate încă valabil și verifică dacă se aplică poșta sau doar ghișeul, în funcție de consulat.', type: 'action' },
+        ],
+      },
+    ],
+  },
+  'pasaport-minor-crds-uk': {
+    title: 'Pașaport minor cu domiciliu în UK (CRDS) — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru pașaport minor CRDS. Dacă un părinte solicită simultan CRDS, faceți două cereri separate în aceeași zi.', type: 'action' },
+          { text: 'Încarcă documentele minorului și ale părinților. După validare apare slotul de programare.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică prezența minorului și a părinților care trebuie să vină la ghișeu.', type: 'action' },
+          { text: 'Dacă lipsește un părinte, ia acordul autentificat sau documentul de custodie recunoscut în România.', type: 'warning' },
+          { text: 'Manchester: pregătește xerocopii și numerar pentru fiecare cerere care se plătește.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat cu minorul',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Minorul trebuie să fie prezent pentru biometrie. Pentru 14+ se verifică și CI-ul, dacă există.', type: 'action' },
+          { text: 'La ghișeu se dau acordurile parentale și se depune cererea cu toate actele în original.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Verifică după consulat dacă ridicarea se face la ghișeu sau dacă există opțiune prin poștă.', type: 'action' },
+          { text: 'Pentru Edinburgh, tratează ridicarea ca flux la ghișeu până când poșta este confirmată explicit.', type: 'note' },
+        ],
+      },
+    ],
+  },
+  'pasaport-minor-ro-uk': {
+    title: 'Pașaport minor cu domiciliu în România — din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Pașapoarte → Pașaport simplu electronic pentru cetățeni minori cu domiciliul în România.', type: 'action' },
+          { text: 'Încarcă certificatul de naștere românesc al minorului și actele părinților. După validare apare slotul de programare.', type: 'info' },
+          { text: 'Programările sunt gratuite. Nu folosi intermediari.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Pentru minorii 14+, verifică din nou că CI-ul va rămâne valabil până la ridicare.', type: 'warning' },
+          { text: 'Dacă vine un singur părinte, pregătește acordul autentificat, hotărârea recunoscută în România sau certificatul de deces.', type: 'warning' },
+          { text: 'Manchester: pregătește xerocopii și numerar pentru taxa de pașaport.', type: 'info' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat cu minorul',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Minorul este fotografiat biometric la consulat. Părinții semnează acordurile direct la ghișeu.', type: 'action' },
+          { text: 'Pentru 14+, funcționarul verifică actul de identitate al minorului și valabilitatea lui.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Pentru sub 14 ani, ridicarea se face de regulă de părinte. Pentru 14+, verifică cerința de prezență și CI valabilă.', type: 'action' },
+          { text: 'Dacă certificatul de naștere era britanic, pașaportul nu poate fi ridicat până nu există certificatul românesc în ordine.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'pasaport-temporar-uk': {
+    title: 'Pașaport temporar în UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Pașapoarte → Pașaport simplu temporar și încarcă documentul care dovedește urgența.', type: 'action' },
+          { text: 'La Manchester, depunerea pentru temporar este Luni–Joi 09:30–13:30 și nu există opțiune prin poștă.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Ia actul de identitate românesc disponibil, documentul justificativ al urgenței și orice document standard necesar pentru verificarea identității.', type: 'action' },
+          { text: 'Fără justificare clară, consulatul poate trata cererea ca neurgentă sau o poate respinge.', type: 'warning' },
+          { text: 'Verifică taxa lunară în GBP. Manchester este numerar obligatoriu.', type: 'info' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La ghișeu predai documentele, semnezi cererea și justifici urgența. Pentru pașaport temporar nu se preiau amprente.', type: 'action' },
+          { text: 'Pentru minor se aplică și regulile de prezență și acord parental pentru pașaport minor.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Ridică pașaportul temporar',
+        shortLabel: 'Ridicare',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Dacă urgența este acceptată, pașaportul se eliberează de regulă în aproximativ 3 zile lucrătoare.', type: 'info' },
+          { text: 'Pașaportul temporar este valabil 12 luni; verifică dacă este suficient pentru destinația și scopul tău.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'titlu-calatorie-uk': {
+    title: 'Titlu de călătorie adult în UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Programare sau prezentare directă',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Londra și Edinburgh permit prezentare fără programare dacă ai bilet către România în cel mult 7 zile lucrătoare.', type: 'info' },
+          { text: 'Manchester cere programare obligatorie. Pentru plecare în 48h, scrie la manchester.consul@mae.ro cu datele tale și biletul.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Ziua la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Funcționarul verifică identitatea, completezi declarația de pierdere dacă este cazul și ești fotografiat la consulat.', type: 'action' },
+          { text: 'Titlul de călătorie este gratuit. Dacă sunt necesare verificări suplimentare, eliberarea poate dura mai mult decât aceeași zi.', type: 'info' },
+          { text: 'Edinburgh cere apostilă FCDO pe raportul de poliție dacă documentul a fost furat.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Pleci în România — și ce urmează',
+        shortLabel: 'Plecare',
+        blocks: [
+          { text: 'Titlul este valabil doar pentru o călătorie în România și își pierde valabilitatea la intrare.', type: 'warning' },
+          { text: 'Pentru revenirea în UK, obține în România pașaport sau CI valabilă.', type: 'action' },
+        ],
+      },
+    ],
+  },
+  'titlu-calatorie-minor-sub14-uk': {
+    title: 'Titlu de călătorie minor sub 14 ani în UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Ziua la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La Londra și Manchester depun ambii părinți și predau 2 fotografii ale minorului. Minorul sub 14 ani nu trebuie să fie prezent.', type: 'info' },
+          { text: 'La Edinburgh minorul trebuie să fie prezent personal, iar fotografia se face biometric la consulat.', type: 'warning' },
+          { text: 'Dacă documentul minorului a fost furat, pregătește raportul de poliție; Edinburgh cere și apostilă FCDO.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Plecați în România — și ce urmează',
+        shortLabel: 'Plecare',
+        blocks: [
+          { text: 'Titlul de călătorie este gratuit, valabil 30 de zile și doar pentru intrarea în România.', type: 'info' },
+          { text: 'Pentru revenirea în UK, minorul va avea nevoie de pașaport valabil obținut în România sau ulterior prin consulat.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'titlu-calatorie-minor-14-18-uk': {
+    title: 'Titlu de călătorie minor 14–18 ani în UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Ziua la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Minorul 14+ depune cererea personal, asistat de ambii părinți. Se verifică documentele minorului și ale părinților.', type: 'action' },
+          { text: 'Manchester cere 2 fotografii tip pașaport. Londra și Edinburgh fac fotografia la consulat.', type: 'info' },
+          { text: 'Pentru furt, Edinburgh cere raport poliție apostilat FCDO și traducere autorizată.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Plecați în România — și ce urmează',
+        shortLabel: 'Plecare',
+        blocks: [
+          { text: 'Titlul se folosește o singură dată pentru intrarea în România și nu mai este valabil după aceea.', type: 'warning' },
+          { text: 'Planifică obținerea pașaportului sau CI-ului minorului în România înainte de revenirea în UK.', type: 'action' },
+        ],
+      },
+    ],
+  },
+  'procura-ci-uk': {
+    title: 'Procura pentru reînnoirea cărții de identitate din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Acte notariale → Procură CI. Dacă nu ai niciun act românesc valabil, rămâi tot pe această programare: titlul de călătorie se poate elibera înainte de autentificarea procurii, la aceeași prezentare.', type: 'action' },
+          { text: 'Programările sunt gratuite și apar după validarea cererii.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică fotografiile și datele persoanei împuternicite. Orice eroare în CNP, serie sau adresă întârzie tot dosarul în România.', type: 'action' },
+          { text: 'Manchester: pregătește numerar. Edinburgh: ia în calcul și verificarea CNARNN dacă ți se aplică.', type: 'warning' },
+          { text: 'Londra cere 6 fotografii, Manchester și Edinburgh 5.', type: 'info' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Autentifică procura la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La ghișeu se verifică identitatea, se redactează procura pe baza datelor mandatarului și semnezi în fața funcționarului consular.', type: 'action' },
+          { text: 'Procura se autentifică pe loc, iar taxa notarială se achită după regula consulatului tău.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Persoana împuternicită depune actele în România',
+        shortLabel: 'România',
+        blocks: [
+          { text: 'Trimite originalul procurii către persoana împuternicită și păstrează o copie scanată.', type: 'action' },
+          { text: 'Mandatarul depune dosarul la SPCLEP-ul competent și urmează instrucțiunile locale pentru taxa CI și ridicare.', type: 'info' },
+        ],
+      },
+    ],
+  },
+  'procura-generala-uk': {
+    title: 'Procura notarială din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Acte notariale și apoi tipul corect: procură specială, declarație notarială, legalizare copie, legalizare traducere sau legalizare semnătură.', type: 'action' },
+          { text: 'Pentru imobil, dacă notarul din România ți-a trimis modelul de procură, încarcă-l sau adu-l la programare.', type: 'tip' },
+          { text: 'Programările sunt gratuite și apar după validarea cererii.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Ia CI sau pașaport românesc valabil și datele complete ale mandatarului. Pentru imobil, pregătește cartea funciară, cadastru, adresă și scopul exact.', type: 'action' },
+          { text: 'Manchester: plic Royal Mail Special Delivery preplătit + cerere de expediere prin poștă sunt obligatorii.', type: 'warning' },
+          { text: 'Cetățenii străini trebuie să vină cu traducător autorizat de Ministerul Justiției din România.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Autentifică actul la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'Funcționarul verifică identitatea, redactează sau verifică procura, o citești integral și semnezi în fața funcționarului.', type: 'action' },
+          { text: 'La Manchester documentul se trimite prin poștă; la Londra și Edinburgh poate fi ridicat la ghișeu sau trimis dacă soliciți.', type: 'info' },
+          { text: 'Verifică toate datele din procură înainte să pleci sau înainte să fie expediată.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Folosește procura în România',
+        shortLabel: 'România',
+        blocks: [
+          { text: 'Trimite originalul procurii mandatarului din România, ideal prin curier sau poștă tracked.', type: 'action' },
+          { text: 'Mandatarul folosește procura la notar, autoritate sau instituția indicată, împreună cu propria CI și actele tranzacției.', type: 'info' },
+        ],
+      },
+    ],
+  },
+  'prima-ci-minor-uk': {
+    title: 'Prima carte de identitate minor 14+ din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru prima carte de identitate minor 14–18 ani și încarcă documentele scanate.', type: 'action' },
+          { text: 'Slotul de programare apare după aprobarea dosarului din econsulat.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică fotografiile și actele de stare civilă ale părinților. La Manchester pregătește și xerocopii.', type: 'action' },
+          { text: 'La Edinburgh ia și documentul justificativ britanic + cele 2 traduceri autorizate, dacă ți se aplică.', type: 'warning' },
+          { text: 'Taxele pentru CI nu se achită la consulat, ci ulterior în România.', type: 'note' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        blocks: [
+          { text: 'Minorul se prezintă personal la ghișeu împreună cu părintele sau părinții ceruți de consulatul competent.', type: 'action' },
+          { text: 'La ghișeu se verifică documentele, se preiau fotografiile și se semnează cererea.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Achită taxele în România și primești CI prin poștă',
+        shortLabel: 'Ridicare',
+        blocks: [
+          { text: 'Taxele pentru cartea de identitate se achită în România, prin Ghișeul.ro sau de o persoană care te ajută local.', type: 'action' },
+          { text: 'După procesare, actul este trimis prin poștă; termenul diferă după consulat și poate fi mai lung la Edinburgh.', type: 'info' },
+        ],
+      },
+    ],
+  },
+  'prima-ci-adult-uk': {
+    title: 'Prima carte de identitate adult 18+ din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege serviciul pentru prima carte de identitate adult 18+ și încarcă documentele scanate cerute de consulat.', type: 'action' },
+          { text: 'Programarea apare după aprobarea dosarului în econsulat.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică actele tale, fotografiile și documentul de identitate al însoțitorului. La Manchester pregătește și xerocopii.', type: 'action' },
+          { text: 'Însoțitorul trebuie să fie prezent fizic și să poată da declarația de certificare a identității la ghișeu.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat cu însoțitorul',
+        shortLabel: 'Consulat',
+        blocks: [
+          { text: 'La ghișeu depui documentele, însoțitorul dă declarația, iar funcționarul completează și validează cererea ta.', type: 'action' },
+          { text: 'Taxa consulară este gratuită, dar taxele pentru emiterea CI se achită ulterior în România.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Achită taxele în România și primești CI',
+        shortLabel: 'Ridicare',
+        blocks: [
+          { text: 'Achită taxa în România prin Ghișeul.ro sau printr-o persoană care te ajută local, apoi urmărește termenul de emitere.', type: 'action' },
+          { text: 'Pentru acest flux, termenul poate ajunge până la 6 luni.', type: 'warning' },
+        ],
+      },
+    ],
+  },
+  'transcriere-nastere-minor-uk': {
+    title: 'Transcrierea certificatului de naștere pentru minor din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Transcriere certificat de naștere — minor și încarcă certificatul britanic long form, apostila și traducerea autorizată.', type: 'action' },
+          { text: 'La Edinburgh, dacă trebuie și transcrierea căsătoriei, fă programări separate și începe cu căsătoria.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică originalele și numărul de exemplare ale traducerii: Londra cere 1, Manchester și Edinburgh 2.', type: 'action' },
+          { text: 'Dacă minorul are 14+ ani și mergi la Edinburgh, confirmă din timp dacă are nevoie de titlu de călătorie înainte de transcriere.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La ghișeu depui dosarul, se verifică datele părinților și se semnează cererea de transcriere.', type: 'action' },
+          { text: 'Dacă dosarul este complet, certificatul românesc poate fi emis în aceeași zi.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Primești certificatul de naștere românesc',
+        shortLabel: 'Ridicare',
+        blocks: [
+          { text: 'Verifică toate datele de pe certificatul românesc imediat ce îl primești.', type: 'action' },
+          { text: 'După transcriere poți continua cu pașaportul minorului sau cu prima CI, dacă vârsta o permite.', type: 'tip' },
+        ],
+      },
+    ],
+  },
+  'transcriere-nastere-adult-uk': {
+    title: 'Transcrierea certificatului de naștere pentru adult din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Transcriere certificat de naștere — adult 18+ și încarcă certificatul britanic long form, apostila și traducerea autorizată.', type: 'action' },
+          { text: 'Dacă trebuie mai întâi transcrisă căsătoria părinților, rezolvă acea etapă înainte de a solicita programarea pentru naștere.', type: 'warning' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Verifică originalele și numărul de exemplare ale traducerii: Londra cere 1, Manchester și Edinburgh 2.', type: 'action' },
+          { text: 'Pregătește și documentele de stare civilă suplimentare dacă există neconcordanțe de nume sau situații de divorț / recăsătorire.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La ghișeu depui dosarul, se verifică situația de cetățenie și se înregistrează cererea de transcriere.', type: 'action' },
+          { text: 'Serviciul este gratuit, dar termenul poate ajunge până la 6 luni.', type: 'info' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Primești certificatul de naștere românesc',
+        shortLabel: 'Ridicare',
+        blocks: [
+          { text: 'Urmărește dosarul și verifică datele de pe certificatul românesc imediat ce îl primești.', type: 'action' },
+          { text: 'După transcriere poți continua cu prima CI adult sau cu alte documente românești care cer certificatul actualizat.', type: 'tip' },
+        ],
+      },
+    ],
+  },
+  'transcriere-casatorie-uk': {
+    title: 'Transcriere căsătorie britanică din UK — Ghid complet',
+    steps: [
+      {
+        id: 3,
+        title: 'Fă programarea pe econsulat.ro',
+        shortLabel: 'Programare',
+        hasConsulateCard: true,
+        actionItem: { label: 'Deschide econsulat.ro', href: 'https://econsulat.ro' },
+        blocks: [
+          { text: 'Alege Acte de stare civilă → Transcriere certificat de căsătorie și încarcă certificatul britanic, apostila și traducerea.', type: 'action' },
+          { text: 'Dacă ambii soți sunt români, programarea poate fi pe numele unuia, dar ambii trebuie să fie prezenți la ghișeu.', type: 'warning' },
+          { text: 'Programările sunt gratuite.', type: 'info' },
+        ],
+      },
+      {
+        id: 4,
+        title: 'Pregătește-te pentru ziua programării',
+        shortLabel: 'Pregătire',
+        blocks: [
+          { text: 'Londra: 1 traducere autorizată. Manchester și Edinburgh: 2 traduceri autorizate. Edinburgh: original + 2 fotocopii per document.', type: 'warning' },
+          { text: 'Verifică ordinea cronologică: dacă aveți copii născuți după căsătorie, transcrierea căsătoriei vine înaintea transcrierii nașterii.', type: 'info' },
+          { text: 'Dacă există căsătorie anterioară, pregătește dovada divorțului sau mențiunile înscrise în registrele române.', type: 'warning' },
+        ],
+      },
+      {
+        id: 5,
+        title: 'Prezintă-te la consulat',
+        shortLabel: 'Consulat',
+        hasConsulateCard: true,
+        blocks: [
+          { text: 'La ghișeu depui originalele, traducerile și copiile cerute, completezi cererea și declarația pe propria răspundere.', type: 'action' },
+          { text: 'Serviciul este gratuit. Dacă dosarul este complet, certificatul românesc se eliberează în aceeași zi.', type: 'info' },
+          { text: 'Dacă există neconcordanțe de nume sau date, cererea poate fi respinsă până corectezi actele.', type: 'warning' },
+        ],
+      },
+      {
+        id: 6,
+        title: 'Primești certificatul de căsătorie românesc',
+        shortLabel: 'Certificat RO',
+        blocks: [
+          { text: 'Verifică imediat datele de pe certificatul românesc: nume, prenume, data și locul căsătoriei.', type: 'action' },
+          { text: 'Cu certificatul românesc poți continua schimbarea numelui pe CI/pașaport sau transcrierea nașterii copiilor.', type: 'tip' },
+        ],
+      },
+    ],
+  },
 } satisfies Partial<Record<GuideId, GhidPaidContent>>)
 
 function getFullPaidGuideContent(guideId: GuideId): GhidPaidContent | null {
@@ -1799,16 +2527,27 @@ function ConsulateCard({
     guideId === 'titlu-calatorie-it' ||
     guideId === 'titlu-calatorie-urgenta-it' ||
     guideId === 'titlu-calatorie-es' ||
-    guideId === 'titlu-calatorie-urgenta-es'
+    guideId === 'titlu-calatorie-urgenta-es' ||
+    guideId === 'titlu-calatorie-uk' ||
+    guideId === 'titlu-calatorie-minor-sub14-uk' ||
+    guideId === 'titlu-calatorie-minor-14-18-uk'
   const isGeneralPoaGuide =
     guideId === 'procura-generala-de' ||
     guideId === 'procura-generala-it' ||
     guideId === 'procura-generala-es' ||
-    guideId === 'procura-pensie-es'
+    guideId === 'procura-pensie-es' ||
+    guideId === 'procura-ci-uk' ||
+    guideId === 'procura-generala-uk'
   const isBirthTranscriptionGuide =
     guideId === 'transcriere-nastere-de' ||
     guideId === 'transcriere-nastere-it' ||
-    guideId === 'transcriere-nastere-es'
+    guideId === 'transcriere-nastere-es' ||
+    guideId === 'transcriere-nastere-minor-uk' ||
+    guideId === 'transcriere-nastere-adult-uk' ||
+    guideId === 'transcriere-casatorie-uk'
+  const isUkAdultBirthTranscriptionGuide = guideId === 'transcriere-nastere-adult-uk'
+  const isUkMarriageTranscriptionGuide = guideId === 'transcriere-casatorie-uk'
+  const isTemporaryPassportGuide = guideId === 'pasaport-temporar-uk'
   const isCrdsPassportGuide =
     guideId === 'pasaport-crds-de' ||
     guideId === 'pasaport-crds-de-pierdut' ||
@@ -1820,7 +2559,10 @@ function ConsulateCard({
     guideId === 'pasaport-minor-crds-it' ||
     guideId === 'pasaport-crds-es' ||
     guideId === 'pasaport-crds-es-pierdut' ||
-    guideId === 'pasaport-crds-pierdut-combinat-es'
+    guideId === 'pasaport-crds-pierdut-combinat-es' ||
+    guideId === 'pasaport-crds-uk' ||
+    guideId === 'pasaport-crds-uk-pierdut' ||
+    guideId === 'pasaport-minor-crds-uk'
   const displaySchedule = isBirthTranscriptionGuide
     ? card.scheduleDeponere
     : isTravelTitleGuide
@@ -1847,15 +2589,23 @@ function ConsulateCard({
       ? 'gratuit'
     : isGeneralPoaGuide
       ? card.paymentNotarial ?? 'procură obișnuită = gratuită · dacă se aplică taxa de 3€, plata se face prin virament în avans'
+    : isTemporaryPassportGuide
+      ? card.paymentPassportTemporary ?? card.paymentPassport ?? card.paymentMethod
     : card.paymentPassport ?? card.paymentMethod
   const displayPaymentNote = isTravelTitleGuide
     ? 'Titlul de călătorie se eliberează fără taxă consulară.'
     : isBirthTranscriptionGuide
-      ? card.starecivilaTermen
+      ? isUkMarriageTranscriptionGuide
+        ? 'Transcrierea căsătoriei este gratuită și certificatul românesc se eliberează de regulă în aceeași zi dacă dosarul este complet.'
+        : isUkAdultBirthTranscriptionGuide
+          ? 'Transcrierea nașterii pentru adult este gratuită, dar termenul poate ajunge până la 6 luni.'
+          : card.starecivilaTermen
         ? `Termen orientativ confirmat: ${card.starecivilaTermen}.`
         : 'Termenul exact nu este publicat oficial la acest consulat; verifică direct înainte de drum și ia în calcul un interval orientativ apropiat de practicile obișnuite ale misiunii.'
     : isGeneralPoaGuide
       ? card.paymentNotarialNote ?? 'Dacă se aplică taxa de 3€ RNNEPR, verifică IBAN-ul și momentul plății înainte de programare.'
+    : isTemporaryPassportGuide
+      ? card.paymentPassportTemporaryNote ?? card.paymentPassportNote ?? card.paymentNote
     : card.paymentPassportNote ?? card.paymentNote
   const displayWarnings = isTravelTitleGuide
     ? isItaly
@@ -2312,7 +3062,18 @@ function GhidPaidPageContent() {
   }
 
   const handleStepFeedback = async (value: StepFeedbackType) => {
-    if (!sessionId || !activeGuideId || !stepSafe || isDevGuidePreview) return
+    if (!activeGuideId || !stepSafe) return
+
+    if (isDevGuidePreview) {
+      setFeedbackByStep((current) => ({
+        ...current,
+        [stepSafe.id]: value,
+      }))
+      setFeedbackSavedStepId(stepSafe.id)
+      return
+    }
+
+    if (!sessionId) return
 
     setFeedbackSubmittingStepId(stepSafe.id)
     setFeedbackSavedStepId(null)
@@ -2555,14 +3316,12 @@ function GhidPaidPageContent() {
                 </div>
               )}
 
-              {!isDevGuidePreview && (
-                <StepFeedback
-                  selected={feedbackByStep[stepSafe.id] ?? null}
-                  isSubmitting={feedbackSubmittingStepId === stepSafe.id}
-                  isSaved={feedbackSavedStepId === stepSafe.id}
-                  onSelect={handleStepFeedback}
-                />
-              )}
+              <StepFeedback
+                selected={feedbackByStep[stepSafe.id] ?? null}
+                isSubmitting={feedbackSubmittingStepId === stepSafe.id}
+                isSaved={feedbackSavedStepId === stepSafe.id}
+                onSelect={handleStepFeedback}
+              />
 
               {isLast && (
                 <div className="mt-6 bg-green-50 border-2 border-green-400 rounded-2xl p-5 text-center">

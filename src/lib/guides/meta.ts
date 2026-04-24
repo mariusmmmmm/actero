@@ -75,6 +75,23 @@ const GUIDE_TITLES: Record<string, string> = {
   'procura-pensie-es': 'procura pentru pensie din Spania',
   'procura-vanzare-es': 'procura pentru vânzarea unui imobil din Spania',
   'transcriere-nastere-es': 'transcrierea certificatului de naștere din Spania',
+  'pasaport-crds-uk': 'pașaportul CRDS din Marea Britanie',
+  'pasaport-uk-cu-domiciliu': 'pașaportul din Marea Britanie cu domiciliu în România',
+  'pasaport-crds-uk-pierdut': 'pașaportul CRDS pierdut sau furat din Marea Britanie',
+  'pasaport-uk-cu-domiciliu-pierdut': 'pașaportul pierdut sau furat din Marea Britanie',
+  'pasaport-minor-crds-uk': 'pașaportul CRDS pentru copil din Marea Britanie',
+  'pasaport-minor-ro-uk': 'pașaportul pentru copil cu domiciliu în România din Marea Britanie',
+  'pasaport-temporar-uk': 'pașaportul temporar din Marea Britanie',
+  'titlu-calatorie-uk': 'titlul de călătorie pentru adult din Marea Britanie',
+  'titlu-calatorie-minor-sub14-uk': 'titlul de călătorie pentru minor sub 14 ani din Marea Britanie',
+  'titlu-calatorie-minor-14-18-uk': 'titlul de călătorie pentru minor 14–18 ani din Marea Britanie',
+  'procura-ci-uk': 'procura pentru reînnoirea cărții de identitate din Marea Britanie',
+  'procura-generala-uk': 'procura notarială din Marea Britanie',
+  'prima-ci-minor-uk': 'prima carte de identitate pentru minor 14+ din Marea Britanie',
+  'prima-ci-adult-uk': 'prima carte de identitate pentru adult 18+ din Marea Britanie',
+  'transcriere-nastere-minor-uk': 'transcrierea certificatului de naștere pentru minor din Marea Britanie',
+  'transcriere-nastere-adult-uk': 'transcrierea certificatului de naștere pentru adult din Marea Britanie',
+  'transcriere-casatorie-uk': 'transcrierea certificatului de căsătorie britanic din Marea Britanie',
 }
 
 const CROSS_SELL: Record<string, CrossSellGuide[]> = {
@@ -189,5 +206,73 @@ const CROSS_SELL: Record<string, CrossSellGuide[]> = {
   'transcriere-nastere-es': [
     { guideId: 'buletin-es-fara-domiciliu-minor', title: 'CI minor cu domiciliu în Spania', subtitle: 'După transcriere, dacă ai nevoie de CI pentru copil', icon: '🪪' },
     { guideId: 'pasaport-crds-es', title: 'Pașaport CRDS', subtitle: 'Un pas următor frecvent după transcriere', icon: '📕' },
+  ],
+  'pasaport-crds-uk': [
+    { guideId: 'pasaport-crds-uk-pierdut', title: 'Pașaport pierdut sau furat', subtitle: 'Dacă documentul nu mai este la tine', icon: '⚠️' },
+    { guideId: 'pasaport-minor-crds-uk', title: 'Pașaport minor CRDS', subtitle: 'Dacă rezolvi și actele copilului', icon: '🧒' },
+  ],
+  'pasaport-uk-cu-domiciliu': [
+    { guideId: 'pasaport-uk-cu-domiciliu-pierdut', title: 'Pașaport pierdut sau furat', subtitle: 'Fluxul pentru lipsă de document', icon: '⚠️' },
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport CRDS', subtitle: 'Dacă vrei schimbarea domiciliului pe UK', icon: '📕' },
+  ],
+  'pasaport-crds-uk-pierdut': [
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport CRDS standard', subtitle: 'Pentru reînnoire fără pierdere sau furt', icon: '📕' },
+    { guideId: 'pasaport-minor-crds-uk', title: 'Pașaport minor CRDS', subtitle: 'Dacă rezolvi și cazul copilului', icon: '🧒' },
+  ],
+  'pasaport-uk-cu-domiciliu-pierdut': [
+    { guideId: 'pasaport-uk-cu-domiciliu', title: 'Pașaport standard', subtitle: 'Reînnoire fără pierdere sau furt', icon: '📕' },
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport CRDS', subtitle: 'Dacă vrei trecerea domiciliului pe UK', icon: '🧭' },
+  ],
+  'pasaport-minor-crds-uk': [
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport CRDS adult', subtitle: 'Necesită cel puțin un părinte cu CRDS sau cerere simultană', icon: '📕' },
+    { guideId: 'pasaport-crds-uk-pierdut', title: 'Pașaport adult pierdut/furat', subtitle: 'Dacă rezolvi în paralel și actele unui părinte', icon: '⚠️' },
+  ],
+  'pasaport-minor-ro-uk': [
+    { guideId: 'pasaport-minor-crds-uk', title: 'Pașaport minor CRDS', subtitle: 'Dacă vrei domiciliul copilului trecut în UK', icon: '🧒' },
+    { guideId: 'transcriere-nastere-minor-uk', title: 'Transcriere naștere minor', subtitle: 'Dacă minorul are doar certificat britanic', icon: '🧾' },
+  ],
+  'pasaport-temporar-uk': [
+    { guideId: 'titlu-calatorie-uk', title: 'Titlu de călătorie', subtitle: 'Dacă scopul este doar întoarcerea în România', icon: '⚡' },
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport electronic CRDS', subtitle: 'Dacă nu ai o urgență justificată legal', icon: '📕' },
+  ],
+  'titlu-calatorie-uk': [
+    { guideId: 'pasaport-temporar-uk', title: 'Pașaport temporar', subtitle: 'Dacă trebuie să călătorești și în altă destinație, nu doar România', icon: '⚡' },
+    { guideId: 'pasaport-crds-uk', title: 'Pașaport electronic', subtitle: 'Documentul permanent după întoarcerea în România', icon: '📕' },
+  ],
+  'titlu-calatorie-minor-sub14-uk': [
+    { guideId: 'titlu-calatorie-minor-14-18-uk', title: 'Titlu minor 14–18 ani', subtitle: 'Dacă minorul are deja 14 ani', icon: '🧒' },
+    { guideId: 'pasaport-minor-ro-uk', title: 'Pașaport minor', subtitle: 'Documentul permanent după întoarcerea în România', icon: '📕' },
+  ],
+  'titlu-calatorie-minor-14-18-uk': [
+    { guideId: 'titlu-calatorie-minor-sub14-uk', title: 'Titlu minor sub 14 ani', subtitle: 'Dacă solicitarea este pentru un copil mai mic', icon: '🧒' },
+    { guideId: 'pasaport-minor-ro-uk', title: 'Pașaport minor', subtitle: 'Documentul permanent după întoarcerea în România', icon: '📕' },
+  ],
+  'procura-ci-uk': [
+    { guideId: 'prima-ci-adult-uk', title: 'Prima carte de identitate 18+', subtitle: 'Dacă nu ai avut niciodată CI sau buletin', icon: '🪪' },
+    { guideId: 'pasaport-uk-cu-domiciliu', title: 'Pașaport cu domiciliu în România', subtitle: 'Dacă rezolvi și pașaportul din UK', icon: '📕' },
+  ],
+  'procura-generala-uk': [
+    { guideId: 'procura-ci-uk', title: 'Procura pentru CI', subtitle: 'Dacă scopul este reînnoirea cărții de identitate', icon: '🪪' },
+    { guideId: 'titlu-calatorie-uk', title: 'Titlu de călătorie', subtitle: 'Dacă nu ai act românesc valabil pentru autentificare', icon: '⚡' },
+  ],
+  'prima-ci-minor-uk': [
+    { guideId: 'transcriere-nastere-minor-uk', title: 'Transcriere naștere minor', subtitle: 'Dacă îți lipsește certificatul românesc al minorului', icon: '🧾' },
+    { guideId: 'pasaport-minor-crds-uk', title: 'Pașaport minor CRDS', subtitle: 'Pasul următor frecvent după actele de stare civilă', icon: '📕' },
+  ],
+  'prima-ci-adult-uk': [
+    { guideId: 'transcriere-nastere-adult-uk', title: 'Transcriere naștere adult', subtitle: 'Dacă ai nevoie mai întâi de certificatul românesc', icon: '🧾' },
+    { guideId: 'procura-ci-uk', title: 'Procura pentru reînnoirea CI', subtitle: 'Dacă ai avut deja CI sau buletin și vrei varianta mai simplă', icon: '📜' },
+  ],
+  'transcriere-nastere-minor-uk': [
+    { guideId: 'pasaport-minor-crds-uk', title: 'Pașaport minor CRDS', subtitle: 'Pasul următor frecvent după transcriere și obținerea CNP-ului', icon: '📕' },
+    { guideId: 'prima-ci-minor-uk', title: 'Prima CI minor 14+', subtitle: 'Dacă minorul a împlinit 14 ani și are nevoie de carte de identitate', icon: '🪪' },
+  ],
+  'transcriere-nastere-adult-uk': [
+    { guideId: 'prima-ci-adult-uk', title: 'Prima CI adult 18+', subtitle: 'Dacă ai nevoie și de primul act de identitate românesc', icon: '🪪' },
+    { guideId: 'procura-ci-uk', title: 'Procura pentru reînnoirea CI', subtitle: 'Dacă de fapt ai avut anterior buletin sau carte de identitate', icon: '📜' },
+  ],
+  'transcriere-casatorie-uk': [
+    { guideId: 'transcriere-nastere-minor-uk', title: 'Transcriere naștere minor', subtitle: 'Dacă aveți copii născuți după căsătorie', icon: '🧾' },
+    { guideId: 'procura-ci-uk', title: 'Procura pentru CI', subtitle: 'Dacă vrei schimbarea numelui pe cartea de identitate', icon: '🪪' },
   ],
 }

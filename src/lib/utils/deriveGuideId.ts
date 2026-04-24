@@ -9,7 +9,7 @@ export function deriveGuideId(
   country: string,
   situation: SituationFlags
 ): WizardResult {
-  if (country !== 'de' && country !== 'it' && country !== 'es') {
+  if (country !== 'de' && country !== 'it' && country !== 'es' && country !== 'uk') {
     return { type: 'waitlist', country, service: problemType }
   }
 
@@ -34,6 +34,10 @@ function deriveGuideIdByCountry(
       if (country === 'it') return guide('transcriere-nastere-it')
       if (country === 'de') return guide('transcriere-nastere-de')
       if (country === 'es') return guide('transcriere-nastere-es')
+      if (country === 'uk') return guide(situation.isMinorTranscriere ? 'transcriere-nastere-minor-uk' : 'transcriere-nastere-adult-uk')
+      return { type: 'waitlist', country, service: problemType }
+    case 'transcriere-casatorie':
+      if (country === 'uk') return guide('transcriere-casatorie-uk')
       return { type: 'waitlist', country, service: problemType }
     default:
       return { type: 'waitlist', country, service: problemType }
@@ -43,6 +47,32 @@ function deriveGuideIdByCountry(
 // ─── PATH 1 — PAȘAPORT ───────────────────────────────────────────────────────
 
 function derivePasaport(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'uk') {
+    if (s.pasaportCrdsCase === 'temporar') {
+      return guide('pasaport-temporar-uk')
+    }
+
+    if (s.hasDomiciliuRO) {
+      if (s.isMinorPasaport) {
+        return guide('pasaport-minor-ro-uk')
+      }
+      if (s.pasaportStatus === 'pierdut-furat') {
+        return guide('pasaport-uk-cu-domiciliu-pierdut')
+      }
+      return guide('pasaport-uk-cu-domiciliu')
+    }
+
+    if (s.isMinorPasaport) {
+      return guide('pasaport-minor-crds-uk')
+    }
+
+    if (s.pasaportStatus === 'pierdut-furat') {
+      return guide('pasaport-crds-uk-pierdut')
+    }
+
+    return guide('pasaport-crds-uk')
+  }
+
   if (country === 'es') {
     if (s.pasaportStatus === 'pierdut-furat') {
       if (s.hasDomiciliuRO) {
@@ -97,6 +127,17 @@ function derivePasaport(country: CountryCode, s: SituationFlags): WizardResult {
 // ─── PATH 2 — BULETIN ────────────────────────────────────────────────────────
 
 function deriveBuletin(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'uk') {
+    if (s.buletinStatus === 'niciodata') {
+      return guide(s.isMinorBuletin ? 'prima-ci-minor-uk' : 'prima-ci-adult-uk')
+    }
+
+    if (s.hasDomiciliuRO && !s.isMinorBuletin) {
+      return guide('procura-ci-uk')
+    }
+
+    return { type: 'waitlist', country, service: 'buletin' }
+  }
   if (country === 'es') {
     if (s.buletinStatus === 'pierdut-furat-distrus') {
       return guide('buletin-es-pierdut')
@@ -140,6 +181,11 @@ function deriveBuletin(country: CountryCode, s: SituationFlags): WizardResult {
 // ─── PATH 3 — TITLU DE CĂLĂTORIE ─────────────────────────────────────────────
 
 function deriveTitluCalatorie(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'uk') {
+    if (s.titluSolicitant === 'minor-sub14') return guide('titlu-calatorie-minor-sub14-uk')
+    if (s.titluSolicitant === 'minor-14-18') return guide('titlu-calatorie-minor-14-18-uk')
+    return guide('titlu-calatorie-uk')
+  }
   if (country === 'es') {
     if (s.urgenta === 'sub-3-zile') return guide('titlu-calatorie-urgenta-es')
     return guide('titlu-calatorie-es')
@@ -153,6 +199,9 @@ function deriveTitluCalatorie(country: CountryCode, s: SituationFlags): WizardRe
 // ─── PATH 4 — PROCURĂ ────────────────────────────────────────────────────────
 
 function deriveProcura(country: CountryCode, s: SituationFlags): WizardResult {
+  if (country === 'uk') {
+    return guide('procura-generala-uk')
+  }
   if (country === 'es') {
     switch (s.scopProcura) {
       case 'vanzare':

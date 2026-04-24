@@ -11,9 +11,17 @@ const ADMIN_ROUTES = ['/admin']
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
+  const isDevGuidePreview =
+    process.env.NODE_ENV !== 'production' &&
+    pathname === '/ghid/test-session' &&
+    !!req.nextUrl.searchParams.get('guide')
 
   // Linkul din email trebuie să poată seta cookie-ul înainte să protejăm ghidul paid.
-  if (pathname === '/ghid/access') {
+  if (pathname === '/ghid/access' || pathname === '/ghid/admin-preview') {
+    return NextResponse.next()
+  }
+
+  if (isDevGuidePreview) {
     return NextResponse.next()
   }
 

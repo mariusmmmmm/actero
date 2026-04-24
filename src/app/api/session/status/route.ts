@@ -6,6 +6,7 @@ import type { NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import {
   getAccessSessionIdFromRequest,
+  getAdminPreviewSessionIdFromRequest,
   isValidSessionId,
   NO_STORE_HEADERS,
 } from '@/lib/security'
@@ -14,6 +15,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const sessionId = searchParams.get('session')
   const accessSessionId = await getAccessSessionIdFromRequest(req)
+  const adminPreviewSessionId = await getAdminPreviewSessionIdFromRequest(req)
 
   if (!isValidSessionId(sessionId)) {
     return NextResponse.json({ isPaid: false }, { status: 400 })
@@ -39,5 +41,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ isPaid: false }, { status: 404, headers: NO_STORE_HEADERS })
   }
 
-  return NextResponse.json({ isPaid: data.is_paid }, { headers: NO_STORE_HEADERS })
+  const isAdminPreview = adminPreviewSessionId === data.id
+
+  return NextResponse.json({ isPaid: data.is_paid || isAdminPreview }, { headers: NO_STORE_HEADERS })
 }

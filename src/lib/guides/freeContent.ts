@@ -1493,4 +1493,633 @@ Object.assign(ghidFreeMap, {
       'Care este pasul următor după transcriere',
     ],
   },
+  'pasaport-crds-uk': {
+    title: 'Pașaport cu domiciliu în UK (CRDS)',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce documente îți trebuie',
+        blocks: [
+          { type: 'info', text: 'Consulatul din UK procesează cereri de pașaport românesc pentru cetățenii cu domiciliu înregistrat în Marea Britanie (CRDS).' },
+          { type: 'info', text: 'Documente obligatorii: formularul de cerere, pașaportul vechi dacă există, certificatul de naștere românesc și dovada rezidenței în UK.' },
+          { type: 'warning', text: 'Dacă ți-ai schimbat numele, ai nevoie și de documentul românesc corespunzător: certificat de căsătorie sau sentință de divorț, după caz.' },
+          { type: 'note', text: 'Fotografia se face biometric la consulat — nu aduci fotografii de acasă.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Dovada că locuiești în UK',
+        blocks: [
+          { type: 'info', text: 'Londra și Manchester acceptă, fără traducere, documente precum share code, pașaport britanic, ILR, NINo, council tax, P60 sau P45.' },
+          { type: 'info', text: 'Unele documente se acceptă doar cu traducere autorizată în română: contract de muncă, dovadă HMRC, adeverință de școlarizare sau contract de chirie.' },
+          { type: 'warning', text: 'Edinburgh are listă proprie și nu te baza pe share code fără să verifici direct regula publicată de consulat.' },
+          { type: 'tip', text: 'La Manchester pregătește și xerocopii, iar taxa de pașaport se plătește exclusiv în numerar.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea corect pe econsulat.ro pentru UK',
+      'Ce taxă plătești la Londra, Manchester sau Edinburgh',
+      'Regula de numerar-only la Manchester și fereastra de ridicare din Edinburgh',
+      'Ce verifici înainte de ridicare sau expediere prin poștă',
+    ],
+  },
+  'pasaport-uk-cu-domiciliu': {
+    title: 'Pașaport cu domiciliu în România — reînnoire din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce documente îți trebuie',
+        blocks: [
+          { type: 'info', text: 'Dacă domiciliul tău oficial este în România, poți reînnoi pașaportul la consulatul din UK fără dovadă de rezidență britanică.' },
+          { type: 'info', text: 'Documente obligatorii: cartea de identitate sau buletinul valabil și pașaportul anterior, dacă îl mai ai.' },
+          { type: 'tip', text: 'CI provizoriu este acceptat, dar trebuie însoțit de certificatul de naștere românesc în original.' },
+          { type: 'warning', text: 'Dacă ți-ai schimbat numele, CI-ul trebuie să reflecte deja noul nume înainte de programare.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Verifică valabilitatea cărții de identitate',
+        blocks: [
+          { type: 'warning', text: 'CI-ul trebuie să fie valabil atât la depunerea cererii, cât și la ridicarea pașaportului, peste aproximativ 60 de zile.' },
+          { type: 'tip', text: 'Dacă CI expiră curând, rezolvă mai întâi procura sau fluxul pentru înnoirea cărții de identitate în România.' },
+          { type: 'info', text: 'Dacă vrei să treci domiciliul pe UK, ghidul corect este cel pentru pașaport CRDS.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum alegi serviciul corect pe econsulat.ro pentru domiciliu în România',
+      'Taxa și metoda de plată în UK, inclusiv numerar-only la Manchester',
+      'Cum verifici că CI-ul rămâne valabil până la ridicare',
+      'Regulile de ridicare sau expediere după consulat',
+    ],
+  },
+  'pasaport-crds-uk-pierdut': {
+    title: 'Pașaport CRDS pierdut sau furat în UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Pierdut sau furat — ce trebuie să faci imediat',
+        blocks: [
+          { type: 'info', text: 'Pentru pașaport pierdut, declarația se completează direct la ghișeu. Pentru pașaport furat, ai nevoie de raportul poliției britanice înainte de programare.' },
+          { type: 'action', text: 'Dacă documentul a fost furat, păstrează raportul în original și comandă traducerea autorizată în română.' },
+          { type: 'warning', text: 'La Edinburgh, confirmă direct dacă se cere și apostila FCDO pe raportul de poliție.' },
+          { type: 'tip', text: 'Dacă trebuie să pleci urgent în România și nu mai ai niciun act valabil, următorul lot util va fi titlul de călătorie din UK.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente îți trebuie',
+        blocks: [
+          { type: 'info', text: 'Ai nevoie de certificatul de naștere românesc și de dovada rezidenței în UK. Dacă mai ai și CI sau alt document cu fotografie, ia-l cu tine.' },
+          { type: 'info', text: 'Pentru furt: raportul poliției britanice în original + traducere autorizată în română.' },
+          { type: 'warning', text: 'La Manchester pregătește și xerocopii simple din toate actele pe care le vei prezenta.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum completezi cererea pentru pașaport pierdut sau furat în UK',
+      'Ce faci la ghișeu pentru pierdere vs. furt',
+      'Când trebuie apostilă sau doar traducere autorizată',
+      'Cum ridici noul pașaport după aprobarea cererii',
+    ],
+  },
+  'pasaport-uk-cu-domiciliu-pierdut': {
+    title: 'Pașaport domiciliu România pierdut sau furat din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Pierdut sau furat — ce trebuie să faci imediat',
+        blocks: [
+          { type: 'info', text: 'Pentru pașaport pierdut, declarația se completează la ghișeu. Pentru furt, trebuie mai întâi raportul poliției britanice și traducerea autorizată în română.' },
+          { type: 'warning', text: 'Dacă domiciliul este încă în România, ai nevoie de CI valabilă atât la depunere, cât și la ridicare.' },
+          { type: 'tip', text: 'Dacă nu mai ai niciun act valabil și trebuie să pleci urgent, vom adăuga separat ghidul pentru titlu de călătorie din UK.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Verifică valabilitatea cărții de identitate',
+        blocks: [
+          { type: 'warning', text: 'CI-ul trebuie să fie valabil și la ridicarea pașaportului, nu doar în ziua programării.' },
+          { type: 'tip', text: 'Dacă ai doar CI provizoriu, adu și certificatul de naștere românesc în original.' },
+          { type: 'warning', text: 'La Manchester pregătește și xerocopii, iar taxa de pașaport se plătește exclusiv în numerar.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum depui cererea când domiciliul tău este încă în România',
+      'Cum verifici dacă CI-ul îți rămâne valabil până la ridicare',
+      'Ce pregătești pentru furt, pierdere și programare',
+      'Cum ridici pașaportul sau îl primești prin poștă, unde se aplică',
+    ],
+  },
+  'pasaport-minor-crds-uk': {
+    title: 'Pașaport minor cu domiciliu în UK (CRDS)',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Condiții obligatorii înainte de programare',
+        blocks: [
+          { type: 'warning', text: 'Cel puțin unul dintre părinți trebuie să aibă deja pașaport CRDS sau să solicite simultan un pașaport CRDS împreună cu minorul.' },
+          { type: 'warning', text: 'Minorul trebuie să aibă certificat de naștere românesc. Dacă are doar certificat britanic, se face mai întâi transcrierea.' },
+          { type: 'info', text: 'Acordul ambilor părinți rămâne obligatoriu pentru schimbarea domiciliului minorului pe UK.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'info', text: 'Documente de bază: actele de identitate ale ambilor părinți, certificatul de naștere românesc al minorului și pașaportul anterior al minorului, dacă există.' },
+          { type: 'info', text: 'Pentru minorii 14+: dacă au deja CI, o aduci în original și ambii părinți dau acordul personal la ghișeu.' },
+          { type: 'warning', text: 'Dacă vine un singur părinte, ai nevoie de acordul autentificat al celuilalt părinte sau de documentul de custodie recunoscut în România.' },
+          { type: 'note', text: 'La Manchester pregătește și xerocopii simple din toate documentele.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat cu minorul' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea pentru minor și, dacă e cazul, pentru părintele care cere simultan CRDS',
+      'Checklistul complet pentru sub 14 ani vs. 14+',
+      'Regula acordului parental și ce documente merg când lipsește un părinte',
+      'Cum ridici pașaportul minorului după aprobare',
+    ],
+  },
+  'pasaport-minor-ro-uk': {
+    title: 'Pașaport minor cu domiciliu în România — din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică documentele necesare',
+        blocks: [
+          { type: 'info', text: 'Dacă domiciliul oficial al minorului este în România, cererea se depune la consulatul competent din UK fără dovadă de rezidență britanică.' },
+          { type: 'warning', text: 'Certificatul de naștere britanic nu este acceptat direct. Dacă minorul s-a născut în UK, trebuie mai întâi transcris în registrele române.' },
+          { type: 'info', text: 'Pentru minorii sub 14 ani: certificat de naștere românesc, pașaport anterior dacă există și actele valabile ale ambilor părinți.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce trebuie să știi pentru minorii 14+',
+        blocks: [
+          { type: 'warning', text: 'Pentru minorii 14–18 ani, CI-ul sau CI provizoriu trebuie să fie valabil și la depunere, și la ridicarea pașaportului.' },
+          { type: 'tip', text: 'Dacă CI-ul minorului expiră curând, rezolvați mai întâi CI-ul prin consulat sau în România, apoi pașaportul.' },
+          { type: 'info', text: 'Dacă doriți trecerea domiciliului minorului pe UK, fluxul corect este pașaport minor CRDS.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat cu minorul' },
+      { id: 6, title: 'Ridică pașaportul' },
+    ],
+    paywallTeaser: [
+      'Checklist complet sub 14 ani vs. 14–18 ani',
+      'Cum faci programarea pentru pașaport minor cu domiciliu în România',
+      'Ce documente sunt necesare dacă vine un singur părinte',
+      'Regula CI-ului la ridicare pentru minorii 14+',
+    ],
+  },
+  'pasaport-temporar-uk': {
+    title: 'Pașaport temporar în UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică dacă ești eligibil',
+        blocks: [
+          { type: 'warning', text: 'Pașaportul temporar se eliberează doar în situații justificate legal: urgențe medicale, familiale, profesionale, file epuizate, pașaport depus pentru viză sau alte cazuri speciale.' },
+          { type: 'info', text: 'Valabilitatea este de 12 luni. Pentru cazuri urgente acceptate, eliberarea se face de regulă în 3 zile lucrătoare.' },
+          { type: 'tip', text: 'Dacă nu ai o urgență justificată, pașaportul electronic rămâne varianta mai potrivită.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Pregătește documentele justificative',
+        blocks: [
+          { type: 'info', text: 'Ai nevoie de act de identitate românesc, CNP și documentul care dovedește urgența: bilet, adeverință medicală, document de la angajator, dovadă viză sau pașaport cu file epuizate.' },
+          { type: 'warning', text: 'Fără documente justificative, cererea de pașaport temporar poate fi respinsă.' },
+          { type: 'note', text: 'La Manchester, plata este exclusiv numerar și cererile se depun doar Luni–Joi 09:30–13:30.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Ridică pașaportul temporar' },
+    ],
+    paywallTeaser: [
+      'Ce categorie selectezi pe econsulat.ro',
+      'Checklist complet pentru fiecare tip de urgență',
+      'Regula Manchester: interval special, numerar și fără poștă',
+      'Cum ridici pașaportul în aproximativ 3 zile lucrătoare',
+    ],
+  },
+  'titlu-calatorie-uk': {
+    title: 'Titlu de călătorie adult în UK',
+    meta: { free: '2 pași gratuiți', total: '5 pași total' },
+    totalSteps: 5,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică dacă ai nevoie de titlu de călătorie',
+        blocks: [
+          { type: 'info', text: 'Titlul de călătorie este gratuit, valabil 30 de zile și se folosește exclusiv pentru întoarcerea în România.' },
+          { type: 'warning', text: 'La intrarea în România, titlul își pierde valabilitatea. Pentru revenirea în UK vei avea nevoie de pașaport sau CI valabilă.' },
+          { type: 'tip', text: 'Dacă ai nevoie să călătorești în altă țară decât România, verifică fluxul de pașaport temporar.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente trebuie să aduci',
+        blocks: [
+          { type: 'info', text: 'Adu CI sau pașaport expirat, alt document românesc cu fotografie sau, dacă nu ai nimic, trebuie să îți cunoști CNP-ul.' },
+          { type: 'warning', text: 'Dacă pașaportul a fost furat, Londra/Manchester cer raport de poliție + traducere; Edinburgh cere și apostilă FCDO.' },
+          { type: 'note', text: 'La Manchester programarea este obligatorie. Pentru plecare în 48h, scrii la manchester.consul@mae.ro.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Programare sau prezentare directă' },
+      { id: 4, title: 'Ziua la consulat' },
+      { id: 5, title: 'Pleci în România cu titlul de călătorie' },
+    ],
+    paywallTeaser: [
+      'Cum mergi fără programare la Londra sau Edinburgh cu bilet în 7 zile',
+      'Cum ceri urgență la Manchester',
+      'Ce se întâmplă la ghișeu și când se eliberează pe loc',
+      'Ce faci după intrarea în România ca să revii în UK',
+    ],
+  },
+  'titlu-calatorie-minor-sub14-uk': {
+    title: 'Titlu de călătorie minor sub 14 ani în UK',
+    meta: { free: '2 pași gratuiți', total: '4 pași total' },
+    totalSteps: 4,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'warning', text: 'La Londra și Manchester minorul sub 14 ani nu trebuie să fie prezent; la Edinburgh toți minorii trebuie să fie prezenți personal.' },
+          { type: 'info', text: 'Ai nevoie de certificatul de naștere românesc sau certificatul britanic forma lungă cu apostilă FCDO.' },
+          { type: 'info', text: 'Ambii părinți trebuie să prezinte acte de identitate valabile. Dacă vine un singur părinte, ai nevoie de document justificativ.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Programare sau prezentare directă',
+        blocks: [
+          { type: 'info', text: 'Londra și Edinburgh permit prezentare directă dacă există bilet către România în cel mult 7 zile lucrătoare.' },
+          { type: 'warning', text: 'Manchester cere programare obligatorie; pentru urgențe de 48h se trimite email cu rezervarea de călătorie.' },
+          { type: 'note', text: 'Titlul de călătorie este gratuit și este doar pentru călătoria în România.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Ziua la consulat' },
+      { id: 4, title: 'Plecați în România cu titlul de călătorie' },
+    ],
+    paywallTeaser: [
+      'Regula exactă de prezență a minorului pe consulat',
+      'Ce faci dacă un părinte nu poate veni',
+      'Ce documente sunt necesare dacă pașaportul minorului a fost furat',
+      'Cum revine minorul în UK după intrarea în România',
+    ],
+  },
+  'titlu-calatorie-minor-14-18-uk': {
+    title: 'Titlu de călătorie minor 14–18 ani în UK',
+    meta: { free: '2 pași gratuiți', total: '4 pași total' },
+    totalSteps: 4,
+    steps: [
+      {
+        id: 1,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'warning', text: 'Minorul 14–18 ani trebuie să fie prezent personal la consulat, la toate cele 3 consulate UK.' },
+          { type: 'info', text: 'Adu certificatul de naștere românesc sau certificatul britanic forma lungă cu apostilă FCDO, plus documentele disponibile ale minorului.' },
+          { type: 'info', text: 'Ambii părinți trebuie să aibă CI sau pașapoarte valabile. Dacă unul lipsește, pregătește documentul legal justificativ.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Programare sau prezentare directă',
+        blocks: [
+          { type: 'info', text: 'Londra și Edinburgh permit prezentare directă cu bilet spre România în cel mult 7 zile lucrătoare.' },
+          { type: 'warning', text: 'Manchester cere programare obligatorie. Pentru urgențe de 48h se trimite email cu numele minorului și rezervarea.' },
+          { type: 'note', text: 'La Manchester se cer 2 fotografii tip pașaport; la Londra și Edinburgh fotografia se face la consulat.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Ziua la consulat' },
+      { id: 4, title: 'Plecați în România cu titlul de călătorie' },
+    ],
+    paywallTeaser: [
+      'Ce semnează minorul 14+ la ghișeu',
+      'Cum se tratează pașaportul pierdut vs. furat',
+      'Ce faci dacă un părinte nu are act valabil',
+      'Cum obții documentul permanent după întoarcerea în România',
+    ],
+  },
+  'procura-ci-uk': {
+    title: 'Procura pentru reînnoirea cărții de identitate din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică dacă poți folosi procura CI',
+        blocks: [
+          { type: 'info', text: 'Procura CI este pentru adultul care a avut deja buletin sau carte de identitate și vrea să o reînnoiască sau să o înlocuiască din UK.' },
+          { type: 'warning', text: 'Prima carte de identitate NU se obține prin procură. Dacă nu ai avut niciodată CI, ghidul corect este pentru prima CI.' },
+          { type: 'warning', text: 'La autentificare ai nevoie de un act românesc valabil: CI sau pașaport. Dacă nu ai niciunul, consulatul poate elibera mai întâi titlul de călătorie la aceeași programare.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente și fotografii pregătești',
+        blocks: [
+          { type: 'info', text: 'Ai nevoie de actul tău de identitate valabil și de toate datele persoanei împuternicite din România: nume, CNP, seria și numărul CI, adresă și emitent.' },
+          { type: 'warning', text: 'Fotografiile diferă în funcție de consulat: Londra cere 6, iar Manchester și Edinburgh 5, toate tip 3×4 cm cu bandă albă jos.' },
+          { type: 'tip', text: 'Dacă mergi la Manchester, pregătește numerar pentru taxa notarială.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Autentifică procura la consulat' },
+      { id: 6, title: 'Persoana împuternicită depune actele în România' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea corectă la Acte notariale → Procură CI',
+      'Ce se întâmplă dacă nu ai nici CI, nici pașaport valabil',
+      'Care este taxa la Londra, Manchester sau Edinburgh',
+      'Ce trebuie să facă persoana împuternicită la SPCLEP în România',
+    ],
+  },
+  'procura-generala-uk': {
+    title: 'Procura notarială din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Alege tipul de act notarial',
+        blocks: [
+          { type: 'info', text: 'La consulatele române din UK poți autentifica procuri speciale, declarații notariale, legalizări de copii, traduceri sau semnături.' },
+          { type: 'warning', text: 'Consulatul nu autentifică direct contracte de vânzare-cumpărare, donații, divorțuri sau proceduri succesorale. Pentru imobil se face procura, iar contractul se semnează în România.' },
+          { type: 'tip', text: 'Dacă nu poți ajunge la consulat, alternativa este notar britanic / solicitor + apostilă FCDO + traducere autorizată în română.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente și date pregătești',
+        blocks: [
+          { type: 'info', text: 'Pentru orice act notarial ai nevoie de CI sau pașaport românesc valabil, în original.' },
+          { type: 'info', text: 'Pentru procură pregătește datele complete ale mandatarului și obiectul exact: imobil, carte funciară, acțiune sau autoritate.' },
+          { type: 'warning', text: 'La Manchester actele notariale se trimit prin poștă: plic Royal Mail Special Delivery preplătit + cerere de expediere sunt obligatorii.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Autentifică actul la consulat' },
+      { id: 6, title: 'Folosește procura în România' },
+    ],
+    paywallTeaser: [
+      'Ce serviciu exact selectezi pe econsulat.ro',
+      'Checklist complet pentru mandatar, imobil și obiectul procurii',
+      'Regula Manchester: plic preplătit și expediere obligatorie',
+      'Cum folosește mandatarul procura în România',
+    ],
+  },
+  'prima-ci-minor-uk': {
+    title: 'Prima carte de identitate minor 14+ din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică dacă poți depune la consulat',
+        blocks: [
+          { type: 'info', text: 'Minorul 14–18 ani poate depune cererea pentru prima CI la consulatul competent din UK, iar actul se emite în România și vine ulterior prin poștă.' },
+          { type: 'warning', text: 'Prima CI nu se face prin procură: minorul trebuie să fie prezent personal.' },
+          { type: 'warning', text: 'La Edinburgh, consulatul cere document britanic justificativ și 2 traduceri autorizate pentru motivul pentru care minorul nu se deplasează în România.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'info', text: 'Documentele de bază sunt certificatul de naștere românesc al minorului, dovada domiciliului din România și actele părintelui / reprezentantului legal.' },
+          { type: 'warning', text: 'Numărul de fotografii diferă: Londra și Manchester cer 2, iar Edinburgh 4.' },
+          { type: 'note', text: 'La Manchester pregătește și xerocopii simple din toate actele.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Achită taxele în România și primești CI prin poștă' },
+    ],
+    paywallTeaser: [
+      'Checklist complet pentru Londra, Manchester sau Edinburgh',
+      'Când trebuie să vină un singur părinte și când ambii',
+      'Cum se achită taxele în România',
+      'Ce termene realiste ai pentru emiterea CI',
+    ],
+  },
+  'prima-ci-adult-uk': {
+    title: 'Prima carte de identitate adult 18+ din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică dacă ești pe fluxul corect',
+        blocks: [
+          { type: 'info', text: 'Acest ghid este pentru adultul care nu a avut niciodată carte de identitate sau buletin românesc.' },
+          { type: 'warning', text: 'Dacă ai avut CI anterior, fluxul mai simplu este procura pentru reînnoirea cărții de identitate.' },
+          { type: 'warning', text: 'Trebuie să te prezinți personal la consulat, însoțit de un părinte sau de o persoană care îți poate certifica identitatea.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'info', text: 'Ai nevoie de certificatul de naștere românesc, dovada domiciliului din România și actul de identitate al însoțitorului.' },
+          { type: 'note', text: 'Declarația însoțitorului nu se aduce de acasă — se dă la ghișeu în fața funcționarului consular.' },
+          { type: 'warning', text: 'La Manchester pregătește și xerocopii; la Edinburgh verifică direct numărul de fotografii cerut.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat cu însoțitorul' },
+      { id: 6, title: 'Achită taxele în România și primești CI' },
+    ],
+    paywallTeaser: [
+      'Cum faci programarea corectă pentru prima CI adult 18+',
+      'Ce trebuie să aibă însoțitorul la ghișeu',
+      'Cum se achită taxele în România și cât durează emiterea',
+      'Când merită să alegi totuși varianta cu procură în loc de prima CI',
+    ],
+  },
+  'transcriere-nastere-minor-uk': {
+    title: 'Transcrierea certificatului de naștere pentru minor din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică ordinea corectă a transcrierilor',
+        blocks: [
+          { type: 'warning', text: 'Dacă părinții s-au căsătorit în UK înainte de naștere și căsătoria nu este transcrisă în România, mai întâi transcrii căsătoria.' },
+          { type: 'info', text: 'Pentru minori, certificatul românesc se poate elibera în aceeași zi dacă dosarul este complet.' },
+          { type: 'warning', text: 'La Edinburgh, minorul de 14+ fără document românesc valabil poate avea nevoie mai întâi de titlu de călătorie.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'warning', text: 'Ai nevoie de certificatul britanic forma lungă, cu apostila FCDO. Forma scurtă nu este acceptată.' },
+          { type: 'warning', text: 'Traducerea autorizată diferă: Londra cere 1 exemplar, iar Manchester și Edinburgh 2 exemplare originale.' },
+          { type: 'tip', text: 'Dacă părinții nu sunt căsătoriți, pregătește și certificatele de naștere românești ale ambilor părinți.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Primești certificatul de naștere românesc' },
+    ],
+    paywallTeaser: [
+      'Checklist complet pe consulat, inclusiv câte traduceri duci',
+      'Ce faci la Edinburgh dacă minorul are peste 14 ani',
+      'Cum combini transcrierea cu pașaportul minorului când se poate',
+      'Ce semnezi și ce ridici în aceeași zi la consulat',
+    ],
+  },
+  'transcriere-nastere-adult-uk': {
+    title: 'Transcrierea certificatului de naștere pentru adult din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică situația ta înainte de programare',
+        blocks: [
+          { type: 'warning', text: 'Pentru adult 18+, termenul nu este în aceeași zi ca la minor: dosarul poate dura până la 6 luni.' },
+          { type: 'warning', text: 'Dacă părinții s-au căsătorit în UK înainte de naștere și căsătoria nu este transcrisă, transcrii întâi căsătoria.' },
+          { type: 'tip', text: 'Dacă ai avut deja buletin sau carte de identitate, verifică dacă de fapt ai nevoie de procura pentru CI, nu de transcriere.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'warning', text: 'Certificatul britanic trebuie să fie forma lungă și apostilat de FCDO.' },
+          { type: 'warning', text: 'Traducerea autorizată diferă per consulat: Londra 1 exemplar, Manchester și Edinburgh 2 exemplare originale.' },
+          { type: 'info', text: 'Pregătește și documentele de stare civilă relevante ale părinților dacă există neconcordanțe de nume sau situații de divorț / recăsătorire.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Primești certificatul de naștere românesc' },
+    ],
+    paywallTeaser: [
+      'Checklist complet pentru dosarul de transcriere adult 18+',
+      'Cum urmărești dosarul pe durata celor până la 6 luni',
+      'Ce faci dacă ai mai mult de 3 prenume sau acte vechi cu nume diferite',
+      'Cum primești certificatul românesc la final',
+    ],
+  },
+  'transcriere-casatorie-uk': {
+    title: 'Transcriere căsătorie britanică din UK',
+    meta: { free: '2 pași gratuiți', total: '6 pași total' },
+    totalSteps: 6,
+    steps: [
+      {
+        id: 1,
+        title: 'Verifică ordinea transcrierilor',
+        blocks: [
+          { type: 'warning', text: 'Actele de stare civilă se transcriu în ordine cronologică. Dacă aveți copii născuți după căsătorie, transcrieți întâi căsătoria.' },
+          { type: 'info', text: 'Transcrierea căsătoriei este necesară pentru schimbarea numelui pe acte românești, acte pentru copii, moșteniri sau drepturi patrimoniale în România.' },
+          { type: 'warning', text: 'Dacă unul dintre soți a mai fost căsătorit în România, divorțul sau desfacerea căsătoriei anterioare trebuie să fie înscrisă în registrele române.' },
+        ],
+      },
+      {
+        id: 2,
+        title: 'Ce documente sunt necesare',
+        blocks: [
+          { type: 'warning', text: 'Certificatul de căsătorie britanic trebuie apostilat de FCDO și tradus autorizat în română.' },
+          { type: 'warning', text: 'Londra cere 1 exemplar al traducerii; Manchester și Edinburgh cer 2 exemplare. Edinburgh cere și 2 fotocopii per document.' },
+          { type: 'info', text: 'Dacă ambii soți sunt cetățeni români, ambii trebuie să fie prezenți. Pentru căsătorie mixtă, vine cetățeanul român, iar traducătorul poate fi necesar dacă soțul/soția nu vorbește română.' },
+        ],
+      },
+    ],
+    lockedSteps: [
+      { id: 3, title: 'Fă programarea pe econsulat.ro' },
+      { id: 4, title: 'Pregătește-te pentru ziua programării' },
+      { id: 5, title: 'Prezintă-te la consulat' },
+      { id: 6, title: 'Primești certificatul de căsătorie românesc' },
+    ],
+    paywallTeaser: [
+      'Checklist complet pe consulat: traduceri, fotocopii și prezența soților',
+      'Ce se întâmplă la ghișeu și cum se eliberează certificatul în aceeași zi',
+      'Cum folosești certificatul românesc pentru schimbarea numelui',
+      'Ce faci dacă există căsătorii anterioare sau neconcordanțe de nume',
+    ],
+  },
 } satisfies Partial<Record<GuideId, GhidFreeContent>>)

@@ -14,6 +14,11 @@ import {
   spainRegionOptions,
   spainRegionToConsulate,
 } from '@/lib/content/consulates/es'
+import {
+  ukConsulates,
+  ukRegionOptions,
+  ukRegionToConsulate,
+} from '@/lib/content/consulates/uk'
 import type {
   BundeslandCode,
   ConsulateId,
@@ -25,9 +30,11 @@ import type {
   RegionCode,
   SpainConsulateId,
   SpainRegionCode,
+  UkConsulateId,
+  UkRegionCode,
 } from '@/types'
 
-export { bundeslandOptions, italyRegionOptions, spainRegionOptions }
+export { bundeslandOptions, italyRegionOptions, spainRegionOptions, ukRegionOptions }
 
 export function getRegionOptionsByCountry(country: CountryCode): { code: RegionCode; name: string }[] {
   if (country === 'it') {
@@ -35,6 +42,9 @@ export function getRegionOptionsByCountry(country: CountryCode): { code: RegionC
   }
   if (country === 'es') {
     return spainRegionOptions.map((item) => ({ code: item.code, name: item.name }))
+  }
+  if (country === 'uk') {
+    return ukRegionOptions.map((item) => ({ code: item.code, name: item.name }))
   }
   return bundeslandOptions.map((item) => ({ code: item.code, name: item.name }))
 }
@@ -47,6 +57,9 @@ export function getConsulateCountry(consulateId: ConsulateId | null): CountryCod
   if (consulateId === 'roma' || consulateId === 'milano' || consulateId === 'bologna' || consulateId === 'torino' || consulateId === 'trieste' || consulateId === 'bari' || consulateId === 'catania') {
     return 'it'
   }
+  if (consulateId === 'londra' || consulateId === 'manchester' || consulateId === 'edinburgh') {
+    return 'uk'
+  }
   return 'es'
 }
 
@@ -56,6 +69,9 @@ export function deriveConsulateId(country: CountryCode, region: RegionCode): Con
   }
   if (country === 'es') {
     return spainRegionToConsulate[region as SpainRegionCode]
+  }
+  if (country === 'uk') {
+    return ukRegionToConsulate[region as UkRegionCode]
   }
   return bundeslandToConsulate[region as BundeslandCode]
 }
@@ -83,6 +99,9 @@ export function getConsulateById(id: ConsulateId): ConsulateInfo {
   }
   if (country === 'es') {
     return spainConsulates[id as SpainConsulateId]
+  }
+  if (country === 'uk') {
+    return ukConsulates[id as UkConsulateId]
   }
   return germanConsulates[id as GermanyConsulateId]
 }

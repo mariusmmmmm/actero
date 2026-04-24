@@ -49,6 +49,14 @@ function getStep1Options(country: CountryCode) {
     sublabel: 'Transcrierea nașterii, apoi primul pașaport sau primul buletin',
     value: 'transcriere-nastere' as ProblemType,
   },
+  ...(country === 'uk'
+    ? [{
+        icon: '💍',
+        label: 'Vreau să transcriu certificatul de căsătorie britanic',
+        sublabel: 'Certificat de căsătorie românesc · gratuit · de regulă în aceeași zi',
+        value: 'transcriere-casatorie' as ProblemType,
+      }]
+    : []),
 ]
 }
 
@@ -57,6 +65,7 @@ function getResidenceCountryCopy(country: CountryCode) {
 }
 
 function getCountryFlag(country: CountryCode) {
+  if (country === 'uk') return '🇬🇧'
   if (country === 'it') return '🇮🇹'
   if (country === 'es') return '🇪🇸'
   return '🇩🇪'
@@ -65,6 +74,7 @@ function getCountryFlag(country: CountryCode) {
 function getRegionPrompt(country: CountryCode) {
   if (country === 'de') return 'În ce land locuiești acum?'
   if (country === 'es') return 'În ce comunitate autonomă sau provincie locuiești acum?'
+  if (country === 'uk') return 'În ce regiune din UK locuiești acum?'
   return 'În ce regiune locuiești acum?'
 }
 
@@ -156,6 +166,9 @@ function Step2() {
         trieste: 'Trieste',
         bari: 'Bari',
         catania: 'Catania',
+        londra: 'Londra',
+        manchester: 'Manchester',
+        edinburgh: 'Edinburgh',
       }[consulate]
     : null
 
@@ -230,6 +243,7 @@ function getProblemTypeFromHint(hint: string | null): ProblemType | null {
   if (hint.startsWith('titlu-calatorie-')) return 'titlu-calatorie'
   if (hint.startsWith('procura-')) return 'procura'
   if (hint === 'transcriere-nastere-de' || hint === 'transcriere-nastere-it') return 'transcriere-nastere'
+  if (hint === 'transcriere-casatorie-uk') return 'transcriere-casatorie'
   return null
 }
 
@@ -284,6 +298,9 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
             { value: 'expirat-deteriorat', label: 'Am avut pașaport, dar acum este expirat sau deteriorat', sublabel: 'Primești ghidul pentru reînnoire / eliberare pașaport nou' },
             { value: 'pierdut-furat', label: 'Am avut pașaport, dar este pierdut sau furat', sublabel: 'Primești ghidul pentru pașaport pierdut sau furat' },
             { value: 'primul', label: 'Nu am avut niciodată pașaport românesc', sublabel: 'Primești ghidul pentru primul pașaport sau, dacă e cazul, transcriere înainte de pașaport' },
+            ...(country === 'uk'
+              ? [{ value: 'temporar', label: 'Am nevoie de pașaport temporar', sublabel: 'Pentru situații urgente justificate legal, cu documente doveditoare' }]
+              : []),
           ],
         },
         {
@@ -365,6 +382,17 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
       ]
     case 'titlu-calatorie':
       return [
+        ...(country === 'uk'
+          ? [{
+              key: 'titluSolicitant' as keyof SituationFlags,
+              question: 'Pentru cine este titlul de călătorie?',
+              options: [
+                { value: 'adult', label: 'Adult', sublabel: 'Primești ghidul pentru titlu de călătorie adult în UK' },
+                { value: 'minor-sub14', label: 'Minor sub 14 ani', sublabel: 'Regulile de prezență diferă între Londra/Manchester și Edinburgh' },
+                { value: 'minor-14-18', label: 'Minor 14–18 ani', sublabel: 'Minorul trebuie să fie prezent personal la consulat' },
+              ],
+            }]
+          : []),
         {
           key: 'tipDocumentLipsa',
           question: 'Ce document românesc îți lipsește pentru plecarea urgentă?',
@@ -425,6 +453,20 @@ function getQuestions(problemType: ProblemType, country: CountryCode): Question[
         },
       ]
     case 'transcriere-nastere':
+      if (country === 'uk') {
+        return [
+          {
+            key: 'isMinorTranscriere',
+            question: 'Certificatul de naștere pe care vrei să-l transcrii este al unui minor?',
+            options: [
+              { value: true, label: 'Da, este pentru un minor', sublabel: 'Primești ghidul pentru transcriere minor în UK' },
+              { value: false, label: 'Nu, este pentru un adult 18+', sublabel: 'Primești ghidul pentru transcriere adult în UK' },
+            ],
+          },
+        ]
+      }
+      return []
+    case 'transcriere-casatorie':
       return []
   }
 }
@@ -436,7 +478,7 @@ function getVisibleQuestions(problemType: ProblemType, country: CountryCode, sit
     return all.filter((q, i) => {
       if (i === 0) return true
       if (i === 1) return true
-      if (i === 2) return situation.hasDomiciliuRO === false
+      if (i === 2) return situation.hasDomiciliuRO === false || (country === 'uk' && situation.hasDomiciliuRO === true)
       if (i === 3) {
         return (
           situation.hasDomiciliuRO === false &&
@@ -459,7 +501,12 @@ function getVisibleQuestions(problemType: ProblemType, country: CountryCode, sit
   if (problemType === 'buletin') {
     return all.filter((_, i) => {
       if (i === 0 || i === 1) return true
-      if (i === 2) return country === 'es' && situation.buletinStatus !== 'pierdut-furat-distrus'
+      if (i === 2) {
+        return (
+          (country === 'es' && situation.buletinStatus !== 'pierdut-furat-distrus') ||
+          (country === 'uk' && situation.buletinStatus === 'niciodata')
+        )
+      }
       if (i === 3) {
         return (
           country === 'es' &&
@@ -589,6 +636,13 @@ function Step3() {
       if (value === 'primul') {
         setSituationFlag('pasaportCrdsCase', value)
         setSituationFlag('isPrimulPasaport', true)
+        return
+      }
+      if (value === 'temporar') {
+        setSituationFlag('pasaportCrdsCase', value)
+        setSituationFlag('isPrimulPasaport', false)
+        setSituationFlag('pasaportStatus', 'expirat-distrus')
+        setSituationFlag('pasaportPierdutFurat', false)
         return
       }
     }

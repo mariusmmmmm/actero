@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import SiteHeader from '@/components/layout/SiteHeader'
 import type { GuideId } from '@/types'
 
@@ -42,6 +43,40 @@ const guides: { id: GuideId; title: string }[] = [
   { id: 'procura-mostenire-it', title: 'Procură notarială · Moștenire / succesiune · Italia' },
   { id: 'procura-generala-it', title: 'Procură notarială generală · Italia' },
   { id: 'transcriere-nastere-it', title: 'Transcriere certificat de naștere · Italia' },
+  { id: 'pasaport-crds-es', title: 'Reînnoire pașaport CRDS · Spania' },
+  { id: 'pasaport-es-cu-domiciliu', title: 'Pașaport · Domiciliu România · Spania' },
+  { id: 'pasaport-crds-es-pierdut', title: 'Pașaport CRDS pierdut/furat · Spania' },
+  { id: 'pasaport-es-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Spania' },
+  { id: 'pasaport-crds-pierdut-combinat-es', title: 'Pașaport CRDS pierdut/furat · Cale combinată · Spania' },
+  { id: 'buletin-es-cu-domiciliu', title: 'Buletin adult · Domiciliu România · Spania' },
+  { id: 'buletin-es-cu-domiciliu-minor', title: 'Buletin minor · Domiciliu România · Spania' },
+  { id: 'buletin-es-majorat', title: 'Buletin la 18 ani · Domiciliu România · Spania' },
+  { id: 'buletin-es-fara-domiciliu', title: 'Buletin adult CRDS · Spania' },
+  { id: 'buletin-es-fara-domiciliu-minor', title: 'Buletin minor CRDS · Spania' },
+  { id: 'buletin-es-pierdut', title: 'Buletin pierdut/furat · Spania' },
+  { id: 'titlu-calatorie-es', title: 'Titlu de călătorie · Spania · standard' },
+  { id: 'titlu-calatorie-urgenta-es', title: 'Titlu de călătorie · Spania · urgență' },
+  { id: 'procura-generala-es', title: 'Procură notarială generală · Spania' },
+  { id: 'procura-pensie-es', title: 'Procură pentru pensie · Spania' },
+  { id: 'procura-vanzare-es', title: 'Procură vânzare imobil · Spania' },
+  { id: 'transcriere-nastere-es', title: 'Transcriere certificat de naștere · Spania' },
+  { id: 'pasaport-crds-uk', title: 'Reînnoire pașaport CRDS · Marea Britanie' },
+  { id: 'pasaport-uk-cu-domiciliu', title: 'Pașaport · Domiciliu România · Marea Britanie' },
+  { id: 'pasaport-crds-uk-pierdut', title: 'Pașaport CRDS pierdut/furat · Marea Britanie' },
+  { id: 'pasaport-uk-cu-domiciliu-pierdut', title: 'Pașaport pierdut/furat · Domiciliu România · Marea Britanie' },
+  { id: 'pasaport-minor-crds-uk', title: 'Pașaport copil CRDS · Marea Britanie' },
+  { id: 'pasaport-minor-ro-uk', title: 'Pașaport copil · Domiciliu România · Marea Britanie' },
+  { id: 'pasaport-temporar-uk', title: 'Pașaport temporar · Marea Britanie' },
+  { id: 'titlu-calatorie-uk', title: 'Titlu de călătorie adult · Marea Britanie' },
+  { id: 'titlu-calatorie-minor-sub14-uk', title: 'Titlu de călătorie minor sub 14 ani · Marea Britanie' },
+  { id: 'titlu-calatorie-minor-14-18-uk', title: 'Titlu de călătorie minor 14–18 ani · Marea Britanie' },
+  { id: 'procura-ci-uk', title: 'Procură pentru reînnoirea cărții de identitate · Marea Britanie' },
+  { id: 'procura-generala-uk', title: 'Procură notarială generală · Marea Britanie' },
+  { id: 'prima-ci-minor-uk', title: 'Prima carte de identitate minor 14+ · Marea Britanie' },
+  { id: 'prima-ci-adult-uk', title: 'Prima carte de identitate adult 18+ · Marea Britanie' },
+  { id: 'transcriere-nastere-minor-uk', title: 'Transcriere certificat de naștere minor · Marea Britanie' },
+  { id: 'transcriere-nastere-adult-uk', title: 'Transcriere certificat de naștere adult · Marea Britanie' },
+  { id: 'transcriere-casatorie-uk', title: 'Transcriere certificat de căsătorie · Marea Britanie' },
 ]
 
 const seoPages = [
@@ -108,7 +143,18 @@ const routes = [
 ]
 
 export default function DevGhiduriPage() {
+  const router = useRouter()
   const [checkedSeoPages, setCheckedSeoPages] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    const directGuideId = new URLSearchParams(window.location.search).get('guide') as GuideId | null
+    if (!directGuideId) return
+
+    const guideExists = guides.some((guide) => guide.id === directGuideId)
+    if (!guideExists) return
+
+    router.replace(`/ghid/test-session?guide=${directGuideId}`)
+  }, [router])
 
   const checkedSeoCount = checkedSeoPages.size
   const seoProgressLabel = useMemo(

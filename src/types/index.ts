@@ -4,7 +4,7 @@
 // ─── ȚĂRI ────────────────────────────────────────────────────────────────────
 
 export type CountryStatus = 'available' | 'coming_soon' | 'date_announced'
-export type CountryCode = 'de' | 'it' | 'es'
+export type CountryCode = 'de' | 'it' | 'es' | 'uk'
 
 export type Country = {
   code: CountryCode | string
@@ -84,12 +84,27 @@ export type SpainRegionCode =
   | 'Andalucía - Jaén'
   | 'Región de Murcia'
 
-export type RegionCode = BundeslandCode | ItalyRegionCode | SpainRegionCode
+export type UkRegionCode =
+  | 'Londra (Greater London)'
+  | 'Sud-Est Anglia (South East England)'
+  | 'Sud-Vest Anglia (South West England)'
+  | 'East of England'
+  | 'East Midlands'
+  | 'West Midlands'
+  | 'Țara Galilor (Wales)'
+  | 'Greater Manchester'
+  | 'Nord-Vest Anglia (North West England)'
+  | 'Nord-Est Anglia și Yorkshire'
+  | 'Scoția (Scotland)'
+  | 'Irlanda de Nord (Northern Ireland)'
+
+export type RegionCode = BundeslandCode | ItalyRegionCode | SpainRegionCode | UkRegionCode
 
 export type GermanyConsulateId = 'muenchen' | 'bonn' | 'stuttgart' | 'berlin'
 export type ItalyConsulateId = 'roma' | 'milano' | 'bologna' | 'torino' | 'trieste' | 'bari' | 'catania'
 export type SpainConsulateId = 'madrid' | 'barcelona' | 'valencia' | 'sevilla' | 'bilbao' | 'zaragoza' | 'ciudadreal' | 'almeria'
-export type ConsulateId = GermanyConsulateId | ItalyConsulateId | SpainConsulateId
+export type UkConsulateId = 'londra' | 'manchester' | 'edinburgh'
+export type ConsulateId = GermanyConsulateId | ItalyConsulateId | SpainConsulateId | UkConsulateId
 
 export type ConsulateInfo = {
   countryCode: CountryCode
@@ -113,10 +128,12 @@ export type ConsulateInfo = {
   paymentMethod: string      // ex: 'exclusiv EC-Karte' | 'exclusiv numerar'
   paymentPassport?: string
   paymentPassportCrds?: string
+  paymentPassportTemporary?: string
   paymentNotarial?: string
   paymentNote?: string       // ex: IBAN pentru Stuttgart
   paymentPassportNote?: string
   paymentPassportCrdsNote?: string
+  paymentPassportTemporaryNote?: string
   paymentNotarialNote?: string
   postalPickup: boolean
   postalPickupUrl?: string
@@ -134,7 +151,7 @@ export type ConsulateInfo = {
 
 // ─── WIZARD ──────────────────────────────────────────────────────────────────
 
-export type ProblemType = 'pasaport' | 'buletin' | 'titlu-calatorie' | 'procura' | 'transcriere-nastere'
+export type ProblemType = 'pasaport' | 'buletin' | 'titlu-calatorie' | 'procura' | 'transcriere-nastere' | 'transcriere-casatorie'
 
 export type SituationFlags = {
   // Wizard Step 2
@@ -147,7 +164,7 @@ export type SituationFlags = {
   isPrimulPasaport?: boolean
   locuNastere?: 'ro' | 'de-strainatate'  // Q3 path pașaport + buletin
   pasaportStatus?: 'expirat-distrus' | 'pierdut-furat'
-  pasaportCrdsCase?: 'expirat-deteriorat' | 'pierdut-furat' | 'primul'
+  pasaportCrdsCase?: 'expirat-deteriorat' | 'pierdut-furat' | 'primul' | 'temporar'
   pasaportPierdutFurat?: boolean
   isMinorPasaport?: boolean
 
@@ -159,11 +176,13 @@ export type SituationFlags = {
   tipActSolicitat?: 'CEI' | 'CIS'
   isMinorBuletin?: boolean
   isMajoratBuletin?: boolean
+  isMinorTranscriere?: boolean
 
   // Path Titlu de călătorie
   actDisponibil?: 'pasaport-expirat' | 'buletin-expirat' | 'ambele'
   urgenta?: 'sub-3-zile' | '1-2-saptamani'
   tipDocumentLipsa?: 'pasaport' | 'buletin' | 'ambele'
+  titluSolicitant?: 'adult' | 'minor-sub14' | 'minor-14-18'
 
   // Path Procură
   scopProcura?: 'vanzare' | 'mostenire' | 'pensie' | 'altceva'
@@ -232,6 +251,23 @@ export type GuideId =
   | 'procura-pensie-es'
   | 'procura-vanzare-es'
   | 'transcriere-nastere-es'
+  | 'pasaport-crds-uk'
+  | 'pasaport-uk-cu-domiciliu'
+  | 'pasaport-crds-uk-pierdut'
+  | 'pasaport-uk-cu-domiciliu-pierdut'
+  | 'pasaport-minor-crds-uk'
+  | 'pasaport-minor-ro-uk'
+  | 'pasaport-temporar-uk'
+  | 'titlu-calatorie-uk'
+  | 'titlu-calatorie-minor-sub14-uk'
+  | 'titlu-calatorie-minor-14-18-uk'
+  | 'procura-ci-uk'
+  | 'procura-generala-uk'
+  | 'prima-ci-minor-uk'
+  | 'prima-ci-adult-uk'
+  | 'transcriere-nastere-minor-uk'
+  | 'transcriere-nastere-adult-uk'
+  | 'transcriere-casatorie-uk'
 
 export type RouteId = 'route-a' | 'route-b' | 'route-a-it' | 'route-b-it'
 

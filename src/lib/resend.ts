@@ -47,6 +47,23 @@ const GUIDE_TITLES: Record<string, string> = {
   'procura-mostenire-it': 'Procură · Moștenire · Italia',
   'procura-generala-it': 'Procură notarială generală · Italia',
   'transcriere-nastere-it': 'Transcriere certificat de naștere · Italia',
+  'pasaport-crds-uk': 'Reînnoire pașaport CRDS · Marea Britanie',
+  'pasaport-crds-uk-pierdut': 'Pașaport CRDS pierdut/furat · Marea Britanie',
+  'pasaport-uk-cu-domiciliu': 'Pașaport · Domiciliu România · Marea Britanie',
+  'pasaport-uk-cu-domiciliu-pierdut': 'Pașaport pierdut/furat · Domiciliu România · Marea Britanie',
+  'pasaport-minor-crds-uk': 'Pașaport copil CRDS · Marea Britanie',
+  'pasaport-minor-ro-uk': 'Pașaport copil · Domiciliu România · Marea Britanie',
+  'pasaport-temporar-uk': 'Pașaport temporar · Marea Britanie',
+  'titlu-calatorie-uk': 'Titlu de călătorie adult · Marea Britanie',
+  'titlu-calatorie-minor-sub14-uk': 'Titlu de călătorie minor sub 14 ani · Marea Britanie',
+  'titlu-calatorie-minor-14-18-uk': 'Titlu de călătorie minor 14–18 ani · Marea Britanie',
+  'procura-ci-uk': 'Procură pentru reînnoirea cărții de identitate · Marea Britanie',
+  'procura-generala-uk': 'Procură notarială generală · Marea Britanie',
+  'prima-ci-minor-uk': 'Prima carte de identitate minor 14+ · Marea Britanie',
+  'prima-ci-adult-uk': 'Prima carte de identitate adult 18+ · Marea Britanie',
+  'transcriere-nastere-minor-uk': 'Transcriere certificat de naștere minor · Marea Britanie',
+  'transcriere-nastere-adult-uk': 'Transcriere certificat de naștere adult · Marea Britanie',
+  'transcriere-casatorie-uk': 'Transcriere certificat de căsătorie · Marea Britanie',
 }
 
 function getGuideTitle(guideId: string | null): string {

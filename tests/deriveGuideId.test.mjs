@@ -200,6 +200,202 @@ test('routes Spain adult buletin with domicile in Spain to the dedicated guide',
   })
 })
 
+test('routes UK CRDS passport renewal to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-crds-uk',
+  })
+})
+
+test('routes UK passport renewal with domicile in Romania to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-uk-cu-domiciliu',
+  })
+})
+
+test('routes UK CRDS lost passport flow to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: false,
+    pasaportStatus: 'pierdut-furat',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-crds-uk-pierdut',
+  })
+})
+
+test('routes UK lost passport with Romanian domicile to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: true,
+    pasaportStatus: 'pierdut-furat',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-uk-cu-domiciliu-pierdut',
+  })
+})
+
+test('routes UK minor CRDS passport flow to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: false,
+    isMinorPasaport: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-minor-crds-uk',
+  })
+})
+
+test('routes UK minor passport with domicile in Romania to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: true,
+    isMinorPasaport: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-minor-ro-uk',
+  })
+})
+
+test('routes UK temporary passport flow to the dedicated guide', () => {
+  const result = deriveGuideId('pasaport', 'uk', {
+    hasDomiciliuRO: false,
+    pasaportCrdsCase: 'temporar',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'pasaport-temporar-uk',
+  })
+})
+
+test('routes UK adult travel title flow to the dedicated guide', () => {
+  const result = deriveGuideId('titlu-calatorie', 'uk', {
+    titluSolicitant: 'adult',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'titlu-calatorie-uk',
+  })
+})
+
+test('routes UK travel title for minor under 14 to the dedicated guide', () => {
+  const result = deriveGuideId('titlu-calatorie', 'uk', {
+    titluSolicitant: 'minor-sub14',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'titlu-calatorie-minor-sub14-uk',
+  })
+})
+
+test('routes UK travel title for minor 14-18 to the dedicated guide', () => {
+  const result = deriveGuideId('titlu-calatorie', 'uk', {
+    titluSolicitant: 'minor-14-18',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'titlu-calatorie-minor-14-18-uk',
+  })
+})
+
+test('routes UK adult CI renewal to procura CI guide', () => {
+  const result = deriveGuideId('buletin', 'uk', {
+    buletinStatus: 'expirat',
+    hasDomiciliuRO: true,
+    isMinorBuletin: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'procura-ci-uk',
+  })
+})
+
+test('routes UK first minor CI to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'uk', {
+    buletinStatus: 'niciodata',
+    hasDomiciliuRO: true,
+    isMinorBuletin: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'prima-ci-minor-uk',
+  })
+})
+
+test('routes UK first adult CI to the dedicated guide', () => {
+  const result = deriveGuideId('buletin', 'uk', {
+    buletinStatus: 'niciodata',
+    hasDomiciliuRO: true,
+    isMinorBuletin: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'prima-ci-adult-uk',
+  })
+})
+
+test('routes UK minor birth transcription to the dedicated guide', () => {
+  const result = deriveGuideId('transcriere-nastere', 'uk', {
+    isMinorTranscriere: true,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'transcriere-nastere-minor-uk',
+  })
+})
+
+test('routes UK adult birth transcription to the dedicated guide', () => {
+  const result = deriveGuideId('transcriere-nastere', 'uk', {
+    isMinorTranscriere: false,
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'transcriere-nastere-adult-uk',
+  })
+})
+
+test('routes UK general procura flow to the notarial guide', () => {
+  const result = deriveGuideId('procura', 'uk', {
+    scopProcura: 'altceva',
+  })
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'procura-generala-uk',
+  })
+})
+
+test('routes UK marriage transcription to the dedicated guide', () => {
+  const result = deriveGuideId('transcriere-casatorie', 'uk', {})
+
+  assert.deepEqual(result, {
+    type: 'guide',
+    guideId: 'transcriere-casatorie-uk',
+  })
+})
+
 test('routes Spain minor buletin with domicile in Spain to the dedicated guide', () => {
   const result = deriveGuideId('buletin', 'es', {
     hasDomiciliuRO: false,

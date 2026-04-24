@@ -2,6 +2,7 @@ import type { NextRequest, NextResponse } from 'next/server'
 import { getBaseUrl } from '@/lib/base-url'
 
 export const ACCESS_COOKIE_NAME = 'actero_access_token'
+export const ADMIN_PREVIEW_COOKIE_NAME = 'actero_admin_preview'
 export const CHECKOUT_CONFIRM_COOKIE_NAME = 'actero_checkout_confirm'
 export const NO_STORE_HEADERS = {
   'Cache-Control': 'no-store, max-age=0',
@@ -117,6 +118,24 @@ async function signOpaqueValue(value: string): Promise<string | null> {
   return Array.from(new Uint8Array(signature), (byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
+async function signAdminPreviewValue(value: string): Promise<string | null> {
+  const secret = process.env.ADMIN_GUIDE_ACCESS_SECRET?.trim()
+
+  if (!secret) return null
+
+  const encodedSecret = new TextEncoder().encode(secret)
+  const encodedValue = new TextEncoder().encode(value)
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encodedSecret,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  )
+  const signature = await crypto.subtle.sign('HMAC', key, encodedValue)
+  return Array.from(new Uint8Array(signature), (byte) => byte.toString(16).padStart(2, '0')).join('')
+}
+
 export function getClientAddress(req: NextRequest): string {
   const forwardedFor = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
   const realIp = req.headers.get('x-real-ip')?.trim()
@@ -125,6 +144,14 @@ export function getClientAddress(req: NextRequest): string {
 }
 
 export async function setAccessCookie(response: NextResponse, sessionId: string) {
+  return setAccessCookieWithMaxAge(response, sessionId, 60 * 60 * 24 * 180)
+}
+
+export async function setAccessCookieWithMaxAge(
+  response: NextResponse,
+  sessionId: string,
+  maxAgeSeconds: number
+) {
   const nonce = generateOpaqueToken()
   const signature = await signOpaqueValue(`${sessionId}:${nonce}`)
 
@@ -136,7 +163,7 @@ export async function setAccessCookie(response: NextResponse, sessionId: string)
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 180,
+    maxAge: maxAgeSeconds,
     path: '/',
   })
 
@@ -147,6 +174,86 @@ export async function setAccessCookie(response: NextResponse, sessionId: string)
     maxAge: 0,
     path: '/',
   })
+}
+
+export async function createAdminPreviewSignature(
+  sessionId: string,
+  expiresAtUnix: number
+): Promise<string | null> {
+  if (!Number.isFinite(expiresAtUnix)) return null
+  return signAdminPreviewValue(`${sessionId}:${Math.floor(expiresAtUnix)}`)
+}
+
+export async function isValidAdminPreviewSignature(
+  sessionId: string,
+  expiresAtUnix: number,
+  signature: string
+): Promise<boolean> {
+  if (!isValidSessionId(sessionId) || !signature || !Number.isFinite(expiresAtUnix)) {
+    return false
+  }
+
+  const nowUnix = Math.floor(Date.now() / 1000)
+  const normalizedExpiry = Math.floor(expiresAtUnix)
+  if (normalizedExpiry <= nowUnix) return false
+  if (normalizedExpiry - nowUnix > 60 * 60) return false
+
+  const expectedSignature = await createAdminPreviewSignature(sessionId, normalizedExpiry)
+  return !!expectedSignature && expectedSignature === signature
+}
+
+export async function setAdminPreviewCookie(
+  response: NextResponse,
+  sessionId: string,
+  expiresAtUnix: number
+) {
+  const normalizedExpiry = Math.floor(expiresAtUnix)
+  const nowUnix = Math.floor(Date.now() / 1000)
+  const maxAge = normalizedExpiry - nowUnix
+
+  if (!isValidSessionId(sessionId) || maxAge <= 0 || maxAge > 60 * 60) {
+    throw new Error('Invalid admin preview lifetime')
+  }
+
+  const nonce = generateOpaqueToken()
+  const signature = await signAdminPreviewValue(`${sessionId}:${normalizedExpiry}:${nonce}`)
+
+  if (!signature) {
+    throw new Error('Missing ADMIN_GUIDE_ACCESS_SECRET')
+  }
+
+  response.cookies.set(ADMIN_PREVIEW_COOKIE_NAME, `${sessionId}:${normalizedExpiry}:${nonce}:${signature}`, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge,
+    path: '/',
+  })
+}
+
+export async function getAdminPreviewSessionIdFromRequest(req: NextRequest): Promise<string | null> {
+  const rawValue = req.cookies.get(ADMIN_PREVIEW_COOKIE_NAME)?.value?.trim()
+
+  if (!rawValue) return null
+
+  const [sessionId, expiresAtRaw, nonce, signature] = rawValue.split(':')
+  const expiresAtUnix = Number(expiresAtRaw)
+
+  if (!isValidSessionId(sessionId) || !nonce || !signature || !Number.isFinite(expiresAtUnix)) {
+    return null
+  }
+
+  const nowUnix = Math.floor(Date.now() / 1000)
+  const normalizedExpiry = Math.floor(expiresAtUnix)
+  if (normalizedExpiry <= nowUnix) return null
+  if (normalizedExpiry - nowUnix > 60 * 60) return null
+
+  const expectedSignature = await signAdminPreviewValue(`${sessionId}:${normalizedExpiry}:${nonce}`)
+  if (!expectedSignature || expectedSignature !== signature) {
+    return null
+  }
+
+  return sessionId
 }
 
 export async function setCheckoutConfirmCookie(response: NextResponse, sessionId: string) {

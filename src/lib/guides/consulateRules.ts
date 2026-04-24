@@ -62,6 +62,17 @@ const COUNTRY_DEFAULT_RULES: Record<CountryCode, RuleSet> = {
     travelBadgeSummaryUrgent: 'verifică regula exactă a consulatului',
     rnneprPaymentRule: 'În Spania, RNNEPR nu se aplică. Procura consulară este gratuită.',
   },
+  uk: {
+    passportLostTranslationRule: 'Pentru pașaport furat în UK, ai nevoie de raportul poliției britanice în original + traducere autorizată în română.',
+    travelTranslationRule: 'Pentru document furat în UK, regula de traducere și apostilare diferă după consulat. Verifică direct la consulatul tău.',
+    travelPhotoRule: 'În UK, fotografia pentru pașaport se face la ghișeu, iar regulile pentru titlul de călătorie diferă pentru minori.',
+    travelIssuanceRule: 'Titlul se eliberează după verificarea identității și a regulii consulatului tău.',
+    travelBookingRule: 'În UK, regula pentru titlul de călătorie diferă: Londra și Edinburgh au excepții fără programare, Manchester cere programare.',
+    travelBookingUrgentRule: 'Pentru urgențe în UK, verifică regula consulatului tău înainte de drum.',
+    travelBadgeSummary: 'verifică regula consulatului înainte de deplasare',
+    travelBadgeSummaryUrgent: 'verifică regula consulatului · posibil aceeași zi',
+    rnneprPaymentRule: 'În UK, verifică taxa notarială exactă la consulatul tău. Manchester este cash only.',
+  },
 }
 
 const CONSULATE_RULES: Partial<Record<ConsulateId, RuleSet>> = {
@@ -207,6 +218,9 @@ export function getPassportPaymentRule(consulate: ConsulateId | null): string {
 
   const card = getConsulateById(consulate)
   const method = card.paymentPassport ?? card.paymentMethod
+  if (getConsulateCountry(consulate) === 'uk') {
+    return `Taxa de pașaport în UK este variabilă lunar și se plătește astfel la consulatul tău: ${method}.`
+  }
   return `Taxa: 53€ — se achită la consulat (${method}).`
 }
 

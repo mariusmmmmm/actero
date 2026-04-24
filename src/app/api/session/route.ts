@@ -9,8 +9,8 @@ import type { CreateSessionPayload, CreateSessionResponse } from '@/types'
 import { hasTrustedOrigin, NO_STORE_HEADERS } from '@/lib/security'
 import { enforceRateLimit } from '@/lib/rate-limit'
 
-const ALLOWED_PROBLEM_TYPES = new Set(['pasaport', 'buletin', 'titlu-calatorie', 'procura', 'transcriere-nastere'])
-const ALLOWED_COUNTRIES = new Set(['de', 'it', 'es'])
+const ALLOWED_PROBLEM_TYPES = new Set(['pasaport', 'buletin', 'titlu-calatorie', 'procura', 'transcriere-nastere', 'transcriere-casatorie'])
+const ALLOWED_COUNTRIES = new Set(['de', 'it', 'es', 'uk'])
 
 export async function POST(req: NextRequest) {
   try {
