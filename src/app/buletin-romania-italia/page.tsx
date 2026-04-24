@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Buletin românesc din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Buletin românesc din Italia — Ghid complet 2026',
   description: 'Reînnoire buletin din Italia: prezență obligatorie în România din 2025, CEI sau CIS, SPCLEP competent. Pași verificați pentru românii din Italia.',
   keywords: ['buletin romania italia','buletin romanesc din italia','reinnoire buletin romanesc italia','carte identitate romaneasca italia','cei cis romani italia'],
   openGraph: { title: 'Buletin românesc din Italia — Ghid 2026', description: 'Prezență obligatorie în România din 2025. CEI sau CIS — ce alegi și de ce.', url: 'https://www.actero.ro/buletin-romania-italia', type: 'article' },

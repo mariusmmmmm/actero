@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin pierdut sau furat — cu domiciliu activ în România | ActeRO',
+  title: 'Buletin pierdut sau furat — cu domiciliu activ în România',
   description:
     'Buletin pierdut cu domiciliu în România: termenul de 15 zile, extras CF online, CEI sau CIS și pașii corecți la SPCLEP.',
   keywords: [

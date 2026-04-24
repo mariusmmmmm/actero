@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport expirat în Italia? Ghid complet 2026 | ActeRO',
+  title: 'Pașaport expirat în Italia? Ghid complet 2026',
   description: 'Pașaport românesc expirat în Italia: documente exacte, programare econsulat.ro, taxă 53€, termen 45 zile. CRDS sau domiciliu România — pași verificați per consulat.',
   keywords: ['pasaport expirat italia','reinnoire pasaport romanesc italia','pasaport crds expirat italia','documente pasaport expirat italia','programare pasaport expirat consulat'],
   openGraph: { title: 'Pașaport expirat în Italia — Ghid complet 2026', description: 'Ce acte trebuie, unde mergi, cât costă și cât durează — verificat live pentru toate cele 7 consulate.', url: 'https://www.actero.ro/pasaport-expirat-italia', type: 'article' },

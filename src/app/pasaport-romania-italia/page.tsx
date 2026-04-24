@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport românesc în Italia — Tot ce trebuie să știi în 2026 | ActeRO',
+  title: 'Pașaport românesc în Italia — Tot ce trebuie să știi în 2026',
   description: 'Pașaport CRDS (domiciliu Italia) sau cu domiciliu în România: documente, programare econsulat.ro, taxe confirmate per consulat. Verificat live aprilie 2026.',
   keywords: ['pasaport romania italia','pasaport romanesc italia','pasaport crds italia','documente necesare pasaport romanesc in italia','reinnoire pasaport romanesc italia','programare pasaport consulat italia'],
   openGraph: { title: 'Pașaport românesc în Italia — Ghid complet 2026', description: 'CRDS sau domiciliu RO, expirat sau pierdut — documente exacte, taxe și programare pentru toate cele 7 consulate.', url: 'https://www.actero.ro/pasaport-romania-italia', type: 'article' },

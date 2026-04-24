@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură divorț notarial din Germania — Ce acoperă și ce nu | ActeRO',
+  title: 'Procură divorț notarial din Germania — Ce acoperă și ce nu',
   description:
     'Procură pentru divorț notarial în România din Germania. Ce acoperă procura, limitele ei, când nu se poate notarial și de ce ambii soți au nevoie de procură.',
   keywords: [

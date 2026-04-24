@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Titlu de călătorie URGENT din Germania — fără programare, aceeași zi | ActeRO',
+  title: 'Titlu de călătorie URGENT din Germania — fără programare, aceeași zi',
   description:
     'Zbor în câteva ore și nu ai pașaport? Titlul de călătorie: gratuit, fără programare, aceeași zi. Intervale per consulat, ce aduci și ce faci după ce ajungi în România.',
   keywords: [

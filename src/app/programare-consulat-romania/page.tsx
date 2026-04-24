@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Programare la consulatul României în Germania — Ghid 2026 | ActeRO',
+  title: 'Programare la consulatul României în Germania — Ghid 2026',
   description: 'Cum obții programare pe econsulat.ro: validare, luni la 08:00, greșeli frecvente și reguli importante pentru consulatele României din Germania.',
   keywords: ['programare consulat romania germania', 'econsulat luni 08:00', 'programare pașaport germania', 'econsulat validata', 'intermediari programări consulat'],
   openGraph: {

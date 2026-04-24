@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport pierdut sau furat în Italia — ce faci 2026 | ActeRO',
+  title: 'Pașaport pierdut sau furat în Italia — ce faci 2026',
   description: 'Pașaport românesc pierdut sau furat în Italia: declarație la poliție, traducere autorizată MJ, procedura la consulat. Uniform Italia — fără apostilă, fără legalizare.',
   keywords: ['pasaport pierdut furat italia','procedura pasaport furat italia','adeverinta politie pasaport furat romania','pasaport pierdut romani italia'],
   openGraph: { title: 'Pașaport pierdut sau furat în Italia — Ghid 2026', description: 'Adeverință poliție + traducere autorizată MJ (uniform în Italia). Declarație pierdere: la ghișeul consulatului.', url: 'https://www.actero.ro/pasaport-pierdut-furat-italia', type: 'article' },

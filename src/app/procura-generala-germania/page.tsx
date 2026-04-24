@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură generală din Germania — Divorț, firmă, bancă, acte diverse | ActeRO',
+  title: 'Procură generală din Germania — Divorț, firmă, bancă, acte diverse',
   description:
     'Procură generală la consulatul din Germania pentru divorț, firmă, cont bancar sau acte diverse. Taxa 3€ RNNEPR, ce trebuie specificat și când procura e prea generală.',
   keywords: [

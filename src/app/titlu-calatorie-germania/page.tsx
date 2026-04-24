@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Titlu de călătorie din Germania — fără programare, aceeași zi | ActeRO',
+  title: 'Titlu de călătorie din Germania — fără programare, aceeași zi',
   description:
     'Pașaportul a expirat și ai un zbor în câteva zile? Titlul de călătorie se obține la consulat fără programare, gratuit, de obicei în aceeași zi. Află ce acte trebuie.',
   keywords: [

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Titlu de călătorie vs pașaport temporar — Diferența reală | ActeRO',
+  title: 'Titlu de călătorie vs pașaport temporar — Diferența reală',
   description:
     'Titlu de călătorie și pașaport temporar nu sunt alternative, ci pași diferiți. Titlul te aduce în România, pașaportul temporar îl obții acolo.',
   keywords: [

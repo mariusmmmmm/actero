@@ -9,7 +9,7 @@ import SiteFooter from '@/components/layout/SiteFooter'
 import SiteHeader from '@/components/layout/SiteHeader'
 
 export const metadata: Metadata = {
-  title: 'ActeRO | Ghiduri pentru acte românești în diaspora',
+  title: 'Ghiduri pentru acte românești în diaspora',
   description:
     'ActeRO te ajută să afli exact ce pași urmezi pentru pașaport, buletin, titlu de călătorie, procuri și actele copilului născut în străinătate.',
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     'titlu de călătorie românia',
   ],
   openGraph: {
-    title: 'ActeRO | Ghiduri pentru acte românești în diaspora',
+    title: 'Ghiduri pentru acte românești în diaspora',
     description:
       'Ghiduri clare pentru pașaport, buletin, titlu de călătorie, procuri și actele copilului născut în străinătate.',
     url: 'https://www.actero.ro',

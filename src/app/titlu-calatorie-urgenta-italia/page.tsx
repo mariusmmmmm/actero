@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Titlu de călătorie urgent din Italia — cine poate merge fără programare | ActeRO',
+  title: 'Titlu de călătorie urgent din Italia — cine poate merge fără programare',
   description: 'Roma și Milano: urgent posibil fără programare în anumite condiții. Bologna: walk-in doar cu dovezi. Torino: exclusiv cu programare. Emiterea depinde de consulat și de verificarea dosarului.',
   keywords: ['titlu calatorie urgent italia','titlu de calatorie fara programare italia','titlu calatorie se elibereaza pe loc','titlu calatorie documente italia'],
   openGraph: { title: 'Titlu de călătorie urgent din Italia — reguli diferite pe consulat', description: 'Roma L-V 11:00–13:00 · Milano linia urgențe · Bologna direct. Torino: NU walk-in.', url: 'https://www.actero.ro/titlu-calatorie-urgenta-italia', type: 'article' },

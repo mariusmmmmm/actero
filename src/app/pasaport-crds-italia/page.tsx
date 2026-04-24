@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport CRDS din Italia — cu domiciliul în Italia 2026 | ActeRO',
+  title: 'Pașaport CRDS din Italia — cu domiciliul în Italia 2026',
   description: 'Pașaport CRDS: domiciliu în Italia, document domiciliu italian obligatoriu, biometrie la ghișeu, 53€. Diferențe față de pașaportul cu domiciliu în România. Verificat 2026.',
   keywords: ['pasaport crds italia','pasaport crds ce inseamna','pasaport crds domiciliu italia','prim pasaport crds italia','pasaport simplu electronic crds'],
   openGraph: { title: 'Pașaport CRDS din Italia — Ghid 2026', description: 'CRDS = domiciliu în Italia. Document domiciliu italian obligatoriu. Biometrie la ghișeu. 53€.', url: 'https://www.actero.ro/pasaport-crds-italia', type: 'article' },

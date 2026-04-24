@@ -411,7 +411,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'acte-romanesti-spania': {
     slug: 'acte-romanesti-spania',
     lpTopic: 'acte-romanesti-spania',
-    title: 'Acte românești în Spania — Ghid complet 2026 | ActeRO',
+    title: 'Acte românești în Spania — Ghid complet 2026',
     description: 'Pașaport, buletin, procuri, titlu de călătorie și transcriere naștere pentru românii din Spania. 8 consulate, reguli verificate, fără drumuri degeaba.',
     keywords: ['acte romanesti spania', 'pasaport romania spania', 'consulat roman spania', 'procura notariala spania'],
     h1: 'Acte românești în Spania — ghid complet pentru diaspora română',
@@ -524,7 +524,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'pasaport-romania-spania': {
     slug: 'pasaport-romania-spania',
     lpTopic: 'pasaport-romania-spania',
-    title: 'Pașaport românesc în Spania — CRDS, minor, pierdut, domiciliu RO | ActeRO',
+    title: 'Pașaport românesc în Spania — CRDS, minor, pierdut, domiciliu RO',
     description: 'Hub pentru pașaportul românesc din Spania: CRDS, domiciliu în România, pașaport minor, pierdut/furat și taxa reală 53€.',
     keywords: ['pasaport romania spania', 'pasaport crds spania', 'pasaport pierdut furat spania'],
     h1: 'Pașaport românesc în Spania — ghid complet 2026',
@@ -595,7 +595,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'pasaport-cu-domiciliu-romania-din-spania': {
     slug: 'pasaport-cu-domiciliu-romania-din-spania',
     lpTopic: 'pasaport-domiciliu-ro-spania',
-    title: 'Pașaport cu domiciliu în România din Spania — Ghid 2026 | ActeRO',
+    title: 'Pașaport cu domiciliu în România din Spania — Ghid 2026',
     description: 'Locuiești în Spania, dar în actele românești ai încă domiciliul în România? Aici este ghidul corect pentru pașaportul tău.',
     h1: 'Pașaport cu domiciliu în România din Spania',
     intro: 'Această pagină este pentru românii care locuiesc în Spania, dar au încă domiciliul oficial în România și cer un pașaport nou prin consulat.',
@@ -656,7 +656,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'taxa-pasaport-romanesc-spania': {
     slug: 'taxa-pasaport-romanesc-spania',
     lpTopic: 'taxa-pasaport-spania',
-    title: 'Cât costă pașaportul românesc în Spania — 53€ sau 59€? | ActeRO',
+    title: 'Cât costă pașaportul românesc în Spania — 53€ sau 59€?',
     description: 'Taxa legală este 53€. Unele pagini afișează 59€. Excepția importantă: Madrid CRDS = 60€ total. Tabel practic și clar.',
     h1: 'Cât costă pașaportul românesc în Spania — 53€ sau 59€?',
     intro: 'Pagina aceasta există ca să elimine o confuzie foarte frecventă: în Spania vei vedea uneori 53€, alteori 59€, iar la Madrid CRDS chiar 60€.',
@@ -737,7 +737,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'titlu-calatorie-spania': {
     slug: 'titlu-calatorie-spania',
     lpTopic: 'titlu-calatorie-spania',
-    title: 'Titlu de călătorie din Spania — Ghid 2026 | ActeRO',
+    title: 'Titlu de călătorie din Spania — Ghid 2026',
     description: 'Titlu de călătorie din Spania: când îl folosești, când ai nevoie de programare și cum diferă regula pe consulate.',
     h1: 'Titlu de călătorie din Spania — când îl folosești și ce îți trebuie',
     intro: 'Dacă nu mai ai pașaport valabil și trebuie să te deplasezi, titlul de călătorie este documentul de urgență pe termen scurt. În Spania, regula practică diferă ușor de la un consulat la altul.',
@@ -790,7 +790,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'titlu-calatorie-urgenta-spania': {
     slug: 'titlu-calatorie-urgenta-spania',
     lpTopic: 'titlu-calatorie-urgenta-spania',
-    title: 'Titlu de călătorie urgent din Spania — Ghid 2026 | ActeRO',
+    title: 'Titlu de călătorie urgent din Spania — Ghid 2026',
     description: 'Gratuit, pe flux rapid în cazuri reale de urgență. Când poți merge fără programare și ce documente aduci la consulat.',
     h1: 'Titlu de călătorie urgent din Spania — gratuit, pe flux rapid',
     intro: 'Aceasta este pagina pentru urgențele reale: pașaport expirat, pierdut sau furat și nevoie de plecare rapidă. În practică, acesta este unul dintre cele mai sensibile fluxuri consulare din Spania.',
@@ -856,7 +856,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'pasaport-crds-spania': {
     slug: 'pasaport-crds-spania',
     lpTopic: 'pasaport-crds-spania',
-    title: 'Pașaport CRDS din Spania — cu domiciliul înregistrat în Spania | ActeRO',
+    title: 'Pașaport CRDS din Spania — cu domiciliul înregistrat în Spania',
     description: 'CRDS în Spania: empadronamiento acceptat, taxa 53€, excepția Madrid 60€, documente și reguli pe consulat.',
     h1: 'Pașaport CRDS din Spania — ce este, ce acte trebuie, cât costă',
     intro: 'Dacă locuiești permanent în Spania și ai sau vrei domiciliul înregistrat acolo, aceasta este ramura ta de pașaport. În practică, CRDS este una dintre cele mai căutate proceduri consulare din Spania.',
@@ -923,7 +923,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'buletin-romania-spania': {
     slug: 'buletin-romania-spania',
     lpTopic: 'buletin-romania-spania',
-    title: 'Buletin românesc din Spania — adult, minor, majorat, pierdut | ActeRO',
+    title: 'Buletin românesc din Spania — adult, minor, majorat, pierdut',
     description: 'Buletin din Spania: cu domiciliu în România, fără domiciliu, majorat, minor sau pierdut. Ghid 2026 pentru toate ramurile.',
     h1: 'Buletin românesc din Spania — CRDS sau domiciliu în România?',
     intro: 'La buletin, Spania are mai multe ramuri distincte decât pare la prima vedere: adult, minor, majorat, cu domiciliu în România, fără domiciliu sau document pierdut.',
@@ -991,7 +991,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'procura-notariala-spania': {
     slug: 'procura-notariala-spania',
     lpTopic: 'procura-notariala-spania',
-    title: 'Procură notarială din Spania — Gratuită, aceeași zi | ActeRO',
+    title: 'Procură notarială din Spania — Gratuită, aceeași zi',
     description: 'Procura la consulatul român din Spania este gratuită, se face pe econsulat.ro și este valabilă direct în România fără apostilă.',
     h1: 'Procură notarială din Spania — gratuită, eliberată în aceeași zi',
     intro: 'Spania este una dintre țările în care procura consulară este mult mai simplă decât în alte state: fără RNNEPR, fără apostilă și, în practică, cu eliberare foarte rapidă.',
@@ -1051,7 +1051,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'empadronamiento-pasaport-roman': {
     slug: 'empadronamiento-pasaport-roman',
     lpTopic: 'empadronamiento-pasaport-roman',
-    title: 'Empadronamiento pentru pașaport românesc CRDS | ActeRO',
+    title: 'Empadronamiento pentru pașaport românesc CRDS',
     description: 'Empadronamiento-ul este acceptat ca dovadă de domiciliu pentru CRDS la consulatele române din Spania. Ce este și cum îl obții.',
     h1: 'Empadronamiento — documentul spaniol care simplifică pașaportul românesc CRDS',
     intro: 'Această pagină există pentru una dintre cele mai importante scurtături legitime din Spania: empadronamiento-ul poate fi folosit ca dovadă de domiciliu pentru CRDS.',
@@ -1107,7 +1107,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'acte-copil-nascut-in-spania': {
     slug: 'acte-copil-nascut-in-spania',
     lpTopic: 'acte-copil-nascut-in-spania',
-    title: 'Copil născut în Spania — ce acte românești îi trebuie | ActeRO',
+    title: 'Copil născut în Spania — ce acte românești îi trebuie',
     description: 'Ordinea corectă pentru copil născut în Spania: transcriere, pașaport, apoi alte acte. Ghid 2026 pentru părinți.',
     h1: 'Copil născut în Spania — ce acte românești îi trebuie și în ce ordine',
     intro: 'Aceasta este pagina pentru părinții care încep de la zero: copil născut în Spania, fără acte românești, și nevoie de traseu clar fără pași inversați.',
@@ -1161,7 +1161,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'transcriere-nastere-spania': {
     slug: 'transcriere-nastere-spania',
     lpTopic: 'transcriere-nastere-spania',
-    title: 'Transcriere certificat de naștere din Spania — ghid complet 2026 | ActeRO',
+    title: 'Transcriere certificat de naștere din Spania — ghid complet 2026',
     description: 'Cum transcrii certificatul de naștere spaniol în România prin consulat. Acte, apostilă, traduceri și pașii practici.',
     h1: 'Transcriere certificat de naștere din Spania — ghid complet 2026',
     intro: 'Aceasta este una dintre cele mai importante proceduri pentru familiile din Spania: fără transcriere, copilul nu poate intra corect în restul fluxurilor de acte românești.',
@@ -1221,7 +1221,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'pasaport-minor-spania': {
     slug: 'pasaport-minor-spania',
     lpTopic: 'pasaport-minor-spania',
-    title: 'Pașaport pentru copilul tău din Spania — ghid 2026 | ActeRO',
+    title: 'Pașaport pentru copilul tău din Spania — ghid 2026',
     description: 'Pașaport minor din Spania: după transcriere, documente, prezența copilului și diferențe între consulate.',
     h1: 'Pașaport pentru copilul tău din Spania — ghid 2026',
     intro: 'Această pagină este pentru părinții care au trecut sau sunt aproape să treacă de transcriere și au nevoie de pașaportul românesc pentru copil.',
@@ -1265,7 +1265,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'pasaport-pierdut-furat-spania': {
     slug: 'pasaport-pierdut-furat-spania',
     lpTopic: 'pasaport-pierdut-furat-spania',
-    title: 'Pașaport pierdut sau furat în Spania — ce faci pas cu pas | ActeRO',
+    title: 'Pașaport pierdut sau furat în Spania — ce faci pas cu pas',
     description: 'Pașaport pierdut sau furat în Spania: când mergi pe pașaport nou, când pe titlu urgent și când apare traducerea denunțului.',
     h1: 'Pașaport pierdut sau furat în Spania — ce faci pas cu pas',
     intro: 'Aceasta este una dintre cele mai frecvente situații de panică pentru diaspora: ai rămas fără pașaport și nu știi dacă rezolvi cu titlu de călătorie, cu pașaport nou sau cu ambele.',
@@ -1318,7 +1318,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'procura-vanzare-proprietate-spania': {
     slug: 'procura-vanzare-proprietate-spania',
     lpTopic: 'procura-vanzare-proprietate-spania',
-    title: 'Procură pentru vânzarea unui imobil din România — din Spania | ActeRO',
+    title: 'Procură pentru vânzarea unui imobil din România — din Spania',
     description: 'Cum faci din Spania procura pentru vânzarea unui apartament, teren sau casă din România. Ce date trebuie să ai pregătite.',
     h1: 'Procură pentru vânzarea unui imobil din România — din Spania',
     intro: 'Această pagină este pentru una dintre cele mai sensibile procuri: cea de vânzare imobiliară. Aici contează foarte mult să ai datele corecte înainte de programare.',
@@ -1374,7 +1374,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'programare-consulat-roman-spania': {
     slug: 'programare-consulat-roman-spania',
     lpTopic: 'programare-consulat-spania',
-    title: 'Cum faci programare la consulatul român din Spania — ghid econsulat.ro | ActeRO',
+    title: 'Cum faci programare la consulatul român din Spania — ghid econsulat.ro',
     description: 'Programare la consulatul român din Spania pe econsulat.ro: pași, capcane și diferențe locale între consulate.',
     h1: 'Cum faci programare la consulatul român din Spania — ghid econsulat.ro',
     intro: 'Pagina aceasta este pentru utilizatorii care știu deja ce serviciu vor, dar se blochează la programarea efectivă pe econsulat.ro sau la alegerea consulatului potrivit.',
@@ -1429,7 +1429,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'consulat-competent-spania': {
     slug: 'consulat-competent-spania',
     lpTopic: 'consulat-competent-spania',
-    title: 'Care este consulatul român competent în Spania | ActeRO',
+    title: 'Care este consulatul român competent în Spania',
     description: 'Consulatul român competent în Spania depinde de comunitatea autonomă și uneori de provincie. Tabel complet și excepții.',
     h1: 'Care este consulatul român competent pentru zona ta din Spania',
     intro: 'Aceasta este pagina care rezolvă una dintre cele mai frecvente surse de eroare: alegerea consulatului greșit. În Spania, unele comunități sunt împărțite pe provincii.',
@@ -1518,7 +1518,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'apostila-haga-spania': {
     slug: 'apostila-haga-spania',
     lpTopic: 'apostila-haga-spania',
-    title: 'Apostila Haga pentru acte spaniole — TSJ, nu notarul | ActeRO',
+    title: 'Apostila Haga pentru acte spaniole — TSJ, nu notarul',
     description: 'Apostila Haga pe acte spaniole de stare civilă se obține la Tribunalul Superior de Justicia, nu la notar. Ghid practic 2026.',
     h1: 'Apostila Haga în Spania — cum o obții gratuit și de ce nu merge la notar',
     intro: 'Această pagină există pentru o confuzie foarte costisitoare: mulți utilizatori ajung la notar pentru apostilă, deși pentru actele de stare civilă spaniole traseul corect este altul.',
@@ -1560,7 +1560,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'traducator-autorizat-spania': {
     slug: 'traducator-autorizat-spania',
     lpTopic: 'traducator-autorizat-spania',
-    title: 'Traducător autorizat pentru acte românești în Spania | ActeRO',
+    title: 'Traducător autorizat pentru acte românești în Spania',
     description: 'Când ai nevoie de traducător autorizat MJ înregistrat la consulat și cum afli lista corectă în Spania.',
     h1: 'Traducător autorizat MJ pentru acte românești în Spania — ce trebuie să știi',
     intro: 'Această pagină clarifică un detaliu care blochează multe dosare: nu orice traducător autorizat te ajută la orice consulat. În Spania contează și înregistrarea locală.',
@@ -1603,7 +1603,7 @@ const spainPages: Record<string, SpainSeoPageConfig> = {
   'consulat-madrid-vs-barcelona': {
     slug: 'consulat-madrid-vs-barcelona',
     lpTopic: 'consulat-madrid-vs-barcelona',
-    title: 'Consulatul din Madrid sau Barcelona — cum știi care e al tău | ActeRO',
+    title: 'Consulatul din Madrid sau Barcelona — cum știi care e al tău',
     description: 'Madrid sau Barcelona depinde de comunitatea autonomă. Diferențe de arondare și reguli cheie între cele două consulate.',
     h1: 'Madrid sau Barcelona — consulatul tău după adresă din Spania',
     intro: 'Aceasta este comparația pentru cea mai mare sursă de trafic și confuzie din Spania: Madrid vs Barcelona. Mulți utilizatori pornesc doar de la orașul mare, fără să verifice arondarea reală.',

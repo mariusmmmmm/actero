@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Primul pașaport copil născut în Germania — după transcriere | ActeRO',
+  title: 'Primul pașaport copil născut în Germania — după transcriere',
   description:
     'Primul pașaport CRDS al copilului după transcriere: acordul părinților, fără fotografii proprii, pașii practici și diferențele importante. Ghid 2026.',
   keywords: [

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport pierdut sau furat în Germania — Ce faci imediat | ActeRO',
+  title: 'Pașaport pierdut sau furat în Germania — Ce faci imediat',
   description:
     'Pașaport românesc pierdut sau furat în Germania: ordinea pașilor, declarația la ghișeu și diferențele practice pe consulat. Ghid 2026.',
   keywords: [

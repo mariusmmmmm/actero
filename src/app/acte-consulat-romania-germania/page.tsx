@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Ce acte rezolvi la consulatul României din Germania — Listă completă 2026 | ActeRO',
+  title: 'Ce acte rezolvi la consulatul României din Germania — Listă completă 2026',
   description:
     'Lista completă a actelor ce se rezolvă la consulatul României din Germania și ce NU se rezolvă acolo. Pașaport, procuri, stare civilă, transcriere. Ghid 2026.',
   keywords: [

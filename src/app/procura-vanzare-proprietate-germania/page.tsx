@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură vânzare proprietate din Germania — Consulat, aceeași zi | ActeRO',
+  title: 'Procură vânzare proprietate din Germania — Consulat, aceeași zi',
   description:
     'Procură pentru vânzare sau cumpărare proprietate în România, făcută la consulat din Germania. Notar ales vs neales, taxa 3€ RNNEPR și ce date ale imobilului trebuie.',
   keywords: [

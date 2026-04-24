@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.actero.ro'),
   title: {
     default: 'ActeRO — Acte românești în diaspora, pas cu pas',
-    template: '%s · ActeRO',
+    template: '%s | ActeRO',
   },
   description:
     'Ghid personalizat pentru pașaport, buletin, procuri și alte acte românești în diaspora. Fără drumuri degeaba la consulat.',

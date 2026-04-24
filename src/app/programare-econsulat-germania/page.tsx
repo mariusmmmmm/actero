@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Programare econsulat.ro din Germania — Cum funcționează, când apar locuri | ActeRO',
+  title: 'Programare econsulat.ro din Germania — Cum funcționează, când apar locuri',
   description:
     'Econsulat.ro: fluxul complet cerere → validată → programare, când apar locuri noi, greșelile de selecție a serviciului și de ce programările sunt gratuite.',
   keywords: [

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport CRDS din Germania — Ce este, cine îl face, ce documente | ActeRO',
+  title: 'Pașaport CRDS din Germania — Ce este, cine îl face, ce documente',
   description:
     'Pașaportul CRDS se face dacă domiciliul oficial e în Germania, nu în România. Fără fotografii, fără Aufenthaltstitel, CI se anulează. Ghid complet 2026.',
   keywords: [

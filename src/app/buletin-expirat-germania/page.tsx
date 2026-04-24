@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP | ActeRO',
+  title: 'Buletin expirat în Germania — Nu la consulat, ci la SPCLEP',
   description:
     'Buletinul expirat nu se reînnoiește la consulat. Din 2025, prezență fizică obligatorie la SPCLEP în România. CEI sau CIS, cu sau fără domiciliu — ghid complet.',
   keywords: [

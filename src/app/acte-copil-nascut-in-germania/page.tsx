@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Acte românești copil născut în Germania — de unde începi | ActeRO',
+  title: 'Acte românești copil născut în Germania — de unde începi',
   description:
     'Copilul s-a născut în Germania și nu are acte românești? Transcrierea nașterii vine prima — abia după poți obține pașaport sau buletin. Ordinea corectă pas cu pas.',
   keywords: [

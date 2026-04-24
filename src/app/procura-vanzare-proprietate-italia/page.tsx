@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Procură vânzare proprietate din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Procură vânzare proprietate din Italia — Ghid complet 2026',
   description: 'Procură pentru vânzare sau cumpărare proprietate în România, făcută la consulatul din Italia. Gratuit, aceeași zi, valabilă fără apostilă. RNNEPR virament bancar.',
   keywords: ['procura vanzare proprietate italia','procura imobiliara italia romania','procura notariala vanzare din italia','imobil romania procura consulat italia'],
   openGraph: { title: 'Procură vânzare proprietate din Italia — Ghid 2026', description: 'Gratuită, gata în aceeași zi, valabilă în România fără apostilă. Plată RNNEPR prin virament.', url: 'https://www.actero.ro/procura-vanzare-proprietate-italia', type: 'article' },

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport expirat în Germania — Ce faci, ce aduci, cât costă 2026 | ActeRO',
+  title: 'Pașaport expirat în Germania — Ce faci, ce aduci, cât costă 2026',
   description:
     'Pașaport expirat în Germania: CRDS sau domiciliu România, documente, taxă 53€, termen 45 zile. Tabel per consulat cu plată, ridicare și poștă.',
   keywords: [

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România | ActeRO',
+  title: 'Formule A vs Geburtsurkunde — Ce document alegi pentru transcriere România',
   description:
     'Formule A sau Geburtsurkunde pentru transcrierea nașterii copilului la consulatul din Germania? Formule A este, de obicei, varianta mai simplă. Ghid 2026.',
   keywords: [

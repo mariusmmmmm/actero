@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Milano — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Milano — Ghid complet 2026',
   description: 'Documente, programare econsulat.ro, plată numerar sau card, ridicare DHL — tot ce trebuie dacă ești din Lombardia sau Trentino. Verificat live aprilie 2026.',
   keywords: ['pasaport consulat milano','programare consulat milano','documente pasaport milano','consulat romaniei la milano','pasaport romanesc milano 2026'],
   openGraph: { title: 'Pașaport la Consulatul din Milano — Ghid 2026', description: 'Programare, documente, plată numerar sau card, ridicare DHL — ghid verificat pentru românii din Lombardia și Trentino.', url: 'https://www.actero.ro/pasaport-consulat-milano', type: 'article' },

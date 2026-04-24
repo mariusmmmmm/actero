@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Catania — Date corecte 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Catania — Date corecte 2026',
   description: 'Atenție: site-ul oficial afișează 100€ — taxa incorectă. Datele reale și avertizarea completă pentru românii din Sicilia. Confirmă direct înainte de deplasare.',
   keywords: ['pasaport consulat catania','taxa pasaport consulat catania','romani catania pasaport','consulat romanesc catania sicilia'],
   openGraph: { title: 'Pașaport la Consulatul din Catania — Date corecte 2026', description: 'Site-ul afișează 100€ (incorect). Taxa reală estimată: 53€. Singura sursă cu avertizare clară pentru Sicilia.', url: 'https://www.actero.ro/pasaport-consulat-catania', type: 'article' },

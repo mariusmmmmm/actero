@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Schimbare domiciliu copil din Germania în România — SPCLEP | ActeRO',
+  title: 'Schimbare domiciliu copil din Germania în România — SPCLEP',
   description:
     'Înregistrarea domiciliului copilului născut în Germania în România. Acordul ambilor părinți, extras CF, SPCLEP competent și legătura cu primul buletin.',
   keywords: [

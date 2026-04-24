@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Bari — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Bari — Ghid complet 2026',
   description: 'Taxa 53€ confirmată. Minori: 2–3 luni. Programare econsulat.ro sau bari.programari@mae.ro. Ridicare L-J 09:00–15:00. DHL contra cost. Puglia, Calabria, Basilicata.',
   keywords: ['pasaport consulat bari','romani bari pasaport','programare consulat bari','pasaport minor bari'],
   openGraph: { title: 'Pașaport la Consulatul din Bari — Ghid 2026', description: 'Taxa 53€ confirmată. Minori: 2–3 luni. Programare alternativă prin email.', url: 'https://www.actero.ro/pasaport-consulat-bari', type: 'article' },

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Torino — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Torino — Ghid complet 2026',
   description: "Exclusiv cu programare — inclusiv urgențe. Ridicare: joi 14:30–15:30 (o singură zi/săptămână). Taxa 53€ confirmată. Piemonte, Liguria, Valle d'Aosta.",
   keywords: ['pasaport consulat torino','programare consulat torino','cat dureaza pasaport torino','romani torino pasaport'],
   openGraph: { title: 'Pașaport la Consulatul din Torino — Ghid 2026', description: 'EXCLUSIV cu programare — chiar și urgențele. Ridicare: joi 14:30–15:30 sau plic preplătit.', url: 'https://www.actero.ro/pasaport-consulat-torino', type: 'article' },

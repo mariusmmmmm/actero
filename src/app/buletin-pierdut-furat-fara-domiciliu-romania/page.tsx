@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin pierdut sau furat în Germania, fără domiciliu în România | ActeRO',
+  title: 'Buletin pierdut sau furat în Germania, fără domiciliu în România',
   description:
     'Buletin pierdut fără domiciliu activ în România: sesizarea la poliție nu este documentul principal la SPCLEP, CEI oferă traseu mai flexibil. Ghid 2026.',
   keywords: [

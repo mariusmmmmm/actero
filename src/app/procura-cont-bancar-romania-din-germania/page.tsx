@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci | ActeRO',
+  title: 'Procură cont bancar România din Germania — Ce operațiuni, ce bănci',
   description:
     'Procură pentru operațiuni bancare în România din Germania. Ce operațiuni specifici, ce bănci acceptă și de ce trebuie să verifici înainte cu banca.',
   keywords: [

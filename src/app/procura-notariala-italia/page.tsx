@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Procură notarială din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Procură notarială din Italia — Ghid complet 2026',
   description: 'Procură la consulatele italiene: gratuită, aceeași zi, valabilă în România fără apostilă. Plată RNNEPR prin virament bancar în avans. Verificat live aprilie 2026.',
   keywords: ['procura notariala italia','procura din italia pentru romania','cat costa o procura la ambasada italia','in cat timp se elibereaza o procura italia','procura vanzare proprietate italia'],
   openGraph: { title: 'Procură notarială din Italia — Ghid 2026', description: 'Gratuită, gata în aceeași zi, valabilă în RO fără apostilă. Plată RNNEPR prin virament în avans.', url: 'https://www.actero.ro/procura-notariala-italia', type: 'article' },

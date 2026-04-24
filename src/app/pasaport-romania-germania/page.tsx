@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport românesc din Germania — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport românesc din Germania — Ghid complet 2026',
   description:
     'CRDS sau domiciliu în România? Expirat, pierdut sau primul pașaport? Află exact ce traseu ți se aplică și ce documente pregătești.',
   keywords: [

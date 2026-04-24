@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Acte românești din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Acte românești din Italia — Ghid complet 2026',
   description:
     'Pașaport, buletin, titlu de călătorie, procuri și acte pentru copil din Italia. Vezi ce rezolvi la consulat și ce necesită drum în România.',
   keywords: [

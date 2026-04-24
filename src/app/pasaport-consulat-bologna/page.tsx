@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Bologna — fără programare obligatorie | ActeRO',
+  title: 'Pașaport la Consulatul din Bologna — fără programare obligatorie',
   description: 'Singurul consulat român din Italia fără programare obligatorie. Documente, ore, urgențe și ce înseamnă "bilet de avion nu e urgență". Emilia-Romagna, Toscana, Marche.',
   keywords: ['pasaport consulat bologna','consulat romania bologna fara programare','programare consulat bologna','acte pasaport bologna','romani bologna'],
   openGraph: { title: 'Pașaport la Consulatul din Bologna — fără programare obligatorie', description: 'Singurul consulat italian fără programare obligatorie. Mergi direct L-V 09:00–14:00.', url: 'https://www.actero.ro/pasaport-consulat-bologna', type: 'article' },

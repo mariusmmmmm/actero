@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Transcriere certificat de naștere italian — Ghid complet 2026 | ActeRO',
+  title: 'Transcriere certificat de naștere italian — Ghid complet 2026',
   description: 'Copil născut în Italia fără acte românești: transcriere certificat naștere italian la consulat. Extras multilingv sau certificat italian cu apostilă, termen și taxă. Verificat per consulat.',
   keywords: ['transcriere certificat nastere italia','certificat nastere romanesc copii nascuti in italia','acte copil nascut italia','cat dureaza transcrierea nastere italia consulat'],
   openGraph: { title: 'Transcriere certificat de naștere italian — Ghid 2026', description: 'Gratuit la consulat. Extras multilingv sau certificat italian cu apostilă și traducere, după caz.', url: 'https://www.actero.ro/transcriere-certificat-nastere-italia', type: 'article' },

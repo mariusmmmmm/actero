@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin românesc din Germania — Ghid complet 2026 | ActeRO',
+  title: 'Buletin românesc din Germania — Ghid complet 2026',
   description:
     'Buletin expirat sau pierdut în Germania? Din 2025 nu mai merge la consulat — afli rapid unde mergi, CEI sau CIS și traseul exact pentru situația ta.',
   keywords: [

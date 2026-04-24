@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Divorț pronunțat în Italia — ce trebuie să faci în România | ActeRO',
+  title: 'Divorț pronunțat în Italia — ce trebuie să faci în România',
   description: 'Hotărârile judecătorești UE sunt recunoscute de plin drept în România — fără exequatur, fără procură specială. Ce trebuie cu adevărat înregistrat și cum.',
   keywords: ['divort italia romania acte','divort pronuntat in italia romania','inscrierea divortului din italia in romania','hotarare judecatoreasca italia romana'],
   openGraph: { title: 'Divorț pronunțat în Italia — ce faci în România', description: 'Hotărârea italiană e valabilă automat în România. Nu ai nevoie de exequatur.', url: 'https://www.actero.ro/divort-italia-romania', type: 'article' },

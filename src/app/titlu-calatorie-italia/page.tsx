@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Titlu de călătorie din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Titlu de călătorie din Italia — Ghid complet 2026',
   description:
     'Cum revii în România din Italia când nu mai ai pașaport sau buletin valabil. Reguli diferite la Roma, Milano, Bologna, Torino, Trieste, Bari și Catania.',
   keywords: [

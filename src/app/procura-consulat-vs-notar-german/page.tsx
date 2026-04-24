@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură la consulat vs notar german — Ce alegi pentru România | ActeRO',
+  title: 'Procură la consulat vs notar german — Ce alegi pentru România',
   description:
     'Consulat sau notar german pentru procura valabilă în România? Apostilă, traducere, cost, timp. De ce consulatul câștigă în aproape toate cazurile.',
   keywords: [

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Trieste — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Trieste — Ghid complet 2026',
   description: 'Exclusiv cu programare. Taxa 53€ confirmată. Minori: 2–3 luni procesare. Ridicare L-J 15:30–16:30, V 14:00–15:00. DHL contra cost. Veneto, Friuli-Venezia Giulia.',
   keywords: ['pasaport consulat trieste','romani trieste pasaport','programare consulat trieste','pasaport minor trieste 2 3 luni'],
   openGraph: { title: 'Pașaport la Consulatul din Trieste — Ghid 2026', description: 'Taxa 53€ confirmată. Minori: 2–3 luni (nu 45 zile). Ridicare L-J 15:30–16:30.', url: 'https://www.actero.ro/pasaport-consulat-trieste', type: 'article' },

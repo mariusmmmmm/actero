@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Transcriere certificat de naștere Germania — Formule A, fără apostilă | ActeRO',
+  title: 'Transcriere certificat de naștere Germania — Formule A, fără apostilă',
   description:
     'Transcriere naștere copil născut în Germania: Formule A fără apostilă vs Geburtsurkunde cu apostilă. Gratuit. Cerințe per consulat, termene și ridicare.',
   keywords: [

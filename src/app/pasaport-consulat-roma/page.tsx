@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport la Consulatul din Roma — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport la Consulatul din Roma — Ghid complet 2026',
   description: 'Documente, programare, program ridicare CRDS vs non-CRDS, urgențe titlu de călătorie L-V 11:00–13:00. Lazio, Campania, Abruzzo, Sardegna. Verificat aprilie 2026.',
   keywords: ['pasaport consulat roma','programare ambasada romaniei la roma','acte necesare pasaport roma','consulat romani roma','pasaport crds roma'],
   openGraph: { title: 'Pașaport la Consulatul din Roma — Ghid 2026', description: 'Atenție: Vineri NU pașapoarte obișnuite. Ridicare CRDS vs non-CRDS: programe diferite. Urgențe walk-in L-V 11:00–13:00.', url: 'https://www.actero.ro/pasaport-consulat-roma', type: 'article' },

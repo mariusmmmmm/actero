@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine? | ActeRO',
+  title: 'CEI vs CIS pentru diaspora — Care e mai bun pentru tine?',
   description:
     'CEI sau CIS pentru românii din Germania? Diferențele practice: UE, SPCLEP, ridicare, cost și termen. Ghid 2026.',
   keywords: [

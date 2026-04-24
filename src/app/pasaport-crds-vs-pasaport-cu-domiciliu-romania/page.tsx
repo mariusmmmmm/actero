@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi | ActeRO',
+  title: 'Pașaport CRDS vs pașaport cu domiciliu în România — Cum alegi',
   description:
     'CRDS sau pașaport standard? Criteriul unic este domiciliul oficial. Ghid comparativ 2026.',
   keywords: [

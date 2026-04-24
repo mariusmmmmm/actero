@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026 | ActeRO',
+  title: 'Procură notarială din Germania — Consulat sau notar german? Ghid 2026',
   description:
     'Procură pentru vânzare, moștenire, divorț sau firmă la consulatul României din Germania. Programare pe econsulat.ro, eliberare în aceeași zi, taxa 3€ RNNEPR.',
   keywords: [

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin expirat cu domiciliu activ în România — Cel mai simplu caz | ActeRO',
+  title: 'Buletin expirat cu domiciliu activ în România — Cel mai simplu caz',
   description:
     'Buletin expirat și domiciliu activ în România: cel mai simplu traseu. Fără extras CF, CEI la orice SPCLEP. Prezență fizică obligatorie, fotografii nu. Ghid 2026.',
   keywords: [

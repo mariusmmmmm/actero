@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Pașaport cu domiciliu în România, depus din Germania — Ghid 2026 | ActeRO',
+  title: 'Pașaport cu domiciliu în România, depus din Germania — Ghid 2026',
   description:
     'Locuiești în Germania dar domiciliul oficial este în România? Ghid pentru pașaportul standard, fără CRDS, cu diferențele practice care contează.',
   keywords: [

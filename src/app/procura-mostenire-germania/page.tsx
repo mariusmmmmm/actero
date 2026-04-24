@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Procură moștenire din Germania — Consulat sau notar, ce trebuie | ActeRO',
+  title: 'Procură moștenire din Germania — Consulat sau notar, ce trebuie',
   description:
     'Procură pentru moștenire sau succesiune în România, din Germania. Ce cere consulatul vs notarul, certificatul de deces și taxa 3€ RNNEPR.',
   keywords: [

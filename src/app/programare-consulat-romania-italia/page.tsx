@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Cum obții programare la consulat în Italia — Ghid 2026 | ActeRO',
+  title: 'Cum obții programare la consulat în Italia — Ghid 2026',
   description: 'econsulat.ro pas cu pas, excepțiile Bologna și Bari, plus regulile care diferă între consulate. Programările sunt gratuite — nu apela la intermediari.',
   keywords: ['programare consulat romania italia','programare consulat milano','programare consulat roma','econsulat ro programare italia','consulat romania italia fara programare'],
   openGraph: { title: 'Programare la consulat în Italia — Ghid 2026', description: 'econsulat.ro + excepțiile Bologna și Bari. Regulile diferă după consulat și tipul de serviciu.', url: 'https://www.actero.ro/programare-consulat-romania-italia', type: 'article' },

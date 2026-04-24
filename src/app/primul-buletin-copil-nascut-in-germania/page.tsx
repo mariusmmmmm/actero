@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Primul buletin (CEI) copil născut în Germania — după transcriere | ActeRO',
+  title: 'Primul buletin (CEI) copil născut în Germania — după transcriere',
   description:
     'Primul buletin CEI al copilului după transcrierea nașterii: orice SPCLEP, copilul prezent și stabilirea domiciliului în România. Ghid 2026.',
   keywords: [

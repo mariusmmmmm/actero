@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 export const metadata: Metadata = {
-  title: 'Pașaport copil CRDS din Italia — Ghid complet 2026 | ActeRO',
+  title: 'Pașaport copil CRDS din Italia — Ghid complet 2026',
   description: 'Pașaport minor CRDS: prezență ambii părinți obligatorie, termen 2–3 luni la Trieste și Bari, 45 zile la restul. Reguli procură dacă lipsește un părinte. Verificat 2026.',
   keywords: ['pasaport minor italia','pasaport copil italia 2026','pasaport crds copil italia','pasaport minor trieste bari 2 3 luni','procura parinte pasaport copil italia'],
   openGraph: { title: 'Pașaport copil CRDS din Italia — Ghid 2026', description: 'Prezență ambii părinți. Trieste + Bari: 2–3 luni. Lipsește un părinte → procură specială.', url: 'https://www.actero.ro/pasaport-minor-italia', type: 'article' },

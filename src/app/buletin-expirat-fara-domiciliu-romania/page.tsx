@@ -3,7 +3,7 @@ import Link from 'next/link'
 import LlmOptimizedPage from '@/components/seo/LlmOptimizedPage'
 
 export const metadata: Metadata = {
-  title: 'Buletin expirat fără domiciliu activ în România — Ce se adaugă | ActeRO',
+  title: 'Buletin expirat fără domiciliu activ în România — Ce se adaugă',
   description:
     'Buletin expirat fără domiciliu în România: extras CF obligatoriu, CEI la orice SPCLEP și diferența față de primul buletin. Ghid 2026.',
   keywords: [
