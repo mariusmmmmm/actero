@@ -1,52 +1,52 @@
 import type { Metadata } from 'next'
 import StructuredSeoPage, { type StructuredSeoPageProps } from '@/components/seo/StructuredSeoPage'
-import { metadata as hubActeMetadata, pageProps as hubActePageProps } from '../../../seo_uk/seo_uk_hub_acte_romanesti'
+import { metadata as hubActeMetadata, pageProps as hubActePageProps } from './uk-content/seo_uk_hub_acte_romanesti'
 import {
   articleSchema as hubActeArticleSchema,
   breadcrumbSchema as hubActeBreadcrumbSchema,
   faqSchema as hubActeFaqSchema,
-} from '../../../seo_uk/seo_uk_hub_acte_romanesti'
-import { metadata as hubBuletinMetadata, pageProps as hubBuletinPageProps } from '../../../seo_uk/seo_uk_hub_buletin'
-import { faqSchema as hubBuletinFaqSchema } from '../../../seo_uk/seo_uk_hub_buletin'
-import { metadata as geoLondraMetadata, pageProps as geoLondraPageProps } from '../../../seo_uk/seo_uk_geo_londra'
+} from './uk-content/seo_uk_hub_acte_romanesti'
+import { metadata as hubBuletinMetadata, pageProps as hubBuletinPageProps } from './uk-content/seo_uk_hub_buletin'
+import { faqSchema as hubBuletinFaqSchema } from './uk-content/seo_uk_hub_buletin'
+import { metadata as geoLondraMetadata, pageProps as geoLondraPageProps } from './uk-content/seo_uk_geo_londra'
 import {
   articleSchema as geoLondraArticleSchema,
   breadcrumbSchema as geoLondraBreadcrumbSchema,
   faqSchema as geoLondraFaqSchema,
   governmentOfficeSchema as geoLondraGovernmentOfficeSchema,
-} from '../../../seo_uk/seo_uk_geo_londra'
-import { metadata as geoManchesterMetadata, pageProps as geoManchesterPageProps } from '../../../seo_uk/seo_uk_geo_manchester'
+} from './uk-content/seo_uk_geo_londra'
+import { metadata as geoManchesterMetadata, pageProps as geoManchesterPageProps } from './uk-content/seo_uk_geo_manchester'
 import {
   faqSchema as geoManchesterFaqSchema,
   governmentOfficeSchema as geoManchesterGovernmentOfficeSchema,
-} from '../../../seo_uk/seo_uk_geo_manchester'
-import { metadata as leafBrexitMetadata, pageProps as leafBrexitPageProps } from '../../../seo_uk/seo_uk_leaf_brexit_pasaport'
+} from './uk-content/seo_uk_geo_manchester'
+import { metadata as leafBrexitMetadata, pageProps as leafBrexitPageProps } from './uk-content/seo_uk_leaf_brexit_pasaport'
 import {
   articleSchema as leafBrexitArticleSchema,
   breadcrumbSchema as leafBrexitBreadcrumbSchema,
   faqSchema as leafBrexitFaqSchema,
-} from '../../../seo_uk/seo_uk_leaf_brexit_pasaport'
-import { metadata as leafBuletinUeMetadata, pageProps as leafBuletinUePageProps } from '../../../seo_uk/seo_uk_leaf_buletin_ue'
+} from './uk-content/seo_uk_leaf_brexit_pasaport'
+import { metadata as leafBuletinUeMetadata, pageProps as leafBuletinUePageProps } from './uk-content/seo_uk_leaf_buletin_ue'
 import {
   articleSchema as leafBuletinUeArticleSchema,
   breadcrumbSchema as leafBuletinUeBreadcrumbSchema,
   faqSchema as leafBuletinUeFaqSchema,
-} from '../../../seo_uk/seo_uk_leaf_buletin_ue'
-import { metadata as leafPasaportCrdsMetadata, pageProps as leafPasaportCrdsPageProps } from '../../../seo_uk/seo_uk_leaf_pasaport_crds'
-import { faqSchema as leafPasaportCrdsFaqSchema } from '../../../seo_uk/seo_uk_leaf_pasaport_crds'
-import { metadata as leafPasaportExpiratMetadata, pageProps as leafPasaportExpiratPageProps } from '../../../seo_uk/seo_uk_leaf_pasaport_expirat'
+} from './uk-content/seo_uk_leaf_buletin_ue'
+import { metadata as leafPasaportCrdsMetadata, pageProps as leafPasaportCrdsPageProps } from './uk-content/seo_uk_leaf_pasaport_crds'
+import { faqSchema as leafPasaportCrdsFaqSchema } from './uk-content/seo_uk_leaf_pasaport_crds'
+import { metadata as leafPasaportExpiratMetadata, pageProps as leafPasaportExpiratPageProps } from './uk-content/seo_uk_leaf_pasaport_expirat'
 import {
   articleSchema as leafPasaportExpiratArticleSchema,
   breadcrumbSchema as leafPasaportExpiratBreadcrumbSchema,
   faqSchema as leafPasaportExpiratFaqSchema,
-} from '../../../seo_uk/seo_uk_leaf_pasaport_expirat'
-import { metadata as leafTitluUrgentMetadata, pageProps as leafTitluUrgentPageProps } from '../../../seo_uk/seo_uk_leaf_titlu_urgent'
-import { faqSchema as leafTitluUrgentFaqSchema } from '../../../seo_uk/seo_uk_leaf_titlu_urgent'
-import { metadata as leafApostilaMetadata, pageProps as leafApostilaPageProps } from '../../../seo_uk/seo_uk_leaf_apostila_fcdo'
+} from './uk-content/seo_uk_leaf_pasaport_expirat'
+import { metadata as leafTitluUrgentMetadata, pageProps as leafTitluUrgentPageProps } from './uk-content/seo_uk_leaf_titlu_urgent'
+import { faqSchema as leafTitluUrgentFaqSchema } from './uk-content/seo_uk_leaf_titlu_urgent'
+import { metadata as leafApostilaMetadata, pageProps as leafApostilaPageProps } from './uk-content/seo_uk_leaf_apostila_fcdo'
 import {
   articleSchema as leafApostilaArticleSchema,
   faqSchema as leafApostilaFaqSchema,
-} from '../../../seo_uk/seo_uk_leaf_apostila_fcdo'
+} from './uk-content/seo_uk_leaf_apostila_fcdo'
 import {
   edinburghMetadata,
   edinburghPageProps,
@@ -59,7 +59,7 @@ import {
   copilHubPageProps,
   titluHubMetadata,
   titluHubPageProps,
-} from '../../../seo_uk/seo_uk_sprint3_bloc_a'
+} from './uk-content/seo_uk_sprint3_bloc_a'
 import {
   pasaportMinorMetadata,
   pasaportMinorPageProps,
@@ -71,7 +71,7 @@ import {
   temporarPageProps,
   certNastereMetadata,
   certNasterePageProps,
-} from '../../../seo_uk/seo_uk_sprint3_bloc_b'
+} from './uk-content/seo_uk_sprint3_bloc_b'
 import {
   procuraImobiliataMetadata,
   procuraImobiliaraPageProps,
@@ -83,7 +83,7 @@ import {
   transcriereNasterePageProps,
   transcriereCasatorieMetadata,
   transcriereCasatoriePageProps,
-} from '../../../seo_uk/seo_uk_sprint3_bloc_c'
+} from './uk-content/seo_uk_sprint3_bloc_c'
 
 type UkSeoConfig = {
   metadata: Metadata
