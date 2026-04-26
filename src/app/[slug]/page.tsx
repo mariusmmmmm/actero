@@ -19,9 +19,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function GenericSpainSeoPage({ params }: PageProps) {
   const { slug } = await params
 
-  if (!getSpainSeoPageConfig(slug) && !getUkSeoPageConfig(slug)) {
+  const spainConfig = getSpainSeoPageConfig(slug)
+  const ukConfig = getUkSeoPageConfig(slug)
+
+  if (!spainConfig && !ukConfig) {
     notFound()
   }
 
-  return renderSpainSeoPage(slug) ?? renderUkSeoPage(slug)
+  if (spainConfig) {
+    return renderSpainSeoPage(slug)
+  }
+
+  return renderUkSeoPage(slug)
 }
