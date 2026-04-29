@@ -56,6 +56,10 @@ const SPAIN_UPDATED_AT = 'aprilie 2026'
 const SPAIN_PUBLISHED = '2026-04-21'
 const SPAIN_DEFAULT_IMAGE = `${BASE_URL}/logo.png`
 
+function normalizeSeoTitle(title: string): string {
+  return title.replace(/ \| ActeRO$/, '')
+}
+
 function getSpainModifiedAt(slug: string): string {
   if (slug === 'acte-romanesti-spania' || slug === 'pasaport-romania-spania') return '2026-04-21'
   if (slug.startsWith('pasaport-consulat-')) return '2026-04-21'
@@ -85,12 +89,14 @@ const consulateRegions = Object.entries(spainRegionToConsulate).reduce<Record<Sp
 )
 
 function makeMetadata(config: SpainSeoPageConfig): Metadata {
+  const normalizedTitle = normalizeSeoTitle(config.title)
+
   return {
-    title: config.title,
+    title: normalizedTitle,
     description: config.description,
     keywords: config.keywords,
     openGraph: {
-      title: config.title.replace(' | ActeRO', ''),
+      title: normalizedTitle,
       description: config.description,
       url: `${BASE_URL}/${config.slug}`,
       type: 'article',
@@ -98,7 +104,7 @@ function makeMetadata(config: SpainSeoPageConfig): Metadata {
     },
     twitter: {
       card: 'summary_large_image',
-      title: config.title.replace(' | ActeRO', ''),
+      title: normalizedTitle,
       description: config.description,
       images: [SPAIN_DEFAULT_IMAGE],
     },
